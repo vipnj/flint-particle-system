@@ -1,0 +1,86 @@
+/*
+ * FLINT PARTICLE SYSTEM
+ * .....................
+ * 
+ * Author: Richard Lord
+ * Copyright (c) Big Room Ventures Ltd. 2008
+ * Version: 1.0.0
+ * Available at http://flashgamecode.net/
+ * 
+ * Licence Agreement
+ * 
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ * 
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ */
+
+package bigroom.flint.actions 
+{
+	import bigroom.flint.actions.Action;
+	import bigroom.flint.emitters.Emitter;
+	import bigroom.flint.particles.Particle;	
+
+	/**
+	 * The SwarmToMouse action causes the particle to swarm around the mouse pointer.
+	 */
+
+	public class SwarmToMouse implements Action 
+	{
+		private var _power:Number;
+		
+		/**
+		 * The constructor creates a SwarmToMouse action for use by 
+		 * an emitter. To add a SwarmToMouse to all particles created by an emitter, use the
+		 * emitter's addAction method.
+		 * 
+		 * @see Emitter.addAction.
+		 * 
+		 * @param power The strength of the swarming action.
+		 */
+		public function SwarmToMouse( power:Number )
+		{
+			_power = power;
+		}
+		
+		/**
+		 * The update method is used by the emitter to apply the action.
+		 * It is called within the emitter's update loop and need not
+		 * be called by the user.
+		 * 
+		 * @param emitter The Emitter that created the particle.
+		 * @param particle The particle to be updated.
+		 * @param time The duration of the frame - used for time based updates.
+		 */
+		public function update( emitter:Emitter, particle:Particle, time:Number ):void
+		{
+			var turnLeft:Boolean = ( ( particle.y - emitter.mouseY ) * particle.velX + ( emitter.mouseX - particle.x ) * particle.velY > 0 );
+			var newAngle:Number;
+			if ( turnLeft )
+			{
+				newAngle = Math.atan2( particle.velY, particle.velX ) - _power * time;
+				
+			}
+			else
+			{
+				newAngle = Math.atan2( particle.velY, particle.velX ) + _power * time;
+			}
+			var len:Number = Math.sqrt( particle.velX * particle.velX + particle.velY * particle.velY );
+			particle.velX = len * Math.cos( newAngle );
+			particle.velY = len * Math.sin( newAngle );
+		}
+	}
+}

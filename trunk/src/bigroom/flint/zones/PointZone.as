@@ -1,0 +1,78 @@
+/*
+ * FLINT PARTICLE SYSTEM
+ * .....................
+ * 
+ * Author: Richard Lord
+ * Copyright (c) Big Room Ventures Ltd. 2008
+ * Version: 1.0.0
+ * Available at http://flashgamecode.net/
+ * 
+ * Licence Agreement
+ * 
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ * 
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ */
+
+package bigroom.flint.zones 
+{
+	import flash.geom.Point;
+
+	/**
+	 * The Point zone defines a zone that contains a single point.
+	 */
+
+	public class PointZone implements Zone 
+	{
+		private var _point:Point;
+		
+		/**
+		 * The constructor defines a Point zone.
+		 * 
+		 * @param point The point that is the zone.
+		 */
+		public function PointZone( point:Point )
+		{
+			_point = point;
+		}
+		
+		/**
+		 * The contains method determines whether a point is inside the zone.
+		 * This method is used by the initializers and actions that
+		 * use the zone. Usually, it need not be called directly by the user.
+		 * 
+		 * @param point The location to test for.
+		 * @return true if point is inside the zone, false if it is outside.
+		 */
+		public function contains( point:Point ):Boolean
+		{
+			return _point.equals( point );
+		}
+		
+		/**
+		 * The getLocation method returns a random point inside the zone.
+		 * This method is used by the initializers and actions that
+		 * use the zone. Usually, it need not be called directly by the user.
+		 * 
+		 * @return a random point inside the zone.
+		 */
+		public function getLocation():Point
+		{
+			return _point.clone();
+		}
+	}
+}
