@@ -1,0 +1,387 @@
+﻿/*
+ * FLINT PARTICLE SYSTEM
+ * .....................
+ * 
+ * Author: Richard Lord
+ * Copyright (c) Big Room Ventures Ltd. 2008
+ * Version: 1.0.0
+ * Available at http://flashgamecode.net/
+ * 
+ * Licence Agreement
+ * 
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ * 
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ */
+
+package bigroom.flint.emitters
+{
+	import flash.display.Sprite;
+	import flash.events.Event;
+	import flash.utils.getTimer;
+	
+	import bigroom.flint.actions.Action;
+	import bigroom.flint.activities.Activity;
+	import bigroom.flint.counters.Counter;
+	import bigroom.flint.events.FlintEvent;
+	import bigroom.flint.initializers.Initializer;
+	import bigroom.flint.particles.Particle;
+	import bigroom.flint.particles.ParticleCreator;
+	import bigroom.flint.utils.Maths;	
+
+	/**
+	 * The base class for all particle emitters. The Emitter class extends the Sprite
+	 * class so it is itself a DisplayObject. Thus, an Emitter is displayed by simply
+	 * adding it as a child to a DisplayObjectContainer.
+	 * 
+	 * <p>At its core, the Emitter
+	 * class manages the creation and ongoing state of particles. It uses a number of
+	 * utility classes to customise its behaviour.</p>
+	 * 
+	 * <p>An emitter uses Initializers to customise the initial state of particles
+	 * that it creates. These are added to the emitter using the addInitializer 
+	 * method.</p>
+	 * 
+	 * <p>An emitter uses Actions to customise the behaviour of particles that
+	 * it creates. These are added to the emitter using the addAction method.</p>
+	 * 
+	 * <p>An emitter uses Activities to customise its own behaviour, such as its
+	 * position and rotation.</p>
+	 * 
+	 * <p>An emitter uses a Counter to know when and how many particles to emit.</p>
+	 * 
+	 * <p>All timings in the emitter are based on actual time passed, not on frames.</p>
+	 * 
+	 * <p>The emitter base class does not display the particles it creates. This is
+	 * usually handled in one of the derived classes like BitmapEmitter and
+	 * DisplayObjectEmitter.</p>
+	 * 
+	 * <p>Most other functionality is est added to an emitter using Actions,
+	 * Initializers, Activities and Counters. This offers greater flexibility to 
+	 * combine behaviours witout needing to further subclass the Emitter itself.</p>
+	 */
+
+	public class Emitter extends Sprite
+	{
+		// manages the creation, reuse and destruction of particles
+		private static var _creator:ParticleCreator = new ParticleCreator();
+		
+		protected var _initializers:Array;
+		protected var _actions:Array;
+		protected var _particles:Array;
+		protected var _activities:Array;
+		protected var _counter:Counter;
+
+		private var _time:uint;
+		protected var _x:Number = 0;
+		protected var _y:Number = 0;
+		protected var _rotation:Number = 0;
+		
+		/**
+		 * The constructor creates an emitter. However, it is more common to 
+		 * create one of the subclasses that implements a specific display method.
+		 */
+		public function Emitter()
+		{
+			_particles = new Array();
+			_actions = new Array();
+			_initializers = new Array();
+			_activities = new Array();
+			
+			addEventListener( Event.REMOVED_FROM_STAGE, removed, false, 0, true );
+		}
+		
+		/**
+		 * Indicates the x coordinate of the Emitter instance relative to 
+		 * the local coordinates of the parent DisplayObjectContainer.
+		 */
+		override public function get x():Number
+		{
+			return _x;
+		}
+		override public function set x( value:Number ):void
+		{
+			_x = value;
+		}
+		/**
+		 * Indicates the y coordinate of the Emitter instance relative to 
+		 * the local coordinates of the parent DisplayObjectContainer.
+		 */
+		override public function get y():Number
+		{
+			return _y;
+		}
+		override public function set y( value:Number ):void
+		{
+			_y = value;
+		}
+		/**
+		 * Indicates the rotation of the Emitter, 
+		 * in degrees, from its original orientation.
+		 */
+		override public function get rotation():Number
+		{
+			return Maths.asDegrees( _rotation );
+		}
+		override public function set rotation( value:Number ):void
+		{
+			_rotation = Maths.asRadians( value );
+		}
+		/**
+		 * Indicates the rotation of the Emitter, 
+		 * in radians, from its original orientation.
+		 */
+		public function get rotRadians():Number
+		{
+			return _rotation;
+		}
+		public function set rotRadians( value:Number ):void
+		{
+			_rotation = value;
+		}
+		
+		/**
+		 * Adds an initializer object to the Emitter. Initializers set the
+		 * initial properties of particles created by the emitter.
+		 */
+		public function addInitializer( initializer:Initializer ):void
+		{
+			_initializers.unshift( initializer );
+		}
+		
+		/**
+		 * Adds an Action object to the Emitter. Actions set the behaviour
+		 * of particles created by the emitter.
+		 */
+		public function addAction( action:Action ):void
+		{
+			_actions.unshift( action );
+		}
+		
+		/**
+		 * Adds an Activity to the Emitter. Activities set the behaviour
+		 * of the Emitter.
+		 */
+		public function addActivity( activity:Activity ):void
+		{
+			_activities.unshift( activity );
+		}
+		
+		/**
+		 * Sets the Counter for the Emitter. The counter defines when and
+		 * with what frequency the emitter emits particles.
+		 */		
+		public function setCounter( counter:Counter ):void
+		{
+			_counter = counter;
+		}
+		
+		/**
+		 * Used internally to create a particle.
+		 */
+		private function createParticle():Particle
+		{
+			var particle:Particle = _creator.createParticle();
+			var len:uint = _initializers.length;
+			for ( var i:uint = 0; i < len; ++i )
+			{
+				_initializers[i].init( this, particle );
+			}
+			particle.x += _x;
+			particle.y += _y;
+			_particles.unshift( particle );
+			particleCreated( particle );
+			return particle;
+		}
+		
+		/**
+		 * Starts the emitter. Until start is called, the emitter will not emit any particles.
+		 */
+		public function start():void
+		{
+			removeEventListener( Event.ENTER_FRAME, frameLoop );
+			addEventListener( Event.ENTER_FRAME, frameLoop, false, 0, true );
+			_time = getTimer();
+			var len:uint = _activities.length;
+			for ( var i:uint = 0; i < len; ++i )
+			{
+				_activities[i].initialize( this );
+			}
+			for( var count:uint = _counter.startEmitter(); count--; )
+			{
+				createParticle();
+			}
+		}
+		
+		/**
+		 * Used internally to update the emitter.
+		 */
+		private function frameLoop( ev:Event ):void
+		{
+			// update timer
+			var oldTime:uint = _time;
+			_time = getTimer();
+			var frameTime:Number = ( _time - oldTime ) * 0.001;
+			frameUpdate( frameTime );
+		}
+		
+		/**
+		 * Used internally and in derived classes to update the emitter.
+		 * @param time The duration, in seconds, of the current frame.
+		 */
+		protected function frameUpdate( time:Number ):void
+		{
+			var i:uint;
+			var len:uint = _activities.length;
+			for ( i = 0; i < len; ++i )
+			{
+				_activities[i].update( this, time );
+			}
+			len = _counter.updateEmitter( time );
+			for( i = 0; i < len; ++i )
+			{
+				createParticle();
+			}
+			
+			if ( _particles.length > 0 )
+			{
+				var particle:Particle;
+				
+				// update particle state
+				len = _actions.length;
+				for ( i = _particles.length; --i >= 0; )
+				{
+					particle = _particles[i];
+					
+					for ( var j:uint = 0; j < len; ++j )
+					{
+						_actions[j].update( this, particle, time );
+					}
+						
+					if ( particle.isDead )
+					{
+						dispatchEvent( new FlintEvent( FlintEvent.PARTICLE_DEAD, particle ) );
+						particleDestroyed( particle );
+						_creator.disposeParticle( particle );
+						_particles.splice( i, 1 );
+					}
+					
+				}
+			}
+			else 
+			{
+				dispatchEvent( new FlintEvent( FlintEvent.EMITTER_EMPTY ) );
+			}
+			update( time );
+		}
+		
+		/**
+		 * Pauses the emitter.
+		 */
+		public function pause():void
+		{
+			removeEventListener( Event.ENTER_FRAME, frameLoop );
+		}
+		
+		/**
+		 * Resumes the emitter after a pause.
+		 */
+		public function resume():void
+		{
+			removeEventListener( Event.ENTER_FRAME, frameLoop );
+			addEventListener( Event.ENTER_FRAME, frameLoop, false, 0, true );
+			_time = getTimer();
+		}
+		
+		private function removed( ev:Event ):void
+		{
+			if( ev.target == this )
+			{
+				dispose();
+			}
+		}
+		
+		/**
+		 * Cleans up the emitter prior to removal. This metid is automatically
+		 * called when the emitter is removed from the stage.
+		 */
+		private function dispose():void
+		{
+			removeEventListener( Event.ENTER_FRAME, frameLoop );
+			var len:uint = _particles.length;
+			for ( var i:uint = 0; i < len; ++i )
+			{
+				_creator.disposeParticle( _particles[i] );
+			}
+			_particles.length = 0;
+			cleanUp();
+		}
+		
+		/**
+		 * Makes the emitter skip forwards a period of time with a single update.
+		 * Used when you want the emitter to look like it's been running for a while.
+		 * 
+		 * @param time The time, in seconds, to skip ahead.
+		 * @param frameRate The frame rate for calculating the new positions. The
+		 * emitter will calculate each frame over the time period tp get the new state
+		 * for the emitter and its particles. A higher frameRate will be more
+		 * accurate but will take longer to calculate.
+		 */
+		public function runAhead( time:Number, frameRate:Number= 10 ):void
+		{
+			pause();
+			var step:Number = 1 / frameRate;
+			while ( time > 0 )
+			{
+				time -= step;
+				frameUpdate( step );
+			}
+			resume();
+		}
+		
+		/**
+		 * Used in derived classes when they need to perform additional actions
+		 * on a newly created particle.
+		 */
+		protected function particleCreated( particle:Particle ):void
+		{
+		}
+		
+		/**
+		 * Used in derived classes when they need to perform additional actions
+		 * on a particle that is about to be destroyed.
+		 */
+		protected function particleDestroyed( particle:Particle ):void
+		{
+		}		
+		
+		/**
+		 * Used in derived classes to add additional functionality into the frame update loop.
+		 */
+		protected function update( time:Number ):void
+		{
+		}
+		
+		/**
+		 * Used in derived classes when they need to do additional tasks when the emitter
+		 * is disposed of.
+		 */
+		protected function cleanUp():void
+		{
+		}
+	}
+}
