@@ -46,7 +46,7 @@ package bigroom.flint.activities
 		 * an emitter. To add an EmitterImage to an emitter, use the
 		 * emitter's addActvity method.
 		 * 
-		 * @see Emitter.addActivity.
+		 * @see bigroom.flint.emitters.Emitter#addActivity()
 		 * 
 		 * @param image The displayObject to use as the image.
 		 */

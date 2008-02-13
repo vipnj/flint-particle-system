@@ -48,7 +48,7 @@ package bigroom.flint.actions
 		 * an emitter. To add a Fade to all particles created by an emitter, use the
 		 * emitter's addAction method.
 		 * 
-		 * @see Emitter.addAction.
+		 * @see bigroom.flint.emitters.Emitter#addAction()
 		 * 
 		 * @param startAlpha The alpha value for the particle at the
 		 * start of its life. Should be between 0 and 1.

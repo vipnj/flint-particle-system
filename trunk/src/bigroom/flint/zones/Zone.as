@@ -57,5 +57,15 @@ package bigroom.flint.zones
 		 * @return a random point inside the zone.
 		 */
 		function getLocation():Point;
+		
+
+		/**
+		 * The getArea method returns the size of the zone.
+		 * It's used by the MultiZone class to manage the balancing between the
+		 * different zones.
+		 * 
+		 * @return the size of the zone.
+		 */
+		function getArea():Number;
 	}
 }

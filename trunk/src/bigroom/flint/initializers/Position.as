@@ -58,7 +58,7 @@ package bigroom.flint.initializers
 		 * 
 		 * @param zone The zone to place all particles in.
 		 * 
-		 * @see bigroom.flint.emitters.Emitter.addInitializer.
+		 * @see bigroom.flint.emitters.Emitter#addInitializer()
 		 */
 		public function Position( zone : Zone )
 		{

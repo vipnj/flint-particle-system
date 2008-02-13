@@ -49,7 +49,7 @@ package bigroom.flint.actions
 		 * an emitter. To add a ColorChange to all particles created by an emitter, use the
 		 * emitter's addAction method.
 		 * 
-		 * @see Emitter.addAction.
+		 * @see bigroom.flint.emitters.Emitter#addAction()
 		 * 
 		 * @param startColor The 32bit (ARGB) color of the particle at the beginning of its life.
 		 * @param endColor The 32bit (ARGB) color of the particle at the end of its life.

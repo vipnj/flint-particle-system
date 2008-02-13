@@ -40,6 +40,8 @@ package bigroom.flint.actions
 	 * its velocity.</p>
 	 * <p>Actions are added to all particles created by an emitter by using the emitter's addAction
 	 * method.<p>
+	 * 
+	 * @see bigroom.flint.emitters.Emitter#addAction()
 	 */
 	public interface Action
 	{

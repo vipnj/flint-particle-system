@@ -55,10 +55,10 @@ package bigroom.flint.initializers
 		 * 
 		 * @param minLifetime the minimum lifetime for particles
 		 * initialized by the instance.
-		 * @param maxLifetime the minimum lifetime for particles
+		 * @param maxLifetime the maximum lifetime for particles
 		 * initialized by the instance.
 		 * 
-		 * @see bigroom.flint.emitters.Emitter.addInitializer.
+		 * @see Emitter.addInitializer.
 		 */
 		public function Lifetime( minLifetime:Number, maxLifetime:Number = NaN )
 		{

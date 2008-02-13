@@ -48,7 +48,7 @@ package bigroom.flint.actions
 		 * an emitter. To add a Scale to all particles created by an emitter, use the
 		 * emitter's addAction method.
 		 * 
-		 * @see Emitter.addAction.
+		 * @see bigroom.flint.emitters.Emitter#addAction()
 		 * 
 		 * @param startScale The scale factor for the particle at the start of it's life.
 		 * 1 is normal size.

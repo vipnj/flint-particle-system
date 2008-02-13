@@ -55,7 +55,7 @@ package bigroom.flint.initializers
 		 * @param parameters The parameters to pass to the constructor
 		 * for the image class.
 		 * 
-		 * @see bigroom.flint.emitters.Emitter.addInitializer.
+		 * @see bigroom.flint.emitters.Emitter#addInitializer()
 		 */
 		public function ImageClass( imageClass:Class, ...parameters )
 		{
