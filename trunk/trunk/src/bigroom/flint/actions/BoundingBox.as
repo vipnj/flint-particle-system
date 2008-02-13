@@ -53,7 +53,7 @@ package bigroom.flint.actions
 		 * an emitter. To add a BoundingBox to all particles created by an emitter, use the
 		 * emitter's addAction method.
 		 * 
-		 * @see Emitter.addAction.
+		 * @see bigroom.flint.emitters.Emitter#addAction()
 		 * 
 		 * @param left The left coordinate of the box. The coordinates are in the
 		 * coordinate space of the object containing the emitter.

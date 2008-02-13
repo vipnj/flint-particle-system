@@ -48,7 +48,7 @@ package bigroom.flint.actions
 		 * an emitter. To add a QuadraticDrag to all particles created by an emitter, use the
 		 * emitter's addAction method.
 		 * 
-		 * @see Emitter.addAction.
+		 * @see bigroom.flint.emitters.Emitter#addAction()
 		 * 
 		 * @param drag The amount of drag. A higher number produces a stronger drag force.
 		 */
@@ -68,7 +68,12 @@ package bigroom.flint.actions
 		 */
 		public function update( emitter:Emitter, particle:Particle, time:Number ):void
 		{
-			var scale:Number = 1 - _drag * time * Math.sqrt( particle.velX * particle.velX + particle.velY * particle.velY );
+			var len2:Number = particle.velX * particle.velX + particle.velY * particle.velY;
+			if( len2 == 0 )
+			{
+				return;
+			}
+			var scale:Number = 1 - _drag * time * Math.sqrt( len2 );
 			if( scale < 0 )
 			{
 				particle.velX = 0;

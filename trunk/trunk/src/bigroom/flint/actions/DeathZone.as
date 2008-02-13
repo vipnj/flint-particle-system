@@ -52,7 +52,8 @@ package bigroom.flint.actions
 		 * an emitter. To add a DeathZone to all particles created by an emitter, use the
 		 * emitter's addAction method.
 		 * 
-		 * @see Emitter.addAction.
+		 * @see bigroom.flint.emitters.Emitter#addAction()
+		 * @see bigroom.flint.zones
 		 * 
 		 * @param zone The zone to use. Any item from the bigroom.flint.zones
 		 * package can be used.

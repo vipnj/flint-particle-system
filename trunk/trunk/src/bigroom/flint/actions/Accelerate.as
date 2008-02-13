@@ -50,7 +50,7 @@ package bigroom.flint.actions
 		 * an emitter. To add an Accelerator to all particles created by an emitter, use the
 		 * emitter's addAction method.
 		 * 
-		 * @see Emitter.addAction.
+		 * @see bigroom.flint.emitters.Emitter#addAction()
 		 * 
 		 * @param accelerationX The x coordinate of the acceleration to apply, in pixels 
 		 * per second per second.

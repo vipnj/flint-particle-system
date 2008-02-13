@@ -44,6 +44,24 @@ package bigroom.flint.emitters
 	import bigroom.flint.utils.Maths;	
 
 	/**
+	 * Dispatched when a particle dies and is about to be removed from the system.
+	 * As soon as the event has been handled the particle will be removed but at the
+	 * time of the event it still exists so its properties (e.g. its location) can be
+	 * read from it.
+	 * 
+	 * @eventType bigroom.flint.events.FlintEvent.PARTICLE_DEAD
+	 */
+	[Event(name="particleDead", type="bigroom.flint.events.FlintEvent")]
+
+	/**
+	 * Dispatched when an emitter contains no particles. Used, for example, to remove an
+	 * emitter when it contains no particles.
+	 * 
+	 * @eventType bigroom.flint.events.FlintEvent.EMITTER_EMPTY
+	 */
+	[Event(name="emitterEmpty", type="bigroom.flint.events.FlintEvent")]
+
+	/**
 	 * The base class for all particle emitters. The Emitter class extends the Sprite
 	 * class so it is itself a DisplayObject. Thus, an Emitter is displayed by simply
 	 * adding it as a child to a DisplayObjectContainer.

@@ -56,7 +56,7 @@ package bigroom.flint.initializers
 		 * @param color1 the 32bit (ARGB) color at one end of the color range to use.
 		 * @param color2 the 32bit (ARGB) color at the other end of the color range to use.
 		 * 
-		 * @see bigroom.flint.emitters.Emitter.addInitializer.
+		 * @see bigroom.flint.emitters.Emitter#addInitializer()
 		 */
 		public function ColorInit( color1:uint, color2:uint )
 		{

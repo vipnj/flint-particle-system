@@ -40,6 +40,8 @@ package bigroom.flint.initializers
 	 * for a particle.</p>
 	 * <p>Initializers are added to all particles created by an emitter by using the emitter's addInitializer
 	 * method.<p>
+	 * 
+	 * @see bigroom.flint.emitters.Emitter#addInitializer()
 	 */
 	public interface Initializer
 	{

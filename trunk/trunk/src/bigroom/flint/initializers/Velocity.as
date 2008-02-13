@@ -63,7 +63,7 @@ package bigroom.flint.initializers
 		 * 
 		 * @param velocity The zone to use for creating the velocity.
 		 * 
-		 * @see bigroom.flint.emitters.Emitter.addInitializer.
+		 * @see bigroom.flint.emitters.Emitter#addInitializer()
 		 */
 		public function Velocity( velocity:Zone )
 		{

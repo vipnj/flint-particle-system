@@ -55,7 +55,7 @@ package bigroom.flint.initializers
 		 * @param minAngle The minimum angle, in radians, for the particle's rotation.
 		 * @param maxAngle The maximum angle, in radians, for the particle's rotation.
 		 * 
- 		 * @see bigroom.flint.emitters.Emitter.addInitializer.
+ 		 * @see bigroom.flint.emitters.Emitter#addInitializer()
 		 */
 		public function Rotation( minAngle : Number, maxAngle : Number = NaN )
 		{

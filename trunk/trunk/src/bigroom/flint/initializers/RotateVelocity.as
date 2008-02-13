@@ -59,7 +59,7 @@ package bigroom.flint.initializers
 		 * @param maxAngVelocity The maximum angularVelocity, in 
 		 * radians per second, for the particle's angularVelocity.
 		 * 
-		 * @see bigroom.flint.emitters.Emitter.addInitializer.
+		 * @see bigroom.flint.emitters.Emitter#addInitializer()
 		 */
 		public function RotateVelocity( minAngVelocity:Number, maxAngVelocity:Number = NaN )
 		{

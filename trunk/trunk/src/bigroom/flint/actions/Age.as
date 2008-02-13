@@ -57,7 +57,7 @@ package bigroom.flint.actions
 		 * an emitter. To add an Age to all particles created by an emitter, use the
 		 * emitter's addAction method.
 		 * 
-		 * @see Emitter.addAction.
+		 * @see bigroom.flint.emitters.Emitter#addAction()
 		 * 
 		 * @param easing an easing function to use to modify the 
 		 * energy curve over the lifetime of the particle. The default

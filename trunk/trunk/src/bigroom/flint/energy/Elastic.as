@@ -52,6 +52,8 @@ package bigroom.flint.energy
 	/**
 	 * A modified form of Robert Penner's easing equations, optimised for the specific use
 	 * of calculating the energy over a particle's lifetime.
+	 * 
+	 * @see bigroom.flint.actions.Age
 	 */
 	public class Elastic
 	{

@@ -57,7 +57,7 @@ package bigroom.flint.initializers
 		 * 
 		 * @param image The DisplayObject to use for each particle created by the emitter.
 		 * 
-		 * @see bigroom.flint.emitters.Emitter.addInitializer.
+		 * @see bigroom.flint.emitters.Emitter#addInitializer()
 		 */
 		public function SharedImage( image:DisplayObject )
 		{

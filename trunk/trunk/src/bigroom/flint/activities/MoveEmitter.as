@@ -45,7 +45,7 @@ package bigroom.flint.activities
 		 * an emitter. To add a MoveEmitter to an emitter, use the
 		 * emitter's addActvity method.
 		 * 
-		 * @see Emitter.addActivity.
+		 * @see bigroom.flint.emitters.Emitter#addActivity()
 		 * 
 		 * @param velocity The velocity to move the emitter, in pixels per second.
 		 */

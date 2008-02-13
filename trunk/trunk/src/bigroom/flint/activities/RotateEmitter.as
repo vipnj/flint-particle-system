@@ -44,7 +44,7 @@ package bigroom.flint.activities
 		 * an emitter. To add a RotateEmitter to an emitter, use the
 		 * emitter's addActvity method.
 		 * 
-		 * @see Emitter.addActivity.
+		 * @see bigroom.flint.emitters.Emitter#addActivity()
 		 * 
 		 * @para angularVelocity The angular velocity for the emitter in 
 		 * radians per second.
