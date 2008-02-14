@@ -46,10 +46,11 @@ package bigroom.flint.zones
 		/**
 		 * The contains method determines whether a point is inside the zone.
 		 * 
-		 * @param point The location to test for.
+		 * @param x The x coordinate of the location to test for.
+		 * @param y The y coordinate of the location to test for.
 		 * @return true if point is inside the zone, false if it is outside.
 		 */
-		function contains( point:Point ):Boolean;
+		function contains( x:Number, y:Number ):Boolean;
 
 		/**
 		 * The getLocation method returns a random point inside the zone.

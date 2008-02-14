@@ -30,8 +30,6 @@
 
 package bigroom.flint.actions 
 {
-	import flash.geom.Point;
-	
 	import bigroom.flint.actions.Action;
 	import bigroom.flint.emitters.Emitter;
 	import bigroom.flint.particles.Particle;
@@ -77,7 +75,7 @@ package bigroom.flint.actions
 		 */
 		public function update( emitter:Emitter, particle:Particle, time:Number ):void
 		{
-			var inside:Boolean = _zone.contains( new Point( particle.x, particle.y ) );
+			var inside:Boolean = _zone.contains( particle.x, particle.y );
 			if ( _invertZone )
 			{
 				inside = !inside;

@@ -28,41 +28,58 @@
  * THE SOFTWARE.
  */
 
-package bigroom.flint.actions 
+package bigroom.flint.initializers
 {
+	import flash.filters.BitmapFilter;
+	
 	import bigroom.flint.emitters.Emitter;
-	import bigroom.flint.particles.Particle;
+	import bigroom.flint.particles.Particle;	
 
 	/**
-	 * The MoveEuler action updates the position of the particle based on its velocity.
-	 * It uses a Euler integrator to calculate the new position, hence the name.
+	 * The ApplyFilter Initializer applies a filter to the particle's image.
 	 */
-	public class MoveEuler implements Action
+
+	public class ApplyFilter implements Initializer 
 	{
+		private var _filter:BitmapFilter;
+		
 		/**
-		 * The constructor creates a MoveEuler action for use by 
-		 * an emitter. To add a MoveEuler to all particles created by an emitter, use the
-		 * emitter's addAction method.
+		 * The constructor creates an ApplyFilter initializer for use by 
+		 * an emitter. To add an ApplyFilter to all particles created by an emitter, use the
+		 * emitter's addInitializer method.
 		 * 
-		 * @see bigroom.flint.emitters.Emitter#addAction()
+		 * @param filter The filter to apply.
+		 * 
+		 * @see bigroom.flint.emitters.Emitter#addInitializer()
 		 */
-		public function MoveEuler()
+		public function ApplyFilter( filter:BitmapFilter )
 		{
+			_filter = filter;
 		}
 		
 		/**
-		 * The update method is used by the emitter to apply the action.
-		 * It is called within the emitter's update loop and need not
+		 * The init method is used by the emitter to initialize the particle.
+		 * It is called within the emitter's createParticle method and need not
 		 * be called by the user.
 		 * 
 		 * @param emitter The Emitter that created the particle.
-		 * @param particle The particle to be updated.
-		 * @param time The duration of the frame - used for time based updates.
+		 * @param particle The particle to be initialized.
 		 */
-		public function update( emitter:Emitter, particle:Particle, time:Number ):void
+		public function init( emitter:Emitter, particle:Particle ):void
 		{
-			particle.x += particle.velX * time;
-			particle.y += particle.velY * time;
+			if( particle.image )
+			{
+				if( particle.image.filters )
+				{
+					var filters:Array = particle.image.filters;
+					filters.push( _filter );
+					particle.image.filters = filters;
+				}
+				else
+				{
+					particle.image.filters = [ _filter ];
+				}
+			}
 		}
 	}
 }

@@ -79,7 +79,7 @@ package bigroom.flint.emitters
 		 */
 		override protected function particleCreated( particle:Particle ):void
 		{
-			addChild( particle.image );
+			addChildAt( particle.image, 0 );
 		}
 		
 		/**

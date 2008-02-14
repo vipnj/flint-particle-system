@@ -31,8 +31,9 @@
 package bigroom.flint.particles
 {
 	import flash.display.DisplayObject;
+	import flash.geom.ColorTransform;
 	import flash.geom.Matrix;
-	import flash.geom.ColorTransform;	
+	import flash.utils.Dictionary;	
 
 	/**
 	 * The Particle class is a set of public properties shared by all particles.
@@ -107,6 +108,14 @@ package bigroom.flint.particles
 		public var isDead:Boolean = false;
 		
 		/**
+		 * The dictionary object enables actions and activities to add additional properties to the particle.
+		 * Any object adding properties to the particle should use a reference to itself as the dictionary
+		 * key, thus ensuring it doesn't clash with other object's properties. If multiple properties are
+		 * needed, the dictionary value can be an object with a number of properties.
+		 */
+		public var dictionary:Dictionary;
+		
+		/**
 		 * Creates a particle. Alternatively particles can be reused by using the ParticleCreator to create
 		 * and manage them. Usually the emitter will create the particles and the user doesn't need
 		 * to create them.
@@ -133,6 +142,7 @@ package bigroom.flint.particles
 			energy = 1;
 			isDead = false;
 			image = null;
+			dictionary = new Dictionary();
 		}
 		
 		/**
