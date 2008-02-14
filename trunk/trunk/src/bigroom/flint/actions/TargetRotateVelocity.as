@@ -34,20 +34,28 @@ package bigroom.flint.actions
 	import bigroom.flint.particles.Particle;
 
 	/**
-	 * The MoveEuler action updates the position of the particle based on its velocity.
-	 * It uses a Euler integrator to calculate the new position, hence the name.
+	 * The TargetRotateVelocity action adjusts the angular velocity of the particle towards the target angular velocity.
 	 */
-	public class MoveEuler implements Action
+	public class TargetRotateVelocity implements Action
 	{
+		private var _vel:Number;
+		private var _scaleFactor:Number;
+		
 		/**
-		 * The constructor creates a MoveEuler action for use by 
-		 * an emitter. To add a MoveEuler to all particles created by an emitter, use the
+		 * The constructor creates a TargetRotateVelocity action for use by 
+		 * an emitter. To add a TargetRotateVelocity to all particles created by an emitter, use the
 		 * emitter's addAction method.
 		 * 
 		 * @see bigroom.flint.emitters.Emitter#addAction()
+		 * 
+		 * @param vel The target angular velocity, in radians per second.
+		 * @param scaleFactor Adjusts how quickly the particle reaches the target angular velocity.
+		 * Larger numbers cause it to approach the target angular velocity more quickly.
 		 */
-		public function MoveEuler()
+		public function TargetRotateVelocity( vel:Number, scaleFactor:Number = 0.1 )
 		{
+			_vel = vel;
+			_scaleFactor = scaleFactor;
 		}
 		
 		/**
@@ -61,8 +69,7 @@ package bigroom.flint.actions
 		 */
 		public function update( emitter:Emitter, particle:Particle, time:Number ):void
 		{
-			particle.x += particle.velX * time;
-			particle.y += particle.velY * time;
+			particle.angVelocity += ( _vel - particle.angVelocity ) * _scaleFactor * time;
 		}
 	}
 }

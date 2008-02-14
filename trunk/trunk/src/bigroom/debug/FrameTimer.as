@@ -1,7 +1,4 @@
 /*
- * FLINT PARTICLE SYSTEM
- * .....................
- * 
  * Author: Richard Lord
  * Copyright (c) Big Room Ventures Ltd. 2008
  * Version: 1.0.0
@@ -28,41 +25,48 @@
  * THE SOFTWARE.
  */
 
-package bigroom.flint.actions 
+package bigroom.debug 
 {
-	import bigroom.flint.emitters.Emitter;
-	import bigroom.flint.particles.Particle;
-
+	import flash.text.TextField;
+	import flash.events.Event;
+	import flash.utils.getTimer;
+	
 	/**
-	 * The MoveEuler action updates the position of the particle based on its velocity.
-	 * It uses a Euler integrator to calculate the new position, hence the name.
+	 * Displays the current framerate. The framerate displayed is an average of 
+	 * the last ten frames. Simply create an instance of this class and place it 
+	 * on the stage.
 	 */
-	public class MoveEuler implements Action
+
+	public class FrameTimer extends TextField
 	{
-		/**
-		 * The constructor creates a MoveEuler action for use by 
-		 * an emitter. To add a MoveEuler to all particles created by an emitter, use the
-		 * emitter's addAction method.
-		 * 
-		 * @see bigroom.flint.emitters.Emitter#addAction()
-		 */
-		public function MoveEuler()
+    private var times:Array;
+    
+    /**
+     * Creates a FrameTimer.
+     * 
+     * @param color The color to use for the text display.
+     */
+    public function FrameTimer( color:uint = 0xFFFFFF )
+   	{
+			textColor = color;
+			times = new Array();
+			addEventListener( Event.ENTER_FRAME, onEnterFrame1 );
+    }
+
+		public function onEnterFrame1( ev:Event ):void
 		{
+			if ( times.push( getTimer() ) > 9 )
+			{
+				removeEventListener( Event.ENTER_FRAME, onEnterFrame1 );
+				addEventListener( Event.ENTER_FRAME, onEnterFrame2 );
+			}
 		}
-		
-		/**
-		 * The update method is used by the emitter to apply the action.
-		 * It is called within the emitter's update loop and need not
-		 * be called by the user.
-		 * 
-		 * @param emitter The Emitter that created the particle.
-		 * @param particle The particle to be updated.
-		 * @param time The duration of the frame - used for time based updates.
-		 */
-		public function update( emitter:Emitter, particle:Particle, time:Number ):void
+	
+		public function onEnterFrame2( ev:Event ):void
 		{
-			particle.x += particle.velX * time;
-			particle.y += particle.velY * time;
+			var t:Number;
+			times.push( t = getTimer() );
+			text = ( Math.round( 10000 / ( t - Number( times.shift() ) ) ) ).toString() + " fps";
 		}
 	}
 }

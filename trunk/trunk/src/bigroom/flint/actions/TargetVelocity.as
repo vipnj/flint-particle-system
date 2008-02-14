@@ -34,20 +34,31 @@ package bigroom.flint.actions
 	import bigroom.flint.particles.Particle;
 
 	/**
-	 * The MoveEuler action updates the position of the particle based on its velocity.
-	 * It uses a Euler integrator to calculate the new position, hence the name.
+	 * The TargetVelocity action adjusts the velocity of the particle towards the target velocity.
 	 */
-	public class MoveEuler implements Action
+	public class TargetVelocity implements Action
 	{
+		private var _velX:Number;
+		private var _velY:Number;
+		private var _scaleFactor:Number;
+		
 		/**
-		 * The constructor creates a MoveEuler action for use by 
-		 * an emitter. To add a MoveEuler to all particles created by an emitter, use the
+		 * The constructor creates a TargetVelocity action for use by 
+		 * an emitter. To add a TargetVelocity to all particles created by an emitter, use the
 		 * emitter's addAction method.
 		 * 
 		 * @see bigroom.flint.emitters.Emitter#addAction()
+		 * 
+		 * @param velX The x coordinate of the target velocity, in pixels per second.
+		 * @param velY The y coordinate of the target velocity, in pixels per second.
+		 * @param scaleFactor Adjusts how quickly the particle reaches the target velocity.
+		 * Larger numbers cause it to approach the target velocity more quickly.
 		 */
-		public function MoveEuler()
+		public function TargetVelocity( velX:Number, velY:Number, scaleFactor:Number = 0.1 )
 		{
+			_velX = velX;
+			_velY = velY;
+			_scaleFactor = scaleFactor;
 		}
 		
 		/**
@@ -61,8 +72,8 @@ package bigroom.flint.actions
 		 */
 		public function update( emitter:Emitter, particle:Particle, time:Number ):void
 		{
-			particle.x += particle.velX * time;
-			particle.y += particle.velY * time;
+			particle.velX += ( _velX - particle.velX ) * _scaleFactor * time;
+			particle.velY += ( _velY - particle.velY ) * _scaleFactor * time;
 		}
 	}
 }

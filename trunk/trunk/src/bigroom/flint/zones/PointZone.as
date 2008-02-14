@@ -55,12 +55,13 @@ package bigroom.flint.zones
 		 * This method is used by the initializers and actions that
 		 * use the zone. Usually, it need not be called directly by the user.
 		 * 
-		 * @param point The location to test for.
+		 * @param x The x coordinate of the location to test for.
+		 * @param y The y coordinate of the location to test for.
 		 * @return true if point is inside the zone, false if it is outside.
 		 */
-		public function contains( point:Point ):Boolean
+		public function contains( x:Number, y:Number ):Boolean
 		{
-			return _point.equals( point );
+			return _point.x == x && _point.y == y;
 		}
 		
 		/**

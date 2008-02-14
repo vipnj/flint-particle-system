@@ -101,7 +101,8 @@ package bigroom.flint.emitters
 		protected var _initializers:Array;
 		protected var _actions:Array;
 		protected var _particles:Array;
-		protected var _activities:Array;
+		protected var _preActivities:Array;
+		protected var _postActivities:Array;
 		protected var _counter:Counter;
 
 		private var _time:uint;
@@ -118,7 +119,8 @@ package bigroom.flint.emitters
 			_particles = new Array();
 			_actions = new Array();
 			_initializers = new Array();
-			_activities = new Array();
+			_preActivities = new Array();
+			_postActivities = new Array();
 			
 			addEventListener( Event.REMOVED_FROM_STAGE, removed, false, 0, true );
 		}
@@ -175,37 +177,62 @@ package bigroom.flint.emitters
 		/**
 		 * Adds an initializer object to the Emitter. Initializers set the
 		 * initial properties of particles created by the emitter.
+		 * 
+		 * @param initializer The initializer to add
 		 */
 		public function addInitializer( initializer:Initializer ):void
 		{
-			_initializers.unshift( initializer );
+			_initializers.push( initializer );
 		}
 		
 		/**
 		 * Adds an Action object to the Emitter. Actions set the behaviour
 		 * of particles created by the emitter.
+		 * 
+		 * @param action The action to add
 		 */
 		public function addAction( action:Action ):void
 		{
-			_actions.unshift( action );
+			_actions.push( action );
 		}
 		
 		/**
 		 * Adds an Activity to the Emitter. Activities set the behaviour
 		 * of the Emitter.
+		 * 
+		 * @param activity The activity to add
+		 * @param postActions If true, the activity occurs after the actions have been applied. Otherwise the
+		 * activity occurs before the actions have been applied.
 		 */
-		public function addActivity( activity:Activity ):void
+		public function addActivity( activity:Activity, postActions:Boolean = false ):void
 		{
-			_activities.unshift( activity );
+			if( postActions )
+			{
+				_postActivities.push( activity );
+			}
+			else
+			{
+				_preActivities.push( activity );
+			}
 		}
 		
 		/**
 		 * Sets the Counter for the Emitter. The counter defines when and
 		 * with what frequency the emitter emits particles.
+		 * 
+		 * @param counter THe counter to use
 		 */		
 		public function setCounter( counter:Counter ):void
 		{
 			_counter = counter;
+		}
+		
+		/**
+		 * Returns the array of all particles created by this emitter.
+		 */
+		public function get particles():Array
+		{
+			return _particles;
 		}
 		
 		/**
@@ -234,12 +261,18 @@ package bigroom.flint.emitters
 			removeEventListener( Event.ENTER_FRAME, frameLoop );
 			addEventListener( Event.ENTER_FRAME, frameLoop, false, 0, true );
 			_time = getTimer();
-			var len:uint = _activities.length;
+			var len:uint = _preActivities.length;
 			for ( var i:uint = 0; i < len; ++i )
 			{
-				_activities[i].initialize( this );
+				_preActivities[i].initialize( this );
 			}
-			for( var count:uint = _counter.startEmitter(); count--; )
+			len = _postActivities.length;
+			for ( i = 0; i < len; ++i )
+			{
+				_postActivities[i].initialize( this );
+			}
+			len = _counter.startEmitter();
+			for ( i = 0; i < len; ++i )
 			{
 				createParticle();
 			}
@@ -264,15 +297,15 @@ package bigroom.flint.emitters
 		protected function frameUpdate( time:Number ):void
 		{
 			var i:uint;
-			var len:uint = _activities.length;
-			for ( i = 0; i < len; ++i )
-			{
-				_activities[i].update( this, time );
-			}
-			len = _counter.updateEmitter( time );
+			var len:uint = _counter.updateEmitter( time );
 			for( i = 0; i < len; ++i )
 			{
 				createParticle();
+			}
+			len = _preActivities.length;
+			for ( i = 0; i < len; ++i )
+			{
+				_preActivities[i].update( this, time );
 			}
 			
 			if ( _particles.length > 0 )
@@ -303,6 +336,11 @@ package bigroom.flint.emitters
 			else 
 			{
 				dispatchEvent( new FlintEvent( FlintEvent.EMITTER_EMPTY ) );
+			}
+			len = _postActivities.length;
+			for ( i = 0; i < len; ++i )
+			{
+				_preActivities[i].update( this, time );
 			}
 			update( time );
 		}
