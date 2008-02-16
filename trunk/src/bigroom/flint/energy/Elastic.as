@@ -100,7 +100,7 @@ package bigroom.flint.energy
 			var p:Number = lifetime * 0.45;
 			if ( age < 1 )
 			{
-				return 1 + 0.5 * ( Math.pow( 2, 10 * --age ) * Math.sin( ( age * lifetime - p * 0.25 ) * TWOPI / p ));
+				return 1 + 0.5 * ( Math.pow( 2, 10 * --age ) * Math.sin( ( age * lifetime - p * 0.25 ) * TWOPI / p ) );
 			}
 			return -0.5 * Math.pow( 2, -10 * --age ) * Math.sin( ( age * lifetime - p * 0.25 ) * TWOPI / p );
 		}

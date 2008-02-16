@@ -71,7 +71,7 @@ package bigroom.flint.energy
 			if ( age == lifetime ) return 0;
 			if ( ( age /= lifetime * 0.5 ) < 1 )
 			{
-				return 1 - 0.5 * Math.pow( 2, 10 * ( age - 1 ) );
+				return 1 - 0.5 * Math.pow( 2, 10 * --age );
 			}
 			return 0.5 * Math.pow( 2, -10 * --age );
 		}

@@ -49,7 +49,7 @@ package bigroom.flint.displayObjects
 			var point:Point;
 			var rotStep:Number = Math.PI / 5;
 			var innerRadius:Number = radius * Math.cos( rotStep * 2 );
-			var halfPi:Number = Math.PI / 2;
+			var halfPi:Number = Math.PI * 0.5;
 			
 			graphics.beginFill( 0xFFFFFF );
 			graphics.moveTo( 0, -radius );

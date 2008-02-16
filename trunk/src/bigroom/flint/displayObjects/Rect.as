@@ -47,7 +47,7 @@ package bigroom.flint.displayObjects
 		public function Rect( width:Number, height:Number )
 		{
 			graphics.beginFill( 0xFFFFFF );
-			graphics.drawRect( - width / 2, - height / 2, width, height );
+			graphics.drawRect( - width * 0.5, - height * 0.5, width, height );
 			graphics.endFill();
 		}
 	}

@@ -59,11 +59,11 @@ package bigroom.flint.energy
 	{
 		public static function easeIn( age:Number, lifetime:Number ):Number
 		{
-			return Math.cos( age / lifetime * ( Math.PI / 2 ) );
+			return Math.cos( age / lifetime * ( Math.PI * 0.5 ) );
 		}
 		public static function easeOut( age:Number, lifetime:Number ):Number
 		{
-			return 1 - Math.sin( age / lifetime * ( Math.PI / 2 ) );
+			return 1 - Math.sin( age / lifetime * ( Math.PI * 0.5 ) );
 		}
 		public static function easeInOut( age:Number, lifetime:Number ):Number
 		{
