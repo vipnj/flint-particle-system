@@ -46,7 +46,7 @@ package bigroom.flint.examples
 	import bigroom.flint.initializers.Position;
 	import bigroom.flint.initializers.SharedImage;
 	import bigroom.flint.initializers.Velocity;
-	import bigroom.flint.zones.DiscSector;
+	import bigroom.flint.zones.DiscSectorZone;
 	import bigroom.flint.zones.PointZone;	
 
 	/**
@@ -62,7 +62,7 @@ package bigroom.flint.examples
 			setCounter( new Steady( 9, 11 ) );
 			
 			addInitializer( new Lifetime( 11, 12 ) );
-			addInitializer( new Velocity( new DiscSector( new Point( 0, 0 ), 40, 30, -4 * Math.PI / 7, -3 * Math.PI / 7 ) ) );
+			addInitializer( new Velocity( new DiscSectorZone( new Point( 0, 0 ), 40, 30, -4 * Math.PI / 7, -3 * Math.PI / 7 ) ) );
 			addInitializer( new Position( new PointZone( new Point( 0, 0 ) ) ) );
 			addInitializer( new ColorInit( 0xFFFFFFFF, 0xFFFFFFFF ) );
 			addInitializer( new SharedImage( new RadialDot( 7 ) ) );

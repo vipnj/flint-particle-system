@@ -37,7 +37,7 @@ package bigroom.flint.zones
 	 * on which it's based have a hole in the middle, like a doughnut.
 	 */
 
-	public class DiscSector implements Zone 
+	public class DiscSectorZone implements Zone 
 	{
 		private var _center:Point;
 		private var _innerRadius:Number;
@@ -68,7 +68,7 @@ package bigroom.flint.zones
 		 * direction (towards the graphical y axis). Angles are converted to a value between 0 
 		 * and two times PI.
 		 */
-		public function DiscSector( center:Point, outerRadius:Number, innerRadius:Number, minAngle:Number, maxAngle:Number )
+		public function DiscSectorZone( center:Point, outerRadius:Number, innerRadius:Number, minAngle:Number, maxAngle:Number )
 		{
 			_center = center;
 			_innerRadius = innerRadius;

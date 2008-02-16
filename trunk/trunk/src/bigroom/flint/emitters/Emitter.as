@@ -441,17 +441,33 @@ package bigroom.flint.emitters
 		{
 		}
 		
+		/**
+		 * Converts the point object from the emitter's 
+		 * (local) coordinates to the Stage (global) coordinates.
+		 * 
+		 * @param point The name or identifier of a point created 
+		 * with the Point class, specifying the x and y coordinates as properties.
+		 * @return A Point object with coordinates relative to the Stage.
+		 */
 		override public function localToGlobal( point:Point ):Point
 		{
-			var p:Point = parent.localToGlobal( point );
+			var p:Point = super.localToGlobal( point );
 			p.x += _x;
 			p.y += _y;
 			return p;
 		}
 		
+		/**
+		 * Converts the point object from the Stage (global)
+		 * coordinates to the emitter's (local) coordinates.
+		 * 
+		 * @param point An object created with the Point class. 
+		 * The Point object specifies the x and y coordinates as properties.
+		 * @return A Point object with coordinates relative to the display object.
+		 */
 		override public function globalToLocal( point:Point ):Point
 		{
-			var p:Point = parent.globalToLocal( point );
+			var p:Point = super.globalToLocal( point );
 			p.x -= _x;
 			p.y -= _y;
 			return p;

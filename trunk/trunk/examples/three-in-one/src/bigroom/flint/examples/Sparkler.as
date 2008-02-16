@@ -45,7 +45,7 @@ package bigroom.flint.examples
 	import bigroom.flint.initializers.Lifetime;
 	import bigroom.flint.initializers.SharedImage;
 	import bigroom.flint.initializers.Velocity;
-	import bigroom.flint.zones.Disc;	
+	import bigroom.flint.zones.DiscZone;	
 
 	public class Sparkler extends BitmapEmitter
 	{
@@ -60,7 +60,7 @@ package bigroom.flint.examples
 			
 			addInitializer( new SharedImage( new LineShape( 6 ) ) );
 			addInitializer( new ColorInit( 0xFFFFCC00, 0xFFFFCC00 ) );
-			addInitializer( new Velocity( new Disc( new Point( 0, 0 ), 200, 350 ) ) );
+			addInitializer( new Velocity( new DiscZone( new Point( 0, 0 ), 200, 350 ) ) );
 			addInitializer( new Lifetime( 0.2, 0.4 ) );
 			
 			addAction( new Age() );

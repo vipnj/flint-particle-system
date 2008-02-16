@@ -30,31 +30,33 @@
 
 package bigroom.flint.actions 
 {
+	import flash.geom.Point;
+	
 	import bigroom.flint.actions.Action;
 	import bigroom.flint.emitters.Emitter;
 	import bigroom.flint.particles.Particle;	
 
 	/**
-	 * The TurnTowardsMouse action causes the particle to constantly adjust its velocity
-	 * so that it travels towards the mouse pointer.
+	 * The DeathOffStage action marks the particle as dead if it is outside the stage.
 	 */
 
-	public class TurnTowardsMouse implements Action 
+	public class DeathOffStage implements Action 
 	{
-		private var _power:Number;
+		private var _padding:Number;
 		
 		/**
-		 * The constructor creates a TurnTowardsMouse action for use by 
-		 * an emitter. To add a TurnTowardsMouse to all particles created by an emitter, use the
+		 * The constructor creates a DeathOffStage action for use by 
+		 * an emitter. To add a DeathOffStage to all particles created by an emitter, use the
 		 * emitter's addAction method.
 		 * 
 		 * @see bigroom.flint.emitters.Emitter#addAction()
 		 * 
-		 * @param power The strength of the swarming action.
+		 * @param padding An additional distance, in pixels, to add around the stage
+		 * to allow for the size of the particles.
 		 */
-		public function TurnTowardsMouse( power:Number )
+		public function DeathOffStage( padding:Number = 10 )
 		{
-			_power = power;
+			_padding = padding;
 		}
 		
 		/**
@@ -68,20 +70,18 @@ package bigroom.flint.actions
 		 */
 		public function update( emitter:Emitter, particle:Particle, time:Number ):void
 		{
-			var turnLeft:Boolean = ( ( particle.y - emitter.mouseY ) * particle.velX + ( emitter.mouseX - particle.x ) * particle.velY > 0 );
-			var newAngle:Number;
-			if ( turnLeft )
+			if( !emitter.stage )
 			{
-				newAngle = Math.atan2( particle.velY, particle.velX ) - _power * time;
-				
+				return;
 			}
-			else
+			
+			var point:Point = emitter.parent.localToGlobal( new Point( particle.x, particle.y ) );
+			
+			if( point.x < -_padding || point.x > emitter.stage.stageWidth + _padding
+				|| point.y < -_padding || point.y > emitter.stage.stageHeight + _padding )
 			{
-				newAngle = Math.atan2( particle.velY, particle.velX ) + _power * time;
+				particle.isDead = true;
 			}
-			var len:Number = Math.sqrt( particle.velX * particle.velX + particle.velY * particle.velY );
-			particle.velX = len * Math.cos( newAngle );
-			particle.velY = len * Math.sin( newAngle );
 		}
 	}
 }
