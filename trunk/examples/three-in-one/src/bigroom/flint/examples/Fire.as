@@ -45,8 +45,8 @@ package bigroom.flint.examples
 	import bigroom.flint.initializers.Lifetime;
 	import bigroom.flint.initializers.Position;
 	import bigroom.flint.initializers.Velocity;
-	import bigroom.flint.zones.Disc;
-	import bigroom.flint.zones.DiscSector;	
+	import bigroom.flint.zones.DiscZone;
+	import bigroom.flint.zones.DiscSectorZone;	
 
 	/**
 	 * 
@@ -61,8 +61,8 @@ package bigroom.flint.examples
 			setCounter( new Steady( 55, 65 ) );
 			
 			addInitializer( new Lifetime( 2, 3 ) );
-			addInitializer( new Velocity( new DiscSector( new Point( 0, 0 ), 20, 10, -Math.PI, 0 ) ) );
-			addInitializer( new Position( new Disc( new Point( 0, 0 ), 3 ) ) );
+			addInitializer( new Velocity( new DiscSectorZone( new Point( 0, 0 ), 20, 10, -Math.PI, 0 ) ) );
+			addInitializer( new Position( new DiscZone( new Point( 0, 0 ), 3 ) ) );
 			addInitializer( new ImageClass( RadialDot, 5 ) );
 			
 			addAction( new Age() );

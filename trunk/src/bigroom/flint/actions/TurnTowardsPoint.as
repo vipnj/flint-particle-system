@@ -35,7 +35,8 @@ package bigroom.flint.actions
 	import bigroom.flint.particles.Particle;
 
 	/**
-	 * The Swarm action causes the particle to swarm around a particular point.
+	 * The TurnTowardsPoint action causes the particle to constantly adjust its velocity
+	 * so that it travels towards a particular point.
 	 */
 
 	public class TurnTowardsPoint implements Action 
@@ -45,8 +46,8 @@ package bigroom.flint.actions
 		private var _power:Number;
 		
 		/**
-		 * The constructor creates a Swarm action for use by 
-		 * an emitter. To add a Swarm to all particles created by an emitter, use the
+		 * The constructor creates a TurnTowardsPoint action for use by 
+		 * an emitter. To add a TurnTowardsPoint to all particles created by an emitter, use the
 		 * emitter's addAction method.
 		 * 
 		 * @see bigroom.flint.emitters.Emitter#addAction()
@@ -55,7 +56,7 @@ package bigroom.flint.actions
 		 * @param x The x coordinate of the point around which the particle swarms.
 		 * @param y The y coordinate of the point around which the particle swarms.
 		 */
-		public function TurnTowardsPoint( power:Number, x:Number, y:Number )
+		public function TurnTowardsPoint( x:Number, y:Number, power:Number )
 		{
 			_power = power;
 			_x = x;

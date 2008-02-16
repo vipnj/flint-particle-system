@@ -41,7 +41,7 @@ package bigroom.flint.examples
 	import bigroom.flint.initializers.ColorInit;
 	import bigroom.flint.initializers.Position;
 	import bigroom.flint.initializers.Velocity;
-	import bigroom.flint.zones.Disc;
+	import bigroom.flint.zones.DiscZone;
 	import bigroom.flint.zones.PointZone;	
 
 	public class Thousands extends PixelEmitter
@@ -54,7 +54,7 @@ package bigroom.flint.examples
 			setCounter( new Blast( 2000 ) );
 			
 			addInitializer( new ColorInit( 0xFFFF00FF, 0xFF00FFFF ) );
-			addInitializer( new Position( new Disc( new Point( 0, 0 ), 200 ) ) );
+			addInitializer( new Position( new DiscZone( new Point( 0, 0 ), 200 ) ) );
 			addInitializer( new Velocity( new PointZone( new Point( 0, 0 ) ) ) );
 
 			addAction( new MoveEuler() );

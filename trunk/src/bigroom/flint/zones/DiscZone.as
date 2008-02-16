@@ -33,34 +33,37 @@ package bigroom.flint.zones
 	import flash.geom.Point;
 
 	/**
-	 * The Box zone defines a rectangular shaped zone.
+	 * The Disc zone defines a circular zone. The zone may
+	 * have a hole in the middle, like a doughnut.
 	 */
 
-	public class Box implements Zone 
+	public class DiscZone implements Zone 
 	{
-		private var _left : Number;
-		private var _top : Number;
-		private var _right : Number;
-		private var _bottom : Number;
-		private var _width : Number;
-		private var _height : Number;
+		private var _center:Point;
+		private var _innerRadius:Number;
+		private var _outerRadius:Number;
+		private var _innerSq:Number;
+		private var _outerSq:Number;
+		
+		private static var TWOPI:Number = Math.PI * 2;
 		
 		/**
-		 * The constructor creates a Box zone.
+		 * The constructor defines a Disc zone.
 		 * 
-		 * @param left The left coordinate of the rectangle defining the region of the zone.
-		 * @param top The top coordinate of the rectangle defining the region of the zone.
-		 * @param right The right coordinate of the rectangle defining the region of the zone.
-		 * @param bottom The bottom coordinate of the rectangle defining the region of the zone.
+		 * @param center The centre of the disc.
+		 * @param outerRadius The radius of the outer edge of the disc.
+		 * @param innerRadius If set, this defines the radius of the inner
+		 * edge of the disc. Points closer to the center than this inner radius
+		 * are excluded from the zone. If this parameter is not set then all 
+		 * points inside the outer radius are included in the zone.
 		 */
-		public function Box( left:Number, top:Number, right:Number, bottom:Number )
+		public function DiscZone( center:Point, outerRadius:Number, innerRadius:Number = 0 )
 		{
-			_left = left;
-			_top = top;
-			_right = right;
-			_bottom = bottom;
-			_width = right - left;
-			_height = bottom - top;
+			_center = center;
+			_innerRadius = innerRadius;
+			_outerRadius = outerRadius;
+			_innerSq = _innerRadius * _innerRadius;
+			_outerSq = _outerRadius * _outerRadius;
 		}
 		
 		/**
@@ -74,7 +77,10 @@ package bigroom.flint.zones
 		 */
 		public function contains( x:Number, y:Number ):Boolean
 		{
-			return x >= _left && x <= _right && y >= _top && y <= _bottom;
+			x -= _center.x;
+			y -= _center.y;
+			var distSq:Number = x * x + y * y;
+			return distSq <= _outerSq && distSq >= _innerSq;
 		}
 		
 		/**
@@ -86,7 +92,11 @@ package bigroom.flint.zones
 		 */
 		public function getLocation():Point
 		{
-			return new Point( _left + Math.random() * _width, _top + Math.random() * _height );
+			var rand:Number = Math.random();
+			var point:Point =  Point.polar( _innerRadius + (1 - rand * rand ) * ( _outerRadius - _innerRadius ), Math.random() * TWOPI );
+			point.x += _center.x;
+			point.y += _center.y;
+			return point;
 		}
 		
 		/**
@@ -98,7 +108,7 @@ package bigroom.flint.zones
 		 */
 		public function getArea():Number
 		{
-			return _width * _height;
+			return Math.PI * _outerSq - Math.PI * _innerSq;
 		}
 	}
 }

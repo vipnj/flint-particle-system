@@ -78,7 +78,6 @@ package bigroom.flint.zones
 					}
 				}
 			}
-			trace( _area );
 		}
 
 		/**

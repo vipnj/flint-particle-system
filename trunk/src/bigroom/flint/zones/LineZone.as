@@ -38,7 +38,8 @@ package bigroom.flint.zones
 
 	public class LineZone implements Zone 
 	{
-		private var _start:Point;
+		private var _point1:Point;
+		private var _point2:Point;
 		private var _length:Point;
 		
 		/**
@@ -49,7 +50,8 @@ package bigroom.flint.zones
 		 */
 		public function LineZone( point1:Point, point2:Point )
 		{
-			_start = point1;
+			_point1 = point1;
+			_point2 = point2;
 			_length = point2.subtract( point1 );
 		}
 		
@@ -64,9 +66,15 @@ package bigroom.flint.zones
 		 */
 		public function contains( x:Number, y:Number ):Boolean
 		{
-			
-			return false;//_point.equals( point );
-			// TODO: sort this out
+			// not on line if dot product with perpendicular is not zero
+			if ( ( x - _point1.x ) * _length.y - ( y - _point1.y ) * _length.x != 0 )
+			{
+				return false;
+			}
+			// is it between the points
+			var dot1:Number = ( x - _point1.x ) * _length.x - ( y - _point1.y ) * _length.y;
+			var dot2:Number = ( x - _point2.x ) * _length.x - ( y - _point2.y ) * _length.y;
+			return ( dot1 <= 0 && dot2 >= 0 ) || ( dot1 >= 0 && dot2 <= 0 );
 		}
 		
 		/**
@@ -78,7 +86,7 @@ package bigroom.flint.zones
 		 */
 		public function getLocation():Point
 		{
-			var ret:Point = _start.clone();
+			var ret:Point = _point1.clone();
 			var scale:Number = Math.random();
 			ret.x += _length.x * scale;
 			ret.y += _length.y * scale;
