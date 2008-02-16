@@ -49,7 +49,7 @@ package bigroom.flint.zones
 		private var _width : Number;
 		private var _height : Number;
 		private var _area : Number;
-
+		private var _validPoints : Array;
 		
 		/**
 		 * The constructor creates a BitmapDataZone object.
@@ -70,15 +70,17 @@ package bigroom.flint.zones
 			_right = _left + _width;
 			_bottom = _top + _height;
 			
+			_validPoints = new Array();
 			_area = 0;
 			for( var x : uint = 0; x < _width ; ++x )
 			{
 				for( var y : uint = 0; y < _height ; ++y )
 				{
-					var pixel : uint = bitmapData.getPixel32( Math.round( x ), Math.round( y ) );
+					var pixel : uint = bitmapData.getPixel32( x, y );
 					if ( ( pixel >> 24 & 0xFF ) != 0 )
 					{
 						++_area;
+						_validPoints.push( new Point( x, y ) );
 					}
 				}
 			}
@@ -107,14 +109,15 @@ package bigroom.flint.zones
 		 */
 		public function getLocation() : Point
 		{
-			do
+/*			do
 			{
 				var x : Number = Math.random( ) * _width;
 				var y : Number = Math.random( ) * _height;
 				var pixel : uint = _bitmapData.getPixel32( Math.round( x ), Math.round( y ) );
 			}
 			while( ( pixel >> 24 & 0xFF ) == 0 );
-			return new Point( x + _left, y + _top );
+			return new Point( x + _left, y + _top );*/
+			return _validPoints[ Math.floor( Math.random() * _validPoints.length ) ];
 		}
 
 		

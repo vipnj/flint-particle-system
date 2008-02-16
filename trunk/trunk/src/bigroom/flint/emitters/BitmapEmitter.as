@@ -61,7 +61,8 @@ package bigroom.flint.emitters
 	{
 		protected var _bitmap:Bitmap;
 		protected var _offset:Point;
-		private var _filters:Array;
+		private var _preFilters:Array;
+		private var _postFilters:Array;
 
 		/**
 		 * The constructor creates a BitmapEmitter. After creation it should be
@@ -70,8 +71,9 @@ package bigroom.flint.emitters
 		public function BitmapEmitter()
 		{
 			super();
-			_filters = new Array();
-			addEventListener( Event.ADDED_TO_STAGE, added, false, 0, true );
+			_preFilters = new Array();
+			_postFilters = new Array();
+			addEventListener( Event.ADDED_TO_STAGE, addedToStage, false, 0, true );
 		}
 		
 		/**
@@ -81,12 +83,49 @@ package bigroom.flint.emitters
 		 * produce a trail behind each particle as the previous images blur and fade
 		 * more each frame.
 		 */
-		public function addFilter( filter:BitmapFilter ):void
+		public function addFilter( filter:BitmapFilter, postRender:Boolean = false ):void
 		{
-			_filters.unshift( filter );
+			if( postRender )
+			{
+				_postFilters.push( filter );
+			}
+			else
+			{
+				_preFilters.push( filter );
+			}
 		}
 		
-		private function added( ev:Event ):void
+		/**
+		 * Removes a BitmapFilter object from the Emitter.
+		 * 
+		 * @param filter The BitmapFilter to remove
+		 * 
+		 * @see addFilter()
+		 */
+		public function removeFilter( filter:BitmapFilter ):void
+		{
+			for( var i:uint = 0; i < _preFilters.length; ++i )
+			{
+				if( _preFilters[i] == filter )
+				{
+					_preFilters.splice( i, 1 );
+					return;
+				}
+			}
+			for( i = 0; i < _postFilters.length; ++i )
+			{
+				if( _postFilters[i] == filter )
+				{
+					_postFilters.splice( i, 1 );
+					return;
+				}
+			}
+		}
+		
+		/**
+		 * Create the correct sized bitmap when the emitter is added to the display list.
+		 */
+		private function addedToStage( ev:Event ):void
 		{
 			if( _bitmap && _bitmap.bitmapData )
 			{
@@ -95,7 +134,7 @@ package bigroom.flint.emitters
 			_bitmap = new Bitmap();
 			_bitmap.bitmapData = new BitmapData( stage.stageWidth, stage.stageHeight, true, 0 );
 			addChild( _bitmap );
-			_offset = localToGlobal( new Point( 0, 0 ) );
+			_offset = parent.localToGlobal( new Point( 0, 0 ) );
 			_bitmap.x = - _offset.x;
 			_bitmap.y = - _offset.y;
 		}
@@ -112,6 +151,7 @@ package bigroom.flint.emitters
 				// An alternative will be created when the emitter is added to the stage
 				_bitmap = new Bitmap();
 				_bitmap.bitmapData = new BitmapData( 10, 10, true, 0 );
+				trace( "No Bitmap" );
 			}
 		}
 		
@@ -127,15 +167,12 @@ package bigroom.flint.emitters
 			var i:uint;
 			var len:uint;
 			_bitmap.bitmapData.lock();
-			len = _filters.length;
-			if( len )
+			len = _preFilters.length;
+			for( i = 0; i < len; ++i )
 			{
-				for( i = 0; i < len; ++i )
-				{
-					_bitmap.bitmapData.applyFilter( _bitmap.bitmapData, _bitmap.bitmapData.rect, new Point( 0, 0 ), _filters[i] );
-				}
+				_bitmap.bitmapData.applyFilter( _bitmap.bitmapData, _bitmap.bitmapData.rect, new Point( 0, 0 ), _preFilters[i] );
 			}
-			else
+			if( len == 0 && _postFilters.length == 0 )
 			{
 				_bitmap.bitmapData.fillRect( _bitmap.bitmapData.rect, 0 );
 			}
@@ -146,6 +183,11 @@ package bigroom.flint.emitters
 				{
 					drawParticle( _particles[i] );
 				}
+			}
+			len = _postFilters.length;
+			for( i = 0; i < len; ++i )
+			{
+				_bitmap.bitmapData.applyFilter( _bitmap.bitmapData, _bitmap.bitmapData.rect, new Point( 0, 0 ), _postFilters[i] );
 			}
 			_bitmap.bitmapData.unlock();
 		}

@@ -176,10 +176,10 @@ package bigroom.flint.emitters
 		}
 		
 		/**
-		 * Adds an initializer object to the Emitter. Initializers set the
+		 * Adds an Initializer object to the Emitter. Initializers set the
 		 * initial properties of particles created by the emitter.
 		 * 
-		 * @param initializer The initializer to add
+		 * @param initializer The Initializer to add
 		 */
 		public function addInitializer( initializer:Initializer ):void
 		{
@@ -187,14 +187,52 @@ package bigroom.flint.emitters
 		}
 		
 		/**
+		 * Removes an Initializer object from the Emitter.
+		 * 
+		 * @param initializer The Initializer to remove
+		 * 
+		 * @see addInitializer()
+		 */
+		public function removeInitializer( initializer:Initializer ):void
+		{
+			for( var i:uint = 0; i < _initializers.length; ++i )
+			{
+				if( _initializers[i] == initializer )
+				{
+					_initializers.splice( i, 1 );
+					return;
+				}
+			}
+		}
+		
+		/**
 		 * Adds an Action object to the Emitter. Actions set the behaviour
 		 * of particles created by the emitter.
 		 * 
-		 * @param action The action to add
+		 * @param action The Action to add
 		 */
 		public function addAction( action:Action ):void
 		{
 			_actions.push( action );
+		}
+		
+		/**
+		 * Removes an Action object from the Emitter.
+		 * 
+		 * @param action The Action to remove
+		 * 
+		 * @see addAction()
+		 */
+		public function removeAction( action:Action ):void
+		{
+			for( var i:uint = 0; i < _actions.length; ++i )
+			{
+				if( _actions[i] == action )
+				{
+					_actions.splice( i, 1 );
+					return;
+				}
+			}
 		}
 		
 		/**
@@ -214,6 +252,33 @@ package bigroom.flint.emitters
 			else
 			{
 				_preActivities.push( activity );
+			}
+		}
+		
+		/**
+		 * Removes an Activity object from the Emitter.
+		 * 
+		 * @param activity The Activity to remove
+		 * 
+		 * @see addActivity()
+		 */
+		public function removeActivity( activity:Activity ):void
+		{
+			for( var i:uint = 0; i < _preActivities.length; ++i )
+			{
+				if( _preActivities[i] == activity )
+				{
+					_preActivities.splice( i, 1 );
+					return;
+				}
+			}
+			for( i = 0; i < _postActivities.length; ++i )
+			{
+				if( _postActivities[i] == activity )
+				{
+					_postActivities.splice( i, 1 );
+					return;
+				}
 			}
 		}
 		

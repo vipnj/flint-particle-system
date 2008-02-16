@@ -38,11 +38,16 @@ package bigroom.flint.actions
 
 	/**
 	 * The DeathOffStage action marks the particle as dead if it is outside the stage.
+	 * Warning: The DeathOffStage action is very slow.
 	 */
 
 	public class DeathOffStage implements Action 
 	{
 		private var _padding:Number;
+		private var _left:Number = NaN;
+		private var _right:Number = NaN;
+		private var _top:Number = NaN;
+		private var _bottom:Number = NaN;
 		
 		/**
 		 * The constructor creates a DeathOffStage action for use by 
@@ -74,11 +79,16 @@ package bigroom.flint.actions
 			{
 				return;
 			}
+			if( isNaN( _top ) )
+			{
+				var point:Point = emitter.parent.localToGlobal( new Point( 0, 0 ) );
+				_left = point.x - _padding;
+				_right = point.x + emitter.stage.stageWidth + _padding;
+				_top = point.y - _padding;
+				_bottom = point.y + emitter.stage.stageHeight + _padding;
+			}
 			
-			var point:Point = emitter.parent.localToGlobal( new Point( particle.x, particle.y ) );
-			
-			if( point.x < -_padding || point.x > emitter.stage.stageWidth + _padding
-				|| point.y < -_padding || point.y > emitter.stage.stageHeight + _padding )
+			if( particle.x < _left || particle.x > _right || particle.y < _top || particle.y > _bottom )
 			{
 				particle.isDead = true;
 			}
