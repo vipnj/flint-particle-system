@@ -2,10 +2,10 @@
  * FLINT PARTICLE SYSTEM
  * .....................
  * 
- * Author: Richard Lord
+ * Author: Richard Lord (Big Room)
  * Copyright (c) Big Room Ventures Ltd. 2008
  * Version: 1.0.0
- * Available at http://flashgamecode.net/
+ * 
  * 
  * Licence Agreement
  * 
@@ -46,7 +46,7 @@ package bigroom.flint.zones
 		private var _height : Number;
 		
 		/**
-		 * The constructor defines a Box zone.
+		 * The constructor creates a Box zone.
 		 * 
 		 * @param left The left coordinate of the rectangle defining the region of the zone.
 		 * @param top The top coordinate of the rectangle defining the region of the zone.

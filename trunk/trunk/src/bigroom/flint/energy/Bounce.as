@@ -37,10 +37,10 @@
  * 
  * Modifications:
  * 
- * Author: Richard Lord
+ * Author: Richard Lord (Big Room)
  * Copyright (c) Big Room Ventures Ltd. 2008
  * Version: 1.0.0
- * Available at http://flashgamecode.net/
+ * 
  * 
  * Used in the Flint Particle System which is licenced under the MIT license. As per the
  * original license for Robert Penner's classes, these specific classes are released under 

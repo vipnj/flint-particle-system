@@ -1,11 +1,12 @@
 /*
  * FLINT PARTICLE SYSTEM
- * .....................
+ * http://flintparticles.org/
+ * ..........................
  * 
- * Author: Richard Lord
+ * Author: Richard Lord (Big Room)
  * Copyright (c) Big Room Ventures Ltd. 2008
  * Version: 1.0.0
- * Available at http://flashgamecode.net/
+ * 
  * 
  * Licence Agreement
  * 
