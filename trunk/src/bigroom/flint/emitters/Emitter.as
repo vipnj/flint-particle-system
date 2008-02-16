@@ -2,10 +2,10 @@
  * FLINT PARTICLE SYSTEM
  * .....................
  * 
- * Author: Richard Lord
+ * Author: Richard Lord (Big Room)
  * Copyright (c) Big Room Ventures Ltd. 2008
  * Version: 1.0.0
- * Available at http://flashgamecode.net/
+ * 
  * 
  * Licence Agreement
  * 
@@ -60,7 +60,8 @@ package bigroom.flint.emitters
 	 * @eventType bigroom.flint.events.FlintEvent.EMITTER_EMPTY
 	 */
 	[Event(name="emitterEmpty", type="bigroom.flint.events.FlintEvent")]
-
+	import flash.geom.Point;	
+	
 	/**
 	 * The base class for all particle emitters. The Emitter class extends the Sprite
 	 * class so it is itself a DisplayObject. Thus, an Emitter is displayed by simply
@@ -438,6 +439,22 @@ package bigroom.flint.emitters
 		 */
 		protected function cleanUp():void
 		{
+		}
+		
+		override public function localToGlobal( point:Point ):Point
+		{
+			var p:Point = parent.localToGlobal( point );
+			p.x += _x;
+			p.y += _y;
+			return p;
+		}
+		
+		override public function globalToLocal( point:Point ):Point
+		{
+			var p:Point = parent.globalToLocal( point );
+			p.x -= _x;
+			p.y -= _y;
+			return p;
 		}
 	}
 }

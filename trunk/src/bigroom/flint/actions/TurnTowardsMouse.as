@@ -2,10 +2,10 @@
  * FLINT PARTICLE SYSTEM
  * .....................
  * 
- * Author: Richard Lord
+ * Author: Richard Lord (Big Room)
  * Copyright (c) Big Room Ventures Ltd. 2008
  * Version: 1.0.0
- * Available at http://flashgamecode.net/
+ * 
  * 
  * Licence Agreement
  * 
@@ -38,7 +38,7 @@ package bigroom.flint.actions
 	 * The SwarmToMouse action causes the particle to swarm around the mouse pointer.
 	 */
 
-	public class SwarmToMouse implements Action 
+	public class TurnTowardsMouse implements Action 
 	{
 		private var _power:Number;
 		
@@ -51,7 +51,7 @@ package bigroom.flint.actions
 		 * 
 		 * @param power The strength of the swarming action.
 		 */
-		public function SwarmToMouse( power:Number )
+		public function TurnTowardsMouse( power:Number )
 		{
 			_power = power;
 		}

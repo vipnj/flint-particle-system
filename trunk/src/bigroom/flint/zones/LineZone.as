@@ -2,10 +2,10 @@
  * FLINT PARTICLE SYSTEM
  * .....................
  * 
- * Author: Richard Lord
+ * Author: Richard Lord (Big Room)
  * Copyright (c) Big Room Ventures Ltd. 2008
  * Version: 1.0.0
- * Available at http://flashgamecode.net/
+ * 
  * 
  * Licence Agreement
  * 
@@ -42,7 +42,7 @@ package bigroom.flint.zones
 		private var _length:Point;
 		
 		/**
-		 * The constructor defines a LineZone zone.
+		 * The constructor creates a LineZone zone.
 		 * 
 		 * @param point1 The point at one end of the line.
 		 * @param point2 The point at the other end of the line.

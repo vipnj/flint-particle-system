@@ -2,10 +2,10 @@
  * FLINT PARTICLE SYSTEM
  * .....................
  * 
- * Author: Richard Lord
+ * Author: Richard Lord (Big Room)
  * Copyright (c) Big Room Ventures Ltd. 2008
  * Version: 1.0.0
- * Available at http://flashgamecode.net/
+ * 
  * 
  * Licence Agreement
  * 
@@ -38,7 +38,7 @@ package bigroom.flint.actions
 	 * The Swarm action causes the particle to swarm around a particular point.
 	 */
 
-	public class Swarm implements Action 
+	public class TurnTowardsPoint implements Action 
 	{
 		private var _x:Number;
 		private var _y:Number;
@@ -55,7 +55,7 @@ package bigroom.flint.actions
 		 * @param x The x coordinate of the point around which the particle swarms.
 		 * @param y The y coordinate of the point around which the particle swarms.
 		 */
-		public function Swarm( power:Number, x:Number, y:Number )
+		public function TurnTowardsPoint( power:Number, x:Number, y:Number )
 		{
 			_power = power;
 			_x = x;
