@@ -65,8 +65,18 @@ package bigroom.flint.zones
 			_bitmapData = bitmapData;
 			_left = xOffset;
 			_top = yOffset;
-			_width = bitmapData.width;
-			_height = bitmapData.height;
+			invalidate();
+		}
+		
+		/**
+		 * This method forces the zone to revaluate itself. It should be called whenever the 
+		 * contents of the BitmapData object change. However, it is an intensive method and 
+		 * calling it frequently will likely slow your code down.
+		 */
+		public function invalidate():void
+		{
+			_width = _bitmapData.width;
+			_height = _bitmapData.height;
 			_right = _left + _width;
 			_bottom = _top + _height;
 			
@@ -76,7 +86,7 @@ package bigroom.flint.zones
 			{
 				for( var y : uint = 0; y < _height ; ++y )
 				{
-					var pixel : uint = bitmapData.getPixel32( x, y );
+					var pixel : uint = _bitmapData.getPixel32( x, y );
 					if ( ( pixel >> 24 & 0xFF ) != 0 )
 					{
 						++_area;
