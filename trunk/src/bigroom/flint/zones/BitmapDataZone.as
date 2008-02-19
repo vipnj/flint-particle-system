@@ -90,7 +90,7 @@ package bigroom.flint.zones
 					if ( ( pixel >> 24 & 0xFF ) != 0 )
 					{
 						++_area;
-						_validPoints.push( new Point( x, y ) );
+						_validPoints.push( new Point( x + _left, y + _top ) );
 					}
 				}
 			}
