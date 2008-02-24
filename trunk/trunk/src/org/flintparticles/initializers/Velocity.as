@@ -52,7 +52,7 @@ package org.flintparticles.initializers
 	 * in a range of directions.
 	 */
 
-	public class Velocity implements Initializer
+	public class Velocity extends Initializer
 	{
 		private var _zone:Zone;
 
@@ -78,7 +78,7 @@ package org.flintparticles.initializers
 		 * @param emitter The Emitter that created the particle.
 		 * @param particle The particle to be initialized.
 		 */
-		public function init( emitter:Emitter, particle:Particle ):void
+		override public function initialize( emitter:Emitter, particle:Particle ):void
 		{
 			var loc:Point;
 			if( emitter.rotRadians == 0 )

@@ -40,7 +40,7 @@ package org.flintparticles.actions
 	 * particles travelling slower than the specified speed.
 	 */
 
-	public class DeathSpeed implements Action 
+	public class DeathSpeed extends Action
 	{
 		private var _limitSq:Number;
 		private var _isMinimum:Boolean;
@@ -72,7 +72,7 @@ package org.flintparticles.actions
 		 * @param particle The particle to be updated.
 		 * @param time The duration of the frame - used for time based updates.
 		 */
-		public function update( emitter:Emitter, particle:Particle, time:Number ):void
+		override public function update( emitter:Emitter, particle:Particle, time:Number ):void
 		{
 			var speedSq:Number = particle.velX * particle.velX + particle.velY * particle.velY;
 			if ( ( _isMinimum && speedSq < _limitSq ) || ( !_isMinimum && speedSq > _limitSq ) )

@@ -39,7 +39,7 @@ package org.flintparticles.actions
 	 * causing the particle to drift around.
 	 */
 
-	public class RandomDrift implements Action 
+	public class RandomDrift extends Action
 	{
 		private var _sizeX:Number;
 		private var _sizeY:Number;
@@ -70,7 +70,7 @@ package org.flintparticles.actions
 		 * @param particle The particle to be updated.
 		 * @param time The duration of the frame - used for time based updates.
 		 */
-		public function update( emitter:Emitter, particle:Particle, time:Number ):void
+		override public function update( emitter:Emitter, particle:Particle, time:Number ):void
 		{
 			particle.velX += ( Math.random() - 0.5 ) * _sizeX * time;
 			particle.velY += ( Math.random() - 0.5 ) * _sizeY * time;

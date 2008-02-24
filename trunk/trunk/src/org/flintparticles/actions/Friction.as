@@ -44,7 +44,7 @@ package org.flintparticles.actions
 	 * @see QuadraticDrag
 	 */
 
-	public class Friction implements Action 
+	public class Friction extends Action
 	{
 		private var _friction:Number;
 		
@@ -71,7 +71,7 @@ package org.flintparticles.actions
 		 * @param particle The particle to be updated.
 		 * @param time The duration of the frame - used for time based updates.
 		 */
-		public function update( emitter:Emitter, particle:Particle, time:Number ):void
+		override public function update( emitter:Emitter, particle:Particle, time:Number ):void
 		{
 			var len2:Number = particle.velX * particle.velX + particle.velY * particle.velY;
 			if( len2 == 0 )

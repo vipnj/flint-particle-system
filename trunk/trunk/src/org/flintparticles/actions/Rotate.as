@@ -38,7 +38,7 @@ package org.flintparticles.actions
 	 * It uses a Euler integrator to calculate the new rotation, hence the name.
 	 */
 
-	public class Rotate implements Action
+	public class Rotate extends Action
 	{
 		/**
 		 * The constructor creates a Rotate action for use by 
@@ -60,7 +60,7 @@ package org.flintparticles.actions
 		 * @param particle The particle to be updated.
 		 * @param time The duration of the frame - used for time based updates.
 		 */
-		public function update( emitter:Emitter, particle:Particle, time:Number ):void
+		override public function update( emitter:Emitter, particle:Particle, time:Number ):void
 		{
 			particle.rotation += particle.angVelocity * time;
 		}

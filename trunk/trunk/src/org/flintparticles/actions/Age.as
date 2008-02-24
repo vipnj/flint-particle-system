@@ -48,7 +48,7 @@ package org.flintparticles.actions
 	 * <p>When adjusting the energy this action can use any of the
 	 * eassing functions in the org.flintparticles.energy package.</p>
 	 */
-	public class Age implements Action 
+	public class Age extends Action
 	{
 		private var _easing:Function;
 		
@@ -84,13 +84,17 @@ package org.flintparticles.actions
 		 * @param particle The particle to be updated.
 		 * @param time The duration of the frame - used for time based updates.
 		 */
-		public function update( emitter:Emitter, particle:Particle, time:Number ):void
+		override public function update( emitter:Emitter, particle:Particle, time:Number ):void
 		{
 			particle.age += time;
-			particle.energy = _easing( particle.age, particle.lifetime );
-			if ( particle.energy <= 0 )
+			if( particle.age >= particle.lifetime )
 			{
+				particle.energy = 0;
 				particle.isDead = true;
+			}
+			else
+			{
+				particle.energy = _easing( particle.age, particle.lifetime );
 			}
 		}
 	}

@@ -41,7 +41,7 @@ package org.flintparticles.actions
 	 * and displays no loss of energy in the collision.
 	 */
 
-	public class BoundingBox implements Action 
+	public class BoundingBox extends Action
 	{
 		private var _left : Number;
 		private var _top : Number;
@@ -81,7 +81,7 @@ package org.flintparticles.actions
 		 * @param particle The particle to be updated.
 		 * @param time The duration of the frame - used for time based updates.
 		 */
-		public function update( emitter : Emitter, particle : Particle, time : Number ) : void
+		override public function update( emitter : Emitter, particle : Particle, time : Number ) : void
 		{
 			var halfWidth:Number;
 			var halfHeight:Number;

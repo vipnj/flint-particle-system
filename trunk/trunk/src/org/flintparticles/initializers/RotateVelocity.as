@@ -39,7 +39,7 @@ package org.flintparticles.initializers
 	 * using this angular velocity.
 	 */
 
-	public class RotateVelocity implements Initializer
+	public class RotateVelocity extends Initializer
 	{
 		private var _max:Number;
 		private var _min:Number;
@@ -75,7 +75,7 @@ package org.flintparticles.initializers
 		 * @param emitter The Emitter that created the particle.
 		 * @param particle The particle to be initialized.
 		 */
-		public function init( emitter:Emitter, particle:Particle ):void
+		override public function initialize( emitter:Emitter, particle:Particle ):void
 		{
 			if( isNaN( _max ) )
 			{

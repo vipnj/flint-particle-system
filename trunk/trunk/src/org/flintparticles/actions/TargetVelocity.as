@@ -36,7 +36,7 @@ package org.flintparticles.actions
 	/**
 	 * The TargetVelocity action adjusts the velocity of the particle towards the target velocity.
 	 */
-	public class TargetVelocity implements Action
+	public class TargetVelocity extends Action
 	{
 		private var _velX:Number;
 		private var _velY:Number;
@@ -70,7 +70,7 @@ package org.flintparticles.actions
 		 * @param particle The particle to be updated.
 		 * @param time The duration of the frame - used for time based updates.
 		 */
-		public function update( emitter:Emitter, particle:Particle, time:Number ):void
+		override public function update( emitter:Emitter, particle:Particle, time:Number ):void
 		{
 			particle.velX += ( _velX - particle.velX ) * _scaleFactor * time;
 			particle.velY += ( _velY - particle.velY ) * _scaleFactor * time;

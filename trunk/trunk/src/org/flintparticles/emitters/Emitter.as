@@ -112,6 +112,20 @@ package org.flintparticles.emitters
 		protected var _rotation:Number = 0;
 		
 		/**
+		 * Identifies whether the particles should be arranged
+		 * into spacially sorted arrays - this speeds up proximity
+		 * testing for those actions that need it
+		 */
+		public var spaceSort:Boolean = false;
+		/**
+		 * The array of particle indices sorted based on the paricles horizontal position.
+		 * To persuade the emitter to create this array you should set the spaceSort property
+		 * to true. Usually, actions that need this set to true will do so in their addedToEmitter
+		 * method.
+		 */
+		public var spaceSortedX:Array;
+
+		/**
 		 * The constructor creates an emitter. However, it is more common to 
 		 * create one of the subclasses that implements a specific display method.
 		 */
@@ -184,6 +198,7 @@ package org.flintparticles.emitters
 		public function addInitializer( initializer:Initializer ):void
 		{
 			_initializers.push( initializer );
+			initializer.addedToEmitter( this );
 		}
 		
 		/**
@@ -214,6 +229,7 @@ package org.flintparticles.emitters
 		public function addAction( action:Action ):void
 		{
 			_actions.push( action );
+			action.addedToEmitter( this );
 		}
 		
 		/**
@@ -253,6 +269,7 @@ package org.flintparticles.emitters
 			{
 				_preActivities.push( activity );
 			}
+			activity.addedToEmitter( this );
 		}
 		
 		/**
@@ -310,7 +327,7 @@ package org.flintparticles.emitters
 			var len:uint = _initializers.length;
 			for ( var i:uint = 0; i < len; ++i )
 			{
-				_initializers[i].init( this, particle );
+				_initializers[i].initialize( this, particle );
 			}
 			particle.x += _x;
 			particle.y += _y;
@@ -363,32 +380,47 @@ package org.flintparticles.emitters
 		protected function frameUpdate( time:Number ):void
 		{
 			var i:uint;
+			var particle:Particle;
 			var len:uint = _counter.updateEmitter( time );
 			for( i = 0; i < len; ++i )
 			{
 				createParticle();
+			}
+			if( spaceSort )
+			{
+				spaceSortedX = _particles.sortOn( "x", Array.NUMERIC | Array.RETURNINDEXEDARRAY );
+				len = _particles.length;
+				for( i = 0; i < len; ++i )
+				{
+					_particles[ spaceSortedX[i] ].spaceSortX = i;
+				}
 			}
 			len = _preActivities.length;
 			for ( i = 0; i < len; ++i )
 			{
 				_preActivities[i].update( this, time );
 			}
-			
 			if ( _particles.length > 0 )
 			{
-				var particle:Particle;
 				
 				// update particle state
 				len = _actions.length;
-				for ( i = _particles.length; --i >= 0; )
+				var action:Action;
+				var len2:uint = _particles.length;
+				
+				for( var j:uint = 0; j < len; ++j )
+				{
+					action = _actions[j];
+					for ( i = 0; i < len2; ++i )
+					{
+						particle = _particles[i];
+						action.update( this, particle, time );
+					}
+				}
+				// remove dead particles
+				for ( i = len2; i--; )
 				{
 					particle = _particles[i];
-					
-					for ( var j:uint = 0; j < len; ++j )
-					{
-						_actions[j].update( this, particle, time );
-					}
-						
 					if ( particle.isDead )
 					{
 						dispatchEvent( new FlintEvent( FlintEvent.PARTICLE_DEAD, particle ) );
@@ -396,7 +428,6 @@ package org.flintparticles.emitters
 						_creator.disposeParticle( particle );
 						_particles.splice( i, 1 );
 					}
-					
 				}
 			}
 			else 

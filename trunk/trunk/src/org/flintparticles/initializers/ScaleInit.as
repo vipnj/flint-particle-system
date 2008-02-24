@@ -37,7 +37,7 @@ package org.flintparticles.initializers
 	 * The ScaleInit Initializer sets the size of the particle.
 	 */
 
-	public class ScaleInit implements Initializer 
+	public class ScaleInit extends Initializer
 	{
 		private var _min:Number;
 		private var _max:Number;
@@ -80,7 +80,7 @@ package org.flintparticles.initializers
 		 * @param emitter The Emitter that created the particle.
 		 * @param particle The particle to be initialized.
 		 */
-		public function init( emitter:Emitter, particle:Particle ):void
+		override public function initialize( emitter:Emitter, particle:Particle ):void
 		{
 			if( _max == _min )
 			{

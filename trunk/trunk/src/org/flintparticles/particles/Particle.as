@@ -108,6 +108,11 @@ package org.flintparticles.particles
 		public var isDead:Boolean = false;
 		
 		/**
+		 * The position in the emitter's horizontal spacial sorted array
+		 */
+		public var spaceSortX:uint;
+		
+		/**
 		 * The dictionary object enables actions and activities to add additional properties to the particle.
 		 * Any object adding properties to the particle should use a reference to itself as the dictionary
 		 * key, thus ensuring it doesn't clash with other object's properties. If multiple properties are
@@ -127,7 +132,7 @@ package org.flintparticles.particles
 		/**
 		 * Sets the particles properties to their default values.
 		 */
-		public function init():void
+		public function initialize():void
 		{
 			x = 0;
 			y = 0;
@@ -142,6 +147,7 @@ package org.flintparticles.particles
 			energy = 1;
 			isDead = false;
 			image = null;
+			spaceSortX = 0;
 			dictionary = new Dictionary();
 		}
 		

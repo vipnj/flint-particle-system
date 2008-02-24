@@ -38,7 +38,7 @@ package org.flintparticles.initializers
 	 * usually combined with the Age action to age the particle over its
 	 * lifetime and destroy the particle at the end of its lifetime.
 	 */
-	public class Lifetime implements Initializer 
+	public class Lifetime extends Initializer
 	{
 		private var _max:Number;
 		private var _min:Number;
@@ -74,7 +74,7 @@ package org.flintparticles.initializers
 		 * @param emitter The Emitter that created the particle.
 		 * @param particle The particle to be initialized.
 		 */
-		public function init( emitter:Emitter, particle:Particle ):void
+		override public function initialize( emitter:Emitter, particle:Particle ):void
 		{
 			if( isNaN( _max ) )
 			{

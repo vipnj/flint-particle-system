@@ -37,7 +37,7 @@ package org.flintparticles.actions
 	 * The Move action updates the position of the particle based on its velocity.
 	 * It uses a Euler integrator to calculate the new position, hence the name.
 	 */
-	public class Move implements Action
+	public class Move extends Action
 	{
 		/**
 		 * The constructor creates a Move action for use by 
@@ -59,7 +59,7 @@ package org.flintparticles.actions
 		 * @param particle The particle to be updated.
 		 * @param time The duration of the frame - used for time based updates.
 		 */
-		public function update( emitter:Emitter, particle:Particle, time:Number ):void
+		override public function update( emitter:Emitter, particle:Particle, time:Number ):void
 		{
 			particle.x += particle.velX * time;
 			particle.y += particle.velY * time;

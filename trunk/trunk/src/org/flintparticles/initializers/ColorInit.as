@@ -38,7 +38,7 @@ package org.flintparticles.initializers
 	 * The ColorInit Initializer sets the color of the particle.
 	 */
 
-	public class ColorInit implements Initializer 
+	public class ColorInit extends Initializer
 	{
 		private var _min:uint;
 		private var _max:uint;
@@ -72,7 +72,7 @@ package org.flintparticles.initializers
 		 * @param emitter The Emitter that created the particle.
 		 * @param particle The particle to be initialized.
 		 */
-		public function init( emitter:Emitter, particle:Particle ):void
+		override public function initialize( emitter:Emitter, particle:Particle ):void
 		{
 			if( _max == _min )
 			{

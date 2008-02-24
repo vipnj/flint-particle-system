@@ -40,12 +40,13 @@ package org.flintparticles.actions
 	 * of the distance from the particle to the point.
 	 */
 
-	public class GravityWell implements Action 
+	public class GravityWell extends Action
 	{
 		private var _x:Number;
 		private var _y:Number;
 		private var _power:Number;
-		private var _distanceFactor:Number = 0.01;
+		private var _epsilonSq:Number;
+		private var _gravityConst:Number = 10000;
 		
 		/**
 		 * The constructor creates a GravityWell action for use by 
@@ -57,12 +58,18 @@ package org.flintparticles.actions
 		 * @param power The strength of the force - larger numbers produce a stringer force.
 		 * @param x The x coordinate of the point towards which the force draws the particles.
 		 * @param y The y coordinate of the point towards which the force draws the particles.
+		 * @param epsilon The minimum distance for which gravity is calculated. Objects closer
+		 * than this distance experience a gravity force as it they were this distance away.
+		 * This stops the gravity effect blowing up as distances get small. For realistic gravity 
+		 * effects you will want a small epsilon ( ~1 ), but for stable visual effects a larger
+		 * epsilon (~100) is often better.
 		 */
-		public function GravityWell( power:Number, x:Number, y:Number )
+		public function GravityWell( power:Number, x:Number, y:Number, epsilon:Number = 100 )
 		{
-			_power = power;
+			_power = power * _gravityConst;
 			_x = x;
 			_y = y;
+			_epsilonSq = epsilon * epsilon;
 		}
 		
 		/**
@@ -74,18 +81,18 @@ package org.flintparticles.actions
 		 * @param particle The particle to be updated.
 		 * @param time The duration of the frame - used for time based updates.
 		 */
-		public function update( emitter:Emitter, particle:Particle, time:Number ):void
+		override public function update( emitter:Emitter, particle:Particle, time:Number ):void
 		{
-			var x:Number = ( _x - particle.x ) * _distanceFactor;
-			var y:Number = ( _y - particle.y ) * _distanceFactor;
-			var d2:Number = x * x + y * y;
-			if( d2 == 0 )
+			var x:Number = ( _x - particle.x );
+			var y:Number = ( _y - particle.y );
+			var dSq:Number = x * x + y * y;
+			if( dSq == 0 )
 			{
 				return;
 			}
-			var len:Number = Math.sqrt( d2 );
-			if( d2 < 1 ) d2 = 1;
-			var factor:Number = ( _power * time ) / ( d2 * len );
+			var d:Number = Math.sqrt( dSq );
+			if( dSq < _epsilonSq ) dSq = _epsilonSq;
+			var factor:Number = ( _power * time ) / ( dSq * d );
 			particle.velX += x * factor;
 			particle.velY += y * factor;
 		}

@@ -38,7 +38,7 @@ package org.flintparticles.actions
 	 * should be used in conjunction with the Age action.
 	 */
 
-	public class Scale implements Action 
+	public class Scale extends Action
 	{
 		private var _diffScale:Number;
 		private var _endScale:Number;
@@ -70,7 +70,7 @@ package org.flintparticles.actions
 		 * @param particle The particle to be updated.
 		 * @param time The duration of the frame - used for time based updates.
 		 */
-		public function update( emitter:Emitter, particle:Particle, time:Number ):void
+		override public function update( emitter:Emitter, particle:Particle, time:Number ):void
 		{
 			particle.scale = _endScale + _diffScale * particle.energy;
 		}

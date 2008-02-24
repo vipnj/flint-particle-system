@@ -47,7 +47,7 @@ package org.flintparticles.initializers
 	 * in the org.flintparticles.zones package.</p>
 	 */
 
-	public class Position implements Initializer 
+	public class Position extends Initializer
 	{
 		private var _zone : Zone;
 
@@ -64,7 +64,7 @@ package org.flintparticles.initializers
 		{
 			_zone = zone;
 		}
-
+		
 		/**
 		 * The init method is used by the emitter to initialize the particle.
 		 * It is called within the emitter's createParticle method and need not
@@ -73,7 +73,7 @@ package org.flintparticles.initializers
 		 * @param emitter The Emitter that created the particle.
 		 * @param particle The particle to be initialized.
 		 */
-		public function init( emitter : Emitter, particle : Particle ) : void
+		override public function initialize( emitter : Emitter, particle : Particle ) : void
 		{
 			var loc:Point = _zone.getLocation();
 			particle.x = loc.x;

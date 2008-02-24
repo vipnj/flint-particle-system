@@ -33,7 +33,10 @@ package org.flintparticles.activities
 	import org.flintparticles.emitters.Emitter;
 	
 	/**
-	 * The Activity interface must be implemented by all emitter Activities.
+	 * The Activity class is the abstract base class for all emitter activities. Instances of the 
+	 * Activity class should not be directly created because the Activity class itself simply defines 
+	 * default methods that do nothing. Classes that extend the Activity class implement their 
+	 * own functionality for the methods they want to use.
 	 * 
 	 * <p>An Activity is a class that is used to modify the 
 	 * behaviour of the emitter over time. It may, for example, move or
@@ -41,15 +44,33 @@ package org.flintparticles.activities
 	 * 
 	 * <p>Activities are added to the emitter by using its addActivity method.</p> 
 	 */
-	public interface Activity
+	public class Activity
 	{
+		/**
+		 * The constructor creates an Activity object. But you shouldn't use it because the Activity
+		 * class is abstract.
+		 */
+		public function Activity()
+		{
+		}
+
+		/**
+		 * The addedToEmitter method is called from the emitter when the Activity is added to it
+		 * 
+		 * @param emitter The Emitter that the Activity was added to.
+		 */
+		public function addedToEmitter( emitter:Emitter ):void
+		{
+		}
 		
 		/**
 		 * The initialize method is called once when the emitter starts.
 		 * 
 		 * @param emitter The Emitter that is using the Activity.
 		 */
-		function initialize( emitter:Emitter ):void;
+		public function initialize( emitter:Emitter ):void
+		{
+		}
 		
 		/**
 		 * The update method is called every frame by the emitter.
@@ -57,6 +78,8 @@ package org.flintparticles.activities
 		 * @param emitter The Emitter that is using the Activity.
 		 * @param time The duration of the frame in seconds - used for time based updates.
 		 */
-		function update( emitter:Emitter, time:Number ):void;
+		public function update( emitter:Emitter, time:Number ):void
+		{
+		}
 	}
 }

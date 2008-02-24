@@ -39,7 +39,7 @@ package org.flintparticles.actions
 	 * The Jet Action applies an acceleration to the particle only if it is in the specified zone. 
 	 */
 
-	public class Jet implements Action 
+	public class Jet extends Action
 	{
 		private var _x:Number;
 		private var _y:Number;
@@ -78,7 +78,7 @@ package org.flintparticles.actions
 		 * @param particle The particle to be updated.
 		 * @param time The duration of the frame - used for time based updates.
 		 */
-		public function update( emitter:Emitter, particle:Particle, time:Number ):void
+		override public function update( emitter:Emitter, particle:Particle, time:Number ):void
 		{
 			if( _zone.contains( particle.x, particle.y ) )
 			{

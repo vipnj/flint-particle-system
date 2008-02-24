@@ -38,7 +38,7 @@ package org.flintparticles.actions
 	 * should be used in conjunction with the Age action.
 	 */
 
-	public class Fade implements Action 
+	public class Fade extends Action
 	{
 		private var _diffAlpha:Number;
 		private var _endAlpha:Number;
@@ -70,7 +70,7 @@ package org.flintparticles.actions
 		 * @param particle The particle to be updated.
 		 * @param time The duration of the frame - used for time based updates.
 		 */
-		public function update( emitter:Emitter, particle:Particle, time:Number ):void
+		override public function update( emitter:Emitter, particle:Particle, time:Number ):void
 		{
 			var alpha:Number = _endAlpha + _diffAlpha * particle.energy;
 			particle.color = ( particle.color & 0xFFFFFF ) | ( Math.round( alpha * 255 ) << 24 );

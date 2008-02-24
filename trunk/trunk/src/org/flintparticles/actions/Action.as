@@ -34,7 +34,11 @@ package org.flintparticles.actions
 	import org.flintparticles.particles.Particle;	
 
 	/**
-	 * The Action interface must be implemented by all particle actions.
+	 * The Action class is the abstract base class for all particle actions. Instances of the Action 
+	 * class should not be directly created because the Action class itself simply defines default
+	 * methods that do nothing. Classes that extend the Action class implement their own functionality 
+	 * for the methods they want to use.
+	 * 
 	 * <p>An Action is a class that is used to modify an aspect of a particle 
 	 * every frame. Actions may, for example, move the particle of modify 
 	 * its velocity.</p>
@@ -43,8 +47,25 @@ package org.flintparticles.actions
 	 * 
 	 * @see org.flintparticles.emitters.Emitter#addAction()
 	 */
-	public interface Action
+	public class Action
 	{
+		/**
+		 * The constructor creates an Action object. But you shouldn't use it because the Action
+		 * class is abstract.
+		 */
+		public function Action()
+		{
+		}
+		
+		/**
+		 * The addedToEmitter method is called from the emitter when the Action is added to it
+		 * 
+		 * @param emitter The Emitter that the Action was added to.
+		 */
+		public function addedToEmitter( emitter:Emitter ):void
+		{
+		}
+		
 		/**
 		 * The update method is called every frame for every particle created
 		 * by the emitter.
@@ -53,6 +74,8 @@ package org.flintparticles.actions
 		 * @param particle The particle to be updated.
 		 * @param time The duration of the frame - used for time based updates.
 		 */
-		function update( emitter:Emitter, particle:Particle, time:Number ):void;
+		public function update( emitter:Emitter, particle:Particle, time:Number ):void
+		{
+		}
 	}
 }

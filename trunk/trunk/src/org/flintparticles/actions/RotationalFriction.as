@@ -42,7 +42,7 @@ package org.flintparticles.actions
 	 * RotationalLinearDrag and RotationalQuadraticDrag.
 	 */
 
-	public class RotationalFriction implements Action 
+	public class RotationalFriction extends Action
 	{
 		private var _friction:Number;
 		
@@ -69,7 +69,7 @@ package org.flintparticles.actions
 		 * @param particle The particle to be updated.
 		 * @param time The duration of the frame - used for time based updates.
 		 */
-		public function update( emitter:Emitter, particle:Particle, time:Number ):void
+		override public function update( emitter:Emitter, particle:Particle, time:Number ):void
 		{
 			if( particle.angVelocity == 0 )
 			{
