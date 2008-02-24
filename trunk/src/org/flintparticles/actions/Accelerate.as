@@ -40,7 +40,7 @@ package org.flintparticles.actions
 	 * gravity.
 	 */
 
-	public class Accelerate implements Action 
+	public class Accelerate extends Action
 	{
 		private var _x:Number;
 		private var _y:Number;
@@ -72,7 +72,7 @@ package org.flintparticles.actions
 		 * @param particle The particle to be updated.
 		 * @param time The duration of the frame - used for time based updates.
 		 */
-		public function update( emitter:Emitter, particle:Particle, time:Number ):void
+		override public function update( emitter:Emitter, particle:Particle, time:Number ):void
 		{
 			particle.velX += _x * time;
 			particle.velY += _y * time;

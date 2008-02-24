@@ -36,7 +36,7 @@ package org.flintparticles.actions
 	/**
 	 * The TargetRotateVelocity action adjusts the angular velocity of the particle towards the target angular velocity.
 	 */
-	public class TargetRotateVelocity implements Action
+	public class TargetRotateVelocity extends Action
 	{
 		private var _vel:Number;
 		private var _scaleFactor:Number;
@@ -67,7 +67,7 @@ package org.flintparticles.actions
 		 * @param particle The particle to be updated.
 		 * @param time The duration of the frame - used for time based updates.
 		 */
-		public function update( emitter:Emitter, particle:Particle, time:Number ):void
+		override public function update( emitter:Emitter, particle:Particle, time:Number ):void
 		{
 			particle.angVelocity += ( _vel - particle.angVelocity ) * _scaleFactor * time;
 		}

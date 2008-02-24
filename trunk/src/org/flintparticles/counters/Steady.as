@@ -41,6 +41,7 @@ package org.flintparticles.counters
 		protected var _timeToNext:Number;
 		protected var _rateMin:Number;
 		protected var _rateMax:Number;
+		private var _stop:Boolean;
 		
 		/**
 		 * The constructor creates a Steady counter for use by an emitter. To
@@ -58,8 +59,17 @@ package org.flintparticles.counters
 		 */
 		public function Steady( rateMin:Number, rateMax:Number = NaN )
 		{
+			_stop = false;
 			_rateMin = rateMin;
 			_rateMax = isNaN( rateMax ) ? rateMin : rateMax;
+		}
+		
+		/**
+		 * Stops the emitter from emitting particles
+		 */
+		public function stop():void
+		{
+			_stop = true;
 		}
 		
 		/**
@@ -87,6 +97,10 @@ package org.flintparticles.counters
 		 */
 		public function updateEmitter( time:Number ):uint
 		{
+			if( _stop )
+			{
+				return 0;
+			}
 			var emitTime:Number = time;
 			var count:uint = 0;
 			emitTime -= _timeToNext;

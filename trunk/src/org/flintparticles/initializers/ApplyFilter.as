@@ -39,7 +39,7 @@ package org.flintparticles.initializers
 	 * The ApplyFilter Initializer applies a filter to the particle's image.
 	 */
 
-	public class ApplyFilter implements Initializer 
+	public class ApplyFilter extends Initializer
 	{
 		private var _filter:BitmapFilter;
 		
@@ -65,7 +65,7 @@ package org.flintparticles.initializers
 		 * @param emitter The Emitter that created the particle.
 		 * @param particle The particle to be initialized.
 		 */
-		public function init( emitter:Emitter, particle:Particle ):void
+		override public function initialize( emitter:Emitter, particle:Particle ):void
 		{
 			if( particle.image )
 			{

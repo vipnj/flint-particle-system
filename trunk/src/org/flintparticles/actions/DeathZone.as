@@ -40,7 +40,7 @@ package org.flintparticles.actions
 	 * a zone.
 	 */
 
-	public class DeathZone implements Action 
+	public class DeathZone extends Action
 	{
 		private var _zone:Zone;
 		private var _invertZone:Boolean;
@@ -73,7 +73,7 @@ package org.flintparticles.actions
 		 * @param particle The particle to be updated.
 		 * @param time The duration of the frame - used for time based updates.
 		 */
-		public function update( emitter:Emitter, particle:Particle, time:Number ):void
+		override public function update( emitter:Emitter, particle:Particle, time:Number ):void
 		{
 			var inside:Boolean = _zone.contains( particle.x, particle.y );
 			if ( _invertZone )

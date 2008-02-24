@@ -37,7 +37,7 @@ package org.flintparticles.activities
 	/**
 	 * The EmitterImage activity draws an image at the point where the emitter is.
 	 */
-	public class EmitterImage implements Activity
+	public class EmitterImage extends Activity
 	{
 		private var _image:DisplayObject;
 		
@@ -62,7 +62,7 @@ package org.flintparticles.activities
 		 * 
 		 * @param emitter The Emitter that is using the activity.
 		 */
-		public function initialize( emitter : Emitter ) : void
+		override public function initialize( emitter : Emitter ) : void
 		{
 			if( _image.stage )
 			{
@@ -79,7 +79,7 @@ package org.flintparticles.activities
 		 * @param emitter The Emitter that is using the activity.
 		 * @param time The duration of the frame - used for time based updates.
 		 */
-		public function update( emitter : Emitter, time : Number ) : void
+		override public function update( emitter : Emitter, time : Number ) : void
 		{
 			_image.x = emitter.x;
 			_image.y = emitter.y;

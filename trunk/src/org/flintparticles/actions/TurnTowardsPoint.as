@@ -39,7 +39,7 @@ package org.flintparticles.actions
 	 * so that it travels towards a particular point.
 	 */
 
-	public class TurnTowardsPoint implements Action 
+	public class TurnTowardsPoint extends Action
 	{
 		private var _x:Number;
 		private var _y:Number;
@@ -72,7 +72,7 @@ package org.flintparticles.actions
 		 * @param particle The particle to be updated.
 		 * @param time The duration of the frame - used for time based updates.
 		 */
-		public function update( emitter:Emitter, particle:Particle, time:Number ):void
+		override public function update( emitter:Emitter, particle:Particle, time:Number ):void
 		{
 			var turnLeft:Boolean = ( ( particle.y - _y ) * particle.velX + ( _x - particle.x ) * particle.velY > 0 );
 			var newAngle:Number;

@@ -46,7 +46,7 @@ package org.flintparticles.initializers
 	 * only indirectly used to display the particle.
 	 */
 
-	public class SharedImage implements Initializer
+	public class SharedImage extends Initializer
 	{
 		private var _image:DisplayObject;
 		
@@ -72,7 +72,7 @@ package org.flintparticles.initializers
 		 * @param emitter The Emitter that created the particle.
 		 * @param particle The particle to be initialized.
 		 */
-		public function init( emitter:Emitter, particle:Particle ):void
+		override public function initialize( emitter:Emitter, particle:Particle ):void
 		{
 			particle.image = _image;
 		}

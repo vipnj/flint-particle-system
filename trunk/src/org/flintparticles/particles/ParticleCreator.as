@@ -75,7 +75,7 @@ package org.flintparticles.particles
 		 */
 		public function disposeParticle( particle:Particle ):void
 		{
-			particle.init();
+			particle.initialize();
 			_particles.push( particle );
 		}
 

@@ -40,7 +40,7 @@ package org.flintparticles.actions
 	 * proportional to the square of the distance from the particle to the point.
 	 */
 
-	public class Explosion implements Action 
+	public class Explosion extends Action
 	{
 		private var _x:Number;
 		private var _y:Number;
@@ -74,7 +74,7 @@ package org.flintparticles.actions
 		 * @param particle The particle to be updated.
 		 * @param time The duration of the frame - used for time based updates.
 		 */
-		public function update( emitter:Emitter, particle:Particle, time:Number ):void
+		override public function update( emitter:Emitter, particle:Particle, time:Number ):void
 		{
 			var x:Number = ( particle.x - _x ) * _distanceFactor;
 			var y:Number = ( particle.y - _y ) * _distanceFactor;

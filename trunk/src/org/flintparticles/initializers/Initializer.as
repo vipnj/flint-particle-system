@@ -34,6 +34,11 @@ package org.flintparticles.initializers
 	import org.flintparticles.particles.Particle;		
 
 	/**
+	 * The Initializer class is the abstract base class for all particle initializers. Instances of 
+	 * the Initializer class should not be directly created because the Initializer class itself 
+	 * simply defines default methods that do nothing. Classes that extend the Initializer class 
+	 * implement their own functionality for the methods they want to use.
+	 * 
 	 * The Initializer interface must be implemented by all particle initializers.
 	 * <p>An Initializer is a class that is used to set an aspect of a particle 
 	 * when it is created. Initializers may, for example, set an initial velocity
@@ -43,8 +48,25 @@ package org.flintparticles.initializers
 	 * 
 	 * @see org.flintparticles.emitters.Emitter#addInitializer()
 	 */
-	public interface Initializer
+	public class Initializer
 	{
+		/**
+		 * The constructor creates an Initializer object. But you shouldn't use it because the 
+		 * Initializer class is abstract.
+		 */
+		public function Initializer()
+		{
+		}
+		
+		/**
+		 * The addedToEmitter method is called from the emitter when the Initializer is added to it
+		 * 
+		 * @param emitter The Emitter that the Initializer was added to.
+		 */
+		public function addedToEmitter( emitter:Emitter ):void
+		{
+		}
+		
 		/**
 		 * The init method is called for every particle created
 		 * by the emitter.
@@ -52,6 +74,8 @@ package org.flintparticles.initializers
 		 * @param emitter The Emitter that created the particle.
 		 * @param particle The particle to be initialized.
 		 */
-		function init( emitter:Emitter, particle:Particle ):void;
+		public function initialize( emitter:Emitter, particle:Particle ):void
+		{
+		}
 	}
 }

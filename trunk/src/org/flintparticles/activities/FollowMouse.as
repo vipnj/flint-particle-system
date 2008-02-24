@@ -37,7 +37,7 @@ package org.flintparticles.activities
 	 * the position of the mouse pointer. The effect is for
 	 * it to emit particles from the mouse pointer location.
 	 */
-	public class FollowMouse implements Activity
+	public class FollowMouse extends Activity
 	{
 		/**
 		 * The constructor creates a FollowMouse activity for use by 
@@ -51,17 +51,6 @@ package org.flintparticles.activities
 		}
 		
 		/**
-		 * The initialize method is used by the emitter to start the activity.
-		 * It is called within the emitter's start method and need not
-		 * be called by the user.
-		 * 
-		 * @param emitter The Emitter that is using the activity.
-		 */
-		public function initialize( emitter : Emitter ) : void
-		{
-		}
-		
-		/**
 		 * The update method is used by the emitter to apply the activity.
 		 * It is called within the emitter's update loop and need not
 		 * be called by the user.
@@ -69,7 +58,7 @@ package org.flintparticles.activities
 		 * @param emitter The Emitter that is using the activity.
 		 * @param time The duration of the frame - used for time based updates.
 		 */
-		public function update( emitter : Emitter, time : Number ) : void
+		override public function update( emitter : Emitter, time : Number ) : void
 		{
 			emitter.x = emitter.parent.mouseX;
 			emitter.y = emitter.parent.mouseY;

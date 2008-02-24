@@ -39,7 +39,7 @@ package org.flintparticles.actions
 	 * so that it travels towards the mouse pointer.
 	 */
 
-	public class TurnTowardsMouse implements Action 
+	public class TurnTowardsMouse extends Action
 	{
 		private var _power:Number;
 		
@@ -66,7 +66,7 @@ package org.flintparticles.actions
 		 * @param particle The particle to be updated.
 		 * @param time The duration of the frame - used for time based updates.
 		 */
-		public function update( emitter:Emitter, particle:Particle, time:Number ):void
+		override public function update( emitter:Emitter, particle:Particle, time:Number ):void
 		{
 			var turnLeft:Boolean = ( ( particle.y - emitter.mouseY ) * particle.velX + ( emitter.mouseX - particle.x ) * particle.velY > 0 );
 			var newAngle:Number;

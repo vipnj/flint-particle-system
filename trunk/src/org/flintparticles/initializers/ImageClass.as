@@ -40,7 +40,7 @@ package org.flintparticles.initializers
 	 * BitmapEmitter it is more efficient to use the SharedImage Initializer.
 	 */
 
-	public class ImageClass implements Initializer 
+	public class ImageClass extends Initializer
 	{
 		private var _imageClass:Class;
 		private var _parameters:Array;
@@ -71,7 +71,7 @@ package org.flintparticles.initializers
 		 * @param emitter The Emitter that created the particle.
 		 * @param particle The particle to be initialized.
 		 */
-		public function init( emitter:Emitter, particle:Particle ):void
+		override public function initialize( emitter:Emitter, particle:Particle ):void
 		{
 			particle.image = construct( _imageClass, _parameters );
 		}

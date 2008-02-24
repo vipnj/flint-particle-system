@@ -41,7 +41,7 @@ package org.flintparticles.actions
 	 * Warning: The DeathOffStage action is very slow.
 	 */
 
-	public class DeathOffStage implements Action 
+	public class DeathOffStage extends Action
 	{
 		private var _padding:Number;
 		private var _left:Number = NaN;
@@ -73,7 +73,7 @@ package org.flintparticles.actions
 		 * @param particle The particle to be updated.
 		 * @param time The duration of the frame - used for time based updates.
 		 */
-		public function update( emitter:Emitter, particle:Particle, time:Number ):void
+		override public function update( emitter:Emitter, particle:Particle, time:Number ):void
 		{
 			if( !emitter.stage )
 			{

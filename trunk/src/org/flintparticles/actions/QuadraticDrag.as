@@ -39,7 +39,7 @@ package org.flintparticles.actions
 	 * The drag force is proportional to the square of the velocity of the particle.
 	 */
 
-	public class QuadraticDrag implements Action 
+	public class QuadraticDrag extends Action
 	{
 		private var _drag:Number;
 		
@@ -66,7 +66,7 @@ package org.flintparticles.actions
 		 * @param particle The particle to be updated.
 		 * @param time The duration of the frame - used for time based updates.
 		 */
-		public function update( emitter:Emitter, particle:Particle, time:Number ):void
+		override public function update( emitter:Emitter, particle:Particle, time:Number ):void
 		{
 			var len2:Number = particle.velX * particle.velX + particle.velY * particle.velY;
 			if( len2 == 0 )
