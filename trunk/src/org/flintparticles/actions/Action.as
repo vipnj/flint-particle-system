@@ -58,7 +58,21 @@ package org.flintparticles.actions
 		}
 		
 		/**
-		 * The addedToEmitter method is called from the emitter when the Action is added to it
+		 * The getDefaultPriority method is used to order the execution of actions.
+		 * It is called within the emitter's addAction method when the user doesn't
+		 * manually set a priority. It need not be called directly by the user.
+	 	 * 
+		 * @see org.flintparticles.emitters.Emitter#addAction()
+		 */
+		public function getDefaultPriority():Number
+		{
+			return 0;
+		}
+		
+		/**
+		 * The addedToEmitter method is called by the emitter when the Action is added to it
+		 * It is called within the emitter's addAction method and need not
+		 * be called by the user.
 		 * 
 		 * @param emitter The Emitter that the Action was added to.
 		 */
@@ -67,8 +81,9 @@ package org.flintparticles.actions
 		}
 		
 		/**
-		 * The update method is called every frame for every particle created
-		 * by the emitter.
+		 * The update method is used by the emitter to apply the action
+		 * to every particle. It is called within the emitter's update 
+		 * loop and need not be called by the user.
 		 * 
 		 * @param emitter The Emitter that created the particle.
 		 * @param particle The particle to be updated.

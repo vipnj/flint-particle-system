@@ -51,12 +51,7 @@ package org.flintparticles.activities
 		}
 		
 		/**
-		 * The update method is used by the emitter to apply the activity.
-		 * It is called within the emitter's update loop and need not
-		 * be called by the user.
-		 * 
-		 * @param emitter The Emitter that is using the activity.
-		 * @param time The duration of the frame - used for time based updates.
+		 * @inheritDoc
 		 */
 		override public function update( emitter : Emitter, time : Number ) : void
 		{

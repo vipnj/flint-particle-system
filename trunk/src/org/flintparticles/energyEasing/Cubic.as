@@ -47,7 +47,7 @@
  * the BSD License.
  */
 
-package org.flintparticles.energy
+package org.flintparticles.energyEasing
 {
 	/**
 	 * A modified form of Robert Penner's easing equations, optimised for the specific use
@@ -55,23 +55,23 @@ package org.flintparticles.energy
 	 * 
 	 * @see org.flintparticles.actions.Age
 	 */
-	public class Quadratic
+	public class Cubic
 	{
 		public static function easeIn( age:Number, lifetime:Number ):Number
 		{
-			return 1 - ( age /= lifetime ) * age;
+			return 1 - ( age /= lifetime ) * age * age;
 		}
-		public static function easeOut( age:Number, lifetime:Number ):Number 
+		public static function easeOut( age:Number, lifetime:Number ):Number
 		{
-			return ( age = 1 - age / lifetime ) * age;
+			return ( age = 1 - age / lifetime ) * age * age;
 		}
 		public static function easeInOut( age:Number, lifetime:Number ):Number
 		{
 			if ( ( age /= lifetime * 0.5 ) < 1 )
 			{
-				return 1 - age * age * 0.5;
+				return 1 - age * age * age * 0.5;
 			}
-			return ( age -= 2 ) * age * 0.5;
+			return - (age -= 2) * age * age * 0.5;
 		}
 	}
 }

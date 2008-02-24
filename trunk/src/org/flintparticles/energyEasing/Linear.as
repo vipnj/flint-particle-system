@@ -47,7 +47,7 @@
  * the BSD License.
  */
 
-package org.flintparticles.energy
+package org.flintparticles.energyEasing
 {
 	/**
 	 * A modified form of Robert Penner's easing equations, optimised for the specific use
@@ -55,25 +55,23 @@ package org.flintparticles.energy
 	 * 
 	 * @see org.flintparticles.actions.Age
 	 */
-	public class Exponential
+	public class Linear
 	{
+		public static function easeNone( age:Number, lifetime:Number ):Number
+		{
+			return 1 - age / lifetime;
+		}
 		public static function easeIn( age:Number, lifetime:Number ):Number
 		{
-			return ( age == 0 ) ? 1 : 1 - Math.pow( 2, 10 * ( age / lifetime - 1 ) );
+			return 1 - age / lifetime;
 		}
 		public static function easeOut( age:Number, lifetime:Number ):Number
 		{
-			return ( age == lifetime ) ? 0 : Math.pow( 2, -10 * age / lifetime );
+			return 1 - age / lifetime;
 		}
 		public static function easeInOut( age:Number, lifetime:Number ):Number
 		{
-			if ( age == 0 ) return 1;
-			if ( age == lifetime ) return 0;
-			if ( ( age /= lifetime * 0.5 ) < 1 )
-			{
-				return 1 - 0.5 * Math.pow( 2, 10 * --age );
-			}
-			return 0.5 * Math.pow( 2, -10 * --age );
+			return 1 - age / lifetime;
 		}
 	}
 }

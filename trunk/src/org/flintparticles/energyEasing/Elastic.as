@@ -47,7 +47,7 @@
  * the BSD License.
  */
 
-package org.flintparticles.energy
+package org.flintparticles.energyEasing
 {
 	/**
 	 * A modified form of Robert Penner's easing equations, optimised for the specific use
@@ -55,23 +55,54 @@ package org.flintparticles.energy
 	 * 
 	 * @see org.flintparticles.actions.Age
 	 */
-	public class Quartic
+	public class Elastic
 	{
+		private static var TWOPI:Number = Math.PI * 2;
+		
 		public static function easeIn( age:Number, lifetime:Number ):Number
 		{
-			return 1 - ( age /= lifetime ) * age * age * age;
+			if ( age == 0 )
+			{
+				return 1;
+			}
+			if ( ( age /= lifetime ) == 1 )
+			{
+				return 0;
+			}
+			
+			var p:Number = 0.3 * lifetime;
+			return 1 + Math.pow( 2, 10 * --age ) * Math.sin( ( age * lifetime - p * 0.25 ) * TWOPI / p );
 		}
 		public static function easeOut( age:Number, lifetime:Number ):Number
 		{
-			return ( age = 1 - age / lifetime ) * age * age * age;
+			if ( age == 0 )
+			{
+				return 1;
+			}
+			if ( ( age /= lifetime ) == 1 )
+			{
+				return 0;
+			}
+			
+			var p:Number = 0.3 * lifetime;
+			return Math.pow( 2, -10 * age ) * Math.sin( ( age * lifetime - p * 0.25 ) * TWOPI / p);
 		}
 		public static function easeInOut( age:Number, lifetime:Number ):Number
 		{
-			if ( ( age /= lifetime * 0.5 ) < 1 )
+			if ( age == 0 )
 			{
-				return 1 - age * age * age * age * 0.5;
+				return 1;
 			}
-			return ( age -= 2 ) * age * age * age * 0.5;
+			if ( ( age /= lifetime * 0.5 ) == 2 )
+			{
+				return 0;
+			}
+			var p:Number = lifetime * 0.45;
+			if ( age < 1 )
+			{
+				return 1 + 0.5 * ( Math.pow( 2, 10 * --age ) * Math.sin( ( age * lifetime - p * 0.25 ) * TWOPI / p ) );
+			}
+			return -0.5 * Math.pow( 2, -10 * --age ) * Math.sin( ( age * lifetime - p * 0.25 ) * TWOPI / p );
 		}
 	}
 }

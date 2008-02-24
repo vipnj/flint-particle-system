@@ -102,9 +102,13 @@ package org.flintparticles.emitters
 		protected var _initializers:Array;
 		protected var _actions:Array;
 		protected var _particles:Array;
-		protected var _preActivities:Array;
-		protected var _postActivities:Array;
+		protected var _activities:Array;
 		protected var _counter:Counter;
+
+		protected var _initializersPriority:Array;
+		protected var _actionsPriority:Array;
+		protected var _particlesPriority:Array;
+		protected var _activitiesPriority:Array;
 
 		private var _time:uint;
 		protected var _x:Number = 0;
@@ -134,8 +138,11 @@ package org.flintparticles.emitters
 			_particles = new Array();
 			_actions = new Array();
 			_initializers = new Array();
-			_preActivities = new Array();
-			_postActivities = new Array();
+			_activities = new Array();
+			_particlesPriority = new Array();
+			_actionsPriority = new Array();
+			_initializersPriority = new Array();
+			_activitiesPriority = new Array();
 			
 			addEventListener( Event.REMOVED_FROM_STAGE, removed, false, 0, true );
 		}
@@ -195,9 +202,21 @@ package org.flintparticles.emitters
 		 * 
 		 * @param initializer The Initializer to add
 		 */
-		public function addInitializer( initializer:Initializer ):void
+		public function addInitializer( initializer:Initializer, priority:Number = NaN ):void
 		{
-			_initializers.push( initializer );
+			if( isNaN( priority ) )
+			{
+				priority = initializer.getDefaultPriority();
+			}
+			for( var i:uint = 0; i < _initializersPriority.length; ++i )
+			{
+				if( _initializersPriority[ i ] < priority )
+				{
+					break;
+				}
+			}
+			_initializers.splice( i, 0, initializer );
+			_initializersPriority.splice( i, 0, priority );
 			initializer.addedToEmitter( this );
 		}
 		
@@ -215,6 +234,7 @@ package org.flintparticles.emitters
 				if( _initializers[i] == initializer )
 				{
 					_initializers.splice( i, 1 );
+					_initializersPriority.splice( i, 1 );
 					return;
 				}
 			}
@@ -226,9 +246,21 @@ package org.flintparticles.emitters
 		 * 
 		 * @param action The Action to add
 		 */
-		public function addAction( action:Action ):void
+		public function addAction( action:Action, priority:Number = NaN ):void
 		{
-			_actions.push( action );
+			if( isNaN( priority ) )
+			{
+				priority = action.getDefaultPriority();
+			}
+			for( var i:uint = 0; i < _actionsPriority.length; ++i )
+			{
+				if( _actionsPriority[ i ] < priority )
+				{
+					break;
+				}
+			}
+			_actions.splice( i, 0, action );
+			_actionsPriority.splice( i, 0, priority );
 			action.addedToEmitter( this );
 		}
 		
@@ -246,6 +278,7 @@ package org.flintparticles.emitters
 				if( _actions[i] == action )
 				{
 					_actions.splice( i, 1 );
+					_actionsPriority.splice( i, 1 );
 					return;
 				}
 			}
@@ -259,16 +292,21 @@ package org.flintparticles.emitters
 		 * @param postActions If true, the activity occurs after the actions have been applied. Otherwise the
 		 * activity occurs before the actions have been applied.
 		 */
-		public function addActivity( activity:Activity, postActions:Boolean = false ):void
+		public function addActivity( activity:Activity, priority:Number = NaN ):void
 		{
-			if( postActions )
+			if( isNaN( priority ) )
 			{
-				_postActivities.push( activity );
+				priority = activity.getDefaultPriority();
 			}
-			else
+			for( var i:uint = 0; i < _activitiesPriority.length; ++i )
 			{
-				_preActivities.push( activity );
+				if( _activitiesPriority[ i ] < priority )
+				{
+					break;
+				}
 			}
+			_activities.splice( i, 0, activity );
+			_activitiesPriority.splice( i, 0, priority );
 			activity.addedToEmitter( this );
 		}
 		
@@ -281,19 +319,12 @@ package org.flintparticles.emitters
 		 */
 		public function removeActivity( activity:Activity ):void
 		{
-			for( var i:uint = 0; i < _preActivities.length; ++i )
+			for( var i:uint = 0; i < _activities.length; ++i )
 			{
-				if( _preActivities[i] == activity )
+				if( _activities[i] == activity )
 				{
-					_preActivities.splice( i, 1 );
-					return;
-				}
-			}
-			for( i = 0; i < _postActivities.length; ++i )
-			{
-				if( _postActivities[i] == activity )
-				{
-					_postActivities.splice( i, 1 );
+					_activities.splice( i, 1 );
+					_activitiesPriority.splice( i, 1 );
 					return;
 				}
 			}
@@ -344,15 +375,10 @@ package org.flintparticles.emitters
 			removeEventListener( Event.ENTER_FRAME, frameLoop );
 			addEventListener( Event.ENTER_FRAME, frameLoop, false, 0, true );
 			_time = getTimer();
-			var len:uint = _preActivities.length;
+			var len:uint = _activities.length;
 			for ( var i:uint = 0; i < len; ++i )
 			{
-				_preActivities[i].initialize( this );
-			}
-			len = _postActivities.length;
-			for ( i = 0; i < len; ++i )
-			{
-				_postActivities[i].initialize( this );
+				_activities[i].initialize( this );
 			}
 			len = _counter.startEmitter();
 			for ( i = 0; i < len; ++i )
@@ -395,10 +421,10 @@ package org.flintparticles.emitters
 					_particles[ spaceSortedX[i] ].spaceSortX = i;
 				}
 			}
-			len = _preActivities.length;
+			len = _activities.length;
 			for ( i = 0; i < len; ++i )
 			{
-				_preActivities[i].update( this, time );
+				_activities[i].update( this, time );
 			}
 			if ( _particles.length > 0 )
 			{
@@ -434,12 +460,7 @@ package org.flintparticles.emitters
 			{
 				dispatchEvent( new FlintEvent( FlintEvent.EMITTER_EMPTY ) );
 			}
-			len = _postActivities.length;
-			for ( i = 0; i < len; ++i )
-			{
-				_preActivities[i].update( this, time );
-			}
-			update( time );
+			render( time );
 		}
 		
 		/**
@@ -523,9 +544,9 @@ package org.flintparticles.emitters
 		}		
 		
 		/**
-		 * Used in derived classes to add additional functionality into the frame update loop.
+		 * Used in derived classes to draw the particles.
 		 */
-		protected function update( time:Number ):void
+		protected function render( time:Number ):void
 		{
 		}
 		

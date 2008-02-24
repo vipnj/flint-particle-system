@@ -43,6 +43,8 @@ package org.flintparticles.activities
 	 * rotate the emitter.</p>
 	 * 
 	 * <p>Activities are added to the emitter by using its addActivity method.</p> 
+ 	 * 
+	 * @see org.flintparticles.emitters.Emitter#addActivity()
 	 */
 	public class Activity
 	{
@@ -55,7 +57,21 @@ package org.flintparticles.activities
 		}
 
 		/**
+		 * The getDefaultPriority method is used to order the execution of activities.
+		 * It is called within the emitter's addActivity method when the user doesn't
+		 * manually set a priority. It need not be called directly by the user.
+	 	 * 
+		 * @see org.flintparticles.emitters.Emitter#addActivity()
+		 */
+		public function getDefaultPriority():Number
+		{
+			return 0;
+		}
+		
+		/**
 		 * The addedToEmitter method is called from the emitter when the Activity is added to it
+		 * It is called within the emitter's addActivity method and need not
+		 * be called by the user.
 		 * 
 		 * @param emitter The Emitter that the Activity was added to.
 		 */
@@ -64,19 +80,23 @@ package org.flintparticles.activities
 		}
 		
 		/**
-		 * The initialize method is called once when the emitter starts.
+		 * The initialize method is used by the emitter to start the activity.
+		 * It is called within the emitter's start method and need not
+		 * be called by the user.
 		 * 
-		 * @param emitter The Emitter that is using the Activity.
+		 * @param emitter The Emitter that is using the activity.
 		 */
 		public function initialize( emitter:Emitter ):void
 		{
 		}
 		
 		/**
-		 * The update method is called every frame by the emitter.
+		 * The update method is used by the emitter to apply the activity.
+		 * It is called within the emitter's update loop and need not
+		 * be called by the user.
 		 * 
-		 * @param emitter The Emitter that is using the Activity.
-		 * @param time The duration of the frame in seconds - used for time based updates.
+		 * @param emitter The Emitter that is using the activity.
+		 * @param time The duration of the frame - used for time based updates.
 		 */
 		public function update( emitter:Emitter, time:Number ):void
 		{

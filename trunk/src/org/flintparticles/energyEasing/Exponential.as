@@ -47,7 +47,7 @@
  * the BSD License.
  */
 
-package org.flintparticles.energy
+package org.flintparticles.energyEasing
 {
 	/**
 	 * A modified form of Robert Penner's easing equations, optimised for the specific use
@@ -55,41 +55,25 @@ package org.flintparticles.energy
 	 * 
 	 * @see org.flintparticles.actions.Age
 	 */
-	public class Bounce
+	public class Exponential
 	{
-		public static function easeOut( age:Number, lifetime:Number ):Number
-		{
-			if ( ( age /= lifetime ) < 1 / 2.75 )
-			{
-				return 1 - 7.5625 * age * age;
-			}
-			else if ( age < 2 / 2.75 )
-			{
-				return 0.25 - 7.5625 * ( age -= ( 1.5 / 2.75 ) ) * age;
-			}
-			else if ( age < 2.5 / 2.75 )
-			{
-				return 0.0625 - 7.5625 * ( age -= ( 2.25 / 2.75 ) ) * age;
-			}
-			else
-			{
-				return 0.015625 - 7.5625 * ( age -= ( 2.625 / 2.75 ) ) * age; 
-			}
-		}
 		public static function easeIn( age:Number, lifetime:Number ):Number
 		{
-			return 1 - easeOut( lifetime - age, lifetime );
+			return ( age == 0 ) ? 1 : 1 - Math.pow( 2, 10 * ( age / lifetime - 1 ) );
+		}
+		public static function easeOut( age:Number, lifetime:Number ):Number
+		{
+			return ( age == lifetime ) ? 0 : Math.pow( 2, -10 * age / lifetime );
 		}
 		public static function easeInOut( age:Number, lifetime:Number ):Number
 		{
-			if ( age < lifetime * 0.5 )
+			if ( age == 0 ) return 1;
+			if ( age == lifetime ) return 0;
+			if ( ( age /= lifetime * 0.5 ) < 1 )
 			{
-				return easeIn( age * 2, lifetime ) * 0.5 + 0.5;
+				return 1 - 0.5 * Math.pow( 2, 10 * --age );
 			}
-			else
-			{
-				return easeOut( age * 2 - lifetime, lifetime ) * 0.5;
-			}
+			return 0.5 * Math.pow( 2, -10 * --age );
 		}
 	}
 }
