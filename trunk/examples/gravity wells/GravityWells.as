@@ -50,11 +50,10 @@ package
 			addFilter( new BlurFilter( 2, 2, 1 ) );
 			addFilter( new ColorMatrixFilter( [ 1,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0.99,0 ] ) );
 
-			setCounter( new Blast( 2000 ) );
+			setCounter( new Blast( 3000 ) );
 			
 			addInitializer( new ColorInit( 0xFFFF00FF, 0xFF00FFFF ) );
 			addInitializer( new Position( new DiscZone( new Point( 0, 0 ), 200 ) ) );
-			addInitializer( new Velocity( new PointZone( new Point( 0, 0 ) ) ) );
 
 			addAction( new Move() );
 			addAction( new GravityWell( 25, 200, 200 ) );
