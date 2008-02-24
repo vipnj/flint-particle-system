@@ -39,7 +39,7 @@
  * 
  * Author: Richard Lord (Big Room)
  * Copyright (c) Big Room Ventures Ltd. 2008
- * Version: 1.0.0
+ * http://flintparticles.org
  * 
  * 
  * Used in the Flint Particle System which is licenced under the MIT license. As per the
