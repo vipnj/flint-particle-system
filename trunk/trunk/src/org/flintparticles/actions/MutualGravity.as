@@ -41,7 +41,7 @@ package org.flintparticles.actions
 		private var _power:Number;
 		private var _maxDistance:Number;
 		private var _maxDistanceSq:Number;
-		private var _epsilonSq:Number = 10;
+		private var _epsilonSq:Number;
 		private var _gravityConst:Number = 1000;
 		
 		/**
@@ -57,19 +57,26 @@ package org.flintparticles.actions
 		 * since often only the closest other particles have a significant effect on the 
 		 * motion of a particle.
 		 */
-		public function MutualGravity( power:Number, maxDistance:Number )
+		public function MutualGravity( power:Number, maxDistance:Number, epsilon:Number = 1 )
 		{
 			_power = power * _gravityConst;
 			_maxDistance = maxDistance;
 			_maxDistanceSq = maxDistance * maxDistance;
+			_epsilonSq = epsilon * epsilon;
 		}
 		
 		/**
-		 * The addedToEmitter method is called by the emitter when the Activity is added to it
-		 * It is called within the emitter's addActivity method and need not
-		 * be called by the user.
+		 * @inheritDoc
 		 * 
-		 * @param emitter The Emitter that the Activity was added to.
+		 * <p>Returns a value of 10, so that the MutualGravity action executes before other actions.</p>
+		 */
+		override public function getDefaultPriority():Number
+		{
+			return 10;
+		}
+
+		/**
+		 * @inheritDoc
 		 */
 		override public function addedToEmitter( emitter:Emitter ) : void
 		{
@@ -77,12 +84,7 @@ package org.flintparticles.actions
 		}
 		
 		/**
-		 * The update method is used by the emitter to apply the activity.
-		 * It is called within the emitter's update loop and need not
-		 * be called by the user.
-		 * 
-		 * @param emitter The Emitter that is using the activity.
-		 * @param time The duration of the frame - used for time based updates.
+		 * @inheritDoc
 		 */
 		override public function update( emitter : Emitter, particle : Particle, time : Number ) : void
 		{

@@ -67,12 +67,7 @@ package org.flintparticles.initializers
 		}
 		
 		/**
-		 * The init method is used by the emitter to initialize the particle.
-		 * It is called within the emitter's createParticle method and need not
-		 * be called by the user.
-		 * 
-		 * @param emitter The Emitter that created the particle.
-		 * @param particle The particle to be initialized.
+		 * @inheritDoc
 		 */
 		override public function initialize( emitter:Emitter, particle:Particle ):void
 		{

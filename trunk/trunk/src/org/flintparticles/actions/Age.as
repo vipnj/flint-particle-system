@@ -31,7 +31,7 @@
 package org.flintparticles.actions 
 {
 	import org.flintparticles.emitters.Emitter;
-	import org.flintparticles.energy.Linear;
+	import org.flintparticles.energyEasing.Linear;
 	import org.flintparticles.particles.Particle;	
 
 	/**
@@ -76,13 +76,7 @@ package org.flintparticles.actions
 		}
 		
 		/**
-		 * The update method is used by the emitter to apply the action.
-		 * It is called within the emitter's update loop and need not
-		 * be called by the user.
-		 * 
-		 * @param emitter The Emitter that created the particle.
-		 * @param particle The particle to be updated.
-		 * @param time The duration of the frame - used for time based updates.
+		 * @inheritDoc
 		 */
 		override public function update( emitter:Emitter, particle:Particle, time:Number ):void
 		{

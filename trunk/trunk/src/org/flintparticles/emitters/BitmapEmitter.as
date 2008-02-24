@@ -158,7 +158,7 @@ package org.flintparticles.emitters
 		/**
 		 * Used internally. Applies filters and renders the particle's image onto the bitmap.
 		 */
-		override protected function update( time:Number ):void
+		override protected function render( time:Number ):void
 		{
 			if( !_bitmap )
 			{

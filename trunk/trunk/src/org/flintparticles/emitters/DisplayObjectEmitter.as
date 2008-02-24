@@ -62,7 +62,7 @@ package org.flintparticles.emitters
 		 * Used internally. During the update phase, the particle's properties are copied to the
 		 * DisplayObject representing the particle.
 		 */
-		override protected function update( time:Number ):void
+		override protected function render( time:Number ):void
 		{
 			var particle:Particle;
 			var len:uint = _particles.length;

@@ -52,13 +52,17 @@ package org.flintparticles.actions
 		}
 
 		/**
-		 * The update method is used by the emitter to apply the action.
-		 * It is called within the emitter's update loop and need not
-		 * be called by the user.
+		 * @inheritDoc
 		 * 
-		 * @param emitter The Emitter that created the particle.
-		 * @param particle The particle to be updated.
-		 * @param time The duration of the frame - used for time based updates.
+		 * <p>Returns a value of -10, so that the Rotate action executes after other actions.</p>
+		 */
+		override public function getDefaultPriority():Number
+		{
+			return -10;
+		}
+
+		/**
+		 * @inheritDoc
 		 */
 		override public function update( emitter:Emitter, particle:Particle, time:Number ):void
 		{

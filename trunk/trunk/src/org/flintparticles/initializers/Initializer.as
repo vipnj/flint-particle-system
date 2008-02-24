@@ -59,7 +59,21 @@ package org.flintparticles.initializers
 		}
 		
 		/**
+		 * The getDefaultPriority method is used to order the execution of initializers.
+		 * It is called within the emitter's addInitializer method when the user doesn't
+		 * manually set a priority. It need not be called directly by the user.
+	 	 * 
+		 * @see org.flintparticles.emitters.Emitter#addInitializer()
+		 */
+		public function getDefaultPriority():Number
+		{
+			return 0;
+		}
+		
+		/**
 		 * The addedToEmitter method is called from the emitter when the Initializer is added to it
+		 * It is called within the emitter's addInitializer method and need not
+		 * be called by the user.
 		 * 
 		 * @param emitter The Emitter that the Initializer was added to.
 		 */
@@ -68,8 +82,9 @@ package org.flintparticles.initializers
 		}
 		
 		/**
-		 * The init method is called for every particle created
-		 * by the emitter.
+		 * The initialize method is used by the emitter to initialize the particle.
+		 * It is called within the emitter's createParticle method and need not
+		 * be called by the user.
 		 * 
 		 * @param emitter The Emitter that created the particle.
 		 * @param particle The particle to be initialized.
