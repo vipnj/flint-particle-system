@@ -201,6 +201,10 @@ package org.flintparticles.emitters
 		 * initial properties of particles created by the emitter.
 		 * 
 		 * @param initializer The Initializer to add
+		 * @param priority Indicates the sequencing of the initializers. Higher numbers cause
+		 * an initializer to be run before other initialzers. All initializers have a default priority
+		 * which is used if no value is passed in this parameter. The default priority is usually
+		 * the one you want so this parameter is only used when you need to override the default.
 		 */
 		public function addInitializer( initializer:Initializer, priority:Number = NaN ):void
 		{
@@ -245,6 +249,10 @@ package org.flintparticles.emitters
 		 * of particles created by the emitter.
 		 * 
 		 * @param action The Action to add
+		 * @param priority Indicates the sequencing of the actions. Higher numbers cause
+		 * an action to be run before other actions. All actions have a default priority
+		 * which is used if no value is passed in this parameter. The default priority is usually
+		 * the one you want so this parameter is only used when you need to override the default.
 		 */
 		public function addAction( action:Action, priority:Number = NaN ):void
 		{
@@ -289,8 +297,10 @@ package org.flintparticles.emitters
 		 * of the Emitter.
 		 * 
 		 * @param activity The activity to add
-		 * @param postActions If true, the activity occurs after the actions have been applied. Otherwise the
-		 * activity occurs before the actions have been applied.
+		 * @param priority Indicates the sequencing of the activities. Higher numbers cause
+		 * an activity to be run before other activities. All activities have a default priority
+		 * which is used if no value is passed in this parameter. The default priority is usually
+		 * the one you want so this parameter is only used when you need to override the default.
 		 */
 		public function addActivity( activity:Activity, priority:Number = NaN ):void
 		{
