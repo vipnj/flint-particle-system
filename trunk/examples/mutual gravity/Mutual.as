@@ -57,6 +57,7 @@ package
 
 			addAction( new MutualGravity( 10, 500, 3 ) );
 			addAction( new BoundingBox( 0, 0, 400, 400 ) );
+			addAction( new SpeedLimit( 200 ) );
 			addAction( new Move() );
 		}
 	}
