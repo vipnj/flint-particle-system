@@ -4,7 +4,7 @@
  * 
  * Author: Richard Lord
  * Copyright (c) Big Room Ventures Ltd. 2008
- * Version: 1.0.0
+ * http://flintparticles.org/
  * 
  * Licence Agreement
  * 
