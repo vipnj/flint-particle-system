@@ -67,6 +67,16 @@ package org.flintparticles.actions
 		
 		/**
 		 * @inheritDoc
+		 * 
+		 * <p>Returns a value of -5, so that the SpeedLimit executes after all accelerations have occured.</p>
+		 */
+		override public function getDefaultPriority():Number
+		{
+			return -5;
+		}
+
+		/**
+		 * @inheritDoc
 		 */
 		override public function update( emitter:Emitter, particle:Particle, time:Number ):void
 		{

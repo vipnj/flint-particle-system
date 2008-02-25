@@ -63,6 +63,16 @@ package org.flintparticles.actions
 		
 		/**
 		 * @inheritDoc
+		 * 
+		 * <p>Returns a value of -5, so that the Fade executes after color changes.</p>
+		 */
+		override public function getDefaultPriority():Number
+		{
+			return -5;
+		}
+
+		/**
+		 * @inheritDoc
 		 */
 		override public function update( emitter:Emitter, particle:Particle, time:Number ):void
 		{
