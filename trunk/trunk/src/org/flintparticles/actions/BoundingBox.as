@@ -74,6 +74,16 @@ package org.flintparticles.actions
 
 		/**
 		 * @inheritDoc
+		 * 
+		 * <p>Returns a value of -20, so that the BoundingBox executes after all movement has occured.</p>
+		 */
+		override public function getDefaultPriority():Number
+		{
+			return -20;
+		}
+
+		/**
+		 * @inheritDoc
 		 */
 		override public function update( emitter : Emitter, particle : Particle, time : Number ) : void
 		{
