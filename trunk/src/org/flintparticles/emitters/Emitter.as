@@ -402,10 +402,15 @@ package org.flintparticles.emitters
 		 */
 		private function frameLoop( ev:Event ):void
 		{
+			var maxTime:Number = 3 / stage.frameRate;
 			// update timer
 			var oldTime:uint = _time;
 			_time = getTimer();
 			var frameTime:Number = ( _time - oldTime ) * 0.001;
+			if( frameTime > maxTime )
+			{
+				frameTime = maxTime;
+			}
 			frameUpdate( frameTime );
 		}
 		
