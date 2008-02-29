@@ -79,7 +79,7 @@ package org.flintparticles.actions
 		 */
 		override public function update( emitter:Emitter, particle:Particle, time:Number ):void
 		{
-			if( !emitter.stage.stageWidth )
+			if( ! emitter.stage || !emitter.stage.stageWidth )
 			{
 				return;
 			}
