@@ -79,17 +79,17 @@ package org.flintparticles.actions
 		 */
 		override public function update( emitter:Emitter, particle:Particle, time:Number ):void
 		{
-			if( !emitter.stage )
+			if( !emitter.stage.stageWidth )
 			{
 				return;
 			}
 			if( isNaN( _top ) )
 			{
 				var point:Point = emitter.parent.localToGlobal( new Point( 0, 0 ) );
-				_left = point.x - _padding;
-				_right = point.x + emitter.stage.stageWidth + _padding;
-				_top = point.y - _padding;
-				_bottom = point.y + emitter.stage.stageHeight + _padding;
+				_left = -point.x - _padding;
+				_right = -point.x + emitter.stage.stageWidth + _padding;
+				_top = -point.y - _padding;
+				_bottom = -point.y + emitter.stage.stageHeight + _padding;
 			}
 			
 			if( particle.x < _left || particle.x > _right || particle.y < _top || particle.y > _bottom )
