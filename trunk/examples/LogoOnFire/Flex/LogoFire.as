@@ -52,7 +52,7 @@ package
 
 	public class LogoFire extends Sprite
 	{
-		[Embed(source="../assets/flint.png")]
+		[Embed(source="assets/flint.png")]
 		public var Logo:Class;
 
 		public function LogoFire()
