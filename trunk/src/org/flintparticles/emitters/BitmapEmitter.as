@@ -131,6 +131,11 @@ package org.flintparticles.emitters
 			{
 				_bitmap.bitmapData.dispose();
 			}
+			if( !stage || stage.stageWidth == 0 )
+			{
+				_bitmap = null;
+				return;
+			}
 			_bitmap = new Bitmap();
 			_bitmap.bitmapData = new BitmapData( stage.stageWidth, stage.stageHeight, true, 0 );
 			addChild( _bitmap );
@@ -147,11 +152,7 @@ package org.flintparticles.emitters
 			super.start();
 			if( !_bitmap )
 			{
-				// if no bitmap, just create one so no errors occur
-				// An alternative will be created when the emitter is added to the stage
-				_bitmap = new Bitmap();
-				_bitmap.bitmapData = new BitmapData( 10, 10, true, 0 );
-				trace( "No Bitmap" );
+				addedToStage( null );
 			}
 		}
 		
@@ -162,7 +163,11 @@ package org.flintparticles.emitters
 		{
 			if( !_bitmap )
 			{
-				return;
+				addedToStage( null );
+				if( !_bitmap )
+				{
+					return;
+				}
 			}
 			var i:uint;
 			var len:uint;
