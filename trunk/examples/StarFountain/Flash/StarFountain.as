@@ -43,10 +43,7 @@ package
 	/**
 	 * This example creates a fountain of stars.
 	 * 
-	 * <p>This is the document class for a flash movie created in a flex or flash project.
-	 * You can either publish it directly using the mxmlc compiler in the Flex SDK,
-	 * or you can associate it as the document class of an empty Flash movie in Flash CS3.
-	 * The movie size should be set at 500px wide, 500px high, with a background colour of black.</p>
+	 * <p>This is the document class for the Flash project.</p>
 	 */
 
 	public class StarFountain extends Sprite
