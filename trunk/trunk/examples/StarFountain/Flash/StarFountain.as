@@ -50,7 +50,7 @@ package
 	{
 		public function StarFountain()
 		{
-			var emitter:BitmapEmitter = new BitmapEmitter();
+			var emitter:DisplayObjectEmitter = new DisplayObjectEmitter();
 
 			emitter.setCounter( new Steady( 50 ) );
 			
