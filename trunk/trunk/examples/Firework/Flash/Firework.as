@@ -31,41 +31,58 @@
 package
 {
 	import flash.display.Sprite;
+	import flash.filters.BlurFilter;
+	import flash.filters.ColorMatrixFilter;
 	import flash.geom.Point;
 	
 	import org.flintparticles.actions.*;
 	import org.flintparticles.counters.*;
-	import org.flintparticles.displayObjects.Line;
+	import org.flintparticles.displayObjects.Dot;
 	import org.flintparticles.emitters.*;
+	import org.flintparticles.energyEasing.Quadratic;
+	import org.flintparticles.events.FlintEvent;
 	import org.flintparticles.initializers.*;
 	import org.flintparticles.zones.*;	
 
 	/**
-	 * This example creates rain.
+	 * This example creates a firework like effect.
 	 * 
 	 * <p>This is the document class for the Flash project.</p>
 	 */
 
-	public class Rain extends Sprite
+	public class Firework extends Sprite
 	{
-		public function Rain()
+		public function Firework()
 		{
-			var emitter:DisplayObjectEmitter = new DisplayObjectEmitter();
+			var emitter:BitmapEmitter = new BitmapEmitter();
 
-			emitter.setCounter( new Steady( 300 ) );
+			emitter.addFilter( new BlurFilter( 2, 2, 1 ) );
+			emitter.addFilter( new ColorMatrixFilter( [ 1,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0.95,0 ] ) );
+
+			emitter.setCounter( new Blast( 700 ) );
 			
-			emitter.addInitializer( new ImageClass( Line, 8 ) );
-			emitter.addInitializer( new Position( new LineZone( new Point( 5, 5 ), new Point( 505, 5 ) ) ) );
-			emitter.addInitializer( new Velocity( new PointZone( new Point( -60, 300 ) ) ) );
-			emitter.addInitializer( new ColorInit( 0x66FFFFFF, 0x66FFFFFF ) );
+			emitter.addInitializer( new SharedImage( new Dot( 2 ) ) );
+			emitter.addInitializer( new ColorInit( 0xFFFFFF00, 0xFFFF6600 ) );
+			emitter.addInitializer( new Velocity( new DiscZone( new Point( 0, 0 ), 120, 200 ) ) );
+			emitter.addInitializer( new Lifetime( 5 ) );
 			
+			emitter.addAction( new Age( Quadratic.easeIn ) );
 			emitter.addAction( new Move() );
-			emitter.addAction( new DeathZone( new RectangleZone( -10, -10, 510, 610 ), true ) );
-			emitter.addAction( new RotateToDirection() );
+			emitter.addAction( new Fade() );
+			emitter.addAction( new Accelerate( 0, 50 ) );
+			emitter.addAction( new LinearDrag( 0.5 ) );
 			
+			emitter.addEventListener( FlintEvent.EMITTER_EMPTY, restart );
+
 			addChild( emitter );
-			emitter.start();
-			emitter.runAhead( 5, 30 );
+			emitter.x = 250;
+			emitter.y = 150;
+			emitter.start( );
+		}
+		
+		public function restart( ev:FlintEvent ):void
+		{
+			Emitter( ev.target ).start();
 		}
 	}
 }

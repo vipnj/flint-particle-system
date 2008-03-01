@@ -31,44 +31,50 @@
 package
 {
 	import flash.display.Sprite;
+	import flash.filters.BlurFilter;
+	import flash.filters.ColorMatrixFilter;
 	import flash.geom.Point;
 	
 	import org.flintparticles.actions.*;
+	import org.flintparticles.activities.FollowMouse;
 	import org.flintparticles.counters.*;
-	import org.flintparticles.displayObjects.Dot;
+	import org.flintparticles.displayObjects.Line;
 	import org.flintparticles.emitters.*;
 	import org.flintparticles.initializers.*;
-	import org.flintparticles.zones.*;	
+	import org.flintparticles.zones.*;
 
+	[SWF(width='400', height='400', frameRate='61', backgroundColor='#000000')]
+	
 	/**
-	 * This example creates snow.
+	 * This example creates a sparkler effect.
 	 * 
-	 * <p>This is the document class for a flash movie created in a flex or flash project.
-	 * You can either publish it directly using the mxmlc compiler in the Flex SDK,
-	 * or you can associate it as the document class of an empty Flash movie in Flash CS3.
-	 * The movie size should be set at 500px wide, 400px high, with a background colour of black.</p>
+	 * <p>This is the document class for the Flex project.</p>
 	 */
-
-	public class Snowfall extends Sprite
+	
+	public class Sparkler extends Sprite
 	{
-		public function Snowfall()
+		public function Sparkler()
 		{
-			var emitter:DisplayObjectEmitter = new DisplayObjectEmitter();
+			var emitter:BitmapEmitter = new BitmapEmitter();
 
-			emitter.setCounter( new Steady( 50 ) );
+			emitter.addActivity( new FollowMouse() );
 			
-			emitter.addInitializer( new ImageClass( Dot, 2 ) );
-			emitter.addInitializer( new Position( new LineZone( new Point( -5, -5 ), new Point( 505, -5 ) ) ) );
-			emitter.addInitializer( new Velocity( new PointZone( new Point( 0, 50 ) ) ) );
-			emitter.addInitializer( new ScaleInit( 0.75, 1.5 ) );
+			emitter.addFilter( new BlurFilter( 2, 2, 1 ) );
+			emitter.addFilter( new ColorMatrixFilter( [ 1,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0.95,0 ] ) );
+
+			emitter.setCounter( new Steady( 150 ) );
 			
+			emitter.addInitializer( new SharedImage( new Line( 8 ) ) );
+			emitter.addInitializer( new ColorInit( 0xFFFFCC00, 0xFFFFCC00 ) );
+			emitter.addInitializer( new Velocity( new DiscZone( new Point( 0, 0 ), 200, 350 ) ) );
+			emitter.addInitializer( new Lifetime( 0.2, 0.4 ) );
+			
+			emitter.addAction( new Age() );
 			emitter.addAction( new Move() );
-			emitter.addAction( new DeathOffStage() );
-			emitter.addAction( new RandomDrift( 10, 10 ) );
+			emitter.addAction( new RotateToDirection() );
 			
 			addChild( emitter );
-			emitter.start();
-			emitter.runAhead( 10 );
+			emitter.start( );
 		}
 	}
 }

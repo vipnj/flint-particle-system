@@ -35,37 +35,39 @@ package
 	
 	import org.flintparticles.actions.*;
 	import org.flintparticles.counters.*;
-	import org.flintparticles.displayObjects.Line;
+	import org.flintparticles.displayObjects.Dot;
 	import org.flintparticles.emitters.*;
 	import org.flintparticles.initializers.*;
 	import org.flintparticles.zones.*;	
 
+	[SWF(width='500', height='400', frameRate='61', backgroundColor='#000000')]
+	
 	/**
-	 * This example creates rain.
+	 * This example creates snow.
 	 * 
-	 * <p>This is the document class for the Flash project.</p>
+	 * <p>This is the document class for the Flex project.</p>
 	 */
 
-	public class Rain extends Sprite
+	public class Snowfall extends Sprite
 	{
-		public function Rain()
+		public function Snowfall()
 		{
 			var emitter:DisplayObjectEmitter = new DisplayObjectEmitter();
 
-			emitter.setCounter( new Steady( 300 ) );
+			emitter.setCounter( new Steady( 50 ) );
 			
-			emitter.addInitializer( new ImageClass( Line, 8 ) );
-			emitter.addInitializer( new Position( new LineZone( new Point( 5, 5 ), new Point( 505, 5 ) ) ) );
-			emitter.addInitializer( new Velocity( new PointZone( new Point( -60, 300 ) ) ) );
-			emitter.addInitializer( new ColorInit( 0x66FFFFFF, 0x66FFFFFF ) );
+			emitter.addInitializer( new ImageClass( Dot, 2 ) );
+			emitter.addInitializer( new Position( new LineZone( new Point( -5, -5 ), new Point( 505, -5 ) ) ) );
+			emitter.addInitializer( new Velocity( new PointZone( new Point( 0, 50 ) ) ) );
+			emitter.addInitializer( new ScaleInit( 0.75, 1.5 ) );
 			
 			emitter.addAction( new Move() );
-			emitter.addAction( new DeathZone( new RectangleZone( -10, -10, 510, 610 ), true ) );
-			emitter.addAction( new RotateToDirection() );
+			emitter.addAction( new DeathOffStage() );
+			emitter.addAction( new RandomDrift( 10, 10 ) );
 			
 			addChild( emitter );
 			emitter.start();
-			emitter.runAhead( 5, 30 );
+			emitter.runAhead( 10 );
 		}
 	}
 }

@@ -31,41 +31,48 @@
 package
 {
 	import flash.display.Sprite;
+	import flash.filters.BlurFilter;
+	import flash.filters.ColorMatrixFilter;
 	import flash.geom.Point;
 	
 	import org.flintparticles.actions.*;
+	import org.flintparticles.activities.FollowMouse;
 	import org.flintparticles.counters.*;
 	import org.flintparticles.displayObjects.Line;
 	import org.flintparticles.emitters.*;
 	import org.flintparticles.initializers.*;
-	import org.flintparticles.zones.*;	
+	import org.flintparticles.zones.*;
 
 	/**
-	 * This example creates rain.
+	 * This example creates a sparkler effect.
 	 * 
 	 * <p>This is the document class for the Flash project.</p>
 	 */
-
-	public class Rain extends Sprite
+	
+	public class Sparkler extends Sprite
 	{
-		public function Rain()
+		public function Sparkler()
 		{
-			var emitter:DisplayObjectEmitter = new DisplayObjectEmitter();
+			var emitter:BitmapEmitter = new BitmapEmitter();
 
-			emitter.setCounter( new Steady( 300 ) );
+			emitter.addActivity( new FollowMouse() );
 			
-			emitter.addInitializer( new ImageClass( Line, 8 ) );
-			emitter.addInitializer( new Position( new LineZone( new Point( 5, 5 ), new Point( 505, 5 ) ) ) );
-			emitter.addInitializer( new Velocity( new PointZone( new Point( -60, 300 ) ) ) );
-			emitter.addInitializer( new ColorInit( 0x66FFFFFF, 0x66FFFFFF ) );
+			emitter.addFilter( new BlurFilter( 2, 2, 1 ) );
+			emitter.addFilter( new ColorMatrixFilter( [ 1,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0.95,0 ] ) );
+
+			emitter.setCounter( new Steady( 150 ) );
 			
+			emitter.addInitializer( new SharedImage( new Line( 8 ) ) );
+			emitter.addInitializer( new ColorInit( 0xFFFFCC00, 0xFFFFCC00 ) );
+			emitter.addInitializer( new Velocity( new DiscZone( new Point( 0, 0 ), 200, 350 ) ) );
+			emitter.addInitializer( new Lifetime( 0.2, 0.4 ) );
+			
+			emitter.addAction( new Age() );
 			emitter.addAction( new Move() );
-			emitter.addAction( new DeathZone( new RectangleZone( -10, -10, 510, 610 ), true ) );
 			emitter.addAction( new RotateToDirection() );
 			
 			addChild( emitter );
-			emitter.start();
-			emitter.runAhead( 5, 30 );
+			emitter.start( );
 		}
 	}
 }
