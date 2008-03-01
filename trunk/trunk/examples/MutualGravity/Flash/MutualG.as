@@ -30,57 +30,43 @@
 
 package
 {
-	import flash.display.Bitmap;
 	import flash.display.Sprite;
-	import flash.geom.Point;
+	import flash.filters.BlurFilter;
 	
 	import org.flintparticles.actions.*;
 	import org.flintparticles.counters.*;
-	import org.flintparticles.displayObjects.RadialDot;
+	import org.flintparticles.displayObjects.Dot;
 	import org.flintparticles.emitters.*;
 	import org.flintparticles.initializers.*;
 	import org.flintparticles.zones.*;	
 
-	[SWF(width='500', height='300', frameRate='61', backgroundColor='#000000')]
-	
 	/**
-	 * This example creates creates fire on an image. This is the code for the Flex project.
+	 * This example creates an abstract effect using Mutual Gravity to attract the particles to each other.
 	 * 
-	 * <p>This is the document class for the Flex project.</p>
+	 * <p>This is the document class for the Flash project.</p>
 	 */
 
-	public class LogoFire extends Sprite
+	public class MutualG extends Sprite
 	{
-		[Embed(source="assets/flint.png")]
-		public var Logo:Class;
-
-		public function LogoFire()
+		public function MutualG()
 		{
 			var emitter:BitmapEmitter = new BitmapEmitter();
 
-			emitter.setCounter( new Steady( 250 ) );
+			emitter.addFilter( new BlurFilter( 2, 2, 1 ) );
+
+			emitter.setCounter( new Blast( 30 ) );
 			
-			emitter.addInitializer( new Lifetime( 1.5 ) );
-			emitter.addInitializer( new Velocity( new DiscSectorZone( new Point( 0, 0 ), 20, 10, -Math.PI, 0 ) ) );
-			var bitmap:Bitmap = new Logo();
-			emitter.addInitializer( new Position( new BitmapDataZone( bitmap.bitmapData ) ) );
-			emitter.addInitializer( new ImageClass( RadialDot, 7 ) );
-			
-			emitter.addAction( new Age() );
+			emitter.addInitializer( new SharedImage( new Dot( 2 ) ) );
+			emitter.addInitializer( new ColorInit( 0xFFFF00FF, 0xFF00FFFF ) );
+			emitter.addInitializer( new Position( new RectangleZone( 10, 10, 380, 380 ) ) );
+
+			emitter.addAction( new MutualGravity( 10, 500, 3 ) );
+			emitter.addAction( new BoundingBox( 0, 0, 400, 400 ) );
+			emitter.addAction( new SpeedLimit( 150 ) );
 			emitter.addAction( new Move() );
-			emitter.addAction( new LinearDrag( 1 ) );
-			emitter.addAction( new Accelerate( 0, -40 ) );
-			emitter.addAction( new ColorChange( 0xFFFF9900, 0x00CC0000 ) );
-			emitter.addAction( new Scale( 1, 1.5 ) );
 			
 			addChild( emitter );
-			emitter.x = 118;
-			emitter.y = 70;
 			emitter.start( );
-
-			addChild( bitmap );
-			bitmap.x = 118;
-			bitmap.y = 70;
 		}
 	}
 }

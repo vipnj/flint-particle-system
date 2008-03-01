@@ -30,57 +30,44 @@
 
 package
 {
-	import flash.display.Bitmap;
 	import flash.display.Sprite;
 	import flash.geom.Point;
 	
 	import org.flintparticles.actions.*;
 	import org.flintparticles.counters.*;
-	import org.flintparticles.displayObjects.RadialDot;
+	import org.flintparticles.displayObjects.Line;
 	import org.flintparticles.emitters.*;
 	import org.flintparticles.initializers.*;
 	import org.flintparticles.zones.*;	
 
-	[SWF(width='500', height='300', frameRate='61', backgroundColor='#000000')]
+	[SWF(width='400', height='400', frameRate='61', backgroundColor='#000000')]
 	
 	/**
-	 * This example creates creates fire on an image. This is the code for the Flex project.
+	 * This example creates rain.
 	 * 
 	 * <p>This is the document class for the Flex project.</p>
 	 */
 
-	public class LogoFire extends Sprite
+	public class Rain extends Sprite
 	{
-		[Embed(source="assets/flint.png")]
-		public var Logo:Class;
-
-		public function LogoFire()
+		public function Rain()
 		{
-			var emitter:BitmapEmitter = new BitmapEmitter();
+			var emitter:DisplayObjectEmitter = new DisplayObjectEmitter();
 
-			emitter.setCounter( new Steady( 250 ) );
+			emitter.setCounter( new Steady( 300 ) );
 			
-			emitter.addInitializer( new Lifetime( 1.5 ) );
-			emitter.addInitializer( new Velocity( new DiscSectorZone( new Point( 0, 0 ), 20, 10, -Math.PI, 0 ) ) );
-			var bitmap:Bitmap = new Logo();
-			emitter.addInitializer( new Position( new BitmapDataZone( bitmap.bitmapData ) ) );
-			emitter.addInitializer( new ImageClass( RadialDot, 7 ) );
+			emitter.addInitializer( new ImageClass( Line, 8 ) );
+			emitter.addInitializer( new Position( new LineZone( new Point( 5, 5 ), new Point( 505, 5 ) ) ) );
+			emitter.addInitializer( new Velocity( new PointZone( new Point( -60, 300 ) ) ) );
+			emitter.addInitializer( new ColorInit( 0x66FFFFFF, 0x66FFFFFF ) );
 			
-			emitter.addAction( new Age() );
 			emitter.addAction( new Move() );
-			emitter.addAction( new LinearDrag( 1 ) );
-			emitter.addAction( new Accelerate( 0, -40 ) );
-			emitter.addAction( new ColorChange( 0xFFFF9900, 0x00CC0000 ) );
-			emitter.addAction( new Scale( 1, 1.5 ) );
+			emitter.addAction( new DeathZone( new RectangleZone( -10, -10, 510, 610 ), true ) );
+			emitter.addAction( new RotateToDirection() );
 			
 			addChild( emitter );
-			emitter.x = 118;
-			emitter.y = 70;
-			emitter.start( );
-
-			addChild( bitmap );
-			bitmap.x = 118;
-			bitmap.y = 70;
+			emitter.start();
+			emitter.runAhead( 5, 30 );
 		}
 	}
 }

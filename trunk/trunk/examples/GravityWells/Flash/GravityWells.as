@@ -30,57 +30,45 @@
 
 package
 {
-	import flash.display.Bitmap;
 	import flash.display.Sprite;
+	import flash.filters.BlurFilter;
+	import flash.filters.ColorMatrixFilter;
 	import flash.geom.Point;
 	
 	import org.flintparticles.actions.*;
 	import org.flintparticles.counters.*;
-	import org.flintparticles.displayObjects.RadialDot;
 	import org.flintparticles.emitters.*;
 	import org.flintparticles.initializers.*;
 	import org.flintparticles.zones.*;	
 
-	[SWF(width='500', height='300', frameRate='61', backgroundColor='#000000')]
-	
 	/**
-	 * This example creates creates fire on an image. This is the code for the Flex project.
+	 * This example creates an abstract effect using 5 GravityWells and thousands of particles.
 	 * 
-	 * <p>This is the document class for the Flex project.</p>
+	 * <p>This is the document class for the Flash project.</p>
 	 */
-
-	public class LogoFire extends Sprite
+	public class GravityWells extends Sprite
 	{
-		[Embed(source="assets/flint.png")]
-		public var Logo:Class;
-
-		public function LogoFire()
+		public function GravityWells()
 		{
-			var emitter:BitmapEmitter = new BitmapEmitter();
+			var emitter:PixelEmitter = new PixelEmitter();
 
-			emitter.setCounter( new Steady( 250 ) );
+			emitter.addFilter( new BlurFilter( 2, 2, 1 ) );
+			emitter.addFilter( new ColorMatrixFilter( [ 1,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0.99,0 ] ) );
+
+			emitter.setCounter( new Blast( 4000 ) );
 			
-			emitter.addInitializer( new Lifetime( 1.5 ) );
-			emitter.addInitializer( new Velocity( new DiscSectorZone( new Point( 0, 0 ), 20, 10, -Math.PI, 0 ) ) );
-			var bitmap:Bitmap = new Logo();
-			emitter.addInitializer( new Position( new BitmapDataZone( bitmap.bitmapData ) ) );
-			emitter.addInitializer( new ImageClass( RadialDot, 7 ) );
-			
-			emitter.addAction( new Age() );
+			emitter.addInitializer( new ColorInit( 0xFFFF00FF, 0xFF00FFFF ) );
+			emitter.addInitializer( new Position( new DiscZone( new Point( 200, 200 ), 200 ) ) );
+
 			emitter.addAction( new Move() );
-			emitter.addAction( new LinearDrag( 1 ) );
-			emitter.addAction( new Accelerate( 0, -40 ) );
-			emitter.addAction( new ColorChange( 0xFFFF9900, 0x00CC0000 ) );
-			emitter.addAction( new Scale( 1, 1.5 ) );
+			emitter.addAction( new GravityWell( 25, 200, 200 ) );
+			emitter.addAction( new GravityWell( 25, 75, 75 ) );
+			emitter.addAction( new GravityWell( 25, 325, 325 ) );
+			emitter.addAction( new GravityWell( 25, 75, 325 ) );
+			emitter.addAction( new GravityWell( 25, 325, 75 ) );
 			
 			addChild( emitter );
-			emitter.x = 118;
-			emitter.y = 70;
-			emitter.start( );
-
-			addChild( bitmap );
-			bitmap.x = 118;
-			bitmap.y = 70;
+			emitter.start();
 		}
 	}
 }
