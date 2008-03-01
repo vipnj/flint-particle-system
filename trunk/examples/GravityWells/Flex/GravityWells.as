@@ -41,15 +41,13 @@ package
 	import org.flintparticles.initializers.*;
 	import org.flintparticles.zones.*;	
 
+	[SWF(width='400', height='400', frameRate='61', backgroundColor='#000000')]
+
 	/**
 	 * This example creates an abstract effect using 5 GravityWells and thousands of particles.
 	 * 
-	 * <p>This is the document class for a flash movie created in a flex or flash project.
-	 * You can either publish it directly using the mxmlc compiler in the Flex SDK,
-	 * or you can associate it as the document class of an empty Flash movie in Flash CS3.
-	 * The movie size should be set at 400px wide, 400px high, with a background colour of black.</p>
+	 * <p>This is the document class for the Flex project.</p>
 	 */
-
 	public class GravityWells extends Sprite
 	{
 		public function GravityWells()
