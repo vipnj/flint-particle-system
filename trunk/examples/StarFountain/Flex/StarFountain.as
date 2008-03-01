@@ -35,37 +35,48 @@ package
 	
 	import org.flintparticles.actions.*;
 	import org.flintparticles.counters.*;
-	import org.flintparticles.displayObjects.Line;
+	import org.flintparticles.displayObjects.Star;
 	import org.flintparticles.emitters.*;
 	import org.flintparticles.initializers.*;
 	import org.flintparticles.zones.*;	
 
+	[SWF(width='500', height='500', frameRate='61', backgroundColor='#000000')]
+	
 	/**
-	 * This example creates rain.
+	 * This example creates a fountain of stars.
 	 * 
-	 * <p>This is the document class for the Flash project.</p>
+	 * <p>This is the document class for the Flex project.</p>
 	 */
 
-	public class Rain extends Sprite
+	public class StarFountain extends Sprite
 	{
-		public function Rain()
+		public function StarFountain()
 		{
-			var emitter:DisplayObjectEmitter = new DisplayObjectEmitter();
+			var emitter:BitmapEmitter = new BitmapEmitter();
 
-			emitter.setCounter( new Steady( 300 ) );
+			emitter.setCounter( new Steady( 50 ) );
 			
-			emitter.addInitializer( new ImageClass( Line, 8 ) );
-			emitter.addInitializer( new Position( new LineZone( new Point( 5, 5 ), new Point( 505, 5 ) ) ) );
-			emitter.addInitializer( new Velocity( new PointZone( new Point( -60, 300 ) ) ) );
-			emitter.addInitializer( new ColorInit( 0x66FFFFFF, 0x66FFFFFF ) );
+			emitter.addInitializer( new ImageClass( Star, 12 ) );
+			emitter.addInitializer( new ColorInit( 0xFFFF33FF, 0xFF33FFFF ) );
+			
+			emitter.addInitializer( new Position( new PointZone( new Point( 0, 0 ) ) ) );
+			emitter.addInitializer( new Velocity( new DiscSectorZone( new Point( 0, 0 ), 260, 360, -3 * Math.PI/5, -2 * Math.PI / 5 ) ) );
+			emitter.addInitializer( new RotateVelocity( -4, 4 ) );
+			
+			emitter.addInitializer( new Lifetime( 6 ) );
 			
 			emitter.addAction( new Move() );
-			emitter.addAction( new DeathZone( new RectangleZone( -10, -10, 510, 610 ), true ) );
-			emitter.addAction( new RotateToDirection() );
+			emitter.addAction( new Rotate() );
+			emitter.addAction( new Accelerate( 0, 150 ) );
+			
+			emitter.addAction( new Age() );
+			emitter.addAction( new Scale( 0.5, 3 ) );
+			emitter.addAction( new DeathOffStage() );
 			
 			addChild( emitter );
-			emitter.start();
-			emitter.runAhead( 5, 30 );
+			emitter.x = 250;
+			emitter.y = 450;
+			emitter.start( );
 		}
 	}
 }
