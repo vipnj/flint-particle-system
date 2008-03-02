@@ -32,59 +32,29 @@ package org.flintparticles.actions
 {
 	import org.flintparticles.actions.Action;
 	import org.flintparticles.emitters.Emitter;
-	import org.flintparticles.particles.Particle;
+	import org.flintparticles.particles.Particle;	
 
 	/**
-	 * The Accelerate Action adjusts the velocity of the particle by a 
-	 * constant acceleration. This can be used, for example, to simulate
-	 * gravity.
+	 * The TurnAwayFromMouse action causes the particle to constantly adjust its direction
+	 * so that it travels away from the mouse pointer.
 	 */
 
-	public class Accelerate extends Action
+	public class TurnAwayFromMouse extends Action
 	{
-		private var _x:Number;
-		private var _y:Number;
+		private var _power:Number;
 		
 		/**
-		 * The constructor creates an Acceleration action for use by 
-		 * an emitter. To add an Accelerator to all particles created by an emitter, use the
+		 * The constructor creates a TurnAwayFromMouse action for use by 
+		 * an emitter. To add a TurnAwayFromMouse to all particles created by an emitter, use the
 		 * emitter's addAction method.
 		 * 
 		 * @see org.flintparticles.emitters.Emitter#addAction()
 		 * 
-		 * @param accelerationX The x coordinate of the acceleration to apply, in pixels 
-		 * per second per second.
-		 * @param accelerationY The y coordinate of the acceleration to apply, in pixels 
-		 * per second per second.
+		 * @param power The strength of the turn action. Higher values produce a sharper turn.
 		 */
-		public function Accelerate( accelerationX:Number, accelerationY:Number )
+		public function TurnAwayFromMouse( power:Number )
 		{
-			_x = accelerationX;
-			_y = accelerationY;
-		}
-		
-		/**
-		 * The x coordinate of the acceleration.
-		 */
-		public function get x():Number
-		{
-			return _x;
-		}
-		public function set x( value:Number ):void
-		{
-			_x = value;
-		}
-		
-		/**
-		 * The y coordinate of the acceleration.
-		 */
-		public function get y():Number
-		{
-			return _y;
-		}
-		public function set y( value:Number ):void
-		{
-			_y = value;
+			_power = power;
 		}
 		
 		/**
@@ -92,8 +62,20 @@ package org.flintparticles.actions
 		 */
 		override public function update( emitter:Emitter, particle:Particle, time:Number ):void
 		{
-			particle.velX += _x * time;
-			particle.velY += _y * time;
+			var turnLeft:Boolean = ( ( particle.y - emitter.mouseY ) * particle.velX + ( emitter.mouseX - particle.x ) * particle.velY > 0 );
+			var newAngle:Number;
+			if ( turnLeft )
+			{
+				newAngle = Math.atan2( particle.velY, particle.velX ) + _power * time;
+				
+			}
+			else
+			{
+				newAngle = Math.atan2( particle.velY, particle.velX ) - _power * time;
+			}
+			var len:Number = Math.sqrt( particle.velX * particle.velX + particle.velY * particle.velY );
+			particle.velX = len * Math.cos( newAngle );
+			particle.velY = len * Math.sin( newAngle );
 		}
 	}
 }

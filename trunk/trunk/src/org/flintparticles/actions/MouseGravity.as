@@ -31,60 +31,39 @@
 package org.flintparticles.actions 
 {
 	import org.flintparticles.actions.Action;
-	import org.flintparticles.emitters.Emitter;
 	import org.flintparticles.particles.Particle;
+	import org.flintparticles.emitters.Emitter;	
 
 	/**
-	 * The Accelerate Action adjusts the velocity of the particle by a 
-	 * constant acceleration. This can be used, for example, to simulate
-	 * gravity.
+	 * The MouseGravity action applies a force on the particle to draw it towards
+	 * the mouse. The force applied is inversely proportional to the square
+	 * of the distance from the particle to the mouse.
 	 */
 
-	public class Accelerate extends Action
+	public class MouseGravity extends Action
 	{
-		private var _x:Number;
-		private var _y:Number;
+		private var _power:Number;
+		private var _epsilonSq:Number;
+		private var _gravityConst:Number = 10000;
 		
 		/**
-		 * The constructor creates an Acceleration action for use by 
-		 * an emitter. To add an Accelerator to all particles created by an emitter, use the
+		 * The constructor creates a MouseGravity action for use by 
+		 * an emitter. To add a MouseGravity to all particles created by an emitter, use the
 		 * emitter's addAction method.
 		 * 
 		 * @see org.flintparticles.emitters.Emitter#addAction()
 		 * 
-		 * @param accelerationX The x coordinate of the acceleration to apply, in pixels 
-		 * per second per second.
-		 * @param accelerationY The y coordinate of the acceleration to apply, in pixels 
-		 * per second per second.
+		 * @param power The strength of the force - larger numbers produce a stringer force.
+		 * @param epsilon The minimum distance for which gravity is calculated. Particles closer
+		 * than this distance experience a gravity force as it they were this distance away.
+		 * This stops the gravity effect blowing up as distances get small. For realistic gravity 
+		 * effects you will want a small epsilon ( ~1 ), but for stable visual effects a larger
+		 * epsilon (~100) is often better.
 		 */
-		public function Accelerate( accelerationX:Number, accelerationY:Number )
+		public function MouseGravity( power:Number, epsilon:Number = 100 )
 		{
-			_x = accelerationX;
-			_y = accelerationY;
-		}
-		
-		/**
-		 * The x coordinate of the acceleration.
-		 */
-		public function get x():Number
-		{
-			return _x;
-		}
-		public function set x( value:Number ):void
-		{
-			_x = value;
-		}
-		
-		/**
-		 * The y coordinate of the acceleration.
-		 */
-		public function get y():Number
-		{
-			return _y;
-		}
-		public function set y( value:Number ):void
-		{
-			_y = value;
+			_power = power * _gravityConst;
+			_epsilonSq = epsilon * epsilon;
 		}
 		
 		/**
@@ -92,8 +71,18 @@ package org.flintparticles.actions
 		 */
 		override public function update( emitter:Emitter, particle:Particle, time:Number ):void
 		{
-			particle.velX += _x * time;
-			particle.velY += _y * time;
+			var x:Number = emitter.mouseX - particle.x;
+			var y:Number = emitter.mouseY - particle.y;
+			var dSq:Number = x * x + y * y;
+			if( dSq == 0 )
+			{
+				return;
+			}
+			var d:Number = Math.sqrt( dSq );
+			if( dSq < _epsilonSq ) dSq = _epsilonSq;
+			var factor:Number = ( _power * time ) / ( dSq * d );
+			particle.velX += x * factor;
+			particle.velY += y * factor;
 		}
 	}
 }

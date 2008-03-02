@@ -28,54 +28,65 @@
  * THE SOFTWARE.
  */
 
-package org.flintparticles.actions 
+package org.flintparticles.initializers 
 {
-	import org.flintparticles.actions.Action;
 	import org.flintparticles.emitters.Emitter;
 	import org.flintparticles.particles.Particle;	
 
 	/**
-	 * The TurnTowardsMouse action causes the particle to constantly adjust its direction
-	 * so that it travels towards the mouse pointer.
+	 * The AlphaInit Initializer sets the alpha transparency of the particle.
 	 */
 
-	public class TurnTowardsMouse extends Action
+	public class AlphaInit extends Initializer
 	{
-		private var _power:Number;
+		private var _min:Number;
+		private var _max:Number;
 		
 		/**
-		 * The constructor creates a TurnTowardsMouse action for use by 
-		 * an emitter. To add a TurnTowardsMouse to all particles created by an emitter, use the
-		 * emitter's addAction method.
+		 * The constructor creates an AlphaInit initializer for use by 
+		 * an emitter. To add an AlphaInit to all particles created by an emitter, use the
+		 * emitter's addInitializer method.
 		 * 
-		 * @see org.flintparticles.emitters.Emitter#addAction()
+		 * <p>The alpha of particles initialized by this class
+		 * will be a random value between the minimum and maximum
+		 * values set. If no maximum value is set, the minimum value
+		 * is used with no variation.</p>
 		 * 
-		 * @param power The strength of the turn action. Higher values produce a sharper turn.
+		 * @param minAlpha the minimum alpha for particles
+		 * initialized by the instance. The value should be between 1 and 0.
+		 * @param maxAlpha the maximum alpha for particles
+		 * initialized by the instance. The value should be between 1 and 0.
+		 * 
+		 * @see org.flintparticles.emitters.Emitter#addInitializer().
 		 */
-		public function TurnTowardsMouse( power:Number )
+		public function AlphaInit( minAlpha:Number, maxAlpha:Number = NaN )
 		{
-			_power = power;
+			_min = minAlpha;
+			if( isNaN( maxAlpha ) )
+			{
+				_max = _min;
+			}
+			else
+			{
+				_max = maxAlpha;
+			}
 		}
 		
 		/**
 		 * @inheritDoc
 		 */
-		override public function update( emitter:Emitter, particle:Particle, time:Number ):void
+		override public function initialize( emitter:Emitter, particle:Particle ):void
 		{
-			var turnLeft:Boolean = ( ( particle.y - emitter.mouseY ) * particle.velX + ( emitter.mouseX - particle.x ) * particle.velY > 0 );
-			var newAngle:Number;
-			if ( turnLeft )
+			var alpha:Number;
+			if( _max == _min )
 			{
-				newAngle = Math.atan2( particle.velY, particle.velX ) - _power * time;
-				
+				alpha = _min;
 			}
 			else
 			{
-				newAngle = Math.atan2( particle.velY, particle.velX ) + _power * time;
+				alpha = _min + Math.random() * ( _max - _min );
 			}
-			var len:Number = Math.sqrt( particle.velX * particle.velX + particle.velY * particle.velY );
-			particle.velX = len * Math.cos( newAngle );
-			particle.velY = len * Math.sin( newAngle );
+			particle.color = ( particle.color & 0xFFFFFF ) | ( Math.round( alpha * 255 ) << 24 );
 		}
 	}
 }

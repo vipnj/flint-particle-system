@@ -30,40 +30,49 @@
 
 package org.flintparticles.counters
 {
-	import org.flintparticles.emitters.Emitter;	
+	import flash.utils.getTimer;
 	
+	import org.flintparticles.emitters.Emitter;		
+
 	/**
-	 * The Steady counter causes the emitter to emit particles continuously
-	 * at a steady rate. It can be used to simulate any continuous particle
-	 * stream. The rate can also be varied by setting a range of value for the
-	 * emission rate.
+	 * The PerformanceAdjusted counter causes the emitter to emit particles continuously
+	 * at a steady rate. It then adjusts this rate downwards if the frame rate is below a 
+	 * target frame rate.
 	 */
-	public class Steady implements Counter
+	public class PerformanceAdjusted implements Counter
 	{
-		protected var _timeToNext:Number;
-		protected var _rateMin:Number;
-		protected var _rateMax:Number;
+		private var _timeToNext:Number;
+		private var _rateMin:Number;
+		private var _rateMax:Number;
+		private var _target:Number;
+		private var _rate:Number;
+		private var _step:Number;
+		private var _times:Array;
+		private var _timeToRateCheck:Number;
 		private var _stop:Boolean;
 		
 		/**
-		 * The constructor creates a Steady counter for use by an emitter. To
-		 * add a Steady counter to an emitter use the emitter's setCounter
+		 * The constructor creates a PerformanceAdjusted counter for use by an emitter. To
+		 * add a PerformanceAdjusted counter to an emitter use the emitter's setCounter
 		 * method.
-		 * <p>If two parameters are passed to the constructor then a random
-		 * value between the two is used. This allows for random variation
-		 * in the emission rate over the lifetime of the emitter. Otherwise the 
-		 * single value passed in is used.</p>
-		 * @param rateMin The minimum number of particles to emit
-		 * per second.
-		 * @param rateMax The maximum number of particles to emit
-		 * per second. If not set then the emitter
-		 * will emit exactly the rateMin number of particles per second.
+		 * @param rateMin The minimum number of particles to emit per second. The counter
+		 * will never drop the rate below this value.
+		 * @param rateMax The maximum number of particles to emit per second. the counter
+		 * will start at this rate and adjust downwards if the frame rate is too slow.
+		 * @param targetFrameRate The frame rate that the counter should aim for. Always set
+		 * this slightly below your actual frame rate since flash will drop frames occasionally
+		 * even when performance is fine. So, for example, if your movie's frame rate is
+		 * 30fps and you want to target this rate, set the target rate to 26fps or so.
 		 */
-		public function Steady( rateMin:Number, rateMax:Number = NaN )
+		public function PerformanceAdjusted( rateMin:Number, rateMax:Number, targetFrameRate:Number )
 		{
 			_stop = false;
 			_rateMin = rateMin;
-			_rateMax = isNaN( rateMax ) ? rateMin : rateMax;
+			_rate = _rateMax = rateMax;
+			_target = targetFrameRate;
+			_times = new Array();
+			_step = ( rateMax - rateMin ) / 20;
+			_timeToRateCheck = 0;
 		}
 		
 		/**
@@ -95,8 +104,7 @@ package org.flintparticles.counters
 		
 		private function newTimeToNext():void
 		{
-			var rate:Number = _rateMin + Math.random() * ( _rateMax - _rateMin );
-			_timeToNext = 1 / rate;
+			_timeToNext = 1 / _rate;
 		}
 		
 		/**
@@ -111,6 +119,27 @@ package org.flintparticles.counters
 			{
 				return 0;
 			}
+			
+			if( _rate > _rateMin && ( _timeToRateCheck -= time ) <= 0 )
+			{
+				// adjust rate
+				var t:Number;
+				if ( _times.push( t = getTimer() ) > 9 )
+				{
+					var frameRate:Number = Math.round( 10000 / ( t - Number( _times.shift() ) ) );
+					if( frameRate < _target )
+					{
+						_rate = Math.floor( ( _rate + _rateMin ) * 0.5 );
+						_times = new Array();
+						
+						if( !( _timeToRateCheck = emitter.particles[0].lifetime ) )
+						{
+							_timeToRateCheck = 2;
+						}
+					}
+				}
+			}
+			
 			var emitTime:Number = time;
 			var count:uint = 0;
 			emitTime -= _timeToNext;

@@ -30,6 +30,8 @@
 
 package org.flintparticles.actions 
 {
+	import flash.geom.Rectangle;
+	
 	import org.flintparticles.actions.Action;
 	import org.flintparticles.emitters.Emitter;
 	import org.flintparticles.particles.Particle;	
@@ -70,6 +72,21 @@ package org.flintparticles.actions
 			_top = top;
 			_right = right;
 			_bottom = bottom;
+		}
+		
+		/**
+		 * The bounding box.
+		 */
+		public function get box():Rectangle
+		{
+			return new Rectangle( _left, _top, _right - _left, _bottom - _top );
+		}
+		public function set box( value:Rectangle ):void
+		{
+			_left = value.left;
+			_right = value.right;
+			_top = value.top;
+			_bottom = value.bottom;
 		}
 
 		/**

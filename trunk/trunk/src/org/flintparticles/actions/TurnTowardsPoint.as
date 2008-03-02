@@ -35,7 +35,7 @@ package org.flintparticles.actions
 	import org.flintparticles.particles.Particle;
 
 	/**
-	 * The TurnTowardsPoint action causes the particle to constantly adjust its velocity
+	 * The TurnTowardsPoint action causes the particle to constantly adjust its direction
 	 * so that it travels towards a particular point.
 	 */
 
@@ -52,7 +52,7 @@ package org.flintparticles.actions
 		 * 
 		 * @see org.flintparticles.emitters.Emitter#addAction()
 		 * 
-		 * @param power The strength of the swarming action.
+		 * @param power The strength of the turn action. Higher values produce a sharper turn.
 		 * @param x The x coordinate of the point around which the particle swarms.
 		 * @param y The y coordinate of the point around which the particle swarms.
 		 */

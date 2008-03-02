@@ -31,8 +31,9 @@
 
 package org.flintparticles.counters
 {
-	import org.flintparticles.easing.Linear;	
-	
+	import org.flintparticles.easing.Linear;
+	import org.flintparticles.emitters.Emitter;		
+
 	/**
 	 * The TimePeriod counter causes the emitter to emit particles for a period of time
 	 * and then stop. The rate of emission over that period can be modified using
@@ -81,7 +82,7 @@ package org.flintparticles.counters
 		 * user.
 		 * @return The number of particles to emit at the start.
 		 */
-		public function startEmitter() : uint
+		public function startEmitter( emitter:Emitter ) : uint
 		{
 			_particlesPassed = 0;
 			_timePassed = 0;
@@ -95,7 +96,7 @@ package org.flintparticles.counters
 		 * @param time The time, in seconds, since the previous call to this method.
 		 * @return The number of particles to emit this frame.
 		 */
-		public function updateEmitter( time : Number ) : uint
+		public function updateEmitter( emitter:Emitter, time : Number ) : uint
 		{
 			if( _particlesPassed == _particles )
 			{
