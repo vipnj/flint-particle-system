@@ -45,11 +45,12 @@ package org.flintparticles.actions
 		private var _x:Number;
 		private var _y:Number;
 		private var _power:Number;
-		private var _distanceFactor:Number = 0.01;
+		private var _gravityConst:Number = 10000;
+		private var _epsilonSq:Number;
 		
 		/**
 		 * The constructor creates an Explosion action for use by 
-		 * an emitter. To add a Explosion to all particles created by an emitter, use the
+		 * an emitter. To add an Explosion to all particles created by an emitter, use the
 		 * emitter's addAction method.
 		 * 
 		 * @see org.flintparticles.emitters.Emitter#addAction()
@@ -57,12 +58,17 @@ package org.flintparticles.actions
 		 * @param power The strength of the force - larger numbers produce a stringer force.
 		 * @param x The x coordinate of the point towards which the force draws the particles.
 		 * @param y The y coordinate of the point towards which the force draws the particles.
+		 * @param epsilon The minimum distance for which the explosion force is calculated. 
+		 * Particles closer than this distance experience the explosion as it they were 
+		 * this distance away. This stops the explosion effect blowing up as distances get 
+		 * small.
 		 */
-		public function Explosion( power:Number, x:Number, y:Number )
+		public function Explosion( power:Number, x:Number, y:Number, epsilon:Number = 1 )
 		{
-			_power = power;
+			_power = power * _gravityConst;
 			_x = x;
 			_y = y;
+			_epsilonSq = epsilon * epsilon;
 		}
 		
 		/**
@@ -70,16 +76,16 @@ package org.flintparticles.actions
 		 */
 		override public function update( emitter:Emitter, particle:Particle, time:Number ):void
 		{
-			var x:Number = ( particle.x - _x ) * _distanceFactor;
-			var y:Number = ( particle.y - _y ) * _distanceFactor;
-			var d2:Number = x * x + y * y;
-			if( d2 == 0 )
+			var x:Number = particle.x - _x;
+			var y:Number = particle.y - _y;
+			var dSq:Number = x * x + y * y;
+			if( dSq == 0 )
 			{
 				return;
 			}
-			var len:Number = Math.sqrt( d2 );
-			if( d2 < 1 ) d2 = 1; // stop it blowing uyp to ridiculous values
-			var factor:Number = ( _power * time ) / ( d2 * len );
+			var d:Number = Math.sqrt( dSq );
+			if( dSq < _epsilonSq ) dSq = _epsilonSq; // stop it blowing uyp to ridiculous values
+			var factor:Number = ( _power * time ) / ( dSq * d );
 			particle.velX += x * factor;
 			particle.velY += y * factor;
 		}

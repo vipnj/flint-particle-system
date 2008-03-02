@@ -390,7 +390,7 @@ package org.flintparticles.emitters
 			{
 				_activities[i].initialize( this );
 			}
-			len = _counter.startEmitter();
+			len = _counter.startEmitter( this );
 			for ( i = 0; i < len; ++i )
 			{
 				createParticle();
@@ -425,7 +425,7 @@ package org.flintparticles.emitters
 		{
 			var i:uint;
 			var particle:Particle;
-			var len:uint = _counter.updateEmitter( time );
+			var len:uint = _counter.updateEmitter( this, time );
 			for( i = 0; i < len; ++i )
 			{
 				createParticle();

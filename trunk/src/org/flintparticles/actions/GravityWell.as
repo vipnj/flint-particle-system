@@ -58,7 +58,7 @@ package org.flintparticles.actions
 		 * @param power The strength of the force - larger numbers produce a stringer force.
 		 * @param x The x coordinate of the point towards which the force draws the particles.
 		 * @param y The y coordinate of the point towards which the force draws the particles.
-		 * @param epsilon The minimum distance for which gravity is calculated. Objects closer
+		 * @param epsilon The minimum distance for which gravity is calculated. Particles closer
 		 * than this distance experience a gravity force as it they were this distance away.
 		 * This stops the gravity effect blowing up as distances get small. For realistic gravity 
 		 * effects you will want a small epsilon ( ~1 ), but for stable visual effects a larger
@@ -77,8 +77,8 @@ package org.flintparticles.actions
 		 */
 		override public function update( emitter:Emitter, particle:Particle, time:Number ):void
 		{
-			var x:Number = ( _x - particle.x );
-			var y:Number = ( _y - particle.y );
+			var x:Number = _x - particle.x;
+			var y:Number = _y - particle.y;
 			var dSq:Number = x * x + y * y;
 			if( dSq == 0 )
 			{

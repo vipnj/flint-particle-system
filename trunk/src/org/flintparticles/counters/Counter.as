@@ -30,6 +30,8 @@
 
 package org.flintparticles.counters 
 {
+	import org.flintparticles.emitters.Emitter;	
+	
 	/**
 	 * The Counter interface must be implemented by all counters.
 	 * <p>A counter is a class that tells an emitter how many particles to
@@ -46,7 +48,7 @@ package org.flintparticles.counters
 		 * @return The number of particles the emitter should emit
 		 * at the moment it starts.
 		 */
-		function startEmitter():uint;
+		function startEmitter( emitter:Emitter ):uint;
 		
 		/**
 		 * The updateEmitter method is called every frame after the
@@ -54,6 +56,6 @@ package org.flintparticles.counters
 		 * @return The number of particles the emitter should emit
 		 * at this time.
 		 */
-		function updateEmitter( time:Number ):uint;
+		function updateEmitter( emitter:Emitter, time:Number ):uint;
 	}
 }

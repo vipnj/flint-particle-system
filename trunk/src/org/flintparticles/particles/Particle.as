@@ -118,7 +118,15 @@ package org.flintparticles.particles
 		 * key, thus ensuring it doesn't clash with other object's properties. If multiple properties are
 		 * needed, the dictionary value can be an object with a number of properties.
 		 */
-		public var dictionary:Dictionary;
+		public function get dictionary():Dictionary
+		{
+			if( _dictionary == null )
+			{
+				_dictionary = new Dictionary();
+			}
+			return _dictionary;
+		}
+		private var _dictionary:Dictionary = null;
 		
 		/**
 		 * Creates a particle. Alternatively particles can be reused by using the ParticleCreator to create
@@ -148,7 +156,7 @@ package org.flintparticles.particles
 			isDead = false;
 			image = null;
 			spaceSortX = 0;
-			dictionary = new Dictionary();
+			_dictionary = null;
 		}
 		
 		/**

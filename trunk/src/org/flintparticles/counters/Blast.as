@@ -30,6 +30,8 @@
 
 package org.flintparticles.counters
 {
+	import org.flintparticles.emitters.Emitter;	
+	
 	/**
 	 * The Blast counter causes the emitter to emit a single burst of
 	 * particles when it starts and then emit no further particles.
@@ -65,7 +67,7 @@ package org.flintparticles.counters
 		 * of particles to emit when it starts up. It need not be called by the
 		 * user.
 		 */
-		public function startEmitter():uint
+		public function startEmitter( emitter:Emitter ):uint
 		{
 			return Math.round( _startMin + Math.random() * ( _startMax - _startMin ) );
 		}
@@ -76,7 +78,7 @@ package org.flintparticles.counters
 		 * the method. It need not be called by the user.
 		 * @param time The time, in seconds, since the previous call to this method.
 		 */
-		public function updateEmitter( time:Number ):uint
+		public function updateEmitter( emitter:Emitter, time:Number ):uint
 		{
 			return 0;
 		}
