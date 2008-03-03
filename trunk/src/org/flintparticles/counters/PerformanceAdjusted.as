@@ -92,9 +92,7 @@ package org.flintparticles.counters
 		}
 		
 		/**
-		 * The startEmitter method is used by the emitter to obtain the number 
-		 * of particles to emit when it starts up. It need not be called by the
-		 * user.
+		 * @inheritDoc
 		 */
 		public function startEmitter( emitter:Emitter ):uint
 		{
@@ -108,10 +106,7 @@ package org.flintparticles.counters
 		}
 		
 		/**
-		 * The updateEmitter method is used by the emitter to obtain the number
-		 * of particles it should have emitted since the previous time it called 
-		 * the method. It need not be called by the user.
-		 * @param time The time, in seconds, since the previous call to this method.
+		 * @inheritDoc
 		 */
 		public function updateEmitter( emitter:Emitter, time:Number ):uint
 		{
