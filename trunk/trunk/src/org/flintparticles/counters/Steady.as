@@ -83,9 +83,45 @@ package org.flintparticles.counters
 		}
 		
 		/**
-		 * The startEmitter method is used by the emitter to obtain the number 
-		 * of particles to emit when it starts up. It need not be called by the
-		 * user.
+		 * The minimum number of particles to emit per second.
+		 */
+		public function get rateMin():Number
+		{
+			return _rateMin;
+		}
+		public function set rateMin( value:Number ):void
+		{
+			_rateMin = value;
+		}
+		
+		/**
+		 * The maximum number of particles to emit per second.
+		 */
+		public function get rateMax():Number
+		{
+			return _rateMax;
+		}
+		public function set rateMax( value:Number ):void
+		{
+			_rateMax = value;
+		}
+		
+		/**
+		 * When setting, thios property sets both rateMin and rateMax to the same value.
+		 * When reading, this property is the average of rateMin and rateMax.
+		 */
+		public function get rate():Number
+		{
+			return ( _rateMax + _rateMin ) * 0.5;
+		}
+		public function set rate( value:Number ):void
+		{
+			_rateMax = value;
+			_rateMin = value;
+		}
+		
+		/**
+		 * @inheritDoc
 		 */
 		public function startEmitter( emitter:Emitter ):uint
 		{
@@ -95,15 +131,12 @@ package org.flintparticles.counters
 		
 		private function newTimeToNext():void
 		{
-			var rate:Number = _rateMin + Math.random() * ( _rateMax - _rateMin );
+			var rate:Number = ( _rateMin == _rateMax ) ? _rateMin : _rateMin + Math.random() * ( _rateMax - _rateMin );
 			_timeToNext = 1 / rate;
 		}
 		
 		/**
-		 * The updateEmitter method is used by the emitter to obtain the number
-		 * of particles it should have emitted since the previous time it called 
-		 * the method. It need not be called by the user.
-		 * @param time The time, in seconds, since the previous call to this method.
+		 * @inheritDoc
 		 */
 		public function updateEmitter( emitter:Emitter, time:Number ):uint
 		{

@@ -32,11 +32,13 @@ package org.flintparticles.emitters
 {
 	import flash.display.Sprite;
 	import flash.events.Event;
+	import flash.geom.Point;
 	import flash.utils.getTimer;
 	
 	import org.flintparticles.actions.Action;
 	import org.flintparticles.activities.Activity;
 	import org.flintparticles.counters.Counter;
+	import org.flintparticles.counters.ZeroCounter;
 	import org.flintparticles.events.FlintEvent;
 	import org.flintparticles.initializers.Initializer;
 	import org.flintparticles.particles.Particle;
@@ -60,8 +62,7 @@ package org.flintparticles.emitters
 	 * @eventType org.flintparticles.events.FlintEvent.EMITTER_EMPTY
 	 */
 	[Event(name="emitterEmpty", type="org.flintparticles.events.FlintEvent")]
-	import flash.geom.Point;	
-	
+
 	/**
 	 * The base class for all particle emitters. The Emitter class extends the Sprite
 	 * class so it is itself a DisplayObject. Thus, an Emitter is displayed by simply
@@ -143,6 +144,7 @@ package org.flintparticles.emitters
 			_actionsPriority = new Array();
 			_initializersPriority = new Array();
 			_activitiesPriority = new Array();
+			_counter = new ZeroCounter();
 			
 			addEventListener( Event.REMOVED_FROM_STAGE, removed, false, 0, true );
 		}

@@ -1,4 +1,4 @@
-/*
+﻿/*
  * FLINT PARTICLE SYSTEM
  * .....................
  * 
@@ -28,37 +28,40 @@
  * THE SOFTWARE.
  */
 
-package org.flintparticles.counters 
+package org.flintparticles.counters
 {
 	import org.flintparticles.emitters.Emitter;	
 	
 	/**
-	 * The Counter interface must be implemented by all counters.
-	 * <p>A counter is a class that tells an emitter how many particles to
-	 * emit at any time. The two methods allow the emission of particles
-	 * when the emitter starts and every frame thereafter.</p>
-	 * 
-	 * <p>A counter is set for an emitter using the emitter's 
-	 * setCounter method.</p>
+	 * The Zero counter causes the emitter to emit no particles. Because the emitter
+	 * requires a counter, this counter is used as the default and should be used whenever
+	 * you don't want a counter.
 	 */
-	public interface Counter 
+	public class ZeroCounter implements Counter
 	{
 		/**
-		 * The startEmitter method is called when the emitter starts.
-		 * @param emitter The emitter
-		 * @return The number of particles the emitter should emit
-		 * at the moment it starts.
+		 * The constructor creates a Zero counter for use by an emitter. To
+		 * add a Zero counter to an emitter use the emitter's setCounter
+		 * method.
 		 */
-		function startEmitter( emitter:Emitter ):uint;
+		public function ZeroCounter()
+		{
+		}
 		
 		/**
-		 * The updateEmitter method is called every frame after the
-		 * emitter has started.
-		 * @param emitter The emitter
-		 * @param time The time, in seconds, since the previous call to this method.
-		 * @return The number of particles the emitter should emit
-		 * at this time.
+		 * @inheritDoc
 		 */
-		function updateEmitter( emitter:Emitter, time:Number ):uint;
+		public function startEmitter( emitter:Emitter ):uint
+		{
+			return 0;
+		}
+		
+		/**
+		 * @inheritDoc
+		 */
+		public function updateEmitter( emitter:Emitter, time:Number ):uint
+		{
+			return 0;
+		}
 	}
 }
