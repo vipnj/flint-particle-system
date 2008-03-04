@@ -52,13 +52,40 @@ package org.flintparticles.actions
 		 * 
 		 * @param startAlpha The alpha value for the particle at the
 		 * start of its life. Should be between 0 and 1.
-		 * @param endAlpha Te alpha value of the particle at the end of it's
+		 * @param endAlpha The alpha value of the particle at the end of its
 		 * life. Should be between 0 and 1.
 		 */
 		public function Fade( startAlpha:Number = 1, endAlpha:Number = 0 )
 		{
 			_diffAlpha = startAlpha - endAlpha;
 			_endAlpha = endAlpha;
+		}
+		
+		/**
+		 * The alpha value for the particle at the start of its life.
+		 * Should be between 0 and 1.
+		 */
+		public function get startAlpha():Number
+		{
+			return _endAlpha + _diffAlpha;
+		}
+		public function set startAlpha( value:Number ):void
+		{
+			_diffAlpha = value - _endAlpha;
+		}
+		
+		/**
+		 * The alpha value for the particle at the end of its life.
+		 * Should be between 0 and 1.
+		 */
+		public function get endAlpha():Number
+		{
+			return _endAlpha;
+		}
+		public function set endAlpha( value:Number ):void
+		{
+			_diffAlpha = _endAlpha + _diffAlpha - value;
+			_endAlpha = value;
 		}
 		
 		/**
@@ -70,7 +97,7 @@ package org.flintparticles.actions
 		{
 			return -5;
 		}
-
+		
 		/**
 		 * @inheritDoc
 		 */

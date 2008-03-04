@@ -73,6 +73,46 @@ package org.flintparticles.initializers
 		}
 		
 		/**
+		 * The minimum scale value for particles initialised by 
+		 * this initializer. Should be between 0 and 1.
+		 */
+		public function get minScale():Number
+		{
+			return _min;
+		}
+		public function set minScale( value:Number ):void
+		{
+			_min = value;
+		}
+		
+		/**
+		 * The maximum scale value for particles initialised by 
+		 * this initializer. Should be between 0 and 1.
+		 */
+		public function get maxScale():Number
+		{
+			return _max;
+		}
+		public function set maxScale( value:Number ):void
+		{
+			_max = value;
+		}
+		
+		/**
+		 * When reading, returns the average of minScale and maxScale.
+		 * When writing this sets both maxScale and minScale to the 
+		 * same scale value.
+		 */
+		public function get scale():Number
+		{
+			return _min == _max ? _min : ( _max + _min ) / 2;
+		}
+		public function set scale( value:Number ):void
+		{
+			_max = _min = value;
+		}
+		
+		/**
 		 * @inheritDoc
 		 */
 		override public function initialize( emitter:Emitter, particle:Particle ):void

@@ -73,6 +73,57 @@ package org.flintparticles.initializers
 		}
 		
 		/**
+		 * The minimum alpha value for particles initialised by 
+		 * this initializer. Should be between 0 and 1.
+		 */
+		public function get minAlpha():Number
+		{
+			return _min;
+		}
+		public function set minAlpha( value:Number ):void
+		{
+			_min = value;
+		}
+		
+		/**
+		 * The maximum alpha value for particles initialised by 
+		 * this initializer. Should be between 0 and 1.
+		 */
+		public function get maxAlpha():Number
+		{
+			return _max;
+		}
+		public function set maxAlpha( value:Number ):void
+		{
+			_max = value;
+		}
+		
+		/**
+		 * When reading, returns the average of minAlpha and maxAlpha.
+		 * When writing this sets both maxAlpha and minAlpha to the 
+		 * same alpha value.
+		 */
+		public function get alpha():Number
+		{
+			return _min == _max ? _min : ( _max + _min ) / 2;
+		}
+		public function set alpha( value:Number ):void
+		{
+			_max = _min = value;
+		}
+		
+		/**
+		 * @inheritDoc
+		 * 
+		 * returns -10 to ensure it occurs after the color assignment 
+		 * classes like ColorInit.
+		 */
+		override public function getDefaultPriority():Number
+		{
+			return -10;
+		}
+		
+		/**
 		 * @inheritDoc
 		 */
 		override public function initialize( emitter:Emitter, particle:Particle ):void

@@ -58,6 +58,18 @@ package org.flintparticles.actions
 		}
 		
 		/**
+		 * The amount of drag. A higher number produces a stronger drag force.
+		 */
+		public function get drag():Number
+		{
+			return _drag;
+		}
+		public function set drag( value:Number ):void
+		{
+			_drag = value;
+		}
+		
+		/**
 		 * @inheritDoc
 		 */
 		override public function update( emitter:Emitter, particle:Particle, time:Number ):void

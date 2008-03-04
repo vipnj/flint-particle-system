@@ -55,6 +55,19 @@ package org.flintparticles.activities
 		}
 		
 		/**
+		 * The angular velocity for the emitter in 
+		 * radians per second.
+		 */
+		public function get angularVelocity():Number
+		{
+			return _angularVelocity;
+		}
+		public function set angularVelocity( value:Number ):void
+		{
+			_angularVelocity = value;
+		}
+		
+		/**
 		 * @inheritDoc
 		 */
 		override public function update( emitter : Emitter, time : Number ) : void

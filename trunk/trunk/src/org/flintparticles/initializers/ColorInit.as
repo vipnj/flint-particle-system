@@ -65,6 +65,46 @@ package org.flintparticles.initializers
 		}
 		
 		/**
+		 * The minimum color value for particles initialised by 
+		 * this initializer. Should be between 0 and 1.
+		 */
+		public function get minColor():uint
+		{
+			return _min;
+		}
+		public function set minColor( value:uint ):void
+		{
+			_min = value;
+		}
+		
+		/**
+		 * The maximum color value for particles initialised by 
+		 * this initializer. Should be between 0 and 1.
+		 */
+		public function get maxColor():uint
+		{
+			return _max;
+		}
+		public function set maxColor( value:uint ):void
+		{
+			_max = value;
+		}
+		
+		/**
+		 * When reading, returns the average of minColor and maxColor.
+		 * When writing this sets both maxColor and minColor to the 
+		 * same color.
+		 */
+		public function get color():uint
+		{
+			return _min == _max ? _min : interpolateColors( _max, _min, 0.5 );
+		}
+		public function set color( value:uint ):void
+		{
+			_max = _min = value;
+		}
+		
+		/**
 		 * @inheritDoc
 		 */
 		override public function initialize( emitter:Emitter, particle:Particle ):void

@@ -67,6 +67,46 @@ package org.flintparticles.initializers
 		}
 		
 		/**
+		 * The minimum lifetime for particles initialised by 
+		 * this initializer. Should be between 0 and 1.
+		 */
+		public function get minLifetime():Number
+		{
+			return _min;
+		}
+		public function set minLifetime( value:Number ):void
+		{
+			_min = value;
+		}
+		
+		/**
+		 * The maximum lifetime for particles initialised by 
+		 * this initializer. Should be between 0 and 1.
+		 */
+		public function get maxLifetime():Number
+		{
+			return _max;
+		}
+		public function set maxLifetime( value:Number ):void
+		{
+			_max = value;
+		}
+		
+		/**
+		 * When reading, returns the average of minLifetime and maxLifetime.
+		 * When writing this sets both maxLifetime and minLifetime to the 
+		 * same lifetime value.
+		 */
+		public function get lifetime():Number
+		{
+			return _min == _max ? _min : ( _max + _min ) * 0.5;
+		}
+		public function set lifetime( value:Number ):void
+		{
+			_max = _min = value;
+		}
+		
+		/**
 		 * @inheritDoc
 		 */
 		override public function initialize( emitter:Emitter, particle:Particle ):void

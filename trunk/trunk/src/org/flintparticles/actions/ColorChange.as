@@ -61,6 +61,30 @@ package org.flintparticles.actions
 		}
 		
 		/**
+		 * The color of the particle at the beginning of its life.
+		 */
+		public function get startColor():uint
+		{
+			return _startColor;
+		}
+		public function set startColor( value:uint ):void
+		{
+			_startColor = value;
+		}
+		
+		/**
+		 * The color of the particle at the end of its life.
+		 */
+		public function get endColor():uint
+		{
+			return _endColor;
+		}
+		public function set endColor( value:uint ):void
+		{
+			_endColor = value;
+		}
+
+		/**
 		 * @inheritDoc
 		 */
 		override public function update( emitter:Emitter, particle:Particle, time:Number ):void

@@ -62,6 +62,33 @@ package org.flintparticles.actions
 		}
 		
 		/**
+		 * The alpha value for the particle at the start of its life.
+		 * Should be between 0 and 1.
+		 */
+		public function get startScale():Number
+		{
+			return _endScale + _diffScale;
+		}
+		public function set startScale( value:Number ):void
+		{
+			_diffScale = value - _endScale;
+		}
+		
+		/**
+		 * The alpha value for the particle at the end of its life.
+		 * Should be between 0 and 1.
+		 */
+		public function get endScale():Number
+		{
+			return _endScale;
+		}
+		public function set endScale( value:Number ):void
+		{
+			_diffScale = _endScale + _diffScale - value;
+			_endScale = value;
+		}
+		
+		/**
 		 * @inheritDoc
 		 */
 		override public function update( emitter:Emitter, particle:Particle, time:Number ):void

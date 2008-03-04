@@ -50,7 +50,7 @@ package org.flintparticles.initializers
 		 * an emitter. To add an ImageClass to all particles created by an emitter, use the
 		 * emitter's addInitializer method.
 		 * 
-		 * @param imageClass The name of the class to use when creating
+		 * @param imageClass The class to use when creating
 		 * the particles' DisplayObjects.
 		 * @param parameters The parameters to pass to the constructor
 		 * for the image class.

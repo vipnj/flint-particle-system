@@ -58,6 +58,29 @@ package org.flintparticles.initializers
 		}
 		
 		/**
+		 * The filter to apply to each particle's image when it is created.
+		 */
+		public function get filter():BitmapFilter
+		{
+			return _filter;
+		}
+		public function set filter( value:BitmapFilter ):void
+		{
+			_filter = value;
+		}
+		
+		/**
+		 * @inheritDoc
+		 * 
+		 * returns -10 to ensure it occurs after the image assignment 
+		 * classes like ImageClass.
+		 */
+		override public function getDefaultPriority():Number
+		{
+			return -10;
+		}
+		
+		/**
 		 * @inheritDoc
 		 */
 		override public function initialize( emitter:Emitter, particle:Particle ):void

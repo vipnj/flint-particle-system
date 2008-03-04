@@ -48,11 +48,23 @@ package org.flintparticles.activities
 		 * 
 		 * @see org.flintparticles.emitters.Emitter#addActivity()
 		 * 
-		 * @param image The displayObject to use as the image.
+		 * @param image The display object to use as the image.
 		 */
 		public function EmitterImage( image:DisplayObject )
 		{
 			_image = image;
+		}
+		
+		/**
+		 * The display object to use as the image.
+		 */
+		public function get image():DisplayObject
+		{
+			return _image;
+		}
+		public function set image( value:DisplayObject ):void
+		{
+			_image = value;
 		}
 		
 		/**

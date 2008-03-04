@@ -90,6 +90,54 @@ package org.flintparticles.actions
 		}
 
 		/**
+		 * The left coordinate of the bounding box.
+		 */
+		public function get left():Number
+		{
+			return _left;
+		}
+		public function set left( value:Number ):void
+		{
+			_left = value;
+		}
+
+		/**
+		 * The top coordinate of the bounding box.
+		 */
+		public function get top():Number
+		{
+			return _top;
+		}
+		public function set top( value:Number ):void
+		{
+			_top = value;
+		}
+
+		/**
+		 * The left coordinate of the bounding box.
+		 */
+		public function get right():Number
+		{
+			return _right;
+		}
+		public function set right( value:Number ):void
+		{
+			_right = value;
+		}
+
+		/**
+		 * The left coordinate of the bounding box.
+		 */
+		public function get bottom():Number
+		{
+			return _bottom;
+		}
+		public function set bottom( value:Number ):void
+		{
+			_bottom = value;
+		}
+
+		/**
 		 * @inheritDoc
 		 * 
 		 * <p>Returns a value of -20, so that the BoundingBox executes after all movement has occured.</p>

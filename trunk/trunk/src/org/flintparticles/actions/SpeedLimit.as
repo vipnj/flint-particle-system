@@ -66,6 +66,31 @@ package org.flintparticles.actions
 		}
 		
 		/**
+		 * The speed limit
+		 */
+		public function get limit():Number
+		{
+			return _limit;
+		}
+		public function set limit( value:Number ):void
+		{
+			_limit = value;
+			_limitSq = value * value;
+		}
+		
+		/**
+		 * Whether the speed is a minimum (true) or maximum (false) speed.
+		 */
+		public function get isMinimum():Boolean
+		{
+			return _isMinimum;
+		}
+		public function set isMinimum( value:Boolean ):void
+		{
+			_isMinimum = value;
+		}
+		
+		/**
 		 * @inheritDoc
 		 * 
 		 * <p>Returns a value of -5, so that the SpeedLimit executes after all accelerations have occured.</p>

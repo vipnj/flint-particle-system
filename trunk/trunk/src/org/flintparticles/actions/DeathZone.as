@@ -55,13 +55,39 @@ package org.flintparticles.actions
 		 * 
 		 * @param zone The zone to use. Any item from the org.flintparticles.zones
 		 * package can be used.
-		 * @param invertZone If true, the zone is treated as the safe area
-		 * and everywhere outside the zone results in the particle dying.
+		 * @param zoneIsSafe If true, the zone is treated as the safe area
+		 * and being outside the zone results in the particle dying.
 		 */
-		public function DeathZone( zone:Zone, invertZone:Boolean = false )
+		public function DeathZone( zone:Zone, zoneIsSafe:Boolean = false )
 		{
 			_zone = zone;
-			_invertZone = invertZone;
+			_invertZone = zoneIsSafe;
+		}
+		
+		/**
+		 * The zone.
+		 */
+		public function get zone():Zone
+		{
+			return _zone;
+		}
+		public function set zone( value:Zone ):void
+		{
+			_zone = value;
+		}
+		
+		/**
+		 * If true, the zone is treated as the safe area and being ouside the zone
+		 * results in the particle dying. Otherwise, being inside the zone causes the
+		 * particle to die.
+		 */
+		public function get zoneIsSafe():Boolean
+		{
+			return _invertZone;
+		}
+		public function set zoneIsSafe( value:Boolean ):void
+		{
+			_invertZone = value;
 		}
 		
 		/**
