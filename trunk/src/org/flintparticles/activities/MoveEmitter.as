@@ -47,12 +47,41 @@ package org.flintparticles.activities
 		 * 
 		 * @see org.flintparticles.emitters.Emitter#addActivity()
 		 * 
-		 * @param velocity The velocity to move the emitter, in pixels per second.
+		 * @param x The x coordinate of the velocity to move the emitter, 
+		 * in pixels per second.
+		 * @param y The y coordinate of the velocity to move the emitter, 
+		 * in pixels per second.
 		 */
-		public function MoveEmitter( velocityX:Number, velocityY:Number )
+		public function MoveEmitter( x:Number, y:Number )
 		{
-			_velX = velocityX;
-			_velY = velocityY;
+			_velX = x;
+			_velY = y;
+		}
+		
+		/**
+		 * The x coordinate of the velocity to move the emitter, 
+		 * in pixels per second
+		 */
+		public function get x():Number
+		{
+			return _velX;
+		}
+		public function set x( value:Number ):void
+		{
+			_velX = value;
+		}
+		
+		/**
+		 * The y coordinate of the velocity to move the emitter, 
+		 * in pixels per second
+		 */
+		public function get y():Number
+		{
+			return _velY;
+		}
+		public function set y( value:Number ):void
+		{
+			_velY = value;
 		}
 		
 		/**

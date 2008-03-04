@@ -58,6 +58,18 @@ package org.flintparticles.actions
 		}
 		
 		/**
+		 * The strength of theturn action. Higher values produce a sharper turn.
+		 */
+		public function get power():Number
+		{
+			return _power;
+		}
+		public function set power( value:Number ):void
+		{
+			_power = value;
+		}
+
+		/**
 		 * @inheritDoc
 		 */
 		override public function update( emitter:Emitter, particle:Particle, time:Number ):void

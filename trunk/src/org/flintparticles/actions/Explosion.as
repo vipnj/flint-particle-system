@@ -55,7 +55,7 @@ package org.flintparticles.actions
 		 * 
 		 * @see org.flintparticles.emitters.Emitter#addAction()
 		 * 
-		 * @param power The strength of the force - larger numbers produce a stringer force.
+		 * @param power The strength of the force - larger numbers produce a stronger force.
 		 * @param x The x coordinate of the point towards which the force draws the particles.
 		 * @param y The y coordinate of the point towards which the force draws the particles.
 		 * @param epsilon The minimum distance for which the explosion force is calculated. 
@@ -69,6 +69,57 @@ package org.flintparticles.actions
 			_x = x;
 			_y = y;
 			_epsilonSq = epsilon * epsilon;
+		}
+		
+		/**
+		 * The strength of the explosive force.
+		 */
+		public function get power():Number
+		{
+			return _power / _gravityConst;
+		}
+		public function set power( value:Number ):void
+		{
+			_power = value * _gravityConst;
+		}
+		
+		/**
+		 * The x coordinate of the center of the explosive force.
+		 */
+		public function get x():Number
+		{
+			return _x;
+		}
+		public function set x( value:Number ):void
+		{
+			_x = value;
+		}
+		
+		/**
+		 * The y coordinate of the center of the explosive force.
+		 */
+		public function get y():Number
+		{
+			return _y;
+		}
+		public function set y( value:Number ):void
+		{
+			_y = value;
+		}
+		
+		/**
+		 * The minimum distance for which the explosion force is calculated. 
+		 * Particles closer than this distance experience the explosion as it they were 
+		 * this distance away. This stops the explosion effect blowing up as distances get 
+		 * small.
+		 */
+		public function get epsilon():Number
+		{
+			return Math.sqrt( _epsilonSq );
+		}
+		public function set epsilon( value:Number ):void
+		{
+			_epsilonSq = value * value;
 		}
 		
 		/**

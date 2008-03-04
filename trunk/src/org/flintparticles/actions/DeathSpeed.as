@@ -42,6 +42,7 @@ package org.flintparticles.actions
 
 	public class DeathSpeed extends Action
 	{
+		private var _limit:Number;
 		private var _limitSq:Number;
 		private var _isMinimum:Boolean;
 		
@@ -59,8 +60,34 @@ package org.flintparticles.actions
 		 */
 		public function DeathSpeed( speed:Number, isMinimum:Boolean = false )
 		{
+			_limit = speed;
 			_limitSq = speed * speed;
 			_isMinimum = isMinimum;
+		}
+		
+		/**
+		 * The speed limit beyond which the particle dies
+		 */
+		public function get limit():Number
+		{
+			return _limit;
+		}
+		public function set limit( value:Number ):void
+		{
+			_limit = value;
+			_limitSq = value * value;
+		}
+		
+		/**
+		 * Whether the speed is a minimum (true) or maximum (false) speed.
+		 */
+		public function get isMinimum():Boolean
+		{
+			return _isMinimum;
+		}
+		public function set isMinimum( value:Boolean ):void
+		{
+			_isMinimum = value;
 		}
 		
 		/**

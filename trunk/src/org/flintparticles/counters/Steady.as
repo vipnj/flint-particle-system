@@ -112,12 +112,11 @@ package org.flintparticles.counters
 		 */
 		public function get rate():Number
 		{
-			return ( _rateMax + _rateMin ) * 0.5;
+			return _rateMin == _rateMax ? _rateMin : ( _rateMax + _rateMin ) * 0.5;
 		}
 		public function set rate( value:Number ):void
 		{
-			_rateMax = value;
-			_rateMin = value;
+			_rateMax = _rateMin = value;
 		}
 		
 		/**

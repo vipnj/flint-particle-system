@@ -70,6 +70,56 @@ package org.flintparticles.actions
 		}
 		
 		/**
+		 * The x coordinate of the acceleration.
+		 */
+		public function get x():Number
+		{
+			return _x;
+		}
+		public function set x( value:Number ):void
+		{
+			_x = value;
+		}
+		
+		/**
+		 * The y coordinate of the acceleration.
+		 */
+		public function get y():Number
+		{
+			return _y;
+		}
+		public function set y( value:Number ):void
+		{
+			_y = value;
+		}
+		
+		/**
+		 * The zone in which to apply the acceleration.
+		 */
+		public function get zone():Zone
+		{
+			return _zone;
+		}
+		public function set zone( value:Zone ):void
+		{
+			_zone = value;
+		}
+		
+		/**
+		 * If true, the zone is treated as the safe area and being ouside the zone
+		 * results in the particle dying. Otherwise, being inside the zone causes the
+		 * particle to die.
+		 */
+		public function get invertZone():Boolean
+		{
+			return _invert;
+		}
+		public function set invertZone( value:Boolean ):void
+		{
+			_invert = value;
+		}
+		
+		/**
 		 * @inheritDoc
 		 */
 		override public function update( emitter:Emitter, particle:Particle, time:Number ):void

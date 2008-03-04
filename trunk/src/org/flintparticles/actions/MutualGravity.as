@@ -52,8 +52,8 @@ package org.flintparticles.actions
 		 * @see org.flintparticles.emitters.Emitter#addAction()
 		 * 
 		 * @param power The strength of the gravitational pull between the particles.
-		 * @param maxDistance the maximum distance between particles for the gravitational
-		 * effect to be calculated. You can speed up this method by reducing the maxDistance
+		 * @param maxDistance The maximum distance between particles for the gravitational
+		 * effect to be calculated. You can speed up this action by reducing the maxDistance
 		 * since often only the closest other particles have a significant effect on the 
 		 * motion of a particle.
 		 */
@@ -65,6 +65,49 @@ package org.flintparticles.actions
 			_epsilonSq = epsilon * epsilon;
 		}
 		
+		/**
+		 * The strength of the gravity force.
+		 */
+		public function get power():Number
+		{
+			return _power / _gravityConst;
+		}
+		public function set power( value:Number ):void
+		{
+			_power = value * _gravityConst;
+		}
+		
+		/**
+		 * The maximum distance between particles for the gravitational
+		 * effect to be calculated. You can speed up this action by reducing the maxDistance
+		 * since often only the closest other particles have a significant effect on the 
+		 * motion of a particle.
+		 */
+		public function get maxDistance():Number
+		{
+			return _maxDistance;
+		}
+		public function set maxDistance( value:Number ):void
+		{
+			_maxDistance = value;
+			_maxDistanceSq = value * value;
+		}
+		
+		/**
+		 * The minimum distance for which the gravity force is calculated. 
+		 * Particles closer than this distance experience the gravity as it they were 
+		 * this distance away. This stops the gravity effect blowing up as distances get 
+		 * small.
+		 */
+		public function get epsilon():Number
+		{
+			return Math.sqrt( _epsilonSq );
+		}
+		public function set epsilon( value:Number ):void
+		{
+			_epsilonSq = value * value;
+		}
+
 		/**
 		 * @inheritDoc
 		 * 

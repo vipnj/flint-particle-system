@@ -48,14 +48,39 @@ package org.flintparticles.actions
 		 * 
 		 * @see org.flintparticles.emitters.Emitter#addAction()
 		 * 
-		 * @param vel The target angular velocity, in radians per second.
+		 * @param velocity The target angular velocity, in radians per second.
 		 * @param scaleFactor Adjusts how quickly the particle reaches the target angular velocity.
 		 * Larger numbers cause it to approach the target angular velocity more quickly.
 		 */
-		public function TargetRotateVelocity( vel:Number, scaleFactor:Number = 0.1 )
+		public function TargetRotateVelocity( velocity:Number, scaleFactor:Number = 0.1 )
 		{
-			_vel = vel;
+			_vel = velocity;
 			_scaleFactor = scaleFactor;
+		}
+		
+		/**
+		 * The target angular velocity, in radians per second.
+		 */
+		public function get targetVelocity():Number
+		{
+			return _vel;
+		}
+		public function set targetVelocity( value:Number ):void
+		{
+			_vel = value;
+		}
+		
+		/**
+		 * Adjusts how quickly the particle reaches the target angular velocity.
+		 * Larger numbers cause it to approach the target angular velocity more quickly.
+		 */
+		public function get scaleFactor():Number
+		{
+			return _scaleFactor;
+		}
+		public function set scaleFactor( value:Number ):void
+		{
+			_scaleFactor = value;
 		}
 		
 		/**

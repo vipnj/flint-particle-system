@@ -61,6 +61,18 @@ package org.flintparticles.actions
 		}
 		
 		/**
+		 * The amount of friction. A higher number produces a stronger frictional force.
+		 */
+		public function get friction():Number
+		{
+			return _friction;
+		}
+		public function set friction( value:Number ):void
+		{
+			_friction = value;
+		}
+		
+		/**
 		 * @inheritDoc
 		 */
 		override public function update( emitter:Emitter, particle:Particle, time:Number ):void

@@ -65,6 +65,33 @@ package org.flintparticles.actions
 		}
 		
 		/**
+		 * The strength of the explosive force.
+		 */
+		public function get power():Number
+		{
+			return _power / _gravityConst;
+		}
+		public function set power( value:Number ):void
+		{
+			_power = value * _gravityConst;
+		}
+		
+		/**
+		 * The minimum distance for which the explosion force is calculated. 
+		 * Particles closer than this distance experience the explosion as it they were 
+		 * this distance away. This stops the explosion effect blowing up as distances get 
+		 * small.
+		 */
+		public function get epsilon():Number
+		{
+			return Math.sqrt( _epsilonSq );
+		}
+		public function set epsilon( value:Number ):void
+		{
+			_epsilonSq = value * value;
+		}
+		
+		/**
 		 * @inheritDoc
 		 */
 		override public function update( emitter:Emitter, particle:Particle, time:Number ):void

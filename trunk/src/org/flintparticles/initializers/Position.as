@@ -66,6 +66,18 @@ package org.flintparticles.initializers
 		}
 		
 		/**
+		 * The zone.
+		 */
+		public function get zone():Zone
+		{
+			return _zone;
+		}
+		public function set zone( value:Zone ):void
+		{
+			_zone = value;
+		}
+		
+		/**
 		 * @inheritDoc
 		 */
 		override public function initialize( emitter : Emitter, particle : Particle ) : void

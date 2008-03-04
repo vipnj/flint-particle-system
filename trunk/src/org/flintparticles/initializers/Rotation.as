@@ -64,6 +64,46 @@ package org.flintparticles.initializers
 		}
 		
 		/**
+		 * The minimum angle for particles initialised by 
+		 * this initializer. Should be between 0 and 1.
+		 */
+		public function get minAngle():Number
+		{
+			return _min;
+		}
+		public function set minAngle( value:Number ):void
+		{
+			_min = value;
+		}
+		
+		/**
+		 * The maximum angle for particles initialised by 
+		 * this initializer. Should be between 0 and 1.
+		 */
+		public function get maxAngle():Number
+		{
+			return _max;
+		}
+		public function set maxAngle( value:Number ):void
+		{
+			_max = value;
+		}
+		
+		/**
+		 * When reading, returns the average of minAngle and maxAngle.
+		 * When writing this sets both maxAngle and minAngle to the 
+		 * same angle value.
+		 */
+		public function get angle():Number
+		{
+			return _min == _max ? _min : ( _max + _min ) / 2;
+		}
+		public function set angle( value:Number ):void
+		{
+			_max = _min = value;
+		}
+		
+		/**
 		 * @inheritDoc
 		 */
 		override public function initialize( emitter : Emitter, particle : Particle ) : void

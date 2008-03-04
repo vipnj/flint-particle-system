@@ -68,6 +68,46 @@ package org.flintparticles.initializers
 		}
 		
 		/**
+		 * The minimum angular velocity value for particles initialised by 
+		 * this initializer. Should be between 0 and 1.
+		 */
+		public function get minAngVelocity():Number
+		{
+			return _min;
+		}
+		public function set minAngVelocity( value:Number ):void
+		{
+			_min = value;
+		}
+		
+		/**
+		 * The maximum angular velocity value for particles initialised by 
+		 * this initializer. Should be between 0 and 1.
+		 */
+		public function get maxAngVelocity():Number
+		{
+			return _max;
+		}
+		public function set maxAngVelocity( value:Number ):void
+		{
+			_max = value;
+		}
+		
+		/**
+		 * When reading, returns the average of minAngVelocity and maxAngVelocity.
+		 * When writing this sets both maxAngVelocity and minAngVelocity to the 
+		 * same angular velocity value.
+		 */
+		public function get angVelocity():Number
+		{
+			return _min == _max ? _min : ( _max + _min ) / 2;
+		}
+		public function set angVelocity( value:Number ):void
+		{
+			_max = _min = value;
+		}
+		
+		/**
 		 * @inheritDoc
 		 */
 		override public function initialize( emitter:Emitter, particle:Particle ):void

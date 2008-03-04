@@ -42,7 +42,7 @@ package org.flintparticles.initializers
 	 * 
 	 * With the BitmapEmitter, the DisplayObject is copied into the bitmap
 	 * using the particle's property to place the image correctly. So
-	 * all many particles can share the same DisplayObject because it is
+	 * many particles can share the same DisplayObject because it is
 	 * only indirectly used to display the particle.
 	 */
 

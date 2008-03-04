@@ -62,6 +62,30 @@ package org.flintparticles.actions
 		}
 		
 		/**
+		 * The maximum amount of horizontal drift in pixels per second.
+		 */
+		public function get driftX():Number
+		{
+			return _sizeX;
+		}
+		public function set driftX( value:Number ):void
+		{
+			_sizeX = value;
+		}
+		
+		/**
+		 * The maximum amount of vertical drift in pixels per second.
+		 */
+		public function get driftY():Number
+		{
+			return _sizeY;
+		}
+		public function set driftY( value:Number ):void
+		{
+			_sizeY = value;
+		}
+		
+		/**
 		 * @inheritDoc
 		 */
 		override public function update( emitter:Emitter, particle:Particle, time:Number ):void

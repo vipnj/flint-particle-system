@@ -53,14 +53,50 @@ package org.flintparticles.actions
 		 * @see org.flintparticles.emitters.Emitter#addAction()
 		 * 
 		 * @param power The strength of the turn action. Higher values produce a sharper turn.
-		 * @param x The x coordinate of the point around which the particle swarms.
-		 * @param y The y coordinate of the point around which the particle swarms.
+		 * @param x The x coordinate of the point towards which the particle turns.
+		 * @param y The y coordinate of the point towards which the particle turns.
 		 */
 		public function TurnTowardsPoint( x:Number, y:Number, power:Number )
 		{
 			_power = power;
 			_x = x;
 			_y = y;
+		}
+		
+		/**
+		 * The strength of theturn action. Higher values produce a sharper turn.
+		 */
+		public function get power():Number
+		{
+			return _power;
+		}
+		public function set power( value:Number ):void
+		{
+			_power = value;
+		}
+		
+		/**
+		 * The x coordinate of the point that the particle turns towards.
+		 */
+		public function get x():Number
+		{
+			return _x;
+		}
+		public function set x( value:Number ):void
+		{
+			_x = value;
+		}
+		
+		/**
+		 * The y coordinate of the point that the particle turns towards.
+		 */
+		public function get y():Number
+		{
+			return _y;
+		}
+		public function set y( value:Number ):void
+		{
+			_y = value;
 		}
 		
 		/**

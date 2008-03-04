@@ -54,11 +54,48 @@ package org.flintparticles.actions
 		 * @param scaleFactor Adjusts how quickly the particle reaches the target velocity.
 		 * Larger numbers cause it to approach the target velocity more quickly.
 		 */
-		public function TargetVelocity( velX:Number, velY:Number, scaleFactor:Number = 0.1 )
+		public function TargetVelocity( velocityX:Number, velocityY:Number, scaleFactor:Number = 0.1 )
 		{
-			_velX = velX;
-			_velY = velY;
+			_velX = velocityX;
+			_velY = velocityY;
 			_scaleFactor = scaleFactor;
+		}
+		
+		/**
+		 * The y coordinate of the target velocity, in pixels per second.
+		 */
+		public function get targetVelocityY():Number
+		{
+			return _velY;
+		}
+		public function set targetVelocityY( value:Number ):void
+		{
+			_velY = value;
+		}
+		
+		/**
+		 * The x coordinate of the target velocity, in pixels per second.
+		 */
+		public function get targetVelocityX():Number
+		{
+			return _velX;
+		}
+		public function set targetVelocityX( value:Number ):void
+		{
+			_velX = value;
+		}
+		
+		/**
+		 * Adjusts how quickly the particle reaches the target angular velocity.
+		 * Larger numbers cause it to approach the target angular velocity more quickly.
+		 */
+		public function get scaleFactor():Number
+		{
+			return _scaleFactor;
+		}
+		public function set scaleFactor( value:Number ):void
+		{
+			_scaleFactor = value;
 		}
 		
 		/**

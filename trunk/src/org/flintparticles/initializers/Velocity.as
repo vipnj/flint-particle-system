@@ -65,9 +65,21 @@ package org.flintparticles.initializers
 		 * 
 		 * @see org.flintparticles.emitters.Emitter#addInitializer()
 		 */
-		public function Velocity( velocity:Zone )
+		public function Velocity( zone:Zone )
 		{
-			_zone = velocity;
+			_zone = zone;
+		}
+		
+		/**
+		 * The zone.
+		 */
+		public function get zone():Zone
+		{
+			return _zone;
+		}
+		public function set zone( value:Zone ):void
+		{
+			_zone = value;
 		}
 		
 		/**
