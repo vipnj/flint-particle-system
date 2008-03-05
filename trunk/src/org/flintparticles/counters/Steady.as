@@ -107,7 +107,7 @@ package org.flintparticles.counters
 		}
 		
 		/**
-		 * When setting, thios property sets both rateMin and rateMax to the same value.
+		 * When setting, this property sets both rateMin and rateMax to the same value.
 		 * When reading, this property is the average of rateMin and rateMax.
 		 */
 		public function get rate():Number
@@ -124,14 +124,14 @@ package org.flintparticles.counters
 		 */
 		public function startEmitter( emitter:Emitter ):uint
 		{
-			newTimeToNext();
+			_timeToNext = newTimeToNext();
 			return 0;
 		}
 		
-		private function newTimeToNext():void
+		private function newTimeToNext():Number
 		{
-			var rate:Number = ( _rateMin == _rateMax ) ? _rateMin : _rateMin + Math.random() * ( _rateMax - _rateMin );
-			_timeToNext = 1 / rate;
+			var newRate:Number = ( _rateMin == _rateMax ) ? _rateMin : _rateMin + Math.random() * ( _rateMax - _rateMin );
+			return 1 / newRate;
 		}
 		
 		/**
@@ -143,17 +143,13 @@ package org.flintparticles.counters
 			{
 				return 0;
 			}
-			var emitTime:Number = time;
 			var count:uint = 0;
-			emitTime -= _timeToNext;
-			while ( emitTime >= 0 )
+			_timeToNext -= time;
+			while( _timeToNext <= 0 )
 			{
 				++count;
-				newTimeToNext();
-				emitTime -= _timeToNext;
+				_timeToNext += newTimeToNext();
 			}
-			_timeToNext = -emitTime;
-			
 			return count;
 		}
 	}
