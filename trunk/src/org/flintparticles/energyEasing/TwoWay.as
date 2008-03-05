@@ -50,7 +50,7 @@ package org.flintparticles.energyEasing
 		}
 		
 		/**
-		 * energy follows the top half ofa circle, increasing and then decreasing.
+		 * Energy increases and then decreases as if following the top half of a circle.
 		 */
 		public static function circular( age:Number, lifetime:Number ):Number
 		{
