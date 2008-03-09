@@ -39,8 +39,8 @@ package org.flintparticles.counters
 	 */
 	public class Blast implements Counter
 	{
-		protected var _startMin:uint;
-		protected var _startMax:uint;
+		private var _startMin:uint;
+		private var _startMax:uint;
 		
 		/**
 		 * The constructor creates a Blast counter for use by an emitter. To

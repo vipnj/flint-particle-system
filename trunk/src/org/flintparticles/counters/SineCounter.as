@@ -33,37 +33,38 @@ package org.flintparticles.counters
 	import org.flintparticles.emitters.Emitter;	
 	
 	/**
-	 * The Steady counter causes the emitter to emit particles continuously
-	 * at a steady rate. It can be used to simulate any continuous particle
-	 * stream. The rate can also be varied by setting a range of value for the
-	 * emission rate.
+	 * The Sine counter causes the emitter to emit particles continuously
+	 * at a rate that varies according to a sine wave.
 	 */
-	public class Steady implements Counter
+	public class SineCounter implements Counter
 	{
-		private var _timeToNext:Number;
+		private var _emitted:Number;
 		private var _rateMin:Number;
 		private var _rateMax:Number;
+		private var _period:Number;
 		private var _stop:Boolean;
+		private var _timePassed:Number;
+		private var _factor:Number;
+		private var _scale:Number;
 		
 		/**
-		 * The constructor creates a Steady counter for use by an emitter. To
-		 * add a Steady counter to an emitter use the emitter's setCounter
+		 * The constructor creates a SineCounter counter for use by an emitter. To
+		 * add a SineCounter counter to an emitter use the emitter's setCounter
 		 * method.
-		 * <p>If two parameters are passed to the constructor then a random
-		 * value between the two is used. This allows for random variation
-		 * in the emission rate over the lifetime of the emitter. Otherwise the 
-		 * single value passed in is used.</p>
-		 * @param rateMin The minimum number of particles to emit
-		 * per second.
-		 * @param rateMax The maximum number of particles to emit
-		 * per second. If not set then the emitter
-		 * will emit exactly the rateMin number of particles per second.
+		 * @period The period of the sine wave used, in seconds.
+		 * @param rateMax The number of particles emitted per second at the peak of
+		 * the sine wave.
+		 * @param rateMin The number of particles to emit per second at the bottom
+		 * of the sine wave.
 		 */
-		public function Steady( rateMin:Number, rateMax:Number = NaN )
+		public function SineCounter( period:Number, rateMax:Number, rateMin:Number = 0 )
 		{
 			_stop = false;
+			_period = period;
 			_rateMin = rateMin;
-			_rateMax = isNaN( rateMax ) ? rateMin : rateMax;
+			_rateMax = rateMax;
+			_factor = 2 * Math.PI / period;
+			_scale = 0.5 * ( _rateMax - _rateMin );
 		}
 		
 		/**
@@ -80,10 +81,12 @@ package org.flintparticles.counters
 		public function resume():void
 		{
 			_stop = false;
+			_emitted = 0;
 		}
 		
 		/**
-		 * The minimum number of particles to emit per second.
+		 * The number of particles to emit per second at the bottom
+		 * of the sine wave.
 		 */
 		public function get rateMin():Number
 		{
@@ -92,10 +95,12 @@ package org.flintparticles.counters
 		public function set rateMin( value:Number ):void
 		{
 			_rateMin = value;
+			_scale = 0.5 * ( _rateMax - _rateMin );
 		}
 		
 		/**
-		 * The maximum number of particles to emit per second.
+		 * The number of particles emitted per second at the peak of
+		 * the sine wave.
 		 */
 		public function get rateMax():Number
 		{
@@ -104,19 +109,20 @@ package org.flintparticles.counters
 		public function set rateMax( value:Number ):void
 		{
 			_rateMax = value;
+			_scale = 0.5 * ( _rateMax - _rateMin );
 		}
 		
 		/**
-		 * When setting, this property sets both rateMin and rateMax to the same value.
-		 * When reading, this property is the average of rateMin and rateMax.
+		 * The period of the sine wave used, in seconds.
 		 */
-		public function get rate():Number
+		public function get period():Number
 		{
-			return _rateMin == _rateMax ? _rateMin : ( _rateMax + _rateMin ) * 0.5;
+			return _period;
 		}
-		public function set rate( value:Number ):void
+		public function set period( value:Number ):void
 		{
-			_rateMax = _rateMin = value;
+			_period = value;
+			_factor = 2 * Math.PI / _period;
 		}
 		
 		/**
@@ -124,14 +130,9 @@ package org.flintparticles.counters
 		 */
 		public function startEmitter( emitter:Emitter ):uint
 		{
-			_timeToNext = newTimeToNext();
+			_timePassed = 0;
+			_emitted = 0;
 			return 0;
-		}
-		
-		private function newTimeToNext():Number
-		{
-			var newRate:Number = ( _rateMin == _rateMax ) ? _rateMin : _rateMin + Math.random() * ( _rateMax - _rateMin );
-			return 1 / newRate;
 		}
 		
 		/**
@@ -143,14 +144,12 @@ package org.flintparticles.counters
 			{
 				return 0;
 			}
-			var count:uint = 0;
-			_timeToNext -= time;
-			while( _timeToNext <= 0 )
-			{
-				++count;
-				_timeToNext += newTimeToNext();
-			}
-			return count;
+			_timePassed += time;
+			var count:uint = Math.floor( _rateMax * _timePassed + _scale * ( 1 - Math.cos( _timePassed * _factor ) ) / _factor );
+			var ret:uint = count - _emitted;
+			_emitted = count;
+			trace( ret );
+			return ret;
 		}
 	}
 }
