@@ -145,8 +145,9 @@ package org.flintparticles.actions
 			{
 				other = particles[sortedX[i]];
 				if( ( dx = other.x - particle.x ) > _maxDistance ) break;
-				if( ( dy = other.y - particle.y ) > _maxDistance ) continue;
-				distanceSq = dx * dx + dy * dy;
+				dy = other.y - particle.y;
+				if( dy > _maxDistance || dy < -_maxDistance ) continue;
+				distanceSq = dy * dy + dx * dx;
 				if( distanceSq <= _maxDistanceSq && distanceSq > 0 )
 				{
 					distance = Math.sqrt( distanceSq );
