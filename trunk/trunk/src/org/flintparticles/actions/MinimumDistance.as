@@ -35,9 +35,8 @@ package org.flintparticles.actions
 	import org.flintparticles.emitters.Emitter;	
 
 	/**
-	 * The MouseGravity action applies a force on the particle to draw it towards
-	 * the mouse. The force applied is inversely proportional to the square
-	 * of the distance from the particle to the mouse.
+	 * The MinimumDistance action applies an acceleration to the particle to maintain a minimum
+	 * distance between it and its neighbours.
 	 */
 
 	public class MinimumDistance extends Action
@@ -47,18 +46,15 @@ package org.flintparticles.actions
 		private var _minSq:Number;
 		
 		/**
-		 * The constructor creates a MouseGravity action for use by 
-		 * an emitter. To add a MouseGravity to all particles created by an emitter, use the
+		 * The constructor creates a ApproachNeighbours action for use by 
+		 * an emitter. To add a ApproachNeighbours to all particles created by an emitter, use the
 		 * emitter's addAction method.
 		 * 
 		 * @see org.flintparticles.emitters.Emitter#addAction()
 		 * 
-		 * @param power The strength of the force - larger numbers produce a stringer force.
-		 * @param epsilon The minimum distance for which gravity is calculated. Particles closer
-		 * than this distance experience a gravity force as it they were this distance away.
-		 * This stops the gravity effect blowing up as distances get small. For realistic gravity 
-		 * effects you will want a small epsilon ( ~1 ), but for stable visual effects a larger
-		 * epsilon (~100) is often better.
+		 * @param minimum The minimum distance, in pixels, that this action maintains between 
+		 * particles.
+		 * @param acceleration The acceleration force applied to avoid the other particles.
 		 */
 		public function MinimumDistance( minimum:Number, acceleration:Number )
 		{
@@ -68,7 +64,8 @@ package org.flintparticles.actions
 		}
 		
 		/**
-		 * The strength of the gravity force.
+		 * The minimum distance, in pixels, that this action maintains between 
+		 * particles.
 		 */
 		public function get minimum():Number
 		{
@@ -81,10 +78,7 @@ package org.flintparticles.actions
 		}
 		
 		/**
-		 * The minimum distance for which the gravity force is calculated. 
-		 * Particles closer than this distance experience the gravity as it they were 
-		 * this distance away. This stops the gravity effect blowing up as distances get 
-		 * small.
+		 * The acceleration force applied to avoid the other particles.
 		 */
 		public function get acceleration():Number
 		{

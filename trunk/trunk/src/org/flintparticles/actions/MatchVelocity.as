@@ -35,9 +35,8 @@ package org.flintparticles.actions
 	import org.flintparticles.particles.Particle;	
 
 	/**
-	 * The MouseGravity action applies a force on the particle to draw it towards
-	 * the mouse. The force applied is inversely proportional to the square
-	 * of the distance from the particle to the mouse.
+	 * The MatchVelocity action applies an acceleration to the particle to match
+	 * its velocity to that of its nearest neighbours.
 	 */
 
 	public class MatchVelocity extends Action
@@ -46,42 +45,39 @@ package org.flintparticles.actions
 		private var _acc:Number;
 		
 		/**
-		 * The constructor creates a MouseGravity action for use by 
-		 * an emitter. To add a MouseGravity to all particles created by an emitter, use the
+		 * The constructor creates a MatchVelocity action for use by 
+		 * an emitter. To add a MatchVelocity to all particles created by an emitter, use the
 		 * emitter's addAction method.
 		 * 
 		 * @see org.flintparticles.emitters.Emitter#addAction()
 		 * 
-		 * @param power The strength of the force - larger numbers produce a stringer force.
-		 * @param epsilon The minimum distance for which gravity is calculated. Particles closer
-		 * than this distance experience a gravity force as it they were this distance away.
-		 * This stops the gravity effect blowing up as distances get small. For realistic gravity 
-		 * effects you will want a small epsilon ( ~1 ), but for stable visual effects a larger
-		 * epsilon (~100) is often better.
+		 * @param maxDistance The maximum distance, in pixels, over which this action operates.
+		 * The particle will match its velocity other particles that are this close or closer to it.
+		 * @param acceleration The acceleration force applied to adjust velocity to match that
+		 * of the other particles.
 		 */
-		public function MatchVelocity( minimum:Number, acceleration:Number )
+		public function MatchVelocity( maxDistance:Number, acceleration:Number )
 		{
-			_min = minimum;
+			_min = maxDistance;
 			_acc = acceleration;
 		}
 		
 		/**
-		 * The strength of the gravity force.
+		 * The maximum distance, in pixels, over which this action operates.
+		 * The particle will match its velocity other particles that are this close or closer to it.
 		 */
-		public function get minimum():Number
+		public function get maxDistance():Number
 		{
 			return _min;
 		}
-		public function set minimum( value:Number ):void
+		public function set maxDistance( value:Number ):void
 		{
 			_min = value;
 		}
 		
 		/**
-		 * The minimum distance for which the gravity force is calculated. 
-		 * Particles closer than this distance experience the gravity as it they were 
-		 * this distance away. This stops the gravity effect blowing up as distances get 
-		 * small.
+		 * The acceleration force applied to adjust velocity to match that
+		 * of the other particles.
 		 */
 		public function get acceleration():Number
 		{
