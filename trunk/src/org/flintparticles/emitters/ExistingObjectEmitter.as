@@ -106,8 +106,8 @@ package org.flintparticles.emitters
 			var r:Number = DisplayObjectUtils.globalToLocalRotation( this, DisplayObjectUtils.localToGlobalRotation( obj, 0 ) );
 			obj.parent.removeChild( obj );
 			addChild( obj );
-			obj.x = particle.x = p.x + x;
-			obj.y = particle.y = p.y + x;
+			obj.x = particle.x = p.x + _x;
+			obj.y = particle.y = p.y + _y;
 			particle.image = obj;
 			particle.rotation = Maths.asRadians( r + rotation );
 			_particles.unshift( particle );
