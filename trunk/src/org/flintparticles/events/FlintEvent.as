@@ -46,6 +46,11 @@ package org.flintparticles.events
 		public static var EMITTER_EMPTY:String = "emitterEmpty";
 		
 		/**
+		 * The event dispatched by an emitter when a particle is created.
+		 */
+		public static var PARTICLE_CREATED:String = "particleCreated";
+		
+		/**
 		 * The event dispatched by an emitter when a particle dies.
 		 */
 		public static var PARTICLE_DEAD:String = "particleDead";
