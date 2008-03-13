@@ -56,6 +56,13 @@ package org.flintparticles.emitters
 	[Event(name="particleDead", type="org.flintparticles.events.FlintEvent")]
 
 	/**
+	 * Dispatched when a particle is created and has just been added to the system.
+	 * 
+	 * @eventType org.flintparticles.events.FlintEvent.PARTICLE_CREATED
+	 */
+	[Event(name="particleCreated", type="org.flintparticles.events.FlintEvent")]
+
+	/**
 	 * Dispatched when an emitter contains no particles. Used, for example, to remove an
 	 * emitter when it contains no particles.
 	 * 
@@ -98,7 +105,7 @@ package org.flintparticles.emitters
 	public class Emitter extends Sprite
 	{
 		// manages the creation, reuse and destruction of particles
-		private static var _creator:ParticleCreator = new ParticleCreator();
+		protected static var _creator:ParticleCreator = new ParticleCreator();
 		
 		protected var _initializers:Array;
 		protected var _actions:Array;
@@ -374,8 +381,10 @@ package org.flintparticles.emitters
 			}
 			particle.x += _x;
 			particle.y += _y;
+			particle.rotation += _rotation;
 			_particles.unshift( particle );
 			particleCreated( particle );
+			dispatchEvent( new FlintEvent( FlintEvent.PARTICLE_CREATED, particle ) );
 			return particle;
 		}
 		
