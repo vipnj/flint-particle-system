@@ -43,10 +43,11 @@ package org.flintparticles.displayObjects
 		 * The constructor creates a Rect with a specified width and height.
 		 * @param width The width, in pixels, of the rectangle.
 		 * @param height The height, in pixels, of the rectangle.
+		 * @param color the color of the rectangle
 		 */
-		public function Rect( width:Number, height:Number )
+		public function Rect( width:Number, height:Number, color:uint = 0xFFFFFF )
 		{
-			graphics.beginFill( 0xFFFFFF );
+			graphics.beginFill( color );
 			graphics.drawRect( - width * 0.5, - height * 0.5, width, height );
 			graphics.endFill();
 		}

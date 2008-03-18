@@ -42,10 +42,11 @@ package org.flintparticles.displayObjects
 		/**
 		 * The constructor creates a Line with a specified length.
 		 * @param lineLength The length, in pixels, of the line.
+		 * @param color the color of the Line
 		 */
-		public function Line( lineLength : Number )
+		public function Line( lineLength : Number, color:uint = 0xFFFFFF )
 		{
-			graphics.lineStyle( 1, 0xFFFFFF );
+			graphics.lineStyle( 1, color );
 			graphics.moveTo( -lineLength * 0.5, 0 );
 			graphics.lineTo( lineLength * 0.5, 0 );
 			graphics.endFill( );

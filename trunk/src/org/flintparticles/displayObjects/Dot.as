@@ -42,10 +42,11 @@ package org.flintparticles.displayObjects
 		/**
 		 * The constructor creates a Dot with a specified radius.
 		 * @param radius The radius, in pixels, of the Dot.
+		 * @param color the color of the Dot
 		 */
-		public function Dot( radius:Number )
+		public function Dot( radius:Number, color:uint = 0xFFFFFF )
 		{
-			graphics.beginFill( 0xFFFFFF );
+			graphics.beginFill( color );
 			graphics.drawCircle( 0, 0, radius );
 			graphics.endFill();
 		}
