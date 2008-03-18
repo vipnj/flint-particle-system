@@ -43,15 +43,16 @@ package org.flintparticles.displayObjects
 		/**
 		 * The constructor creates a Star with a specified radius.
 		 * @param radius The radius, in pixels, of the Star.
+		 * @param color the color of the Star
 		 */
-		public function Star( radius:Number )
+		public function Star( radius:Number, color:uint = 0xFFFFFF )
 		{
 			var point:Point;
 			var rotStep:Number = Math.PI / 5;
 			var innerRadius:Number = radius * Math.cos( rotStep * 2 );
 			var halfPi:Number = Math.PI * 0.5;
 			
-			graphics.beginFill( 0xFFFFFF );
+			graphics.beginFill( color );
 			graphics.moveTo( 0, -radius );
 			point = Point.polar( innerRadius, rotStep - halfPi );
 			graphics.lineTo( point.x, point.y );

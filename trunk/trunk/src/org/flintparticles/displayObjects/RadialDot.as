@@ -45,6 +45,7 @@ package org.flintparticles.displayObjects
 		/**
 		 * The constructor creates a RadialDot with a specified radius.
 		 * @param radius The radius, in pixels, of the RadialDot.
+		 * @param color the color of the RadialDot
 		 */
 		public function RadialDot( radius:Number, color:uint = 0xFFFFFF )
 		{
