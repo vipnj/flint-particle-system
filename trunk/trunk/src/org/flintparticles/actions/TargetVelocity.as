@@ -40,7 +40,7 @@ package org.flintparticles.actions
 	{
 		private var _velX:Number;
 		private var _velY:Number;
-		private var _scaleFactor:Number;
+		private var _rate:Number;
 		
 		/**
 		 * The constructor creates a TargetVelocity action for use by 
@@ -51,14 +51,14 @@ package org.flintparticles.actions
 		 * 
 		 * @param velX The x coordinate of the target velocity, in pixels per second.
 		 * @param velY The y coordinate of the target velocity, in pixels per second.
-		 * @param scaleFactor Adjusts how quickly the particle reaches the target velocity.
+		 * @param rate Adjusts how quickly the particle reaches the target velocity.
 		 * Larger numbers cause it to approach the target velocity more quickly.
 		 */
-		public function TargetVelocity( velocityX:Number, velocityY:Number, scaleFactor:Number = 0.1 )
+		public function TargetVelocity( targetVelocityX:Number, targetVelocityY:Number, rate:Number = 0.1 )
 		{
-			_velX = velocityX;
-			_velY = velocityY;
-			_scaleFactor = scaleFactor;
+			_velX = targetVelocityX;
+			_velY = targetVelocityY;
+			_rate = rate;
 		}
 		
 		/**
@@ -74,7 +74,7 @@ package org.flintparticles.actions
 		}
 		
 		/**
-		 * The x coordinate of the target velocity, in pixels per second.
+		 * The x coordinate of the target velocity, in pixels per second.s
 		 */
 		public function get targetVelocityX():Number
 		{
@@ -89,13 +89,13 @@ package org.flintparticles.actions
 		 * Adjusts how quickly the particle reaches the target angular velocity.
 		 * Larger numbers cause it to approach the target angular velocity more quickly.
 		 */
-		public function get scaleFactor():Number
+		public function get rate():Number
 		{
-			return _scaleFactor;
+			return _rate;
 		}
-		public function set scaleFactor( value:Number ):void
+		public function set rate( value:Number ):void
 		{
-			_scaleFactor = value;
+			_rate = value;
 		}
 		
 		/**
@@ -103,8 +103,8 @@ package org.flintparticles.actions
 		 */
 		override public function update( emitter:Emitter, particle:Particle, time:Number ):void
 		{
-			particle.velX += ( _velX - particle.velX ) * _scaleFactor * time;
-			particle.velY += ( _velY - particle.velY ) * _scaleFactor * time;
+			particle.velX += ( _velX - particle.velX ) * _rate * time;
+			particle.velY += ( _velY - particle.velY ) * _rate * time;
 		}
 	}
 }
