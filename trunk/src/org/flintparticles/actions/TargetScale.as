@@ -34,45 +34,45 @@ package org.flintparticles.actions
 	import org.flintparticles.particles.Particle;
 
 	/**
-	 * The TargetRotateVelocity action adjusts the angular velocity of the particle towards the target angular velocity.
+	 * The TargetScale action adjusts the scale of the particle towards the target scale.
 	 */
-	public class TargetRotateVelocity extends Action
+	public class TargetScale extends Action
 	{
-		private var _vel:Number;
+		private var _scale:Number;
 		private var _rate:Number;
 		
 		/**
-		 * The constructor creates a TargetRotateVelocity action for use by 
-		 * an emitter. To add a TargetRotateVelocity to all particles created by an emitter, use the
+		 * The constructor creates a TargetScale action for use by 
+		 * an emitter. To add a TargetScale to all particles created by an emitter, use the
 		 * emitter's addAction method.
 		 * 
 		 * @see org.flintparticles.emitters.Emitter#addAction()
 		 * 
-		 * @param targetVelocity The target angular velocity, in radians per second.
-		 * @param rate Adjusts how quickly the particle reaches the target angular velocity.
-		 * Larger numbers cause it to approach the target angular velocity more quickly.
+		 * @param targetScale The scale for the particle. 1 is normal size.
+		 * @param rate Adjusts how quickly the particle reaches the target scale.
+		 * Larger numbers cause it to approach the target scale more quickly.
 		 */
-		public function TargetRotateVelocity( targetVelocity:Number, rate:Number = 0.1 )
+		public function TargetScale( targetScale:Number, rate:Number = 0.1 )
 		{
-			_vel = targetVelocity;
+			_scale = targetScale;
 			_rate = rate;
 		}
 		
 		/**
-		 * The target angular velocity, in radians per second.
+		 * The target scale for the particle. 1 is normal size.
 		 */
-		public function get targetVelocity():Number
+		public function get targetScale():Number
 		{
-			return _vel;
+			return _scale;
 		}
-		public function set targetVelocity( value:Number ):void
+		public function set targetScale( value:Number ):void
 		{
-			_vel = value;
+			_scale = value;
 		}
 		
 		/**
-		 * Adjusts how quickly the particle reaches the target angular velocity.
-		 * Larger numbers cause it to approach the target angular velocity more quickly.
+		 * Adjusts how quickly the particle reaches the target scale.
+		 * Larger numbers cause it to approach the target scale more quickly.
 		 */
 		public function get rate():Number
 		{
@@ -88,7 +88,7 @@ package org.flintparticles.actions
 		 */
 		override public function update( emitter:Emitter, particle:Particle, time:Number ):void
 		{
-			particle.angVelocity += ( _vel - particle.angVelocity ) * _rate * time;
+			particle.scale += ( _scale - particle.scale ) * _rate * time;
 		}
 	}
 }
