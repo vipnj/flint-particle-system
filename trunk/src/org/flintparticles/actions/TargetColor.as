@@ -38,7 +38,10 @@ package org.flintparticles.actions
 	 */
 	public class TargetColor extends Action
 	{
-		private var _color:uint;
+		private var _red:uint;
+		private var _green:uint;
+		private var _blue:uint;
+		private var _alpha:uint;
 		private var _rate:Number;
 		
 		/**
@@ -54,7 +57,10 @@ package org.flintparticles.actions
 		 */
 		public function TargetColor( targetColor:uint, rate:Number = 0.1 )
 		{
-			_color = targetColor;
+			_red = ( targetColor >>> 16 ) & 255;
+			_green = ( targetColor >>> 8 ) & 255;
+			_blue = ( targetColor ) & 255;
+			_alpha = ( targetColor >>> 24 ) & 255;
 			_rate = rate;
 		}
 		
@@ -63,11 +69,14 @@ package org.flintparticles.actions
 		 */
 		public function get targetColor():Number
 		{
-			return _color;
+			return ( _alpha << 24 ) | ( _red << 16 ) | ( _green << 8 ) | _blue;
 		}
 		public function set targetColor( value:Number ):void
 		{
-			_color = value;
+			_red = ( value >>> 16 ) & 255;
+			_green = ( value >>> 8 ) & 255;
+			_blue = ( value ) & 255;
+			_alpha = ( value >>> 24 ) & 255;
 		}
 		
 		/**
@@ -97,11 +106,11 @@ package org.flintparticles.actions
 			var inv:Number = _rate * time;
 			var ratio:Number = 1 - inv;
 			
-			dicObj.red = dicObj.red * ratio + ( ( _color >>> 16 ) & 255 ) * inv;
-			dicObj.green = dicObj.green * ratio + ( ( _color >>> 8 ) & 255 ) * inv;
-			dicObj.blue = dicObj.blue * ratio + ( ( _color ) & 255 ) * inv;
-			dicObj.alpha = dicObj.alpha * ratio + ( ( _color >>> 24 ) & 255 ) * inv;
-			particle.color =  ( Math.round( dicObj.alpha ) << 24 ) | ( Math.round( dicObj.red ) << 16 ) | ( Math.round( dicObj.green ) << 8 ) | Math.round( dicObj.blue );
+			dicObj.red = dicObj.red * ratio + _red * inv;
+			dicObj.green = dicObj.green * ratio + _green * inv;
+			dicObj.blue = dicObj.blue * ratio + _blue * inv;
+			dicObj.alpha = dicObj.alpha * ratio + _alpha * inv;
+			particle.color = dicObj.getColor();
 		}
 	}
 }
@@ -119,5 +128,10 @@ class ColorFloat
 		green = ( color >>> 8 ) & 255;
 		blue = ( color ) & 255;
 		alpha = ( color >>> 24 ) & 255;
+	}
+	
+	public function getColor():uint
+	{
+		return ( Math.round( alpha ) << 24 ) | ( Math.round( red ) << 16 ) | ( Math.round( green ) << 8 ) | Math.round( blue );
 	}
 }
