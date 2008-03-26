@@ -31,7 +31,6 @@
 
 package org.flintparticles.actions 
 {
-	import org.flintparticles.actions.Action;
 	import org.flintparticles.emitters.Emitter;
 	import org.flintparticles.particles.Particle;	
 

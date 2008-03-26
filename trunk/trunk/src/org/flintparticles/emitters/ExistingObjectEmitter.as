@@ -95,7 +95,7 @@ package org.flintparticles.emitters
 		
 		private function addObject( obj:DisplayObject ):void
 		{
-			var particle:Particle = _creator.createParticle();
+			var particle:Particle = _particleFactory.createParticle();
 			var len:uint = _initializers.length;
 			for ( var i:uint = 0; i < len; ++i )
 			{

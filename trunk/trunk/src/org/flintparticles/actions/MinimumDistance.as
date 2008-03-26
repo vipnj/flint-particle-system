@@ -30,7 +30,6 @@
 
 package org.flintparticles.actions 
 {
-	import org.flintparticles.actions.Action;
 	import org.flintparticles.particles.Particle;
 	import org.flintparticles.emitters.Emitter;	
 

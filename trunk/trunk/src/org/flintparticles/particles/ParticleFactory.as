@@ -28,62 +28,34 @@
  * THE SOFTWARE.
  */
 
-package org.flintparticles.actions 
+package org.flintparticles.particles 
 {
-	import org.flintparticles.emitters.Emitter;
-	import org.flintparticles.particles.Particle;	
-
 	/**
-	 * The LinearDrag action applies drag to the particle to slow it down when it's moving.
-	 * The drag force is proportional to the velocity of the particle.
+	 * The ParticleFactory interface defines the interface for any factory class used by emitters to 
+	 * create, reuse and dispose of particles. To speed up the particle system, a ParticleFactory will
+	 * usually maintain a pool of dead particles and reuse them when a new particle is needed, rather 
+	 * than creating a whole new particle. The default ParticleFactory is an instance of the ParticleCreator 
+	 * class.
+	 * 
+	 * @see org.flintparticles.particles.ParticleCreator
 	 */
 
-	public class LinearDrag extends Action
+	public interface ParticleFactory 
 	{
-		private var _drag:Number;
-		
 		/**
-		 * The constructor creates a LinearDrag action for use by 
-		 * an emitter. To add a LinearDrag to all particles created by an emitter, use the
-		 * emitter's addAction method.
+		 * To obtain a new Particle object. If using a pool of particles the particle factory will usually return 
+		 * a particle from the pool and only creates a new particle if the pool is empty.
 		 * 
-		 * @see org.flintparticles.emitters.Emitter#addAction()
+		 * @return a Particle object.
+		 */
+		function createParticle():Particle;
+		
+		/**
+		 * Indicates a particle is no longer required. If using a pool of particles the particle factory will 
+		 * return the particle to the pool for reuse later.
 		 * 
-		 * @param drag The amount of drag. A higher number produces a stronger drag force.
+		 * @param particle The particle to return for reuse.
 		 */
-		public function LinearDrag( drag:Number )
-		{
-			_drag = drag;
-		}
-		
-		/**
-		 * The amount of drag. A higher number produces a stronger drag force.
-		 */
-		public function get drag():Number
-		{
-			return _drag;
-		}
-		public function set drag( value:Number ):void
-		{
-			_drag = value;
-		}
-		
-		/**
-		 * @inheritDoc
-		 */
-		override public function update( emitter:Emitter, particle:Particle, time:Number ):void
-		{
-			var scale:Number = 1 - _drag * time;
-			if( scale < 0 )
-			{
-				particle.velX = 0;
-				particle.velY = 0;
-			}
-			else
-			{
-				particle.velX *= scale;
-				particle.velY *= scale;
-			}
-		}
+		function disposeParticle( particle:Particle ):void;
 	}
 }
