@@ -30,23 +30,29 @@
 
 package org.flintparticles.actions 
 {
-	import org.flintparticles.actions.Action;
-	import org.flintparticles.particles.Particle;
-	import org.flintparticles.emitters.Emitter;	
+	import org.flintparticles.activities.FrameUpdatable;
+	import org.flintparticles.activities.UpdateOnFrame;
+	import org.flintparticles.emitters.Emitter;
+	import org.flintparticles.particles.Particle;	
 
 	/**
 	 * The Explosion action applies a force on the particle to push it away from
-	 * a single point - the center of the explosion. The force applied is inversely 
-	 * proportional to the square of the distance from the particle to the point.
+	 * a single point - the center of the explosion. The force occurs instantaneously at the central point 
+	 * of the explosion and then ripples out in a shock wave.
 	 */
 
-	public class Explosion extends Action
+	public class Explosion extends Action implements FrameUpdatable
 	{
 		private var _x:Number;
 		private var _y:Number;
 		private var _power:Number;
-		private var _gravityConst:Number = 10000;
+		private var _depth:Number;
+		private var _invDepth:Number;
 		private var _epsilonSq:Number;
+		private var _oldRadius:Number = 0;
+		private var _radius:Number = 0;
+		private var _radiusChange:Number = 0;
+		private var _expansionRate:Number = 500;
 		
 		/**
 		 * The constructor creates an Explosion action for use by 
@@ -55,36 +61,41 @@ package org.flintparticles.actions
 		 * 
 		 * @see org.flintparticles.emitters.Emitter#addAction()
 		 * 
-		 * @param power The strength of the force - larger numbers produce a stronger force.
-		 * @param x The x coordinate of the point towards which the force draws the particles.
-		 * @param y The y coordinate of the point towards which the force draws the particles.
+		 * @param power The strength of the explosion - larger numbers produce a stronger force.
+		 * @param x The x coordinate of the center of the explosion.
+		 * @param y The y coordinate of the center of the explosion.
+		 * @param expansionRate The rate at which the shockwave moves out from the explosion, in pixels per second.
+		 * @param depth The depth (front-edge to back-edge) of the shock wave.
 		 * @param epsilon The minimum distance for which the explosion force is calculated. 
 		 * Particles closer than this distance experience the explosion as it they were 
 		 * this distance away. This stops the explosion effect blowing up as distances get 
 		 * small.
 		 */
-		public function Explosion( power:Number, x:Number, y:Number, epsilon:Number = 1 )
+		public function Explosion( power:Number, x:Number, y:Number, expansionRate:Number = 300, depth:Number = 10, epsilon:Number = 1 )
 		{
-			_power = power * _gravityConst;
+			_power = power;
 			_x = x;
 			_y = y;
+			_expansionRate = expansionRate;
+			_depth = depth * 0.5;
+			_invDepth = 1 / _depth;
 			_epsilonSq = epsilon * epsilon;
 		}
 		
 		/**
-		 * The strength of the explosive force.
+		 * The strength of the explosion - larger numbers produce a stronger force.
 		 */
 		public function get power():Number
 		{
-			return _power / _gravityConst;
+			return _power;
 		}
 		public function set power( value:Number ):void
 		{
-			_power = value * _gravityConst;
+			_power = value;
 		}
 		
 		/**
-		 * The x coordinate of the center of the explosive force.
+		 * The x coordinate of the center of the explosion.
 		 */
 		public function get x():Number
 		{
@@ -96,7 +107,7 @@ package org.flintparticles.actions
 		}
 		
 		/**
-		 * The y coordinate of the center of the explosive force.
+		 * The y coordinate of the center of the explosion.
 		 */
 		public function get y():Number
 		{
@@ -125,6 +136,25 @@ package org.flintparticles.actions
 		/**
 		 * @inheritDoc
 		 */
+		override public function addedToEmitter( emitter:Emitter ):void
+		{
+			emitter.addActivity( new UpdateOnFrame( this ) );
+		}
+		
+		/**
+		 * Called every frame before the particles are updated. This method is called via the FrameUpdateable
+		 * interface which is called by the emitter by using an UpdateOnFrame activity.
+		 */
+		public function frameUpdate( emitter:Emitter, time:Number ):void
+		{
+			_oldRadius = _radius;
+			_radiusChange = _expansionRate * time;
+			_radius += _radiusChange;
+		}
+		
+		/**
+		 * @inheritDoc
+		 */
 		override public function update( emitter:Emitter, particle:Particle, time:Number ):void
 		{
 			var x:Number = particle.x - _x;
@@ -135,8 +165,43 @@ package org.flintparticles.actions
 				return;
 			}
 			var d:Number = Math.sqrt( dSq );
-			if( dSq < _epsilonSq ) dSq = _epsilonSq; // stop it blowing uyp to ridiculous values
-			var factor:Number = ( _power * time ) / ( dSq * d );
+			
+			if( d < _oldRadius - _depth )
+			{
+				return;
+			}
+			if( d > _radius + _depth )
+			{
+				return;
+			}
+			
+			var offset:Number = d < _radius ? _depth - _radius + d : _depth - d + _radius;
+			var oldOffset:Number = d < _oldRadius ? _depth - _oldRadius + d : _depth - d + _oldRadius;
+			offset *= _invDepth;
+			oldOffset *= _invDepth;
+			if( offset < 0 )
+			{
+				time = time * ( _radiusChange + offset ) / _radiusChange;
+				offset = 0;
+			}
+			if( oldOffset < 0 )
+			{
+				time = time * ( _radiusChange + oldOffset ) / _radiusChange;
+				oldOffset = 0;
+			}
+			
+			var factor:Number;
+			if( d < _oldRadius || d > _radius )
+			{
+				factor = time * power * ( offset + oldOffset ) / ( _radius * 2 * d );
+			}
+			else
+			{
+				var ratio:Number = ( 1 - oldOffset ) / _radiusChange;
+				var f1:Number = ratio * time * power * ( oldOffset + 1 ) / ( _radius * 2 * d );
+				var f2:Number = ( 1 - ratio ) * time * power * ( offset + 1 ) / ( _radius * 2 * d );
+				factor = f1 + f2;
+			}
 			particle.velX += x * factor;
 			particle.velY += y * factor;
 		}

@@ -34,45 +34,37 @@ package org.flintparticles.actions
 	import org.flintparticles.emitters.Emitter;	
 
 	/**
-	 * The GravityWell action applies a force on the particle to draw it towards
-	 * a single point. The force applied is inversely proportional to the square
-	 * of the distance from the particle to the point.
+	 * The MouseExplosion action applies a force on the particle to push it away from
+	 * the mouse. The force applied is inversely proportional to the square of the 
+	 * distance from the particle to the mouse.
 	 */
 
-	public class GravityWell extends Action
+	public class MouseAntiGravity extends Action
 	{
-		private var _x:Number;
-		private var _y:Number;
 		private var _power:Number;
-		private var _epsilonSq:Number;
 		private var _gravityConst:Number = 10000;
+		private var _epsilonSq:Number;
 		
 		/**
-		 * The constructor creates a GravityWell action for use by 
-		 * an emitter. To add a GravityWell to all particles created by an emitter, use the
+		 * The constructor creates a MouseExplosion action for use by 
+		 * an emitter. To add a MouseExplosion to all particles created by an emitter, use the
 		 * emitter's addAction method.
 		 * 
 		 * @see org.flintparticles.emitters.Emitter#addAction()
 		 * 
-		 * @param power The strength of the force - larger numbers produce a stringer force.
-		 * @param x The x coordinate of the point towards which the force draws the particles.
-		 * @param y The y coordinate of the point towards which the force draws the particles.
-		 * @param epsilon The minimum distance for which gravity is calculated. Particles closer
-		 * than this distance experience a gravity force as it they were this distance away.
-		 * This stops the gravity effect blowing up as distances get small. For realistic gravity 
-		 * effects you will want a small epsilon ( ~1 ), but for stable visual effects a larger
-		 * epsilon (~100) is often better.
+		 * @param epsilon The minimum distance for which the explosion force is calculated. 
+		 * Particles closer than this distance experience the explosion as it they were 
+		 * this distance away. This stops the explosion effect blowing up as distances get 
+		 * small.
 		 */
-		public function GravityWell( power:Number, x:Number, y:Number, epsilon:Number = 100 )
+		public function MouseAntiGravity( power:Number, epsilon:Number = 1 )
 		{
 			_power = power * _gravityConst;
-			_x = x;
-			_y = y;
 			_epsilonSq = epsilon * epsilon;
 		}
 		
 		/**
-		 * The strength of the gravity force.
+		 * The strength of the explosive force.
 		 */
 		public function get power():Number
 		{
@@ -84,33 +76,9 @@ package org.flintparticles.actions
 		}
 		
 		/**
-		 * The x coordinate of the center of the gravity force.
-		 */
-		public function get x():Number
-		{
-			return _x;
-		}
-		public function set x( value:Number ):void
-		{
-			_x = value;
-		}
-		
-		/**
-		 * The y coordinate of the center of the gravity force.
-		 */
-		public function get y():Number
-		{
-			return _y;
-		}
-		public function set y( value:Number ):void
-		{
-			_y = value;
-		}
-		
-		/**
-		 * The minimum distance for which the gravity force is calculated. 
-		 * Particles closer than this distance experience the gravity as it they were 
-		 * this distance away. This stops the gravity effect blowing up as distances get 
+		 * The minimum distance for which the explosion force is calculated. 
+		 * Particles closer than this distance experience the explosion as it they were 
+		 * this distance away. This stops the explosion effect blowing up as distances get 
 		 * small.
 		 */
 		public function get epsilon():Number
@@ -127,15 +95,15 @@ package org.flintparticles.actions
 		 */
 		override public function update( emitter:Emitter, particle:Particle, time:Number ):void
 		{
-			var x:Number = _x - particle.x;
-			var y:Number = _y - particle.y;
+			var x:Number = particle.x - emitter.mouseX;
+			var y:Number = particle.y - emitter.mouseY;
 			var dSq:Number = x * x + y * y;
 			if( dSq == 0 )
 			{
 				return;
 			}
 			var d:Number = Math.sqrt( dSq );
-			if( dSq < _epsilonSq ) dSq = _epsilonSq;
+			if( dSq < _epsilonSq ) dSq = _epsilonSq; // stop it blowing uyp to ridiculous values
 			var factor:Number = ( _power * time ) / ( dSq * d );
 			particle.velX += x * factor;
 			particle.velY += y * factor;

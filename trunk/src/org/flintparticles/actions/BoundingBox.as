@@ -32,7 +32,6 @@ package org.flintparticles.actions
 {
 	import flash.geom.Rectangle;
 	
-	import org.flintparticles.actions.Action;
 	import org.flintparticles.emitters.Emitter;
 	import org.flintparticles.particles.Particle;	
 

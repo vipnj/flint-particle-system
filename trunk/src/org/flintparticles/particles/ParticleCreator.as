@@ -37,7 +37,7 @@ package org.flintparticles.particles
 	 * and reuses them when a new particle is needed, rather than creating a whole ne particle.
 	 */
 
-	public class ParticleCreator 
+	public class ParticleCreator implements ParticleFactory
 	{
 		private var _particles:Array;
 		

@@ -42,6 +42,7 @@ package org.flintparticles.emitters
 	import org.flintparticles.events.FlintEvent;
 	import org.flintparticles.initializers.Initializer;
 	import org.flintparticles.particles.Particle;
+	import org.flintparticles.particles.ParticleFactory;
 	import org.flintparticles.particles.ParticleCreator;
 	import org.flintparticles.utils.Maths;	
 
@@ -107,6 +108,8 @@ package org.flintparticles.emitters
 		// manages the creation, reuse and destruction of particles
 		protected static var _creator:ParticleCreator = new ParticleCreator();
 		
+		protected var _particleFactory:ParticleFactory;
+		
 		protected var _initializers:Array;
 		protected var _actions:Array;
 		protected var _particles:Array;
@@ -143,6 +146,7 @@ package org.flintparticles.emitters
 		 */
 		public function Emitter()
 		{
+			_particleFactory = _creator;
 			_particles = new Array();
 			_actions = new Array();
 			_initializers = new Array();
@@ -353,11 +357,29 @@ package org.flintparticles.emitters
 		 * Sets the Counter for the Emitter. The counter defines when and
 		 * with what frequency the emitter emits particles.
 		 * 
-		 * @param counter THe counter to use
+		 * @param counter The counter to use
 		 */		
 		public function setCounter( counter:Counter ):void
 		{
 			_counter = counter;
+		}
+		
+		/**
+		 * This is the particle factory used by the emitter to create and dispose of particles.
+		 * The default value is an instance of the ParticleCreator class that is shared by all
+		 * emitters. You don't usually need to alter this unless you are not using the default particle type.
+		 * 
+		 * @param particleFactory The particle factory to use
+		 * 
+		 * @see org.flintparticles.particles.ParticleCreator
+		 */		
+		public function get particleFactory():ParticleFactory
+		{
+			return _particleFactory;
+		}
+		public function set particleFactory( value:ParticleFactory ):void
+		{
+			_particleFactory = value;
 		}
 		
 		/**
@@ -373,7 +395,7 @@ package org.flintparticles.emitters
 		 */
 		private function createParticle():Particle
 		{
-			var particle:Particle = _creator.createParticle();
+			var particle:Particle = _particleFactory.createParticle();
 			var len:uint = _initializers.length;
 			for ( var i:uint = 0; i < len; ++i )
 			{
@@ -480,7 +502,7 @@ package org.flintparticles.emitters
 					{
 						dispatchEvent( new FlintEvent( FlintEvent.PARTICLE_DEAD, particle ) );
 						particleDestroyed( particle );
-						_creator.disposeParticle( particle );
+						_particleFactory.disposeParticle( particle );
 						_particles.splice( i, 1 );
 					}
 				}
@@ -528,7 +550,7 @@ package org.flintparticles.emitters
 			var len:uint = _particles.length;
 			for ( var i:uint = 0; i < len; ++i )
 			{
-				_creator.disposeParticle( _particles[i] );
+				_particleFactory.disposeParticle( _particles[i] );
 			}
 			_particles.length = 0;
 			cleanUp();
