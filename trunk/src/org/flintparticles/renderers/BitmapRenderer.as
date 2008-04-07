@@ -28,11 +28,12 @@
  * THE SOFTWARE.
  */
 
-package org.flintparticles.emitters
+package org.flintparticles.renderers
 {
 	import flash.display.Bitmap;
 	import flash.display.BitmapData;
 	import flash.display.DisplayObject;
+	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.filters.BitmapFilter;
 	import flash.geom.Matrix;
@@ -41,47 +42,61 @@ package org.flintparticles.emitters
 	import org.flintparticles.particles.Particle;	
 
 	/**
-	 * The BitmapEmitter is an emitter that manages its particles by
-	 * drawing them all onto a single Bitmap display object.
+	 * The BitmapRenderer draws particles onto a single Bitmap display object.
 	 * 
-	 * <p>The image to be used for each particle is a DisplayObject, but this 
+	 * <p>The image to be used for each particle is the particles image property.
+	 * This is a DisplayObject, but this 
 	 * DisplayObject is not used directly but is, rather, copied into the
 	 * bitmap with the various properties of the particle applied.
-	 * Consequently each each particle may be represented by the same DisplayObject
+	 * Consequently each particle may be represented by the same DisplayObject
 	 * instance and the SharedImage initializer can be used with this emitter.</p>
 	 * 
-	 * <p>The BitmapEmitter allows the use of BitmapFilters to modify the appearance
+	 * <p>The BitmapRenderer allows the use of BitmapFilters to modify the appearance
 	 * of the bitmap. Every frame, under normal circumstances, the Bitmap used to
 	 * display the particles is wiped clean before all the particles are redrawn.
-	 * However, if one or more filters aare added to the emitter, the filters are
+	 * However, if one or more filters are added to the renderer, the filters are
 	 * applied to the bitmap instead of wiping it clean. This enables various trail
 	 * effects by using blur and other filters.</p>
 	 */
-	public class BitmapEmitter extends Emitter
+	public class BitmapRenderer extends Sprite implements Renderer
 	{
 		protected var _bitmap:Bitmap;
 		protected var _offset:Point;
 		private var _preFilters:Array;
 		private var _postFilters:Array;
+		private var _smoothing:Boolean;
 
 		/**
-		 * The constructor creates a BitmapEmitter. After creation it should be
-		 * added to the display list of a DisplayObjectContainer to place it on the stage.
+		 * The constructor creates a BitmapRenderer. After creation it should be
+		 * added to the display list of a DisplayObjectContainer to place it on 
+		 * the stage and should be applied to an Emitter using the Emitter's
+		 * renderer property.
+		 * 
+		 * @param smoothing Whether to use smoothing when scaling the Bitmap and, if the
+		 * particles are represented by bitmaps, when drawing the particles.
+		 * Smoothing removes pixelation when images are scaled and rotated, but it
+		 * takes longer.
 		 */
-		public function BitmapEmitter()
+		public function BitmapRenderer( smoothing:Boolean = false )
 		{
 			super();
+			_smoothing = smoothing;
 			_preFilters = new Array();
 			_postFilters = new Array();
 			addEventListener( Event.ADDED_TO_STAGE, addedToStage, false, 0, true );
+			addEventListener( Event.REMOVED_FROM_STAGE, removedFromStage, false, 0, true );
 		}
 		
 		/**
-		 * The addFilter method adds a BitmapFilter to the emitter. These filters
-		 * are applied each frame before the new particle positions are drawn, instead
+		 * The addFilter method adds a BitmapFilter to the renderer. These filters
+		 * are applied each frame, before or after the new particle positions are drawn, instead
 		 * of wiping the display clear. Use of a blur filter, for example, will
 		 * produce a trail behind each particle as the previous images blur and fade
 		 * more each frame.
+		 * 
+		 * @param filter The filter to apply
+		 * @param postRender If false, the filter is applied before drawing the particles
+		 * in their new positions. If true the filter is applied after drawing the particles.
 		 */
 		public function addFilter( filter:BitmapFilter, postRender:Boolean = false ):void
 		{
@@ -96,7 +111,7 @@ package org.flintparticles.emitters
 		}
 		
 		/**
-		 * Removes a BitmapFilter object from the Emitter.
+		 * Removes a BitmapFilter object from the Renderer.
 		 * 
 		 * @param filter The BitmapFilter to remove
 		 * 
@@ -122,8 +137,8 @@ package org.flintparticles.emitters
 			}
 		}
 		
-		/**
-		 * Create the correct sized bitmap when the emitter is added to the display list.
+		/*
+		 * Create the correct sized bitmap when the renderer is added to the display list.
 		 */
 		private function addedToStage( ev:Event ):void
 		{
@@ -136,30 +151,56 @@ package org.flintparticles.emitters
 				_bitmap = null;
 				return;
 			}
-			_bitmap = new Bitmap();
+			_bitmap = new Bitmap( null, "auto", _smoothing);
 			_bitmap.bitmapData = new BitmapData( stage.stageWidth, stage.stageHeight, true, 0 );
 			addChild( _bitmap );
-			_offset = parent.localToGlobal( new Point( 0, 0 ) );
+			_offset = localToGlobal( new Point( 0, 0 ) );
 			_bitmap.x = - _offset.x;
 			_bitmap.y = - _offset.y;
 		}
 		
 		/**
-		 * Starts the emitter. Until start is called, the emitter will not emit any particles.
+		 * Override's the default x property of the display object to add additional functionality
+		 * for managing the bitmap display.
 		 */
-		override public function start():void
+		override public function set x( value:Number ):void
 		{
-			super.start();
-			if( !_bitmap )
+			super.x = value;
+			if( _bitmap && stage )
 			{
-				addedToStage( null );
+				_offset = localToGlobal( new Point( 0, 0 ) );
+				_bitmap.x = - _offset.x;
+				_bitmap.y = - _offset.y;
 			}
 		}
 		
 		/**
-		 * Used internally. Applies filters and renders the particle's image onto the bitmap.
+		 * Override's the default y property of the display object to add additional functionality
+		 * for managing the bitmap display.
 		 */
-		override protected function render( time:Number ):void
+		override public function set y( value:Number ):void
+		{
+			super.y = value;
+			if( _bitmap && stage )
+			{
+				_offset = localToGlobal( new Point( 0, 0 ) );
+				_bitmap.x = - _offset.x;
+				_bitmap.y = - _offset.y;
+			}
+		}
+		
+		/*
+		 * When the renderer is removed from the stage.
+		 */
+		private function removedFromStage( ev:Event ):void
+		{
+			dispose();
+		}
+		
+		/**
+		 * @inheritDoc
+		 */
+		public function renderParticles( particles:Array ):void
 		{
 			if( !_bitmap )
 			{
@@ -181,12 +222,12 @@ package org.flintparticles.emitters
 			{
 				_bitmap.bitmapData.fillRect( _bitmap.bitmapData.rect, 0 );
 			}
-			len = _particles.length;
+			len = particles.length;
 			if ( len )
 			{
 				for( i = 0; i < len; ++i )
 				{
-					drawParticle( _particles[i] );
+					drawParticle( particles[i] );
 				}
 			}
 			len = _postFilters.length;
@@ -199,23 +240,41 @@ package org.flintparticles.emitters
 		
 		/**
 		 * Used internally here and in derived classes to alter the manner of 
-		 * the particle rendering (e.g. te PixelRenderer just sets a single pixel.
+		 * the particle rendering (e.g. in the PixelRenderer class).
 		 */
 		protected function drawParticle( particle:Particle ):void
 		{
 			var matrix:Matrix;
 			matrix = particle.matrixTransform;
 			matrix.translate( _offset.x, _offset.y );
-			_bitmap.bitmapData.draw( particle.image, matrix, particle.colorTransform );
+			_bitmap.bitmapData.draw( particle.image, matrix, particle.colorTransform, particle.image.blendMode, null, _smoothing );
 		}
 		
 		/**
-		 * Used internally. When the Emitter is disposed it calls tis method and
-		 * we dump the BitmapData object.
+		 * @inheritDoc
 		 */
-		override protected function cleanUp():void
+		public function addParticle( particle:Particle ):void
 		{
-			_bitmap.bitmapData.dispose();
+		}
+		
+		/**
+		 * @inheritDoc
+		 */
+		public function removeParticle( particle:Particle ):void
+		{
+		}
+		
+		/**
+		 * May be called by the user to cause the renderer to dispose of the bitmapData object
+		 * it is using. This method will automatically be called when the renderer is removed 
+		 * from the display list.
+		 */
+		public function dispose():void
+		{
+			if( _bitmap && _bitmap.bitmapData )
+			{
+				_bitmap.bitmapData.dispose();
+			}
 		}
 	}
 }

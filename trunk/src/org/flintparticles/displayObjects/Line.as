@@ -30,7 +30,7 @@
 
 package org.flintparticles.displayObjects 
 {
-	import flash.display.Shape;
+	import flash.display.Shape;	
 
 	/**
 	 * The LineShape class is a DisplayObject that displays a line. The line is always white
@@ -43,13 +43,15 @@ package org.flintparticles.displayObjects
 		 * The constructor creates a Line with a specified length.
 		 * @param lineLength The length, in pixels, of the line.
 		 * @param color the color of the Line
+		 * @param bm The blendMode for the Line
 		 */
-		public function Line( lineLength : Number, color:uint = 0xFFFFFF )
+		public function Line( lineLength : Number, color:uint = 0xFFFFFF, bm:String = "normal" )
 		{
 			graphics.lineStyle( 1, color );
 			graphics.moveTo( -lineLength * 0.5, 0 );
 			graphics.lineTo( lineLength * 0.5, 0 );
 			graphics.endFill( );
+			blendMode = bm;
 		}
 	}
 }

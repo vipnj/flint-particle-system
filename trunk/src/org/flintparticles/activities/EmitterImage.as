@@ -31,6 +31,7 @@
 package org.flintparticles.activities
 {
 	import flash.display.DisplayObject;
+	import flash.display.DisplayObjectContainer;
 	
 	import org.flintparticles.emitters.Emitter;	
 
@@ -72,11 +73,15 @@ package org.flintparticles.activities
 		 */
 		override public function initialize( emitter : Emitter ) : void
 		{
-			if( _image.stage )
+			if( _image.parent )
 			{
 				_image.parent.removeChild( _image );
 			}
-			emitter.addChild( _image );
+			if( emitter.renderer is DisplayObjectContainer )
+			{
+				var dispObj:DisplayObjectContainer = DisplayObjectContainer( emitter.renderer );
+				dispObj.addChild( _image );
+			}
 		}
 		
 		/**
@@ -84,8 +89,17 @@ package org.flintparticles.activities
 		 */
 		override public function update( emitter : Emitter, time : Number ) : void
 		{
+			if( !_image.parent )
+			{
+				if( emitter.renderer is DisplayObjectContainer )
+				{
+					var dispObj:DisplayObjectContainer = DisplayObjectContainer( emitter.renderer );
+					dispObj.addChild( _image );
+				}
+			}
 			_image.x = emitter.x;
 			_image.y = emitter.y;
+			_image.rotation = emitter.rotation;
 		}
 	}
 }

@@ -49,8 +49,7 @@ package org.flintparticles.counters
 		
 		/**
 		 * The constructor creates a SineCounter counter for use by an emitter. To
-		 * add a SineCounter counter to an emitter use the emitter's setCounter
-		 * method.
+		 * add a SineCounter counter to an emitter use the emitter's counter property.
 		 * @period The period of the sine wave used, in seconds.
 		 * @param rateMax The number of particles emitted per second at the peak of
 		 * the sine wave.

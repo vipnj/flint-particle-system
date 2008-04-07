@@ -51,8 +51,7 @@ package org.flintparticles.counters
 
 		/**
 		 * The constructor creates a TimePeriod counter for use by an emitter. To
-		 * add a TimePeriod counter to an emitter use the emitter's setCounter
-		 * method.
+		 * add a TimePeriod counter to an emitter use the emitter's counter property.
 		 * @param numParticles The number of particles to emit over the full duration
 		 * of the time period
 		 * @param duration The duration of the time period. After this time is up the

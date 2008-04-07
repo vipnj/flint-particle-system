@@ -89,7 +89,7 @@ package org.flintparticles.zones
 		public function contains( x : Number, y : Number ) : Boolean
 		{
 			var point:Point = new Point( x, y );
-			point = _emitter.parent.localToGlobal( point );
+			point = _emitter.rendererLocalToGlobal( point );
 			return _displayObject.hitTestPoint( point.x, point.y, true );
 		}
 
@@ -108,7 +108,7 @@ package org.flintparticles.zones
 			}
 			while( !_displayObject.hitTestPoint( x, y, true ) );
 			var point:Point = new Point( x, y );
-			point = _emitter.globalToLocal( point );
+			point = _emitter.rendererGlobalToLocal( point );
 			return point;
 		}
 

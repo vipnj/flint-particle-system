@@ -30,7 +30,7 @@
 
 package org.flintparticles.displayObjects 
 {
-	import flash.display.Shape;
+	import flash.display.Shape;	
 
 	/**
 	 * The Rect class is a DisplayObject that displays a rectangle. The rectangle is always white
@@ -44,12 +44,14 @@ package org.flintparticles.displayObjects
 		 * @param width The width, in pixels, of the rectangle.
 		 * @param height The height, in pixels, of the rectangle.
 		 * @param color the color of the rectangle
+		 * @param bm The blendMode for the rectangle
 		 */
-		public function Rect( width:Number, height:Number, color:uint = 0xFFFFFF )
+		public function Rect( width:Number, height:Number, color:uint = 0xFFFFFF, bm:String = "normal" )
 		{
 			graphics.beginFill( color );
 			graphics.drawRect( - width * 0.5, - height * 0.5, width, height );
 			graphics.endFill();
+			blendMode = bm;
 		}
 	}
 }

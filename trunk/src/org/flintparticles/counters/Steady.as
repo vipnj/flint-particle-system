@@ -47,8 +47,7 @@ package org.flintparticles.counters
 		
 		/**
 		 * The constructor creates a Steady counter for use by an emitter. To
-		 * add a Steady counter to an emitter use the emitter's setCounter
-		 * method.
+		 * add a Steady counter to an emitter use the emitter's counter property.
 		 * <p>If two parameters are passed to the constructor then a random
 		 * value between the two is used. This allows for random variation
 		 * in the emission rate over the lifetime of the emitter. Otherwise the 

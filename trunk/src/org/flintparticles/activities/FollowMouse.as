@@ -30,6 +30,8 @@
 
 package org.flintparticles.activities
 {
+	import flash.display.DisplayObject;
+	
 	import org.flintparticles.emitters.Emitter;
 	
 	/**
@@ -55,8 +57,12 @@ package org.flintparticles.activities
 		 */
 		override public function update( emitter : Emitter, time : Number ) : void
 		{
-			emitter.x = emitter.parent.mouseX;
-			emitter.y = emitter.parent.mouseY;
+			if( emitter.renderer is DisplayObject )
+			{
+				var dispObj:DisplayObject = DisplayObject( emitter.renderer );
+				emitter.x = dispObj.mouseX;
+				emitter.y = dispObj.mouseY;
+			}
 		}
 	}
 }

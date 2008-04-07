@@ -28,64 +28,65 @@
  * THE SOFTWARE.
  */
 
-package org.flintparticles.emitters
+package org.flintparticles.renderers
 {
-	import org.flintparticles.particles.Particle;
-	
 	import flash.display.DisplayObject;
-	import flash.geom.Transform;	
+	import flash.display.Sprite;
+	import flash.geom.Transform;
+	
+	import org.flintparticles.particles.Particle;	
 
 	/**
-	 * The DisplayObjectEmitter is an emitter that manages its particles by
-	 * adding them to its display list and letting the flash renderer deal
-	 * will displaying them.
+	 * The DisplayObjectRenderer is a renderer that adds particles to its display list 
+	 * and letting the flash renderer deal with displaying them.
 	 * 
-	 * <p>Consequently particle must be represented by a DisplayObject, and
+	 * <p>Consequently particles must be represented by a DisplayObject, and
 	 * each must use a different DisplayObject instance. The DisplayObject
 	 * to be used should not be defined using the SharedImage initializer
 	 * because this shares one DisplayObject instance between all the particles.
 	 * The ImageClass initializer is commonly used because this creates a new 
 	 * DisplayObject for each particle.</p>
 	 */
-	public class DisplayObjectEmitter extends Emitter
+	public class DisplayObjectRenderer extends Sprite implements Renderer
 	{
 		/**
-		 * The constructor creates a DisplayObjectEmitter. After creation it should be
-		 * added to the display list of a DisplayObjectContainer to place it on the stage.
+		 * The constructor creates a DisplayObjectRenderer. After creation it should be
+		 * added to the display list of a DisplayObjectContainer to place it on 
+		 * the stage and should be applied to an Emitter using the Emitter's
+		 * renderer property.
 		 */
-		public function DisplayObjectEmitter()
+		public function DisplayObjectRenderer()
 		{
 			super();
 		}
 		
 		/**
-		 * Used internally. During the update phase, the particle's properties are copied to the
-		 * DisplayObject representing the particle.
+		 * @inheritDoc
 		 */
-		override protected function render( time:Number ):void
+		public function renderParticles( particles:Array ):void
 		{
 			var particle:Particle;
-			var len:uint = _particles.length;
+			var len:uint = particles.length;
 			for( var i:uint = 0; i < len; ++i )
 			{
-				particle = _particles[i];
+				particle = particles[i];
 				particle.image.transform.colorTransform = particle.colorTransform;
 				particle.image.transform.matrix = particle.matrixTransform;
 			}
 		}
 		
 		/**
-		 * Used internally. When created, the particle is added to the emitter's display list.
+		 * @inheritDoc
 		 */
-		override protected function particleCreated( particle:Particle ):void
+		public function addParticle( particle:Particle ):void
 		{
 			addChildAt( particle.image, 0 );
 		}
 		
 		/**
-		 * Used internally. When destroyed, the particle is removed from the emitter's display list.
+		 * @inheritDoc
 		 */
-		override protected function particleDestroyed( particle:Particle ):void
+		public function removeParticle( particle:Particle ):void
 		{
 			removeChild( particle.image );
 		}

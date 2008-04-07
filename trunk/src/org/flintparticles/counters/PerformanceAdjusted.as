@@ -53,8 +53,7 @@ package org.flintparticles.counters
 		
 		/**
 		 * The constructor creates a PerformanceAdjusted counter for use by an emitter. To
-		 * add a PerformanceAdjusted counter to an emitter use the emitter's setCounter
-		 * method.
+		 * add a PerformanceAdjusted counter to an emitter use the emitter's counter property.
 		 * @param rateMin The minimum number of particles to emit per second. The counter
 		 * will never drop the rate below this value.
 		 * @param rateMax The maximum number of particles to emit per second. the counter

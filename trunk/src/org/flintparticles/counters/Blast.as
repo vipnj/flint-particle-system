@@ -44,8 +44,7 @@ package org.flintparticles.counters
 		
 		/**
 		 * The constructor creates a Blast counter for use by an emitter. To
-		 * add a Blast counter to an emitter use the emitter's setCounter
-		 * method.
+		 * add a Blast counter to an emitter use the emitter's counter property.
 		 * <p>If two parameters are passed to the constructor then a random
 		 * value between the two is used. This allows for some variation
 		 * between emitters using the same Blast settings. Otherwise the 
