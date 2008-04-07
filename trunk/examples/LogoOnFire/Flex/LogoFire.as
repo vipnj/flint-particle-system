@@ -42,7 +42,7 @@ package
 	import org.flintparticles.renderers.*;
 	import org.flintparticles.zones.*;	
 
-	[SWF(width='500', height='300', frameRate='61', backgroundColor='#000000')]
+	[SWF(width='500', height='200', frameRate='61', backgroundColor='#000000')]
 	
 	/**
 	 * This example creates creates fire on an image. This is the code for the Flex project.
