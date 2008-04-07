@@ -36,8 +36,9 @@ package
 	import org.flintparticles.actions.*;
 	import org.flintparticles.counters.*;
 	import org.flintparticles.displayObjects.RadialDot;
-	import org.flintparticles.emitters.*;
+	import org.flintparticles.emitters.Emitter;
 	import org.flintparticles.initializers.*;
+	import org.flintparticles.renderers.*;
 	import org.flintparticles.zones.*;
 	
 	[SWF(width='300', height='400', frameRate='61', backgroundColor='#000000')]
@@ -52,9 +53,9 @@ package
 	{
 		public function FireAndSmoke()
 		{
-			var smoke:BitmapEmitter = new BitmapEmitter();
+			var smoke:Emitter = new Emitter();
 			
-			smoke.setCounter( new Steady( 9, 11 ) );
+			smoke.counter = new Steady( 9, 11 );
       
 			smoke.addInitializer( new Lifetime( 11, 12 ) );
 			smoke.addInitializer( new Velocity( new DiscSectorZone( new Point( 0, 0 ), 40, 30, -4 * Math.PI / 7, -3 * Math.PI / 7 ) ) );
@@ -67,13 +68,18 @@ package
 			smoke.addAction( new Fade( 0.15, 0 ) );
 			smoke.addAction( new RandomDrift( 15, 15 ) );
 			
-			addChild( smoke );
+			var smokeRenderer:BitmapRenderer = new BitmapRenderer();
+			smoke.renderer = smokeRenderer;
+			addChild( smokeRenderer );
+			
 			smoke.x = 150;
 			smoke.y = 380;
 			smoke.start( );
+			
 
-			var fire:DisplayObjectEmitter = new DisplayObjectEmitter();
-			fire.setCounter( new Steady( 55, 65 ) );
+			var fire:Emitter = new Emitter();
+			
+			fire.counter = new Steady( 55, 65 );
 
 			fire.addInitializer( new Lifetime( 2, 3 ) );
 			fire.addInitializer( new Velocity( new DiscSectorZone( new Point( 0, 0 ), 20, 10, -Math.PI, 0 ) ) );
@@ -87,7 +93,10 @@ package
 			fire.addAction( new ColorChange( 0xFFFFCC00, 0x00CC0000 ) );
 			fire.addAction( new Scale( 1, 1.5 ) );
 
-			addChild( fire );
+			var fireRenderer:DisplayObjectRenderer = new DisplayObjectRenderer();
+			fire.renderer = fireRenderer;
+			addChild( fireRenderer );
+			
 			fire.x = 150;
 			fire.y = 380;
 			fire.start( );

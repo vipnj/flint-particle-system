@@ -39,8 +39,9 @@ package
 	import org.flintparticles.activities.FollowMouse;
 	import org.flintparticles.counters.*;
 	import org.flintparticles.displayObjects.Line;
-	import org.flintparticles.emitters.*;
+	import org.flintparticles.emitters.Emitter;
 	import org.flintparticles.initializers.*;
+	import org.flintparticles.renderers.*;
 	import org.flintparticles.zones.*;
 
 	[SWF(width='400', height='400', frameRate='61', backgroundColor='#000000')]
@@ -55,14 +56,11 @@ package
 	{
 		public function Sparkler()
 		{
-			var emitter:BitmapEmitter = new BitmapEmitter();
+			var emitter:Emitter = new Emitter();
 
-			emitter.addActivity( new FollowMouse() );
+			emitter.counter = new Steady( 150 );
 			
-			emitter.addFilter( new BlurFilter( 2, 2, 1 ) );
-			emitter.addFilter( new ColorMatrixFilter( [ 1,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0.95,0 ] ) );
-
-			emitter.setCounter( new Steady( 150 ) );
+			emitter.addActivity( new FollowMouse() );
 			
 			emitter.addInitializer( new SharedImage( new Line( 8 ) ) );
 			emitter.addInitializer( new ColorInit( 0xFFFFCC00, 0xFFFFCC00 ) );
@@ -73,7 +71,12 @@ package
 			emitter.addAction( new Move() );
 			emitter.addAction( new RotateToDirection() );
 			
-			addChild( emitter );
+			var renderer:BitmapRenderer = new BitmapRenderer();
+			renderer.addFilter( new BlurFilter( 2, 2, 1 ) );
+			renderer.addFilter( new ColorMatrixFilter( [ 1,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0.95,0 ] ) );
+			emitter.renderer = renderer;
+			addChild( renderer );
+			
 			emitter.start( );
 		}
 	}

@@ -36,8 +36,9 @@ package
 	import org.flintparticles.actions.*;
 	import org.flintparticles.counters.*;
 	import org.flintparticles.displayObjects.Star;
-	import org.flintparticles.emitters.*;
+	import org.flintparticles.emitters.Emitter;
 	import org.flintparticles.initializers.*;
+	import org.flintparticles.renderers.*;
 	import org.flintparticles.zones.*;	
 
 	/**
@@ -50,28 +51,28 @@ package
 	{
 		public function StarFountain()
 		{
-			var emitter:DisplayObjectEmitter = new DisplayObjectEmitter();
+			var emitter:Emitter = new Emitter();
 
-			emitter.setCounter( new Steady( 50 ) );
+			emitter.counter = new Steady( 50 );
 			
 			emitter.addInitializer( new ImageClass( Star, 12 ) );
 			emitter.addInitializer( new ColorInit( 0xFFFF33FF, 0xFF33FFFF ) );
-			
 			emitter.addInitializer( new Position( new PointZone( new Point( 0, 0 ) ) ) );
 			emitter.addInitializer( new Velocity( new DiscSectorZone( new Point( 0, 0 ), 260, 360, -3 * Math.PI/5, -2 * Math.PI / 5 ) ) );
 			emitter.addInitializer( new RotateVelocity( -4, 4 ) );
-			
 			emitter.addInitializer( new Lifetime( 6 ) );
 			
 			emitter.addAction( new Move() );
 			emitter.addAction( new Rotate() );
 			emitter.addAction( new Accelerate( 0, 150 ) );
-			
 			emitter.addAction( new Age() );
 			emitter.addAction( new Scale( 0.5, 3 ) );
 			emitter.addAction( new DeathOffStage() );
 			
-			addChild( emitter );
+			var renderer:DisplayObjectRenderer = new DisplayObjectRenderer();
+			emitter.renderer = renderer;
+			addChild( renderer );
+			
 			emitter.x = 250;
 			emitter.y = 450;
 			emitter.start( );

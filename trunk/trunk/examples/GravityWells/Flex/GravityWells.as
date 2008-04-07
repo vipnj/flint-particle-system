@@ -37,8 +37,9 @@ package
 	
 	import org.flintparticles.actions.*;
 	import org.flintparticles.counters.*;
-	import org.flintparticles.emitters.*;
+	import org.flintparticles.emitters.Emitter;
 	import org.flintparticles.initializers.*;
+	import org.flintparticles.renderers.*;
 	import org.flintparticles.zones.*;	
 
 	[SWF(width='400', height='400', frameRate='61', backgroundColor='#000000')]
@@ -52,12 +53,9 @@ package
 	{
 		public function GravityWells()
 		{
-			var emitter:PixelEmitter = new PixelEmitter();
+			var emitter:Emitter = new Emitter();
 
-			emitter.addFilter( new BlurFilter( 2, 2, 1 ) );
-			emitter.addFilter( new ColorMatrixFilter( [ 1,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0.99,0 ] ) );
-
-			emitter.setCounter( new Blast( 4000 ) );
+			emitter.counter = new Blast( 4000 );
 			
 			emitter.addInitializer( new ColorInit( 0xFFFF00FF, 0xFF00FFFF ) );
 			emitter.addInitializer( new Position( new DiscZone( new Point( 200, 200 ), 200 ) ) );
@@ -69,7 +67,12 @@ package
 			emitter.addAction( new GravityWell( 25, 75, 325 ) );
 			emitter.addAction( new GravityWell( 25, 325, 75 ) );
 			
-			addChild( emitter );
+			var renderer:PixelRenderer = new PixelRenderer();
+			renderer.addFilter( new BlurFilter( 2, 2, 1 ) );
+			renderer.addFilter( new ColorMatrixFilter( [ 1,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0.99,0 ] ) );
+			emitter.renderer = renderer;
+			addChild( renderer );
+			
 			emitter.start();
 		}
 	}

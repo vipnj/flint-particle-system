@@ -38,10 +38,11 @@ package
 	import org.flintparticles.actions.*;
 	import org.flintparticles.counters.*;
 	import org.flintparticles.displayObjects.Dot;
-	import org.flintparticles.emitters.*;
+	import org.flintparticles.emitters.Emitter;
 	import org.flintparticles.energyEasing.Quadratic;
 	import org.flintparticles.events.FlintEvent;
 	import org.flintparticles.initializers.*;
+	import org.flintparticles.renderers.*;
 	import org.flintparticles.zones.*;	
 
 	/**
@@ -54,12 +55,9 @@ package
 	{
 		public function Firework()
 		{
-			var emitter:BitmapEmitter = new BitmapEmitter();
+			var emitter:Emitter = new Emitter();
 
-			emitter.addFilter( new BlurFilter( 2, 2, 1 ) );
-			emitter.addFilter( new ColorMatrixFilter( [ 1,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0.95,0 ] ) );
-
-			emitter.setCounter( new Blast( 700 ) );
+			emitter.counter = new Blast( 700 );
 			
 			emitter.addInitializer( new SharedImage( new Dot( 2 ) ) );
 			emitter.addInitializer( new ColorInit( 0xFFFFFF00, 0xFFFF6600 ) );
@@ -73,8 +71,13 @@ package
 			emitter.addAction( new LinearDrag( 0.5 ) );
 			
 			emitter.addEventListener( FlintEvent.EMITTER_EMPTY, restart );
-
-			addChild( emitter );
+			
+			var renderer:BitmapRenderer = new BitmapRenderer();
+			renderer.addFilter( new BlurFilter( 2, 2, 1 ) );
+			renderer.addFilter( new ColorMatrixFilter( [ 1,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0.95,0 ] ) );
+			emitter.renderer = renderer;
+			addChild( renderer );
+			
 			emitter.x = 250;
 			emitter.y = 150;
 			emitter.start( );

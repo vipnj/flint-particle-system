@@ -38,10 +38,11 @@ package
 	
 	import org.flintparticles.actions.*;
 	import org.flintparticles.counters.*;
-	import org.flintparticles.emitters.*;
+	import org.flintparticles.emitters.Emitter;
 	import org.flintparticles.energyEasing.Quadratic;
 	import org.flintparticles.events.FlintEvent;
 	import org.flintparticles.initializers.*;
+	import org.flintparticles.renderers.*;
 	import org.flintparticles.zones.*;	
 
 	/**
@@ -54,12 +55,9 @@ package
 	{
 		public function LogoFirework()
 		{
-			var emitter:PixelEmitter = new PixelEmitter();
+			var emitter:Emitter = new Emitter();
 
-			emitter.addFilter( new BlurFilter( 2, 2, 1 ) );
-			emitter.addFilter( new ColorMatrixFilter( [ 1,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0.96,0 ] ) );
-
-			emitter.setCounter( new Blast( 1500 ) );
+			emitter.counter = new Blast( 1500 );
 			
 			emitter.addInitializer( new ColorInit( 0xFFFF3300, 0xFFFFFF00 ) );
 			emitter.addInitializer( new Lifetime( 6 ) );
@@ -75,7 +73,12 @@ package
 			
 			emitter.addEventListener( FlintEvent.EMITTER_EMPTY, restart );
 
-			addChild( emitter );
+			var renderer:PixelRenderer = new PixelRenderer();
+			renderer.addFilter( new BlurFilter( 2, 2, 1 ) );
+			renderer.addFilter( new ColorMatrixFilter( [ 1,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0.96,0 ] ) );
+			emitter.renderer = renderer;
+			addChild( renderer );
+			
 			emitter.x = 250;
 			emitter.y = 300;
 			emitter.start( );

@@ -36,8 +36,9 @@ package
 	import org.flintparticles.actions.*;
 	import org.flintparticles.counters.*;
 	import org.flintparticles.displayObjects.Dot;
-	import org.flintparticles.emitters.*;
+	import org.flintparticles.emitters.Emitter;
 	import org.flintparticles.initializers.*;
+	import org.flintparticles.renderers.*;
 	import org.flintparticles.zones.*;	
 
 	/**
@@ -50,11 +51,9 @@ package
 	{
 		public function MutualG()
 		{
-			var emitter:BitmapEmitter = new BitmapEmitter();
+			var emitter:Emitter = new Emitter();
 
-			emitter.addFilter( new BlurFilter( 2, 2, 1 ) );
-
-			emitter.setCounter( new Blast( 30 ) );
+			emitter.counter = new Blast( 30 );
 			
 			emitter.addInitializer( new SharedImage( new Dot( 2 ) ) );
 			emitter.addInitializer( new ColorInit( 0xFFFF00FF, 0xFF00FFFF ) );
@@ -65,7 +64,11 @@ package
 			emitter.addAction( new SpeedLimit( 150 ) );
 			emitter.addAction( new Move() );
 			
-			addChild( emitter );
+			var renderer:BitmapRenderer = new BitmapRenderer();
+			renderer.addFilter( new BlurFilter( 2, 2, 1 ) );
+			emitter.renderer = renderer;
+			addChild( renderer );
+
 			emitter.start( );
 		}
 	}
