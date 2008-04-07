@@ -30,6 +30,8 @@
 
 package org.flintparticles.actions 
 {
+	import flash.display.DisplayObject;
+	
 	import org.flintparticles.emitters.Emitter;
 	import org.flintparticles.particles.Particle;	
 
@@ -73,7 +75,12 @@ package org.flintparticles.actions
 		 */
 		override public function update( emitter:Emitter, particle:Particle, time:Number ):void
 		{
-			var turnLeft:Boolean = ( ( particle.y - emitter.mouseY ) * particle.velX + ( emitter.mouseX - particle.x ) * particle.velY > 0 );
+			if( ! ( emitter.renderer is DisplayObject ) )
+			{
+				return;
+			}
+			var dispObj:DisplayObject = DisplayObject( emitter.renderer );
+			var turnLeft:Boolean = ( ( particle.y - dispObj.mouseY ) * particle.velX + ( dispObj.mouseX - particle.x ) * particle.velY > 0 );
 			var newAngle:Number;
 			if ( turnLeft )
 			{

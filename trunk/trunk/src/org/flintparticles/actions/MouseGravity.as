@@ -30,8 +30,10 @@
 
 package org.flintparticles.actions 
 {
-	import org.flintparticles.particles.Particle;
-	import org.flintparticles.emitters.Emitter;	
+	import flash.display.DisplayObject;
+	
+	import org.flintparticles.emitters.Emitter;
+	import org.flintparticles.particles.Particle;	
 
 	/**
 	 * The MouseGravity action applies a force on the particle to draw it towards
@@ -97,8 +99,13 @@ package org.flintparticles.actions
 		 */
 		override public function update( emitter:Emitter, particle:Particle, time:Number ):void
 		{
-			var x:Number = emitter.mouseX - particle.x;
-			var y:Number = emitter.mouseY - particle.y;
+			if( ! ( emitter.renderer is DisplayObject ) )
+			{
+				return;
+			}
+			var dispObj:DisplayObject = DisplayObject( emitter.renderer );
+			var x:Number = dispObj.mouseX - particle.x;
+			var y:Number = dispObj.mouseY - particle.y;
 			var dSq:Number = x * x + y * y;
 			if( dSq == 0 )
 			{

@@ -28,37 +28,38 @@
  * THE SOFTWARE.
  */
 
-package org.flintparticles.counters 
+package org.flintparticles.renderers 
 {
-	import org.flintparticles.emitters.Emitter;	
-	
+	import org.flintparticles.particles.Particle;		
+
 	/**
-	 * The Counter interface must be implemented by all counters.
-	 * <p>A counter is a class that tells an emitter how many particles to
-	 * emit at any time. The two methods allow the emission of particles
-	 * when the emitter starts and every frame thereafter.</p>
+	 * The Renderer interface must be implemented by all renderers.
 	 * 
-	 * <p>A counter is set for an emitter by assigning it to the emitter's 
-	 * counter property.</p>
+	 * <p>A renderer is a class that draws the particles that are managed by
+	 * an emitter.</p>
+	 * 
+	 * <p>A renderer is set for an emitter by assigning it to the emitter's 
+	 * renderer property.</p>
 	 */
-	public interface Counter 
+	public interface Renderer
 	{
 		/**
-		 * The startEmitter method is called when the emitter starts.
-		 * @param emitter The emitter
-		 * @return The number of particles the emitter should emit
-		 * at the moment it starts.
+		 * The addParticle method is called when a particle is added to the emitter.
+		 * @param particle The particle.
 		 */
-		function startEmitter( emitter:Emitter ):uint;
-		
+		function addParticle( particle:Particle ):void;
+
 		/**
-		 * The updateEmitter method is called every frame after the
-		 * emitter has started.
-		 * @param emitter The emitter
-		 * @param time The time, in seconds, since the previous call to this method.
-		 * @return The number of particles the emitter should emit
-		 * at this time.
+		 * The removeParticle method is called when a particle is removed from the emitter.
+		 * @param particle The particle.
 		 */
-		function updateEmitter( emitter:Emitter, time:Number ):uint;
+		function removeParticle( particle:Particle ):void;
+
+		/**
+		 * The renderParticles method is called every frame so the renderer can
+		 * draw the particles.
+		 * @param particles The particles to draw.
+		 */
+		function renderParticles( particles:Array ):void;
 	}
 }

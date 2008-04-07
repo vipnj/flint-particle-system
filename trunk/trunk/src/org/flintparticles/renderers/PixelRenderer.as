@@ -28,20 +28,25 @@
  * THE SOFTWARE.
  */
 
-package org.flintparticles.emitters
+package org.flintparticles.renderers
 {
 	import flash.display.Bitmap;
 	import flash.display.BitmapData;
 	
 	import org.flintparticles.particles.Particle;	
 
-	public class PixelEmitter extends BitmapEmitter
+	/**
+	 * The PixelRenderer draws particles as single pixels on a  Bitmap display object.
+	 */
+	public class PixelRenderer extends BitmapRenderer
 	{
 		/**
-		 * The constructor creates a PixelEmitter. After creation it should be
-		 * added to the display list of a DisplayObjectContainer to place it on the stage.
+		 * The constructor creates a PixelRenderer. After creation it should be
+		 * added to the display list of a DisplayObjectContainer to place it on 
+		 * the stage and should be applied to an Emitter using the Emitter's
+		 * renderer property.
 		 */
-		public function PixelEmitter()
+		public function PixelRenderer()
 		{
 			super();
 		}

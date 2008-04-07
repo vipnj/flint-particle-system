@@ -45,8 +45,7 @@ package org.flintparticles.counters
 		
 		/**
 		 * The constructor creates a Pulse counter for use by an emitter. To
-		 * add a Pulse counter to an emitter use the emitter's setCounter
-		 * method.
+		 * add a Pulse counter to an emitter use the emitter's counter property.
 		 * 
 		 * @param period The time, in seconds, between each pulse.
 		 * @param quantity The number of particles to emit at each pulse.

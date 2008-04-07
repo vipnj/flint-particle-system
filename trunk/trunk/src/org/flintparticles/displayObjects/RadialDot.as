@@ -30,8 +30,8 @@
 
 package org.flintparticles.displayObjects 
 {
-	import flash.display.Shape;
 	import flash.display.GradientType;
+	import flash.display.Shape;
 	import flash.geom.Matrix;	
 
 	/**
@@ -46,14 +46,16 @@ package org.flintparticles.displayObjects
 		 * The constructor creates a RadialDot with a specified radius.
 		 * @param radius The radius, in pixels, of the RadialDot.
 		 * @param color the color of the RadialDot
+		 * @param bm The blendMode for the RadialDot
 		 */
-		public function RadialDot( radius:Number, color:uint = 0xFFFFFF )
+		public function RadialDot( radius:Number, color:uint = 0xFFFFFF, bm:String = "normal" )
 		{
 			var matrix:Matrix = new Matrix();
 			matrix.createGradientBox( radius * 2, radius * 2, 0, -radius, -radius );
 			graphics.beginGradientFill( GradientType.RADIAL, [color,color], [1,0], [0,255], matrix );
 			graphics.drawCircle( 0, 0, radius );
 			graphics.endFill();
+			blendMode = bm;
 		}
 	}
 }

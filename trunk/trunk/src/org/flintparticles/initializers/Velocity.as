@@ -88,7 +88,7 @@ package org.flintparticles.initializers
 		override public function initialize( emitter:Emitter, particle:Particle ):void
 		{
 			var loc:Point;
-			if( emitter.rotRadians == 0 )
+			if( emitter.rotation == 0 )
 			{
 				loc = _zone.getLocation();
 				particle.velX = loc.x;
@@ -96,8 +96,8 @@ package org.flintparticles.initializers
 			}
 			else
 			{
-				var sin:Number = Math.sin( emitter.rotRadians );
-				var cos:Number = Math.cos( emitter.rotRadians );
+				var sin:Number = Math.sin( emitter.rotation );
+				var cos:Number = Math.cos( emitter.rotation );
 				loc = _zone.getLocation();
 				particle.velX = cos * loc.x - sin * loc.y;
 				particle.velY = cos * loc.y + sin * loc.x;

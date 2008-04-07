@@ -37,8 +37,8 @@ package org.flintparticles.initializers
 	/**
 	 * The ImageClasses Initializer sets the DisplayObject to use to draw
 	 * the particle. It selects one of multiple images that are passed to it.
-	 * It is used with the DisplayObjectEmitter. When using the
-	 * BitmapEmitter it is more efficient to use the SharedImage Initializer.
+	 * It is used with the DisplayObjectRenderer. When using the
+	 * BitmapRenderer it is more efficient to use the SharedImage Initializer.
 	 */
 
 	public class ImageClasses extends Initializer

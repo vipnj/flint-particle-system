@@ -41,8 +41,7 @@ package org.flintparticles.counters
 	{
 		/**
 		 * The constructor creates a Zero counter for use by an emitter. To
-		 * add a Zero counter to an emitter use the emitter's setCounter
-		 * method.
+		 * add a Zero counter to an emitter use the emitter's counter property.
 		 */
 		public function ZeroCounter()
 		{

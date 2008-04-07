@@ -44,8 +44,9 @@ package org.flintparticles.displayObjects
 		 * The constructor creates a Star with a specified radius.
 		 * @param radius The radius, in pixels, of the Star.
 		 * @param color the color of the Star
+		 * @param bm The blendMode for the Star
 		 */
-		public function Star( radius:Number, color:uint = 0xFFFFFF )
+		public function Star( radius:Number, color:uint = 0xFFFFFF, bm:String = "normal" )
 		{
 			var point:Point;
 			var rotStep:Number = Math.PI / 5;
@@ -74,6 +75,8 @@ package org.flintparticles.displayObjects
 			graphics.lineTo( point.x, point.y );
 			graphics.lineTo( 0, -radius );
 			graphics.endFill();
+			
+			blendMode = bm;
 		}
 	}
 }

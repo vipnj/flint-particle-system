@@ -30,8 +30,10 @@
 
 package org.flintparticles.emitters
 {
-	import flash.display.Sprite;
+	import flash.display.DisplayObject;
+	import flash.display.Shape;
 	import flash.events.Event;
+	import flash.events.EventDispatcher;
 	import flash.geom.Point;
 	import flash.utils.getTimer;
 	
@@ -42,8 +44,10 @@ package org.flintparticles.emitters
 	import org.flintparticles.events.FlintEvent;
 	import org.flintparticles.initializers.Initializer;
 	import org.flintparticles.particles.Particle;
-	import org.flintparticles.particles.ParticleFactory;
 	import org.flintparticles.particles.ParticleCreator;
+	import org.flintparticles.particles.ParticleFactory;
+	import org.flintparticles.renderers.Renderer;
+	import org.flintparticles.utils.DisplayObjectUtils;
 	import org.flintparticles.utils.Maths;	
 
 	/**
@@ -72,9 +76,7 @@ package org.flintparticles.emitters
 	[Event(name="emitterEmpty", type="org.flintparticles.events.FlintEvent")]
 
 	/**
-	 * The base class for all particle emitters. The Emitter class extends the Sprite
-	 * class so it is itself a DisplayObject. Thus, an Emitter is displayed by simply
-	 * adding it as a child to a DisplayObjectContainer.
+	 * The basic particle emitter.
 	 * 
 	 * <p>At its core, the Emitter
 	 * class manages the creation and ongoing state of particles. It uses a number of
@@ -92,20 +94,19 @@ package org.flintparticles.emitters
 	 * 
 	 * <p>An emitter uses a Counter to know when and how many particles to emit.</p>
 	 * 
+	 * <p>An emitter uses a Renderer to display the particles on screen.</p>
+	 * 
 	 * <p>All timings in the emitter are based on actual time passed, not on frames.</p>
 	 * 
-	 * <p>The emitter base class does not display the particles it creates. This is
-	 * usually handled in one of the derived classes like BitmapEmitter and
-	 * DisplayObjectEmitter.</p>
-	 * 
-	 * <p>Most other functionality is est added to an emitter using Actions,
-	 * Initializers, Activities and Counters. This offers greater flexibility to 
-	 * combine behaviours witout needing to further subclass the Emitter itself.</p>
+	 * <p>Most functionality is best added to an emitter using Actions,
+	 * Initializers, Activities, Counters and Renderers. This offers greater 
+	 * flexibility to combine behaviours witout needing to subclass 
+	 * the Emitter itself.</p>
 	 */
 
-	public class Emitter extends Sprite
+	public class Emitter extends EventDispatcher
 	{
-		// manages the creation, reuse and destruction of particles
+		// defaault factory to manage the creation, reuse and destruction of particles
 		protected static var _creator:ParticleCreator = new ParticleCreator();
 		
 		protected var _particleFactory:ParticleFactory;
@@ -115,6 +116,7 @@ package org.flintparticles.emitters
 		protected var _particles:Array;
 		protected var _activities:Array;
 		protected var _counter:Counter;
+		protected var _renderer:Renderer;
 
 		protected var _initializersPriority:Array;
 		protected var _actionsPriority:Array;
@@ -125,6 +127,8 @@ package org.flintparticles.emitters
 		protected var _x:Number = 0;
 		protected var _y:Number = 0;
 		protected var _rotation:Number = 0;
+		
+		private var _ticker:Shape;
 		
 		/**
 		 * Identifies whether the particles should be arranged
@@ -141,8 +145,7 @@ package org.flintparticles.emitters
 		public var spaceSortedX:Array;
 
 		/**
-		 * The constructor creates an emitter. However, it is more common to 
-		 * create one of the subclasses that implements a specific display method.
+		 * The constructor creates an emitter.
 		 */
 		public function Emitter()
 		{
@@ -156,49 +159,48 @@ package org.flintparticles.emitters
 			_initializersPriority = new Array();
 			_activitiesPriority = new Array();
 			_counter = new ZeroCounter();
-			
-			addEventListener( Event.REMOVED_FROM_STAGE, removed, false, 0, true );
+			_ticker = new Shape();
 		}
 		
 		/**
 		 * Indicates the x coordinate of the Emitter instance relative to 
-		 * the local coordinates of the parent DisplayObjectContainer.
+		 * the local coordinate system of the Renderer.
 		 */
-		override public function get x():Number
+		public function get x():Number
 		{
 			return _x;
 		}
-		override public function set x( value:Number ):void
+		public function set x( value:Number ):void
 		{
 			_x = value;
 		}
 		/**
 		 * Indicates the y coordinate of the Emitter instance relative to 
-		 * the local coordinates of the parent DisplayObjectContainer.
+		 * the local coordinate system of the Renderer.
 		 */
-		override public function get y():Number
+		public function get y():Number
 		{
 			return _y;
 		}
-		override public function set y( value:Number ):void
+		public function set y( value:Number ):void
 		{
 			_y = value;
 		}
 		/**
-		 * Indicates the rotation of the Emitter, 
-		 * in degrees, from its original orientation.
+		 * Indicates the rotation of the Emitter, in degrees, relative to 
+		 * the local coordinate system of the Renderer.
 		 */
-		override public function get rotation():Number
+		public function get rotation():Number
 		{
 			return Maths.asDegrees( _rotation );
 		}
-		override public function set rotation( value:Number ):void
+		public function set rotation( value:Number ):void
 		{
 			_rotation = Maths.asRadians( value );
 		}
 		/**
-		 * Indicates the rotation of the Emitter, 
-		 * in radians, from its original orientation.
+		 * Indicates the rotation of the Emitter, in radians, relative to 
+		 * the local coordinate system of the Renderer.
 		 */
 		public function get rotRadians():Number
 		{
@@ -214,10 +216,11 @@ package org.flintparticles.emitters
 		 * initial properties of particles created by the emitter.
 		 * 
 		 * @param initializer The Initializer to add
-		 * @param priority Indicates the sequencing of the initializers. Higher numbers cause
-		 * an initializer to be run before other initialzers. All initializers have a default priority
-		 * which is used if no value is passed in this parameter. The default priority is usually
-		 * the one you want so this parameter is only used when you need to override the default.
+		 * @param priority Indicates the sequencing of the initializers. Higher numbers 
+		 * cause an initializer to be run before other initialzers. All initializers 
+		 * have a default priority which is used if no value is passed in this 
+		 * parameter. The default priority is usually the one you want so this 
+		 * parameter is only used when you need to override the default.
 		 */
 		public function addInitializer( initializer:Initializer, priority:Number = NaN ):void
 		{
@@ -354,14 +357,28 @@ package org.flintparticles.emitters
 		}
 		
 		/**
-		 * Sets the Counter for the Emitter. The counter defines when and
+		 * The Counter for the Emitter. The counter defines when and
 		 * with what frequency the emitter emits particles.
-		 * 
-		 * @param counter The counter to use
 		 */		
-		public function setCounter( counter:Counter ):void
+		public function get counter():Counter
 		{
-			_counter = counter;
+			return _counter;
+		}
+		public function set counter( value:Counter ):void
+		{
+			_counter = value;
+		}
+		
+		/**
+		 * The Renderer for the Emitter. The renderer draws the particles.
+		 */		
+		public function get renderer():Renderer
+		{
+			return _renderer;
+		}
+		public function set renderer( value:Renderer ):void
+		{
+			_renderer = value;
 		}
 		
 		/**
@@ -383,14 +400,79 @@ package org.flintparticles.emitters
 		}
 		
 		/**
-		 * Returns the array of all particles created by this emitter.
+		 * The array of all particles created by this emitter.
 		 */
 		public function get particles():Array
 		{
 			return _particles;
 		}
-		
+
 		/**
+		 * Used to add existing display objects as particles to the emitter. This
+		 * allows you, for example, to take an existing image and subject its component
+		 * display objects to the actions of the emitter.
+		 * 
+		 * <p>This method moves all the display objects into the emitter's renderer,
+		 * removing them from their current position within the display list. It will
+		 * only work if a renderer has been defined for the emitter and the renderer has
+		 * been added to the display list.</p>
+		 * 
+		 * @param objects Each parameter is another display object for adding to the emitter.
+		 * If you pass an array as the parameter, each item in the array should be another
+		 * display object for adding to the emitter.
+		 */
+		public function addDisplayObjects( ...objects ):void
+		{
+			if( !( _renderer is DisplayObject ) || ! DisplayObject( _renderer ).stage )
+			{
+				throw( new Error( "Attempt to add DisplayObjects to an emitter when the emitter has no renderer or the emitter's renderer is not on the stage." ) );
+			}
+			for( var i:Number = 0; i < objects.length; ++i )
+			{
+				if( objects[i] is Array )
+				{
+					for( var j:Number = 0; j < objects[i].length; ++j )
+					{
+						if( objects[i][j] is DisplayObject )
+						{
+							addDisplayObject( objects[i][j] );
+						}
+					}
+				}
+				else if( objects[i] is DisplayObject )
+				{
+					addDisplayObject( objects[i] );
+				}
+			}
+		}
+		
+		/*
+		 * Used internally to add an individual display object to the emitter
+		 */
+		private function addDisplayObject( obj:DisplayObject ):void
+		{
+			var particle:Particle = _particleFactory.createParticle();
+			var len:uint = _initializers.length;
+			for ( var i:uint = 0; i < len; ++i )
+			{
+				_initializers[i].initialize( this, particle );
+			}
+			var p:Point = new Point( 0, 0 );
+			var r:Number = 0;
+			var displayObj:DisplayObject = DisplayObject( _renderer );
+			p = displayObj.globalToLocal( obj.localToGlobal( p ) );
+			r = DisplayObjectUtils.globalToLocalRotation( displayObj, DisplayObjectUtils.localToGlobalRotation( obj, 0 ) );
+			obj.parent.removeChild( obj );
+			particle.x = p.x;
+			particle.y = p.y;
+			particle.image = obj;
+			particle.rotation = Maths.asRadians( r );
+			_particles.unshift( particle );
+			_renderer.addParticle( particle );
+		}
+
+		
+		/*
 		 * Used internally to create a particle.
 		 */
 		private function createParticle():Particle
@@ -405,7 +487,7 @@ package org.flintparticles.emitters
 			particle.y += _y;
 			particle.rotation += _rotation;
 			_particles.unshift( particle );
-			particleCreated( particle );
+			_renderer.addParticle( particle );
 			dispatchEvent( new FlintEvent( FlintEvent.PARTICLE_CREATED, particle ) );
 			return particle;
 		}
@@ -415,8 +497,8 @@ package org.flintparticles.emitters
 		 */
 		public function start():void
 		{
-			removeEventListener( Event.ENTER_FRAME, frameLoop );
-			addEventListener( Event.ENTER_FRAME, frameLoop, false, 0, true );
+			_ticker.removeEventListener( Event.ENTER_FRAME, frameLoop );
+			_ticker.addEventListener( Event.ENTER_FRAME, frameLoop );
 			_time = getTimer();
 			var len:uint = _activities.length;
 			for ( var i:uint = 0; i < len; ++i )
@@ -430,7 +512,7 @@ package org.flintparticles.emitters
 			}
 		}
 		
-		/**
+		/*
 		 * Used internally to update the emitter.
 		 */
 		private function frameLoop( ev:Event ):void
@@ -439,14 +521,14 @@ package org.flintparticles.emitters
 			var oldTime:uint = _time;
 			_time = getTimer();
 			var frameTime:Number = ( _time - oldTime ) * 0.001;
-			if( stage )
+/*			if( _renderer is DisplayObject && DisplayObject( _renderer ).stage )
 			{
-				var maxTime:Number = 3 / stage.frameRate;
+				var maxTime:Number = 3 / DisplayObject( _renderer ).stage.frameRate;
 				if( frameTime > maxTime )
 				{
 					frameTime = maxTime;
 				}
-			}
+			}*/
 			frameUpdate( frameTime );
 		}
 		
@@ -501,7 +583,7 @@ package org.flintparticles.emitters
 					if ( particle.isDead )
 					{
 						dispatchEvent( new FlintEvent( FlintEvent.PARTICLE_DEAD, particle ) );
-						particleDestroyed( particle );
+						_renderer.removeParticle( particle );
 						_particleFactory.disposeParticle( particle );
 						_particles.splice( i, 1 );
 					}
@@ -511,7 +593,7 @@ package org.flintparticles.emitters
 			{
 				dispatchEvent( new FlintEvent( FlintEvent.EMITTER_EMPTY ) );
 			}
-			render( time );
+			_renderer.renderParticles( _particles );
 		}
 		
 		/**
@@ -519,7 +601,7 @@ package org.flintparticles.emitters
 		 */
 		public function pause():void
 		{
-			removeEventListener( Event.ENTER_FRAME, frameLoop );
+			_ticker.removeEventListener( Event.ENTER_FRAME, frameLoop );
 		}
 		
 		/**
@@ -527,33 +609,23 @@ package org.flintparticles.emitters
 		 */
 		public function resume():void
 		{
-			removeEventListener( Event.ENTER_FRAME, frameLoop );
-			addEventListener( Event.ENTER_FRAME, frameLoop, false, 0, true );
+			_ticker.removeEventListener( Event.ENTER_FRAME, frameLoop );
+			_ticker.addEventListener( Event.ENTER_FRAME, frameLoop );
 			_time = getTimer();
 		}
 		
-		private function removed( ev:Event ):void
-		{
-			if( ev.target == this )
-			{
-				dispose();
-			}
-		}
-		
 		/**
-		 * Cleans up the emitter prior to removal. This metid is automatically
-		 * called when the emitter is removed from the stage.
+		 * Cleans up the emitter prior to removal.
 		 */
-		private function dispose():void
+		public function dispose():void
 		{
-			removeEventListener( Event.ENTER_FRAME, frameLoop );
+			_ticker.removeEventListener( Event.ENTER_FRAME, frameLoop );
 			var len:uint = _particles.length;
 			for ( var i:uint = 0; i < len; ++i )
 			{
 				_particleFactory.disposeParticle( _particles[i] );
 			}
 			_particles.length = 0;
-			cleanUp();
 		}
 		
 		/**
@@ -562,7 +634,7 @@ package org.flintparticles.emitters
 		 * 
 		 * @param time The time, in seconds, to skip ahead.
 		 * @param frameRate The frame rate for calculating the new positions. The
-		 * emitter will calculate each frame over the time period tp get the new state
+		 * emitter will calculate each frame over the time period to get the new state
 		 * for the emitter and its particles. A higher frameRate will be more
 		 * accurate but will take longer to calculate.
 		 */
@@ -577,68 +649,34 @@ package org.flintparticles.emitters
 			}
 			resume();
 		}
-		
+
 		/**
-		 * Used in derived classes when they need to perform additional actions
-		 * on a newly created particle.
+		 * If the emitter's renderer is a display object, this method will
+		 * calculate a locatToGlobal on the point with respect to the renderer.
+		 * The new point is returned. If the renderer is not a display object then
+		 * the original point is returned.
 		 */
-		protected function particleCreated( particle:Particle ):void
+		public function rendererLocalToGlobal( p:Point ):Point
 		{
+			var q:Point = p.clone();
+			if( _renderer is DisplayObject )
+			{
+				q = DisplayObject( _renderer ).localToGlobal( q );
+			}
+			return q;
 		}
-		
+
 		/**
-		 * Used in derived classes when they need to perform additional actions
-		 * on a particle that is about to be destroyed.
-		 */
-		protected function particleDestroyed( particle:Particle ):void
-		{
-		}		
-		
-		/**
-		 * Used in derived classes to draw the particles.
-		 */
-		protected function render( time:Number ):void
-		{
-		}
-		
-		/**
-		 * Used in derived classes when they need to do additional tasks when the emitter
-		 * is disposed of.
-		 */
-		protected function cleanUp():void
-		{
-		}
-		
-		/**
-		 * Converts the point object from the emitter's 
-		 * (local) coordinates to the Stage (global) coordinates.
 		 * 
-		 * @param point The name or identifier of a point created 
-		 * with the Point class, specifying the x and y coordinates as properties.
-		 * @return A Point object with coordinates relative to the Stage.
 		 */
-		override public function localToGlobal( point:Point ):Point
+		public function rendererGlobalToLocal( p:Point ):Point
 		{
-			var p:Point = super.localToGlobal( point );
-			p.x += _x;
-			p.y += _y;
-			return p;
-		}
-		
-		/**
-		 * Converts the point object from the Stage (global)
-		 * coordinates to the emitter's (local) coordinates.
-		 * 
-		 * @param point An object created with the Point class. 
-		 * The Point object specifies the x and y coordinates as properties.
-		 * @return A Point object with coordinates relative to the display object.
-		 */
-		override public function globalToLocal( point:Point ):Point
-		{
-			var p:Point = super.globalToLocal( point );
-			p.x -= _x;
-			p.y -= _y;
-			return p;
+			var q:Point = p.clone();
+			if( _renderer is DisplayObject )
+			{
+				q = DisplayObject( _renderer ).globalToLocal( q );
+			}
+			return q;
 		}
 	}
 }

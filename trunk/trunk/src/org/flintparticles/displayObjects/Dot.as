@@ -30,7 +30,7 @@
 
 package org.flintparticles.displayObjects 
 {
-	import flash.display.Shape;
+	import flash.display.Shape;	
 
 	/**
 	 * The Dot class is a DisplayObject that displays a dot. The dot is always white
@@ -43,12 +43,14 @@ package org.flintparticles.displayObjects
 		 * The constructor creates a Dot with a specified radius.
 		 * @param radius The radius, in pixels, of the Dot.
 		 * @param color the color of the Dot
+		 * @param bm The blendMode for the Dot
 		 */
-		public function Dot( radius:Number, color:uint = 0xFFFFFF )
+		public function Dot( radius:Number, color:uint = 0xFFFFFF, bm:String = "normal" )
 		{
 			graphics.beginFill( color );
 			graphics.drawCircle( 0, 0, radius );
 			graphics.endFill();
+			blendMode = bm;
 		}
 	}
 }
