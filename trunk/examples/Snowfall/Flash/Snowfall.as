@@ -36,8 +36,9 @@ package
 	import org.flintparticles.actions.*;
 	import org.flintparticles.counters.*;
 	import org.flintparticles.displayObjects.Dot;
-	import org.flintparticles.emitters.*;
+	import org.flintparticles.emitters.Emitter;
 	import org.flintparticles.initializers.*;
+	import org.flintparticles.renderers.*;
 	import org.flintparticles.zones.*;	
 
 	/**
@@ -50,9 +51,9 @@ package
 	{
 		public function Snowfall()
 		{
-			var emitter:DisplayObjectEmitter = new DisplayObjectEmitter();
+			var emitter:Emitter = new Emitter();
 
-			emitter.setCounter( new Steady( 50 ) );
+			emitter.counter = new Steady( 50 );
 			
 			emitter.addInitializer( new ImageClass( Dot, 2 ) );
 			emitter.addInitializer( new Position( new LineZone( new Point( -5, -5 ), new Point( 505, -5 ) ) ) );
@@ -63,7 +64,10 @@ package
 			emitter.addAction( new DeathOffStage() );
 			emitter.addAction( new RandomDrift( 10, 10 ) );
 			
-			addChild( emitter );
+			var renderer:DisplayObjectRenderer = new DisplayObjectRenderer();
+			emitter.renderer = renderer;
+			addChild( renderer );
+			
 			emitter.start();
 			emitter.runAhead( 10 );
 		}

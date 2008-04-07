@@ -37,8 +37,9 @@ package
 	import org.flintparticles.actions.*;
 	import org.flintparticles.counters.*;
 	import org.flintparticles.displayObjects.RadialDot;
-	import org.flintparticles.emitters.*;
+	import org.flintparticles.emitters.Emitter;
 	import org.flintparticles.initializers.*;
+	import org.flintparticles.renderers.*;
 	import org.flintparticles.zones.*;	
 
 	/**
@@ -51,9 +52,9 @@ package
 	{
 		public function LogoFire()
 		{
-			var emitter:BitmapEmitter = new BitmapEmitter();
+			var emitter:Emitter = new Emitter();
 
-			emitter.setCounter( new Steady( 250 ) );
+			emitter.counter = new Steady( 250 );
 			
 			emitter.addInitializer( new Lifetime( 1.5 ) );
 			emitter.addInitializer( new Velocity( new DiscSectorZone( new Point( 0, 0 ), 20, 10, -Math.PI, 0 ) ) );
@@ -68,7 +69,10 @@ package
 			emitter.addAction( new ColorChange( 0xFFFF9900, 0x00CC0000 ) );
 			emitter.addAction( new Scale( 1, 1.5 ) );
 			
-			addChild( emitter );
+			var renderer:BitmapRenderer = new BitmapRenderer();
+			emitter.renderer = renderer;
+			addChild( renderer );
+			
 			emitter.x = 118;
 			emitter.y = 70;
 			emitter.start( );

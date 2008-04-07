@@ -36,8 +36,9 @@ package
 	import org.flintparticles.actions.*;
 	import org.flintparticles.counters.*;
 	import org.flintparticles.displayObjects.Line;
-	import org.flintparticles.emitters.*;
+	import org.flintparticles.emitters.Emitter;
 	import org.flintparticles.initializers.*;
+	import org.flintparticles.renderers.*;
 	import org.flintparticles.zones.*;	
 
 	[SWF(width='400', height='400', frameRate='61', backgroundColor='#000000')]
@@ -52,9 +53,9 @@ package
 	{
 		public function Rain()
 		{
-			var emitter:DisplayObjectEmitter = new DisplayObjectEmitter();
+			var emitter:Emitter = new Emitter();
 
-			emitter.setCounter( new Steady( 300 ) );
+			emitter.counter = new Steady( 300 );
 			
 			emitter.addInitializer( new ImageClass( Line, 8 ) );
 			emitter.addInitializer( new Position( new LineZone( new Point( 5, 5 ), new Point( 505, 5 ) ) ) );
@@ -65,7 +66,10 @@ package
 			emitter.addAction( new DeathZone( new RectangleZone( -10, -10, 510, 610 ), true ) );
 			emitter.addAction( new RotateToDirection() );
 			
-			addChild( emitter );
+			var renderer:DisplayObjectRenderer = new DisplayObjectRenderer();
+			emitter.renderer = renderer;
+			addChild( renderer );
+			
 			emitter.start();
 			emitter.runAhead( 5, 30 );
 		}
