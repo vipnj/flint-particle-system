@@ -44,9 +44,9 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <p></p>
   The Position Initializer sets the initial location of the particle.
   
-  <p>The class uses zones to place the particle. A zone defines an area
-  of the stage and the particle is placed at a random point within
-  that area. For precise placement, the Point zone defines a single
+  <p>The class uses zones to place the particle. A zone defines a region
+  in relation to the emitter and the particle is placed at a random point within
+  that region. For precise placement, the Point zone defines a single
   point at which all particles will be placed. Various zones (and the
   Zones interface for use when implementing custom zones) are defined
   in the org.flintparticles.zones package.</p>
