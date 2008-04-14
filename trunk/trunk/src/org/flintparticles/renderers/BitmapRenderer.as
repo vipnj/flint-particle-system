@@ -75,7 +75,7 @@ package org.flintparticles.renderers
 	 */
 	public class BitmapRenderer extends Sprite implements Renderer
 	{
-		protected var _bitmap:Bitmap;
+		public var _bitmap:Bitmap;
 		private var _preFilters:Array;
 		private var _postFilters:Array;
 		protected var _smoothing:Boolean;
@@ -168,6 +168,10 @@ package org.flintparticles.renderers
 			if( _bitmap && _bitmap.bitmapData )
 			{
 				_bitmap.bitmapData.dispose();
+			}
+			if( _bitmap )
+			{
+				removeChild( _bitmap );
 			}
 			_bitmap = new Bitmap( null, "auto", _smoothing);
 			_bitmap.bitmapData = new BitmapData( _canvas.width, _canvas.height, true, 0 );
