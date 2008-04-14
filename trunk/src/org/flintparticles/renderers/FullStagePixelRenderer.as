@@ -37,30 +37,31 @@ package org.flintparticles.renderers
 	import org.flintparticles.particles.Particle;	
 
 	/**
-	 * The PixelRenderer draws particles as single pixels on a Bitmap display object.
+	 * The FullStagePixelRenderer is a custom PixelRenderer whose canvas exactly covers
+	 * the stage. This canvas sizing is only reliable when the display region for the swf 
+	 * is exactly the same size as the swf itself, so that no scaling occurs.
 	 * 
-	 * <p>This class has been modified in version 1.0.1 of Flint to fix various
-	 * limitations in the previous version. Specifically, the canvas for drawing
-	 * the particles on must now be specified by the developer (it previously defaulted
-	 * to the size and position of the stage).</p>
+	 * <p>It is more efficient to use a PixelRenderer with an appropriately defined canvas.
+	 * This class exists to allow the continued use of functionality that existed in the
+	 * PixelRenderer in early versions of Flint.</p>
 	 * 
-	 * <p>The previous behaviour, while still flawed, has been improved
-	 * and given its own renderer, the FullStagePixelRenderer. To retain the previous
-	 * behaviour, please use the FullStagePixelRenderer.</p>
-	 * 
-	 * @see org.flintparticles.renderers.FullStagePixelRenderer
+	 * <p>This renderer uses properties of the stage object. It throws an exception if it is
+	 * not in the same security sandbox as the Stage owner (the main SWF file). To avoid 
+	 * this, the Stage owner can grant permission to the domain containing this renderer
+	 * by calling the Security.allowDomain() method or the Security.allowInsecureDomain()
+	 * method.</p>
 	 */
-	public class PixelRenderer extends BitmapRenderer
+	public class FullStagePixelRenderer extends FullStageBitmapRenderer
 	{
 		/**
-		 * The constructor creates a PixelRenderer. After creation it should be
+		 * The constructor creates a FullStagePixelRenderer. After creation it should be
 		 * added to the display list of a DisplayObjectContainer to place it on 
 		 * the stage and should be applied to an Emitter using the Emitter's
 		 * renderer property.
 		 */
-		public function PixelRenderer( canvas:Rectangle )
+		public function FullStagePixelRenderer()
 		{
-			super( canvas );
+			super();
 		}
 		
 		/**

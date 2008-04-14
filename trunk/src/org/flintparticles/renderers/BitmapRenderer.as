@@ -34,15 +34,24 @@ package org.flintparticles.renderers
 	import flash.display.BitmapData;
 	import flash.display.DisplayObject;
 	import flash.display.Sprite;
-	import flash.events.Event;
 	import flash.filters.BitmapFilter;
 	import flash.geom.Matrix;
 	import flash.geom.Point;
+	import flash.geom.Rectangle;
 	
 	import org.flintparticles.particles.Particle;	
 
 	/**
 	 * The BitmapRenderer draws particles onto a single Bitmap display object.
+	 * 
+	 * <p>This class has been modified in version 1.0.1 of Flint to fix various
+	 * limitations in the previous version. Specifically, the canvas for drawing
+	 * the particles on must now be specified by the developer (it previously defaulted
+	 * to the size and position of the stage).</p>
+	 * 
+	 * <p>The previous behaviour, while still flawed, has been improved
+	 * and given its own renderer, the FullStageBitmapRenderer. To retain the previous
+	 * behaviour, please use the FullStageBitmapRenderer.</p>
 	 * 
 	 * <p>The image to be used for each particle is the particles image property.
 	 * This is a DisplayObject, but this 
@@ -57,14 +66,20 @@ package org.flintparticles.renderers
 	 * However, if one or more filters are added to the renderer, the filters are
 	 * applied to the bitmap instead of wiping it clean. This enables various trail
 	 * effects by using blur and other filters.</p>
+	 * 
+	 * <p>The BitmapRenderer has mouse events disabled for itself and any 
+	 * display objects in its display list. To enable mouse events for the renderer
+	 * or its children set the mouseEnabled or mouseChildren properties to true.</p>
+	 * 
+	 * @see org.flintparticles.renderers.FullStageBitmapRenderer
 	 */
 	public class BitmapRenderer extends Sprite implements Renderer
 	{
 		protected var _bitmap:Bitmap;
-		protected var _offset:Point;
 		private var _preFilters:Array;
 		private var _postFilters:Array;
-		private var _smoothing:Boolean;
+		protected var _smoothing:Boolean;
+		protected var _canvas:Rectangle;
 
 		/**
 		 * The constructor creates a BitmapRenderer. After creation it should be
@@ -72,19 +87,23 @@ package org.flintparticles.renderers
 		 * the stage and should be applied to an Emitter using the Emitter's
 		 * renderer property.
 		 * 
+		 * @param canvas The area within the renderer on which particles can be drawn.
+		 * Particles outside this area will not be drawn.
 		 * @param smoothing Whether to use smoothing when scaling the Bitmap and, if the
 		 * particles are represented by bitmaps, when drawing the particles.
 		 * Smoothing removes pixelation when images are scaled and rotated, but it
 		 * takes longer.
 		 */
-		public function BitmapRenderer( smoothing:Boolean = false )
+		public function BitmapRenderer( canvas:Rectangle, smoothing:Boolean = false )
 		{
 			super();
+			mouseEnabled = false;
+			mouseChildren = false;
 			_smoothing = smoothing;
 			_preFilters = new Array();
 			_postFilters = new Array();
-			addEventListener( Event.ADDED_TO_STAGE, addedToStage, false, 0, true );
-			addEventListener( Event.REMOVED_FROM_STAGE, removedFromStage, false, 0, true );
+			_canvas = canvas;
+			createBitmap();
 		}
 		
 		/**
@@ -138,65 +157,51 @@ package org.flintparticles.renderers
 		}
 		
 		/*
-		 * Create the correct sized bitmap when the renderer is added to the display list.
+		 * Create the Bitmap and BitmapData objects
 		 */
-		private function addedToStage( ev:Event ):void
+		private function createBitmap():void
+		{
+			if( !canvas )
+			{
+				return;
+			}
+			if( _bitmap && _bitmap.bitmapData )
+			{
+				_bitmap.bitmapData.dispose();
+			}
+			_bitmap = new Bitmap( null, "auto", _smoothing);
+			_bitmap.bitmapData = new BitmapData( _canvas.width, _canvas.height, true, 0 );
+			addChild( _bitmap );
+			_bitmap.x = _canvas.x;
+			_bitmap.y = _canvas.y;
+		}
+		
+		/**
+		 * The canvas is the area within the renderer on which particles can be drawn.
+		 * Particles outside this area will not be drawn.
+		 */
+		public function get canvas():Rectangle
+		{
+			return _canvas;
+		}
+		public function set canvas( value:Rectangle ):void
+		{
+			_canvas = value;
+			createBitmap();
+		}
+		
+		/**
+		 * When the renderer ios no longer required, this method must be called by the 
+		 * user to free up memory used by the renderer.
+		 */
+		public function dispose():void
 		{
 			if( _bitmap && _bitmap.bitmapData )
 			{
 				_bitmap.bitmapData.dispose();
 			}
-			if( !stage || stage.stageWidth == 0 )
-			{
-				_bitmap = null;
-				return;
-			}
-			_bitmap = new Bitmap( null, "auto", _smoothing);
-			_bitmap.bitmapData = new BitmapData( stage.stageWidth, stage.stageHeight, true, 0 );
-			addChild( _bitmap );
-			_offset = localToGlobal( new Point( 0, 0 ) );
-			_bitmap.x = - _offset.x;
-			_bitmap.y = - _offset.y;
 		}
-		
-		/**
-		 * Override's the default x property of the display object to add additional functionality
-		 * for managing the bitmap display.
-		 */
-		override public function set x( value:Number ):void
-		{
-			super.x = value;
-			if( _bitmap && stage )
-			{
-				_offset = localToGlobal( new Point( 0, 0 ) );
-				_bitmap.x = - _offset.x;
-				_bitmap.y = - _offset.y;
-			}
-		}
-		
-		/**
-		 * Override's the default y property of the display object to add additional functionality
-		 * for managing the bitmap display.
-		 */
-		override public function set y( value:Number ):void
-		{
-			super.y = value;
-			if( _bitmap && stage )
-			{
-				_offset = localToGlobal( new Point( 0, 0 ) );
-				_bitmap.x = - _offset.x;
-				_bitmap.y = - _offset.y;
-			}
-		}
-		
-		/*
-		 * When the renderer is removed from the stage.
-		 */
-		private function removedFromStage( ev:Event ):void
-		{
-			dispose();
-		}
-		
+
 		/**
 		 * @inheritDoc
 		 */
@@ -204,11 +209,7 @@ package org.flintparticles.renderers
 		{
 			if( !_bitmap )
 			{
-				addedToStage( null );
-				if( !_bitmap )
-				{
-					return;
-				}
+				return;
 			}
 			var i:uint;
 			var len:uint;
@@ -246,7 +247,7 @@ package org.flintparticles.renderers
 		{
 			var matrix:Matrix;
 			matrix = particle.matrixTransform;
-			matrix.translate( _offset.x, _offset.y );
+			matrix.translate( -_canvas.x, -_canvas.y );
 			_bitmap.bitmapData.draw( particle.image, matrix, particle.colorTransform, particle.image.blendMode, null, _smoothing );
 		}
 		
@@ -262,19 +263,6 @@ package org.flintparticles.renderers
 		 */
 		public function removeParticle( particle:Particle ):void
 		{
-		}
-		
-		/**
-		 * May be called by the user to cause the renderer to dispose of the bitmapData object
-		 * it is using. This method will automatically be called when the renderer is removed 
-		 * from the display list.
-		 */
-		public function dispose():void
-		{
-			if( _bitmap && _bitmap.bitmapData )
-			{
-				_bitmap.bitmapData.dispose();
-			}
 		}
 	}
 }

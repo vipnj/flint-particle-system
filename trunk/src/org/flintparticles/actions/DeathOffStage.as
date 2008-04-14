@@ -38,7 +38,17 @@ package org.flintparticles.actions
 
 	/**
 	 * The DeathOffStage action marks the particle as dead if it is outside the stage.
-	 * Warning: The DeathOffStage action is very slow.
+	 * This action is only reliable when the display region for the swf is exactly the
+	 * same size as the swf itself, so that no scaling occurs.
+	 * 
+	 * <p>Warning: The DeathOffStage action is very slow. A DeathZone action with an appropriate
+	 * RectangleZone is more efficient.</p>
+	 * 
+	 * <p>This renderer uses properties of the stage object. It throws an exception if it is
+	 * not in the same security sandbox as the Stage owner (the main SWF file). To avoid 
+	 * this, the Stage owner can grant permission to the domain containing this renderer
+	 * by calling the Security.allowDomain() method or the Security.allowInsecureDomain()
+	 * method.</p>
 	 */
 
 	public class DeathOffStage extends Action
@@ -79,22 +89,23 @@ package org.flintparticles.actions
 		 */
 		override public function update( emitter:Emitter, particle:Particle, time:Number ):void
 		{
-			if( ! ( emitter.renderer is DisplayObject ) )
-			{
-				return;
-			}
-			var dispObj:DisplayObject = DisplayObject( emitter.renderer );
-			if( ! dispObj.stage || !dispObj.stage.stageWidth )
-			{
-				return;
-			}
 			if( isNaN( _top ) )
 			{
-				var point:Point = dispObj.localToGlobal( new Point( 0, 0 ) );
-				_left = -point.x - _padding;
-				_right = -point.x + dispObj.stage.stageWidth + _padding;
-				_top = -point.y - _padding;
-				_bottom = -point.y + dispObj.stage.stageHeight + _padding;
+				if( ! ( emitter.renderer is DisplayObject ) )
+				{
+					return;
+				}
+				var dispObj:DisplayObject = DisplayObject( emitter.renderer );
+				if( ! dispObj.stage || !dispObj.stage.stageWidth )
+				{
+					return;
+				}
+				var tl:Point = dispObj.globalToLocal( new Point( 0, 0 ) );
+				var br:Point = dispObj.globalToLocal( new Point( dispObj.stage.stageWidth, dispObj.stage.stageHeight ) );
+				_left = tl.x - _padding;
+				_right = br.x + _padding;
+				_top = tl.y - _padding;
+				_bottom = br.y + _padding;
 			}
 			
 			if( particle.x < _left || particle.x > _right || particle.y < _top || particle.y > _bottom )

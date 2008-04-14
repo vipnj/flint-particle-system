@@ -42,6 +42,7 @@ package org.flintparticles.actions
 	{
 		private var _min:Number;
 		private var _acc:Number;
+		private var _minSq:Number;
 		
 		/**
 		 * The constructor creates a MatchVelocity action for use by 
@@ -59,6 +60,7 @@ package org.flintparticles.actions
 		{
 			_min = maxDistance;
 			_acc = acceleration;
+			_minSq = maxDistance * maxDistance;
 		}
 		
 		/**
@@ -113,6 +115,7 @@ package org.flintparticles.actions
 			var particles:Array = emitter.particles;
 			var sortedX:Array = emitter.spaceSortedX;
 			var other:Particle;
+			var distanceSq:Number;
 			var i:int;
 			var len:uint = particles.length;
 			var dx:Number;
@@ -127,9 +130,13 @@ package org.flintparticles.actions
 				if( ( dx = particle.x - other.x ) > _min ) break;
 				dy = other.y - particle.y;
 				if( dy > _min || dy < -_min ) continue;
-				velX += other.velX;
-				velY += other.velY;
-				++count;
+				distanceSq = dy * dy + dx * dx;
+				if( distanceSq <= _minSq && distanceSq > 0 )
+				{
+					velX += other.velX;
+					velY += other.velY;
+					++count;
+				}
 			}
 			for( i = particle.spaceSortX + 1; i < len; ++i )
 			{
@@ -137,9 +144,13 @@ package org.flintparticles.actions
 				if( ( dx = other.x - particle.x ) > _min ) break;
 				dy = other.y - particle.y;
 				if( dy > _min || dy < -_min ) continue;
-				velX += other.velX;
-				velY += other.velY;
-				++count;
+				distanceSq = dy * dy + dx * dx;
+				if( distanceSq <= _minSq && distanceSq > 0 )
+				{
+					velX += other.velX;
+					velY += other.velY;
+					++count;
+				}
 			}
 			if( count != 0 )
 			{
