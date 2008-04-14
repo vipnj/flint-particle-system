@@ -33,6 +33,7 @@ package
 	import flash.display.Bitmap;
 	import flash.display.Sprite;
 	import flash.geom.Point;
+	import flash.geom.Rectangle;
 	
 	import org.flintparticles.actions.*;
 	import org.flintparticles.counters.*;
@@ -69,7 +70,7 @@ package
 			emitter.addAction( new ColorChange( 0xFFFF9900, 0x00CC0000 ) );
 			emitter.addAction( new Scale( 1, 1.5 ) );
 			
-			var renderer:BitmapRenderer = new BitmapRenderer();
+			var renderer:BitmapRenderer = new BitmapRenderer( new Rectangle( 0, 0, 500, 200 ) );
 			emitter.renderer = renderer;
 			addChild( renderer );
 			

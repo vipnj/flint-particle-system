@@ -32,6 +32,7 @@ package
 {
 	import flash.display.Sprite;
 	import flash.filters.BlurFilter;
+	import flash.geom.Rectangle;
 	
 	import org.flintparticles.actions.*;
 	import org.flintparticles.counters.*;
@@ -64,7 +65,7 @@ package
 			emitter.addAction( new SpeedLimit( 150 ) );
 			emitter.addAction( new Move() );
 			
-			var renderer:BitmapRenderer = new BitmapRenderer();
+			var renderer:BitmapRenderer = new BitmapRenderer( new Rectangle( 0, 0, 400, 400 ) );
 			renderer.addFilter( new BlurFilter( 2, 2, 1 ) );
 			emitter.renderer = renderer;
 			addChild( renderer );

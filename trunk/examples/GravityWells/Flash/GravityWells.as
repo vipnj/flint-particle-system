@@ -34,6 +34,7 @@ package
 	import flash.filters.BlurFilter;
 	import flash.filters.ColorMatrixFilter;
 	import flash.geom.Point;
+	import flash.geom.Rectangle;
 	
 	import org.flintparticles.actions.*;
 	import org.flintparticles.counters.*;
@@ -65,7 +66,7 @@ package
 			emitter.addAction( new GravityWell( 25, 75, 325 ) );
 			emitter.addAction( new GravityWell( 25, 325, 75 ) );
 			
-			var renderer:PixelRenderer = new PixelRenderer();
+			var renderer:PixelRenderer = new PixelRenderer( new Rectangle( 0, 0, 400, 400 ) );
 			renderer.addFilter( new BlurFilter( 2, 2, 1 ) );
 			renderer.addFilter( new ColorMatrixFilter( [ 1,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0.99,0 ] ) );
 			emitter.renderer = renderer;
