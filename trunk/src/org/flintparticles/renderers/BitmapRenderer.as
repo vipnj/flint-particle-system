@@ -75,7 +75,7 @@ package org.flintparticles.renderers
 	 */
 	public class BitmapRenderer extends Sprite implements Renderer
 	{
-		public var _bitmap:Bitmap;
+		protected var _bitmap:Bitmap;
 		private var _preFilters:Array;
 		private var _postFilters:Array;
 		protected var _smoothing:Boolean;
