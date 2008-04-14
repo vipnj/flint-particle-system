@@ -384,7 +384,8 @@ package org.flintparticles.emitters
 		/**
 		 * This is the particle factory used by the emitter to create and dispose of particles.
 		 * The default value is an instance of the ParticleCreator class that is shared by all
-		 * emitters. You don't usually need to alter this unless you are not using the default particle type.
+		 * emitters. You don't usually need to alter this unless you are not using the default
+		 * particle type. Any custom particle factory should implement the ParticleFactory class.
 		 * 
 		 * @param particleFactory The particle factory to use
 		 * 

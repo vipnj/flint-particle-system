@@ -46,6 +46,10 @@ package org.flintparticles.renderers
 	 * because this shares one DisplayObject instance between all the particles.
 	 * The ImageClass initializer is commonly used because this creates a new 
 	 * DisplayObject for each particle.</p>
+	 * 
+	 * <p>The DisplayObjectRenderer has mouse events disabled for itself and any 
+	 * display objects in its display list. To enable mouse events for the renderer
+	 * or its children set the mouseEnabled or mouseChildren properties to true.</p>
 	 */
 	public class DisplayObjectRenderer extends Sprite implements Renderer
 	{
@@ -58,6 +62,8 @@ package org.flintparticles.renderers
 		public function DisplayObjectRenderer()
 		{
 			super();
+			mouseEnabled = false;
+			mouseChildren = false;
 		}
 		
 		/**
