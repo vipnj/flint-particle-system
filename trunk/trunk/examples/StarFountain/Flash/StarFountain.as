@@ -67,7 +67,7 @@ package
 			emitter.addAction( new Accelerate( 0, 150 ) );
 			emitter.addAction( new Age() );
 			emitter.addAction( new Scale( 0.5, 3 ) );
-			emitter.addAction( new DeathOffStage() );
+			emitter.addAction( new DeathZone( new RectangleZone( -10, -10, 510, 510 ), true ) );
 			
 			var renderer:DisplayObjectRenderer = new DisplayObjectRenderer();
 			emitter.renderer = renderer;

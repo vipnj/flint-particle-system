@@ -34,6 +34,7 @@ package
 	import flash.filters.BlurFilter;
 	import flash.filters.ColorMatrixFilter;
 	import flash.geom.Point;
+	import flash.geom.Rectangle;
 	
 	import org.flintparticles.actions.*;
 	import org.flintparticles.activities.FollowMouse;
@@ -42,7 +43,7 @@ package
 	import org.flintparticles.emitters.Emitter;
 	import org.flintparticles.initializers.*;
 	import org.flintparticles.renderers.*;
-	import org.flintparticles.zones.*;
+	import org.flintparticles.zones.*;	
 
 	[SWF(width='400', height='400', frameRate='61', backgroundColor='#000000')]
 	
@@ -71,7 +72,7 @@ package
 			emitter.addAction( new Move() );
 			emitter.addAction( new RotateToDirection() );
 			
-			var renderer:BitmapRenderer = new BitmapRenderer();
+			var renderer:BitmapRenderer = new BitmapRenderer( new Rectangle( 0, 0, 400, 400 ) );
 			renderer.addFilter( new BlurFilter( 2, 2, 1 ) );
 			renderer.addFilter( new ColorMatrixFilter( [ 1,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0.95,0 ] ) );
 			emitter.renderer = renderer;

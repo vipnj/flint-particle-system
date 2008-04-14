@@ -32,6 +32,7 @@ package
 {
 	import flash.display.Sprite;
 	import flash.geom.Point;
+	import flash.geom.Rectangle;
 	
 	import org.flintparticles.actions.*;
 	import org.flintparticles.counters.*;
@@ -68,7 +69,7 @@ package
 			smoke.addAction( new Fade( 0.15, 0 ) );
 			smoke.addAction( new RandomDrift( 15, 15 ) );
 			
-			var smokeRenderer:BitmapRenderer = new BitmapRenderer();
+			var smokeRenderer:BitmapRenderer = new BitmapRenderer( new Rectangle( 0, 0, 300, 400 ) );
 			smoke.renderer = smokeRenderer;
 			addChild( smokeRenderer );
 			

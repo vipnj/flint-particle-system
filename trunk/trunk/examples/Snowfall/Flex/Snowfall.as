@@ -63,7 +63,7 @@ package
 			emitter.addInitializer( new ScaleInit( 0.75, 1.5 ) );
 			
 			emitter.addAction( new Move() );
-			emitter.addAction( new DeathOffStage() );
+			emitter.addAction( new DeathZone( new RectangleZone( -10, -10, 510, 410 ), true ) );
 			emitter.addAction( new RandomDrift( 10, 10 ) );
 			
 			var renderer:DisplayObjectRenderer = new DisplayObjectRenderer();
