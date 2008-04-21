@@ -116,6 +116,7 @@ package org.flintparticles.initializers
 			{
 				particle.rotation = _min + Math.random() * ( _max - _min );
 			}
+			particle.rotation += emitter.rotRadians;
 		}
 	}
 }
