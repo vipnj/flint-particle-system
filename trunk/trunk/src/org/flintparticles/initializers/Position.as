@@ -82,9 +82,21 @@ package org.flintparticles.initializers
 		 */
 		override public function initialize( emitter : Emitter, particle : Particle ) : void
 		{
-			var loc:Point = _zone.getLocation();
-			particle.x = loc.x;
-			particle.y = loc.y;
+			var loc:Point;
+			if( emitter.rotRadians == 0 )
+			{
+				loc = _zone.getLocation();
+				particle.x = loc.x;
+				particle.y = loc.y;
+			}
+			else
+			{
+				var sin:Number = Math.sin( emitter.rotRadians );
+				var cos:Number = Math.cos( emitter.rotRadians );
+				loc = _zone.getLocation();
+				particle.x = cos * loc.x - sin * loc.y;
+				particle.y = cos * loc.y + sin * loc.x;
+			}
 		}
 	}
 }
