@@ -480,13 +480,13 @@ package org.flintparticles.emitters
 		{
 			var particle:Particle = _particleFactory.createParticle();
 			var len:uint = _initializers.length;
+			particle.x = _x;
+			particle.y = _y;
+			particle.rotation = _rotation;
 			for ( var i:uint = 0; i < len; ++i )
 			{
 				_initializers[i].initialize( this, particle );
 			}
-			particle.x += _x;
-			particle.y += _y;
-			particle.rotation += _rotation;
 			_particles.unshift( particle );
 			_renderer.addParticle( particle );
 			dispatchEvent( new FlintEvent( FlintEvent.PARTICLE_CREATED, particle ) );

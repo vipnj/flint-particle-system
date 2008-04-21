@@ -97,6 +97,8 @@ package org.flintparticles.initializers
 				particle.x = cos * loc.x - sin * loc.y;
 				particle.y = cos * loc.y + sin * loc.x;
 			}
+			particle.x += emitter.x;
+			particle.y += emitter.y;
 		}
 	}
 }
