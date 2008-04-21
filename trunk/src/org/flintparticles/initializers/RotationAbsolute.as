@@ -34,18 +34,18 @@ package org.flintparticles.initializers
 	import org.flintparticles.particles.Particle;		
 
 	/**
-	 * The Rotation Initializer sets the rotation of the particle. The rotation is
-	 * relative to the rotation of the emitter.
+	 * The RotationAbsolute Initializer sets the rotation of the particle. The rotation is
+	 * independent of the rotation of the emitter.
 	 */
 
-	public class Rotation extends Initializer
+	public class RotationAbsolute extends Initializer
 	{
 		private var _min : Number;
 		private var _max : Number;
 
 		/**
-		 * The constructor creates a Rotation initializer for use by 
-		 * an emitter. To add a Rotation to all particles created by an emitter, use the
+		 * The constructor creates a RotationAbsolute initializer for use by 
+		 * an emitter. To add a RotationAbsolute to all particles created by an emitter, use the
 		 * emitter's addInitializer method.
 		 * 
 		 * <p>The rotation of particles initialized by this class
@@ -58,7 +58,7 @@ package org.flintparticles.initializers
 		 * 
  		 * @see org.flintparticles.emitters.Emitter#addInitializer()
 		 */
-		public function Rotation( minAngle : Number, maxAngle : Number = NaN )
+		public function RotationAbsolute( minAngle : Number, maxAngle : Number = NaN )
 		{
 			_min = minAngle;
 			_max = maxAngle;
@@ -117,7 +117,6 @@ package org.flintparticles.initializers
 			{
 				particle.rotation = _min + Math.random() * ( _max - _min );
 			}
-			particle.rotation += emitter.rotRadians;
 		}
 	}
 }
