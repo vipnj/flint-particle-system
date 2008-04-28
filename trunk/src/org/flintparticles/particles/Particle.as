@@ -40,7 +40,7 @@ package org.flintparticles.particles
 	 * It is deliberately lightweight, with only one method. The Initializers
 	 * and Actions modify these properties directly. This means that the same
 	 * particles can be used in many different emitters, allowing Particle 
-	 * objects to be shared.
+	 * objects to be reused.
 	 * 
 	 * Particles are usually created by the ParticleCreator class. This class
 	 * just simplifies the reuse of Particle objects which speeds up the
