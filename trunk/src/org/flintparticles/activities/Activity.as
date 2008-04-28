@@ -80,6 +80,17 @@ package org.flintparticles.activities
 		}
 		
 		/**
+		 * The removedFromEmitter method is called by the emitter when the Activity is removed from it
+		 * It is called within the emitter's removeActivity method and need not
+		 * be called by the user.
+		 * 
+		 * @param emitter The Emitter that the Activity was removed from.
+		 */
+		public function removedFromEmitter( emitter:Emitter ):void
+		{
+		}
+		
+		/**
 		 * The initialize method is used by the emitter to start the activity.
 		 * It is called within the emitter's start method and need not
 		 * be called by the user.

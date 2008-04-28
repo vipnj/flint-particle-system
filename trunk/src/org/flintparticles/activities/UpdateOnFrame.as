@@ -36,6 +36,9 @@ package org.flintparticles.activities
 	 * The UpdateOnFrame activity is used to call a frameUpdate method of any class that implements the
 	 * FrameUpdatable interface. This is most often used to update an action once every frame - the action
 	 * implements FrameUpdatable and adds an UpdateOnFrame activity to the emitter in its addedToEmitter method.
+	 * See the Explosion Action for an example of this.
+	 * 
+	 * @see org.flintparticles.actions.Explosion
 	 */
 	public class UpdateOnFrame extends Activity
 	{
