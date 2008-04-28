@@ -32,9 +32,9 @@ package org.flintparticles.particles
 {
 
 	/**
-	 * The ParticleCreator is used by the Emitter class tomanage the creation and reuse of particles.
+	 * The ParticleCreator is used by the Emitter class to manage the creation and reuse of particles.
 	 * To speed up the particle system, the ParticleCreator class maintains a pool of dead particles 
-	 * and reuses them when a new particle is needed, rather than creating a whole ne particle.
+	 * and reuses them when a new particle is needed, rather than creating a whole new particle.
 	 */
 
 	public class ParticleCreator implements ParticleFactory
@@ -50,7 +50,7 @@ package org.flintparticles.particles
 		}
 		
 		/**
-		 * To obtain a new Particle object. The createParticle method will return
+		 * Obtains a new Particle object. The createParticle method will return
 		 * a dead particle from the poll of dead particles or create a new particle if none are
 		 * available.
 		 * 

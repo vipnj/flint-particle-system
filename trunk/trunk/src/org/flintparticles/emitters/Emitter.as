@@ -76,21 +76,19 @@ package org.flintparticles.emitters
 	[Event(name="emitterEmpty", type="org.flintparticles.events.FlintEvent")]
 
 	/**
-	 * The basic particle emitter.
-	 * 
-	 * <p>At its core, the Emitter
-	 * class manages the creation and ongoing state of particles. It uses a number of
-	 * utility classes to customise its behaviour.</p>
+	 * The Emitter class manages the creation and ongoing state of particles. It uses a number of
+	 * utility classes to customise its behaviour.
 	 * 
 	 * <p>An emitter uses Initializers to customise the initial state of particles
-	 * that it creates. These are added to the emitter using the addInitializer 
-	 * method.</p>
+	 * that it creates, their position, velocity, color etc. These are added to the 
+	 * emitter using the addInitializer  method.</p>
 	 * 
 	 * <p>An emitter uses Actions to customise the behaviour of particles that
-	 * it creates. These are added to the emitter using the addAction method.</p>
+	 * it creates, to apply gravity, drag, fade etc. These are added to the emitter 
+	 * using the addAction method.</p>
 	 * 
-	 * <p>An emitter uses Activities to customise its own behaviour, such as its
-	 * position and rotation.</p>
+	 * <p>An emitter uses Activities to customise its own behaviour in an ongoing manner, to 
+	 * make it move or rotate.</p>
 	 * 
 	 * <p>An emitter uses a Counter to know when and how many particles to emit.</p>
 	 * 
@@ -102,30 +100,79 @@ package org.flintparticles.emitters
 	 * Initializers, Activities, Counters and Renderers. This offers greater 
 	 * flexibility to combine behaviours witout needing to subclass 
 	 * the Emitter itself.</p>
+	 * 
+	 * <p>The emitter also has position properties - x, y, rotation - that can be used to directly
+	 * affect its location in the particle system.
 	 */
 
 	public class Emitter extends EventDispatcher
 	{
-		// defaault factory to manage the creation, reuse and destruction of particles
+		/**
+		 * @private
+		 * 
+		 * default factory to manage the creation, reuse and destruction of particles
+		 */
 		protected static var _creator:ParticleCreator = new ParticleCreator();
 		
+		/**
+		 * @private
+		 */
 		protected var _particleFactory:ParticleFactory;
 		
+		/**
+		 * @private
+		 */
 		protected var _initializers:Array;
+		/**
+		 * @private
+		 */
 		protected var _actions:Array;
+		/**
+		 * @private
+		 */
 		protected var _particles:Array;
+		/**
+		 * @private
+		 */
 		protected var _activities:Array;
+		/**
+		 * @private
+		 */
 		protected var _counter:Counter;
+		/**
+		 * @private
+		 */
 		protected var _renderer:Renderer;
 
+		/**
+		 * @private
+		 */
 		protected var _initializersPriority:Array;
+		/**
+		 * @private
+		 */
 		protected var _actionsPriority:Array;
+		/**
+		 * @private
+		 */
 		protected var _particlesPriority:Array;
+		/**
+		 * @private
+		 */
 		protected var _activitiesPriority:Array;
 
 		private var _time:uint;
+		/**
+		 * @private
+		 */
 		protected var _x:Number = 0;
+		/**
+		 * @private
+		 */
 		protected var _y:Number = 0;
+		/**
+		 * @private
+		 */
 		protected var _rotation:Number = 0;
 		
 		private var _ticker:Shape;
@@ -133,11 +180,11 @@ package org.flintparticles.emitters
 		/**
 		 * Identifies whether the particles should be arranged
 		 * into spacially sorted arrays - this speeds up proximity
-		 * testing for those actions that need it
+		 * testing for those actions that need it.
 		 */
 		public var spaceSort:Boolean = false;
 		/**
-		 * The array of particle indices sorted based on the paricles horizontal position.
+		 * The array of particle indices sorted based on the particles' horizontal positions.
 		 * To persuade the emitter to create this array you should set the spaceSort property
 		 * to true. Usually, actions that need this set to true will do so in their addedToEmitter
 		 * method.
@@ -163,8 +210,7 @@ package org.flintparticles.emitters
 		}
 		
 		/**
-		 * Indicates the x coordinate of the Emitter instance relative to 
-		 * the local coordinate system of the Renderer.
+		 * Indicates the x coordinate of the Emitter within the particle system's coordinate space.
 		 */
 		public function get x():Number
 		{
@@ -175,8 +221,7 @@ package org.flintparticles.emitters
 			_x = value;
 		}
 		/**
-		 * Indicates the y coordinate of the Emitter instance relative to 
-		 * the local coordinate system of the Renderer.
+		 * Indicates the y coordinate of the Emitter within the particle system's coordinate space.
 		 */
 		public function get y():Number
 		{
@@ -187,8 +232,7 @@ package org.flintparticles.emitters
 			_y = value;
 		}
 		/**
-		 * Indicates the rotation of the Emitter, in degrees, relative to 
-		 * the local coordinate system of the Renderer.
+		 * Indicates the rotation of the Emitter, in degrees, within the particle system's coordinate space.
 		 */
 		public function get rotation():Number
 		{
@@ -199,8 +243,7 @@ package org.flintparticles.emitters
 			_rotation = Maths.asRadians( value );
 		}
 		/**
-		 * Indicates the rotation of the Emitter, in radians, relative to 
-		 * the local coordinate system of the Renderer.
+		 * Indicates the rotation of the Emitter, in radians, within the particle system's coordinate space.
 		 */
 		public function get rotRadians():Number
 		{
@@ -241,7 +284,7 @@ package org.flintparticles.emitters
 		}
 		
 		/**
-		 * Removes an Initializer object from the Emitter.
+		 * Removes an Initializer from the Emitter.
 		 * 
 		 * @param initializer The Initializer to remove
 		 * 
@@ -262,7 +305,7 @@ package org.flintparticles.emitters
 		}
 		
 		/**
-		 * Adds an Action object to the Emitter. Actions set the behaviour
+		 * Adds an Action to the Emitter. Actions set the behaviour
 		 * of particles created by the emitter.
 		 * 
 		 * @param action The Action to add
@@ -290,7 +333,7 @@ package org.flintparticles.emitters
 		}
 		
 		/**
-		 * Removes an Action object from the Emitter.
+		 * Removes an Action from the Emitter.
 		 * 
 		 * @param action The Action to remove
 		 * 
@@ -339,7 +382,7 @@ package org.flintparticles.emitters
 		}
 		
 		/**
-		 * Removes an Activity object from the Emitter.
+		 * Removes an Activity from the Emitter.
 		 * 
 		 * @param activity The Activity to remove
 		 * 
@@ -412,9 +455,8 @@ package org.flintparticles.emitters
 		}
 
 		/**
-		 * Used to add existing display objects as particles to the emitter. This
-		 * allows you, for example, to take an existing image and subject its component
-		 * display objects to the actions of the emitter.
+		 * Adds existing display objects as particles to the emitter. This allows you, for example, 
+		 * to take an existing image and subject it to the actions of the emitter.
 		 * 
 		 * <p>This method moves all the display objects into the emitter's renderer,
 		 * removing them from their current position within the display list. It will
@@ -619,7 +661,10 @@ package org.flintparticles.emitters
 		}
 		
 		/**
-		 * Cleans up the emitter prior to removal.
+		 * Cleans up the emitter prior to removal. If you don't call this method,
+		 * the garbage collector will clean up all the particles in teh usual way.
+		 * If you use this method, the particles will be returned to the particle
+		 * factory for reuse.
 		 */
 		public function dispose():void
 		{
@@ -656,7 +701,7 @@ package org.flintparticles.emitters
 
 		/**
 		 * If the emitter's renderer is a display object, this method will
-		 * calculate a locatToGlobal on the point with respect to the renderer.
+		 * calculate a localToGlobal on the point with respect to the renderer.
 		 * The new point is returned. If the renderer is not a display object then
 		 * the original point is returned.
 		 */
@@ -671,7 +716,10 @@ package org.flintparticles.emitters
 		}
 
 		/**
-		 * 
+		 * If the emitter's renderer is a display object, this method will
+		 * calculate a localToGlobal on the point with respect to the renderer.
+		 * The new point is returned. If the renderer is not a display object then
+		 * the original point is returned.
 		 */
 		public function rendererGlobalToLocal( p:Point ):Point
 		{

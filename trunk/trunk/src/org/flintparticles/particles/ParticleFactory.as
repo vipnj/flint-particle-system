@@ -34,8 +34,8 @@ package org.flintparticles.particles
 	 * The ParticleFactory interface defines the interface for any factory class used by emitters to 
 	 * create, reuse and dispose of particles. To speed up the particle system, a ParticleFactory will
 	 * usually maintain a pool of dead particles and reuse them when a new particle is needed, rather 
-	 * than creating a whole new particle. The default ParticleFactory is an instance of the ParticleCreator 
-	 * class.
+	 * than creating a whole new particle. The default ParticleFactory used by the Emitter is an 
+	 * instance of the ParticleCreator class.
 	 * 
 	 * @see org.flintparticles.particles.ParticleCreator
 	 */
