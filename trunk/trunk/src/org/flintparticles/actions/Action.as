@@ -81,6 +81,17 @@ package org.flintparticles.actions
 		}
 		
 		/**
+		 * The removedFromEmitter method is called by the emitter when the Action is removed from it
+		 * It is called within the emitter's removeAction method and need not
+		 * be called by the user.
+		 * 
+		 * @param emitter The Emitter that the Action was removed from.
+		 */
+		public function removedFromEmitter( emitter:Emitter ):void
+		{
+		}
+		
+		/**
 		 * The update method is used by the emitter to apply the action
 		 * to every particle. It is called within the emitter's update 
 		 * loop and need not be called by the user.

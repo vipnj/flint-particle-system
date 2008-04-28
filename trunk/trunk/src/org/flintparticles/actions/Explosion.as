@@ -43,6 +43,7 @@ package org.flintparticles.actions
 
 	public class Explosion extends Action implements FrameUpdatable
 	{
+		private var _updateActivity:UpdateOnFrame;
 		private var _x:Number;
 		private var _y:Number;
 		private var _power:Number;
@@ -138,7 +139,19 @@ package org.flintparticles.actions
 		 */
 		override public function addedToEmitter( emitter:Emitter ):void
 		{
-			emitter.addActivity( new UpdateOnFrame( this ) );
+			_updateActivity = new UpdateOnFrame( this );
+			emitter.addActivity( _updateActivity );
+		}
+		
+		/**
+		 * @inheritDoc
+		 */
+		override public function removedFromEmitter( emitter:Emitter ):void
+		{
+			if( _updateActivity )
+			{
+				emitter.removeActivity( _updateActivity );
+			}
 		}
 		
 		/**

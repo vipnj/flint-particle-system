@@ -82,6 +82,17 @@ package org.flintparticles.initializers
 		}
 		
 		/**
+		 * The removedFromEmitter method is called by the emitter when the Initializer is removed from it
+		 * It is called within the emitter's removeInitializer method and need not
+		 * be called by the user.
+		 * 
+		 * @param emitter The Emitter that the Initializer was removed from.
+		 */
+		public function removedFromEmitter( emitter:Emitter ):void
+		{
+		}
+		
+		/**
 		 * The initialize method is used by the emitter to initialize the particle.
 		 * It is called within the emitter's createParticle method and need not
 		 * be called by the user.

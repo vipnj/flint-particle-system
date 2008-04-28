@@ -255,6 +255,7 @@ package org.flintparticles.emitters
 				{
 					_initializers.splice( i, 1 );
 					_initializersPriority.splice( i, 1 );
+					initializer.removedFromEmitter( this );
 					return;
 				}
 			}
@@ -303,6 +304,7 @@ package org.flintparticles.emitters
 				{
 					_actions.splice( i, 1 );
 					_actionsPriority.splice( i, 1 );
+					action.removedFromEmitter( this );
 					return;
 				}
 			}
@@ -351,6 +353,7 @@ package org.flintparticles.emitters
 				{
 					_activities.splice( i, 1 );
 					_activitiesPriority.splice( i, 1 );
+					activity.removedFromEmitter( this );
 					return;
 				}
 			}
