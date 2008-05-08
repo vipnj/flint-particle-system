@@ -37,11 +37,11 @@ package org.flintparticles.renderers
 	import org.flintparticles.particles.Particle;	
 
 	/**
-	 * The DisplayObjectRenderer is a renderer that adds particles to its display list 
-	 * and letting the flash renderer deal with displaying them.
+	 * The DisplayObjectRenderer adds particles to its display list 
+	 * and lets the flash player render them in its usual way.
 	 * 
-	 * <p>Consequently particles must be represented by a DisplayObject, and
-	 * each must use a different DisplayObject instance. The DisplayObject
+	 * <p>Particles may be represented by any DisplayObject and each particle 
+	 * must use a different DisplayObject instance. The DisplayObject
 	 * to be used should not be defined using the SharedImage initializer
 	 * because this shares one DisplayObject instance between all the particles.
 	 * The ImageClass initializer is commonly used because this creates a new 
@@ -54,10 +54,12 @@ package org.flintparticles.renderers
 	public class DisplayObjectRenderer extends Sprite implements Renderer
 	{
 		/**
-		 * The constructor creates a DisplayObjectRenderer. After creation it should be
-		 * added to the display list of a DisplayObjectContainer to place it on 
+		 * The constructor creates a DisplayObjectRenderer. After creation it should
+		 * be added to the display list of a DisplayObjectContainer to place it on 
 		 * the stage and should be applied to an Emitter using the Emitter's
 		 * renderer property.
+		 * 
+		 * @see org.flintparticles.emitters.Emitter#renderer
 		 */
 		public function DisplayObjectRenderer()
 		{

@@ -71,10 +71,8 @@ package org.flintparticles.zones
 			{
 				return false;
 			}
-			// is it between the points
-			var dot1:Number = ( x - _point1.x ) * _length.x - ( y - _point1.y ) * _length.y;
-			var dot2:Number = ( x - _point2.x ) * _length.x - ( y - _point2.y ) * _length.y;
-			return ( dot1 <= 0 && dot2 >= 0 ) || ( dot1 >= 0 && dot2 <= 0 );
+			// is it between the points, dot product of the vectors towards each point is negative
+			return ( x - _point1.x ) * ( x - _point2.x ) + ( y - _point1.y ) * ( y - _point2.y ) <= 0;
 		}
 		
 		/**

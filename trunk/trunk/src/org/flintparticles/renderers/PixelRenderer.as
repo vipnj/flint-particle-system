@@ -37,16 +37,30 @@ package org.flintparticles.renderers
 	import org.flintparticles.particles.Particle;	
 
 	/**
-	 * The PixelRenderer draws particles as single pixels on a Bitmap display object.
+	 * The PixelRenderer draws particles as single pixels on a Bitmap display object. The
+	 * region of the particle system covered by this bitmap object must be defined
+	 * in the canvas property of the PixelRenderer. Particles outside this region
+	 * are not drawn.
 	 * 
-	 * <p>This class has been modified in version 1.0.1 of Flint to fix various
+	 * <p>The PixelRenderer allows the use of BitmapFilters to modify the appearance
+	 * of the bitmap. Every frame, under normal circumstances, the Bitmap used to
+	 * display the particles is wiped clean before all the particles are redrawn.
+	 * However, if one or more filters are added to the renderer, the filters are
+	 * applied to the bitmap instead of wiping it clean. This enables various trail
+	 * effects by using blur and other filters.</p>
+	 * 
+	 * <p>The PixelRenderer has mouse events disabled for itself and any 
+	 * display objects in its display list. To enable mouse events for the renderer
+	 * or its children set the mouseEnabled or mouseChildren properties to true.</p>
+	 * 
+	 * <p><i>This class has been modified in version 1.0.1 of Flint to fix various
 	 * limitations in the previous version. Specifically, the canvas for drawing
-	 * the particles on must now be specified by the developer (it previously defaulted
-	 * to the size and position of the stage).</p>
+	 * the particles on must now be specified by the developer (it previously 
+	 * defaulted to the size and position of the stage).</i></p>
 	 * 
-	 * <p>The previous behaviour, while still flawed, has been improved
+	 * <p><i>The previous behaviour, while still flawed, has been improved
 	 * and given its own renderer, the FullStagePixelRenderer. To retain the previous
-	 * behaviour, please use the FullStagePixelRenderer.</p>
+	 * behaviour, please use the FullStagePixelRenderer.</i></p>
 	 * 
 	 * @see org.flintparticles.renderers.FullStagePixelRenderer
 	 */
