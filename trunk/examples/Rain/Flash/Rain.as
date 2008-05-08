@@ -49,9 +49,11 @@ package
 
 	public class Rain extends Sprite
 	{
+		private var emitter:Emitter;
+		
 		public function Rain()
 		{
-			var emitter:Emitter = new Emitter();
+			emitter = new Emitter();
 
 			emitter.counter = new Steady( 300 );
 			

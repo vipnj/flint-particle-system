@@ -52,9 +52,12 @@ package
 
 	public class FireAndSmoke extends Sprite
 	{
+		private var smoke:Emitter;
+		private var fire:Emitter;
+		
 		public function FireAndSmoke()
 		{
-			var smoke:Emitter = new Emitter();
+			smoke = new Emitter();
 			
 			smoke.counter = new Steady( 9, 11 );
       
@@ -78,7 +81,7 @@ package
 			smoke.start( );
 			
 
-			var fire:Emitter = new Emitter();
+			fire = new Emitter();
 			
 			fire.counter = new Steady( 55, 65 );
 

@@ -53,9 +53,11 @@ package
 	
 	public class Sparkler extends Sprite
 	{
+		private var emitter:Emitter;
+		
 		public function Sparkler()
 		{
-			var emitter:Emitter = new Emitter();
+			emitter = new Emitter();
 
 			emitter.counter = new Steady( 150 );
 			

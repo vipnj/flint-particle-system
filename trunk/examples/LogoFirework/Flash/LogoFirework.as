@@ -54,9 +54,11 @@ package
 
 	public class LogoFirework extends Sprite
 	{
+		private var emitter:Emitter;
+		
 		public function LogoFirework()
 		{
-			var emitter:Emitter = new Emitter();
+			emitter = new Emitter();
 
 			emitter.counter = new Blast( 1500 );
 			

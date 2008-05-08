@@ -50,9 +50,11 @@ package
 
 	public class MutualG extends Sprite
 	{
+		private var emitter:Emitter;
+		
 		public function MutualG()
 		{
-			var emitter:Emitter = new Emitter();
+			emitter = new Emitter();
 
 			emitter.counter = new Blast( 30 );
 			
