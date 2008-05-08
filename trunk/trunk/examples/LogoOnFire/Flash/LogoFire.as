@@ -51,9 +51,11 @@ package
 
 	public class LogoFire extends Sprite
 	{
+		private var emitter:Emitter;
+		
 		public function LogoFire()
 		{
-			var emitter:Emitter = new Emitter();
+			emitter = new Emitter();
 
 			emitter.counter = new Steady( 250 );
 			

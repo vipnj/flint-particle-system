@@ -49,9 +49,11 @@ package
 
 	public class StarFountain extends Sprite
 	{
+		private var emitter:Emitter;
+		
 		public function StarFountain()
 		{
-			var emitter:Emitter = new Emitter();
+			emitter = new Emitter();
 
 			emitter.counter = new Steady( 50 );
 			

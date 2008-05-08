@@ -50,9 +50,11 @@ package
 	 */
 	public class GravityWells extends Sprite
 	{
+		private var emitter:Emitter;
+		
 		public function GravityWells()
 		{
-			var emitter:Emitter = new Emitter();
+			emitter = new Emitter();
 
 			emitter.counter = new Blast( 4000 );
 			

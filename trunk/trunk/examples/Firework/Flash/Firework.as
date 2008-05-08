@@ -54,9 +54,11 @@ package
 
 	public class Firework extends Sprite
 	{
+		private var emitter:Emitter;
+		
 		public function Firework()
 		{
-			var emitter:Emitter = new Emitter();
+			emitter = new Emitter();
 
 			emitter.counter = new Blast( 700 );
 			

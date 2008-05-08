@@ -53,9 +53,11 @@ package
 		[Embed(source='assets/bird.swf', symbol='Bird')]
 		public var Bird:Class;
 		
+		private var emitter:Emitter;
+		
 		public function Flocking()
 		{
-			var emitter:Emitter = new Emitter();
+			emitter = new Emitter();
 
 			emitter.counter = new Blast( 150 );
 			
