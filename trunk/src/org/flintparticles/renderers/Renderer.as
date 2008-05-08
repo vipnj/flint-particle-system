@@ -33,31 +33,33 @@ package org.flintparticles.renderers
 	import org.flintparticles.particles.Particle;		
 
 	/**
-	 * The Renderer interface must be implemented by all renderers.
+	 * The Renderer interface must be implemented by all renderers. A renderer 
+	 * is a class that draws the particles that are managed by an emitter. A 
+	 * renderer is set for an emitter by assigning it to the emitter's 
+	 * renderer property.
 	 * 
-	 * <p>A renderer is a class that draws the particles that are managed by
-	 * an emitter.</p>
-	 * 
-	 * <p>A renderer is set for an emitter by assigning it to the emitter's 
-	 * renderer property.</p>
+	 * @see org.flintparticles.emitters.Emitter#renderer
 	 */
 	public interface Renderer
 	{
 		/**
-		 * The addParticle method is called when a particle is added to the emitter.
+		 * The addParticle method is called when a particle is added to the emitter that
+		 * this renderer is assigned to.
 		 * @param particle The particle.
 		 */
 		function addParticle( particle:Particle ):void;
 
 		/**
-		 * The removeParticle method is called when a particle is removed from the emitter.
+		 * The removeParticle method is called when a particle is removed from the 
+		 * emitter that this renderer is assigned to.
 		 * @param particle The particle.
 		 */
 		function removeParticle( particle:Particle ):void;
 
 		/**
 		 * The renderParticles method is called every frame so the renderer can
-		 * draw the particles.
+		 * draw the particles that are in the emitter that this renderer is
+		 * assigned to.
 		 * @param particles The particles to draw.
 		 */
 		function renderParticles( particles:Array ):void;

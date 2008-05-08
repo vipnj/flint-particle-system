@@ -42,23 +42,17 @@ package org.flintparticles.renderers
 	import org.flintparticles.particles.Particle;	
 
 	/**
-	 * The BitmapRenderer draws particles onto a single Bitmap display object.
+	 * The BitmapRenderer draws particles onto a single Bitmap display object. The
+	 * region of the particle system covered by this bitmap object must be defined
+	 * in the canvas property of the BitmapRenderer. Particles outside this region
+	 * are not drawn.
 	 * 
-	 * <p>This class has been modified in version 1.0.1 of Flint to fix various
-	 * limitations in the previous version. Specifically, the canvas for drawing
-	 * the particles on must now be specified by the developer (it previously defaulted
-	 * to the size and position of the stage).</p>
-	 * 
-	 * <p>The previous behaviour, while still flawed, has been improved
-	 * and given its own renderer, the FullStageBitmapRenderer. To retain the previous
-	 * behaviour, please use the FullStageBitmapRenderer.</p>
-	 * 
-	 * <p>The image to be used for each particle is the particles image property.
-	 * This is a DisplayObject, but this 
-	 * DisplayObject is not used directly but is, rather, copied into the
-	 * bitmap with the various properties of the particle applied.
-	 * Consequently each particle may be represented by the same DisplayObject
-	 * instance and the SharedImage initializer can be used with this emitter.</p>
+	 * <p>The image to be used for each particle is the particle's image property.
+	 * This is a DisplayObject, but this DisplayObject is not used directly. Instead
+	 * it is copied into the bitmap with the various properties of the particle 
+	 * applied. Consequently each particle may be represented by the same 
+	 * DisplayObject instance and the SharedImage initializer can be used with this 
+	 * renderer.</p>
 	 * 
 	 * <p>The BitmapRenderer allows the use of BitmapFilters to modify the appearance
 	 * of the bitmap. Every frame, under normal circumstances, the Bitmap used to
@@ -71,14 +65,32 @@ package org.flintparticles.renderers
 	 * display objects in its display list. To enable mouse events for the renderer
 	 * or its children set the mouseEnabled or mouseChildren properties to true.</p>
 	 * 
+	 * <p><i>This class has been modified in version 1.0.1 of Flint to fix various
+	 * limitations in the previous version. Specifically, the canvas for drawing
+	 * the particles on must now be specified by the developer (it previously 
+	 * defaulted to the size and position of the stage).</i></p>
+	 * 
+	 * <p><i>The previous behaviour, while still flawed, has been improved and 
+	 * given its own renderer, the FullStageBitmapRenderer. To retain the previous
+	 * behaviour, please use the FullStageBitmapRenderer.</i></p>
+	 * 
 	 * @see org.flintparticles.renderers.FullStageBitmapRenderer
 	 */
 	public class BitmapRenderer extends Sprite implements Renderer
 	{
+		/**
+		 * @private
+		 */
 		protected var _bitmap:Bitmap;
 		private var _preFilters:Array;
 		private var _postFilters:Array;
+		/**
+		 * @private
+		 */
 		protected var _smoothing:Boolean;
+		/**
+		 * @private
+		 */
 		protected var _canvas:Rectangle;
 
 		/**
@@ -92,7 +104,9 @@ package org.flintparticles.renderers
 		 * @param smoothing Whether to use smoothing when scaling the Bitmap and, if the
 		 * particles are represented by bitmaps, when drawing the particles.
 		 * Smoothing removes pixelation when images are scaled and rotated, but it
-		 * takes longer.
+		 * takes longer so it may slow down your particle system.
+		 * 
+		 * @see org.flintparticles.emitters.Emitter#renderer
 		 */
 		public function BitmapRenderer( canvas:Rectangle, smoothing:Boolean = false )
 		{
@@ -108,10 +122,10 @@ package org.flintparticles.renderers
 		
 		/**
 		 * The addFilter method adds a BitmapFilter to the renderer. These filters
-		 * are applied each frame, before or after the new particle positions are drawn, instead
-		 * of wiping the display clear. Use of a blur filter, for example, will
-		 * produce a trail behind each particle as the previous images blur and fade
-		 * more each frame.
+		 * are applied each frame, before or after the new particle positions are 
+		 * drawn, instead of wiping the display clear. Use of a blur filter, for 
+		 * example, will produce a trail behind each particle as the previous images
+		 * blur and fade more each frame.
 		 * 
 		 * @param filter The filter to apply
 		 * @param postRender If false, the filter is applied before drawing the particles
@@ -195,8 +209,9 @@ package org.flintparticles.renderers
 		}
 		
 		/**
-		 * When the renderer ios no longer required, this method must be called by the 
-		 * user to free up memory used by the renderer.
+		 * When the renderer is no longer required, this method must be called by the 
+		 * user to free up memory used by the renderer. If you don't call this method
+		 * then the renderer's bitmap data will remain in memory.
 		 */
 		public function dispose():void
 		{
@@ -245,7 +260,9 @@ package org.flintparticles.renderers
 		
 		/**
 		 * Used internally here and in derived classes to alter the manner of 
-		 * the particle rendering (e.g. in the PixelRenderer class).
+		 * the particle rendering.
+		 * 
+		 * @param particle The particle to draw on the bitmap.
 		 */
 		protected function drawParticle( particle:Particle ):void
 		{
@@ -260,6 +277,7 @@ package org.flintparticles.renderers
 		 */
 		public function addParticle( particle:Particle ):void
 		{
+			// do nothing
 		}
 		
 		/**
@@ -267,6 +285,7 @@ package org.flintparticles.renderers
 		 */
 		public function removeParticle( particle:Particle ):void
 		{
+			// do nothing
 		}
 	}
 }
