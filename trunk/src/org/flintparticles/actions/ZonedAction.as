@@ -35,61 +35,44 @@ package org.flintparticles.actions
 	import org.flintparticles.zones.Zone;
 
 	/**
-	 * The Jet Action applies an acceleration to the particle only if it is in the specified zone. 
+	 * The ZonedAction Action applies an action to the particle only if it is in the specified zone. 
 	 */
 
-	public class Jet extends Action
+	public class ZonedAction extends Action
 	{
-		private var _x:Number;
-		private var _y:Number;
+		private var _action:Action;
 		private var _zone:Zone;
 		private var _invert:Boolean;
 		
 		/**
-		 * The constructor creates a Jet action for use by 
-		 * an emitter. To add a Jet to all particles created by an emitter, use the
+		 * The constructor creates a ZonedAction action for use by 
+		 * an emitter. To add a ZonedAction to all particles created by an emitter, use the
 		 * emitter's addAction method.
 		 * 
 		 * @see org.flintparticles.emitters.Emitter#addAction()
 		 * 
-		 * @param accelerationX The x coordinate of the acceleration to apply, in pixels 
-		 * per second per second.
-		 * @param accelerationY The y coordinate of the acceleration to apply, in pixels 
-		 * per second per second.
-		 * @param zone The zone in which to apply the acceleration.
-		 * @param invertZone If false (the default) the acceleration is applied only to particles inside 
-		 * the zone. If true the acceleration is applied only to particles outside the zone.
+		 * @param action The action to apply when inside the zone.
+		 * @param zone The zone in which to apply the action.
+		 * @param invertZone If false (the default) the action is applied only to particles inside 
+		 * the zone. If true the action is applied only to particles outside the zone.
 		 */
-		public function Jet( accelerationX:Number, accelerationY:Number, zone:Zone, invertZone:Boolean = false )
+		public function ZonedAction( action:Action, zone:Zone, invertZone:Boolean = false )
 		{
-			_x = accelerationX;
-			_y = accelerationY;
+			_action = action;
 			_zone = zone;
 			_invert = invertZone;
 		}
 		
 		/**
-		 * The x coordinate of the acceleration.
+		 * The action to apply when inside the zone.
 		 */
-		public function get x():Number
+		public function get action():Action
 		{
-			return _x;
+			return _action;
 		}
-		public function set x( value:Number ):void
+		public function set action( value:Action ):void
 		{
-			_x = value;
-		}
-		
-		/**
-		 * The y coordinate of the acceleration.
-		 */
-		public function get y():Number
-		{
-			return _y;
-		}
-		public function set y( value:Number ):void
-		{
-			_y = value;
+			_action = value;
 		}
 		
 		/**
@@ -105,8 +88,8 @@ package org.flintparticles.actions
 		}
 		
 		/**
-		 * If false (the default), the acceleration is applied to particles inside the zone.
-		 * If true, the acceleration is applied to particles outside the zone.
+		 * If false (the default), the action is applied to particles inside the zone.
+		 * If true, the action is applied to particles outside the zone.
 		 */
 		public function get invertZone():Boolean
 		{
@@ -120,22 +103,44 @@ package org.flintparticles.actions
 		/**
 		 * @inheritDoc
 		 */
+		override public function getDefaultPriority():Number
+		{
+			return _action.getDefaultPriority();
+		}
+		
+		/**
+		 * @inheritDoc
+		 */
+		override public function addedToEmitter( emitter:Emitter ):void
+		{
+			_action.addedToEmitter( emitter );
+		}
+		
+		/**
+		 * @inheritDoc
+		 */
+		override public function removedFromEmitter( emitter:Emitter ):void
+		{
+			_action.removedFromEmitter( emitter );
+		}
+
+		/**
+		 * @inheritDoc
+		 */
 		override public function update( emitter:Emitter, particle:Particle, time:Number ):void
 		{
 			if( _zone.contains( particle.x, particle.y ) )
 			{
 				if( !_invert )
 				{
-					particle.velX += _x * time;
-					particle.velY += _y * time;
+					_action.update( emitter, particle, time );
 				}
 			}
 			else
 			{
 				if( _invert )
 				{
-					particle.velX += _x * time;
-					particle.velY += _y * time;
+					_action.update( emitter, particle, time );
 				}
 			}
 		}
