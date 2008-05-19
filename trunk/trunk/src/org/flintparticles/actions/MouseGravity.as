@@ -45,7 +45,7 @@ package org.flintparticles.actions
 	{
 		private var _power:Number;
 		private var _epsilonSq:Number;
-		private var _gravityConst:Number = 10000;
+		private var _gravityConst:Number = 10000; // scales the power to more useable levels
 		
 		/**
 		 * The constructor creates a MouseGravity action for use by 

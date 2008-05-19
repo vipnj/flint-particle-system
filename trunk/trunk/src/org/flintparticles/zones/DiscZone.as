@@ -67,6 +67,47 @@ package org.flintparticles.zones
 		}
 		
 		/**
+		 * The centre of the disc.
+		 */
+		public function get center() : Point
+		{
+			return _center;
+		}
+
+		public function set center( value : Point ) : void
+		{
+			_center = value;
+		}
+
+		/**
+		 * The radius of the inner edge of the disc.
+		 */
+		public function get innerRadius() : Number
+		{
+			return _innerRadius;
+		}
+
+		public function set innerRadius( value : Number ) : void
+		{
+			_innerRadius = value;
+			_innerSq = _innerRadius * _innerRadius;
+		}
+
+		/**
+		 * The radius of the outer edge of the disc.
+		 */
+		public function get outerRadius() : Number
+		{
+			return _outerRadius;
+		}
+
+		public function set outerRadius( value : Number ) : void
+		{
+			_outerRadius = value;
+			_outerSq = _outerRadius * _outerRadius;
+		}
+
+		/**
 		 * The contains method determines whether a point is inside the zone.
 		 * This method is used by the initializers and actions that
 		 * use the zone. Usually, it need not be called directly by the user.

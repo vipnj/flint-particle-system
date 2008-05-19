@@ -1,4 +1,5 @@
-﻿/*
+﻿
+/*
  * FLINT PARTICLE SYSTEM
  * .....................
  * 
@@ -36,7 +37,7 @@ package org.flintparticles.emitters
 	import flash.events.EventDispatcher;
 	import flash.geom.Point;
 	import flash.utils.getTimer;
-	
+
 	import org.flintparticles.actions.Action;
 	import org.flintparticles.activities.Activity;
 	import org.flintparticles.counters.Counter;
@@ -112,84 +113,84 @@ package org.flintparticles.emitters
 		 * 
 		 * default factory to manage the creation, reuse and destruction of particles
 		 */
-		protected static var _creator:ParticleCreator = new ParticleCreator();
-		
-		/**
-		 * @private
-		 */
-		protected var _particleFactory:ParticleFactory;
-		
-		/**
-		 * @private
-		 */
-		protected var _initializers:Array;
-		/**
-		 * @private
-		 */
-		protected var _actions:Array;
-		/**
-		 * @private
-		 */
-		protected var _particles:Array;
-		/**
-		 * @private
-		 */
-		protected var _activities:Array;
-		/**
-		 * @private
-		 */
-		protected var _counter:Counter;
-		/**
-		 * @private
-		 */
-		protected var _renderer:Renderer;
+		protected static var _creator : ParticleCreator = new ParticleCreator( );
 
 		/**
 		 * @private
 		 */
-		protected var _initializersPriority:Array;
-		/**
-		 * @private
-		 */
-		protected var _actionsPriority:Array;
-		/**
-		 * @private
-		 */
-		protected var _particlesPriority:Array;
-		/**
-		 * @private
-		 */
-		protected var _activitiesPriority:Array;
+		protected var _particleFactory : ParticleFactory;
 
-		private var _time:uint;
 		/**
 		 * @private
 		 */
-		protected var _x:Number = 0;
+		protected var _initializers : Array;
 		/**
 		 * @private
 		 */
-		protected var _y:Number = 0;
+		protected var _actions : Array;
 		/**
 		 * @private
 		 */
-		protected var _rotation:Number = 0;
-		
-		private var _ticker:Shape;
-		
+		protected var _particles : Array;
+		/**
+		 * @private
+		 */
+		protected var _activities : Array;
+		/**
+		 * @private
+		 */
+		protected var _counter : Counter;
+		/**
+		 * @private
+		 */
+		protected var _renderer : Renderer;
+
+		/**
+		 * @private
+		 */
+		protected var _initializersPriority : Array;
+		/**
+		 * @private
+		 */
+		protected var _actionsPriority : Array;
+		/**
+		 * @private
+		 */
+		protected var _particlesPriority : Array;
+		/**
+		 * @private
+		 */
+		protected var _activitiesPriority : Array;
+
+		private var _time : uint;
+		/**
+		 * @private
+		 */
+		protected var _x : Number = 0;
+		/**
+		 * @private
+		 */
+		protected var _y : Number = 0;
+		/**
+		 * @private
+		 */
+		protected var _rotation : Number = 0;
+
+		private var _ticker : Shape;
+
 		/**
 		 * Identifies whether the particles should be arranged
 		 * into spacially sorted arrays - this speeds up proximity
 		 * testing for those actions that need it.
 		 */
-		public var spaceSort:Boolean = false;
+		public var spaceSort : Boolean = false;
 		/**
 		 * The array of particle indices sorted based on the particles' horizontal positions.
 		 * To persuade the emitter to create this array you should set the spaceSort property
 		 * to true. Usually, actions that need this set to true will do so in their addedToEmitter
 		 * method.
 		 */
-		public var spaceSortedX:Array;
+		public var spaceSortedX : Array;
 
 		/**
 		 * The constructor creates an emitter.
@@ -197,63 +198,70 @@ package org.flintparticles.emitters
 		public function Emitter()
 		{
 			_particleFactory = _creator;
-			_particles = new Array();
-			_actions = new Array();
-			_initializers = new Array();
-			_activities = new Array();
-			_particlesPriority = new Array();
-			_actionsPriority = new Array();
-			_initializersPriority = new Array();
-			_activitiesPriority = new Array();
-			_counter = new ZeroCounter();
-			_ticker = new Shape();
+			_particles = new Array( );
+			_actions = new Array( );
+			_initializers = new Array( );
+			_activities = new Array( );
+			_particlesPriority = new Array( );
+			_actionsPriority = new Array( );
+			_initializersPriority = new Array( );
+			_activitiesPriority = new Array( );
+			_counter = new ZeroCounter( );
+			_ticker = new Shape( );
 		}
-		
+
 		/**
 		 * Indicates the x coordinate of the Emitter within the particle system's coordinate space.
 		 */
-		public function get x():Number
+		public function get x() : Number
 		{
 			return _x;
 		}
-		public function set x( value:Number ):void
+
+		public function set x( value : Number ) : void
 		{
 			_x = value;
 		}
+
 		/**
 		 * Indicates the y coordinate of the Emitter within the particle system's coordinate space.
 		 */
-		public function get y():Number
+		public function get y() : Number
 		{
 			return _y;
 		}
-		public function set y( value:Number ):void
+
+		public function set y( value : Number ) : void
 		{
 			_y = value;
 		}
+
 		/**
 		 * Indicates the rotation of the Emitter, in degrees, within the particle system's coordinate space.
 		 */
-		public function get rotation():Number
+		public function get rotation() : Number
 		{
 			return Maths.asDegrees( _rotation );
 		}
-		public function set rotation( value:Number ):void
+
+		public function set rotation( value : Number ) : void
 		{
 			_rotation = Maths.asRadians( value );
 		}
+
 		/**
 		 * Indicates the rotation of the Emitter, in radians, within the particle system's coordinate space.
 		 */
-		public function get rotRadians():Number
+		public function get rotRadians() : Number
 		{
 			return _rotation;
 		}
-		public function set rotRadians( value:Number ):void
+
+		public function set rotRadians( value : Number ) : void
 		{
 			_rotation = value;
 		}
-		
+
 		/**
 		 * Adds an Initializer object to the Emitter. Initializers set the
 		 * initial properties of particles created by the emitter.
@@ -265,13 +273,13 @@ package org.flintparticles.emitters
 		 * parameter. The default priority is usually the one you want so this 
 		 * parameter is only used when you need to override the default.
 		 */
-		public function addInitializer( initializer:Initializer, priority:Number = NaN ):void
+		public function addInitializer( initializer : Initializer, priority : Number = NaN ) : void
 		{
 			if( isNaN( priority ) )
 			{
-				priority = initializer.getDefaultPriority();
+				priority = initializer.getDefaultPriority( );
 			}
-			for( var i:uint = 0; i < _initializersPriority.length; ++i )
+			for( var i : uint = 0; i < _initializersPriority.length ; ++i )
 			{
 				if( _initializersPriority[ i ] < priority )
 				{
@@ -282,7 +290,7 @@ package org.flintparticles.emitters
 			_initializersPriority.splice( i, 0, priority );
 			initializer.addedToEmitter( this );
 		}
-		
+
 		/**
 		 * Removes an Initializer from the Emitter.
 		 * 
@@ -290,9 +298,9 @@ package org.flintparticles.emitters
 		 * 
 		 * @see addInitializer()
 		 */
-		public function removeInitializer( initializer:Initializer ):void
+		public function removeInitializer( initializer : Initializer ) : void
 		{
-			for( var i:uint = 0; i < _initializers.length; ++i )
+			for( var i : uint = 0; i < _initializers.length ; ++i )
 			{
 				if( _initializers[i] == initializer )
 				{
@@ -303,7 +311,7 @@ package org.flintparticles.emitters
 				}
 			}
 		}
-		
+
 		/**
 		 * Adds an Action to the Emitter. Actions set the behaviour
 		 * of particles created by the emitter.
@@ -314,13 +322,13 @@ package org.flintparticles.emitters
 		 * which is used if no value is passed in this parameter. The default priority is usually
 		 * the one you want so this parameter is only used when you need to override the default.
 		 */
-		public function addAction( action:Action, priority:Number = NaN ):void
+		public function addAction( action : Action, priority : Number = NaN ) : void
 		{
 			if( isNaN( priority ) )
 			{
-				priority = action.getDefaultPriority();
+				priority = action.getDefaultPriority( );
 			}
-			for( var i:uint = 0; i < _actionsPriority.length; ++i )
+			for( var i : uint = 0; i < _actionsPriority.length ; ++i )
 			{
 				if( _actionsPriority[ i ] < priority )
 				{
@@ -331,7 +339,7 @@ package org.flintparticles.emitters
 			_actionsPriority.splice( i, 0, priority );
 			action.addedToEmitter( this );
 		}
-		
+
 		/**
 		 * Removes an Action from the Emitter.
 		 * 
@@ -339,9 +347,9 @@ package org.flintparticles.emitters
 		 * 
 		 * @see addAction()
 		 */
-		public function removeAction( action:Action ):void
+		public function removeAction( action : Action ) : void
 		{
-			for( var i:uint = 0; i < _actions.length; ++i )
+			for( var i : uint = 0; i < _actions.length ; ++i )
 			{
 				if( _actions[i] == action )
 				{
@@ -352,7 +360,7 @@ package org.flintparticles.emitters
 				}
 			}
 		}
-		
+
 		/**
 		 * Adds an Activity to the Emitter. Activities set the behaviour
 		 * of the Emitter.
@@ -363,13 +371,13 @@ package org.flintparticles.emitters
 		 * which is used if no value is passed in this parameter. The default priority is usually
 		 * the one you want so this parameter is only used when you need to override the default.
 		 */
-		public function addActivity( activity:Activity, priority:Number = NaN ):void
+		public function addActivity( activity : Activity, priority : Number = NaN ) : void
 		{
 			if( isNaN( priority ) )
 			{
-				priority = activity.getDefaultPriority();
+				priority = activity.getDefaultPriority( );
 			}
-			for( var i:uint = 0; i < _activitiesPriority.length; ++i )
+			for( var i : uint = 0; i < _activitiesPriority.length ; ++i )
 			{
 				if( _activitiesPriority[ i ] < priority )
 				{
@@ -380,7 +388,7 @@ package org.flintparticles.emitters
 			_activitiesPriority.splice( i, 0, priority );
 			activity.addedToEmitter( this );
 		}
-		
+
 		/**
 		 * Removes an Activity from the Emitter.
 		 * 
@@ -388,9 +396,9 @@ package org.flintparticles.emitters
 		 * 
 		 * @see addActivity()
 		 */
-		public function removeActivity( activity:Activity ):void
+		public function removeActivity( activity : Activity ) : void
 		{
-			for( var i:uint = 0; i < _activities.length; ++i )
+			for( var i : uint = 0; i < _activities.length ; ++i )
 			{
 				if( _activities[i] == activity )
 				{
@@ -401,32 +409,34 @@ package org.flintparticles.emitters
 				}
 			}
 		}
-		
+
 		/**
 		 * The Counter for the Emitter. The counter defines when and
 		 * with what frequency the emitter emits particles.
 		 */		
-		public function get counter():Counter
+		public function get counter() : Counter
 		{
 			return _counter;
 		}
-		public function set counter( value:Counter ):void
+
+		public function set counter( value : Counter ) : void
 		{
 			_counter = value;
 		}
-		
+
 		/**
 		 * The Renderer for the Emitter. The renderer draws the particles.
 		 */		
-		public function get renderer():Renderer
+		public function get renderer() : Renderer
 		{
 			return _renderer;
 		}
-		public function set renderer( value:Renderer ):void
+
+		public function set renderer( value : Renderer ) : void
 		{
 			_renderer = value;
 		}
-		
+
 		/**
 		 * This is the particle factory used by the emitter to create and dispose of particles.
 		 * The default value is an instance of the ParticleCreator class that is shared by all
@@ -437,19 +447,20 @@ package org.flintparticles.emitters
 		 * 
 		 * @see org.flintparticles.particles.ParticleCreator
 		 */		
-		public function get particleFactory():ParticleFactory
+		public function get particleFactory() : ParticleFactory
 		{
 			return _particleFactory;
 		}
-		public function set particleFactory( value:ParticleFactory ):void
+
+		public function set particleFactory( value : ParticleFactory ) : void
 		{
 			_particleFactory = value;
 		}
-		
+
 		/**
 		 * The array of all particles created by this emitter.
 		 */
-		public function get particles():Array
+		public function get particles() : Array
 		{
 			return _particles;
 		}
@@ -467,17 +478,13 @@ package org.flintparticles.emitters
 		 * If you pass an array as the parameter, each item in the array should be another
 		 * display object for adding to the emitter.
 		 */
-		public function addDisplayObjects( ...objects ):void
+		public function addDisplayObjects( ...objects ) : void
 		{
-			if( !( _renderer is DisplayObject ) || ! DisplayObject( _renderer ).stage )
-			{
-				throw( new Error( "Attempt to add DisplayObjects to an emitter when the emitter has no renderer or the emitter's renderer is not on the stage." ) );
-			}
-			for( var i:Number = 0; i < objects.length; ++i )
+			for( var i : Number = 0; i < objects.length ; ++i )
 			{
 				if( objects[i] is Array )
 				{
-					for( var j:Number = 0; j < objects[i].length; ++j )
+					for( var j : Number = 0; j < objects[i].length ; ++j )
 					{
 						if( objects[i][j] is DisplayObject )
 						{
@@ -491,44 +498,50 @@ package org.flintparticles.emitters
 				}
 			}
 		}
-		
+
 		/*
 		 * Used internally to add an individual display object to the emitter
 		 */
-		private function addDisplayObject( obj:DisplayObject ):void
+		private function addDisplayObject( obj : DisplayObject ) : void
 		{
-			var particle:Particle = _particleFactory.createParticle();
-			var len:uint = _initializers.length;
-			for ( var i:uint = 0; i < len; ++i )
+			var particle : Particle = _particleFactory.createParticle( );
+			var len : uint = _initializers.length;
+			for ( var i : uint = 0; i < len ; ++i )
 			{
 				_initializers[i].initialize( this, particle );
 			}
-			var p:Point = new Point( 0, 0 );
-			var r:Number = 0;
-			var displayObj:DisplayObject = DisplayObject( _renderer );
-			p = displayObj.globalToLocal( obj.localToGlobal( p ) );
-			r = DisplayObjectUtils.globalToLocalRotation( displayObj, DisplayObjectUtils.localToGlobalRotation( obj, 0 ) );
-			obj.parent.removeChild( obj );
-			particle.x = p.x;
-			particle.y = p.y;
+			var displayObj : DisplayObject = _renderer as DisplayObject;
+			if ( obj.parent && displayObj )
+			{
+				var p : Point = displayObj.globalToLocal( obj.localToGlobal( new Point( 0, 0 ) ) );
+				particle.x = p.x;
+				particle.y = p.y;
+				var r : Number = DisplayObjectUtils.globalToLocalRotation( displayObj, DisplayObjectUtils.localToGlobalRotation( obj, 0 ) );
+				particle.rotation = Maths.asRadians( r );
+				obj.parent.removeChild( obj );
+			}
+			else
+			{
+				particle.x = obj.x;
+				particle.y = obj.y;
+				particle.rotation = Maths.asRadians( obj.rotation );
+			}
 			particle.image = obj;
-			particle.rotation = Maths.asRadians( r );
 			_particles.unshift( particle );
 			_renderer.addParticle( particle );
 		}
 
-		
 		/*
 		 * Used internally to create a particle.
 		 */
-		private function createParticle():Particle
+		private function createParticle() : Particle
 		{
-			var particle:Particle = _particleFactory.createParticle();
-			var len:uint = _initializers.length;
+			var particle : Particle = _particleFactory.createParticle( );
+			var len : uint = _initializers.length;
 			particle.x = _x;
 			particle.y = _y;
 			particle.rotation = _rotation;
-			for ( var i:uint = 0; i < len; ++i )
+			for ( var i : uint = 0; i < len ; ++i )
 			{
 				_initializers[i].initialize( this, particle );
 			}
@@ -537,71 +550,71 @@ package org.flintparticles.emitters
 			dispatchEvent( new FlintEvent( FlintEvent.PARTICLE_CREATED, particle ) );
 			return particle;
 		}
-		
+
 		/**
 		 * Starts the emitter. Until start is called, the emitter will not emit any particles.
 		 */
-		public function start():void
+		public function start() : void
 		{
 			_ticker.removeEventListener( Event.ENTER_FRAME, frameLoop );
 			_ticker.addEventListener( Event.ENTER_FRAME, frameLoop );
-			_time = getTimer();
-			var len:uint = _activities.length;
-			for ( var i:uint = 0; i < len; ++i )
+			_time = getTimer( );
+			var len : uint = _activities.length;
+			for ( var i : uint = 0; i < len ; ++i )
 			{
 				_activities[i].initialize( this );
 			}
 			len = _counter.startEmitter( this );
-			for ( i = 0; i < len; ++i )
+			for ( i = 0; i < len ; ++i )
 			{
-				createParticle();
+				createParticle( );
 			}
 		}
-		
+
 		/*
 		 * Used internally to update the emitter.
 		 */
-		private function frameLoop( ev:Event ):void
+		private function frameLoop( ev : Event ) : void
 		{
 			// update timer
-			var oldTime:uint = _time;
-			_time = getTimer();
-			var frameTime:Number = ( _time - oldTime ) * 0.001;
-/*			if( _renderer is DisplayObject && DisplayObject( _renderer ).stage )
+			var oldTime : uint = _time;
+			_time = getTimer( );
+			var frameTime : Number = ( _time - oldTime ) * 0.001;
+			/*			if( _renderer is DisplayObject && DisplayObject( _renderer ).stage )
 			{
-				var maxTime:Number = 3 / DisplayObject( _renderer ).stage.frameRate;
-				if( frameTime > maxTime )
-				{
-					frameTime = maxTime;
-				}
+			var maxTime:Number = 3 / DisplayObject( _renderer ).stage.frameRate;
+			if( frameTime > maxTime )
+			{
+			frameTime = maxTime;
+			}
 			}*/
 			frameUpdate( frameTime );
 		}
-		
+
 		/**
 		 * Used internally and in derived classes to update the emitter.
 		 * @param time The duration, in seconds, of the current frame.
 		 */
-		protected function frameUpdate( time:Number ):void
+		protected function frameUpdate( time : Number ) : void
 		{
-			var i:uint;
-			var particle:Particle;
-			var len:uint = _counter.updateEmitter( this, time );
-			for( i = 0; i < len; ++i )
+			var i : uint;
+			var particle : Particle;
+			var len : uint = _counter.updateEmitter( this, time );
+			for( i = 0; i < len ; ++i )
 			{
-				createParticle();
+				createParticle( );
 			}
 			if( spaceSort )
 			{
 				spaceSortedX = _particles.sortOn( "x", Array.NUMERIC | Array.RETURNINDEXEDARRAY );
 				len = _particles.length;
-				for( i = 0; i < len; ++i )
+				for( i = 0; i < len ; ++i )
 				{
 					_particles[ spaceSortedX[i] ].spaceSortX = i;
 				}
 			}
 			len = _activities.length;
-			for ( i = 0; i < len; ++i )
+			for ( i = 0; i < len ; ++i )
 			{
 				_activities[i].update( this, time );
 			}
@@ -610,20 +623,20 @@ package org.flintparticles.emitters
 				
 				// update particle state
 				len = _actions.length;
-				var action:Action;
-				var len2:uint = _particles.length;
+				var action : Action;
+				var len2 : uint = _particles.length;
 				
-				for( var j:uint = 0; j < len; ++j )
+				for( var j : uint = 0; j < len ; ++j )
 				{
 					action = _actions[j];
-					for ( i = 0; i < len2; ++i )
+					for ( i = 0; i < len2 ; ++i )
 					{
 						particle = _particles[i];
 						action.update( this, particle, time );
 					}
 				}
 				// remove dead particles
-				for ( i = len2; i--; )
+				for ( i = len2; i-- ; )
 				{
 					particle = _particles[i];
 					if ( particle.isDead )
@@ -641,42 +654,42 @@ package org.flintparticles.emitters
 			}
 			_renderer.renderParticles( _particles );
 		}
-		
+
 		/**
 		 * Pauses the emitter.
 		 */
-		public function pause():void
+		public function pause() : void
 		{
 			_ticker.removeEventListener( Event.ENTER_FRAME, frameLoop );
 		}
-		
+
 		/**
 		 * Resumes the emitter after a pause.
 		 */
-		public function resume():void
+		public function resume() : void
 		{
 			_ticker.removeEventListener( Event.ENTER_FRAME, frameLoop );
 			_ticker.addEventListener( Event.ENTER_FRAME, frameLoop );
-			_time = getTimer();
+			_time = getTimer( );
 		}
-		
+
 		/**
 		 * Cleans up the emitter prior to removal. If you don't call this method,
 		 * the garbage collector will clean up all the particles in teh usual way.
 		 * If you use this method, the particles will be returned to the particle
 		 * factory for reuse.
 		 */
-		public function dispose():void
+		public function dispose() : void
 		{
 			_ticker.removeEventListener( Event.ENTER_FRAME, frameLoop );
-			var len:uint = _particles.length;
-			for ( var i:uint = 0; i < len; ++i )
+			var len : uint = _particles.length;
+			for ( var i : uint = 0; i < len ; ++i )
 			{
 				_particleFactory.disposeParticle( _particles[i] );
 			}
 			_particles.length = 0;
 		}
-		
+
 		/**
 		 * Makes the emitter skip forwards a period of time with a single update.
 		 * Used when you want the emitter to look like it's been running for a while.
@@ -687,16 +700,16 @@ package org.flintparticles.emitters
 		 * for the emitter and its particles. A higher frameRate will be more
 		 * accurate but will take longer to calculate.
 		 */
-		public function runAhead( time:Number, frameRate:Number= 10 ):void
+		public function runAhead( time : Number, frameRate : Number = 10 ) : void
 		{
-			pause();
-			var step:Number = 1 / frameRate;
+			pause( );
+			var step : Number = 1 / frameRate;
 			while ( time > 0 )
 			{
 				time -= step;
 				frameUpdate( step );
 			}
-			resume();
+			resume( );
 		}
 
 		/**
@@ -705,9 +718,9 @@ package org.flintparticles.emitters
 		 * The new point is returned. If the renderer is not a display object then
 		 * the original point is returned.
 		 */
-		public function rendererLocalToGlobal( p:Point ):Point
+		public function rendererLocalToGlobal( p : Point ) : Point
 		{
-			var q:Point = p.clone();
+			var q : Point = p.clone( );
 			if( _renderer is DisplayObject )
 			{
 				q = DisplayObject( _renderer ).localToGlobal( q );
@@ -721,9 +734,9 @@ package org.flintparticles.emitters
 		 * The new point is returned. If the renderer is not a display object then
 		 * the original point is returned.
 		 */
-		public function rendererGlobalToLocal( p:Point ):Point
+		public function rendererGlobalToLocal( p : Point ) : Point
 		{
-			var q:Point = p.clone();
+			var q : Point = p.clone( );
 			if( _renderer is DisplayObject )
 			{
 				q = DisplayObject( _renderer ).globalToLocal( q );

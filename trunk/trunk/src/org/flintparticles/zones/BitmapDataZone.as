@@ -69,6 +69,47 @@ package org.flintparticles.zones
 		}
 		
 		/**
+		 * The bitmapData object that defines the zone.
+		 */
+		public function get bitmapData() : BitmapData
+		{
+			return _bitmapData;
+		}
+		public function set bitmapData( value : BitmapData ) : void
+		{
+			_bitmapData = value;
+			invalidate();
+		}
+
+		/**
+		 * A horizontal offset to apply to the pixels in the BitmapData object 
+		 * to reposition the zone
+		 */
+		public function get xOffset() : Number
+		{
+			return _left;
+		}
+		public function set xOffset( value : Number ) : void
+		{
+			_left = value;
+			invalidate();
+		}
+
+		/**
+		 * A vertical offset to apply to the pixels in the BitmapData object 
+		 * to reposition the zone
+		 */
+		public function get yOffset() : Number
+		{
+			return _top;
+		}
+		public function set yOffset( value : Number ) : void
+		{
+			_top = value;
+			invalidate();
+		}
+
+		/**
 		 * This method forces the zone to revaluate itself. It should be called whenever the 
 		 * contents of the BitmapData object change. However, it is an intensive method and 
 		 * calling it frequently will likely slow your code down.

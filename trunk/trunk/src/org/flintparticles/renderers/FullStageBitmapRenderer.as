@@ -111,7 +111,7 @@ package org.flintparticles.renderers
 		
 		private function getNewCanvasRect():Rectangle
 		{
-			var tl:Point = globalToLocal( new Point( 0, 0 ) );
+			var tl:Point = globalToLocal( BitmapRenderer.ZERO_POINT );
 			var br:Point = globalToLocal( new Point( stage.stageWidth, stage.stageHeight ) );
 			return new Rectangle( tl.x, tl.y, br.x - tl.x, br.y - tl.y );
 		}

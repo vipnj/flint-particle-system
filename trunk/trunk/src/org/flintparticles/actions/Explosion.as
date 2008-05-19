@@ -96,6 +96,31 @@ package org.flintparticles.actions
 		}
 		
 		/**
+		 * The strength of the explosion - larger numbers produce a stronger force.
+		 */
+		public function get expansionRate():Number
+		{
+			return _expansionRate;
+		}
+		public function set expansionRate( value:Number ):void
+		{
+			_expansionRate = value;
+		}
+		
+		/**
+		 * The strength of the explosion - larger numbers produce a stronger force.
+		 */
+		public function get depth():Number
+		{
+			return _depth * 2;
+		}
+		public function set depth( value:Number ):void
+		{
+			_depth = value * 0.5;
+			_invDepth = 1 / _depth;
+		}
+		
+		/**
 		 * The x coordinate of the center of the explosion.
 		 */
 		public function get x():Number

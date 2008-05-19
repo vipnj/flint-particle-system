@@ -40,9 +40,9 @@ package org.flintparticles.actions
 
 	public class ApproachNeighbours extends Action
 	{
-		private var _min:Number;
+		private var _max:Number;
 		private var _acc:Number;
-		private var _minSq:Number;
+		private var _maxSq:Number;
 		
 		/**
 		 * The constructor creates a ApproachNeighbours action for use by 
@@ -57,8 +57,8 @@ package org.flintparticles.actions
 		 */
 		public function ApproachNeighbours( maxDistance:Number, acceleration:Number )
 		{
-			_min = maxDistance;
-			_minSq = maxDistance * maxDistance;
+			_max = maxDistance;
+			_maxSq = maxDistance * maxDistance;
 			_acc = acceleration;
 		}
 		
@@ -68,12 +68,12 @@ package org.flintparticles.actions
 		 */
 		public function get maxDistance():Number
 		{
-			return _min;
+			return _max;
 		}
 		public function set maxDistance( value:Number ):void
 		{
-			_min = value;
-			_minSq = value * value;
+			_max = value;
+			_maxSq = value * value;
 		}
 		
 		/**
@@ -126,11 +126,11 @@ package org.flintparticles.actions
 			for( i = particle.spaceSortX - 1; i >= 0; --i )
 			{
 				other = particles[sortedX[i]];
-				if( ( dx = particle.x - other.x ) > _min ) break;
+				if( ( dx = particle.x - other.x ) > _max ) break;
 				dy = other.y - particle.y;
-				if( dy > _min || dy < -_min ) continue;
+				if( dy > _max || dy < -_max ) continue;
 				distanceSq = dy * dy + dx * dx;
-				if( distanceSq <= _minSq && distanceSq > 0 )
+				if( distanceSq <= _maxSq && distanceSq > 0 )
 				{
 					distanceInv = 1 / Math.sqrt( distanceSq );
 					moveX += -dx * distanceInv;
@@ -140,11 +140,11 @@ package org.flintparticles.actions
 			for( i = particle.spaceSortX + 1; i < len; ++i )
 			{
 				other = particles[sortedX[i]];
-				if( ( dx = other.x - particle.x ) > _min ) break;
+				if( ( dx = other.x - particle.x ) > _max ) break;
 				dy = other.y - particle.y;
-				if( dy > _min || dy < -_min ) continue;
+				if( dy > _max || dy < -_max ) continue;
 				distanceSq = dy * dy + dx * dx;
-				if( distanceSq <= _minSq && distanceSq > 0 )
+				if( distanceSq <= _maxSq && distanceSq > 0 )
 				{
 					distanceInv = 1 / Math.sqrt( distanceSq );
 					moveX += dx * distanceInv;

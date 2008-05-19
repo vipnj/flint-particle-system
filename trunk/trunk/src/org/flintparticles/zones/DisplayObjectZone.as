@@ -43,7 +43,7 @@ package org.flintparticles.zones
 	 * position of the zone.
 	 */
 
-	public class DisplayObjectZone  implements Zone 
+	public class DisplayObjectZone implements Zone 
 	{
 		private var _displayObject : DisplayObject;
 		private var _emitter : Emitter;
@@ -62,7 +62,11 @@ package org.flintparticles.zones
 		{
 			_displayObject = displayObject;
 			_emitter = emitter;
-			
+			calculateArea();
+		}
+		
+		private function calculateArea():void
+		{
 			var bounds:Rectangle = _displayObject.getBounds( _displayObject.stage );
 			
 			_area = 0;
@@ -78,6 +82,33 @@ package org.flintparticles.zones
 					}
 				}
 			}
+		}
+
+		/**
+		 * The DisplayObject that defines the zone.
+		 */
+		public function get displayObject() : DisplayObject
+		{
+			return _displayObject;
+		}
+		public function set displayObject( value : DisplayObject ) : void
+		{
+			_displayObject = value;
+			calculateArea();
+		}
+
+		/**
+		 * The emitter that you plan to use the zone with. The 
+		 * coordinates of the DisplayObject are translated to the local coordinate 
+		 * space of the emitter.
+		 */
+		public function get emitter() : Emitter
+		{
+			return _emitter;
+		}
+		public function set emitter( value : Emitter ) : void
+		{
+			_emitter = value;
 		}
 
 		/**

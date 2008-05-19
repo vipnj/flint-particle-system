@@ -64,6 +64,62 @@ package org.flintparticles.zones
 		}
 		
 		/**
+		 * The left coordinate of the rectangle defining the region of the zone.
+		 */
+		public function get left() : Number
+		{
+			return _left;
+		}
+
+		public function set left( value : Number ) : void
+		{
+			_left = value;
+			_width = right - left;
+		}
+
+		/**
+		 * The right coordinate of the rectangle defining the region of the zone.
+		 */
+		public function get right() : Number
+		{
+			return _right;
+		}
+
+		public function set right( value : Number ) : void
+		{
+			_right = value;
+			_width = right - left;
+		}
+
+		/**
+		 * The top coordinate of the rectangle defining the region of the zone.
+		 */
+		public function get top() : Number
+		{
+			return _top;
+		}
+
+		public function set top( value : Number ) : void
+		{
+			_top = value;
+			_height = bottom - top;
+		}
+
+		/**
+		 * The bottom coordinate of the rectangle defining the region of the zone.
+		 */
+		public function get bottom() : Number
+		{
+			return _bottom;
+		}
+
+		public function set bottom( value : Number ) : void
+		{
+			_bottom = value;
+			_height = bottom - top;
+		}
+
+		/**
 		 * The contains method determines whether a point is inside the zone.
 		 * This method is used by the initializers and actions that
 		 * use the zone. Usually, it need not be called directly by the user.

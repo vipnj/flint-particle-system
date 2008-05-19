@@ -46,7 +46,7 @@ package org.flintparticles.actions
 	 * as dead.</p>
 	 * 
 	 * <p>When adjusting the energy this action can use any of the
-	 * eassing functions in the org.flintparticles.energy package.</p>
+	 * easing functions in the org.flintparticles.energy package.</p>
 	 */
 	public class Age extends Action
 	{
@@ -73,6 +73,18 @@ package org.flintparticles.actions
 			{
 				_easing = easing;
 			}
+		}
+		
+		/**
+		 * The easing function used to modify the energy curve over the lifetime of the particle.
+		 */
+		public function get easing():Function
+		{
+			return _easing;
+		}
+		public function set easing( value:Function ):void
+		{
+			_easing = value;
 		}
 		
 		/**

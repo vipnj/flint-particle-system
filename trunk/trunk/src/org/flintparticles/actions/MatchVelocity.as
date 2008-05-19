@@ -40,9 +40,9 @@ package org.flintparticles.actions
 
 	public class MatchVelocity extends Action
 	{
-		private var _min:Number;
+		private var _max:Number;
 		private var _acc:Number;
-		private var _minSq:Number;
+		private var _maxSq:Number;
 		
 		/**
 		 * The constructor creates a MatchVelocity action for use by 
@@ -58,9 +58,9 @@ package org.flintparticles.actions
 		 */
 		public function MatchVelocity( maxDistance:Number, acceleration:Number )
 		{
-			_min = maxDistance;
+			_max = maxDistance;
 			_acc = acceleration;
-			_minSq = maxDistance * maxDistance;
+			_maxSq = maxDistance * maxDistance;
 		}
 		
 		/**
@@ -69,11 +69,11 @@ package org.flintparticles.actions
 		 */
 		public function get maxDistance():Number
 		{
-			return _min;
+			return _max;
 		}
 		public function set maxDistance( value:Number ):void
 		{
-			_min = value;
+			_max = value;
 		}
 		
 		/**
@@ -127,11 +127,11 @@ package org.flintparticles.actions
 			for( i = particle.spaceSortX - 1; i >= 0; --i )
 			{
 				other = particles[sortedX[i]];
-				if( ( dx = particle.x - other.x ) > _min ) break;
+				if( ( dx = particle.x - other.x ) > _max ) break;
 				dy = other.y - particle.y;
-				if( dy > _min || dy < -_min ) continue;
+				if( dy > _max || dy < -_max ) continue;
 				distanceSq = dy * dy + dx * dx;
-				if( distanceSq <= _minSq && distanceSq > 0 )
+				if( distanceSq <= _maxSq && distanceSq > 0 )
 				{
 					velX += other.velX;
 					velY += other.velY;
@@ -141,11 +141,11 @@ package org.flintparticles.actions
 			for( i = particle.spaceSortX + 1; i < len; ++i )
 			{
 				other = particles[sortedX[i]];
-				if( ( dx = other.x - particle.x ) > _min ) break;
+				if( ( dx = other.x - particle.x ) > _max ) break;
 				dy = other.y - particle.y;
-				if( dy > _min || dy < -_min ) continue;
+				if( dy > _max || dy < -_max ) continue;
 				distanceSq = dy * dy + dx * dx;
-				if( distanceSq <= _minSq && distanceSq > 0 )
+				if( distanceSq <= _maxSq && distanceSq > 0 )
 				{
 					velX += other.velX;
 					velY += other.velY;

@@ -65,11 +65,11 @@ package org.flintparticles.actions
 		 */
 		public function get driftX():Number
 		{
-			return _sizeX;
+			return _sizeX / 2;
 		}
 		public function set driftX( value:Number ):void
 		{
-			_sizeX = value;
+			_sizeX = value * 2;
 		}
 		
 		/**
@@ -77,11 +77,11 @@ package org.flintparticles.actions
 		 */
 		public function get driftY():Number
 		{
-			return _sizeY;
+			return _sizeY / 2;
 		}
 		public function set driftY( value:Number ):void
 		{
-			_sizeY = value;
+			_sizeY = value * 2;
 		}
 		
 		/**

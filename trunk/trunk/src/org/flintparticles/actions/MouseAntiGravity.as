@@ -44,7 +44,7 @@ package org.flintparticles.actions
 	public class MouseAntiGravity extends Action
 	{
 		private var _power:Number;
-		private var _gravityConst:Number = 10000;
+		private var _gravityConst:Number = 10000; // scales the power to more usable levels
 		private var _epsilonSq:Number;
 		
 		/**

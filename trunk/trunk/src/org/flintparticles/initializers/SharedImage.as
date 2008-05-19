@@ -65,6 +65,18 @@ package org.flintparticles.initializers
 		}
 		
 		/**
+		 * The DisplayObject to use for each particle created by the emitter.
+		 */
+		public function get image():DisplayObject
+		{
+			return _image;
+		}
+		public function set image( value:DisplayObject ):void
+		{
+			_image = value;
+		}
+		
+		/**
 		 * @inheritDoc
 		 */
 		override public function initialize( emitter:Emitter, particle:Particle ):void
