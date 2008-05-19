@@ -86,13 +86,7 @@ package org.flintparticles.zones
 		}
 		
 		/**
-		 * The contains method determines whether a point is inside the zone.
-		 * This method is used by the initializers and actions that
-		 * use the zone. Usually, it need not be called directly by the user.
-		 * 
-		 * @param x The x coordinate of the location to test for.
-		 * @param y The y coordinate of the location to test for.
-		 * @return true if point is inside the zone, false if it is outside.
+		 * @inheritDoc
 		 */
 		public function contains( x:Number, y:Number ):Boolean
 		{
@@ -108,11 +102,7 @@ package org.flintparticles.zones
 		}
 		
 		/**
-		 * The getLocation method returns a random point inside the zone.
-		 * This method is used by the initializers and actions that
-		 * use the zone. Usually, it need not be called directly by the user.
-		 * 
-		 * @return a random point inside the zone.
+		 * @inheritDoc
 		 */
 		public function getLocation():Point
 		{
@@ -137,11 +127,7 @@ package org.flintparticles.zones
 		}
 		
 		/**
-		 * The getArea method returns the size of the zone.
-		 * This method is used by the MultiZone class. Usually, 
-		 * it need not be called directly by the user.
-		 * 
-		 * @return a random point inside the zone.
+		 * @inheritDoc
 		 */
 		public function getArea():Number
 		{

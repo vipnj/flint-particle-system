@@ -45,6 +45,8 @@ package org.flintparticles.zones
 	{
 		/**
 		 * The contains method determines whether a point is inside the zone.
+		 * This method is used by the initializers and actions that
+		 * use the zone. Usually, it need not be called directly by the user.
 		 * 
 		 * @param x The x coordinate of the location to test for.
 		 * @param y The y coordinate of the location to test for.
@@ -54,6 +56,8 @@ package org.flintparticles.zones
 
 		/**
 		 * The getLocation method returns a random point inside the zone.
+		 * This method is used by the initializers and actions that
+		 * use the zone. Usually, it need not be called directly by the user.
 		 * 
 		 * @return a random point inside the zone.
 		 */
@@ -63,7 +67,7 @@ package org.flintparticles.zones
 		/**
 		 * The getArea method returns the size of the zone.
 		 * It's used by the MultiZone class to manage the balancing between the
-		 * different zones.
+		 * different zones. Usually, it need not be called directly by the user.
 		 * 
 		 * @return the size of the zone.
 		 */

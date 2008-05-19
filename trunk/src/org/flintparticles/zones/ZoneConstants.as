@@ -30,62 +30,35 @@
 
 package org.flintparticles.zones 
 {
-	import flash.geom.Point;
-
 	/**
-	 * The PointZone zone defines a zone that contains a single point.
+	 * Defines a set of constants used by the zones.
 	 */
-
-	public class PointZone implements Zone 
+	public class ZoneConstants 
 	{
-		private var _point:Point;
-		
 		/**
-		 * The constructor defines a PointZone zone.
-		 * 
-		 * @param point The point that is the zone.
+		 * Used by the LinearRectangleZone to define a direction
 		 */
-		public function PointZone( point:Point )
-		{
-			_point = point;
-		}
-		
+		public static const HORIZONTAL:String = "horizontal";
 		/**
-		 * The point that is the zone.
+		 * Used by the LinearRectangleZone to define a direction
 		 */
-		public function get point() : Point
-		{
-			return _point;
-		}
-
-		public function set point( value : Point ) : void
-		{
-			_point = value;
-		}
+		public static const VERTICAL:String = "vertical";
 
 		/**
-		 * @inheritDoc
+		 * Used by the LinearRectangleZone to define a start position
 		 */
-		public function contains( x:Number, y:Number ):Boolean
-		{
-			return _point.x == x && _point.y == y;
-		}
-		
+		public static const TOP_LEFT:String = "topLeft";
 		/**
-		 * @inheritDoc
+		 * Used by the LinearRectangleZone to define a start position
 		 */
-		public function getLocation():Point
-		{
-			return _point.clone();
-		}
-		
+		public static const TOP_RIGHT:String = "topRight";
 		/**
-		 * @inheritDoc
+		 * Used by the LinearRectangleZone to define a start position
 		 */
-		public function getArea():Number
-		{
-			// treat as one pixel square
-			return 1;
-		}
+		public static const BOTTOM_LEFT:String = "bottomLeft";
+		/**
+		 * Used by the LinearRectangleZone to define a start position
+		 */
+		public static const BOTTOM_RIGHT:String = "bottomRight";
 	}
 }
