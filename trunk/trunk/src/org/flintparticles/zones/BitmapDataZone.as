@@ -138,10 +138,7 @@ package org.flintparticles.zones
 		}
 
 		/**
-		 * The contains method determines whether a point is inside the zone.
-		 * 
-		 * @param point The location to test for.
-		 * @return true if point is inside the zone, false if it is outside.
+		 * @inheritDoc
 		 */
 		public function contains( x : Number, y : Number ) : Boolean
 		{
@@ -154,30 +151,16 @@ package org.flintparticles.zones
 		}
 
 		/**
-		 * The getLocation method returns a random point inside the zone.
-		 * 
-		 * @return a random point inside the zone.
+		 * @inheritDoc
 		 */
 		public function getLocation() : Point
 		{
-/*			do
-			{
-				var x : Number = Math.random( ) * _width;
-				var y : Number = Math.random( ) * _height;
-				var pixel : uint = _bitmapData.getPixel32( Math.round( x ), Math.round( y ) );
-			}
-			while( ( pixel >> 24 & 0xFF ) == 0 );
-			return new Point( x + _left, y + _top );*/
 			return _validPoints[ Math.floor( Math.random() * _validPoints.length ) ];
 		}
 
 		
 		/**
-		 * The getArea method returns the size of the zone.
-		 * It's used by the MultiZone class to manage the balancing between the
-		 * different zones.
-		 * 
-		 * @return the size of the zone.
+		 * @inheritDoc
 		 */
 		public function getArea() : Number
 		{
