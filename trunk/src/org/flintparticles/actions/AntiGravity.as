@@ -44,7 +44,7 @@ package org.flintparticles.actions
 		private var _x:Number;
 		private var _y:Number;
 		private var _power:Number;
-		private var _gravityConst:Number = 10000;
+		private var _gravityConst:Number = 10000; // this just scales the power so we don't have to use very large numbers
 		private var _epsilonSq:Number;
 		
 		/**

@@ -66,6 +66,26 @@ package org.flintparticles.zones
 		}
 		
 		/**
+		 * The removeZone method is used to remove a zone from this MultiZone object.
+		 * 
+		 * @param zone The zone you want to add.
+		 */
+		public function removeZone( zone:Zone ):void
+		{
+			var len:int = _zones.length;
+			for( var i:int = 0; i < len; ++i )
+			{
+				if( _zones[i] == zone )
+				{
+					_totalArea -= _areas[i];
+					_areas.splice( i, 1 );
+					_zones.splice( i, 1 );
+					return;
+				}
+			}
+		}
+		
+		/**
 		 * The contains method determines whether a point is inside the zone.
 		 * This method is used by the initializers and actions that
 		 * use the zone. Usually, it need not be called directly by the user.

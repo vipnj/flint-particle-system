@@ -46,7 +46,6 @@ package org.flintparticles.counters
 		private var _rateMax:Number;
 		private var _target:Number;
 		private var _rate:Number;
-		private var _step:Number;
 		private var _times:Array;
 		private var _timeToRateCheck:Number;
 		private var _stop:Boolean;
@@ -70,8 +69,50 @@ package org.flintparticles.counters
 			_rate = _rateMax = rateMax;
 			_target = targetFrameRate;
 			_times = new Array();
-			_step = ( rateMax - rateMin ) / 20;
 			_timeToRateCheck = 0;
+		}
+		
+		/**
+		 * The minimum number of particles to emit per second. The counter
+		 * will never drop the rate below this value.
+		 */
+		public function get rateMin():Number
+		{
+			return _rateMin;
+		}
+		public function set rateMin( value:Number ):void
+		{
+			_rateMin = value;
+			_timeToRateCheck = 0;
+		}
+		
+		/**
+		 * The maximum number of particles to emit per second. the counter
+		 * will start at this rate and adjust downwards if the frame rate is too slow.
+		 */
+		public function get rateMax():Number
+		{
+			return _rateMax;
+		}
+		public function set rateMax( value:Number ):void
+		{
+			_rate = _rateMax = value;
+			_timeToRateCheck = 0;
+		}
+		
+		/**
+		 * The frame rate that the counter should aim for. Always set
+		 * this slightly below your actual frame rate since flash will drop frames occasionally
+		 * even when performance is fine. So, for example, if your movie's frame rate is
+		 * 30fps and you want to target this rate, set the target rate to 26fps or so.
+		 */
+		public function get targetFrameRate():Number
+		{
+			return _target;
+		}
+		public function set targetFrameRate( value:Number ):void
+		{
+			_target = value;
 		}
 		
 		/**

@@ -42,7 +42,7 @@ package org.flintparticles.debug
 
 	public class FrameTimer extends TextField
 	{
-	    private var times:Array;
+	    private var _times:Array;
 	    
 	    /**
 	     * Creates a FrameTimer.
@@ -52,13 +52,13 @@ package org.flintparticles.debug
 	    public function FrameTimer( color:uint = 0xFFFFFF )
 	   	{
 				textColor = color;
-				times = new Array();
+				_times = new Array();
 				addEventListener( Event.ENTER_FRAME, onEnterFrame1 );
 	    }
 
 		private function onEnterFrame1( ev:Event ):void
 		{
-			if ( times.push( getTimer() ) > 9 )
+			if ( _times.push( getTimer() ) > 9 )
 			{
 				removeEventListener( Event.ENTER_FRAME, onEnterFrame1 );
 				addEventListener( Event.ENTER_FRAME, onEnterFrame2 );
@@ -68,8 +68,8 @@ package org.flintparticles.debug
 		private function onEnterFrame2( ev:Event ):void
 		{
 			var t:Number;
-			times.push( t = getTimer() );
-			text = ( Math.round( 10000 / ( t - Number( times.shift() ) ) ) ).toString() + " fps";
+			_times.push( t = getTimer() );
+			text = ( Math.round( 10000 / ( t - Number( _times.shift() ) ) ) ).toString() + " fps";
 		}
 	}
 }

@@ -51,6 +51,19 @@ package org.flintparticles.zones
 		}
 		
 		/**
+		 * The point that is the zone.
+		 */
+		public function get point() : Point
+		{
+			return _point;
+		}
+
+		public function set point( value : Point ) : void
+		{
+			_point = value;
+		}
+
+		/**
 		 * The contains method determines whether a point is inside the zone.
 		 * This method is used by the initializers and actions that
 		 * use the zone. Usually, it need not be called directly by the user.

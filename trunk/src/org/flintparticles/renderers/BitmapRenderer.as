@@ -78,6 +78,8 @@ package org.flintparticles.renderers
 	 */
 	public class BitmapRenderer extends Sprite implements Renderer
 	{
+		protected static var ZERO_POINT:Point = new Point( 0, 0 );
+		
 		/**
 		 * @private
 		 */
@@ -236,7 +238,7 @@ package org.flintparticles.renderers
 			len = _preFilters.length;
 			for( i = 0; i < len; ++i )
 			{
-				_bitmap.bitmapData.applyFilter( _bitmap.bitmapData, _bitmap.bitmapData.rect, new Point( 0, 0 ), _preFilters[i] );
+				_bitmap.bitmapData.applyFilter( _bitmap.bitmapData, _bitmap.bitmapData.rect, BitmapRenderer.ZERO_POINT, _preFilters[i] );
 			}
 			if( len == 0 && _postFilters.length == 0 )
 			{
@@ -253,7 +255,7 @@ package org.flintparticles.renderers
 			len = _postFilters.length;
 			for( i = 0; i < len; ++i )
 			{
-				_bitmap.bitmapData.applyFilter( _bitmap.bitmapData, _bitmap.bitmapData.rect, new Point( 0, 0 ), _postFilters[i] );
+				_bitmap.bitmapData.applyFilter( _bitmap.bitmapData, _bitmap.bitmapData.rect, BitmapRenderer.ZERO_POINT, _postFilters[i] );
 			}
 			_bitmap.bitmapData.unlock();
 		}

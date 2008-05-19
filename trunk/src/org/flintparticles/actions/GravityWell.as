@@ -45,7 +45,7 @@ package org.flintparticles.actions
 		private var _y:Number;
 		private var _power:Number;
 		private var _epsilonSq:Number;
-		private var _gravityConst:Number = 10000;
+		private var _gravityConst:Number = 10000; // just scales the power to a more reasonable number
 		
 		/**
 		 * The constructor creates a GravityWell action for use by 

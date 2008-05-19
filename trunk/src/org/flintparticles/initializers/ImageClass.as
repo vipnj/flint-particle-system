@@ -64,6 +64,32 @@ package org.flintparticles.initializers
 		}
 		
 		/**
+		 * The class to use when creating
+		 * the particles' DisplayObjects.
+		 */
+		public function get imageClass():Class
+		{
+			return _imageClass;
+		}
+		public function set imageClass( value:Class ):void
+		{
+			_imageClass = value;
+		}
+		
+		/**
+		 * The parameters to pass to the constructor
+		 * for the image class.
+		 */
+		public function get parameters():Array
+		{
+			return _parameters;
+		}
+		public function set parameters( value:Array ):void
+		{
+			_parameters = value;
+		}
+		
+		/**
 		 * @inheritDoc
 		 */
 		override public function initialize( emitter:Emitter, particle:Particle ):void

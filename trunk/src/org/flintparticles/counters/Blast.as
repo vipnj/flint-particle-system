@@ -58,7 +58,46 @@ package org.flintparticles.counters
 		public function Blast( startMin:Number, startMax:Number = NaN )
 		{
 			_startMin = startMin;
-			_startMax = isNaN( startMax ) ? startMin : startMax;
+			_startMax = startMax;
+		}
+		
+		/**
+		 * The minimum number of particles to emit
+		 * when the emitter starts.
+		 */
+		public function get startMin():Number
+		{
+			return _startMin;
+		}
+		public function set startMin( value:Number ):void
+		{
+			_startMin = value;
+		}
+		
+		/**
+		 * The maximum number of particles to emit
+		 * when the emitter starts.
+		 */
+		public function get startMax():Number
+		{
+			return _startMax;
+		}
+		public function set startMax( value:Number ):void
+		{
+			_startMax = value;
+		}
+		
+		/**
+		 * When setting, this property sets both startMin and startMax to the same value.
+		 * When reading, this property is the average of startMin and startMax.
+		 */
+		public function get startCount():Number
+		{
+			return _startMin == _startMax ? startMin : ( startMax + startMin ) * 0.5;
+		}
+		public function set startCount( value:Number ):void
+		{
+			startMax = _startMin = value;
 		}
 		
 		/**
@@ -66,7 +105,11 @@ package org.flintparticles.counters
 		 */
 		public function startEmitter( emitter:Emitter ):uint
 		{
-			return Math.round( _startMin + Math.random() * ( _startMax - _startMin ) );
+			if( _startMax )
+			{
+				return Math.round( _startMin + Math.random() * ( _startMax - _startMin ) );
+			}
+			return Math.round( _startMin );
 		}
 		
 		/**

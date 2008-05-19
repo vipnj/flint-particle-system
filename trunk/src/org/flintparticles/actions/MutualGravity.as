@@ -42,7 +42,7 @@ package org.flintparticles.actions
 		private var _maxDistance:Number;
 		private var _maxDistanceSq:Number;
 		private var _epsilonSq:Number;
-		private var _gravityConst:Number = 1000;
+		private var _gravityConst:Number = 1000; // scale sthe power
 		
 		/**
 		 * The constructor creates a MutualGravity action for use by 

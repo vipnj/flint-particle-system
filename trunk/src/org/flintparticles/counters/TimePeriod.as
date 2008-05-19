@@ -37,9 +37,11 @@ package org.flintparticles.counters
 	/**
 	 * The TimePeriod counter causes the emitter to emit particles for a period of time
 	 * and then stop. The rate of emission over that period can be modified using
-	 * easing equations thet conform to the interface defined in Robert Penner's easing
+	 * easing equations that conform to the interface defined in Robert Penner's easing
 	 * equations. An update to these equations is included in the 
 	 * org.flintparticles.easing package.
+	 * 
+	 * @see org.flintparticles.easing
 	 */
 	public class TimePeriod implements Counter
 	{
@@ -75,6 +77,45 @@ package org.flintparticles.counters
 			}
 		}
 
+		/**
+		 * The number of particles to emit over the full duration
+		 * of the time period.
+		 */
+		public function get numParticles():uint
+		{
+			return _particles;
+		}
+		public function set numParticles( value:uint ):void
+		{
+			_particles = value;
+		}
+		
+		/**
+		 * The duration of the time period. After this time is up the
+		 * emitter will not release any more particles.
+		 */
+		public function get duration():Number
+		{
+			return _duration;
+		}
+		public function set duration( value:Number ):void
+		{
+			_duration = value;
+		}
+		
+		/**
+		 * An easing function used to distribute the emission of the
+		 * particles over the time period.
+		 */
+		public function get easing():Function
+		{
+			return _easing;
+		}
+		public function set easing( value:Function ):void
+		{
+			_easing = value;
+		}
+		
 		/**
 		 * @inheritDoc
 		 */

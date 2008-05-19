@@ -110,6 +110,88 @@ package org.flintparticles.zones
 		}
 		
 		/**
+		 * The centre of the disc.
+		 */
+		public function get center() : Point
+		{
+			return _center;
+		}
+
+		public function set center( value : Point ) : void
+		{
+			_center = value;
+		}
+
+		/**
+		 * The radius of the inner edge of the disc.
+		 */
+		public function get innerRadius() : Number
+		{
+			return _innerRadius;
+		}
+
+		public function set innerRadius( value : Number ) : void
+		{
+			_innerRadius = value;
+			_innerSq = _innerRadius * _innerRadius;
+		}
+
+		/**
+		 * The radius of the outer edge of the disc.
+		 */
+		public function get outerRadius() : Number
+		{
+			return _outerRadius;
+		}
+
+		public function set outerRadius( value : Number ) : void
+		{
+			_outerRadius = value;
+			_outerSq = _outerRadius * _outerRadius;
+		}
+
+		/**
+		 * The minimum angle, in radians, for points to be included in the zone.
+		 * An angle of zero is horizontal and to the right. Positive angles are in a clockwise 
+		 * direction (towards the graphical y axis). Angles are converted to a value between 0 
+		 * and two times PI.
+		 */
+		public function get minAngle() : Number
+		{
+			return _minAngle;
+		}
+
+		public function set minAngle( value : Number ) : void
+		{
+			_minAngle = clamp( value );
+		}
+
+		/**
+		 * The maximum angle, in radians, for points to be included in the zone.
+		 * An angle of zero is horizontal and to the right. Positive angles are in a clockwise 
+		 * direction (towards the graphical y axis). Angles are converted to a value between 0 
+		 * and two times PI.
+		 */
+		public function get maxAngle() : Number
+		{
+			return _maxAngle;
+		}
+
+		public function set maxAngle( value : Number ) : void
+		{
+			_maxAngle = value;
+			while ( _maxAngle > TWOPI )
+			{
+				_maxAngle -= TWOPI;
+			}
+			while ( _maxAngle < 0 )
+			{
+				_maxAngle += TWOPI;
+			}
+			_minAllowed = _maxAngle - TWOPI;
+		}
+
+		/**
 		 * The contains method determines whether a point is inside the zone.
 		 * This method is used by the initializers and actions that
 		 * use the zone. Usually, it need not be called directly by the user.
