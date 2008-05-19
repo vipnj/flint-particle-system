@@ -72,9 +72,9 @@ package org.flintparticles.zones
 			_area = 0;
 			var right:Number = bounds.right;
 			var bottom:Number = bounds.bottom;
-			for( var x : uint = bounds.left; x <= right ; ++x )
+			for( var x : int = bounds.left; x <= right ; ++x )
 			{
-				for( var y : uint = bounds.top; y <= bottom ; ++y )
+				for( var y : int = bounds.top; y <= bottom ; ++y )
 				{
 					if ( _displayObject.hitTestPoint( x, y, true ) )
 					{

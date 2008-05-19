@@ -65,7 +65,7 @@ package org.flintparticles.initializers
 		public function SharedImages( images:Array, ratios:Array = null )
 		{
 			_images = images;
-			var len:Number = images.length;
+			var len:int = images.length;
 			_ratios = new Array();
 			var i:uint;
 			if( ratios != null && ratios.length == len )
@@ -95,8 +95,8 @@ package org.flintparticles.initializers
 		override public function initialize( emitter:Emitter, particle:Particle ):void
 		{
 			var rand:Number = Math.random();
-			var len:uint = _images.length;
-			for( var i:uint = 0; i < len; ++i )
+			var len:int = _images.length;
+			for( var i:int = 0; i < len; ++i )
 			{
 				if( _ratios[i] >= rand )
 				{

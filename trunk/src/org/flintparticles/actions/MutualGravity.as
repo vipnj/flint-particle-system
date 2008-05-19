@@ -135,7 +135,7 @@ package org.flintparticles.actions
 			var sortedX:Array = emitter.spaceSortedX;
 			var other:Particle;
 			var i:int;
-			var len:uint = particles.length;
+			var len:int = particles.length;
 			var factor:Number;
 			var distance:Number;
 			var distanceSq:Number;

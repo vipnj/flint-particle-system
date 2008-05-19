@@ -86,6 +86,7 @@ package org.flintparticles.renderers
 		protected var _bitmap:Bitmap;
 		private var _preFilters:Array;
 		private var _postFilters:Array;
+		private var _colorMap:Array;
 		/**
 		 * @private
 		 */
@@ -154,7 +155,7 @@ package org.flintparticles.renderers
 		 */
 		public function removeFilter( filter:BitmapFilter ):void
 		{
-			for( var i:uint = 0; i < _preFilters.length; ++i )
+			for( var i:int = 0; i < _preFilters.length; ++i )
 			{
 				if( _preFilters[i] == filter )
 				{
@@ -170,6 +171,27 @@ package org.flintparticles.renderers
 					return;
 				}
 			}
+		}
+		
+		/**
+		 * Sets a palette map for the renderer. See the paletteMap method in flash's BitmapData object for
+		 * information about how palette maps work. The palette map will be applied to the full canvas of the 
+		 * renderer after all filters have been applied and the particles have been drawn.
+		 */
+		public function setPaletteMap( red : Array = null , green : Array = null , blue : Array = null, alpha : Array = null ) : void
+		{
+			_colorMap = new Array(4);
+			_colorMap[0] = alpha;
+			_colorMap[1] = red;
+			_colorMap[2] = green;
+			_colorMap[3] = blue;
+		}
+		/**
+		 * Clears any palette map that has been set for the renderer.
+		 */
+		public function clearPaletteMap() : void
+		{
+			_colorMap = null;
 		}
 		
 		/*
@@ -232,8 +254,8 @@ package org.flintparticles.renderers
 			{
 				return;
 			}
-			var i:uint;
-			var len:uint;
+			var i:int;
+			var len:int;
 			_bitmap.bitmapData.lock();
 			len = _preFilters.length;
 			for( i = 0; i < len; ++i )
@@ -256,6 +278,10 @@ package org.flintparticles.renderers
 			for( i = 0; i < len; ++i )
 			{
 				_bitmap.bitmapData.applyFilter( _bitmap.bitmapData, _bitmap.bitmapData.rect, BitmapRenderer.ZERO_POINT, _postFilters[i] );
+			}
+			if( _colorMap )
+			{
+				_bitmap.bitmapData.paletteMap( _bitmap.bitmapData, _bitmap.bitmapData.rect, ZERO_POINT, _colorMap[1] , _colorMap[2] , _colorMap[3] , _colorMap[0] );
 			}
 			_bitmap.bitmapData.unlock();
 		}

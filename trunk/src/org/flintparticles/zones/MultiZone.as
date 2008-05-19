@@ -90,8 +90,8 @@ package org.flintparticles.zones
 		 */
 		public function contains( x:Number, y:Number ):Boolean
 		{
-			var len:uint = _zones.length;
-			for( var i:uint = 0; i < len; ++i )
+			var len:int = _zones.length;
+			for( var i:int = 0; i < len; ++i )
 			{
 				if( _zones[i].contains( x, y ) )
 				{
@@ -107,8 +107,8 @@ package org.flintparticles.zones
 		public function getLocation():Point
 		{
 			var selectZone:Number = Math.random() * _totalArea;
-			var len:uint = _zones.length;
-			for( var i:uint = 0; i < len; ++i )
+			var len:int = _zones.length;
+			for( var i:int = 0; i < len; ++i )
 			{
 				if( ( selectZone -= _areas[i] ) <= 0 )
 				{

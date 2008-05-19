@@ -74,8 +74,8 @@ package org.flintparticles.renderers
 		public function renderParticles( particles:Array ):void
 		{
 			var particle:Particle;
-			var len:uint = particles.length;
-			for( var i:uint = 0; i < len; ++i )
+			var len:int = particles.length;
+			for( var i:int = 0; i < len; ++i )
 			{
 				particle = particles[i];
 				particle.image.transform.colorTransform = particle.colorTransform;
