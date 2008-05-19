@@ -124,9 +124,9 @@ package org.flintparticles.zones
 			
 			_validPoints = new Array();
 			_area = 0;
-			for( var x : uint = 0; x < _width ; ++x )
+			for( var x : int = 0; x < _width ; ++x )
 			{
-				for( var y : uint = 0; y < _height ; ++y )
+				for( var y : int = 0; y < _height ; ++y )
 				{
 					var pixel : uint = _bitmapData.getPixel32( x, y );
 					var grey : Number = 0.11 * ( pixel & 0xFF ) + 0.59 * ( ( pixel >>> 8 ) & 0xFF ) + 0.3 * ( ( pixel >>> 16 ) & 0xFF );
@@ -158,9 +158,9 @@ package org.flintparticles.zones
 		public function getLocation() : Point
 		{
 			var value:Number = Math.random() * _area;
-			var low:uint = 0;
-			var mid:uint;
-			var high:uint = _validPoints.length;
+			var low:int = 0;
+			var mid:int;
+			var high:int = _validPoints.length;
 			while( low < high )
 			{
 				mid = Math.floor( ( low + high ) * 0.5 );

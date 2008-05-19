@@ -117,12 +117,12 @@ package org.flintparticles.actions
 			var other:Particle;
 			var distanceSq:Number;
 			var i:int;
-			var len:uint = particles.length;
+			var len:int = particles.length;
 			var dx:Number;
 			var dy:Number;
 			var velX:Number = 0;
 			var velY:Number = 0;
-			var count:uint = 0;
+			var count:int = 0;
 			var factor:Number;
 			for( i = particle.spaceSortX - 1; i >= 0; --i )
 			{

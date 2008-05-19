@@ -68,8 +68,8 @@ package org.flintparticles.initializers
 			_images = images;
 			_ratios = new Array();
 			var empty:Array = new Array();
-			var i:uint;
-			var len:Number = images.length;
+			var i:int;
+			var len:int = images.length;
 			if( parameters == null )
 			{
 				_parameters = new Array();

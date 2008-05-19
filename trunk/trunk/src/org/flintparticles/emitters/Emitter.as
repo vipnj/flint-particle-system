@@ -162,7 +162,7 @@ package org.flintparticles.emitters
 		 */
 		protected var _activitiesPriority : Array;
 
-		private var _time : uint;
+		private var _time : int;
 		/**
 		 * @private
 		 */
@@ -279,7 +279,7 @@ package org.flintparticles.emitters
 			{
 				priority = initializer.getDefaultPriority( );
 			}
-			for( var i : uint = 0; i < _initializersPriority.length ; ++i )
+			for( var i : int = 0; i < _initializersPriority.length ; ++i )
 			{
 				if( _initializersPriority[ i ] < priority )
 				{
@@ -300,7 +300,7 @@ package org.flintparticles.emitters
 		 */
 		public function removeInitializer( initializer : Initializer ) : void
 		{
-			for( var i : uint = 0; i < _initializers.length ; ++i )
+			for( var i : int = 0; i < _initializers.length ; ++i )
 			{
 				if( _initializers[i] == initializer )
 				{
@@ -328,7 +328,7 @@ package org.flintparticles.emitters
 			{
 				priority = action.getDefaultPriority( );
 			}
-			for( var i : uint = 0; i < _actionsPriority.length ; ++i )
+			for( var i : int = 0; i < _actionsPriority.length ; ++i )
 			{
 				if( _actionsPriority[ i ] < priority )
 				{
@@ -349,7 +349,7 @@ package org.flintparticles.emitters
 		 */
 		public function removeAction( action : Action ) : void
 		{
-			for( var i : uint = 0; i < _actions.length ; ++i )
+			for( var i : int = 0; i < _actions.length ; ++i )
 			{
 				if( _actions[i] == action )
 				{
@@ -377,7 +377,7 @@ package org.flintparticles.emitters
 			{
 				priority = activity.getDefaultPriority( );
 			}
-			for( var i : uint = 0; i < _activitiesPriority.length ; ++i )
+			for( var i : int = 0; i < _activitiesPriority.length ; ++i )
 			{
 				if( _activitiesPriority[ i ] < priority )
 				{
@@ -398,7 +398,7 @@ package org.flintparticles.emitters
 		 */
 		public function removeActivity( activity : Activity ) : void
 		{
-			for( var i : uint = 0; i < _activities.length ; ++i )
+			for( var i : int = 0; i < _activities.length ; ++i )
 			{
 				if( _activities[i] == activity )
 				{
@@ -505,8 +505,8 @@ package org.flintparticles.emitters
 		private function addDisplayObject( obj : DisplayObject ) : void
 		{
 			var particle : Particle = _particleFactory.createParticle( );
-			var len : uint = _initializers.length;
-			for ( var i : uint = 0; i < len ; ++i )
+			var len : int = _initializers.length;
+			for ( var i : int = 0; i < len ; ++i )
 			{
 				_initializers[i].initialize( this, particle );
 			}
@@ -537,11 +537,11 @@ package org.flintparticles.emitters
 		private function createParticle() : Particle
 		{
 			var particle : Particle = _particleFactory.createParticle( );
-			var len : uint = _initializers.length;
+			var len : int = _initializers.length;
 			particle.x = _x;
 			particle.y = _y;
 			particle.rotation = _rotation;
-			for ( var i : uint = 0; i < len ; ++i )
+			for ( var i : int = 0; i < len ; ++i )
 			{
 				_initializers[i].initialize( this, particle );
 			}
@@ -559,8 +559,8 @@ package org.flintparticles.emitters
 			_ticker.removeEventListener( Event.ENTER_FRAME, frameLoop );
 			_ticker.addEventListener( Event.ENTER_FRAME, frameLoop );
 			_time = getTimer( );
-			var len : uint = _activities.length;
-			for ( var i : uint = 0; i < len ; ++i )
+			var len : int = _activities.length;
+			for ( var i : int = 0; i < len ; ++i )
 			{
 				_activities[i].initialize( this );
 			}
@@ -577,7 +577,7 @@ package org.flintparticles.emitters
 		private function frameLoop( ev : Event ) : void
 		{
 			// update timer
-			var oldTime : uint = _time;
+			var oldTime : int = _time;
 			_time = getTimer( );
 			var frameTime : Number = ( _time - oldTime ) * 0.001;
 			/*			if( _renderer is DisplayObject && DisplayObject( _renderer ).stage )
@@ -597,9 +597,9 @@ package org.flintparticles.emitters
 		 */
 		protected function frameUpdate( time : Number ) : void
 		{
-			var i : uint;
+			var i : int;
 			var particle : Particle;
-			var len : uint = _counter.updateEmitter( this, time );
+			var len : int = _counter.updateEmitter( this, time );
 			for( i = 0; i < len ; ++i )
 			{
 				createParticle( );
@@ -624,9 +624,9 @@ package org.flintparticles.emitters
 				// update particle state
 				len = _actions.length;
 				var action : Action;
-				var len2 : uint = _particles.length;
+				var len2 : int = _particles.length;
 				
-				for( var j : uint = 0; j < len ; ++j )
+				for( var j : int = 0; j < len ; ++j )
 				{
 					action = _actions[j];
 					for ( i = 0; i < len2 ; ++i )
@@ -682,8 +682,8 @@ package org.flintparticles.emitters
 		public function dispose() : void
 		{
 			_ticker.removeEventListener( Event.ENTER_FRAME, frameLoop );
-			var len : uint = _particles.length;
-			for ( var i : uint = 0; i < len ; ++i )
+			var len : int = _particles.length;
+			for ( var i : int = 0; i < len ; ++i )
 			{
 				_particleFactory.disposeParticle( _particles[i] );
 			}

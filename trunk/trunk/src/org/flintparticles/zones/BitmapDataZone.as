@@ -123,9 +123,9 @@ package org.flintparticles.zones
 			
 			_validPoints = new Array();
 			_area = 0;
-			for( var x : uint = 0; x < _width ; ++x )
+			for( var x : int = 0; x < _width ; ++x )
 			{
-				for( var y : uint = 0; y < _height ; ++y )
+				for( var y : int = 0; y < _height ; ++y )
 				{
 					var pixel : uint = _bitmapData.getPixel32( x, y );
 					if ( ( pixel >> 24 & 0xFF ) != 0 )
