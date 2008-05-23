@@ -84,9 +84,9 @@ package org.flintparticles.renderers
 		 * @private
 		 */
 		protected var _bitmap:Bitmap;
-		private var _preFilters:Array;
-		private var _postFilters:Array;
-		private var _colorMap:Array;
+		protected var _preFilters:Array;
+		protected var _postFilters:Array;
+		protected var _colorMap:Array;
 		/**
 		 * @private
 		 */
@@ -197,7 +197,7 @@ package org.flintparticles.renderers
 		/*
 		 * Create the Bitmap and BitmapData objects
 		 */
-		private function createBitmap():void
+		protected function createBitmap():void
 		{
 			if( !canvas )
 			{
