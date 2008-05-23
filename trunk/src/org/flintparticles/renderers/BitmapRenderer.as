@@ -84,8 +84,17 @@ package org.flintparticles.renderers
 		 * @private
 		 */
 		protected var _bitmap:Bitmap;
+		/**
+		 * @private
+		 */
 		protected var _preFilters:Array;
+		/**
+		 * @private
+		 */
 		protected var _postFilters:Array;
+		/**
+		 * @private
+		 */
 		protected var _colorMap:Array;
 		/**
 		 * @private
@@ -175,7 +184,7 @@ package org.flintparticles.renderers
 		
 		/**
 		 * Sets a palette map for the renderer. See the paletteMap method in flash's BitmapData object for
-		 * information about how palette maps work. The palette map will be applied to the full canvas of the 
+		 * information about how palette maps work. The palette map is applied to the full canvas of the 
 		 * renderer after all filters have been applied and the particles have been drawn.
 		 */
 		public function setPaletteMap( red : Array = null , green : Array = null , blue : Array = null, alpha : Array = null ) : void
@@ -194,7 +203,7 @@ package org.flintparticles.renderers
 			_colorMap = null;
 		}
 		
-		/*
+		/**
 		 * Create the Bitmap and BitmapData objects
 		 */
 		protected function createBitmap():void
