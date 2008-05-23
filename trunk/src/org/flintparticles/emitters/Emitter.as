@@ -571,8 +571,10 @@ package org.flintparticles.emitters
 			}
 		}
 
-		/*
-		 * Used internally to update the emitter.
+		/**
+		 * Used internally to update the emitter. This method listens for the enterframe event.
+		 * It simply calculates the duration of the frame then calls frameUpdate, passing the 
+		 * frame duration to that method.
 		 */
 		private function frameLoop( ev : Event ) : void
 		{
