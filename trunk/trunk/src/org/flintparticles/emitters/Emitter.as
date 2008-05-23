@@ -534,7 +534,7 @@ package org.flintparticles.emitters
 		/*
 		 * Used internally to create a particle.
 		 */
-		private function createParticle() : Particle
+		protected function createParticle() : Particle
 		{
 			var particle : Particle = _particleFactory.createParticle( );
 			var len : int = _initializers.length;
