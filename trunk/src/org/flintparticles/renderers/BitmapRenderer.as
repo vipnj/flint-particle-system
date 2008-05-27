@@ -95,7 +95,7 @@ package org.flintparticles.renderers
 		/**
 		 * @private
 		 */
-		protected var _colorMap:Array;
+		protected var _paletteMap:Array;
 		/**
 		 * @private
 		 */
@@ -189,18 +189,18 @@ package org.flintparticles.renderers
 		 */
 		public function setPaletteMap( red : Array = null , green : Array = null , blue : Array = null, alpha : Array = null ) : void
 		{
-			_colorMap = new Array(4);
-			_colorMap[0] = alpha;
-			_colorMap[1] = red;
-			_colorMap[2] = green;
-			_colorMap[3] = blue;
+			_paletteMap = new Array(4);
+			_paletteMap[0] = alpha;
+			_paletteMap[1] = red;
+			_paletteMap[2] = green;
+			_paletteMap[3] = blue;
 		}
 		/**
 		 * Clears any palette map that has been set for the renderer.
 		 */
 		public function clearPaletteMap() : void
 		{
-			_colorMap = null;
+			_paletteMap = null;
 		}
 		
 		/**
@@ -288,9 +288,9 @@ package org.flintparticles.renderers
 			{
 				_bitmap.bitmapData.applyFilter( _bitmap.bitmapData, _bitmap.bitmapData.rect, BitmapRenderer.ZERO_POINT, _postFilters[i] );
 			}
-			if( _colorMap )
+			if( _paletteMap )
 			{
-				_bitmap.bitmapData.paletteMap( _bitmap.bitmapData, _bitmap.bitmapData.rect, ZERO_POINT, _colorMap[1] , _colorMap[2] , _colorMap[3] , _colorMap[0] );
+				_bitmap.bitmapData.paletteMap( _bitmap.bitmapData, _bitmap.bitmapData.rect, ZERO_POINT, _paletteMap[1] , _paletteMap[2] , _paletteMap[3] , _paletteMap[0] );
 			}
 			_bitmap.bitmapData.unlock();
 		}
