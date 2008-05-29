@@ -203,7 +203,6 @@ package org.flintparticles.actions
 			}
 			var upperBoundary:Number = _radius + _depth;
 			_upperBoundarySq = upperBoundary * upperBoundary;
-			trace( upperBoundary );
 		}
 		
 		/**
