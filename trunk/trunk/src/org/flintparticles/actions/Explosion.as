@@ -54,6 +54,8 @@ package org.flintparticles.actions
 		private var _radius:Number = 0;
 		private var _radiusChange:Number = 0;
 		private var _expansionRate:Number = 500;
+		private var _lowerBoundarySq:Number;
+		private var _upperBoundarySq:Number;
 		
 		/**
 		 * The constructor creates an Explosion action for use by 
@@ -188,6 +190,17 @@ package org.flintparticles.actions
 			_oldRadius = _radius;
 			_radiusChange = _expansionRate * time;
 			_radius += _radiusChange;
+			var lowerBoundary:Number = _oldRadius - _depth;
+			if( lowerBoundary < 0 )
+			{
+				_lowerBoundarySq = 0;
+			}
+			else
+			{
+				_lowerBoundarySq = lowerBoundary * lowerBoundary;
+			}
+			var upperBoundary:Number = _radius + _depth;
+			_upperBoundarySq = upperBoundary * upperBoundary;
 		}
 		
 		/**
@@ -202,17 +215,12 @@ package org.flintparticles.actions
 			{
 				return;
 			}
+			if( dSq < _lowerBoundarySq || dSq > _upperBoundarySq )
+			{
+				return;
+			}
+			
 			var d:Number = Math.sqrt( dSq );
-			
-			if( d < _oldRadius - _depth )
-			{
-				return;
-			}
-			if( d > _radius + _depth )
-			{
-				return;
-			}
-			
 			var offset:Number = d < _radius ? _depth - _radius + d : _depth - d + _radius;
 			var oldOffset:Number = d < _oldRadius ? _depth - _oldRadius + d : _depth - d + _oldRadius;
 			offset *= _invDepth;
