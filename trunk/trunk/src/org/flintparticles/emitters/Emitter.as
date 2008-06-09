@@ -643,9 +643,7 @@ package org.flintparticles.emitters
 					particle = _particles[i];
 					if ( particle.isDead )
 					{
-						dispatchEvent( new FlintEvent( FlintEvent.PARTICLE_DEAD, particle ) );
-						_renderer.removeParticle( particle );
-						_particleFactory.disposeParticle( particle );
+						destroyParticle( particle );
 						_particles.splice( i, 1 );
 					}
 				}
@@ -687,9 +685,19 @@ package org.flintparticles.emitters
 			var len : int = _particles.length;
 			for ( var i : int = 0; i < len ; ++i )
 			{
-				_particleFactory.disposeParticle( _particles[i] );
+				destroyParticle( _particles[i] );
 			}
 			_particles.length = 0;
+		}
+		
+		private function destroyParticle( particle:Particle ):void
+		{
+			dispatchEvent( new FlintEvent( FlintEvent.PARTICLE_DEAD, particle ) );
+			if( _renderer )
+			{	
+				_renderer.removeParticle( particle );
+			}
+			_particleFactory.disposeParticle( particle );
 		}
 
 		/**
