@@ -73,8 +73,6 @@ package org.flintparticles.actions
 		 * Particles closer than this distance experience the explosion as it they were 
 		 * this distance away. This stops the explosion effect blowing up as distances get 
 		 * small.
-		 * @param maxRadius When the shockwave is this far from the center of the explosion, the explosion stops
-		 * and removes itself from the emitter.
 		 */
 		public function Explosion( power:Number, x:Number, y:Number, expansionRate:Number = 300, depth:Number = 10, epsilon:Number = 1 )
 		{
