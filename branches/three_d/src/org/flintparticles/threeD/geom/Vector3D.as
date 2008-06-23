@@ -1,7 +1,11 @@
 /*
- * Author: Richard Lord
- * Copyright (c) Big Room Ventures Ltd. 2007
- * Version: 1.0.0
+ * FLINT PARTICLE SYSTEM
+ * .....................
+ * 
+ * Author: Richard Lord (Big Room)
+ * Copyright (c) Big Room Ventures Ltd. 2008
+ * http://flintparticles.org
+ * 
  * 
  * Licence Agreement
  * 
@@ -109,6 +113,9 @@ package org.flintparticles.threeD.geom
 		 * A zero vector.
 		 */
 		public static var ZERO:Vector3D = new Vector3D( 0, 0, 0, 0 );
+		/**
+		 * A unit vector in the direction of the x axis.
+		 */
 		public static var AXISX:Vector3D = new Vector3D( 1, 0, 0, 0 );
 		/**
 		 * A unit vector in the direction of the y axis.
@@ -196,7 +203,7 @@ package org.flintparticles.threeD.geom
 		 * 
 		 * @param v The vector to copy
 		 * 
-		 * @return A reference to this Vector3D object
+		 * @return a reference to this Vector3D object
 		 */
 		public function assign( v:Vector3D ):Vector3D
 		{

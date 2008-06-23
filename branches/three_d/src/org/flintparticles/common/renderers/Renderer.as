@@ -35,15 +35,25 @@ package org.flintparticles.common.renderers
 	/**
 	 * The Renderer interface must be implemented by all renderers. A renderer 
 	 * is a class that draws the particles that are managed by an emitter. A 
-	 * renderer is set for an emitter by assigning it to the emitter's 
-	 * renderer property.
-	 * 
-	 * @see org.flintparticles.twoD.emitters.Emitter#renderer
+	 * renderer can display the contents of a number of emitters.
 	 */
 	public interface Renderer
 	{
+		/**
+		 * Add an emitter to this renderer. The renderer should draw all the 
+		 * particles that are being managed by the emitter.
+		 * 
+		 * @param emitter The emitter whose particles should be drawn by the 
+		 * renderer
+		 */
 		function addEmitter( emitter : Emitter ) : void;
 
+		/**
+		 * Stop rendering particles that are managed by this emitter.
+		 * 
+		 * @param emitter The emitter whose particles should no longer be
+		 * drawn by the renderer.
+		 */
 		function removeEmitter( emitter : Emitter ) : void;
 	}
 }

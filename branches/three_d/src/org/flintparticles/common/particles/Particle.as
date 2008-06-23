@@ -57,7 +57,10 @@ package org.flintparticles.common.particles
 		public var scale:Number = 1;
 		
 		/**
-		 * The DisplayObject used to display the image.
+		 * The object used to display the image. In a 2D particle, this is usually
+		 * a DisplayObject. In a 3D particle, this may be a DisplayObject, for 
+		 * displaying on a billboard or similar, or a 3D object in the form used
+		 * by the render system.
 		 */
 		public var image:* = null;
 		
@@ -105,7 +108,7 @@ package org.flintparticles.common.particles
 		}
 		
 		/**
-		 * Sets the particles properties to their default values.
+		 * Sets the particle's properties to their default values.
 		 */
 		public function initialize():void
 		{

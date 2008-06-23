@@ -1,7 +1,11 @@
 /*
- * Author: Richard Lord
- * Copyright (c) Big Room Ventures Ltd. 2007
- * Version: 1.0.0
+ * FLINT PARTICLE SYSTEM
+ * .....................
+ * 
+ * Author: Richard Lord (Big Room)
+ * Copyright (c) Big Room Ventures Ltd. 2008
+ * http://flintparticles.org
+ * 
  * 
  * Licence Agreement
  * 
@@ -27,7 +31,8 @@
 package org.flintparticles.threeD.geom
 {
 	/**
-	 * <p>Matrix3D represents a 3D transformation matrix.</p>
+	 * <p>Matrix3D represents a 3D transformation matrix. It mimics some aspects of the 
+	 * flash.geom.Matrix3D class embedded in the Flash Player version 10.</p>
 	 * 
 	 */
 	public class Matrix3D 
@@ -125,160 +130,160 @@ package org.flintparticles.threeD.geom
 		/**
 		 * The value in row 1 column 1 of the matrix.
 		 * 
-		 * <pre>   x 0 0 0
+		 * x 0 0 0
 		 * 0 0 0 0
 		 * 0 0 0 0
-		 * 0 0 0 0</pre>
+		 * 0 0 0 0
 		 */
 		public var n11:Number;
 
 		/**
 		 * The value in row 1 column 2 of the matrix.
 		 * 
-		 * <pre>   0 x 0 0
+		 * 0 x 0 0
 		 * 0 0 0 0
 		 * 0 0 0 0
-		 * 0 0 0 0</pre>
+		 * 0 0 0 0
 		 */
 		public var n12:Number;
 
 		/**
 		 * The value in row 1 column 3 of the matrix.
 		 * 
-		 * <pre>   0 0 x 0
+		 * 0 0 x 0
 		 * 0 0 0 0
 		 * 0 0 0 0
-		 * 0 0 0 0</pre>
+		 * 0 0 0 0
 		 */
 		public var n13:Number;
 
 		/**
 		 * The value in row 1 column 4 of the matrix.
 		 * 
-		 * <pre>   0 0 0 x
+		 * 0 0 0 x
 		 * 0 0 0 0
 		 * 0 0 0 0
-		 * 0 0 0 0</pre>
+		 * 0 0 0 0
 		 */
 		public var n14:Number;
 
 		/**
 		 * The value in row 2 column 1 of the matrix.
 		 * 
-		 * <pre>   0 0 0 0
+		 * 0 0 0 0
 		 * x 0 0 0
 		 * 0 0 0 0
-		 * 0 0 0 0</pre>
+		 * 0 0 0 0
 		 */
 		public var n21:Number;
 
 		/**
 		 * The value in row 2 column 2 of the matrix.
 		 * 
-		 * <pre>   0 0 0 0
+		 * 0 0 0 0
 		 * 0 x 0 0
 		 * 0 0 0 0
-		 * 0 0 0 0</pre>
+		 * 0 0 0 0
 		 */
 		public var n22:Number;
 
 		/**
 		 * The value in row 2 column 3 of the matrix.
 		 * 
-		 * <pre>   0 0 0 0
+		 * 0 0 0 0
 		 * 0 0 x 0
 		 * 0 0 0 0
-		 * 0 0 0 0</pre>
+		 * 0 0 0 0
 		 */
 		public var n23:Number;
 
 		/**
 		 * The value in row 2 column 4 of the matrix.
 		 * 
-		 * <pre>   0 0 0 0
+		 * 0 0 0 0
 		 * 0 0 0 x
 		 * 0 0 0 0
-		 * 0 0 0 0</pre>
+		 * 0 0 0 0
 		 */
 		public var n24:Number;
 
 		/**
 		 * The value in row 3 column 1 of the matrix.
 		 * 
-		 * <pre>   0 0 0 0
+		 * 0 0 0 0
 		 * 0 0 0 0
 		 * x 0 0 0
-		 * 0 0 0 0</pre>
+		 * 0 0 0 0
 		 */
 		public var n31:Number;
 
 		/**
 		 * The value in row 3 column 2 of the matrix.
 		 * 
-		 * <pre>   0 0 0 0
+		 * 0 0 0 0
 		 * 0 0 0 0
 		 * 0 x 0 0
-		 * 0 0 0 0</pre>
+		 * 0 0 0 0
 		 */
 		public var n32:Number;
 
 		/**
 		 * The value in row 3 column 3 of the matrix.
 		 * 
-		 * <pre>   0 0 0 0
+		 * 0 0 0 0
 		 * 0 0 0 0
 		 * 0 0 x 0
-		 * 0 0 0 0</pre>
+		 * 0 0 0 0
 		 */
 		public var n33:Number;
 
 		/**
 		 * The value in row 3 column 4 of the matrix.
 		 * 
-		 * <pre>   0 0 0 0
+		 * 0 0 0 0
 		 * 0 0 0 0
 		 * 0 0 0 x
-		 * 0 0 0 0</pre>
+		 * 0 0 0 0
 		 */
 		public var n34:Number;
 
 		/**
 		 * The value in row 4 column 1 of the matrix.
 		 * 
-		 * <pre>   0 0 0 0
 		 * 0 0 0 0
 		 * 0 0 0 0
-		 * x 0 0 0</pre>
+		 * 0 0 0 0
+		 * x 0 0 0
 		 */
 		public var n41:Number;
 
 		/**
 		 * The value in row 4 column 2 of the matrix.
 		 * 
-		 * <pre>   0 0 0 0
 		 * 0 0 0 0
 		 * 0 0 0 0
-		 * 0 x 0 0</pre>
+		 * 0 0 0 0
+		 * 0 x 0 0
 		 */
 		public var n42:Number;
 
 		/**
 		 * The value in row 4 column 3 of the matrix.
 		 * 
-		 * <pre>   0 0 0 0
 		 * 0 0 0 0
 		 * 0 0 0 0
-		 * 0 0 x 0</pre>
+		 * 0 0 0 0
+		 * 0 0 x 0
 		 */
 		public var n43:Number;
 
 		/**
 		 * The value in row 4 column 4 of the matrix.
 		 * 
-		 * <pre>   0 0 0 0
 		 * 0 0 0 0
 		 * 0 0 0 0
-		 * 0 0 0 x</pre>
+		 * 0 0 0 0
+		 * 0 0 0 x
 		 */
 		public var n44:Number;
 
@@ -384,7 +389,7 @@ package org.flintparticles.threeD.geom
 		}
 
 		/**
-		 * Add another transformation matrix to this one, applying the new 
+		 * Add another transformation matrix to this one, applying the new
 		 * transformation after the transformations already in this matrix.
 		 * 
 		 * @param m The other transformation matrix
@@ -459,7 +464,7 @@ package org.flintparticles.threeD.geom
 		}
 	
 		/**
-		 * Add a rotation about an axis transformation to this matrix, applying the 
+		 * Append a rotation about an axis transformation to this matrix, applying the 
 		 * rotation after the transformations already in this matrix.
 		 * 
 		 * @param angle The rotation angle in radians. If this is not set, the
@@ -504,6 +509,129 @@ package org.flintparticles.threeD.geom
 				return this;
 			}
 			return append( newRotateAboutAxisThroughPoint( point, axis, angle ) );
+		}
+
+		/**
+		 * Add another transformation matrix to this one, applying the new
+		 * transformation before the transformations already in this matrix.
+		 * 
+		 * @param m The other transformation matrix
+		 * 
+		 * @return A reference to this matrix
+		 */
+		public function prepend( m:Matrix3D ):Matrix3D
+		{
+			const o11:Number = n11;
+			const o12:Number = n12;
+			const o13:Number = n13;
+			const o14:Number = n14;
+			const o21:Number = n21;
+			const o22:Number = n22;
+			const o23:Number = n23;
+			const o24:Number = n24;
+			const o31:Number = n31;
+			const o32:Number = n32;
+			const o33:Number = n33;
+			const o34:Number = n34;
+			const o41:Number = n41;
+			const o42:Number = n42;
+			const o43:Number = n43;
+			const o44:Number = n44;
+			
+			n11 = o11 * m.n11 + o12 * m.n21 + o13 * m.n31 + o14 * m.n41;
+			n12 = o11 * m.n12 + o12 * m.n22 + o13 * m.n32 + o14 * m.n42;
+			n13 = o11 * m.n13 + o12 * m.n23 + o13 * m.n33 + o14 * m.n43;
+			n14 = o11 * m.n14 + o12 * m.n24 + o13 * m.n34 + o14 * m.n44;
+			n21 = o21 * m.n11 + o22 * m.n21 + o23 * m.n31 + o24 * m.n41;
+			n22 = o21 * m.n12 + o22 * m.n22 + o23 * m.n32 + o24 * m.n42;
+			n23 = o21 * m.n13 + o22 * m.n23 + o23 * m.n33 + o24 * m.n43;
+			n24 = o21 * m.n14 + o22 * m.n24 + o23 * m.n34 + o24 * m.n44;
+			n31 = o31 * m.n11 + o32 * m.n21 + o33 * m.n31 + o34 * m.n41;
+			n32 = o31 * m.n12 + o32 * m.n22 + o33 * m.n32 + o34 * m.n42;
+			n33 = o31 * m.n13 + o32 * m.n23 + o33 * m.n33 + o34 * m.n43;
+			n34 = o31 * m.n14 + o32 * m.n24 + o33 * m.n34 + o34 * m.n44;
+			n41 = o41 * m.n11 + o42 * m.n21 + o43 * m.n31 + o44 * m.n41;
+			n42 = o41 * m.n12 + o42 * m.n22 + o43 * m.n32 + o44 * m.n42;
+			n43 = o41 * m.n13 + o42 * m.n23 + o43 * m.n33 + o44 * m.n43;
+			n44 = o41 * m.n14 + o42 * m.n24 + o43 * m.n34 + o44 * m.n44;
+			
+			return this;
+		}
+
+		/**
+		 * Prepend a scale transformation to this matrix, applying the scale
+		 * before the transformations already in this matrix.
+		 * 
+		 * @param scaleX The scaling factor in the x direction
+		 * @param scaleY The scaling factor in the y direction
+		 * @param scaleZ The scaling factor in the z direction
+		 * 
+		 * @return A reference to this matrix
+		 */
+		public function prependScale( scaleX:Number, scaleY:Number, scaleZ:Number ):Matrix3D
+		{
+			return prepend( newScale( scaleX, scaleY, scaleZ ) );
+		}
+		
+		/**
+		 * Prepend a translation transformation to this matrix, applying the 
+		 * translation before the transformations already in this matrix.
+		 * 
+		 * @param v The vector for the transformation
+		 * 
+		 * @return A reference to this matrix
+		 */
+		public function prependTranslate( v:Vector3D ):Matrix3D
+		{
+			return prepend( newTranslate( v ) );
+		}
+	
+		/**
+		 * Prepend a rotation about an axis transformation to this matrix, applying the 
+		 * rotation before the transformations already in this matrix.
+		 * 
+		 * @param angle The rotation angle in radians. If this is not set, the
+		 * w coordinate of the axis is used as the angle.
+		 * @param axis The vector to rotate around
+		 * 
+		 * @return A reference to this matrix
+		 */
+		public function prependRotateAboutAxis( axis:Vector3D, angle:Number = NaN ):Matrix3D
+		{
+			if( isNaN( angle ) )
+			{
+				angle = axis.w;
+			}
+			if ( angle == 0 )
+			{
+				return this;
+			}
+			return prepend( newRotateAboutAxis( axis, angle ) );
+		}
+
+		/**
+		 * Prepend a rotation about an axis through an arbitrary point
+		 * transformation to this matrix, applying the rotation
+		 * before the transformations already in this matrix.
+		 * 
+		 * @param point A point the axis passes through.
+		 * @param angle The rotation angle in radians.
+		 * @param axis The vector to rotate around. If this is not set the 
+		 * w coordinate of the axis is used as the angle.
+		 * 
+		 * @return A reference to this matrix
+		 */
+		public function prependRotateAboutAxisThroughPoint( point:Vector3D, axis:Vector3D, angle:Number = NaN ):Matrix3D
+		{
+			if( isNaN( angle ) )
+			{
+				angle = axis.w;
+			}
+			if ( angle == 0 )
+			{
+				return this;
+			}
+			return prepend( newRotateAboutAxisThroughPoint( point, axis, angle ) );
 		}
 
 		/**
@@ -580,7 +708,7 @@ package org.flintparticles.threeD.geom
 		}
 	
 		/**
-		 * Transform a Vector3D using this matrix.
+		 * Transform a Vector3D using this matrix, returning a new, transformed vector.
 		 * 
 		 * @param v The vector to transform.
 		 * 
@@ -596,6 +724,14 @@ package org.flintparticles.threeD.geom
 			);
 		}
 
+		/**
+		 * Transform a Vector3D using this matrix, storing the result in the original 
+		 * vector.
+		 * 
+		 * @param v The vector to transform.
+		 * 
+		 * @return A reference to the original (now transformed) vector.
+		 */
 		public function transformVectorSelf( v:Vector3D ):Vector3D
 		{
 			return v.reset( 
@@ -607,10 +743,12 @@ package org.flintparticles.threeD.geom
 		}
 
 		/**
-		 * Transform an array of points using this matrix. The points themseles
-		 * are altered so the array contains the new values.
+		 * Transform an array of Vector3D objects using this matrix. The 
+		 * results are returned in a new array.
 		 * 
-		 * @param v the array of points to transform.
+		 * @param v the array of Vector3D objects to transform.
+		 * 
+		 * @return An array containing the new transformed vectors.
 		 */
 		public function transformArrayVectors( vectors:Array ):Array
 		{
@@ -622,6 +760,14 @@ package org.flintparticles.threeD.geom
 			return transformedVectors;
 		}
 		
+		/**
+		 * Transform an array of Vector3D objects using this matrix. The 
+		 * original vectors are modified to contain the new, transformed values.
+		 * 
+		 * @param v the array of Vector3D objects to transform.
+		 * 
+		 * @return The original array, which now contains the transformed vectors.
+		 */
 		public function transformArrayVectorsSelf( vectors:Array ):Array
 		{
 			for each( var vector:Vector3D in vectors )
@@ -631,6 +777,10 @@ package org.flintparticles.threeD.geom
 			return vectors;
 		}
 
+		/**
+		 * The positionelements of the matrix. This is the last column of the
+		 * matrix, containing values n14, n24, n34, n44.
+		 */
 		public function get position():Vector3D
 		{
 			return new Vector3D( n14, n24, n34, n44 );
@@ -643,6 +793,11 @@ package org.flintparticles.threeD.geom
 			n44 = value.w;
 		}
 		
+		/**
+		 * An array containing the sixteen values in the matrix, in row-major form.
+		 * 
+		 * <p>[n11, n12, n13, n14, n21, n22, n23, n24, n31, n32, n33, n34, n41, n42, n43, n44]</p>
+		 */
 		public function get rawData():Array
 		{
 			return [n11, n12, n13, n14,
