@@ -278,7 +278,7 @@ package org.flintparticles.renderers
 			len = particles.length;
 			if ( len )
 			{
-				for( i = 0; i < len; ++i )
+				for( i = len; i--; ) // draw newest particles first so they are behind the oldest
 				{
 					drawParticle( particles[i] );
 				}

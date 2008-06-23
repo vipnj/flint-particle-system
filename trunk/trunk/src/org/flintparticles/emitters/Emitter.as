@@ -443,8 +443,6 @@ package org.flintparticles.emitters
 		 * emitters. You don't usually need to alter this unless you are not using the default
 		 * particle type. Any custom particle factory should implement the ParticleFactory class.
 		 * 
-		 * @param particleFactory The particle factory to use
-		 * 
 		 * @see org.flintparticles.particles.ParticleCreator
 		 */		
 		public function get particleFactory() : ParticleFactory
@@ -545,7 +543,7 @@ package org.flintparticles.emitters
 			{
 				_initializers[i].initialize( this, particle );
 			}
-			_particles.unshift( particle );
+			_particles.push( particle );
 			_renderer.addParticle( particle );
 			dispatchEvent( new FlintEvent( FlintEvent.PARTICLE_CREATED, particle ) );
 			return particle;
