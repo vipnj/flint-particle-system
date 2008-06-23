@@ -139,7 +139,8 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
 <a class="signatureLink" href="../../common/renderers/RendererBase.html#addEmitter()">addEmitter</a>(emitter:<a href="../../common/emitters/Emitter.html">Emitter</a>):void</div>
-<div class="summaryTableDescription"></div>
+<div class="summaryTableDescription">
+   Adds the emitter to the renderer.</div>
 </td><td class="summaryTableOwnerCol"><a href="../../common/renderers/RendererBase.html">RendererBase</a></td>
 </tr>
 <tr class="">
@@ -171,7 +172,8 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
 <a class="signatureLink" href="../../common/renderers/RendererBase.html#removeEmitter()">removeEmitter</a>(emitter:<a href="../../common/emitters/Emitter.html">Emitter</a>):void</div>
-<div class="summaryTableDescription"></div>
+<div class="summaryTableDescription">
+   Removes the emitter from the renderer.</div>
 </td><td class="summaryTableOwnerCol"><a href="../../common/renderers/RendererBase.html">RendererBase</a></td>
 </tr>
 <tr class="">
@@ -212,8 +214,8 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <div class="summarySignature">
 <a class="signatureLink" href="../../common/renderers/RendererBase.html#addParticle()">addParticle</a>(particle:<a href="../../common/particles/Particle.html">Particle</a>):void</div>
 <div class="summaryTableDescription">
-   The addParticle method is called when a particle is added to the emitter that
-   this renderer is assigned to.</div>
+   The addParticle method is called when a particle is added to one of
+   the emitters that is being rendered by this renderer.</div>
 </td><td class="summaryTableOwnerCol"><a href="../../common/renderers/RendererBase.html">RendererBase</a></td>
 </tr>
 <tr class="">
@@ -239,8 +241,8 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <div class="summarySignature">
 <a class="signatureLink" href="../../common/renderers/RendererBase.html#removeParticle()">removeParticle</a>(particle:<a href="../../common/particles/Particle.html">Particle</a>):void</div>
 <div class="summaryTableDescription">
-   The removeParticle method is called when a particle is removed from the 
-   emitter that this renderer is assigned to.</div>
+   The removeParticle method is called when a particle is removed from one
+   of the emitters that is being rendered by this renderer.</div>
 </td><td class="summaryTableOwnerCol"><a href="../../common/renderers/RendererBase.html">RendererBase</a></td>
 </tr>
 <tr class="">
@@ -249,9 +251,9 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <a class="signatureLink" href="#renderParticles()">renderParticles</a>(particles:Array):void</div>
 <div class="summaryTableDescription">
    
-   The renderParticles method is called every frame so the renderer can
-   draw the particles that are in the emitter that this renderer is
-   assigned to.</div>
+   The renderParticles method is called during the render phase of 
+   every frame if the state of one of the emitters being rendered
+   by this renderer has changed.</div>
 </td><td class="summaryTableOwnerCol">BitmapRenderer</td>
 </tr>
 </table>
@@ -443,13 +445,16 @@ showHideInherited();
 <div class="detailBody">
 <code>protected override function renderParticles(particles:Array):void</code><p>
    
-   The renderParticles method is called every frame so the renderer can
-   draw the particles that are in the emitter that this renderer is
-   assigned to.
+   The renderParticles method is called during the render phase of 
+   every frame if the state of one of the emitters being rendered
+   by this renderer has changed.
+   
    </p><span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
-<td width="20px"></td><td><code><span class="label">particles</span>:Array</code> &mdash; The particles to draw.
+<td width="20px"></td><td><code><span class="label">particles</span>:Array</code> &mdash; The particles being managed by all the emitters
+   being rendered by this renderer. The particles are in no particular
+   order.
    </td>
 </tr>
 </table>

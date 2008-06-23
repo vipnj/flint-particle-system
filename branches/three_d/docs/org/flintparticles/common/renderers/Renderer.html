@@ -44,14 +44,8 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("In
 <p></p>
   The Renderer interface must be implemented by all renderers. A renderer 
   is a class that draws the particles that are managed by an emitter. A 
-  renderer is set for an emitter by assigning it to the emitter's 
-  renderer property.
-  
+  renderer can display the contents of a number of emitters.
   <p></p>
-<p>
-<span class="classHeaderTableLabel">See also</span>
-</p>
-<div class="seeAlso">org.flintparticles.twoD.emitters.Emitter.renderer</div>
 <br>
 <hr>
 </div>
@@ -66,14 +60,16 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("In
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
 <a class="signatureLink" href="#addEmitter()">addEmitter</a>(emitter:<a href="../emitters/Emitter.html">Emitter</a>):void</div>
-<div class="summaryTableDescription"></div>
+<div class="summaryTableDescription">
+   Add an emitter to this renderer.</div>
 </td><td class="summaryTableOwnerCol">Renderer</td>
 </tr>
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
 <a class="signatureLink" href="#removeEmitter()">removeEmitter</a>(emitter:<a href="../emitters/Emitter.html">Emitter</a>):void</div>
-<div class="summaryTableDescription"></div>
+<div class="summaryTableDescription">
+   Stop rendering particles that are managed by this emitter.</div>
 </td><td class="summaryTableOwnerCol">Renderer</td>
 </tr>
 </table>
@@ -92,10 +88,16 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>public function addEmitter(emitter:<a href="../emitters/Emitter.html">Emitter</a>):void</code><span class="label">Parameters</span>
+<code>public function addEmitter(emitter:<a href="../emitters/Emitter.html">Emitter</a>):void</code><p>
+   Add an emitter to this renderer. The renderer should draw all the 
+   particles that are being managed by the emitter.
+   
+   </p><span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
-<td width="20px"></td><td><code><span class="label">emitter</span>:<a href="../emitters/Emitter.html">Emitter</a></code></td>
+<td width="20px"></td><td><code><span class="label">emitter</span>:<a href="../emitters/Emitter.html">Emitter</a></code> &mdash; The emitter whose particles should be drawn by the 
+   renderer
+   </td>
 </tr>
 </table>
 </div>
@@ -106,10 +108,15 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>public function removeEmitter(emitter:<a href="../emitters/Emitter.html">Emitter</a>):void</code><span class="label">Parameters</span>
+<code>public function removeEmitter(emitter:<a href="../emitters/Emitter.html">Emitter</a>):void</code><p>
+   Stop rendering particles that are managed by this emitter.
+   
+   </p><span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
-<td width="20px"></td><td><code><span class="label">emitter</span>:<a href="../emitters/Emitter.html">Emitter</a></code></td>
+<td width="20px"></td><td><code><span class="label">emitter</span>:<a href="../emitters/Emitter.html">Emitter</a></code> &mdash; The emitter whose particles should no longer be
+   drawn by the renderer.
+   </td>
 </tr>
 </table>
 </div>

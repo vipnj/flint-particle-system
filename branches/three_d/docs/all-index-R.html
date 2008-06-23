@@ -157,7 +157,8 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("RÂ
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/geom/class-list.html');" href="org/flintparticles/threeD/geom/Matrix3D.html#rawData">rawData</a> &mdash; Property in class org.flintparticles.threeD.geom.<a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/geom/class-list.html');" href="org/flintparticles/threeD/geom/Matrix3D.html">Matrix3D</a></td>
 </tr>
 <tr>
-<td width="20"></td><td></td>
+<td width="20"></td><td>
+   An array containing the sixteen values in the matrix, in row-major form.</td>
 </tr>
 <tr>
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('org/flintparticles/common/displayObjects/class-list.html');" href="org/flintparticles/common/displayObjects/Rect.html">Rect</a> &mdash; Class in package <a onclick="javascript:loadClassListFrame('org/flintparticles/common/displayObjects/class-list.html');" href="org/flintparticles/common/displayObjects/package-detail.html">org.flintparticles.common.displayObjects</a></td>
@@ -291,13 +292,15 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("RÂ
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('org/flintparticles/common/renderers/class-list.html');" href="org/flintparticles/common/renderers/Renderer.html#removeEmitter()">removeEmitter</a>(emitter:<a href="org/flintparticles/common/emitters/Emitter.html" onclick="javascript:loadClassListFrame('org/flintparticles/common/emitters./class-list.html');">org.flintparticles.common.emitters:Emitter</a>) &mdash; Method in interface org.flintparticles.common.renderers.<a onclick="javascript:loadClassListFrame('org/flintparticles/common/renderers/class-list.html');" href="org/flintparticles/common/renderers/Renderer.html">Renderer</a></td>
 </tr>
 <tr>
-<td width="20"></td><td></td>
+<td width="20"></td><td>
+   Stop rendering particles that are managed by this emitter.</td>
 </tr>
 <tr>
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('org/flintparticles/common/renderers/class-list.html');" href="org/flintparticles/common/renderers/RendererBase.html#removeEmitter()">removeEmitter</a>(emitter:<a href="org/flintparticles/common/emitters/Emitter.html" onclick="javascript:loadClassListFrame('org/flintparticles/common/emitters./class-list.html');">org.flintparticles.common.emitters:Emitter</a>) &mdash; Method in class org.flintparticles.common.renderers.<a onclick="javascript:loadClassListFrame('org/flintparticles/common/renderers/class-list.html');" href="org/flintparticles/common/renderers/RendererBase.html">RendererBase</a></td>
 </tr>
 <tr>
-<td width="20"></td><td></td>
+<td width="20"></td><td>
+   Removes the emitter from the renderer.</td>
 </tr>
 <tr>
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/renderers/class-list.html');" href="org/flintparticles/threeD/renderers/BitmapRenderer.html#removeFilter()">removeFilter</a>(filter) &mdash; Method in class org.flintparticles.threeD.renderers.<a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/renderers/class-list.html');" href="org/flintparticles/threeD/renderers/BitmapRenderer.html">BitmapRenderer</a></td>
@@ -325,8 +328,8 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("RÂ
 </tr>
 <tr>
 <td width="20"></td><td>
-   The removeParticle method is called when a particle is removed from the 
-   emitter that this renderer is assigned to.</td>
+   The removeParticle method is called when a particle is removed from one
+   of the emitters that is being rendered by this renderer.</td>
 </tr>
 <tr>
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/renderers/class-list.html');" href="org/flintparticles/threeD/renderers/DisplayObjectRenderer.html#removeParticle()">removeParticle</a>(particle:<a href="org/flintparticles/common/particles/Particle.html" onclick="javascript:loadClassListFrame('org/flintparticles/common/particles./class-list.html');">org.flintparticles.common.particles:Particle</a>) &mdash; Method in class org.flintparticles.threeD.renderers.<a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/renderers/class-list.html');" href="org/flintparticles/threeD/renderers/DisplayObjectRenderer.html">DisplayObjectRenderer</a></td>
@@ -334,8 +337,8 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("RÂ
 <tr>
 <td width="20"></td><td>
    
-   The removeParticle method is called when a particle is removed from the 
-   emitter that this renderer is assigned to.</td>
+   The removeParticle method is called when a particle is removed from one
+   of the emitters that is being rendered by this renderer.</td>
 </tr>
 <tr>
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('org/flintparticles/twoD/renderers/class-list.html');" href="org/flintparticles/twoD/renderers/DisplayObjectRenderer.html#removeParticle()">removeParticle</a>(particle:<a href="org/flintparticles/common/particles/Particle.html" onclick="javascript:loadClassListFrame('org/flintparticles/common/particles./class-list.html');">org.flintparticles.common.particles:Particle</a>) &mdash; Method in class org.flintparticles.twoD.renderers.<a onclick="javascript:loadClassListFrame('org/flintparticles/twoD/renderers/class-list.html');" href="org/flintparticles/twoD/renderers/DisplayObjectRenderer.html">DisplayObjectRenderer</a></td>
@@ -343,8 +346,8 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("RÂ
 <tr>
 <td width="20"></td><td>
    
-   The removeParticle method is called when a particle is removed from the 
-   emitter that this renderer is assigned to.</td>
+   The removeParticle method is called when a particle is removed from one
+   of the emitters that is being rendered by this renderer.</td>
 </tr>
 <tr>
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/zones/class-list.html');" href="org/flintparticles/threeD/zones/MultiZone.html#removeZone()">removeZone</a>(zone:<a href="org/flintparticles/threeD/zones/Zone3D.html" onclick="javascript:loadClassListFrame('org/flintparticles/threeD/zones./class-list.html');">org.flintparticles.threeD.zones:Zone3D</a>) &mdash; Method in class org.flintparticles.threeD.zones.<a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/zones/class-list.html');" href="org/flintparticles/threeD/zones/MultiZone.html">MultiZone</a></td>
@@ -414,23 +417,23 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("RÂ
 </tr>
 <tr>
 <td width="20"></td><td>
-  
-  </td>
+  The base class used by all the Flint renderers.</td>
 </tr>
 <tr>
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('org/flintparticles/common/renderers/class-list.html');" href="org/flintparticles/common/renderers/RendererBase.html#RendererBase()">RendererBase</a>() &mdash; Constructor in class org.flintparticles.common.renderers.<a onclick="javascript:loadClassListFrame('org/flintparticles/common/renderers/class-list.html');" href="org/flintparticles/common/renderers/RendererBase.html">RendererBase</a></td>
 </tr>
 <tr>
-<td width="20"></td><td></td>
+<td width="20"></td><td>
+   The constructor creates a RendererBase class.</td>
 </tr>
 <tr>
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('org/flintparticles/common/renderers/class-list.html');" href="org/flintparticles/common/renderers/RendererBase.html#renderParticles()">renderParticles</a>(particles) &mdash; Method in class org.flintparticles.common.renderers.<a onclick="javascript:loadClassListFrame('org/flintparticles/common/renderers/class-list.html');" href="org/flintparticles/common/renderers/RendererBase.html">RendererBase</a></td>
 </tr>
 <tr>
 <td width="20"></td><td>
-   The renderParticles method is called every frame so the renderer can
-   draw the particles that are in the emitter that this renderer is
-   assigned to.</td>
+   The renderParticles method is called during the render phase of 
+   every frame if the state of one of the emitters being rendered
+   by this renderer has changed.</td>
 </tr>
 <tr>
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/renderers/class-list.html');" href="org/flintparticles/threeD/renderers/BitmapRenderer.html#renderParticles()">renderParticles</a>(particles) &mdash; Method in class org.flintparticles.threeD.renderers.<a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/renderers/class-list.html');" href="org/flintparticles/threeD/renderers/BitmapRenderer.html">BitmapRenderer</a></td>
@@ -438,9 +441,9 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("RÂ
 <tr>
 <td width="20"></td><td>
    
-   The renderParticles method is called every frame so the renderer can
-   draw the particles that are in the emitter that this renderer is
-   assigned to.</td>
+   The renderParticles method is called during the render phase of 
+   every frame if the state of one of the emitters being rendered
+   by this renderer has changed.</td>
 </tr>
 <tr>
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/renderers/class-list.html');" href="org/flintparticles/threeD/renderers/DisplayObjectRenderer.html#renderParticles()">renderParticles</a>(particles) &mdash; Method in class org.flintparticles.threeD.renderers.<a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/renderers/class-list.html');" href="org/flintparticles/threeD/renderers/DisplayObjectRenderer.html">DisplayObjectRenderer</a></td>
@@ -448,9 +451,9 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("RÂ
 <tr>
 <td width="20"></td><td>
    
-   The renderParticles method is called every frame so the renderer can
-   draw the particles that are in the emitter that this renderer is
-   assigned to.</td>
+   The renderParticles method is called during the render phase of 
+   every frame if the state of one of the emitters being rendered
+   by this renderer has changed.</td>
 </tr>
 <tr>
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('org/flintparticles/twoD/renderers/class-list.html');" href="org/flintparticles/twoD/renderers/BitmapRenderer.html#renderParticles()">renderParticles</a>(particles) &mdash; Method in class org.flintparticles.twoD.renderers.<a onclick="javascript:loadClassListFrame('org/flintparticles/twoD/renderers/class-list.html');" href="org/flintparticles/twoD/renderers/BitmapRenderer.html">BitmapRenderer</a></td>
@@ -458,9 +461,9 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("RÂ
 <tr>
 <td width="20"></td><td>
    
-   The renderParticles method is called every frame so the renderer can
-   draw the particles that are in the emitter that this renderer is
-   assigned to.</td>
+   The renderParticles method is called during the render phase of 
+   every frame if the state of one of the emitters being rendered
+   by this renderer has changed.</td>
 </tr>
 <tr>
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('org/flintparticles/twoD/renderers/class-list.html');" href="org/flintparticles/twoD/renderers/DisplayObjectRenderer.html#renderParticles()">renderParticles</a>(particles) &mdash; Method in class org.flintparticles.twoD.renderers.<a onclick="javascript:loadClassListFrame('org/flintparticles/twoD/renderers/class-list.html');" href="org/flintparticles/twoD/renderers/DisplayObjectRenderer.html">DisplayObjectRenderer</a></td>
@@ -468,9 +471,9 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("RÂ
 <tr>
 <td width="20"></td><td>
    
-   The renderParticles method is called every frame so the renderer can
-   draw the particles that are in the emitter that this renderer is
-   assigned to.</td>
+   The renderParticles method is called during the render phase of 
+   every frame if the state of one of the emitters being rendered
+   by this renderer has changed.</td>
 </tr>
 <tr>
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/geom/class-list.html');" href="org/flintparticles/threeD/geom/Vector3D.html#reset()">reset</a>(x, y, z, w) &mdash; Method in class org.flintparticles.threeD.geom.<a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/geom/class-list.html');" href="org/flintparticles/threeD/geom/Vector3D.html">Vector3D</a></td>

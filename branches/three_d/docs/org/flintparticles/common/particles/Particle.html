@@ -89,7 +89,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 </tr>
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#image">image</a> : * = null<div class="summaryTableDescription">
-   The DisplayObject used to display the image.</div>
+   The object used to display the image.</div>
 </td><td class="summaryTableOwnerCol">Particle</td>
 </tr>
 <tr class="">
@@ -129,7 +129,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <div class="summarySignature">
 <a class="signatureLink" href="#initialize()">initialize</a>():void</div>
 <div class="summaryTableDescription">
-   Sets the particles properties to their default values.</div>
+   Sets the particle's properties to their default values.</div>
 </td><td class="summaryTableOwnerCol">Particle</td>
 </tr>
 </table>
@@ -210,7 +210,10 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public var image:* = null</code><p>
-   The DisplayObject used to display the image.
+   The object used to display the image. In a 2D particle, this is usually
+   a DisplayObject. In a 3D particle, this may be a DisplayObject, for 
+   displaying on a billboard or similar, or a 3D object in the form used
+   by the render system.
    </p></div>
 <a name="isDead"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
@@ -266,7 +269,7 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public function initialize():void</code><p>
-   Sets the particles properties to their default values.
+   Sets the particle's properties to their default values.
    </p></div>
 <br>
 <br>
