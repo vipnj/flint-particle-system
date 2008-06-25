@@ -37,19 +37,7 @@ package org.flintparticles.threeD.renderers
 	import org.flintparticles.threeD.geom.Vector3D;	
 
 	/**
-	 * The DisplayObjectRenderer adds particles to its display list 
-	 * and lets the flash player render them in its usual way.
-	 * 
-	 * <p>Particles may be represented by any DisplayObject and each particle 
-	 * must use a different DisplayObject instance. The DisplayObject
-	 * to be used should not be defined using the SharedImage initializer
-	 * because this shares one DisplayObject instance between all the particles.
-	 * The ImageClass initializer is commonly used because this creates a new 
-	 * DisplayObject for each particle.</p>
-	 * 
-	 * <p>The DisplayObjectRenderer has mouse events disabled for itself and any 
-	 * display objects in its display list. To enable mouse events for the renderer
-	 * or its children set the mouseEnabled or mouseChildren properties to true.</p>
+	 * Base class for the built-in flint renderers. Does a lot of the 3D calculations. Needs a lot of work.
 	 */
 	public class Flint3DRendererBase extends RendererBase
 	{
