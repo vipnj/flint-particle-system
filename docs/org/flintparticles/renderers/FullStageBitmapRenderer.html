@@ -49,9 +49,10 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
   the stage. This canvas sizing is only reliable when the display region for the swf 
   is exactly the same size as the swf itself, so that no scaling occurs.
   
-  <p>It is more efficient to use a BitmapRenderer with an appropriately defined canvas.
-  This class exists to allow the continued use of functionality that existed in the
-  BitmapRenderer in early versions of Flint.</p>
+  <p>It is more efficient to use a BitmapRenderer with an appropriately defined canvas.</p>
+  <b>This class will be deprecated in future versions of Flint in favour of the following code.</b></p>
+  
+  <p><code>new BitmapRenderer( new Rectangle(0, 0, stage.stageWidth, stage.stageheight) );</code></p>
   
   <p>This renderer uses properties of the stage object. It throws an exception if it is
   not in the same security sandbox as the Stage owner (the main SWF file). To avoid 

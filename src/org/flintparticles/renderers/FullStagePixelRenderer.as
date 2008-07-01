@@ -45,6 +45,11 @@ package org.flintparticles.renderers
 	 * This class exists to allow the continued use of functionality that existed in the
 	 * PixelRenderer in early versions of Flint.</p>
 	 * 
+	 * <p>It is more efficient to use a PixelRenderer with an appropriately defined canvas.
+	 * <b>This class will be deprecated in future versions of Flint in favour of the following code.</b></p>
+	 * 
+	 * <p><code>new PixelRenderer( new Rectangle(0, 0, stage.stageWidth, stage.stageheight) );</code></p>
+	 * 
 	 * <p>This renderer uses properties of the stage object. It throws an exception if it is
 	 * not in the same security sandbox as the Stage owner (the main SWF file). To avoid 
 	 * this, the Stage owner can grant permission to the domain containing this renderer
