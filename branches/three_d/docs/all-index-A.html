@@ -196,6 +196,13 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("AÂ
    The constructor creates an ActivityBase object.</td>
 </tr>
 <tr>
+<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/geom/class-list.html');" href="org/flintparticles/threeD/geom/Quaternion.html#add()">add</a>(q:<a href="org/flintparticles/threeD/geom/Quaternion.html" onclick="javascript:loadClassListFrame('org/flintparticles/threeD/geom./class-list.html');">org.flintparticles.threeD.geom:Quaternion</a>) &mdash; Method in class org.flintparticles.threeD.geom.<a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/geom/class-list.html');" href="org/flintparticles/threeD/geom/Quaternion.html">Quaternion</a></td>
+</tr>
+<tr>
+<td width="20"></td><td>
+   Adds another quaternion to this one, returning a new quaternion.</td>
+</tr>
+<tr>
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/geom/class-list.html');" href="org/flintparticles/threeD/geom/Vector3D.html#add()">add</a>(v:<a href="org/flintparticles/threeD/geom/Vector3D.html" onclick="javascript:loadClassListFrame('org/flintparticles/threeD/geom./class-list.html');">org.flintparticles.threeD.geom:Vector3D</a>) &mdash; Method in class org.flintparticles.threeD.geom.<a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/geom/class-list.html');" href="org/flintparticles/threeD/geom/Vector3D.html">Vector3D</a></td>
 </tr>
 <tr>
@@ -396,7 +403,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("AÂ
    Adds existing particles to the emitter.</td>
 </tr>
 <tr>
-<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/renderers/class-list.html');" href="org/flintparticles/threeD/renderers/BitmapRenderer.html#addFilter()">addFilter</a>(filter, postRender) &mdash; Method in class org.flintparticles.threeD.renderers.<a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/renderers/class-list.html');" href="org/flintparticles/threeD/renderers/BitmapRenderer.html">BitmapRenderer</a></td>
+<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/renderers/flint/class-list.html');" href="org/flintparticles/threeD/renderers/flint/BitmapRenderer.html#addFilter()">addFilter</a>(filter, postRender) &mdash; Method in class org.flintparticles.threeD.renderers.flint.<a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/renderers/flint/class-list.html');" href="org/flintparticles/threeD/renderers/flint/BitmapRenderer.html">BitmapRenderer</a></td>
 </tr>
 <tr>
 <td width="20"></td><td>
@@ -425,13 +432,12 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("AÂ
    the emitters that is being rendered by this renderer.</td>
 </tr>
 <tr>
-<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/renderers/class-list.html');" href="org/flintparticles/threeD/renderers/DisplayObjectRenderer.html#addParticle()">addParticle</a>(particle:<a href="org/flintparticles/common/particles/Particle.html" onclick="javascript:loadClassListFrame('org/flintparticles/common/particles./class-list.html');">org.flintparticles.common.particles:Particle</a>) &mdash; Method in class org.flintparticles.threeD.renderers.<a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/renderers/class-list.html');" href="org/flintparticles/threeD/renderers/DisplayObjectRenderer.html">DisplayObjectRenderer</a></td>
+<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/renderers/flint/class-list.html');" href="org/flintparticles/threeD/renderers/flint/DisplayObjectRenderer.html#addParticle()">addParticle</a>(particle:<a href="org/flintparticles/common/particles/Particle.html" onclick="javascript:loadClassListFrame('org/flintparticles/common/particles./class-list.html');">org.flintparticles.common.particles:Particle</a>) &mdash; Method in class org.flintparticles.threeD.renderers.flint.<a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/renderers/flint/class-list.html');" href="org/flintparticles/threeD/renderers/flint/DisplayObjectRenderer.html">DisplayObjectRenderer</a></td>
 </tr>
 <tr>
 <td width="20"></td><td>
-   
-   The addParticle method is called when a particle is added to one of
-   the emitters that is being rendered by this renderer.</td>
+   This method is called when a particle is added to an emitter -
+   usually becaus ethe emitter has just created the particle.</td>
 </tr>
 <tr>
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('org/flintparticles/twoD/renderers/class-list.html');" href="org/flintparticles/twoD/renderers/DisplayObjectRenderer.html#addParticle()">addParticle</a>(particle:<a href="org/flintparticles/common/particles/Particle.html" onclick="javascript:loadClassListFrame('org/flintparticles/common/particles./class-list.html');">org.flintparticles.common.particles:Particle</a>) &mdash; Method in class org.flintparticles.twoD.renderers.<a onclick="javascript:loadClassListFrame('org/flintparticles/twoD/renderers/class-list.html');" href="org/flintparticles/twoD/renderers/DisplayObjectRenderer.html">DisplayObjectRenderer</a></td>
@@ -684,6 +690,13 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("AÂ
    Converts an angle from degrees to radians
    
    </td>
+</tr>
+<tr>
+<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/geom/class-list.html');" href="org/flintparticles/threeD/geom/Quaternion.html#assign()">assign</a>(q:<a href="org/flintparticles/threeD/geom/Quaternion.html" onclick="javascript:loadClassListFrame('org/flintparticles/threeD/geom./class-list.html');">org.flintparticles.threeD.geom:Quaternion</a>) &mdash; Method in class org.flintparticles.threeD.geom.<a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/geom/class-list.html');" href="org/flintparticles/threeD/geom/Quaternion.html">Quaternion</a></td>
+</tr>
+<tr>
+<td width="20"></td><td>
+   Copies another quaternion into this one.</td>
 </tr>
 <tr>
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/geom/class-list.html');" href="org/flintparticles/threeD/geom/Vector3D.html#assign()">assign</a>(v:<a href="org/flintparticles/threeD/geom/Vector3D.html" onclick="javascript:loadClassListFrame('org/flintparticles/threeD/geom./class-list.html');">org.flintparticles.threeD.geom:Vector3D</a>) &mdash; Method in class org.flintparticles.threeD.geom.<a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/geom/class-list.html');" href="org/flintparticles/threeD/geom/Vector3D.html">Vector3D</a></td>

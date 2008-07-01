@@ -50,6 +50,10 @@ package org.flintparticles.twoD.renderers
 	 * <p>The DisplayObjectRenderer has mouse events disabled for itself and any 
 	 * display objects in its display list. To enable mouse events for the renderer
 	 * or its children set the mouseEnabled or mouseChildren properties to true.</p>
+	 * 
+	 * <p>Because the DisplayObject3DRenderer directly uses the particle's image,
+	 * it is not suitable in situations where the same particle will be displayed 
+	 * by two different renderers.</p> 
 	 */
 	public class DisplayObjectRenderer extends RendererBase
 	{

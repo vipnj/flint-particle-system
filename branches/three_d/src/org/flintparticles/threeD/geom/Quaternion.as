@@ -36,6 +36,11 @@ package org.flintparticles.threeD.geom
 	public class Quaternion 
 	{
 		/**
+		 * The w coordinate of the quaternion.
+		 */
+		public var w:Number;
+
+		/**
 		 * The x coordinate of the quaternion.
 		 */
 		public var x:Number;
@@ -50,11 +55,6 @@ package org.flintparticles.threeD.geom
 		 */
 		public var z:Number;
 		
-		/**
-		 * The w coordinate of the quaternion.
-		 */
-		public var w:Number;
-
 		/**
 		 * Constructor
 		 *
@@ -329,6 +329,11 @@ package org.flintparticles.threeD.geom
 			return new Quaternion( w, -x, -y, -z );
 		}
 		
+		/**
+		 * Set this quaternion equal to its conjugate.
+		 * 
+		 * @return A reference to this quaternion.
+		 */
 		public function makeConjugate():Quaternion
 		{
 			x = -x;
@@ -337,11 +342,19 @@ package org.flintparticles.threeD.geom
 			return this;
 		}
 		
+		/**
+		 * The inverse of this quaternion.
+		 */
 		public function get inverse():Quaternion
 		{
 			return conjugate.scaleBy( 1 / magnitudeSquared );
 		}
 		
+		/**
+		 * Set this quaternion to its inverse.
+		 * 
+		 * @return A reference to this quaternion.
+		 */
 		public function invert():Quaternion
 		{
 			makeConjugate();
@@ -382,6 +395,16 @@ package org.flintparticles.threeD.geom
 			return clone().normalize();
 		}
 		
+		/**
+		 * Create a new unit quaternion that represents a rotation about an axis in 
+		 * 3D space.
+		 * 
+		 * @param axis The axis of the rotation.
+		 * @param angle The angle, in radians, of the rotation. If no value is set, 
+		 * the w coordinate of the axis Vector3D is used.
+		 * 
+		 * @return A Quaternion representing the rotation.
+		 */
 		public static function createFromAxisRotation( axis:Vector3D, angle:Number = NaN ):Quaternion
 		{
 			if( isNaN( angle ) )
@@ -401,6 +424,16 @@ package org.flintparticles.threeD.geom
 			return new Quaternion( cos, -sin * axis.x, -sin * axis.y, -sin * axis.z );
 		}
 		
+		/**
+		 * Set this quaternion to a  unit quaternion that represents a rotation 
+		 * about an axis in 3D space.
+		 * 
+		 * @param axis The axis of the rotation.
+		 * @param angle The angle, in radians, of the rotation. If no value is set, 
+		 * the w coordinate of the axis Vector3D is used.
+		 * 
+		 * @return A reference to this Quaternion.
+		 */
 		public function setFromAxisRotation( axis:Vector3D, angle:Number = NaN ):Quaternion
 		{
 			if( isNaN( angle ) )

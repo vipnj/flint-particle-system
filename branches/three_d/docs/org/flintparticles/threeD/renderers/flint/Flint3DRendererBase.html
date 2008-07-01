@@ -1,0 +1,338 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="../../../../../style.css" type="text/css" media="screen">
+<link rel="stylesheet" href="../../../../../print.css" type="text/css" media="print">
+<meta content="Flint3DRendererBase,org.flintparticles.threeD.renderers.flint.Flint3DRendererBase,cameraTransform,farPlaneDistance,nearPlaneDistance,projectionDistance,calculateTransform" name="keywords">
+<title>org.flintparticles.threeD.renderers.flint.Flint3DRendererBase</title>
+</head>
+<body>
+<script type="text/javascript" language="javascript" src="../../../../../asdoc.js"></script><script type="text/javascript" language="javascript" src="../../../../../cookies.js"></script><script type="text/javascript" language="javascript">
+<!--
+				asdocTitle = 'Flint3DRendererBase - Flint Particle System documentation';
+				var baseRef = '../../../../../';
+				window.onload = configPage;
+			--></script>
+<table style="display:none" id="titleTable" cellspacing="0" cellpadding="0" class="titleTable">
+<tr>
+<td align="left" class="titleTableTitle">Flint Particle System documentation</td><td align="right" class="titleTableTopNav"><a onclick="loadClassListFrame('../../../../../all-classes.html')" href="../../../../../package-summary.html">All&nbsp;Packages</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../../../../all-classes.html')" href="../../../../../class-summary.html">All&nbsp;Classes</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../../../../index-list.html')" href="../../../../../all-index-A.html">Index</a>&nbsp;|&nbsp;<a href="../../../../../index.html?org/flintparticles/threeD/renderers/flint/Flint3DRendererBase.html&amp;org/flintparticles/threeD/renderers/flint/class-list.html" id="framesLink1">Frames</a><a onclick="parent.location=document.location" href="" style="display:none" id="noFramesLink1">No&nbsp;Frames</a></td><td rowspan="3" align="right" class="titleTableLogo"><img alt="Adobe Logo" title="Adobe Logo" class="logoImage" src="../../../../../images/logo.jpg"></td>
+</tr>
+<tr class="titleTableRow2">
+<td align="left" id="subTitle" class="titleTableSubTitle">Class&nbsp;Flint3DRendererBase</td><td align="right" id="subNav" class="titleTableSubNav"><a href="#propertySummary">Properties</a>&nbsp;| <a href="#methodSummary">Methods</a></td>
+</tr>
+<tr class="titleTableRow3">
+<td colspan="2">&nbsp;</td>
+</tr>
+</table>
+<script type="text/javascript" language="javascript">
+<!--
+if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Class Flint3DRendererBase"); titleBar_setSubNav(false,true,false,false,false,false,true,false,false,false,false,false,false,false);}
+--></script>
+<div class="MainContent">
+<table cellspacing="0" cellpadding="0" class="classHeaderTable">
+<tr>
+<td class="classHeaderTableLabel">Package</td><td><a onclick="javascript:loadClassListFrame('class-list.html')" href="package-detail.html">org.flintparticles.threeD.renderers.flint</a></td>
+</tr>
+<tr>
+<td class="classHeaderTableLabel">Class</td><td class="classSignature">public class Flint3DRendererBase</td>
+</tr>
+<tr>
+<td class="classHeaderTableLabel">Inheritance</td><td class="inheritanceList">Flint3DRendererBase <img class="inheritArrow" alt="Inheritance" title="Inheritance" src="../../../../../images/inherit-arrow.gif"> <a href="../../../common/renderers/RendererBase.html">RendererBase</a> <img class="inheritArrow" alt="Inheritance" title="Inheritance" src="../../../../../images/inherit-arrow.gif"> flash.display.Sprite</td>
+</tr>
+<tr>
+<td class="classHeaderTableLabel">Subclasses</td><td><a href="../flint/BitmapRenderer.html">BitmapRenderer</a>, <a href="../flint/DisplayObjectRenderer.html">DisplayObjectRenderer</a></td>
+</tr>
+</table>
+<p></p>
+  Base class for the built-in Flint renderers. This class does the common 
+  3D stuff used by all the built-in renderers.
+  
+  <p>The built-in renderers don't require any additional 3D libraries to
+  use. They display the particles as billboards or pixels within a standard
+  display object with depth, perspective and z-sorting to create a 3D
+  view on the particle systems. The built-in renderers use a left-hand
+  coordinate system. In camera local coordinates, the x axis is horizontal 
+  to the right, the y axis is vertical up and the z axis is away from the 
+  camera.</p>
+  
+  <p>The advantage to these Flint renderers is that they don't require any
+  additional 3D libraries in order to operate. This keeps file size small
+  and may make the renderers more efficient.</p>
+  
+  <p>The disadvantage is that these renderers don't allow the particle
+  system to be integrated with other objects within a 3D scene. For that, you
+  need a generic 3D system and an appropriate renderer to draw the Flint
+  particle systems within a 3D scene in that 3D system.</p>
+  
+  <p>Flint are collaborating with developers of 3D systems to create the 
+  appropriate renderers.</p>
+  <p></p>
+<br>
+<hr>
+</div>
+<a name="propertySummary"></a>
+<div class="summarySection">
+<div class="summaryTableTitle">Public Properties</div>
+<table id="summaryTableProperty" class="summaryTable " cellpadding="3" cellspacing="0">
+<tr>
+<th>&nbsp;</th><th colspan="2">Property</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#cameraTransform">cameraTransform</a> : <a href="../../geom/Matrix3D.html">Matrix3D</a>
+<div class="summaryTableDescription">
+   The transformation matrix that positions the camera in world space.</div>
+</td><td class="summaryTableOwnerCol">Flint3DRendererBase</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#farPlaneDistance">farPlaneDistance</a> : Number<div class="summaryTableDescription">
+   The distance to the camera's far plane
+   - particles farther away than this are not rendered.</div>
+</td><td class="summaryTableOwnerCol">Flint3DRendererBase</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#nearPlaneDistance">nearPlaneDistance</a> : Number<div class="summaryTableDescription">
+   The distance to the camera's near plane
+   - particles closer than this are not rendered.</div>
+</td><td class="summaryTableOwnerCol">Flint3DRendererBase</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#projectionDistance">projectionDistance</a> : Number<div class="summaryTableDescription">
+   The distance to the camera's projection distance.</div>
+</td><td class="summaryTableOwnerCol">Flint3DRendererBase</td>
+</tr>
+</table>
+</div>
+<a name="methodSummary"></a>
+<div class="summarySection">
+<div class="summaryTableTitle">Public Methods</div>
+<div class="showHideLinks">
+<div class="hideInheritedMethod" id="hideInheritedMethod">
+<a onclick="javascript:setInheritedVisible(false,'Method');" href="#methodSummary" class="showHideLink"><img src="../../../../../images/expanded.gif" class="showHideLinkImage"> Hide Inherited Public Methods</a>
+</div>
+<div class="showInheritedMethod" id="showInheritedMethod">
+<a onclick="javascript:setInheritedVisible(true,'Method');" href="#methodSummary" class="showHideLink"><img src="../../../../../images/collapsed.gif" class="showHideLinkImage"> Show Inherited Public Methods</a>
+</div>
+</div>
+<table id="summaryTableMethod" class="summaryTable " cellpadding="3" cellspacing="0">
+<tr>
+<th>&nbsp;</th><th colspan="2">Method</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#Flint3DRendererBase()">Flint3DRendererBase</a>(zSort:Boolean)</div>
+<div class="summaryTableDescription">
+   The constructor creates a Flint3DRendererBase.</div>
+</td><td class="summaryTableOwnerCol">Flint3DRendererBase</td>
+</tr>
+<tr class="hideInheritedMethod">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="../../../common/renderers/RendererBase.html#addEmitter()">addEmitter</a>(emitter:<a href="../../../common/emitters/Emitter.html">Emitter</a>):void</div>
+<div class="summaryTableDescription">
+   Adds the emitter to the renderer.</div>
+</td><td class="summaryTableOwnerCol"><a href="../../../common/renderers/RendererBase.html">RendererBase</a></td>
+</tr>
+<tr class="hideInheritedMethod">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="../../../common/renderers/RendererBase.html#removeEmitter()">removeEmitter</a>(emitter:<a href="../../../common/emitters/Emitter.html">Emitter</a>):void</div>
+<div class="summaryTableDescription">
+   Removes the emitter from the renderer.</div>
+</td><td class="summaryTableOwnerCol"><a href="../../../common/renderers/RendererBase.html">RendererBase</a></td>
+</tr>
+</table>
+</div>
+<a name="protectedMethodSummary"></a>
+<div class="summarySection">
+<div class="summaryTableTitle">Protected Methods</div>
+<div class="showHideLinks">
+<div class="hideInheritedProtectedMethod" id="hideInheritedProtectedMethod">
+<a onclick="javascript:setInheritedVisible(false,'ProtectedMethod');" href="#protectedMethodSummary" class="showHideLink"><img src="../../../../../images/expanded.gif" class="showHideLinkImage"> Hide Inherited Protected Methods</a>
+</div>
+<div class="showInheritedProtectedMethod" id="showInheritedProtectedMethod">
+<a onclick="javascript:setInheritedVisible(true,'ProtectedMethod');" href="#protectedMethodSummary" class="showHideLink"><img src="../../../../../images/collapsed.gif" class="showHideLinkImage"> Show Inherited Protected Methods</a>
+</div>
+</div>
+<table id="summaryTableProtectedMethod" class="summaryTable " cellpadding="3" cellspacing="0">
+<tr>
+<th>&nbsp;</th><th colspan="2">Method</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
+</tr>
+<tr class="hideInheritedProtectedMethod">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="../../../common/renderers/RendererBase.html#addParticle()">addParticle</a>(particle:<a href="../../../common/particles/Particle.html">Particle</a>):void</div>
+<div class="summaryTableDescription">
+   The addParticle method is called when a particle is added to one of
+   the emitters that is being rendered by this renderer.</div>
+</td><td class="summaryTableOwnerCol"><a href="../../../common/renderers/RendererBase.html">RendererBase</a></td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#calculateTransform()">calculateTransform</a>():void</div>
+<div class="summaryTableDescription">
+   Used to recalculate the projection matrix to transform particles
+   to the camera's coordinate system and project them on the camera's
+   projection plane.</div>
+</td><td class="summaryTableOwnerCol">Flint3DRendererBase</td>
+</tr>
+<tr class="hideInheritedProtectedMethod">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="../../../common/renderers/RendererBase.html#removeParticle()">removeParticle</a>(particle:<a href="../../../common/particles/Particle.html">Particle</a>):void</div>
+<div class="summaryTableDescription">
+   The removeParticle method is called when a particle is removed from one
+   of the emitters that is being rendered by this renderer.</div>
+</td><td class="summaryTableOwnerCol"><a href="../../../common/renderers/RendererBase.html">RendererBase</a></td>
+</tr>
+<tr class="hideInheritedProtectedMethod">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="../../../common/renderers/RendererBase.html#renderParticles()">renderParticles</a>(particles:Array):void</div>
+<div class="summaryTableDescription">
+   The renderParticles method is called during the render phase of 
+   every frame if the state of one of the emitters being rendered
+   by this renderer has changed.</div>
+</td><td class="summaryTableOwnerCol"><a href="../../../common/renderers/RendererBase.html">RendererBase</a></td>
+</tr>
+</table>
+</div>
+<script type="text/javascript" language="javascript">
+<!--
+showHideInherited();
+--></script>
+<div class="MainContent">
+<a name="propertyDetail"></a>
+<div class="detailSectionHeader">Property detail</div>
+<a name="cameraTransform"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">cameraTransform</td><td class="detailHeaderType">property</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>cameraTransform:<a href="../../geom/Matrix3D.html">Matrix3D</a></code>&nbsp;&nbsp;[read-write]<p>
+   The transformation matrix that positions the camera in world space.
+   Particles will be transformed using the inverse of this transformation
+   to position them in the camera's coordinate system.
+   </p><span class="label">Implementation</span>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function get cameraTransform():<a href="../../geom/Matrix3D.html">Matrix3D</a></code>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function set cameraTransform(value:<a href="../../geom/Matrix3D.html">Matrix3D</a>):void</code>
+<br>
+</div>
+<a name="farPlaneDistance"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">farPlaneDistance</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>farPlaneDistance:Number</code>&nbsp;&nbsp;[read-write]<p>
+   The distance to the camera's far plane
+   - particles farther away than this are not rendered.
+   
+   The default value is 2000.
+   </p><span class="label">Implementation</span>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function get farPlaneDistance():Number</code>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function set farPlaneDistance(value:Number):void</code>
+<br>
+</div>
+<a name="nearPlaneDistance"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">nearPlaneDistance</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>nearPlaneDistance:Number</code>&nbsp;&nbsp;[read-write]<p>
+   The distance to the camera's near plane
+   - particles closer than this are not rendered.
+   
+   The default value is 10.
+   </p><span class="label">Implementation</span>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function get nearPlaneDistance():Number</code>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function set nearPlaneDistance(value:Number):void</code>
+<br>
+</div>
+<a name="projectionDistance"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">projectionDistance</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>projectionDistance:Number</code>&nbsp;&nbsp;[read-write]<p>
+   The distance to the camera's projection distance. Particles this
+   distance from the camera are rendered at their normal size. Perspective
+   will cause closer particles to appear larger than normal and more 
+   distant particles to appear smaller than normal.
+   
+   The default value is 400.
+   </p><span class="label">Implementation</span>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function get projectionDistance():Number</code>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function set projectionDistance(value:Number):void</code>
+<br>
+</div>
+<a name="constructorDetail"></a>
+<div class="detailSectionHeader">Constructor detail</div>
+<a name="Flint3DRendererBase()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">Flint3DRendererBase</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">constructor</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function Flint3DRendererBase(zSort:Boolean)</code><p>
+   The constructor creates a Flint3DRendererBase. This constructor
+   shouldn't be called directly because this is an abstract base class
+   and developers shouldbe using teh classes derived from this base class.
+   
+   </p><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">zSort</span>:Boolean</code> &mdash; Whether to sort the particle images in z-order (true) or
+   not (false) when rendering them.
+   
+   </td>
+</tr>
+</table>
+<p>
+<span class="label">See also</span>
+</p>
+<div class="seeAlso">org.flintparticles.twoD.emitters.Emitter.renderer</div>
+</div>
+<a name="methodDetail"></a>
+<div class="detailSectionHeader">Method detail</div>
+<a name="calculateTransform()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">calculateTransform</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>protected function calculateTransform():void</code><p>
+   Used to recalculate the projection matrix to transform particles
+   to the camera's coordinate system and project them on the camera's
+   projection plane.
+   </p></div>
+<br>
+<br>
+<hr>
+<br>
+<p></p>
+<center class="copyright"> 
+</center>
+</div>
+</body>
+</html>
+<!-- -->

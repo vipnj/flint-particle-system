@@ -28,7 +28,7 @@
  * THE SOFTWARE.
  */
 
-package org.flintparticles.threeD.renderers
+package org.flintparticles.threeD.renderers.flint
 {
 	import flash.display.Bitmap;
 	import flash.display.BitmapData;
@@ -42,8 +42,32 @@ package org.flintparticles.threeD.renderers
 	import org.flintparticles.threeD.particles.Particle3D;	
 
 	/**
-	 * This 3D renderer is rubbish. It's just good enough to test the rest of the system, but 
-	 * not useful for much else. There will be much better 3D renderers soon.
+	 * The BitmapRenderer is a native Flint 3D renderer that draws particles
+	 * onto a single Bitmap display object. The particles are drawn face-on to the
+	 * camera, with perspective applied to position and scale the particles.
+	 * 
+	 * <p>The region of the projection plane drawn by this renderer must be 
+	 * defined in the canvas property of the BitmapRenderer. Particles outside this 
+	 * region are not drawn.</p>
+	 * 
+	 * <p>The image to be used for each particle is the particle's image property.
+	 * This is a DisplayObject, but this DisplayObject is not used directly. Instead
+	 * it is copied into the bitmap with the various properties of the particle 
+	 * applied, including 3D positioning and perspective relative to the renderer's
+	 * camera position. Consequently each particle may be represented by the same 
+	 * DisplayObject instance and the SharedImage initializer can be used with this 
+	 * renderer.</p>
+	 * 
+	 * <p>The BitmapRenderer allows the use of BitmapFilters to modify the appearance
+	 * of the bitmap. Every frame, under normal circumstances, the Bitmap used to
+	 * display the particles is wiped clean before all the particles are redrawn.
+	 * However, if one or more filters are added to the renderer, the filters are
+	 * applied to the bitmap instead of wiping it clean. This enables various trail
+	 * effects by using blur and other filters.</p>
+	 * 
+	 * <p>The BitmapRenderer has mouse events disabled for itself and any 
+	 * display objects in its display list. To enable mouse events for the renderer
+	 * or its children set the mouseEnabled or mouseChildren properties to true.</p>
 	 */
 	public class BitmapRenderer extends Flint3DRendererBase
 	{
@@ -73,19 +97,20 @@ package org.flintparticles.threeD.renderers
 		 * @private
 		 */
 		protected var _canvas:Rectangle;
-		/**
-		 * @private
-		 */
-		protected var _zSort:Boolean;
 
 		/**
 		 * The constructor creates a BitmapRenderer. After creation it should be
 		 * added to the display list of a DisplayObjectContainer to place it on 
-		 * the stage and should be applied to an Emitter using the Emitter's
-		 * renderer property.
+		 * the stage.
+		 * 
+		 * <p>Emitter's should be added to the renderer using the renderer's
+		 * addEmitter method. The renderer displays all the particles created
+		 * by the emitter's that have been added to it.</p>
 		 * 
 		 * @param canvas The area within the renderer on which particles can be drawn.
 		 * Particles outside this area will not be drawn.
+		 * @param zSort Whether to sort the particles according to their
+		 * z order when rendering them or not.
 		 * @param smoothing Whether to use smoothing when scaling the Bitmap and, if the
 		 * particles are represented by bitmaps, when drawing the particles.
 		 * Smoothing removes pixelation when images are scaled and rotated, but it
@@ -93,9 +118,9 @@ package org.flintparticles.threeD.renderers
 		 * 
 		 * @see org.flintparticles.twoD.emitters.Emitter#renderer
 		 */
-		public function BitmapRenderer( canvas:Rectangle, zSort:Boolean = false, smoothing:Boolean = false )
+		public function BitmapRenderer( canvas:Rectangle, zSort:Boolean = true, smoothing:Boolean = false )
 		{
-			super();
+			super( zSort );
 			mouseEnabled = false;
 			mouseChildren = false;
 			_zSort = zSort;
@@ -216,19 +241,6 @@ package org.flintparticles.threeD.renderers
 		}
 
 		/**
-		 * The canvas is the area within the renderer on which particles can be drawn.
-		 * Particles outside this area will not be drawn.
-		 */
-		public function get zSort():Boolean
-		{
-			return _zSort;
-		}
-		public function set zSort( value:Boolean ):void
-		{
-			_zSort = value;
-		}
-				
-		/**
 		 * When the renderer is no longer required, this method must be called by the 
 		 * user to free up memory used by the renderer. If you don't call this method
 		 * then the renderer's bitmap data will remain in memory.
@@ -242,7 +254,14 @@ package org.flintparticles.threeD.renderers
 		}
 
 		/**
-		 * @inheritDoc
+		 * This method draws the particles in the bitmap image, positioning and
+		 * scaling them according to their positions relative to the camera 
+		 * viewport.
+		 * 
+		 * <p>This method is called internally by Flint and shouldn't need to be called
+		 * by the user.</p>
+		 * 
+		 * @param particles The particles to be rendered.
 		 */
 		override protected function renderParticles( particles:Array ):void
 		{
@@ -257,6 +276,7 @@ package org.flintparticles.threeD.renderers
 			
 			var i:int;
 			var len:int;
+			var particle:Particle3D;
 			_bitmap.bitmapData.lock();
 			len = _preFilters.length;
 			for( i = 0; i < len; ++i )
@@ -267,17 +287,20 @@ package org.flintparticles.threeD.renderers
 			{
 				_bitmap.bitmapData.fillRect( _bitmap.bitmapData.rect, 0 );
 			}
+			len = particles.length;
+			for( i = 0; i < len; ++i )
+			{
+				particle = particles[i];
+				particle.dictionary[this] = _projectionTransform.transformVector( particle.position );
+			}
 			if( _zSort )
 			{
-				
+				trace( "do z sort");
+				particles.sort( sortOnZ );
 			}
-			else
+			for( i = 0; i < len; ++i )
 			{
-				len = particles.length;
-				for( i = 0; i < len; ++i )
-				{
-					drawParticle( particles[i] );
-				}
+				drawParticle( particles[i] );
 			}
 			len = _postFilters.length;
 			for( i = 0; i < len; ++i )
@@ -292,17 +315,45 @@ package org.flintparticles.threeD.renderers
 		}
 		
 		/**
-		 * Used internally here and in derived classes to alter the manner of 
-		 * the particle rendering.
+		 * @private
+		 */
+		protected function sortOnZ( p1:Particle3D, p2:Particle3D ):int
+		{
+			/*
+			 * TODO: does this work?
+			 * return Number( p2.dictionary[this] ) - Number( p1.dictionary[this] )
+			 */
+			var order:Number = Vector3D( p2.dictionary[this] ).z - Vector3D( p1.dictionary[this] ).z;
+			if( order < 0 )
+			{
+				return -1;
+			}
+			if( order > 0 )
+			{
+				return 1;
+			}
+			return 0;
+		}
+
+		/**
+		 * Used internally here and in derived classes to render a single particle.
+		 * Each particle is positioned and perspective scaling applied here.
+		 * 
+		 * <p>Derived classes can modify the rendering of individual particles
+		 * by overriding this method.</p>
 		 * 
 		 * @param particle The particle to draw on the bitmap.
 		 */
 		protected function drawParticle( particle:Particle3D ):void
 		{
-			var pos:Vector3D = _spaceTransform.transformVector( particle.position );
-			var scale:Number = _zoom * _projectionDistance / pos.z;
-			var matrix:Matrix = new Matrix( particle.scale * scale, 0, 0, particle.scale * scale, pos.x * scale, -pos.y * scale );
-			matrix.translate( -_canvas.x, -_canvas.y );
+			var pos:Vector3D = Vector3D( particle.dictionary[this] );
+			if( pos.z < _nearDistance || pos.z > _farDistance )
+			{
+				return;
+			}
+			var scale:Number = particle.scale * _projectionDistance / pos.z;
+			pos.project();
+			var matrix:Matrix = new Matrix( scale, 0, 0, scale, pos.x - _canvas.x, -pos.y - _canvas.y );
 			_bitmap.bitmapData.draw( particle.image, matrix, particle.colorTransform, DisplayObject( particle.image ).blendMode, null, _smoothing );
 		}
 	}

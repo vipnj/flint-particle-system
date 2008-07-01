@@ -243,11 +243,12 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("PÂ
    The period of the sine wave used, in seconds.</td>
 </tr>
 <tr>
-<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/renderers/class-list.html');" href="org/flintparticles/threeD/renderers/PixelRenderer.html">PixelRenderer</a> &mdash; Class in package <a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/renderers/class-list.html');" href="org/flintparticles/threeD/renderers/package-detail.html">org.flintparticles.threeD.renderers</a></td>
+<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/renderers/flint/class-list.html');" href="org/flintparticles/threeD/renderers/flint/PixelRenderer.html">PixelRenderer</a> &mdash; Class in package <a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/renderers/flint/class-list.html');" href="org/flintparticles/threeD/renderers/flint/package-detail.html">org.flintparticles.threeD.renderers.flint</a></td>
 </tr>
 <tr>
 <td width="20"></td><td>
-  This 3D renderer is rubbish.</td>
+  The PixelRenderer is a native Flint 3D renderer that draws particles
+  as single pixels on a Bitmap display object.</td>
 </tr>
 <tr>
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('org/flintparticles/twoD/renderers/class-list.html');" href="org/flintparticles/twoD/renderers/PixelRenderer.html">PixelRenderer</a> &mdash; Class in package <a onclick="javascript:loadClassListFrame('org/flintparticles/twoD/renderers/class-list.html');" href="org/flintparticles/twoD/renderers/package-detail.html">org.flintparticles.twoD.renderers</a></td>
@@ -257,7 +258,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("PÂ
   The PixelRenderer draws particles as single pixels on a Bitmap display object.</td>
 </tr>
 <tr>
-<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/renderers/class-list.html');" href="org/flintparticles/threeD/renderers/PixelRenderer.html#PixelRenderer()">PixelRenderer</a>(canvas) &mdash; Constructor in class org.flintparticles.threeD.renderers.<a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/renderers/class-list.html');" href="org/flintparticles/threeD/renderers/PixelRenderer.html">PixelRenderer</a></td>
+<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/renderers/flint/class-list.html');" href="org/flintparticles/threeD/renderers/flint/PixelRenderer.html#PixelRenderer()">PixelRenderer</a>(canvas, zSort) &mdash; Constructor in class org.flintparticles.threeD.renderers.flint.<a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/renderers/flint/class-list.html');" href="org/flintparticles/threeD/renderers/flint/PixelRenderer.html">PixelRenderer</a></td>
 </tr>
 <tr>
 <td width="20"></td><td>
@@ -377,13 +378,6 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("PÂ
    The position of the particle (in the renderer's units).</td>
 </tr>
 <tr>
-<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/renderers/class-list.html');" href="org/flintparticles/threeD/renderers/Flint3DRendererBase.html#position">position</a> &mdash; Property in class org.flintparticles.threeD.renderers.<a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/renderers/class-list.html');" href="org/flintparticles/threeD/renderers/Flint3DRendererBase.html">Flint3DRendererBase</a></td>
-</tr>
-<tr>
-<td width="20"></td><td>
-   The position of the camera.</td>
-</tr>
-<tr>
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/initializers/class-list.html');" href="org/flintparticles/threeD/initializers/Position.html">Position</a> &mdash; Class in package <a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/initializers/class-list.html');" href="org/flintparticles/threeD/initializers/package-detail.html">org.flintparticles.threeD.initializers</a></td>
 </tr>
 <tr>
@@ -442,6 +436,22 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("PÂ
 <td width="20"></td><td>
    The constructor creates a PositionAbsolute initializer for use by 
    an emitter.</td>
+</tr>
+<tr>
+<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/geom/class-list.html');" href="org/flintparticles/threeD/geom/Quaternion.html#postMultiply()">postMultiply</a>(q:<a href="org/flintparticles/threeD/geom/Quaternion.html" onclick="javascript:loadClassListFrame('org/flintparticles/threeD/geom./class-list.html');">org.flintparticles.threeD.geom:Quaternion</a>) &mdash; Method in class org.flintparticles.threeD.geom.<a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/geom/class-list.html');" href="org/flintparticles/threeD/geom/Quaternion.html">Quaternion</a></td>
+</tr>
+<tr>
+<td width="20"></td><td>
+   Post multiply this quaternion by another quaternion, returning a new quaternion.</td>
+</tr>
+<tr>
+<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/geom/class-list.html');" href="org/flintparticles/threeD/geom/Quaternion.html#postMultiplyBy()">postMultiplyBy</a>(q:<a href="org/flintparticles/threeD/geom/Quaternion.html" onclick="javascript:loadClassListFrame('org/flintparticles/threeD/geom./class-list.html');">org.flintparticles.threeD.geom:Quaternion</a>) &mdash; Method in class org.flintparticles.threeD.geom.<a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/geom/class-list.html');" href="org/flintparticles/threeD/geom/Quaternion.html">Quaternion</a></td>
+</tr>
+<tr>
+<td width="20"></td><td>
+   Post multiply this quaternion by another quaternion
+   
+   </td>
 </tr>
 <tr>
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/actions/class-list.html');" href="org/flintparticles/threeD/actions/AntiGravity.html#power">power</a> &mdash; Property in class org.flintparticles.threeD.actions.<a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/actions/class-list.html');" href="org/flintparticles/threeD/actions/AntiGravity.html">AntiGravity</a></td>
@@ -537,6 +547,22 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("PÂ
    The strength of theturn action.</td>
 </tr>
 <tr>
+<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/geom/class-list.html');" href="org/flintparticles/threeD/geom/Quaternion.html#preMultiply()">preMultiply</a>(q:<a href="org/flintparticles/threeD/geom/Quaternion.html" onclick="javascript:loadClassListFrame('org/flintparticles/threeD/geom./class-list.html');">org.flintparticles.threeD.geom:Quaternion</a>) &mdash; Method in class org.flintparticles.threeD.geom.<a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/geom/class-list.html');" href="org/flintparticles/threeD/geom/Quaternion.html">Quaternion</a></td>
+</tr>
+<tr>
+<td width="20"></td><td>
+   Pre multiply this quaternion by another quaternion, returning a new quaternion.</td>
+</tr>
+<tr>
+<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/geom/class-list.html');" href="org/flintparticles/threeD/geom/Quaternion.html#preMultiplyBy()">preMultiplyBy</a>(q:<a href="org/flintparticles/threeD/geom/Quaternion.html" onclick="javascript:loadClassListFrame('org/flintparticles/threeD/geom./class-list.html');">org.flintparticles.threeD.geom:Quaternion</a>) &mdash; Method in class org.flintparticles.threeD.geom.<a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/geom/class-list.html');" href="org/flintparticles/threeD/geom/Quaternion.html">Quaternion</a></td>
+</tr>
+<tr>
+<td width="20"></td><td>
+   Pre multiply this quaternion by another quaternion
+   
+   </td>
+</tr>
+<tr>
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/geom/class-list.html');" href="org/flintparticles/threeD/geom/Matrix3D.html#prepend()">prepend</a>(m:<a href="org/flintparticles/threeD/geom/Matrix3D.html" onclick="javascript:loadClassListFrame('org/flintparticles/threeD/geom./class-list.html');">org.flintparticles.threeD.geom:Matrix3D</a>) &mdash; Method in class org.flintparticles.threeD.geom.<a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/geom/class-list.html');" href="org/flintparticles/threeD/geom/Matrix3D.html">Matrix3D</a></td>
 </tr>
 <tr>
@@ -584,6 +610,13 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("PÂ
 <td width="20"></td><td>
    Divide all the coordinates in this position vector by the w coordinate, 
    producing a vector with a w coordinate of 1.</td>
+</tr>
+<tr>
+<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/renderers/flint/class-list.html');" href="org/flintparticles/threeD/renderers/flint/Flint3DRendererBase.html#projectionDistance">projectionDistance</a> &mdash; Property in class org.flintparticles.threeD.renderers.flint.<a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/renderers/flint/class-list.html');" href="org/flintparticles/threeD/renderers/flint/Flint3DRendererBase.html">Flint3DRendererBase</a></td>
+</tr>
+<tr>
+<td width="20"></td><td>
+   The distance to the camera's projection distance.</td>
 </tr>
 <tr>
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('org/flintparticles/common/counters/class-list.html');" href="org/flintparticles/common/counters/Pulse.html">Pulse</a> &mdash; Class in package <a onclick="javascript:loadClassListFrame('org/flintparticles/common/counters/class-list.html');" href="org/flintparticles/common/counters/package-detail.html">org.flintparticles.common.counters</a></td>

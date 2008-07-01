@@ -38,9 +38,10 @@ package
 	import org.flintparticles.common.initializers.*;
 	import org.flintparticles.threeD.actions.*;
 	import org.flintparticles.threeD.emitters.Emitter3D;
+	import org.flintparticles.threeD.geom.Matrix3D;
 	import org.flintparticles.threeD.geom.Vector3D;
 	import org.flintparticles.threeD.initializers.*;
-	import org.flintparticles.threeD.renderers.*;
+	import org.flintparticles.threeD.renderers.flint.*;
 	import org.flintparticles.threeD.zones.*;	
 
 	[SWF(width='500', height='500', frameRate='61', backgroundColor='#000000')]
@@ -71,8 +72,7 @@ package
 			emitter.addAction( new Age() );
 			
 			var renderer:DisplayObjectRenderer = new DisplayObjectRenderer();
-			renderer.position = new Vector3D( 0, 100, -300 );
-			renderer.zoom = 8;
+			renderer.cameraTransform = Matrix3D.newTranslate( new Vector3D( 0, 100, -300 ) );
 			renderer.addEmitter( emitter );
 			renderer.x = 250;
 			renderer.y = 250;

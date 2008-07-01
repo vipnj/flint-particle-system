@@ -91,9 +91,9 @@ package org.flintparticles.threeD.geom
 			{
 				return Matrix3D( IDENTITY.clone() );
 			}
-			var sin:Number = Math.sin( angle );
-			var cos:Number = Math.cos( angle );
-			var oneMinCos:Number = 1 - cos;
+			const sin:Number = Math.sin( angle );
+			const cos:Number = Math.cos( angle );
+			const oneMinCos:Number = 1 - cos;
 			return new Matrix3D( [
 				cos + axis.x * axis.x * oneMinCos, axis.x * axis.y * oneMinCos - axis.z * sin, axis.x * axis.z  * oneMinCos + axis.y * sin, 0,
 				axis.x * axis.y * oneMinCos + axis.z * sin, cos + axis.y * axis.y * oneMinCos, axis.y * axis.z * oneMinCos - axis.x * sin, 0,

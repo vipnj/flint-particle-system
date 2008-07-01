@@ -144,7 +144,7 @@ package org.flintparticles.threeD.emitters
 		{
 			if( spaceSort )
 			{
-				spaceSortedX = _particles.sort( sortOnX, Array.NUMERIC | Array.RETURNINDEXEDARRAY );
+				spaceSortedX = _particles.sort( sortOnX, Array.RETURNINDEXEDARRAY );
 				var len:int = _particles.length;
 				for( var i:int = 0; i < len; ++i )
 				{

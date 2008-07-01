@@ -438,7 +438,7 @@ package org.flintparticles.threeD.geom
 		{
 			if( w != 0 )
 			{
-				return multiply( 1/w );
+				return scaleBy( 1/w );
 			}
 			else
 			{
