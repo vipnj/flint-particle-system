@@ -4,7 +4,7 @@
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="../../../style.css" type="text/css" media="screen">
 <link rel="stylesheet" href="../../../print.css" type="text/css" media="print">
-<meta content="BoundingBox,org.flintparticles.actions.BoundingBox,bottom,box,left,right,top,getDefaultPriority,update" name="keywords">
+<meta content="BoundingBox,org.flintparticles.actions.BoundingBox,bottom,bounce,box,left,right,top,getDefaultPriority,update" name="keywords">
 <title>org.flintparticles.actions.BoundingBox</title>
 </head>
 <body>
@@ -63,6 +63,12 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 </td><td class="summaryTableOwnerCol">BoundingBox</td>
 </tr>
 <tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#bounce">bounce</a> : Number<div class="summaryTableDescription">
+   The coefficient of restitution when the particles bounce off the
+   sides of the box.</div>
+</td><td class="summaryTableOwnerCol">BoundingBox</td>
+</tr>
+<tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#box">box</a> : Rectangle<div class="summaryTableDescription">
    The bounding box.</div>
 </td><td class="summaryTableOwnerCol">BoundingBox</td>
@@ -102,7 +108,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
-<a class="signatureLink" href="#BoundingBox()">BoundingBox</a>(left:Number, top:Number, right:Number, bottom:Number)</div>
+<a class="signatureLink" href="#BoundingBox()">BoundingBox</a>(left:Number, top:Number, right:Number, bottom:Number, bounce:Number = 1)</div>
 <div class="summaryTableDescription">
    The constructor creates a BoundingBox action for use by 
    an emitter.</div>
@@ -170,6 +176,25 @@ showHideInherited();
 <code>&nbsp;&nbsp;&nbsp;&nbsp;public function get bottom():Number</code>
 <br>
 <code>&nbsp;&nbsp;&nbsp;&nbsp;public function set bottom(value:Number):void</code>
+<br>
+</div>
+<a name="bounce"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">bounce</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>bounce:Number</code>&nbsp;&nbsp;[read-write]<p>
+   The coefficient of restitution when the particles bounce off the
+   sides of the box. A value of 1 gives a pure pure elastic collision, with no energy loss. 
+   A value between 0 and 1 causes the particle to loose enegy in the collision. A value 
+   greater than 1 causes the particle to gain energy in the collision.
+   </p><span class="label">Implementation</span>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function get bounce():Number</code>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function set bounce(value:Number):void</code>
 <br>
 </div>
 <a name="box"></a>
@@ -245,7 +270,7 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>public function BoundingBox(left:Number, top:Number, right:Number, bottom:Number)</code><p>
+<code>public function BoundingBox(left:Number, top:Number, right:Number, bottom:Number, bounce:Number = 1)</code><p>
    The constructor creates a BoundingBox action for use by 
    an emitter. To add a BoundingBox to all particles created by an emitter, use the
    emitter's addAction method.
@@ -279,6 +304,16 @@ showHideInherited();
 <tr>
 <td width="20px"></td><td><code><span class="label">bottom</span>:Number</code> &mdash; The bottom coordinate of the box. The coordinates are in the
    coordinate space of the object containing the emitter.
+   </td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">bounce</span>:Number</code> (default = <code>1</code>)<code></code> &mdash; The coefficient of restitution when the particles bounce off the
+   sides of the box. A value of 1 gives a pure elastic collision, with no energy loss. 
+   A value between 0 and 1 causes the particle to loose enegy in the collision. A value 
+   greater than 1 causes the particle to gain energy in the collision.
    </td>
 </tr>
 </table>

@@ -48,6 +48,7 @@ package org.flintparticles.actions
 		private var _top : Number;
 		private var _right : Number;
 		private var _bottom : Number;
+		private var _bounce : Number;
 
 		/**
 		 * The constructor creates a BoundingBox action for use by 
@@ -64,13 +65,18 @@ package org.flintparticles.actions
 		 * coordinate space of the object containing the emitter.
 		 * @param bottom The bottom coordinate of the box. The coordinates are in the
 		 * coordinate space of the object containing the emitter.
+		 * @param bounce The coefficient of restitution when the particles bounce off the
+		 * sides of the box. A value of 1 gives a pure elastic collision, with no energy loss. 
+		 * A value between 0 and 1 causes the particle to loose enegy in the collision. A value 
+		 * greater than 1 causes the particle to gain energy in the collision.
 		 */
-		public function BoundingBox( left:Number, top:Number, right:Number, bottom:Number )
+		public function BoundingBox( left:Number, top:Number, right:Number, bottom:Number, bounce:Number = 1 )
 		{
 			_left = left;
 			_top = top;
 			_right = right;
 			_bottom = bottom;
+			_bounce = bounce;
 		}
 		
 		/**
@@ -137,6 +143,21 @@ package org.flintparticles.actions
 		}
 
 		/**
+		 * The coefficient of restitution when the particles bounce off the
+		 * sides of the box. A value of 1 gives a pure pure elastic collision, with no energy loss. 
+		 * A value between 0 and 1 causes the particle to loose enegy in the collision. A value 
+		 * greater than 1 causes the particle to gain energy in the collision.
+		 */
+		public function get bounce():Number
+		{
+			return _bounce;
+		}
+		public function set bounce( value:Number ):void
+		{
+			_bounce = value;
+		}
+
+		/**
 		 * @inheritDoc
 		 * 
 		 * <p>Returns a value of -20, so that the BoundingBox executes after all movement has occured.</p>
@@ -165,22 +186,22 @@ package org.flintparticles.actions
 			var position:Number;
 			if ( particle.velX > 0 && ( position = particle.x + halfWidth ) >= _right )
 			{
-				particle.velX = -particle.velX;
+				particle.velX = -particle.velX * _bounce;
 				particle.x += 2 * ( _right - position );
 			}
 			else if ( particle.velX < 0 && ( position = particle.x - halfWidth ) <= _left )
 			{
-				particle.velX = -particle.velX;
+				particle.velX = -particle.velX * _bounce;
 				particle.x += 2 * ( _left - position );
 			}
 			if ( particle.velY > 0 && ( position = particle.y + halfHeight ) >= _bottom )
 			{
-				particle.velY = -particle.velY;
+				particle.velY = -particle.velY * _bounce;
 				particle.y += 2 * ( _bottom - position );
 			}
 			else if ( particle.velY < 0 && ( position = particle.y - halfHeight ) <= _top )
 			{
-				particle.velY = -particle.velY;
+				particle.velY = -particle.velY * _bounce;
 				particle.y += 2 * ( _top - position );
 			}
 		}

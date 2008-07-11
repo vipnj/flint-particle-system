@@ -175,6 +175,10 @@ package org.flintparticles.emitters
 		 * @private
 		 */
 		protected var _rotation : Number = 0;
+		/**
+		 * @private
+		 */
+		protected var _maximumFrameTime:Number = 0.5;
 
 		private var _ticker : Shape;
 
@@ -251,6 +255,31 @@ package org.flintparticles.emitters
 
 		/**
 		 * Indicates the rotation of the Emitter, in radians, within the particle system's coordinate space.
+		 */
+		public function get maximumFrameTime() : Number
+		{
+			return _maximumFrameTime;
+		}
+
+		public function set maximumFrameTime( value : Number ) : void
+		{
+			_maximumFrameTime = value;
+		}
+
+		/**
+		 * The maximum duration, in seconds, for a single update frame, in seconds.
+		 * 
+		 * <p>Under some circumstances related to the Flash player (e.g. on MacOSX, when the 
+		 * user right-clicks on the flash movie) the flash movie will freeze for a period. When the
+		 * freeze ends, the current frame of the particle system will be calculated as the time since 
+		 * the previous frame,  which encompases the duration of the freeze. This could cause the 
+		 * system to generate a single frame update that compensates for a long period of time and 
+		 * hence moves the particles an unexpected long distance in one go. The result is usually
+		 * visually unacceptable and certainly unexpected.</p>
+		 * 
+		 * <p>This property sets a maximum duration for a frame such that any frames longer than 
+		 * this duration are ignored. The default value is 0.5 seconds. Developers don't usually
+		 * need to change this from the default value.</p>
 		 */
 		public function get rotRadians() : Number
 		{
@@ -580,15 +609,10 @@ package org.flintparticles.emitters
 			var oldTime : int = _time;
 			_time = getTimer( );
 			var frameTime : Number = ( _time - oldTime ) * 0.001;
-			/*			if( _renderer is DisplayObject && DisplayObject( _renderer ).stage )
+			if( frameTime <= _maximumFrameTime )
 			{
-			var maxTime:Number = 3 / DisplayObject( _renderer ).stage.frameRate;
-			if( frameTime > maxTime )
-			{
-			frameTime = maxTime;
+				frameUpdate( frameTime );
 			}
-			}*/
-			frameUpdate( frameTime );
 		}
 
 		/**
