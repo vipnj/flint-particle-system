@@ -295,7 +295,6 @@ package org.flintparticles.threeD.renderers.flint
 			}
 			if( _zSort )
 			{
-				trace( "do z sort");
 				particles.sort( sortOnZ );
 			}
 			for( i = 0; i < len; ++i )

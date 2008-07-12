@@ -169,7 +169,6 @@ package org.flintparticles.common.counters
 			var count:uint = Math.floor( _rateMax * _timePassed + _scale * ( 1 - Math.cos( _timePassed * _factor ) ) / _factor );
 			var ret:uint = count - _emitted;
 			_emitted = count;
-			trace( ret );
 			return ret;
 		}
 	}

@@ -409,11 +409,11 @@ package org.flintparticles.threeD.geom
 		{
 			if( isNaN( angle ) )
 			{
-				angle = axis.w / 2;
+				angle = axis.w * 0.5;
 			}
 			else
 			{
-				angle = angle / 2;
+				angle = angle * 0.5;
 			}
 			if( axis.lengthSquared != 1 )
 			{
@@ -438,11 +438,11 @@ package org.flintparticles.threeD.geom
 		{
 			if( isNaN( angle ) )
 			{
-				angle = axis.w / 2;
+				angle = axis.w * 0.5;
 			}
 			else
 			{
-				angle = angle / 2;
+				angle = angle * 0.5;
 			}
 			if( axis.lengthSquared != 1 )
 			{

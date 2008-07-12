@@ -89,7 +89,7 @@ package org.flintparticles.threeD.emitters
 		{
 			super();
 			_particleFactory = _creator;
-			_position = Vector3D.ZERO.clone();
+			_position = new Vector3D( 0, 0, 0, 1 );
 			_rotation = Vector3D.ZERO.clone();
 		}
 

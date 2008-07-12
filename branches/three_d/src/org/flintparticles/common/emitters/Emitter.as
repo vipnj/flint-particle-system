@@ -30,10 +30,7 @@
 
 package org.flintparticles.common.emitters
 {
-	import flash.display.Shape;
-	import flash.events.Event;
 	import flash.events.EventDispatcher;
-	import flash.utils.getTimer;
 	
 	import org.flintparticles.common.actions.Action;
 	import org.flintparticles.common.activities.Activity;
@@ -44,6 +41,7 @@ package org.flintparticles.common.emitters
 	import org.flintparticles.common.initializers.Initializer;
 	import org.flintparticles.common.particles.Particle;
 	import org.flintparticles.common.particles.ParticleFactory;	
+	import org.flintparticles.common.utils.EmitterUpdater;	
 
 	/**
 	 * Dispatched when a particle dies and is about to be removed from the system.
@@ -119,6 +117,20 @@ package org.flintparticles.common.emitters
 		/**
 		 * @private
 		 */
+		protected static function get emitterUpdater():EmitterUpdater
+		{
+			if( _emitterUpdater ==  null )
+			{
+				_emitterUpdater = new EmitterUpdater();
+				_emitterUpdater.start();
+			}
+			return _emitterUpdater;
+		}
+		private static var _emitterUpdater:EmitterUpdater = null;
+		
+		/**
+		 * @private
+		 */
 		protected var _particleFactory:ParticleFactory;
 		
 		/**
@@ -154,16 +166,33 @@ package org.flintparticles.common.emitters
 		 * @private
 		 */
 		protected var _activitiesPriority:Array;
-
-		private var _time:int;
-		
-		private var _ticker:Shape;
+		/**
+		 * @private
+		 */
+		protected var _useInternalTick:Boolean;
+		/**
+		 * @private
+		 */
+		protected var _running:Boolean = false;
+		/**
+		 * @private
+		 */
+		protected var _started:Boolean = false;
+		/**
+		 * @private
+		 */
+		protected var _maximumFrameTime:Number = 0.5;
 
 		/**
 		 * The constructor creates an emitter.
+		 * 
+		 * @param useInternalTick Indicates whether the emitter should use its
+		 * own tick event to update its state. The internal tick process is tied
+		 * to the framerate and updates the particle system every frame.
 		 */
-		public function Emitter()
+		public function Emitter( useInternalTick:Boolean = true )
 		{
+			_useInternalTick = useInternalTick;
 			_particles = new Array();
 			_actions = new Array();
 			_initializers = new Array();
@@ -172,7 +201,31 @@ package org.flintparticles.common.emitters
 			_initializersPriority = new Array();
 			_activitiesPriority = new Array();
 			_counter = new ZeroCounter();
-			_ticker = new Shape();
+		}
+
+		/**
+		 * The maximum duration, in seconds, for a single update frame, in seconds.
+		 * 
+		 * <p>Under some circumstances related to the Flash player (e.g. on MacOSX, when the 
+		 * user right-clicks on the flash movie) the flash movie will freeze for a period. When the
+		 * freeze ends, the current frame of the particle system will be calculated as the time since 
+		 * the previous frame,  which encompases the duration of the freeze. This could cause the 
+		 * system to generate a single frame update that compensates for a long period of time and 
+		 * hence moves the particles an unexpected long distance in one go. The result is usually
+		 * visually unacceptable and certainly unexpected.</p>
+		 * 
+		 * <p>This property sets a maximum duration for a frame such that any frames longer than 
+		 * this duration are ignored. The default value is 0.5 seconds. Developers don't usually
+		 * need to change this from the default value.</p>
+		 */
+		public function get maximumFrameTime() : Number
+		{
+			return _maximumFrameTime;
+		}
+
+		public function set maximumFrameTime( value : Number ) : void
+		{
+			_maximumFrameTime = value;
 		}
 		
 		/**
@@ -348,6 +401,43 @@ package org.flintparticles.common.emitters
 		}
 		
 		/**
+		 * Indicates whether the emitter should manage its own internal update
+		 * tick. The internal update tick is tied to the frame rate and updates
+		 * the particle system every frame.
+		 * 
+		 * <p>If users choose not to use the internal tick, they have to call
+		 * the emitter's update method with the appropriate time parameter every
+		 * time they want the emitter to update the particle system.</p>
+		 */		
+		public function get useInternalTick():Boolean
+		{
+			return _useInternalTick;
+		}
+		public function set useInternalTick( value:Boolean ):void
+		{
+			if( _useInternalTick != value )
+			{
+				_useInternalTick = value;
+				if( _started )
+				{
+					if( _useInternalTick )
+					{
+						emitterUpdater.addEmitter( this );
+					}
+					else
+					{
+						emitterUpdater.removeEmitter( this );
+					}
+				}
+			}
+		}
+		
+		public function get running():Boolean
+		{
+			return _running;
+		}
+		
+		/**
 		 * This is the particle factory used by the emitter to create and dispose 
 		 * of particles. The 2D and 3D libraries each have a default particle
 		 * factory that is used by the Emitter2D and Emitter3D classes. Any custom 
@@ -438,9 +528,12 @@ package org.flintparticles.common.emitters
 		 */
 		public function start():void
 		{
-			_ticker.removeEventListener( Event.ENTER_FRAME, frameLoop );
-			_ticker.addEventListener( Event.ENTER_FRAME, frameLoop );
-			_time = getTimer();
+			if( _useInternalTick )
+			{
+				emitterUpdater.addEmitter( this );
+			}
+			_started = true;
+			_running = true;
 			var len:int = _activities.length;
 			for ( var i:int = 0; i < len; ++i )
 			{
@@ -454,36 +547,27 @@ package org.flintparticles.common.emitters
 		}
 		
 		/**
-		 * Used internally to update the emitter. This method listens for the 
-		 * enterframe event. It simply calculates the duration of the frame then 
-		 * calls frameUpdate, passing the frame duration to that method.
+		 * Used to update the emitter. If using the internal tick, this method
+		 * will be called every frame without any action by the user. If not
+		 * using the internal tick, the user should call this method on a regular
+		 * basis to update the particle system.
 		 * 
-		 * @see frameUpdate();
-		 */
-		protected function frameLoop( ev:Event ):void
-		{
-			// update timer
-			var oldTime:int = _time;
-			_time = getTimer();
-			var frameTime:Number = ( _time - oldTime ) * 0.001;
-			frameUpdate( frameTime );
-		}
-		
-		/**
-		 * Used internally and in derived classes to update the emitter.
+		 * <p>The method asks the counter how many particles to create then creates 
+		 * those particles. Then it calls sortParticles, applies the activities to 
+		 * the emitter, applies the Actions to all the particles, removes all dead 
+		 * particles, and finally dispatches an emitterUpdated event which tells 
+		 * any renderers to redraw the particles.
 		 * 
-		 * <p>Asks the counter how many particles to create then creates those
-		 * particles. Calls sortParticles. Applies the activities to the emitter.
-		 * Applies the Actions to all the particles. Removes all dead particles.
-		 * Dispatches an emitterUpdated event which tells the renderer to redraw
-		 * the particles.
-		 * 
-		 * @param time The duration, in seconds, of the current frame.
+		 * @param time The duration, in seconds, to be applied in the update step.
 		 * 
 		 * @see sortParticles();
 		 */
-		protected function frameUpdate( time:Number ):void
+		public function update( time:Number ):void
 		{
+			if( !_running || time > _maximumFrameTime )
+			{
+				return;
+			}
 			var i:int;
 			var particle:Particle;
 			var len:int = _counter.updateEmitter( this, time );
@@ -546,7 +630,7 @@ package org.flintparticles.common.emitters
 		 */
 		public function pause():void
 		{
-			_ticker.removeEventListener( Event.ENTER_FRAME, frameLoop );
+			_running = false;
 		}
 		
 		/**
@@ -554,9 +638,18 @@ package org.flintparticles.common.emitters
 		 */
 		public function resume():void
 		{
-			_ticker.removeEventListener( Event.ENTER_FRAME, frameLoop );
-			_ticker.addEventListener( Event.ENTER_FRAME, frameLoop );
-			_time = getTimer();
+			_running = true;
+		}
+		
+		/**
+		 * This method is a synonym for the dispose method. It stops the emitter 
+		 * and cleans out all the particles.
+		 * 
+		 * @see dispose()
+		 */
+		public function stop():void
+		{
+			dispose();
 		}
 		
 		/**
@@ -564,10 +657,16 @@ package org.flintparticles.common.emitters
 		 * the garbage collector will clean up all the particles in the usual way.
 		 * If you use this method, the particles will be returned to the particle
 		 * factory for reuse and the particleDead event is sent for each particle.
+		 * 
+		 * @see stop()
 		 */
 		public function dispose():void
 		{
-			_ticker.removeEventListener( Event.ENTER_FRAME, frameLoop );
+			if( _useInternalTick )
+			{
+				emitterUpdater.removeEmitter( this );
+			}
+			_started = false;
 			var len:int = _particles.length;
 			for ( var i:int = 0; i < len; ++i )
 			{
@@ -589,14 +688,15 @@ package org.flintparticles.common.emitters
 		 */
 		public function runAhead( time:Number, frameRate:Number= 10 ):void
 		{
-			pause();
+			var maxTime:Number = _maximumFrameTime;
 			var step:Number = 1 / frameRate;
+			_maximumFrameTime = step;
 			while ( time > 0 )
 			{
 				time -= step;
-				frameUpdate( step );
+				update( step );
 			}
-			resume();
+			_maximumFrameTime = maxTime;
 		}
 	}
 }
