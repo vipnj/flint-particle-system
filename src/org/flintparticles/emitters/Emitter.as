@@ -254,16 +254,17 @@ package org.flintparticles.emitters
 		}
 
 		/**
-		 * Indicates the rotation of the Emitter, in radians, within the particle system's coordinate space.
+		 * Indicates the rotation of the Emitter, in radians, within the particle system's 
+		 * coordinate space.
 		 */
-		public function get maximumFrameTime() : Number
+		public function get rotRadians() : Number
 		{
-			return _maximumFrameTime;
+			return _rotation;
 		}
 
-		public function set maximumFrameTime( value : Number ) : void
+		public function set rotRadians( value : Number ) : void
 		{
-			_maximumFrameTime = value;
+			_rotation = value;
 		}
 
 		/**
@@ -281,14 +282,14 @@ package org.flintparticles.emitters
 		 * this duration are ignored. The default value is 0.5 seconds. Developers don't usually
 		 * need to change this from the default value.</p>
 		 */
-		public function get rotRadians() : Number
+		public function get maximumFrameTime() : Number
 		{
-			return _rotation;
+			return _maximumFrameTime;
 		}
 
-		public function set rotRadians( value : Number ) : void
+		public function set maximumFrameTime( value : Number ) : void
 		{
-			_rotation = value;
+			_maximumFrameTime = value;
 		}
 
 		/**
