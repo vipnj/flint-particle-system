@@ -53,6 +53,11 @@ package org.flintparticles.threeD.actions
 		private var _radius:Number;
 		private var _bounce:Number;
 		
+		/*
+		 * Temporary variables created as class members to avoid creating new objects all the time
+		 */
+		private var d:Vector3D;
+
 		/**
 		 * The constructor creates a Collide action for use by  an emitter.
 		 * To add a Collide to all particles created by an emitter, use the
@@ -72,6 +77,7 @@ package org.flintparticles.threeD.actions
 		{
 			_radius = radius;
 			_bounce = bounce;
+			d = new Vector3D();
 		}
 		
 		/**
@@ -136,7 +142,6 @@ package org.flintparticles.threeD.actions
 			var factor:Number;
 			var distanceSq:Number;
 			var collisionDist:Number;
-			var d:Vector3D = new Vector3D();
 			var n1:Number, n2:Number;
 			var relN:Number;
 			var m1:Number, m2:Number;

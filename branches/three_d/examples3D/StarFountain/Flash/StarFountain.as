@@ -47,7 +47,7 @@ package
 	/**
 	 * This example creates a fountain of stars.
 	 * 
-	 * <p>This is the document class for the Flex project.</p>
+	 * <p>This is the document class for the Flash project.</p>
 	 */
 
 	public class StarFountain extends Sprite
@@ -63,9 +63,11 @@ package
 			emitter.addInitializer( new ImageClass( Star, 12 ) );
 			emitter.addInitializer( new ColorInit( 0xFFFF33FF, 0xFF33FFFF ) );
 			emitter.addInitializer( new Velocity( new DiscZone( new Vector3D( 0, 250, 0 ), new Vector3D( 0, 1, 0 ), 60, 0 ) ) );
-			emitter.addInitializer( new Lifetime( 6 ) );
+			emitter.addInitializer( new Lifetime( 5 ) );
+			emitter.addInitializer( new RotateVelocity( new Vector3D( 0, 0, 1 ), -4, 4 ) );
 			
 			emitter.addAction( new Move() );
+			emitter.addAction( new Rotate() );
 			emitter.addAction( new Accelerate( new Vector3D( 0, -150, 0 ) ) );
 			emitter.addAction( new Age() );
 			

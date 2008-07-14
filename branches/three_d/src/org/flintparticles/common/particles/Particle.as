@@ -105,6 +105,7 @@ package org.flintparticles.common.particles
 		 */
 		public function Particle()
 		{
+			initialize();
 		}
 		
 		/**

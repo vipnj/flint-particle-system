@@ -35,6 +35,10 @@ package org.flintparticles.threeD.geom
 	 */
 	public class Quaternion 
 	{
+		public static var ZERO:Quaternion = new Quaternion( 0, 0, 0, 0 );
+		
+		public static var IDENTITY:Quaternion = new Quaternion( 1, 0, 0, 0 );
+		
 		/**
 		 * The w coordinate of the quaternion.
 		 */
@@ -63,12 +67,12 @@ package org.flintparticles.threeD.geom
 		 * @param z the z coordinate of the quaternion
 		 * @param w the w coordinate of the quaternion
 		 */
-		public function Quaternion( x:Number = 0, y:Number = 0, z:Number = 0, w:Number = 0 )
+		public function Quaternion( w:Number = 1, x:Number = 0, y:Number = 0, z:Number = 0 )
 		{
+			this.w = w;
 			this.x = x;
 			this.y = y;
 			this.z = z;
-			this.w = w;
 		}
 		
 		/**
@@ -407,21 +411,9 @@ package org.flintparticles.threeD.geom
 		 */
 		public static function createFromAxisRotation( axis:Vector3D, angle:Number = NaN ):Quaternion
 		{
-			if( isNaN( angle ) )
-			{
-				angle = axis.w * 0.5;
-			}
-			else
-			{
-				angle = angle * 0.5;
-			}
-			if( axis.lengthSquared != 1 )
-			{
-				axis = axis.unit();
-			}
-			const cos:Number = Math.cos( angle );
-			const sin:Number = Math.sin( angle );
-			return new Quaternion( cos, -sin * axis.x, -sin * axis.y, -sin * axis.z );
+			var q:Quaternion = new Quaternion();
+			q.setFromAxisRotation( axis, angle );
+			return q;
 		}
 		
 		/**
@@ -454,6 +446,56 @@ package org.flintparticles.threeD.geom
 			y = -sin * axis.y;
 			z = -sin * axis.z;
 			return this;
+		}
+		
+		/**
+		 * Convert this quaternion to an axis/angle rotation, returning the result in a Vector3D
+		 * where x, y, z represent the axis and w represents the angle, in radians.
+		 * 
+		 * @return The axis/angle rotation.
+		 */
+		public function toAxisRotation():Vector3D
+		{
+			var angle:Number = 2 * Math.acos( w );
+			var axis:Vector3D = new Vector3D( x, y, z );
+			axis.normalize();
+			axis.w = angle;
+			return axis;
+		}
+		
+		/**
+		 * Convert this quaternion to a matrix transformation.
+		 * 
+		 * @return The matrix transformation.
+		 */
+		public function toMatrixTransformation():Matrix3D
+		{
+			var xx:Number = x * x;
+			var yy:Number = y * y;
+			var zz:Number = z * z;
+			var wx:Number = w * x;
+			var wy:Number = w * y;
+			var wz:Number = w * z;
+			var xy:Number = x * y;
+			var xz:Number = x * z;
+			var yz:Number = y * z;
+			
+			return new Matrix3D( [
+				1 - 2 * ( yy + zz ), 2 * ( xy - wz ), 2 * ( xz + wy ), 0,
+				2 * ( xy + wz ), 1 - 2 * ( xx - zz ), 2 * ( yz - wx ), 0,
+				2 * ( xz - wy ), 2 * ( yz + wx ), 1 - 2 * ( xx - yy ), 0,
+				0, 0, 0, 1
+			] );
+		}
+		
+		/**
+		 * Get a string representation of this quaternion
+		 * 
+		 * @return a string representation of this quaternion
+		 */
+		public function toString():String
+		{
+			return "(w=" + w + ", x=" + x + ", y=" + y + ", z=" + z + ")";
 		}
 	}
 }

@@ -48,6 +48,11 @@ package org.flintparticles.threeD.actions
 		private var _epsilonSq:Number;
 		private var _gravityConst:Number = 1000; // scale sthe power
 		
+		/*
+		 * Temporary variables created as class members to avoid creating new objects all the time
+		 */
+		private var d:Vector3D;
+		
 		/**
 		 * The constructor creates a MutualGravity action for use by 
 		 * an emitter. To add a MutualGravity to all particles created by an emitter, use the
@@ -66,6 +71,7 @@ package org.flintparticles.threeD.actions
 			this.power = power;
 			this.maxDistance = maxDistance;
 			this.epsilon = epsilon;
+			d = new Vector3D();
 		}
 		
 		/**
@@ -144,7 +150,6 @@ package org.flintparticles.threeD.actions
 			var factor:Number;
 			var distance:Number;
 			var distanceSq:Number;
-			var d:Vector3D = new Vector3D();
 			for( i = p.sortID + 1; i < len; ++i )
 			{
 				other = particles[sortedX[i]];

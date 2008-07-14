@@ -32,6 +32,7 @@ package org.flintparticles.threeD.emitters
 {
 	import org.flintparticles.common.emitters.Emitter;
 	import org.flintparticles.common.particles.Particle;
+	import org.flintparticles.threeD.geom.Quaternion;
 	import org.flintparticles.threeD.geom.Vector3D;
 	import org.flintparticles.threeD.particles.Particle3D;
 	import org.flintparticles.threeD.particles.ParticleCreator3D;	
@@ -65,7 +66,7 @@ package org.flintparticles.threeD.emitters
 		/**
 		 * @private
 		 */
-		protected var _rotation:Vector3D;
+		protected var _rotation:Quaternion;
 		
 		/**
 		 * The array of particle indices sorted based on the particles' x 
@@ -90,7 +91,7 @@ package org.flintparticles.threeD.emitters
 			super();
 			_particleFactory = _creator;
 			_position = new Vector3D( 0, 0, 0, 1 );
-			_rotation = Vector3D.ZERO.clone();
+			_rotation = new Quaternion( 1, 0, 0, 0 );
 		}
 
 		/**
@@ -112,11 +113,11 @@ package org.flintparticles.threeD.emitters
 		 */
 		public function get rotation():Vector3D
 		{
-			return _rotation;
+			return _rotation.toAxisRotation();
 		}
 		public function set rotation( value:Vector3D ):void
 		{
-			_rotation = value;
+			_rotation = _rotation.setFromAxisRotation( value );
 		}
 		
 		/*

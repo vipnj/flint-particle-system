@@ -31,6 +31,7 @@
 package org.flintparticles.threeD.particles
 {
 	import org.flintparticles.common.particles.Particle;
+	import org.flintparticles.threeD.geom.Quaternion;
 	import org.flintparticles.threeD.geom.Vector3D;	
 
 	/**
@@ -49,12 +50,13 @@ package org.flintparticles.threeD.particles
 		public var velocity:Vector3D;
 		
 		/**
-		 * The rotation of the particle, in radians.
+		 * The rotation of the particle, represented as a unit quaternion.
 		 */
-		public var rotation:Vector3D;
+		public var rotation:Quaternion;
 		
 		/**
-		 * The rate of rotation of the particle, in radians per second.
+		 * The rate of rotation of the particle, represented as a vector in the direction of 
+		 * the axis of rotation and whose magnitude indicates the number of rotations per second.
 		 */
 		public var angVelocity:Vector3D;
 	
@@ -71,6 +73,7 @@ package org.flintparticles.threeD.particles
 		 */
 		public function Particle3D()
 		{
+			super();
 		}
 		
 		/**
@@ -81,7 +84,7 @@ package org.flintparticles.threeD.particles
 			super.initialize();
 			position = new Vector3D( 0, 0, 0, 1 );
 			velocity = new Vector3D( 0, 0, 0, 0 );
-			rotation = new Vector3D( 0, 0, 0, 0 );
+			rotation = new Quaternion( 1, 0, 0, 0 );
 			angVelocity = new Vector3D( 0, 0, 0, 0 );
 			sortID = -1;
 		}

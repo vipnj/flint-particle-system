@@ -48,6 +48,12 @@ package org.flintparticles.threeD.actions
 		private var _acc:Number;
 		private var _maxSq:Number;
 		
+		/*
+		 * Temporary variables created as class members to avoid creating new objects all the time
+		 */
+		private var d:Vector3D;
+		private var vel:Vector3D;
+
 		/**
 		 * The constructor creates a MatchVelocity action for use by 
 		 * an emitter. To add a MatchVelocity to all particles created by an emitter, use the
@@ -64,6 +70,8 @@ package org.flintparticles.threeD.actions
 		{
 			this.maxDistance = maxDistance;
 			this.acceleration = acceleration;
+			d = new Vector3D();
+			vel = new Vector3D();
 		}
 		
 		/**
@@ -124,8 +132,6 @@ package org.flintparticles.threeD.actions
 			var i:int;
 			var len:int = particles.length;
 			var distanceSq:Number;
-			var d:Vector3D = new Vector3D();
-			var vel:Vector3D = new Vector3D();
 			var count:int = 0;
 			var factor:Number;
 			for( i = p.sortID - 1; i >= 0; --i )

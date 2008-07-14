@@ -38,6 +38,7 @@ package org.flintparticles.threeD.renderers.flint
 	import flash.geom.Point;
 	import flash.geom.Rectangle;
 	
+	import org.flintparticles.threeD.geom.Quaternion;
 	import org.flintparticles.threeD.geom.Vector3D;
 	import org.flintparticles.threeD.particles.Particle3D;	
 
@@ -352,7 +353,33 @@ package org.flintparticles.threeD.renderers.flint
 			}
 			var scale:Number = particle.scale * _projectionDistance / pos.z;
 			pos.project();
-			var matrix:Matrix = new Matrix( scale, 0, 0, scale, pos.x - _canvas.x, -pos.y - _canvas.y );
+			var rot:Number = 0;
+			if( !particle.rotation.equals( Quaternion.IDENTITY ) )
+			{
+				var axis:Vector3D = _projectionTransform.transformVector( new Vector3D( particle.rotation.x, particle.rotation.y, particle.rotation.z ) );
+				if( axis.z == 0 )
+				{
+					return;
+				}
+				rot = 2 * Math.acos( particle.rotation.w );
+				if( axis.z > 0 )
+				{
+					rot = -rot;
+				}
+			}
+			var matrix:Matrix;
+			if( rot )
+			{
+				var cos:Number = scale * Math.cos( rot );
+				var sin:Number = scale * Math.sin( rot );
+				matrix = new Matrix( cos, sin, -sin, cos, pos.x - _canvas.x, -pos.y - _canvas.y );
+			}
+			else
+			{
+				matrix = new Matrix( scale, 0, 0, scale, pos.x - _canvas.x, -pos.y - _canvas.y );
+			}
+
+
 			_bitmap.bitmapData.draw( particle.image, matrix, particle.colorTransform, DisplayObject( particle.image ).blendMode, null, _smoothing );
 		}
 	}

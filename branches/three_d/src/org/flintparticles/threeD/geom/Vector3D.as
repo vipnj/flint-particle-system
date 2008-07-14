@@ -112,24 +112,24 @@ package org.flintparticles.threeD.geom
 		/**
 		 * A zero vector.
 		 */
-		public static var ZERO:Vector3D = new Vector3D( 0, 0, 0, 0 );
+		public static const ZERO:Vector3D = new Vector3D( 0, 0, 0, 0 );
 		/**
 		 * A unit vector in the direction of the x axis.
 		 */
-		public static var AXISX:Vector3D = new Vector3D( 1, 0, 0, 0 );
+		public static const AXISX:Vector3D = new Vector3D( 1, 0, 0, 0 );
 		/**
 		 * A unit vector in the direction of the y axis.
 		 */
-		public static var AXISY:Vector3D = new Vector3D( 0, 1, 0, 0 );
+		public static const AXISY:Vector3D = new Vector3D( 0, 1, 0, 0 );
 		/**
 		 * A unit vector in the direction of the z axis.
 		 */
-		public static var AXISZ:Vector3D = new Vector3D( 0, 0, 1, 0 );
+		public static const AXISZ:Vector3D = new Vector3D( 0, 0, 1, 0 );
 		/**
 		 * A unit vector in the direction of the w axis. May represent a
 		 * zero position vector.
 		 */
-		public static var AXISW:Vector3D = new Vector3D( 0, 0, 0, 1 );
+		public static const AXISW:Vector3D = new Vector3D( 0, 0, 0, 1 );
 		
 		/**
 		 * The x coordinate of the vector.

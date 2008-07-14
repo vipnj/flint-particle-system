@@ -49,6 +49,12 @@ package org.flintparticles.threeD.actions
 		private var _acc:Number;
 		private var _maxSq:Number;
 		
+		/*
+		 * Temporary variables created as class members to avoid creating new objects all the time
+		 */
+		private var d:Vector3D;
+		private var move:Vector3D;
+		
 		/**
 		 * The constructor creates a ApproachNeighbours action for use by an emitter. 
 		 * To add a ApproachNeighbours to all particles created by an emitter, 
@@ -65,6 +71,8 @@ package org.flintparticles.threeD.actions
 		{
 			this.maxDistance = maxDistance;
 			this.acceleration = acceleration;
+			d = new Vector3D();
+			move = new Vector3D();
 		}
 		
 		/**
@@ -136,8 +144,6 @@ package org.flintparticles.threeD.actions
 			var len:int = particles.length;
 			var distanceInv:Number;
 			var distanceSq:Number;
-			var d:Vector3D = new Vector3D();
-			var move:Vector3D = new Vector3D();
 			var factor:Number;
 			for( i = p.sortID - 1; i >= 0; --i )
 			{

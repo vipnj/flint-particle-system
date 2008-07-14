@@ -192,7 +192,7 @@ package org.flintparticles.common.counters
 					if( frameRate < _target )
 					{
 						_rate = Math.floor( ( _rate + _rateMin ) * 0.5 );
-						_times = new Array();
+						_times.length = 0;
 						
 						if( !( _timeToRateCheck = emitter.particles[0].lifetime ) )
 						{

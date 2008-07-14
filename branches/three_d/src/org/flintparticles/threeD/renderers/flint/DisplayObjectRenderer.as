@@ -33,6 +33,7 @@ package org.flintparticles.threeD.renderers.flint
 	import flash.display.DisplayObject;
 	
 	import org.flintparticles.common.particles.Particle;
+	import org.flintparticles.threeD.geom.Quaternion;
 	import org.flintparticles.threeD.geom.Vector3D;
 	import org.flintparticles.threeD.particles.Particle3D;	
 
@@ -113,6 +114,27 @@ package org.flintparticles.threeD.renderers.flint
 					img.y = -pos.y;
 					img.transform.colorTransform = particle.colorTransform;
 					img.visible = true;
+					if( particle.rotation.equals( Quaternion.IDENTITY ) )
+					{
+						img.rotation = 0;
+					}
+					else
+					{
+						var axis:Vector3D = _projectionTransform.transformVector( new Vector3D( particle.rotation.x, particle.rotation.y, particle.rotation.z ) );
+						if( axis.z == 0 )
+						{
+							return;
+						}
+						var rot:Number = 2 * Math.acos( particle.rotation.w ) * 180 / Math.PI;
+						if( axis.z > 0 )
+						{
+							img.rotation = -rot;
+						}
+						else
+						{
+							img.rotation = rot;
+						}
+					}
 				}
 			}
 			if( _zSort )
