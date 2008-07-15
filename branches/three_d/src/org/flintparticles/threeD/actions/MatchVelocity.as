@@ -134,6 +134,7 @@ package org.flintparticles.threeD.actions
 			var distanceSq:Number;
 			var count:int = 0;
 			var factor:Number;
+			vel.reset( 0, 0, 0, 0 );
 			for( i = p.sortID - 1; i >= 0; --i )
 			{
 				other = particles[sortedX[i]];

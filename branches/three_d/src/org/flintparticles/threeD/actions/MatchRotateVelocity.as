@@ -28,47 +28,57 @@
  * THE SOFTWARE.
  */
 
-package org.flintparticles.twoD.actions 
+package org.flintparticles.threeD.actions 
 {
 	import org.flintparticles.common.actions.ActionBase;
 	import org.flintparticles.common.emitters.Emitter;
 	import org.flintparticles.common.particles.Particle;
-	import org.flintparticles.twoD.emitters.Emitter2D;
-	import org.flintparticles.twoD.particles.Particle2D;	
+	import org.flintparticles.threeD.emitters.Emitter3D;
+	import org.flintparticles.threeD.geom.Vector3D;
+	import org.flintparticles.threeD.particles.Particle3D;
 
 	/**
-	 * The MatchVelocity action applies an acceleration to the particle to match
-	 * its velocity to that of its nearest neighbours.
+	 * The MatchRotateVelocity action applies an angular acceleration to the particle to match
+	 * its angular velocity to that of its nearest neighbours.
 	 */
 
-	public class MatchVelocity extends ActionBase
+	public class MatchRotateVelocity extends ActionBase
 	{
 		private var _max:Number;
 		private var _acc:Number;
 		private var _maxSq:Number;
 		
+		/*
+		 * Temporary variables created as class members to avoid creating new objects all the time
+		 */
+		private var d:Vector3D;
+		private var vel:Vector3D;
+
 		/**
-		 * The constructor creates a MatchVelocity action for use by 
-		 * an emitter. To add a MatchVelocity to all particles created by an emitter, use the
+		 * The constructor creates a MatchRotateVelocity action for use by 
+		 * an emitter. To add a MatchRotateVelocity to all particles created by an emitter, use the
 		 * emitter's addAction method.
 		 * 
 		 * @see org.flintparticles.common.emitters.Emitter#addAction()
 		 * 
 		 * @param maxDistance The maximum distance, in pixels, over which this action operates.
-		 * The particle will match its velocity other particles that are this close or closer to it.
-		 * @param acceleration The acceleration force applied to adjust velocity to match that
+		 * The particle will match its angular velocity other particles that are this close or 
+		 * closer to it.
+		 * @param acceleration The angular acceleration applied to adjust velocity to match that
 		 * of the other particles.
 		 */
-		public function MatchVelocity( maxDistance:Number, acceleration:Number )
+		public function MatchRotateVelocity( maxDistance:Number, acceleration:Number )
 		{
-			_max = maxDistance;
-			_maxSq = maxDistance * maxDistance;
-			_acc = acceleration;
+			this.maxDistance = maxDistance;
+			this.acceleration = acceleration;
+			d = new Vector3D();
+			vel = new Vector3D();
 		}
 		
 		/**
 		 * The maximum distance, in pixels, over which this action operates.
-		 * The particle will match its velocity other particles that are this close or closer to it.
+		 * The particle will match its angular velocity other particles that are this 
+		 * close or closer to it.
 		 */
 		public function get maxDistance():Number
 		{
@@ -81,7 +91,7 @@ package org.flintparticles.twoD.actions
 		}
 		
 		/**
-		 * The acceleration force applied to adjust velocity to match that
+		 * The angular acceleration applied to adjust velocity to match that
 		 * of the other particles.
 		 */
 		public function get acceleration():Number
@@ -108,7 +118,7 @@ package org.flintparticles.twoD.actions
 		 */
 		override public function addedToEmitter( emitter:Emitter ) : void
 		{
-			Emitter2D( emitter ).spaceSort = true;
+			Emitter3D( emitter ).spaceSort = true;
 		}
 		
 		/**
@@ -116,58 +126,55 @@ package org.flintparticles.twoD.actions
 		 */
 		override public function update( emitter:Emitter, particle:Particle, time:Number ):void
 		{
-			var p:Particle2D = Particle2D( particle );
-			var e:Emitter2D = Emitter2D( emitter );
+			var p:Particle3D = Particle3D( particle );
+			var e:Emitter3D = Emitter3D( emitter );
 			var particles:Array = e.particles;
 			var sortedX:Array = e.spaceSortedX;
-			var other:Particle2D;
+			var other:Particle3D;
 			var i:int;
 			var len:int = particles.length;
 			var distanceSq:Number;
-			var dx:Number;
-			var dy:Number;
-			var velX:Number = 0;
-			var velY:Number = 0;
+			vel.reset( 0, 0, 0, 0 );
 			var count:int = 0;
 			var factor:Number;
 			for( i = p.sortID - 1; i >= 0; --i )
 			{
 				other = particles[sortedX[i]];
-				if( ( dx = p.x - other.x ) > _max ) break;
-				dy = other.y - p.y;
-				if( dy > _max || dy < -_max ) continue;
-				distanceSq = dy * dy + dx * dx;
-				if( distanceSq <= _maxSq )
+				if( ( d.x = other.position.x - p.position.x ) < -_max ) break;
+				d.y = other.position.y - p.position.y;
+				if( d.y > _max || d.y < -_max ) continue;
+				d.z = other.position.z - p.position.z;
+				if( d.z > _max || d.z < -_max ) continue;
+				distanceSq = d.lengthSquared;
+				if( distanceSq <= _maxSq && distanceSq > 0 )
 				{
-					velX += other.velX;
-					velY += other.velY;
+					vel.incrementBy( other.angVelocity );
 					++count;
 				}
 			}
 			for( i = p.sortID + 1; i < len; ++i )
 			{
 				other = particles[sortedX[i]];
-				if( ( dx = other.x - p.x ) > _max ) break;
-				dy = other.y - p.y;
-				if( dy > _max || dy < -_max ) continue;
-				distanceSq = dy * dy + dx * dx;
-				if( distanceSq <= _maxSq )
+				if( ( d.x = other.position.x - p.position.x ) > _max ) break;
+				d.y = other.position.y - p.position.y;
+				if( d.y > _max || d.y < -_max ) continue;
+				d.z = other.position.z - p.position.z;
+				if( d.z > _max || d.z < -_max ) continue;
+				distanceSq = d.lengthSquared;
+				if( distanceSq <= _maxSq && distanceSq > 0 )
 				{
-					velX += other.velX;
-					velY += other.velY;
+					vel.incrementBy( other.angVelocity );
 					++count;
 				}
 			}
 			if( count != 0 )
 			{
-				velX = velX / count - p.velX;
-				velY = velY / count - p.velY;
-				if( velX != 0 || velY != 0 )
+				vel.scaleBy( 1 / count ).decrementBy( p.angVelocity );
+				if( !vel.equals( Vector3D.ZERO ) )
 				{
-					factor = time * _acc / Math.sqrt( velX * velX + velY * velY );
+					factor = time * _acc / vel.length;
 					if( factor > 1 ) factor = 1;
-					p.velX += factor * velX;
-					p.velY += factor * velY;
+					p.angVelocity.incrementBy( vel.scaleBy( factor ) );
 				}
 			}
 		}

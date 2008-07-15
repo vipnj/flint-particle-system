@@ -132,6 +132,7 @@ package org.flintparticles.threeD.actions
 			var distanceInv:Number;
 			var distanceSq:Number;
 			var factor:Number;
+			move.reset( 0, 0, 0, 0 );
 			for( i = p.sortID - 1; i >= 0; --i )
 			{
 				other = particles[sortedX[i]];

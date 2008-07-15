@@ -43,7 +43,8 @@ package org.flintparticles.twoD.actions
 
 	public class MatchRotateVelocity extends ActionBase
 	{
-		private var _min:Number;
+		private var _max:Number;
+		private var _maxSq:Number;
 		private var _acc:Number;
 		
 		/**
@@ -61,7 +62,8 @@ package org.flintparticles.twoD.actions
 		 */
 		public function MatchRotateVelocity( maxDistance:Number, acceleration:Number )
 		{
-			_min = maxDistance;
+			_max = maxDistance;
+			_maxSq = maxDistance * maxDistance;
 			_acc = acceleration;
 		}
 		
@@ -72,11 +74,12 @@ package org.flintparticles.twoD.actions
 		 */
 		public function get maxDistance():Number
 		{
-			return _min;
+			return _max;
 		}
 		public function set maxDistance( value:Number ):void
 		{
-			_min = value;
+			_max = value;
+			_maxSq = value * value;
 		}
 		
 		/**
@@ -122,6 +125,7 @@ package org.flintparticles.twoD.actions
 			var other:Particle2D;
 			var i:int;
 			var len:int = particles.length;
+			var distanceSq:Number;
 			var dx:Number;
 			var dy:Number;
 			var vel:Number = 0;
@@ -130,20 +134,28 @@ package org.flintparticles.twoD.actions
 			for( i = p.sortID - 1; i >= 0; --i )
 			{
 				other = particles[sortedX[i]];
-				if( ( dx = p.x - other.x ) > _min ) break;
+				if( ( dx = p.x - other.x ) > _max ) break;
 				dy = other.y - p.y;
-				if( dy > _min || dy < -_min ) continue;
-				vel += other.angVelocity;
-				++count;
+				if( dy > _max || dy < -_max ) continue;
+				distanceSq = dy * dy + dx * dx;
+				if( distanceSq <= _maxSq )
+				{
+					vel += other.angVelocity;
+					++count;
+				}
 			}
 			for( i = p.sortID + 1; i < len; ++i )
 			{
 				other = particles[sortedX[i]];
-				if( ( dx = other.x - p.x ) > _min ) break;
+				if( ( dx = other.x - p.x ) > _max ) break;
 				dy = other.y - p.y;
-				if( dy > _min || dy < -_min ) continue;
-				vel += other.angVelocity;
-				++count;
+				if( dy > _max || dy < -_max ) continue;
+				distanceSq = dy * dy + dx * dx;
+				if( distanceSq <= _maxSq )
+				{
+					vel += other.angVelocity;
+					++count;
+				}
 			}
 			if( count != 0 )
 			{
