@@ -59,6 +59,10 @@ package org.flintparticles.zones
 		 */
 		public function DiscZone( center:Point, outerRadius:Number, innerRadius:Number = 0 )
 		{
+			if( outerRadius < innerRadius )
+			{
+				throw new Error( "The outerRadius (" + outerRadius + ") can't be smaller than the innerRadius (" + innerRadius + ") in your DiscZone. N.B. the outerRadius is the second argument in the constructor and the innerRadius is the third argument." );
+			}
 			_center = center;
 			_innerRadius = innerRadius;
 			_outerRadius = outerRadius;
