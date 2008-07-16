@@ -94,6 +94,15 @@ package org.flintparticles.actions
 			var len:Number = Math.sqrt( particle.velX * particle.velX + particle.velY * particle.velY );
 			particle.velX = len * Math.cos( newAngle );
 			particle.velY = len * Math.sin( newAngle );
+			var overturned:Boolean = ( ( particle.y - dispObj.mouseY ) * particle.velX + ( dispObj.mouseX - particle.x ) * particle.velY > 0 ) != turnLeft;
+			if( overturned )
+			{
+				var dx:Number = dispObj.mouseX - particle.x;
+				var dy:Number = dispObj.mouseY - particle.y;
+				var factor:Number = len / Math.sqrt( dx * dx + dy * dy );
+				particle.velX = dx * factor;
+				particle.velY = dy * factor;
+			}
 		}
 	}
 }
