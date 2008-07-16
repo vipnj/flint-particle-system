@@ -108,7 +108,6 @@ package org.flintparticles.actions
 			if ( turnLeft )
 			{
 				newAngle = Math.atan2( particle.velY, particle.velX ) - _power * time;
-				
 			}
 			else
 			{
@@ -117,6 +116,15 @@ package org.flintparticles.actions
 			var len:Number = Math.sqrt( particle.velX * particle.velX + particle.velY * particle.velY );
 			particle.velX = len * Math.cos( newAngle );
 			particle.velY = len * Math.sin( newAngle );
+			var overturned:Boolean = ( ( particle.y - _y ) * particle.velX + ( _x - particle.x ) * particle.velY > 0 ) != turnLeft;
+			if( overturned )
+			{
+				var dx:Number = _x - particle.x;
+				var dy:Number = _y - particle.y;
+				var factor:Number = len / Math.sqrt( dx * dx + dy * dy );
+				particle.velX = dx * factor;
+				particle.velY = dy * factor;
+			}
 		}
 	}
 }
