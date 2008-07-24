@@ -66,7 +66,7 @@ package
 			
 			emitter.addInitializer( new SharedImage( new Line( 8 ) ) );
 			emitter.addInitializer( new ColorInit( 0xFFFFCC00, 0xFFFFCC00 ) );
-			emitter.addInitializer( new Velocity( new DiscZone( new Point( 0, 0 ), 200, 350 ) ) );
+			emitter.addInitializer( new Velocity( new DiscZone( new Point( 0, 0 ), 350, 200 ) ) );
 			emitter.addInitializer( new Lifetime( 0.2, 0.4 ) );
 			
 			emitter.addAction( new Age() );

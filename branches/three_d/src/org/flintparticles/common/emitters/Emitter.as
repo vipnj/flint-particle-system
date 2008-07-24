@@ -41,7 +41,8 @@ package org.flintparticles.common.emitters
 	import org.flintparticles.common.initializers.Initializer;
 	import org.flintparticles.common.particles.Particle;
 	import org.flintparticles.common.particles.ParticleFactory;	
-	import org.flintparticles.common.utils.EmitterUpdater;	
+	import org.flintparticles.common.utils.EmitterUpdater;
+	import org.flintparticles.common.utils.PriorityArray;
 
 	/**
 	 * Dispatched when a particle dies and is about to be removed from the system.
@@ -136,11 +137,15 @@ package org.flintparticles.common.emitters
 		/**
 		 * @private
 		 */
-		protected var _initializers:Array;
+		protected var _initializers:PriorityArray;
 		/**
 		 * @private
 		 */
-		protected var _actions:Array;
+		protected var _actions:PriorityArray;
+		/**
+		 * @private
+		 */
+		protected var _activities:PriorityArray;
 		/**
 		 * @private
 		 */
@@ -148,28 +153,13 @@ package org.flintparticles.common.emitters
 		/**
 		 * @private
 		 */
-		protected var _activities:Array;
-		/**
-		 * @private
-		 */
 		protected var _counter:Counter;
 
-		/**
-		 * @private
-		 */
-		protected var _initializersPriority:Array;
-		/**
-		 * @private
-		 */
-		protected var _actionsPriority:Array;
-		/**
-		 * @private
-		 */
 		protected var _activitiesPriority:Array;
 		/**
 		 * @private
 		 */
-		protected var _useInternalTick:Boolean;
+		protected var _useInternalTick:Boolean = true;
 		/**
 		 * @private
 		 */
@@ -190,16 +180,12 @@ package org.flintparticles.common.emitters
 		 * own tick event to update its state. The internal tick process is tied
 		 * to the framerate and updates the particle system every frame.
 		 */
-		public function Emitter( useInternalTick:Boolean = true )
+		public function Emitter()
 		{
-			_useInternalTick = useInternalTick;
 			_particles = new Array();
-			_actions = new Array();
-			_initializers = new Array();
-			_activities = new Array();
-			_actionsPriority = new Array();
-			_initializersPriority = new Array();
-			_activitiesPriority = new Array();
+			_actions = new PriorityArray();
+			_initializers = new PriorityArray();
+			_activities = new PriorityArray();
 			_counter = new ZeroCounter();
 		}
 
@@ -248,15 +234,7 @@ package org.flintparticles.common.emitters
 			{
 				priority = initializer.getDefaultPriority();
 			}
-			for( var i:int = 0; i < _initializersPriority.length; ++i )
-			{
-				if( _initializersPriority[ i ] < priority )
-				{
-					break;
-				}
-			}
-			_initializers.splice( i, 0, initializer );
-			_initializersPriority.splice( i, 0, priority );
+			_initializers.add( initializer, priority );
 			initializer.addedToEmitter( this );
 		}
 		
@@ -269,18 +247,46 @@ package org.flintparticles.common.emitters
 		 */
 		public function removeInitializer( initializer:Initializer ):void
 		{
-			for( var i:int = 0; i < _initializers.length; ++i )
+			if( _initializers.remove( initializer ) )
 			{
-				if( _initializers[i] == initializer )
-				{
-					_initializers.splice( i, 1 );
-					_initializersPriority.splice( i, 1 );
-					initializer.removedFromEmitter( this );
-					return;
-				}
+				initializer.removedFromEmitter( this );
 			}
 		}
 		
+		/**
+		 * Detects if the emitter is using a particular initializer or not.
+		 * 
+		 * @param initializer The initializer to look for.
+		 * 
+		 * @return true if the initializer is being used by the emitter, false 
+		 * otherwise.
+		 */
+		public function hasInitializer( initializer:Initializer ):Boolean
+		{
+			return _initializers.contains( initializer );
+		}
+		
+		/**
+		 * Detects if the emitter is using an initializer of a particular class.
+		 * 
+		 * @param initializerClass The type of initializer to look for.
+		 * 
+		 * @return true if the emitter is using an instance of the class as an
+		 * initializer, false otherwise.
+		 */
+		public function hasInitializerOfType( initializerClass:Class ):Boolean
+		{
+			var len:uint = _initializers.length;
+			for( var i:uint = 0; i < len; ++i )
+			{
+				if( _initializers[i] is initializerClass )
+				{
+					return true;
+				}
+			}
+			return false;
+		}
+
 		/**
 		 * Adds an Action to the Emitter. Actions set the behaviour of particles 
 		 * created by the emitter.
@@ -301,15 +307,7 @@ package org.flintparticles.common.emitters
 			{
 				priority = action.getDefaultPriority();
 			}
-			for( var i:int = 0; i < _actionsPriority.length; ++i )
-			{
-				if( _actionsPriority[ i ] < priority )
-				{
-					break;
-				}
-			}
-			_actions.splice( i, 0, action );
-			_actionsPriority.splice( i, 0, priority );
+			_actions.add( action, priority );
 			action.addedToEmitter( this );
 		}
 		
@@ -322,18 +320,46 @@ package org.flintparticles.common.emitters
 		 */
 		public function removeAction( action:Action ):void
 		{
-			for( var i:int = 0; i < _actions.length; ++i )
+			if( _actions.remove( action ) )
 			{
-				if( _actions[i] == action )
-				{
-					_actions.splice( i, 1 );
-					_actionsPriority.splice( i, 1 );
-					action.removedFromEmitter( this );
-					return;
-				}
+				action.removedFromEmitter( this );
 			}
 		}
 		
+		/**
+		 * Detects if the emitter is using a particular action or not.
+		 * 
+		 * @param action The action to look for.
+		 * 
+		 * @return true if the action is being used by the emitter, false 
+		 * otherwise.
+		 */
+		public function hasAction( action:Action ):Boolean
+		{
+			return _actions.contains( action );
+		}
+		
+		/**
+		 * Detects if the emitter is using an action of a particular class.
+		 * 
+		 * @param actionClass The type of action to look for.
+		 * 
+		 * @return true if the emitter is using an instance of the class as an
+		 * action, false otherwise.
+		 */
+		public function hasActionOfType( actionClass:Class ):Boolean
+		{
+			var len:uint = _actions.length;
+			for( var i:uint = 0; i < len; ++i )
+			{
+				if( _actions[i] is actionClass )
+				{
+					return true;
+				}
+			}
+			return false;
+		}
+
 		/**
 		 * Adds an Activity to the Emitter. Activities set the behaviour
 		 * of the Emitter.
@@ -354,15 +380,7 @@ package org.flintparticles.common.emitters
 			{
 				priority = activity.getDefaultPriority();
 			}
-			for( var i:int = 0; i < _activitiesPriority.length; ++i )
-			{
-				if( _activitiesPriority[ i ] < priority )
-				{
-					break;
-				}
-			}
-			_activities.splice( i, 0, activity );
-			_activitiesPriority.splice( i, 0, priority );
+			_activities.add( activity, priority );
 			activity.addedToEmitter( this );
 		}
 		
@@ -375,18 +393,46 @@ package org.flintparticles.common.emitters
 		 */
 		public function removeActivity( activity:Activity ):void
 		{
-			for( var i:int = 0; i < _activities.length; ++i )
+			if( _activities.remove( activity ) )
 			{
-				if( _activities[i] == activity )
-				{
-					_activities.splice( i, 1 );
-					_activitiesPriority.splice( i, 1 );
-					activity.removedFromEmitter( this );
-					return;
-				}
+				activity.removedFromEmitter( this );
 			}
 		}
 		
+		/**
+		 * Detects if the emitter is using a particular activity or not.
+		 * 
+		 * @param activity The activity to look for.
+		 * 
+		 * @return true if the activity is being used by the emitter, false 
+		 * otherwise.
+		 */
+		public function hasActivity( activity:Activity ):Boolean
+		{
+			return _activities.contains( activity );
+		}
+		
+		/**
+		 * Detects if the emitter is using an activity of a particular class.
+		 * 
+		 * @param activityClass The type of activity to look for.
+		 * 
+		 * @return true if the emitter is using an instance of the class as an
+		 * activity, false otherwise.
+		 */
+		public function hasActivityOfType( activityClass:Class ):Boolean
+		{
+			var len:uint = _activities.length;
+			for( var i:uint = 0; i < len; ++i )
+			{
+				if( _activities[i] is activityClass )
+				{
+					return true;
+				}
+			}
+			return false;
+		}
+
 		/**
 		 * The Counter for the Emitter. The counter defines when and
 		 * with what frequency the emitter emits particles.

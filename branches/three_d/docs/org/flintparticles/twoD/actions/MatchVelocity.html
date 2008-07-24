@@ -42,7 +42,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 </tr>
 </table>
 <p></p>
-  The MatchVelocity action applies an acceleration to the particle to match
+  The MatchVelocity action applies an acceleration to each particle to match
   its velocity to that of its nearest neighbours.
   <p></p>
 <br>
@@ -57,8 +57,9 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 </tr>
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#acceleration">acceleration</a> : Number<div class="summaryTableDescription">
-   The acceleration force applied to adjust velocity to match that
-   of the other particles.</div>
+   The acceleration applied to adjust each
+   particle's velocity to match that of the other particles near it
+   </div>
 </td><td class="summaryTableOwnerCol">MatchVelocity</td>
 </tr>
 <tr class="">
@@ -88,8 +89,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <div class="summarySignature">
 <a class="signatureLink" href="#MatchVelocity()">MatchVelocity</a>(maxDistance:Number, acceleration:Number)</div>
 <div class="summaryTableDescription">
-   The constructor creates a MatchVelocity action for use by 
-   an emitter.</div>
+   The constructor creates a MatchVelocity action for use by an emitter.</div>
 </td><td class="summaryTableOwnerCol">MatchVelocity</td>
 </tr>
 <tr class="">
@@ -97,8 +97,8 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <div class="summarySignature">
 <a class="signatureLink" href="#addedToEmitter()">addedToEmitter</a>(emitter:<a href="../../common/emitters/Emitter.html">Emitter</a>):void</div>
 <div class="summaryTableDescription">
-   
-   This method does nothing.</div>
+   Instructs the emitter to produce a sorted particle array for optimizing
+   the calculations in the update method of this action.</div>
 </td><td class="summaryTableOwnerCol">MatchVelocity</td>
 </tr>
 <tr class="">
@@ -106,8 +106,9 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <div class="summarySignature">
 <a class="signatureLink" href="#getDefaultPriority()">getDefaultPriority</a>():Number</div>
 <div class="summaryTableDescription">
-   
-   Returns a default priority of 0 for this action.</div>
+   Returns a value of 10, so that the MatchVelocity action executes 
+   before accelerating actions that act on particles independently of
+   other particles, like Acceleration and GravityWell.</div>
 </td><td class="summaryTableOwnerCol">MatchVelocity</td>
 </tr>
 <tr class="hideInheritedMethod">
@@ -123,8 +124,9 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <div class="summarySignature">
 <a class="signatureLink" href="#update()">update</a>(emitter:<a href="../../common/emitters/Emitter.html">Emitter</a>, particle:<a href="../../common/particles/Particle.html">Particle</a>, time:Number):void</div>
 <div class="summaryTableDescription">
-   
-   This method does nothing.</div>
+   Checks all particles near the current particle and applies the 
+   angular acceleration to alter the particle's angular velocity
+   towards their average angular velocity.</div>
 </td><td class="summaryTableOwnerCol">MatchVelocity</td>
 </tr>
 </table>
@@ -144,8 +146,8 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>acceleration:Number</code>&nbsp;&nbsp;[read-write]<p>
-   The acceleration force applied to adjust velocity to match that
-   of the other particles.
+   The acceleration applied to adjust each
+   particle's velocity to match that of the other particles near it
    </p><span class="label">Implementation</span>
 <br>
 <code>&nbsp;&nbsp;&nbsp;&nbsp;public function get acceleration():Number</code>
@@ -180,23 +182,24 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public function MatchVelocity(maxDistance:Number, acceleration:Number)</code><p>
-   The constructor creates a MatchVelocity action for use by 
-   an emitter. To add a MatchVelocity to all particles created by an emitter, use the
+   The constructor creates a MatchVelocity action for use by an emitter. 
+   To add a MatchVelocity to all particles created by an emitter, use the
    emitter's addAction method.
    
    </p><span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
-<td width="20px"></td><td><code><span class="label">maxDistance</span>:Number</code> &mdash; The maximum distance, in pixels, over which this action operates.
-   The particle will match its velocity other particles that are this close or closer to it.
+<td width="20px"></td><td><code><span class="label">maxDistance</span>:Number</code> &mdash; The maximum distance, in pixels, over which this 
+   action operates. The particle will match its velocity other particles 
+   that are at most this close to it.
    </td>
 </tr>
 <tr>
 <td class="paramSpacer">&nbsp;</td>
 </tr>
 <tr>
-<td width="20px"></td><td><code><span class="label">acceleration</span>:Number</code> &mdash; The acceleration force applied to adjust velocity to match that
-   of the other particles.
+<td width="20px"></td><td><code><span class="label">acceleration</span>:Number</code> &mdash; The acceleration applied to adjust each
+   particle's velocity to match that of the other particles near it.
    </td>
 </tr>
 </table>
@@ -217,18 +220,23 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public override function addedToEmitter(emitter:<a href="../../common/emitters/Emitter.html">Emitter</a>):void</code><p>
-   
-   This method does nothing. Some derived classes override this method
-   to perform actions when the action is added to an emitter.
+   Instructs the emitter to produce a sorted particle array for optimizing
+   the calculations in the update method of this action.
    
    </p><span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
-<td width="20px"></td><td><code><span class="label">emitter</span>:<a href="../../common/emitters/Emitter.html">Emitter</a></code> &mdash; The Emitter that the Action was added to.
+<td width="20px"></td><td><code><span class="label">emitter</span>:<a href="../../common/emitters/Emitter.html">Emitter</a></code> &mdash; The emitter this action has been added to.
    
    </td>
 </tr>
 </table>
+<p>
+<span class="label">See also</span>
+</p>
+<div class="seeAlso">
+<a href="../../common/actions/Action.html#addedToEmitter()" target="">org.flintparticles.common.actions.Action.addedToEmitter()</a>
+</div>
 </div>
 <a name="getDefaultPriority()"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
@@ -238,9 +246,9 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public override function getDefaultPriority():Number</code><p>
-   
-   Returns a default priority of 0 for this action. Derived classes 
-   override this method if they want a different default priority.
+   Returns a value of 10, so that the MatchVelocity action executes 
+   before accelerating actions that act on particles independently of
+   other particles, like Acceleration and GravityWell.
    
    </p><p></p>
 <span class="label">Returns</span>
@@ -249,6 +257,12 @@ showHideInherited();
 <td width="20"></td><td><code>Number</code></td>
 </tr>
 </table>
+<p>
+<span class="label">See also</span>
+</p>
+<div class="seeAlso">
+<a href="../../common/actions/Action.html#getDefaultPriority()" target="">org.flintparticles.common.actions.Action.getDefaultPriority()</a>
+</div>
 </div>
 <a name="update()"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
@@ -258,11 +272,14 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public override function update(emitter:<a href="../../common/emitters/Emitter.html">Emitter</a>, particle:<a href="../../common/particles/Particle.html">Particle</a>, time:Number):void</code><p>
+   Checks all particles near the current particle and applies the 
+   angular acceleration to alter the particle's angular velocity
+   towards their average angular velocity.
    
-   This method does nothing. All derived classes override this method
-   to update each particle every frame.
+   </p><p>This method is called by the emitter and need not be called by the 
+   user.</p>
    
-   </p><span class="label">Parameters</span>
+   <span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
 <td width="20px"></td><td><code><span class="label">emitter</span>:<a href="../../common/emitters/Emitter.html">Emitter</a></code> &mdash; The Emitter that created the particle.
@@ -284,6 +301,12 @@ showHideInherited();
    </td>
 </tr>
 </table>
+<p>
+<span class="label">See also</span>
+</p>
+<div class="seeAlso">
+<a href="../../common/actions/Action.html#update()" target="">org.flintparticles.common.actions.Action.update()</a>
+</div>
 </div>
 <br>
 <br>

@@ -106,20 +106,28 @@ package org.flintparticles.twoD.actions
 		override public function update( emitter:Emitter, particle:Particle, time:Number ):void
 		{
 			var p:Particle2D = Particle2D( particle );
-			var turnLeft:Boolean = ( ( p.y - _y ) * p.velX + ( _x - p.x ) * p.velY > 0 );
-			var newAngle:Number;
-			if ( turnLeft )
+			var velLength:Number = Math.sqrt( p.velX * p.velX + p.velY * p.velY );
+			var dx:Number = p.velX / velLength;
+			var dy:Number = p.velY / velLength;
+			var acc:Number = power * time;
+			var targetX:Number = _x - p.x;
+			var targetY:Number = _y - p.y;
+			var len:Number = Math.sqrt( targetX * targetX + targetY * targetY );
+			if( len == 0 )
 			{
-				newAngle = Math.atan2( p.velY, p.velX ) - _power * time;
-				
+				return;
 			}
-			else
-			{
-				newAngle = Math.atan2( p.velY, p.velX ) + _power * time;
-			}
-			var len:Number = Math.sqrt( p.velX * p.velX + p.velY * p.velY );
-			p.velX = len * Math.cos( newAngle );
-			p.velY = len * Math.sin( newAngle );
+			targetX /= len;
+			targetY /= len;
+			var dot:Number = targetX * dx + targetY * dy;
+			var perpX:Number = targetX - dx * dot;
+			var perpY:Number = targetY - dy * dot;
+			var factor:Number = acc / Math.sqrt( perpX * perpX + perpY * perpY );
+			p.velX += perpX * factor;
+			p.velY += perpY * factor;
+			factor = velLength / Math.sqrt( p.velX * p.velX + p.velY * p.velY );
+			p.velX *= factor;
+			p.velY *= factor;
 		}
 	}
 }

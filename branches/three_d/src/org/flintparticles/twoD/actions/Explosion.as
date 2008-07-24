@@ -38,9 +38,10 @@ package org.flintparticles.twoD.actions
 	import org.flintparticles.twoD.particles.Particle2D;	
 
 	/**
-	 * The Explosion action applies a force on the particle to push it away from
-	 * a single point - the center of the explosion. The force occurs instantaneously at the central point 
-	 * of the explosion and then ripples out in a shock wave.
+	 * The Explosion action applies a force on the particles to push them away 
+	 * from a single point - the center of the explosion. The force occurs 
+	 * instantaneously at the central point of the explosion and then ripples 
+	 * out in a shock wave.
 	 */
 
 	public class Explosion extends ActionBase implements FrameUpdatable
@@ -58,21 +59,23 @@ package org.flintparticles.twoD.actions
 		private var _expansionRate:Number = 500;
 		
 		/**
-		 * The constructor creates an Explosion action for use by 
-		 * an emitter. To add an Explosion to all particles created by an emitter, use the
+		 * The constructor creates an Explosion action for use by an emitter. 
+		 * To add an Explosion to all particles created by an emitter, use the
 		 * emitter's addAction method.
 		 * 
 		 * @see org.flintparticles.common.emitters.Emitter#addAction()
 		 * 
-		 * @param power The strength of the explosion - larger numbers produce a stronger force.
+		 * @param power The strength of the explosion - larger numbers produce a 
+		 * stronger force.
 		 * @param x The x coordinate of the center of the explosion.
 		 * @param y The y coordinate of the center of the explosion.
-		 * @param expansionRate The rate at which the shockwave moves out from the explosion, in pixels per second.
+		 * @param expansionRate The rate at which the shockwave moves out from the 
+		 * explosion, in pixels per second.
 		 * @param depth The depth (front-edge to back-edge) of the shock wave.
-		 * @param epsilon The minimum distance for which the explosion force is calculated. 
-		 * Particles closer than this distance experience the explosion as it they were 
-		 * this distance away. This stops the explosion effect blowing up as distances get 
-		 * small.
+		 * @param epsilon The minimum distance for which the explosion force is 
+		 * calculated. Particles closer than this distance experience the explosion
+		 * as if they were this distance away. This stops the explosion effect 
+		 * blowing up as distances get small.
 		 */
 		public function Explosion( power:Number, x:Number, y:Number, expansionRate:Number = 300, depth:Number = 10, epsilon:Number = 1 )
 		{
@@ -98,7 +101,8 @@ package org.flintparticles.twoD.actions
 		}
 		
 		/**
-		 * The strength of the explosion - larger numbers produce a stronger force.
+		 * The rate at which the shockwave moves out from the 
+		 * explosion, in pixels per second.
 		 */
 		public function get expansionRate():Number
 		{
@@ -110,7 +114,7 @@ package org.flintparticles.twoD.actions
 		}
 		
 		/**
-		 * The strength of the explosion - larger numbers produce a stronger force.
+		 * The depth (front-edge to back-edge) of the shock wave.
 		 */
 		public function get depth():Number
 		{
@@ -148,9 +152,9 @@ package org.flintparticles.twoD.actions
 		
 		/**
 		 * The minimum distance for which the explosion force is calculated. 
-		 * Particles closer than this distance experience the explosion as it they were 
-		 * this distance away. This stops the explosion effect blowing up as distances get 
-		 * small.
+		 * Particles closer than this distance to the center of the explosion
+		 * experience the explosion as it they were this distance away. This 
+		 * stops the explosion effect blowing up as distances get small.
 		 */
 		public function get epsilon():Number
 		{
@@ -162,7 +166,14 @@ package org.flintparticles.twoD.actions
 		}
 		
 		/**
-		 * @inheritDoc
+		 * Adds an UpdateOnFrame activity to the emitter to call this objects
+		 * frameUpdate method once per frame.
+		 * 
+		 * @param emitter The emitter this action has been added to.
+		 * 
+		 * @see frameUpdate()
+		 * @see org.flintparticles.common.activities.UpdateOnFrame
+		 * @see org.flintparticles.common.actions.Action#addedToEmitter()
 		 */
 		override public function addedToEmitter( emitter:Emitter ):void
 		{
@@ -171,7 +182,14 @@ package org.flintparticles.twoD.actions
 		}
 		
 		/**
-		 * @inheritDoc
+		 * Removes the UpdateOnFrame activity that was added to the emitter in the
+		 * addedToEmitter method.
+		 * 
+		 * @param emitter The emitter this action has been added to.
+		 * 
+		 * @see addedToEmitter()
+		 * @see org.flintparticles.common.activities.UpdateOnFrame
+		 * @see org.flintparticles.common.actions.Action#removedFromEmitter()
 		 */
 		override public function removedFromEmitter( emitter:Emitter ):void
 		{
@@ -182,8 +200,16 @@ package org.flintparticles.twoD.actions
 		}
 		
 		/**
-		 * Called every frame before the particles are updated. This method is called via the FrameUpdateable
-		 * interface which is called by the emitter by using an UpdateOnFrame activity.
+		 * Called every frame before the particles are updated, this method
+		 * calculates the current position of the blast shockwave.
+		 * 
+		 * <p>This method is called using an UpdateOnFrame activity that is
+		 * created in the addedToEmitter method.</p>
+		 * 
+		 * @param emitter The emitter that is using this action.
+		 * @param time The duration of the current animation frame.
+		 * 
+		 * @see org.flintparticles.common.activities.UpdateOnFrame
 		 */
 		public function frameUpdate( emitter:Emitter, time:Number ):void
 		{
@@ -193,7 +219,17 @@ package org.flintparticles.twoD.actions
 		}
 		
 		/**
-		 * @inheritDoc
+		 * Calculates the effect of the blast and shockwave on the particle at this
+		 * time.
+		 * 
+		 * <p>This method is called by the emitter and need not be called by the 
+		 * user.</p>
+		 * 
+		 * @param emitter The Emitter that created the particle.
+		 * @param particle The particle to be updated.
+		 * @param time The duration of the frame - used for time based updates.
+		 * 
+		 * @see org.flintparticles.common.actions.Action#update()
 		 */
 		override public function update( emitter:Emitter, particle:Particle, time:Number ):void
 		{

@@ -46,7 +46,7 @@ package
 	[SWF(width='500', height='500', frameRate='61', backgroundColor='#000000')]
 	
 	/**
-	 * This example creates a fountain of stars.
+	 * This example creates a set of colliding balls.
 	 * 
 	 * <p>This is the document class for the Flex project.</p>
 	 */
@@ -64,7 +64,7 @@ package
 			emitter.addInitializer( new SharedImage( new Dot( 10 ) ) );
 			emitter.addInitializer( new ColorInit( 0xFFFF33FF, 0xFF33FFFF ) );
 			emitter.addInitializer( new Position( new PointZone( new Vector3D( 0, 0, 0 ) ) ) );
-			emitter.addInitializer( new Velocity( new DiscZone( new Vector3D( 0, 0, 0 ), new Vector3D( 0, 1, 0 ), 50, 100 ) ) );
+			emitter.addInitializer( new Velocity( new DiscZone( new Vector3D( 0, 0, 0 ), new Vector3D( 0, 1, 0 ), 100, 50 ) ) );
 			
 			emitter.addAction( new Move() );
 			emitter.addAction( new Collide( 10, 1 ) );

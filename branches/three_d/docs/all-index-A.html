@@ -47,7 +47,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("AÂ
 </tr>
 <tr>
 <td width="20"></td><td>
-  The Accelerate Action adjusts the velocity of the particle by a 
+  The Accelerate Action adjusts the velocity of each particle by a 
   constant acceleration.</td>
 </tr>
 <tr>
@@ -86,6 +86,14 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("AÂ
    The x coordinate of the acceleration.</td>
 </tr>
 <tr>
+<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/actions/class-list.html');" href="org/flintparticles/threeD/actions/MatchRotateVelocity.html#acceleration">acceleration</a> &mdash; Property in class org.flintparticles.threeD.actions.<a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/actions/class-list.html');" href="org/flintparticles/threeD/actions/MatchRotateVelocity.html">MatchRotateVelocity</a></td>
+</tr>
+<tr>
+<td width="20"></td><td>
+   The angular acceleration applied to adjust velocity to match that
+   of the other particles.</td>
+</tr>
+<tr>
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/actions/class-list.html');" href="org/flintparticles/threeD/actions/MatchVelocity.html#acceleration">acceleration</a> &mdash; Property in class org.flintparticles.threeD.actions.<a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/actions/class-list.html');" href="org/flintparticles/threeD/actions/MatchVelocity.html">MatchVelocity</a></td>
 </tr>
 <tr>
@@ -105,23 +113,24 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("AÂ
 </tr>
 <tr>
 <td width="20"></td><td>
-   The acceleration force applied to approach the other particles.</td>
+   The acceleration applied to approach the other particles.</td>
 </tr>
 <tr>
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('org/flintparticles/twoD/actions/class-list.html');" href="org/flintparticles/twoD/actions/MatchRotateVelocity.html#acceleration">acceleration</a> &mdash; Property in class org.flintparticles.twoD.actions.<a onclick="javascript:loadClassListFrame('org/flintparticles/twoD/actions/class-list.html');" href="org/flintparticles/twoD/actions/MatchRotateVelocity.html">MatchRotateVelocity</a></td>
 </tr>
 <tr>
 <td width="20"></td><td>
-   The angular acceleration applied to adjust velocity to match that
-   of the other particles.</td>
+   The angular acceleration applied to adjust the angular velocity to 
+   match that of the other particles.</td>
 </tr>
 <tr>
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('org/flintparticles/twoD/actions/class-list.html');" href="org/flintparticles/twoD/actions/MatchVelocity.html#acceleration">acceleration</a> &mdash; Property in class org.flintparticles.twoD.actions.<a onclick="javascript:loadClassListFrame('org/flintparticles/twoD/actions/class-list.html');" href="org/flintparticles/twoD/actions/MatchVelocity.html">MatchVelocity</a></td>
 </tr>
 <tr>
 <td width="20"></td><td>
-   The acceleration force applied to adjust velocity to match that
-   of the other particles.</td>
+   The acceleration applied to adjust each
+   particle's velocity to match that of the other particles near it
+   </td>
 </tr>
 <tr>
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('org/flintparticles/twoD/actions/class-list.html');" href="org/flintparticles/twoD/actions/MinimumDistance.html#acceleration">acceleration</a> &mdash; Property in class org.flintparticles.twoD.actions.<a onclick="javascript:loadClassListFrame('org/flintparticles/twoD/actions/class-list.html');" href="org/flintparticles/twoD/actions/MinimumDistance.html">MinimumDistance</a></td>
@@ -174,6 +183,12 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("AÂ
    The constructor creates an ActionBase object.</td>
 </tr>
 <tr>
+<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('org/flintparticles/common/emitters/class-list.html');" href="org/flintparticles/common/emitters/Emitter.html#_activitiesPriority">_activitiesPriority</a> &mdash; Property in class org.flintparticles.common.emitters.<a onclick="javascript:loadClassListFrame('org/flintparticles/common/emitters/class-list.html');" href="org/flintparticles/common/emitters/Emitter.html">Emitter</a></td>
+</tr>
+<tr>
+<td width="20"></td><td></td>
+</tr>
+<tr>
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('org/flintparticles/common/activities/class-list.html');" href="org/flintparticles/common/activities/Activity.html"><i>Activity</i></a> &mdash; Interface in package <a onclick="javascript:loadClassListFrame('org/flintparticles/common/activities/class-list.html');" href="org/flintparticles/common/activities/package-detail.html">org.flintparticles.common.activities</a></td>
 </tr>
 <tr>
@@ -194,6 +209,13 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("AÂ
 <tr>
 <td width="20"></td><td>
    The constructor creates an ActivityBase object.</td>
+</tr>
+<tr>
+<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('org/flintparticles/common/utils/class-list.html');" href="org/flintparticles/common/utils/PriorityArray.html#add()">add</a>(value, priority) &mdash; Method in class org.flintparticles.common.utils.<a onclick="javascript:loadClassListFrame('org/flintparticles/common/utils/class-list.html');" href="org/flintparticles/common/utils/PriorityArray.html">PriorityArray</a></td>
+</tr>
+<tr>
+<td width="20"></td><td>
+   Adds a value to the PriorityArray.</td>
 </tr>
 <tr>
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/geom/class-list.html');" href="org/flintparticles/threeD/geom/Quaternion.html#add()">add</a>(q:<a href="org/flintparticles/threeD/geom/Quaternion.html" onclick="javascript:loadClassListFrame('org/flintparticles/threeD/geom./class-list.html');">org.flintparticles.threeD.geom:Quaternion</a>) &mdash; Method in class org.flintparticles.threeD.geom.<a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/geom/class-list.html');" href="org/flintparticles/threeD/geom/Quaternion.html">Quaternion</a></td>
@@ -302,6 +324,14 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("AÂ
    This method does nothing.</td>
 </tr>
 <tr>
+<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/actions/class-list.html');" href="org/flintparticles/threeD/actions/MatchRotateVelocity.html#addedToEmitter()">addedToEmitter</a>(emitter:<a href="org/flintparticles/common/emitters/Emitter.html" onclick="javascript:loadClassListFrame('org/flintparticles/common/emitters./class-list.html');">org.flintparticles.common.emitters:Emitter</a>) &mdash; Method in class org.flintparticles.threeD.actions.<a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/actions/class-list.html');" href="org/flintparticles/threeD/actions/MatchRotateVelocity.html">MatchRotateVelocity</a></td>
+</tr>
+<tr>
+<td width="20"></td><td>
+   
+   This method does nothing.</td>
+</tr>
+<tr>
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/actions/class-list.html');" href="org/flintparticles/threeD/actions/MatchVelocity.html#addedToEmitter()">addedToEmitter</a>(emitter:<a href="org/flintparticles/common/emitters/Emitter.html" onclick="javascript:loadClassListFrame('org/flintparticles/common/emitters./class-list.html');">org.flintparticles.common.emitters:Emitter</a>) &mdash; Method in class org.flintparticles.threeD.actions.<a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/actions/class-list.html');" href="org/flintparticles/threeD/actions/MatchVelocity.html">MatchVelocity</a></td>
 </tr>
 <tr>
@@ -338,48 +368,48 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("AÂ
 </tr>
 <tr>
 <td width="20"></td><td>
-   
-   This method does nothing.</td>
+   Instructs the emitter to produce a sorted particle array for optimizing
+   the calculations in the update method of this action.</td>
 </tr>
 <tr>
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('org/flintparticles/twoD/actions/class-list.html');" href="org/flintparticles/twoD/actions/Collide.html#addedToEmitter()">addedToEmitter</a>(emitter:<a href="org/flintparticles/common/emitters/Emitter.html" onclick="javascript:loadClassListFrame('org/flintparticles/common/emitters./class-list.html');">org.flintparticles.common.emitters:Emitter</a>) &mdash; Method in class org.flintparticles.twoD.actions.<a onclick="javascript:loadClassListFrame('org/flintparticles/twoD/actions/class-list.html');" href="org/flintparticles/twoD/actions/Collide.html">Collide</a></td>
 </tr>
 <tr>
 <td width="20"></td><td>
-   
-   This method does nothing.</td>
+   Instructs the emitter to produce a sorted particle array for optimizing
+   the calculations in the update method of this action.</td>
 </tr>
 <tr>
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('org/flintparticles/twoD/actions/class-list.html');" href="org/flintparticles/twoD/actions/Explosion.html#addedToEmitter()">addedToEmitter</a>(emitter:<a href="org/flintparticles/common/emitters/Emitter.html" onclick="javascript:loadClassListFrame('org/flintparticles/common/emitters./class-list.html');">org.flintparticles.common.emitters:Emitter</a>) &mdash; Method in class org.flintparticles.twoD.actions.<a onclick="javascript:loadClassListFrame('org/flintparticles/twoD/actions/class-list.html');" href="org/flintparticles/twoD/actions/Explosion.html">Explosion</a></td>
 </tr>
 <tr>
 <td width="20"></td><td>
-   
-   This method does nothing.</td>
+   Adds an UpdateOnFrame activity to the emitter to call this objects
+   frameUpdate method once per frame.</td>
 </tr>
 <tr>
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('org/flintparticles/twoD/actions/class-list.html');" href="org/flintparticles/twoD/actions/MatchRotateVelocity.html#addedToEmitter()">addedToEmitter</a>(emitter:<a href="org/flintparticles/common/emitters/Emitter.html" onclick="javascript:loadClassListFrame('org/flintparticles/common/emitters./class-list.html');">org.flintparticles.common.emitters:Emitter</a>) &mdash; Method in class org.flintparticles.twoD.actions.<a onclick="javascript:loadClassListFrame('org/flintparticles/twoD/actions/class-list.html');" href="org/flintparticles/twoD/actions/MatchRotateVelocity.html">MatchRotateVelocity</a></td>
 </tr>
 <tr>
 <td width="20"></td><td>
-   
-   This method does nothing.</td>
+   Instructs the emitter to produce a sorted particle array for optimizing
+   the calculations in the update method of this action.</td>
 </tr>
 <tr>
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('org/flintparticles/twoD/actions/class-list.html');" href="org/flintparticles/twoD/actions/MatchVelocity.html#addedToEmitter()">addedToEmitter</a>(emitter:<a href="org/flintparticles/common/emitters/Emitter.html" onclick="javascript:loadClassListFrame('org/flintparticles/common/emitters./class-list.html');">org.flintparticles.common.emitters:Emitter</a>) &mdash; Method in class org.flintparticles.twoD.actions.<a onclick="javascript:loadClassListFrame('org/flintparticles/twoD/actions/class-list.html');" href="org/flintparticles/twoD/actions/MatchVelocity.html">MatchVelocity</a></td>
 </tr>
 <tr>
 <td width="20"></td><td>
-   
-   This method does nothing.</td>
+   Instructs the emitter to produce a sorted particle array for optimizing
+   the calculations in the update method of this action.</td>
 </tr>
 <tr>
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('org/flintparticles/twoD/actions/class-list.html');" href="org/flintparticles/twoD/actions/MinimumDistance.html#addedToEmitter()">addedToEmitter</a>(emitter:<a href="org/flintparticles/common/emitters/Emitter.html" onclick="javascript:loadClassListFrame('org/flintparticles/common/emitters./class-list.html');">org.flintparticles.common.emitters:Emitter</a>) &mdash; Method in class org.flintparticles.twoD.actions.<a onclick="javascript:loadClassListFrame('org/flintparticles/twoD/actions/class-list.html');" href="org/flintparticles/twoD/actions/MinimumDistance.html">MinimumDistance</a></td>
 </tr>
 <tr>
 <td width="20"></td><td>
-   
-   This method does nothing.</td>
+   Instructs the emitter to produce a sorted particle array for optimizing
+   the calculations in the update method of this action.</td>
 </tr>
 <tr>
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('org/flintparticles/twoD/actions/class-list.html');" href="org/flintparticles/twoD/actions/MutualGravity.html#addedToEmitter()">addedToEmitter</a>(emitter:<a href="org/flintparticles/common/emitters/Emitter.html" onclick="javascript:loadClassListFrame('org/flintparticles/common/emitters./class-list.html');">org.flintparticles.common.emitters:Emitter</a>) &mdash; Method in class org.flintparticles.twoD.actions.<a onclick="javascript:loadClassListFrame('org/flintparticles/twoD/actions/class-list.html');" href="org/flintparticles/twoD/actions/MutualGravity.html">MutualGravity</a></td>
@@ -530,6 +560,20 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("AÂ
    an emitter.</td>
 </tr>
 <tr>
+<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/initializers/class-list.html');" href="org/flintparticles/threeD/initializers/Rotation.html#angle">angle</a> &mdash; Property in class org.flintparticles.threeD.initializers.<a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/initializers/class-list.html');" href="org/flintparticles/threeD/initializers/Rotation.html">Rotation</a></td>
+</tr>
+<tr>
+<td width="20"></td><td>
+   When reading, returns the average of minAngle and maxAngle.</td>
+</tr>
+<tr>
+<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/initializers/class-list.html');" href="org/flintparticles/threeD/initializers/RotationAbsolute.html#angle">angle</a> &mdash; Property in class org.flintparticles.threeD.initializers.<a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/initializers/class-list.html');" href="org/flintparticles/threeD/initializers/RotationAbsolute.html">RotationAbsolute</a></td>
+</tr>
+<tr>
+<td width="20"></td><td>
+   When reading, returns the average of minAngle and maxAngle.</td>
+</tr>
+<tr>
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('org/flintparticles/twoD/initializers/class-list.html');" href="org/flintparticles/twoD/initializers/Rotation.html#angle">angle</a> &mdash; Property in class org.flintparticles.twoD.initializers.<a onclick="javascript:loadClassListFrame('org/flintparticles/twoD/initializers/class-list.html');" href="org/flintparticles/twoD/initializers/Rotation.html">Rotation</a></td>
 </tr>
 <tr>
@@ -560,11 +604,19 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("AÂ
    radians per second.</td>
 </tr>
 <tr>
+<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/initializers/class-list.html');" href="org/flintparticles/threeD/initializers/RotateVelocity.html#angVelocity">angVelocity</a> &mdash; Property in class org.flintparticles.threeD.initializers.<a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/initializers/class-list.html');" href="org/flintparticles/threeD/initializers/RotateVelocity.html">RotateVelocity</a></td>
+</tr>
+<tr>
+<td width="20"></td><td>
+   When reading, returns the average of minAngVelocity and maxAngVelocity.</td>
+</tr>
+<tr>
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/particles/class-list.html');" href="org/flintparticles/threeD/particles/Particle3D.html#angVelocity">angVelocity</a> &mdash; Property in class org.flintparticles.threeD.particles.<a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/particles/class-list.html');" href="org/flintparticles/threeD/particles/Particle3D.html">Particle3D</a></td>
 </tr>
 <tr>
 <td width="20"></td><td>
-   The rate of rotation of the particle, in radians per second.</td>
+   The rate of rotation of the particle, represented as a vector in the direction of 
+   the axis of rotation and whose magnitude indicates the number of rotations per second.</td>
 </tr>
 <tr>
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('org/flintparticles/twoD/initializers/class-list.html');" href="org/flintparticles/twoD/initializers/RotateVelocity.html#angVelocity">angVelocity</a> &mdash; Property in class org.flintparticles.twoD.initializers.<a onclick="javascript:loadClassListFrame('org/flintparticles/twoD/initializers/class-list.html');" href="org/flintparticles/twoD/initializers/RotateVelocity.html">RotateVelocity</a></td>
@@ -694,7 +746,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("AÂ
 </tr>
 <tr>
 <td width="20"></td><td>
-   The constructor creates a ApproachNeighbours action for use by an emitter.</td>
+   The constructor creates an ApproachNeighbours action for use by an emitter.</td>
 </tr>
 <tr>
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('org/flintparticles/common/utils/class-list.html');" href="org/flintparticles/common/utils/Maths.html#asDegrees()">asDegrees</a>(radians) &mdash; Static method in class org.flintparticles.common.utils.<a onclick="javascript:loadClassListFrame('org/flintparticles/common/utils/class-list.html');" href="org/flintparticles/common/utils/Maths.html">Maths</a></td>
@@ -729,28 +781,49 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("AÂ
    Copies another vector into this one.</td>
 </tr>
 <tr>
-<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/geom/class-list.html');" href="org/flintparticles/threeD/geom/Vector3D.html#AXISW">AXISW</a> &mdash; Static property in class org.flintparticles.threeD.geom.<a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/geom/class-list.html');" href="org/flintparticles/threeD/geom/Vector3D.html">Vector3D</a></td>
+<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/initializers/class-list.html');" href="org/flintparticles/threeD/initializers/RotateVelocity.html#axis">axis</a> &mdash; Property in class org.flintparticles.threeD.initializers.<a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/initializers/class-list.html');" href="org/flintparticles/threeD/initializers/RotateVelocity.html">RotateVelocity</a></td>
+</tr>
+<tr>
+<td width="20"></td><td>
+   The axis for the rotation.</td>
+</tr>
+<tr>
+<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/initializers/class-list.html');" href="org/flintparticles/threeD/initializers/Rotation.html#axis">axis</a> &mdash; Property in class org.flintparticles.threeD.initializers.<a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/initializers/class-list.html');" href="org/flintparticles/threeD/initializers/Rotation.html">Rotation</a></td>
+</tr>
+<tr>
+<td width="20"></td><td>
+   The axis for the rotation.</td>
+</tr>
+<tr>
+<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/initializers/class-list.html');" href="org/flintparticles/threeD/initializers/RotationAbsolute.html#axis">axis</a> &mdash; Property in class org.flintparticles.threeD.initializers.<a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/initializers/class-list.html');" href="org/flintparticles/threeD/initializers/RotationAbsolute.html">RotationAbsolute</a></td>
+</tr>
+<tr>
+<td width="20"></td><td>
+   The axis for the rotation.</td>
+</tr>
+<tr>
+<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/geom/class-list.html');" href="org/flintparticles/threeD/geom/Vector3D.html#AXISW">AXISW</a> &mdash; Constant static property in class org.flintparticles.threeD.geom.<a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/geom/class-list.html');" href="org/flintparticles/threeD/geom/Vector3D.html">Vector3D</a></td>
 </tr>
 <tr>
 <td width="20"></td><td>
    A unit vector in the direction of the w axis.</td>
 </tr>
 <tr>
-<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/geom/class-list.html');" href="org/flintparticles/threeD/geom/Vector3D.html#AXISX">AXISX</a> &mdash; Static property in class org.flintparticles.threeD.geom.<a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/geom/class-list.html');" href="org/flintparticles/threeD/geom/Vector3D.html">Vector3D</a></td>
+<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/geom/class-list.html');" href="org/flintparticles/threeD/geom/Vector3D.html#AXISX">AXISX</a> &mdash; Constant static property in class org.flintparticles.threeD.geom.<a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/geom/class-list.html');" href="org/flintparticles/threeD/geom/Vector3D.html">Vector3D</a></td>
 </tr>
 <tr>
 <td width="20"></td><td>
    A unit vector in the direction of the x axis.</td>
 </tr>
 <tr>
-<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/geom/class-list.html');" href="org/flintparticles/threeD/geom/Vector3D.html#AXISY">AXISY</a> &mdash; Static property in class org.flintparticles.threeD.geom.<a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/geom/class-list.html');" href="org/flintparticles/threeD/geom/Vector3D.html">Vector3D</a></td>
+<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/geom/class-list.html');" href="org/flintparticles/threeD/geom/Vector3D.html#AXISY">AXISY</a> &mdash; Constant static property in class org.flintparticles.threeD.geom.<a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/geom/class-list.html');" href="org/flintparticles/threeD/geom/Vector3D.html">Vector3D</a></td>
 </tr>
 <tr>
 <td width="20"></td><td>
    A unit vector in the direction of the y axis.</td>
 </tr>
 <tr>
-<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/geom/class-list.html');" href="org/flintparticles/threeD/geom/Vector3D.html#AXISZ">AXISZ</a> &mdash; Static property in class org.flintparticles.threeD.geom.<a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/geom/class-list.html');" href="org/flintparticles/threeD/geom/Vector3D.html">Vector3D</a></td>
+<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/geom/class-list.html');" href="org/flintparticles/threeD/geom/Vector3D.html#AXISZ">AXISZ</a> &mdash; Constant static property in class org.flintparticles.threeD.geom.<a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/geom/class-list.html');" href="org/flintparticles/threeD/geom/Vector3D.html">Vector3D</a></td>
 </tr>
 <tr>
 <td width="20"></td><td>

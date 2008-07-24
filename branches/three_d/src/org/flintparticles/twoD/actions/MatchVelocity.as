@@ -37,7 +37,7 @@ package org.flintparticles.twoD.actions
 	import org.flintparticles.twoD.particles.Particle2D;	
 
 	/**
-	 * The MatchVelocity action applies an acceleration to the particle to match
+	 * The MatchVelocity action applies an acceleration to each particle to match
 	 * its velocity to that of its nearest neighbours.
 	 */
 
@@ -48,16 +48,17 @@ package org.flintparticles.twoD.actions
 		private var _maxSq:Number;
 		
 		/**
-		 * The constructor creates a MatchVelocity action for use by 
-		 * an emitter. To add a MatchVelocity to all particles created by an emitter, use the
+		 * The constructor creates a MatchVelocity action for use by an emitter. 
+		 * To add a MatchVelocity to all particles created by an emitter, use the
 		 * emitter's addAction method.
 		 * 
 		 * @see org.flintparticles.common.emitters.Emitter#addAction()
 		 * 
-		 * @param maxDistance The maximum distance, in pixels, over which this action operates.
-		 * The particle will match its velocity other particles that are this close or closer to it.
-		 * @param acceleration The acceleration force applied to adjust velocity to match that
-		 * of the other particles.
+		 * @param maxDistance The maximum distance, in pixels, over which this 
+		 * action operates. The particle will match its velocity other particles 
+		 * that are at most this close to it.
+		 * @param acceleration The acceleration applied to adjust each
+		 * particle's velocity to match that of the other particles near it.
 		 */
 		public function MatchVelocity( maxDistance:Number, acceleration:Number )
 		{
@@ -81,8 +82,8 @@ package org.flintparticles.twoD.actions
 		}
 		
 		/**
-		 * The acceleration force applied to adjust velocity to match that
-		 * of the other particles.
+		 * The acceleration applied to adjust each
+		 * particle's velocity to match that of the other particles near it
 		 */
 		public function get acceleration():Number
 		{
@@ -94,9 +95,11 @@ package org.flintparticles.twoD.actions
 		}
 
 		/**
-		 * @inheritDoc
+		 * Returns a value of 10, so that the MatchVelocity action executes 
+		 * before accelerating actions that act on particles independently of
+		 * other particles, like Acceleration and GravityWell.
 		 * 
-		 * <p>Returns a value of 10, so that the MutualGravity action executes before other actions.</p>
+		 * @see org.flintparticles.common.actions.Action#getDefaultPriority()
 		 */
 		override public function getDefaultPriority():Number
 		{
@@ -104,7 +107,12 @@ package org.flintparticles.twoD.actions
 		}
 
 		/**
-		 * @inheritDoc
+		 * Instructs the emitter to produce a sorted particle array for optimizing
+		 * the calculations in the update method of this action.
+		 * 
+		 * @param emitter The emitter this action has been added to.
+		 * 
+		 * @see org.flintparticles.common.actions.Action#addedToEmitter()
 		 */
 		override public function addedToEmitter( emitter:Emitter ) : void
 		{
@@ -112,7 +120,18 @@ package org.flintparticles.twoD.actions
 		}
 		
 		/**
-		 * @inheritDoc
+		 * Checks all particles near the current particle and applies the 
+		 * angular acceleration to alter the particle's angular velocity
+		 * towards their average angular velocity.
+		 * 
+		 * <p>This method is called by the emitter and need not be called by the 
+		 * user.</p>
+		 * 
+		 * @param emitter The Emitter that created the particle.
+		 * @param particle The particle to be updated.
+		 * @param time The duration of the frame - used for time based updates.
+		 * 
+		 * @see org.flintparticles.common.actions.Action#update()
 		 */
 		override public function update( emitter:Emitter, particle:Particle, time:Number ):void
 		{

@@ -42,8 +42,8 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 </tr>
 </table>
 <p></p>
-  The LinearDrag action applies drag to the particle to slow it down when it's moving.
-  The drag force is proportional to the velocity of the particle.
+  The LinearDrag action applies drag to the particle to slow it down when 
+  it's moving. The drag force is proportional to the speed of the particle.
   <p></p>
 <br>
 <hr>
@@ -82,8 +82,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <div class="summarySignature">
 <a class="signatureLink" href="#LinearDrag()">LinearDrag</a>(drag:Number)</div>
 <div class="summaryTableDescription">
-   The constructor creates a LinearDrag action for use by 
-   an emitter.</div>
+   The constructor creates a LinearDrag action for use by an emitter.</div>
 </td><td class="summaryTableOwnerCol">LinearDrag</td>
 </tr>
 <tr class="hideInheritedMethod">
@@ -115,8 +114,8 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <div class="summarySignature">
 <a class="signatureLink" href="#update()">update</a>(emitter:<a href="../../common/emitters/Emitter.html">Emitter</a>, particle:<a href="../../common/particles/Particle.html">Particle</a>, time:Number):void</div>
 <div class="summaryTableDescription">
-   
-   This method does nothing.</div>
+   Calculates the drag on the particle and applies it for the period of 
+   time indicated.</div>
 </td><td class="summaryTableOwnerCol">LinearDrag</td>
 </tr>
 </table>
@@ -154,14 +153,15 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public function LinearDrag(drag:Number)</code><p>
-   The constructor creates a LinearDrag action for use by 
-   an emitter. To add a LinearDrag to all particles created by an emitter, use the
+   The constructor creates a LinearDrag action for use by an emitter.
+   To add a LinearDrag to all particles created by an emitter, use the
    emitter's addAction method.
    
    </p><span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
-<td width="20px"></td><td><code><span class="label">drag</span>:Number</code> &mdash; The amount of drag. A higher number produces a stronger drag force.
+<td width="20px"></td><td><code><span class="label">drag</span>:Number</code> &mdash; The amount of drag. A higher number produces a stronger drag 
+   force.
    </td>
 </tr>
 </table>
@@ -182,11 +182,13 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public override function update(emitter:<a href="../../common/emitters/Emitter.html">Emitter</a>, particle:<a href="../../common/particles/Particle.html">Particle</a>, time:Number):void</code><p>
+   Calculates the drag on the particle and applies it for the period of 
+   time indicated.
    
-   This method does nothing. All derived classes override this method
-   to update each particle every frame.
+   </p><p>This method is called by the emitter and need not be called by the 
+   user.</p>
    
-   </p><span class="label">Parameters</span>
+   <span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
 <td width="20px"></td><td><code><span class="label">emitter</span>:<a href="../../common/emitters/Emitter.html">Emitter</a></code> &mdash; The Emitter that created the particle.
@@ -208,6 +210,12 @@ showHideInherited();
    </td>
 </tr>
 </table>
+<p>
+<span class="label">See also</span>
+</p>
+<div class="seeAlso">
+<a href="../../common/actions/Action.html#update()" target="">org.flintparticles.common.actions.Action.update()</a>
+</div>
 </div>
 <br>
 <br>

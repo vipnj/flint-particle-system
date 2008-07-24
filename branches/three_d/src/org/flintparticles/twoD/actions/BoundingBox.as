@@ -31,7 +31,6 @@
 package org.flintparticles.twoD.actions 
 {
 	import flash.display.DisplayObject;
-	import flash.geom.Rectangle;
 	
 	import org.flintparticles.common.actions.ActionBase;
 	import org.flintparticles.common.emitters.Emitter;
@@ -39,10 +38,11 @@ package org.flintparticles.twoD.actions
 	import org.flintparticles.twoD.particles.Particle2D;	
 
 	/**
-	 * The BoundingBox action confines each particle to a box. The 
-	 * particle bounces back off the side of the box when it reaches 
-	 * the edge. The bounce treats the particle as a circular body
-	 * and displays no loss of energy in the collision.
+	 * The BoundingBox action confines each particle to a rectangle region. The 
+	 * particle bounces back off the sides of the rectangle when it reaches 
+	 * the edge. The bounce treats the particle as a circular body. By default,
+	 * no energy is lost in the collision. This can be modified by setting the
+	 * bounce property to a value other than 1, its default value.
 	 */
 
 	public class BoundingBox extends ActionBase
@@ -55,19 +55,15 @@ package org.flintparticles.twoD.actions
 
 		/**
 		 * The constructor creates a BoundingBox action for use by 
-		 * an emitter. To add a BoundingBox to all particles created by an emitter, use the
-		 * emitter's addAction method.
+		 * an emitter. To add a BoundingBox to all particles created by an emitter, 
+		 * use the emitter's addAction method.
 		 * 
 		 * @see org.flintparticles.common.emitters.Emitter#addAction()
 		 * 
-		 * @param left The left coordinate of the box. The coordinates are in the
-		 * coordinate space of the object containing the emitter.
-		 * @param top The top coordinate of the box. The coordinates are in the
-		 * coordinate space of the object containing the emitter.
-		 * @param right The right coordinate of the box. The coordinates are in the
-		 * coordinate space of the object containing the emitter.
-		 * @param bottom The bottom coordinate of the box. The coordinates are in the
-		 * coordinate space of the object containing the emitter.
+		 * @param left The left coordinate of the box.
+		 * @param top The top coordinate of the box.
+		 * @param right The right coordinate of the box.
+		 * @param bottom The bottom coordinate of the box.
 		 * @param bounce The coefficient of restitution when the particles bounce off the
 		 * sides of the box. A value of 1 gives a pure elastic collision, with no energy loss. 
 		 * A value between 0 and 1 causes the particle to loose enegy in the collision. A value 
@@ -80,21 +76,6 @@ package org.flintparticles.twoD.actions
 			_right = right;
 			_bottom = bottom;
 			_bounce = bounce;
-		}
-		
-		/**
-		 * The bounding box.
-		 */
-		public function get box():Rectangle
-		{
-			return new Rectangle( _left, _top, _right - _left, _bottom - _top );
-		}
-		public function set box( value:Rectangle ):void
-		{
-			_left = value.left;
-			_right = value.right;
-			_top = value.top;
-			_bottom = value.bottom;
 		}
 
 		/**

@@ -40,7 +40,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Al
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableSecondCol"><a href="org/flintparticles/twoD/actions/Accelerate.html">Accelerate</a>
 <br>
 </td><td class="summaryTableCol"><a onclick="javascript:loadClassListFrame('org/flintparticles/twoD/actions/class-list.html');" href="org/flintparticles/twoD/actions/package-detail.html">org.flintparticles.twoD.actions</a></td><td class="summaryTableLastCol">
-  The Accelerate Action adjusts the velocity of the particle by a 
+  The Accelerate Action adjusts the velocity of each particle by a 
   constant acceleration.</td>
 </tr>
 <tr class="prow0">
@@ -177,7 +177,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Al
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableSecondCol"><a href="org/flintparticles/twoD/actions/BoundingBox.html">BoundingBox</a>
 <br>
 </td><td class="summaryTableCol"><a onclick="javascript:loadClassListFrame('org/flintparticles/twoD/actions/class-list.html');" href="org/flintparticles/twoD/actions/package-detail.html">org.flintparticles.twoD.actions</a></td><td class="summaryTableLastCol">
-  The BoundingBox action confines each particle to a box.</td>
+  The BoundingBox action confines each particle to a rectangle region.</td>
 </tr>
 <tr class="prow1">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableSecondCol"><a href="org/flintparticles/threeD/actions/BoundingBox.html">BoundingBox</a>
@@ -207,8 +207,8 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Al
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableSecondCol"><a href="org/flintparticles/twoD/actions/Collide.html">Collide</a>
 <br>
 </td><td class="summaryTableCol"><a onclick="javascript:loadClassListFrame('org/flintparticles/twoD/actions/class-list.html');" href="org/flintparticles/twoD/actions/package-detail.html">org.flintparticles.twoD.actions</a></td><td class="summaryTableLastCol">
-  The Collide action detects collisions between particles and modifies their velocities
-  in response to the collision.</td>
+  The Collide action detects collisions between particles and modifies their 
+  velocities in response to the collision.</td>
 </tr>
 <tr class="prow0">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableSecondCol"><a href="org/flintparticles/threeD/actions/Collide.html">Collide</a>
@@ -266,7 +266,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Al
 <br>
 </td><td class="summaryTableCol"><a onclick="javascript:loadClassListFrame('org/flintparticles/twoD/actions/class-list.html');" href="org/flintparticles/twoD/actions/package-detail.html">org.flintparticles.twoD.actions</a></td><td class="summaryTableLastCol">
   The DeathZone action marks the particle as dead if it is inside
-  a zone.</td>
+  a specific zone.</td>
 </tr>
 <tr class="prow1">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableSecondCol"><a href="org/flintparticles/threeD/actions/DeathZone.html">DeathZone</a>
@@ -372,8 +372,8 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Al
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableSecondCol"><a href="org/flintparticles/twoD/actions/Explosion.html">Explosion</a>
 <br>
 </td><td class="summaryTableCol"><a onclick="javascript:loadClassListFrame('org/flintparticles/twoD/actions/class-list.html');" href="org/flintparticles/twoD/actions/package-detail.html">org.flintparticles.twoD.actions</a></td><td class="summaryTableLastCol">
-  The Explosion action applies a force on the particle to push it away from
-  a single point - the center of the explosion.</td>
+  The Explosion action applies a force on the particles to push them away 
+  from a single point - the center of the explosion.</td>
 </tr>
 <tr class="prow0">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableSecondCol"><a href="org/flintparticles/threeD/actions/Explosion.html">Explosion</a>
@@ -429,7 +429,8 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Al
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableSecondCol"><a href="org/flintparticles/twoD/actions/Friction.html">Friction</a>
 <br>
 </td><td class="summaryTableCol"><a onclick="javascript:loadClassListFrame('org/flintparticles/twoD/actions/class-list.html');" href="org/flintparticles/twoD/actions/package-detail.html">org.flintparticles.twoD.actions</a></td><td class="summaryTableLastCol">
-  The Friction action applies friction to the particle to slow it down when it's moving.</td>
+  The Friction action applies friction to the particle to slow it down when 
+  it's moving.</td>
 </tr>
 <tr class="prow1">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableSecondCol"><a href="org/flintparticles/threeD/actions/Friction.html">Friction</a>
@@ -488,7 +489,8 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Al
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableSecondCol"><a href="org/flintparticles/twoD/actions/Jet.html">Jet</a>
 <br>
 </td><td class="summaryTableCol"><a onclick="javascript:loadClassListFrame('org/flintparticles/twoD/actions/class-list.html');" href="org/flintparticles/twoD/actions/package-detail.html">org.flintparticles.twoD.actions</a></td><td class="summaryTableLastCol">
-  The Jet Action applies an acceleration to the particle only if it is in the specified zone.</td>
+  The Jet Action applies an acceleration to particles only if they are in 
+  the specified zone.</td>
 </tr>
 <tr class="prow0">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableSecondCol"><a href="org/flintparticles/threeD/actions/Jet.html">Jet</a>
@@ -537,7 +539,8 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Al
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableSecondCol"><a href="org/flintparticles/twoD/actions/LinearDrag.html">LinearDrag</a>
 <br>
 </td><td class="summaryTableCol"><a onclick="javascript:loadClassListFrame('org/flintparticles/twoD/actions/class-list.html');" href="org/flintparticles/twoD/actions/package-detail.html">org.flintparticles.twoD.actions</a></td><td class="summaryTableLastCol">
-  The LinearDrag action applies drag to the particle to slow it down when it's moving.</td>
+  The LinearDrag action applies drag to the particle to slow it down when 
+  it's moving.</td>
 </tr>
 <tr class="prow0">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableSecondCol"><a href="org/flintparticles/threeD/actions/LinearDrag.html">LinearDrag</a>
@@ -561,80 +564,81 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Al
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableSecondCol"><a href="org/flintparticles/twoD/actions/MatchRotateVelocity.html">MatchRotateVelocity</a>
 <br>
 </td><td class="summaryTableCol"><a onclick="javascript:loadClassListFrame('org/flintparticles/twoD/actions/class-list.html');" href="org/flintparticles/twoD/actions/package-detail.html">org.flintparticles.twoD.actions</a></td><td class="summaryTableLastCol">
+  The MatchRotateVelocity action applies an angular acceleration to each 
+  particle to match its angular velocity to that of its nearest neighbours.</td>
+</tr>
+<tr class="prow0">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableSecondCol"><a href="org/flintparticles/threeD/actions/MatchRotateVelocity.html">MatchRotateVelocity</a>
+<br>
+</td><td class="summaryTableCol"><a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/actions/class-list.html');" href="org/flintparticles/threeD/actions/package-detail.html">org.flintparticles.threeD.actions</a></td><td class="summaryTableLastCol">
   The MatchRotateVelocity action applies an angular acceleration to the particle to match
   its angular velocity to that of its nearest neighbours.</td>
 </tr>
-<tr class="prow0">
+<tr class="prow1">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableSecondCol"><a href="org/flintparticles/twoD/actions/MatchVelocity.html">MatchVelocity</a>
 <br>
 </td><td class="summaryTableCol"><a onclick="javascript:loadClassListFrame('org/flintparticles/twoD/actions/class-list.html');" href="org/flintparticles/twoD/actions/package-detail.html">org.flintparticles.twoD.actions</a></td><td class="summaryTableLastCol">
-  The MatchVelocity action applies an acceleration to the particle to match
+  The MatchVelocity action applies an acceleration to each particle to match
   its velocity to that of its nearest neighbours.</td>
 </tr>
-<tr class="prow1">
+<tr class="prow0">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableSecondCol"><a href="org/flintparticles/threeD/actions/MatchVelocity.html">MatchVelocity</a>
 <br>
 </td><td class="summaryTableCol"><a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/actions/class-list.html');" href="org/flintparticles/threeD/actions/package-detail.html">org.flintparticles.threeD.actions</a></td><td class="summaryTableLastCol">
   The MatchVelocity action applies an acceleration to the particle to match
   its velocity to that of its nearest neighbours.</td>
 </tr>
-<tr class="prow0">
+<tr class="prow1">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableSecondCol"><a href="org/flintparticles/common/utils/Maths.html">Maths</a>
 <br>
 </td><td class="summaryTableCol"><a onclick="javascript:loadClassListFrame('org/flintparticles/common/utils/class-list.html');" href="org/flintparticles/common/utils/package-detail.html">org.flintparticles.common.utils</a></td><td class="summaryTableLastCol">
   The Maths class contains a coupleof useful methods for use in maths functions.</td>
 </tr>
-<tr class="prow1">
+<tr class="prow0">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableSecondCol"><a href="org/flintparticles/threeD/geom/Matrix3D.html">Matrix3D</a>
 <br>
 </td><td class="summaryTableCol"><a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/geom/class-list.html');" href="org/flintparticles/threeD/geom/package-detail.html">org.flintparticles.threeD.geom</a></td><td class="summaryTableLastCol">
   <p>Matrix3D represents a 3D transformation matrix.</td>
 </tr>
-<tr class="prow0">
+<tr class="prow1">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableSecondCol"><a href="org/flintparticles/twoD/actions/MinimumDistance.html">MinimumDistance</a>
 <br>
 </td><td class="summaryTableCol"><a onclick="javascript:loadClassListFrame('org/flintparticles/twoD/actions/class-list.html');" href="org/flintparticles/twoD/actions/package-detail.html">org.flintparticles.twoD.actions</a></td><td class="summaryTableLastCol">
-  The MinimumDistance action applies an acceleration to the particle to maintain a minimum
-  distance between it and its neighbours.</td>
+  The MinimumDistance action applies an acceleration to the particle to 
+  maintain a minimum distance between it and its neighbours.</td>
 </tr>
-<tr class="prow1">
+<tr class="prow0">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableSecondCol"><a href="org/flintparticles/threeD/actions/MinimumDistance.html">MinimumDistance</a>
 <br>
 </td><td class="summaryTableCol"><a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/actions/class-list.html');" href="org/flintparticles/threeD/actions/package-detail.html">org.flintparticles.threeD.actions</a></td><td class="summaryTableLastCol">
   The MinimumDistance action applies an acceleration to the particle to maintain a minimum
   distance between it and its neighbours.</td>
 </tr>
-<tr class="prow0">
+<tr class="prow1">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableSecondCol"><a href="org/flintparticles/twoD/actions/MouseAntiGravity.html">MouseAntiGravity</a>
 <br>
 </td><td class="summaryTableCol"><a onclick="javascript:loadClassListFrame('org/flintparticles/twoD/actions/class-list.html');" href="org/flintparticles/twoD/actions/package-detail.html">org.flintparticles.twoD.actions</a></td><td class="summaryTableLastCol">
   The MouseExplosion action applies a force on the particle to push it away from
   the mouse.</td>
 </tr>
-<tr class="prow1">
+<tr class="prow0">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableSecondCol"><a href="org/flintparticles/twoD/actions/MouseGravity.html">MouseGravity</a>
 <br>
 </td><td class="summaryTableCol"><a onclick="javascript:loadClassListFrame('org/flintparticles/twoD/actions/class-list.html');" href="org/flintparticles/twoD/actions/package-detail.html">org.flintparticles.twoD.actions</a></td><td class="summaryTableLastCol">
   The MouseGravity action applies a force on the particle to draw it towards
   the mouse.</td>
 </tr>
-<tr class="prow0">
+<tr class="prow1">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableSecondCol"><a href="org/flintparticles/twoD/actions/Move.html">Move</a>
 <br>
 </td><td class="summaryTableCol"><a onclick="javascript:loadClassListFrame('org/flintparticles/twoD/actions/class-list.html');" href="org/flintparticles/twoD/actions/package-detail.html">org.flintparticles.twoD.actions</a></td><td class="summaryTableLastCol">
   The Move action updates the position of the particle based on its velocity.</td>
 </tr>
-<tr class="prow1">
+<tr class="prow0">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableSecondCol"><a href="org/flintparticles/threeD/actions/Move.html">Move</a>
 <br>
 </td><td class="summaryTableCol"><a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/actions/class-list.html');" href="org/flintparticles/threeD/actions/package-detail.html">org.flintparticles.threeD.actions</a></td><td class="summaryTableLastCol">
   The Move action updates the position of the particle based on its velocity.</td>
-</tr>
-<tr class="prow0">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableSecondCol"><a href="org/flintparticles/twoD/activities/MoveEmitter.html">MoveEmitter</a>
-<br>
-</td><td class="summaryTableCol"><a onclick="javascript:loadClassListFrame('org/flintparticles/twoD/activities/class-list.html');" href="org/flintparticles/twoD/activities/package-detail.html">org.flintparticles.twoD.activities</a></td><td class="summaryTableLastCol">
-  The MoveEmitter activity moves the emitter at a constant velocity.</td>
 </tr>
 <tr class="prow1">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableSecondCol"><a href="org/flintparticles/threeD/activities/MoveEmitter.html">MoveEmitter</a>
@@ -643,115 +647,115 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Al
   The MoveEmitter activity moves the emitter at a constant velocity.</td>
 </tr>
 <tr class="prow0">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableSecondCol"><a href="org/flintparticles/twoD/activities/MoveEmitter.html">MoveEmitter</a>
+<br>
+</td><td class="summaryTableCol"><a onclick="javascript:loadClassListFrame('org/flintparticles/twoD/activities/class-list.html');" href="org/flintparticles/twoD/activities/package-detail.html">org.flintparticles.twoD.activities</a></td><td class="summaryTableLastCol">
+  The MoveEmitter activity moves the emitter at a constant velocity.</td>
+</tr>
+<tr class="prow1">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableSecondCol"><a href="org/flintparticles/twoD/zones/MultiZone.html">MultiZone</a>
 <br>
 </td><td class="summaryTableCol"><a onclick="javascript:loadClassListFrame('org/flintparticles/twoD/zones/class-list.html');" href="org/flintparticles/twoD/zones/package-detail.html">org.flintparticles.twoD.zones</a></td><td class="summaryTableLastCol">
   The MutiZone zone defines a zone that combines other zones into one larger zone.</td>
 </tr>
-<tr class="prow1">
+<tr class="prow0">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableSecondCol"><a href="org/flintparticles/threeD/zones/MultiZone.html">MultiZone</a>
 <br>
 </td><td class="summaryTableCol"><a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/zones/class-list.html');" href="org/flintparticles/threeD/zones/package-detail.html">org.flintparticles.threeD.zones</a></td><td class="summaryTableLastCol">
   The MutiZone zone defines a zone that combines other zones into one larger zone.</td>
 </tr>
-<tr class="prow0">
+<tr class="prow1">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableSecondCol"><a href="org/flintparticles/twoD/actions/MutualGravity.html">MutualGravity</a>
 <br>
 </td><td class="summaryTableCol"><a onclick="javascript:loadClassListFrame('org/flintparticles/twoD/actions/class-list.html');" href="org/flintparticles/twoD/actions/package-detail.html">org.flintparticles.twoD.actions</a></td><td class="summaryTableLastCol">
   The MutualGravity Action applies forces to attract each particle towards the other particles.</td>
 </tr>
-<tr class="prow1">
+<tr class="prow0">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableSecondCol"><a href="org/flintparticles/threeD/actions/MutualGravity.html">MutualGravity</a>
 <br>
 </td><td class="summaryTableCol"><a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/actions/class-list.html');" href="org/flintparticles/threeD/actions/package-detail.html">org.flintparticles.threeD.actions</a></td><td class="summaryTableLastCol">
   The MutualGravity Action applies forces to attract each particle towards the other particles.</td>
 </tr>
-<tr class="prow0">
+<tr class="prow1">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableSecondCol"><a href="org/flintparticles/common/particles/Particle.html">Particle</a>
 <br>
 </td><td class="summaryTableCol"><a onclick="javascript:loadClassListFrame('org/flintparticles/common/particles/class-list.html');" href="org/flintparticles/common/particles/package-detail.html">org.flintparticles.common.particles</a></td><td class="summaryTableLastCol">
   The Particle class is a set of public properties shared by all particles.</td>
 </tr>
-<tr class="prow1">
+<tr class="prow0">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableSecondCol"><a href="org/flintparticles/twoD/particles/Particle2D.html">Particle2D</a>
 <br>
 </td><td class="summaryTableCol"><a onclick="javascript:loadClassListFrame('org/flintparticles/twoD/particles/class-list.html');" href="org/flintparticles/twoD/particles/package-detail.html">org.flintparticles.twoD.particles</a></td><td class="summaryTableLastCol">
   The Particle class is a set of public properties shared by all particles.</td>
 </tr>
-<tr class="prow0">
+<tr class="prow1">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableSecondCol"><a href="org/flintparticles/twoD/particles/Particle2DUtils.html">Particle2DUtils</a>
 <br>
 </td><td class="summaryTableCol"><a onclick="javascript:loadClassListFrame('org/flintparticles/twoD/particles/class-list.html');" href="org/flintparticles/twoD/particles/package-detail.html">org.flintparticles.twoD.particles</a></td><td class="summaryTableLastCol">&nbsp;</td>
 </tr>
-<tr class="prow1">
+<tr class="prow0">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableSecondCol"><a href="org/flintparticles/threeD/particles/Particle3D.html">Particle3D</a>
 <br>
 </td><td class="summaryTableCol"><a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/particles/class-list.html');" href="org/flintparticles/threeD/particles/package-detail.html">org.flintparticles.threeD.particles</a></td><td class="summaryTableLastCol">
   The Particle3D class extends the Particle class to include state properties 
   that are relevant to particles in 3D space.</td>
 </tr>
-<tr class="prow0">
+<tr class="prow1">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableSecondCol"><a href="org/flintparticles/twoD/particles/ParticleCreator2D.html">ParticleCreator2D</a>
 <br>
 </td><td class="summaryTableCol"><a onclick="javascript:loadClassListFrame('org/flintparticles/twoD/particles/class-list.html');" href="org/flintparticles/twoD/particles/package-detail.html">org.flintparticles.twoD.particles</a></td><td class="summaryTableLastCol">
   The ParticleCreator is used by the Emitter class to manage the creation and reuse of particles.</td>
 </tr>
-<tr class="prow1">
+<tr class="prow0">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableSecondCol"><a href="org/flintparticles/threeD/particles/ParticleCreator3D.html">ParticleCreator3D</a>
 <br>
 </td><td class="summaryTableCol"><a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/particles/class-list.html');" href="org/flintparticles/threeD/particles/package-detail.html">org.flintparticles.threeD.particles</a></td><td class="summaryTableLastCol">
   The ParticleCreator is used by the Emitter class to manage the creation and reuse of particles.</td>
 </tr>
-<tr class="prow0">
+<tr class="prow1">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableSecondCol"><a href="org/flintparticles/common/events/ParticleEvent.html">ParticleEvent</a>
 <br>
 </td><td class="summaryTableCol"><a onclick="javascript:loadClassListFrame('org/flintparticles/common/events/class-list.html');" href="org/flintparticles/common/events/package-detail.html">org.flintparticles.common.events</a></td><td class="summaryTableLastCol">
   The class for particle related events dispatched by classes in the Flint project.</td>
 </tr>
-<tr class="prow1">
+<tr class="prow0">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableSecondCol"><a href="org/flintparticles/common/particles/ParticleFactory.html"><i>ParticleFactory</i></a>
 <br>
 </td><td class="summaryTableCol"><a onclick="javascript:loadClassListFrame('org/flintparticles/common/particles/class-list.html');" href="org/flintparticles/common/particles/package-detail.html">org.flintparticles.common.particles</a></td><td class="summaryTableLastCol">
   The ParticleFactory interface defines the interface for any factory class used by emitters to 
   create, reuse and dispose of particles.</td>
 </tr>
-<tr class="prow0">
+<tr class="prow1">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableSecondCol"><a href="org/flintparticles/common/counters/PerformanceAdjusted.html">PerformanceAdjusted</a>
 <br>
 </td><td class="summaryTableCol"><a onclick="javascript:loadClassListFrame('org/flintparticles/common/counters/class-list.html');" href="org/flintparticles/common/counters/package-detail.html">org.flintparticles.common.counters</a></td><td class="summaryTableLastCol">
   The PerformanceAdjusted counter causes the emitter to emit particles 
   continuously at a steady rate.</td>
 </tr>
-<tr class="prow1">
+<tr class="prow0">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableSecondCol"><a href="org/flintparticles/threeD/renderers/flint/PixelRenderer.html">PixelRenderer</a>
 <br>
 </td><td class="summaryTableCol"><a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/renderers/flint/class-list.html');" href="org/flintparticles/threeD/renderers/flint/package-detail.html">org.flintparticles.threeD.renderers.flint</a></td><td class="summaryTableLastCol">
   The PixelRenderer is a native Flint 3D renderer that draws particles
   as single pixels on a Bitmap display object.</td>
 </tr>
-<tr class="prow0">
+<tr class="prow1">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableSecondCol"><a href="org/flintparticles/twoD/renderers/PixelRenderer.html">PixelRenderer</a>
 <br>
 </td><td class="summaryTableCol"><a onclick="javascript:loadClassListFrame('org/flintparticles/twoD/renderers/class-list.html');" href="org/flintparticles/twoD/renderers/package-detail.html">org.flintparticles.twoD.renderers</a></td><td class="summaryTableLastCol">
   The PixelRenderer draws particles as single pixels on a Bitmap display object.</td>
 </tr>
-<tr class="prow1">
+<tr class="prow0">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableSecondCol"><a href="org/flintparticles/twoD/zones/PointZone.html">PointZone</a>
 <br>
 </td><td class="summaryTableCol"><a onclick="javascript:loadClassListFrame('org/flintparticles/twoD/zones/class-list.html');" href="org/flintparticles/twoD/zones/package-detail.html">org.flintparticles.twoD.zones</a></td><td class="summaryTableLastCol">
   The PointZone zone defines a zone that contains a single point.</td>
 </tr>
-<tr class="prow0">
+<tr class="prow1">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableSecondCol"><a href="org/flintparticles/threeD/zones/PointZone.html">PointZone</a>
 <br>
 </td><td class="summaryTableCol"><a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/zones/class-list.html');" href="org/flintparticles/threeD/zones/package-detail.html">org.flintparticles.threeD.zones</a></td><td class="summaryTableLastCol">
   The PointZone zone defines a zone that contains a single point.</td>
-</tr>
-<tr class="prow1">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableSecondCol"><a href="org/flintparticles/threeD/initializers/Position.html">Position</a>
-<br>
-</td><td class="summaryTableCol"><a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/initializers/class-list.html');" href="org/flintparticles/threeD/initializers/package-detail.html">org.flintparticles.threeD.initializers</a></td><td class="summaryTableLastCol">
-  The Position Initializer sets the initial location of the particle.</td>
 </tr>
 <tr class="prow0">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableSecondCol"><a href="org/flintparticles/twoD/initializers/Position.html">Position</a>
@@ -760,16 +764,29 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Al
   The Position Initializer sets the initial location of the particle.</td>
 </tr>
 <tr class="prow1">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableSecondCol"><a href="org/flintparticles/threeD/initializers/PositionAbsolute.html">PositionAbsolute</a>
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableSecondCol"><a href="org/flintparticles/threeD/initializers/Position.html">Position</a>
 <br>
 </td><td class="summaryTableCol"><a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/initializers/class-list.html');" href="org/flintparticles/threeD/initializers/package-detail.html">org.flintparticles.threeD.initializers</a></td><td class="summaryTableLastCol">
-  The PositionAbsolute Initializer sets the initial location of the particle.</td>
+  The Position Initializer sets the initial location of the particle.</td>
 </tr>
 <tr class="prow0">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableSecondCol"><a href="org/flintparticles/twoD/initializers/PositionAbsolute.html">PositionAbsolute</a>
 <br>
 </td><td class="summaryTableCol"><a onclick="javascript:loadClassListFrame('org/flintparticles/twoD/initializers/class-list.html');" href="org/flintparticles/twoD/initializers/package-detail.html">org.flintparticles.twoD.initializers</a></td><td class="summaryTableLastCol">
   The PositionAbsolute Initializer sets the initial location of the particle.</td>
+</tr>
+<tr class="prow1">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableSecondCol"><a href="org/flintparticles/threeD/initializers/PositionAbsolute.html">PositionAbsolute</a>
+<br>
+</td><td class="summaryTableCol"><a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/initializers/class-list.html');" href="org/flintparticles/threeD/initializers/package-detail.html">org.flintparticles.threeD.initializers</a></td><td class="summaryTableLastCol">
+  The PositionAbsolute Initializer sets the initial location of the particle.</td>
+</tr>
+<tr class="prow0">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableSecondCol"><a href="org/flintparticles/common/utils/PriorityArray.html">PriorityArray</a>
+<br>
+</td><td class="summaryTableCol"><a onclick="javascript:loadClassListFrame('org/flintparticles/common/utils/class-list.html');" href="org/flintparticles/common/utils/package-detail.html">org.flintparticles.common.utils</a></td><td class="summaryTableLastCol">
+  A PriorityArray is a collection of values that are permanently
+  sorted according to their priority.</td>
 </tr>
 <tr class="prow1">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableSecondCol"><a href="org/flintparticles/common/counters/Pulse.html">Pulse</a>
@@ -883,10 +900,10 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Al
   The Rotate action updates the rotation of the particle based on its angular velocity.</td>
 </tr>
 <tr class="prow1">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableSecondCol"><a href="org/flintparticles/twoD/activities/RotateEmitter.html">RotateEmitter</a>
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableSecondCol"><a href="org/flintparticles/threeD/actions/Rotate.html">Rotate</a>
 <br>
-</td><td class="summaryTableCol"><a onclick="javascript:loadClassListFrame('org/flintparticles/twoD/activities/class-list.html');" href="org/flintparticles/twoD/activities/package-detail.html">org.flintparticles.twoD.activities</a></td><td class="summaryTableLastCol">
-  The RotateEmitter activity rotates the emitter at a constant rate.</td>
+</td><td class="summaryTableCol"><a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/actions/class-list.html');" href="org/flintparticles/threeD/actions/package-detail.html">org.flintparticles.threeD.actions</a></td><td class="summaryTableLastCol">
+  The Rotate action updates the rotation of the particle based on its angular velocity.</td>
 </tr>
 <tr class="prow0">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableSecondCol"><a href="org/flintparticles/threeD/activities/RotateEmitter.html">RotateEmitter</a>
@@ -895,9 +912,22 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Al
   The RotateEmitter activity rotates the emitter at a constant rate.</td>
 </tr>
 <tr class="prow1">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableSecondCol"><a href="org/flintparticles/twoD/activities/RotateEmitter.html">RotateEmitter</a>
+<br>
+</td><td class="summaryTableCol"><a onclick="javascript:loadClassListFrame('org/flintparticles/twoD/activities/class-list.html');" href="org/flintparticles/twoD/activities/package-detail.html">org.flintparticles.twoD.activities</a></td><td class="summaryTableLastCol">
+  The RotateEmitter activity rotates the emitter at a constant rate.</td>
+</tr>
+<tr class="prow0">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableSecondCol"><a href="org/flintparticles/twoD/actions/RotateToDirection.html">RotateToDirection</a>
 <br>
 </td><td class="summaryTableCol"><a onclick="javascript:loadClassListFrame('org/flintparticles/twoD/actions/class-list.html');" href="org/flintparticles/twoD/actions/package-detail.html">org.flintparticles.twoD.actions</a></td><td class="summaryTableLastCol">
+  The RotateToDirection action updates the rotation of the particle 
+  so that it always points in the direction it is traveling.</td>
+</tr>
+<tr class="prow1">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableSecondCol"><a href="org/flintparticles/threeD/actions/RotateToDirection.html">RotateToDirection</a>
+<br>
+</td><td class="summaryTableCol"><a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/actions/class-list.html');" href="org/flintparticles/threeD/actions/package-detail.html">org.flintparticles.threeD.actions</a></td><td class="summaryTableLastCol">
   The RotateToDirection action updates the rotation of the particle 
   so that it always points in the direction it is traveling.</td>
 </tr>
@@ -908,9 +938,21 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Al
   The RotateVelocity Initializer sets the angular velocity of the particle.</td>
 </tr>
 <tr class="prow1">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableSecondCol"><a href="org/flintparticles/threeD/initializers/RotateVelocity.html">RotateVelocity</a>
+<br>
+</td><td class="summaryTableCol"><a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/initializers/class-list.html');" href="org/flintparticles/threeD/initializers/package-detail.html">org.flintparticles.threeD.initializers</a></td><td class="summaryTableLastCol">
+  The RotateVelocity Initializer sets the angular velocity of the particle.</td>
+</tr>
+<tr class="prow0">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableSecondCol"><a href="org/flintparticles/twoD/initializers/Rotation.html">Rotation</a>
 <br>
 </td><td class="summaryTableCol"><a onclick="javascript:loadClassListFrame('org/flintparticles/twoD/initializers/class-list.html');" href="org/flintparticles/twoD/initializers/package-detail.html">org.flintparticles.twoD.initializers</a></td><td class="summaryTableLastCol">
+  The Rotation Initializer sets the rotation of the particle.</td>
+</tr>
+<tr class="prow1">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableSecondCol"><a href="org/flintparticles/threeD/initializers/Rotation.html">Rotation</a>
+<br>
+</td><td class="summaryTableCol"><a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/initializers/class-list.html');" href="org/flintparticles/threeD/initializers/package-detail.html">org.flintparticles.threeD.initializers</a></td><td class="summaryTableLastCol">
   The Rotation Initializer sets the rotation of the particle.</td>
 </tr>
 <tr class="prow0">
@@ -920,9 +962,22 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Al
   The RotationAbsolute Initializer sets the rotation of the particle.</td>
 </tr>
 <tr class="prow1">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableSecondCol"><a href="org/flintparticles/threeD/initializers/RotationAbsolute.html">RotationAbsolute</a>
+<br>
+</td><td class="summaryTableCol"><a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/initializers/class-list.html');" href="org/flintparticles/threeD/initializers/package-detail.html">org.flintparticles.threeD.initializers</a></td><td class="summaryTableLastCol">
+  The RotationAbsolute Initializer sets the rotation of the particle.</td>
+</tr>
+<tr class="prow0">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableSecondCol"><a href="org/flintparticles/twoD/actions/RotationalFriction.html">RotationalFriction</a>
 <br>
 </td><td class="summaryTableCol"><a onclick="javascript:loadClassListFrame('org/flintparticles/twoD/actions/class-list.html');" href="org/flintparticles/twoD/actions/package-detail.html">org.flintparticles.twoD.actions</a></td><td class="summaryTableLastCol">
+  The RotationalFriction action applies friction to the particle's rotational movement
+  to slow it down when it's rotating.</td>
+</tr>
+<tr class="prow1">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableSecondCol"><a href="org/flintparticles/threeD/actions/RotationalFriction.html">RotationalFriction</a>
+<br>
+</td><td class="summaryTableCol"><a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/actions/class-list.html');" href="org/flintparticles/threeD/actions/package-detail.html">org.flintparticles.threeD.actions</a></td><td class="summaryTableLastCol">
   The RotationalFriction action applies friction to the particle's rotational movement
   to slow it down when it's rotating.</td>
 </tr>
@@ -934,9 +989,23 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Al
   when it's rotating.</td>
 </tr>
 <tr class="prow1">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableSecondCol"><a href="org/flintparticles/threeD/actions/RotationalLinearDrag.html">RotationalLinearDrag</a>
+<br>
+</td><td class="summaryTableCol"><a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/actions/class-list.html');" href="org/flintparticles/threeD/actions/package-detail.html">org.flintparticles.threeD.actions</a></td><td class="summaryTableLastCol">
+  The RotationalLinearDrag action applies drag to the particle to slow it down 
+  when it's rotating.</td>
+</tr>
+<tr class="prow0">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableSecondCol"><a href="org/flintparticles/twoD/actions/RotationalQuadraticDrag.html">RotationalQuadraticDrag</a>
 <br>
 </td><td class="summaryTableCol"><a onclick="javascript:loadClassListFrame('org/flintparticles/twoD/actions/class-list.html');" href="org/flintparticles/twoD/actions/package-detail.html">org.flintparticles.twoD.actions</a></td><td class="summaryTableLastCol">
+  The RotationalQuadraticDrag action applies drag to the particle to slow it 
+  down when it's rotating.</td>
+</tr>
+<tr class="prow1">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableSecondCol"><a href="org/flintparticles/threeD/actions/RotationalQuadraticDrag.html">RotationalQuadraticDrag</a>
+<br>
+</td><td class="summaryTableCol"><a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/actions/class-list.html');" href="org/flintparticles/threeD/actions/package-detail.html">org.flintparticles.threeD.actions</a></td><td class="summaryTableLastCol">
   The RotationalQuadraticDrag action applies drag to the particle to slow it 
   down when it's rotating.</td>
 </tr>
@@ -1026,49 +1095,62 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Al
   The TargetRotateVelocity action adjusts the angular velocity of the particle towards the target angular velocity.</td>
 </tr>
 <tr class="prow1">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableSecondCol"><a href="org/flintparticles/threeD/actions/TargetRotateVelocity.html">TargetRotateVelocity</a>
+<br>
+</td><td class="summaryTableCol"><a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/actions/class-list.html');" href="org/flintparticles/threeD/actions/package-detail.html">org.flintparticles.threeD.actions</a></td><td class="summaryTableLastCol">
+  The TargetRotateVelocity action adjusts the angular velocity of the particle towards the target angular velocity.</td>
+</tr>
+<tr class="prow0">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableSecondCol"><a href="org/flintparticles/common/actions/TargetScale.html">TargetScale</a>
 <br>
 </td><td class="summaryTableCol"><a onclick="javascript:loadClassListFrame('org/flintparticles/common/actions/class-list.html');" href="org/flintparticles/common/actions/package-detail.html">org.flintparticles.common.actions</a></td><td class="summaryTableLastCol">
   The TargetScale action adjusts the scale of the particle towards a 
   target scale.</td>
 </tr>
-<tr class="prow0">
+<tr class="prow1">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableSecondCol"><a href="org/flintparticles/twoD/actions/TargetVelocity.html">TargetVelocity</a>
 <br>
 </td><td class="summaryTableCol"><a onclick="javascript:loadClassListFrame('org/flintparticles/twoD/actions/class-list.html');" href="org/flintparticles/twoD/actions/package-detail.html">org.flintparticles.twoD.actions</a></td><td class="summaryTableLastCol">
   The TargetVelocity action adjusts the velocity of the particle towards the target velocity.</td>
 </tr>
-<tr class="prow1">
+<tr class="prow0">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableSecondCol"><a href="org/flintparticles/threeD/actions/TargetVelocity.html">TargetVelocity</a>
 <br>
 </td><td class="summaryTableCol"><a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/actions/class-list.html');" href="org/flintparticles/threeD/actions/package-detail.html">org.flintparticles.threeD.actions</a></td><td class="summaryTableLastCol">
   The TargetVelocity action adjusts the velocity of the particle towards the target velocity.</td>
 </tr>
-<tr class="prow0">
+<tr class="prow1">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableSecondCol"><a href="org/flintparticles/common/counters/TimePeriod.html">TimePeriod</a>
 <br>
 </td><td class="summaryTableCol"><a onclick="javascript:loadClassListFrame('org/flintparticles/common/counters/class-list.html');" href="org/flintparticles/common/counters/package-detail.html">org.flintparticles.common.counters</a></td><td class="summaryTableLastCol">
   The TimePeriod counter causes the emitter to emit particles for a period of 
   time and then stop.</td>
 </tr>
-<tr class="prow1">
+<tr class="prow0">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableSecondCol"><a href="org/flintparticles/twoD/actions/TurnAwayFromMouse.html">TurnAwayFromMouse</a>
 <br>
 </td><td class="summaryTableCol"><a onclick="javascript:loadClassListFrame('org/flintparticles/twoD/actions/class-list.html');" href="org/flintparticles/twoD/actions/package-detail.html">org.flintparticles.twoD.actions</a></td><td class="summaryTableLastCol">
   The TurnAwayFromMouse action causes the particle to constantly adjust its direction
   so that it travels away from the mouse pointer.</td>
 </tr>
-<tr class="prow0">
+<tr class="prow1">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableSecondCol"><a href="org/flintparticles/twoD/actions/TurnTowardsMouse.html">TurnTowardsMouse</a>
 <br>
 </td><td class="summaryTableCol"><a onclick="javascript:loadClassListFrame('org/flintparticles/twoD/actions/class-list.html');" href="org/flintparticles/twoD/actions/package-detail.html">org.flintparticles.twoD.actions</a></td><td class="summaryTableLastCol">
   The TurnTowardsMouse action causes the particle to constantly adjust its direction
   so that it travels towards the mouse pointer.</td>
 </tr>
-<tr class="prow1">
+<tr class="prow0">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableSecondCol"><a href="org/flintparticles/twoD/actions/TurnTowardsPoint.html">TurnTowardsPoint</a>
 <br>
 </td><td class="summaryTableCol"><a onclick="javascript:loadClassListFrame('org/flintparticles/twoD/actions/class-list.html');" href="org/flintparticles/twoD/actions/package-detail.html">org.flintparticles.twoD.actions</a></td><td class="summaryTableLastCol">
+  The TurnTowardsPoint action causes the particle to constantly adjust its direction
+  so that it travels towards a particular point.</td>
+</tr>
+<tr class="prow1">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableSecondCol"><a href="org/flintparticles/threeD/actions/TurnTowardsPoint.html">TurnTowardsPoint</a>
+<br>
+</td><td class="summaryTableCol"><a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/actions/class-list.html');" href="org/flintparticles/threeD/actions/package-detail.html">org.flintparticles.threeD.actions</a></td><td class="summaryTableLastCol">
   The TurnTowardsPoint action causes the particle to constantly adjust its direction
   so that it travels towards a particular point.</td>
 </tr>
@@ -1108,15 +1190,15 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Al
   coordinate space.</td>
 </tr>
 <tr class="prow1">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableSecondCol"><a href="org/flintparticles/threeD/initializers/Velocity.html">Velocity</a>
-<br>
-</td><td class="summaryTableCol"><a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/initializers/class-list.html');" href="org/flintparticles/threeD/initializers/package-detail.html">org.flintparticles.threeD.initializers</a></td><td class="summaryTableLastCol">
-  The ColorInit Initializer sets the velocity of the particle.</td>
-</tr>
-<tr class="prow0">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableSecondCol"><a href="org/flintparticles/twoD/initializers/Velocity.html">Velocity</a>
 <br>
 </td><td class="summaryTableCol"><a onclick="javascript:loadClassListFrame('org/flintparticles/twoD/initializers/class-list.html');" href="org/flintparticles/twoD/initializers/package-detail.html">org.flintparticles.twoD.initializers</a></td><td class="summaryTableLastCol">
+  The ColorInit Initializer sets the velocity of the particle.</td>
+</tr>
+<tr class="prow0">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableSecondCol"><a href="org/flintparticles/threeD/initializers/Velocity.html">Velocity</a>
+<br>
+</td><td class="summaryTableCol"><a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/initializers/class-list.html');" href="org/flintparticles/threeD/initializers/package-detail.html">org.flintparticles.threeD.initializers</a></td><td class="summaryTableLastCol">
   The ColorInit Initializer sets the velocity of the particle.</td>
 </tr>
 <tr class="prow1">

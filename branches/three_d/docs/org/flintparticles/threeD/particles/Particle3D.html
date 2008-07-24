@@ -71,7 +71,8 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#angVelocity">angVelocity</a> : <a href="../geom/Vector3D.html">Vector3D</a>
 <div class="summaryTableDescription">
-   The rate of rotation of the particle, in radians per second.</div>
+   The rate of rotation of the particle, represented as a vector in the direction of 
+   the axis of rotation and whose magnitude indicates the number of rotations per second.</div>
 </td><td class="summaryTableOwnerCol">Particle3D</td>
 </tr>
 <tr class="hideInheritedProperty">
@@ -116,9 +117,9 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 </td><td class="summaryTableOwnerCol">Particle3D</td>
 </tr>
 <tr class="">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#rotation">rotation</a> : <a href="../geom/Vector3D.html">Vector3D</a>
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#rotation">rotation</a> : <a href="../geom/Quaternion.html">Quaternion</a>
 <div class="summaryTableDescription">
-   The rotation of the particle, in radians.</div>
+   The rotation of the particle, represented as a unit quaternion.</div>
 </td><td class="summaryTableOwnerCol">Particle3D</td>
 </tr>
 <tr class="hideInheritedProperty">
@@ -180,7 +181,8 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public var angVelocity:<a href="../geom/Vector3D.html">Vector3D</a></code><p>
-   The rate of rotation of the particle, in radians per second.
+   The rate of rotation of the particle, represented as a vector in the direction of 
+   the axis of rotation and whose magnitude indicates the number of rotations per second.
    </p></div>
 <a name="position"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
@@ -199,8 +201,8 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>public var rotation:<a href="../geom/Vector3D.html">Vector3D</a></code><p>
-   The rotation of the particle, in radians.
+<code>public var rotation:<a href="../geom/Quaternion.html">Quaternion</a></code><p>
+   The rotation of the particle, represented as a unit quaternion.
    </p></div>
 <a name="sortID"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">

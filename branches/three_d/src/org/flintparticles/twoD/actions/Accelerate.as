@@ -36,7 +36,7 @@ package org.flintparticles.twoD.actions
 	import org.flintparticles.twoD.particles.Particle2D;	
 
 	/**
-	 * The Accelerate Action adjusts the velocity of the particle by a 
+	 * The Accelerate Action adjusts the velocity of each particle by a 
 	 * constant acceleration. This can be used, for example, to simulate
 	 * gravity.
 	 */
@@ -52,10 +52,10 @@ package org.flintparticles.twoD.actions
 		 * 
 		 * @see org.flintparticles.common.emitters.Emitter#addAction()
 		 * 
-		 * @param accelerationX The x coordinate of the acceleration to apply, in pixels 
-		 * per second per second.
-		 * @param accelerationY The y coordinate of the acceleration to apply, in pixels 
-		 * per second per second.
+		 * @param accelerationX The x coordinate of the acceleration to apply, in
+		 * pixels per second per second.
+		 * @param accelerationY The y coordinate of the acceleration to apply, in 
+		 * pixels per second per second.
 		 */
 		public function Accelerate( accelerationX:Number, accelerationY:Number )
 		{
@@ -64,7 +64,8 @@ package org.flintparticles.twoD.actions
 		}
 		
 		/**
-		 * The x coordinate of the acceleration.
+		 * The x coordinate of the acceleration, in
+		 * pixels per second per second.
 		 */
 		public function get x():Number
 		{
@@ -76,7 +77,8 @@ package org.flintparticles.twoD.actions
 		}
 		
 		/**
-		 * The y coordinate of the acceleration.
+		 * The y coordinate of the acceleration, in
+		 * pixels per second per second.
 		 */
 		public function get y():Number
 		{
@@ -88,14 +90,14 @@ package org.flintparticles.twoD.actions
 		}
 		
 		/**
-		 * Applies the acceleration to a particle.
+		 * Applies the acceleration to a particle for the specified time period.
 		 * 
 		 * <p>This method is called by the emitter and need not be called by the 
 		 * user</p>
 		 * 
 		 * @param emitter The Emitter that created the particle.
 		 * @param particle The particle to be updated.
-		 * @param time The duration of the frame - used for time based updates.
+		 * @param time The duration of the frame.
 		 * 
 		 * @see org.flintparticles.common.actions.Action#update()
 		 */

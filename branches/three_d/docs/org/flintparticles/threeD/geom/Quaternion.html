@@ -4,7 +4,7 @@
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="../../../../style.css" type="text/css" media="screen">
 <link rel="stylesheet" href="../../../../print.css" type="text/css" media="print">
-<meta content="Quaternion,org.flintparticles.threeD.geom.Quaternion,w,x,y,z,conjugate,inverse,magnitude,magnitudeSquared,add,assign,clone,createFromAxisRotation,decrementBy,dotProduct,equals,incrementBy,invert,makeConjugate,nearEquals,normalize,postMultiply,postMultiplyBy,preMultiply,preMultiplyBy,reset,scalarMultiply,scaleBy,setFromAxisRotation,subtract,unit" name="keywords">
+<meta content="Quaternion,org.flintparticles.threeD.geom.Quaternion,IDENTITY,ZERO,w,x,y,z,conjugate,inverse,magnitude,magnitudeSquared,add,assign,clone,createFromAxisRotation,decrementBy,dotProduct,equals,incrementBy,invert,makeConjugate,nearEquals,normalize,postMultiply,postMultiplyBy,preMultiply,preMultiplyBy,reset,scalarMultiply,scaleBy,setFromAxisRotation,subtract,toAxisRotation,toMatrixTransformation,toString,unit" name="keywords">
 <title>org.flintparticles.threeD.geom.Quaternion</title>
 </head>
 <body>
@@ -58,6 +58,11 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 </td><td class="summaryTableOwnerCol">Quaternion</td>
 </tr>
 <tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#IDENTITY">IDENTITY</a> : <a href="../geom/Quaternion.html">Quaternion</a>
+<div class="summaryTableDescription">[static]</div>
+</td><td class="summaryTableOwnerCol">Quaternion</td>
+</tr>
+<tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#inverse">inverse</a> : <a href="../geom/Quaternion.html">Quaternion</a>
 <div class="summaryTableDescription">[read-only]
    The inverse of this quaternion.</div>
@@ -93,6 +98,11 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
    The z coordinate of the quaternion.</div>
 </td><td class="summaryTableOwnerCol">Quaternion</td>
 </tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#ZERO">ZERO</a> : <a href="../geom/Quaternion.html">Quaternion</a>
+<div class="summaryTableDescription">[static]</div>
+</td><td class="summaryTableOwnerCol">Quaternion</td>
+</tr>
 </table>
 </div>
 <a name="methodSummary"></a>
@@ -105,7 +115,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
-<a class="signatureLink" href="#Quaternion()">Quaternion</a>(x:Number = 0, y:Number = 0, z:Number = 0, w:Number = 0)</div>
+<a class="signatureLink" href="#Quaternion()">Quaternion</a>(w:Number = 1, x:Number = 0, y:Number = 0, z:Number = 0)</div>
 <div class="summaryTableDescription">
    Constructor
       </div>
@@ -307,6 +317,35 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
+<a class="signatureLink" href="#toAxisRotation()">toAxisRotation</a>():<a href="../geom/Vector3D.html">Vector3D</a>
+</div>
+<div class="summaryTableDescription">
+   Convert this quaternion to an axis/angle rotation, returning the result in a Vector3D
+   where x, y, z represent the axis and w represents the angle, in radians.</div>
+</td><td class="summaryTableOwnerCol">Quaternion</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#toMatrixTransformation()">toMatrixTransformation</a>():<a href="../geom/Matrix3D.html">Matrix3D</a>
+</div>
+<div class="summaryTableDescription">
+   Convert this quaternion to a matrix transformation.</div>
+</td><td class="summaryTableOwnerCol">Quaternion</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#toString()">toString</a>():String</div>
+<div class="summaryTableDescription">
+   Get a string representation of this quaternion
+   
+   </div>
+</td><td class="summaryTableOwnerCol">Quaternion</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
 <a class="signatureLink" href="#unit()">unit</a>():<a href="../geom/Quaternion.html">Quaternion</a>
 </div>
 <div class="summaryTableDescription">
@@ -335,6 +374,15 @@ showHideInherited();
 <br>
 <code>&nbsp;&nbsp;&nbsp;&nbsp;public function get conjugate():<a href="../geom/Quaternion.html">Quaternion</a></code>
 <br>
+</div>
+<a name="IDENTITY"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">IDENTITY</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public static var IDENTITY:<a href="../geom/Quaternion.html">Quaternion</a></code>
 </div>
 <a name="inverse"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
@@ -418,6 +466,15 @@ showHideInherited();
 <code>public var z:Number</code><p>
    The z coordinate of the quaternion.
    </p></div>
+<a name="ZERO"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">ZERO</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public static var ZERO:<a href="../geom/Quaternion.html">Quaternion</a></code>
+</div>
 <a name="constructorDetail"></a>
 <div class="detailSectionHeader">Constructor detail</div>
 <a name="Quaternion()"></a>
@@ -427,33 +484,33 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>public function Quaternion(x:Number = 0, y:Number = 0, z:Number = 0, w:Number = 0)</code><p>
+<code>public function Quaternion(w:Number = 1, x:Number = 0, y:Number = 0, z:Number = 0)</code><p>
    Constructor
       </p><span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
-<td width="20px"></td><td><code><span class="label">x</span>:Number</code> (default = <code>0</code>)<code></code> &mdash; the x coordinate of the quaternion
+<td width="20px"></td><td><code><span class="label">w</span>:Number</code> (default = <code>1</code>)<code></code> &mdash; the x coordinate of the quaternion
    </td>
 </tr>
 <tr>
 <td class="paramSpacer">&nbsp;</td>
 </tr>
 <tr>
-<td width="20px"></td><td><code><span class="label">y</span>:Number</code> (default = <code>0</code>)<code></code> &mdash; the y coordinate of the quaternion
+<td width="20px"></td><td><code><span class="label">x</span>:Number</code> (default = <code>0</code>)<code></code> &mdash; the y coordinate of the quaternion
    </td>
 </tr>
 <tr>
 <td class="paramSpacer">&nbsp;</td>
 </tr>
 <tr>
-<td width="20px"></td><td><code><span class="label">z</span>:Number</code> (default = <code>0</code>)<code></code> &mdash; the z coordinate of the quaternion
+<td width="20px"></td><td><code><span class="label">y</span>:Number</code> (default = <code>0</code>)<code></code> &mdash; the z coordinate of the quaternion
    </td>
 </tr>
 <tr>
 <td class="paramSpacer">&nbsp;</td>
 </tr>
 <tr>
-<td width="20px"></td><td><code><span class="label">w</span>:Number</code> (default = <code>0</code>)<code></code> &mdash; the w coordinate of the quaternion
+<td width="20px"></td><td><code><span class="label">z</span>:Number</code> (default = <code>0</code>)<code></code> &mdash; the w coordinate of the quaternion
    </td>
 </tr>
 </table>
@@ -1084,6 +1141,70 @@ showHideInherited();
    
                         
                      </td>
+</tr>
+</table>
+</div>
+<a name="toAxisRotation()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">toAxisRotation</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function toAxisRotation():<a href="../geom/Vector3D.html">Vector3D</a></code><p>
+   Convert this quaternion to an axis/angle rotation, returning the result in a Vector3D
+   where x, y, z represent the axis and w represents the angle, in radians.
+   
+   </p><p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code><a href="../geom/Vector3D.html">Vector3D</a></code> &mdash; 
+                        The axis/angle rotation.
+   
+                        
+                     </td>
+</tr>
+</table>
+</div>
+<a name="toMatrixTransformation()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">toMatrixTransformation</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function toMatrixTransformation():<a href="../geom/Matrix3D.html">Matrix3D</a></code><p>
+   Convert this quaternion to a matrix transformation.
+   
+   </p><p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code><a href="../geom/Matrix3D.html">Matrix3D</a></code> &mdash; 
+                        The matrix transformation.
+   
+                        
+                     </td>
+</tr>
+</table>
+</div>
+<a name="toString()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">toString</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function toString():String</code><p>
+   Get a string representation of this quaternion
+   
+   </p><p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code>String</code> &mdash; a string representation of this quaternion
+   </td>
 </tr>
 </table>
 </div>

@@ -133,6 +133,27 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 </tr>
 </table>
 </div>
+<a name="protectedPropertySummary"></a>
+<div class="summarySection">
+<div class="summaryTableTitle">Protected Properties</div>
+<div class="showHideLinks">
+<div class="hideInheritedProtectedProperty" id="hideInheritedProtectedProperty">
+<a onclick="javascript:setInheritedVisible(false,'ProtectedProperty');" href="#protectedPropertySummary" class="showHideLink"><img src="../../../../images/expanded.gif" class="showHideLinkImage"> Hide Inherited Protected Properties</a>
+</div>
+<div class="showInheritedProtectedProperty" id="showInheritedProtectedProperty">
+<a onclick="javascript:setInheritedVisible(true,'ProtectedProperty');" href="#protectedPropertySummary" class="showHideLink"><img src="../../../../images/collapsed.gif" class="showHideLinkImage"> Show Inherited Protected Properties</a>
+</div>
+</div>
+<table id="summaryTableProtectedProperty" class="summaryTable hideInheritedProtectedProperty" cellpadding="3" cellspacing="0">
+<tr>
+<th>&nbsp;</th><th colspan="2">Property</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
+</tr>
+<tr class="hideInheritedProtectedProperty">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol"><a class="signatureLink" href="../../common/emitters/Emitter.html#_activitiesPriority">_activitiesPriority</a> : Array<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol"><a href="../../common/emitters/Emitter.html">Emitter</a></td>
+</tr>
+</table>
+</div>
 <a name="methodSummary"></a>
 <div class="summarySection">
 <div class="summaryTableTitle">Public Methods</div>
@@ -194,6 +215,54 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <a class="signatureLink" href="../../common/emitters/Emitter.html#dispose()">dispose</a>():void</div>
 <div class="summaryTableDescription">
    Cleans up the emitter prior to removal.</div>
+</td><td class="summaryTableOwnerCol"><a href="../../common/emitters/Emitter.html">Emitter</a></td>
+</tr>
+<tr class="hideInheritedMethod">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="../../common/emitters/Emitter.html#hasAction()">hasAction</a>(action:<a href="../../common/actions/Action.html">Action</a>):Boolean</div>
+<div class="summaryTableDescription">
+   Detects if the emitter is using a particular action or not.</div>
+</td><td class="summaryTableOwnerCol"><a href="../../common/emitters/Emitter.html">Emitter</a></td>
+</tr>
+<tr class="hideInheritedMethod">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="../../common/emitters/Emitter.html#hasActionOfType()">hasActionOfType</a>(actionClass:Class):Boolean</div>
+<div class="summaryTableDescription">
+   Detects if the emitter is using an action of a particular class.</div>
+</td><td class="summaryTableOwnerCol"><a href="../../common/emitters/Emitter.html">Emitter</a></td>
+</tr>
+<tr class="hideInheritedMethod">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="../../common/emitters/Emitter.html#hasActivity()">hasActivity</a>(activity:<a href="../../common/activities/Activity.html">Activity</a>):Boolean</div>
+<div class="summaryTableDescription">
+   Detects if the emitter is using a particular activity or not.</div>
+</td><td class="summaryTableOwnerCol"><a href="../../common/emitters/Emitter.html">Emitter</a></td>
+</tr>
+<tr class="hideInheritedMethod">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="../../common/emitters/Emitter.html#hasActivityOfType()">hasActivityOfType</a>(activityClass:Class):Boolean</div>
+<div class="summaryTableDescription">
+   Detects if the emitter is using an activity of a particular class.</div>
+</td><td class="summaryTableOwnerCol"><a href="../../common/emitters/Emitter.html">Emitter</a></td>
+</tr>
+<tr class="hideInheritedMethod">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="../../common/emitters/Emitter.html#hasInitializer()">hasInitializer</a>(initializer:<a href="../../common/initializers/Initializer.html">Initializer</a>):Boolean</div>
+<div class="summaryTableDescription">
+   Detects if the emitter is using a particular initializer or not.</div>
+</td><td class="summaryTableOwnerCol"><a href="../../common/emitters/Emitter.html">Emitter</a></td>
+</tr>
+<tr class="hideInheritedMethod">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="../../common/emitters/Emitter.html#hasInitializerOfType()">hasInitializerOfType</a>(initializerClass:Class):Boolean</div>
+<div class="summaryTableDescription">
+   Detects if the emitter is using an initializer of a particular class.</div>
 </td><td class="summaryTableOwnerCol"><a href="../../common/emitters/Emitter.html">Emitter</a></td>
 </tr>
 <tr class="hideInheritedMethod">

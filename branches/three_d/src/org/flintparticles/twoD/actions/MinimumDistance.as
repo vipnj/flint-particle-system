@@ -37,8 +37,8 @@ package org.flintparticles.twoD.actions
 	import org.flintparticles.twoD.particles.Particle2D;	
 
 	/**
-	 * The MinimumDistance action applies an acceleration to the particle to maintain a minimum
-	 * distance between it and its neighbours.
+	 * The MinimumDistance action applies an acceleration to the particle to 
+	 * maintain a minimum distance between it and its neighbours.
 	 */
 
 	public class MinimumDistance extends ActionBase
@@ -48,15 +48,16 @@ package org.flintparticles.twoD.actions
 		private var _minSq:Number;
 		
 		/**
-		 * The constructor creates a ApproachNeighbours action for use by 
-		 * an emitter. To add a ApproachNeighbours to all particles created by an emitter, use the
-		 * emitter's addAction method.
+		 * The constructor creates a ApproachNeighbours action for use by an emitter. 
+		 * To add a ApproachNeighbours to all particles created by an emitter, use 
+		 * the emitter's addAction method.
 		 * 
 		 * @see org.flintparticles.common.emitters.Emitter#addAction()
 		 * 
-		 * @param minimum The minimum distance, in pixels, that this action maintains between 
-		 * particles.
-		 * @param acceleration The acceleration force applied to avoid the other particles.
+		 * @param minimum The minimum distance, in pixels, that this action 
+		 * maintains between particles.
+		 * @param acceleration The acceleration force applied to avoid the 
+		 * other particles.
 		 */
 		public function MinimumDistance( minimum:Number, acceleration:Number )
 		{
@@ -92,9 +93,11 @@ package org.flintparticles.twoD.actions
 		}
 
 		/**
-		 * @inheritDoc
+		 * Returns a value of 10, so that the MinimumDistance action executes 
+		 * before accelerating actions that act on particles independently of
+		 * other particles, like Acceleration and GravityWell.
 		 * 
-		 * <p>Returns a value of 10, so that the MutualGravity action executes before other actions.</p>
+		 * @see org.flintparticles.common.actions.Action#getDefaultPriority()
 		 */
 		override public function getDefaultPriority():Number
 		{
@@ -102,7 +105,12 @@ package org.flintparticles.twoD.actions
 		}
 
 		/**
-		 * @inheritDoc
+		 * Instructs the emitter to produce a sorted particle array for optimizing
+		 * the calculations in the update method of this action.
+		 * 
+		 * @param emitter The emitter this action has been added to.
+		 * 
+		 * @see org.flintparticles.common.actions.Action#addedToEmitter()
 		 */
 		override public function addedToEmitter( emitter:Emitter ) : void
 		{

@@ -150,7 +150,7 @@ package org.flintparticles.threeD.actions
 			{
 				other = particles[sortedX[i]];
 				collisionDist = other.scale * _radius + p.scale * _radius;
-				if( ( d.x = other.position.x - p.position.x ) > collisionDist ) break;
+				if( ( d.x = other.position.x - p.position.x ) > collisionDist ) continue;
 				d.y = other.position.y - p.position.y;
 				if( d.y > collisionDist || d.y < -collisionDist ) continue;
 				d.z = other.position.z - p.position.z;
@@ -166,7 +166,7 @@ package org.flintparticles.threeD.actions
 					{
 						m1 = p.scale * p.scale * p.scale; // assume common density so mass is proportinate to volume
 						m2 = other.scale * other.scale * other.scale;
-						factor = ( 2 * _bounce * relN ) / ( m1 + m2 );
+						factor = ( ( 1 + _bounce ) * relN ) / ( m1 + m2 );
 						f1 = factor * m2;
 						f2 = -factor * m1;
 						p.velocity.decrementBy( d.multiply( f1 ) );

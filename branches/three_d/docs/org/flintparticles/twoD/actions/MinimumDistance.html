@@ -42,8 +42,8 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 </tr>
 </table>
 <p></p>
-  The MinimumDistance action applies an acceleration to the particle to maintain a minimum
-  distance between it and its neighbours.
+  The MinimumDistance action applies an acceleration to the particle to 
+  maintain a minimum distance between it and its neighbours.
   <p></p>
 <br>
 <hr>
@@ -88,8 +88,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <div class="summarySignature">
 <a class="signatureLink" href="#MinimumDistance()">MinimumDistance</a>(minimum:Number, acceleration:Number)</div>
 <div class="summaryTableDescription">
-   The constructor creates a ApproachNeighbours action for use by 
-   an emitter.</div>
+   The constructor creates a ApproachNeighbours action for use by an emitter.</div>
 </td><td class="summaryTableOwnerCol">MinimumDistance</td>
 </tr>
 <tr class="">
@@ -97,8 +96,8 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <div class="summarySignature">
 <a class="signatureLink" href="#addedToEmitter()">addedToEmitter</a>(emitter:<a href="../../common/emitters/Emitter.html">Emitter</a>):void</div>
 <div class="summaryTableDescription">
-   
-   This method does nothing.</div>
+   Instructs the emitter to produce a sorted particle array for optimizing
+   the calculations in the update method of this action.</div>
 </td><td class="summaryTableOwnerCol">MinimumDistance</td>
 </tr>
 <tr class="">
@@ -106,8 +105,9 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <div class="summarySignature">
 <a class="signatureLink" href="#getDefaultPriority()">getDefaultPriority</a>():Number</div>
 <div class="summaryTableDescription">
-   
-   Returns a default priority of 0 for this action.</div>
+   Returns a value of 10, so that the MinimumDistance action executes 
+   before accelerating actions that act on particles independently of
+   other particles, like Acceleration and GravityWell.</div>
 </td><td class="summaryTableOwnerCol">MinimumDistance</td>
 </tr>
 <tr class="hideInheritedMethod">
@@ -179,22 +179,23 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public function MinimumDistance(minimum:Number, acceleration:Number)</code><p>
-   The constructor creates a ApproachNeighbours action for use by 
-   an emitter. To add a ApproachNeighbours to all particles created by an emitter, use the
-   emitter's addAction method.
+   The constructor creates a ApproachNeighbours action for use by an emitter. 
+   To add a ApproachNeighbours to all particles created by an emitter, use 
+   the emitter's addAction method.
    
    </p><span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
-<td width="20px"></td><td><code><span class="label">minimum</span>:Number</code> &mdash; The minimum distance, in pixels, that this action maintains between 
-   particles.
+<td width="20px"></td><td><code><span class="label">minimum</span>:Number</code> &mdash; The minimum distance, in pixels, that this action 
+   maintains between particles.
    </td>
 </tr>
 <tr>
 <td class="paramSpacer">&nbsp;</td>
 </tr>
 <tr>
-<td width="20px"></td><td><code><span class="label">acceleration</span>:Number</code> &mdash; The acceleration force applied to avoid the other particles.
+<td width="20px"></td><td><code><span class="label">acceleration</span>:Number</code> &mdash; The acceleration force applied to avoid the 
+   other particles.
    </td>
 </tr>
 </table>
@@ -215,18 +216,23 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public override function addedToEmitter(emitter:<a href="../../common/emitters/Emitter.html">Emitter</a>):void</code><p>
-   
-   This method does nothing. Some derived classes override this method
-   to perform actions when the action is added to an emitter.
+   Instructs the emitter to produce a sorted particle array for optimizing
+   the calculations in the update method of this action.
    
    </p><span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
-<td width="20px"></td><td><code><span class="label">emitter</span>:<a href="../../common/emitters/Emitter.html">Emitter</a></code> &mdash; The Emitter that the Action was added to.
+<td width="20px"></td><td><code><span class="label">emitter</span>:<a href="../../common/emitters/Emitter.html">Emitter</a></code> &mdash; The emitter this action has been added to.
    
    </td>
 </tr>
 </table>
+<p>
+<span class="label">See also</span>
+</p>
+<div class="seeAlso">
+<a href="../../common/actions/Action.html#addedToEmitter()" target="">org.flintparticles.common.actions.Action.addedToEmitter()</a>
+</div>
 </div>
 <a name="getDefaultPriority()"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
@@ -236,9 +242,9 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public override function getDefaultPriority():Number</code><p>
-   
-   Returns a default priority of 0 for this action. Derived classes 
-   override this method if they want a different default priority.
+   Returns a value of 10, so that the MinimumDistance action executes 
+   before accelerating actions that act on particles independently of
+   other particles, like Acceleration and GravityWell.
    
    </p><p></p>
 <span class="label">Returns</span>
@@ -247,6 +253,12 @@ showHideInherited();
 <td width="20"></td><td><code>Number</code></td>
 </tr>
 </table>
+<p>
+<span class="label">See also</span>
+</p>
+<div class="seeAlso">
+<a href="../../common/actions/Action.html#getDefaultPriority()" target="">org.flintparticles.common.actions.Action.getDefaultPriority()</a>
+</div>
 </div>
 <a name="update()"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">

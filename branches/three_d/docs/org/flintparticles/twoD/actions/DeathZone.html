@@ -43,7 +43,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 </table>
 <p></p>
   The DeathZone action marks the particle as dead if it is inside
-  a zone.
+  a specific zone.
   <p></p>
 <br>
 <hr>
@@ -105,8 +105,8 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <div class="summarySignature">
 <a class="signatureLink" href="#getDefaultPriority()">getDefaultPriority</a>():Number</div>
 <div class="summaryTableDescription">
-   
-   Returns a default priority of 0 for this action.</div>
+   Returns a value of -20, so that the DeathZone executes after all 
+   movement has occured.</div>
 </td><td class="summaryTableOwnerCol">DeathZone</td>
 </tr>
 <tr class="hideInheritedMethod">
@@ -122,8 +122,8 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <div class="summarySignature">
 <a class="signatureLink" href="#update()">update</a>(emitter:<a href="../../common/emitters/Emitter.html">Emitter</a>, particle:<a href="../../common/particles/Particle.html">Particle</a>, time:Number):void</div>
 <div class="summaryTableDescription">
-   
-   This method does nothing.</div>
+   Checks whether the particle is inside the zone and kills it if it is
+   in the DeathZone region.</div>
 </td><td class="summaryTableOwnerCol">DeathZone</td>
 </tr>
 </table>
@@ -185,8 +185,8 @@ showHideInherited();
    </p><span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
-<td width="20px"></td><td><code><span class="label">zone</span>:<a href="../zones/Zone2D.html">Zone2D</a></code> &mdash; The zone to use. Any item from the org.flintparticles.twoD.zones
-   package can be used.
+<td width="20px"></td><td><code><span class="label">zone</span>:<a href="../zones/Zone2D.html">Zone2D</a></code> &mdash; The zone to use. Any item from the 
+   org.flintparticles.twoD.zones package can be used.
    </td>
 </tr>
 <tr>
@@ -218,9 +218,8 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public override function getDefaultPriority():Number</code><p>
-   
-   Returns a default priority of 0 for this action. Derived classes 
-   override this method if they want a different default priority.
+   Returns a value of -20, so that the DeathZone executes after all 
+   movement has occured.
    
    </p><p></p>
 <span class="label">Returns</span>
@@ -229,6 +228,12 @@ showHideInherited();
 <td width="20"></td><td><code>Number</code></td>
 </tr>
 </table>
+<p>
+<span class="label">See also</span>
+</p>
+<div class="seeAlso">
+<a href="../../common/actions/Action.html#getDefaultPriority()" target="">org.flintparticles.common.actions.Action.getDefaultPriority()</a>
+</div>
 </div>
 <a name="update()"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
@@ -238,11 +243,13 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public override function update(emitter:<a href="../../common/emitters/Emitter.html">Emitter</a>, particle:<a href="../../common/particles/Particle.html">Particle</a>, time:Number):void</code><p>
+   Checks whether the particle is inside the zone and kills it if it is
+   in the DeathZone region.
    
-   This method does nothing. All derived classes override this method
-   to update each particle every frame.
+   </p><p>This method is called by the emitter and need not be called by the 
+   user.</p>
    
-   </p><span class="label">Parameters</span>
+   <span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
 <td width="20px"></td><td><code><span class="label">emitter</span>:<a href="../../common/emitters/Emitter.html">Emitter</a></code> &mdash; The Emitter that created the particle.
@@ -264,6 +271,12 @@ showHideInherited();
    </td>
 </tr>
 </table>
+<p>
+<span class="label">See also</span>
+</p>
+<div class="seeAlso">
+<a href="../../common/actions/Action.html#update()" target="">org.flintparticles.common.actions.Action.update()</a>
+</div>
 </div>
 <br>
 <br>

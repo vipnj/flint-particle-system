@@ -39,7 +39,17 @@ package org.flintparticles.twoD.actions
 	/**
 	 * The ApproachNeighbours action applies an acceleration to the particle to 
 	 * draw it towards other nearby particles. The size of the acceleration 
-	 * is constant, only the direction varies.
+	 * is constant, only the direction varies. This differentiates this action
+	 * from the MutualGravity action, where the acceleration is proportional
+	 * to the distance between the particles.
+	 * 
+	 * <p>ApproachNeighbours is most commonly used when creating flocking
+	 * behaviours. Flocking is usually a combination of ApproachNeighbours
+	 * to draw particles together, MinimumDistance to stop them getting too close
+	 * and MatchVelocity to make them match speed and direction of motion.</p>
+	 * 
+	 * @see org.flintparticles.twoD.actions.MinimumDistance
+	 * @see org.flintparticles.twoD.actions.MatchVelocity
 	 */
 
 	public class ApproachNeighbours extends ActionBase
@@ -49,16 +59,16 @@ package org.flintparticles.twoD.actions
 		private var _maxSq:Number;
 		
 		/**
-		 * The constructor creates a ApproachNeighbours action for use by an emitter. 
-		 * To add a ApproachNeighbours to all particles created by an emitter, 
+		 * The constructor creates an ApproachNeighbours action for use by an emitter. 
+		 * To add an ApproachNeighbours to all particles created by an emitter, 
 		 * use the emitter's addAction method.
 		 * 
 		 * @see org.flintparticles.common.emitters.Emitter#addAction()
 		 * 
 		 * @param maxDistance The maximum distance, in pixels, over which this action 
-		 * operates. Particles further away than this distance are ignored.
-		 * @param acceleration The acceleration force applied to approach the other 
-		 * particles.
+		 * operates. Particles further apart than this distance ignore each other.
+		 * @param acceleration The size of the acceleration applied to approach the 
+		 * other particles.
 		 */
 		public function ApproachNeighbours( maxDistance:Number, acceleration:Number )
 		{
@@ -68,8 +78,8 @@ package org.flintparticles.twoD.actions
 		}
 		
 		/**
-		 * The maximum distance, in pixels, over which this action operates. Particles
-		 * further away than this distance are ignored.
+		 * The maximum distance, in pixels, over which this action operates.
+		 * Particles further apart than this distance ignore each other.
 		 */
 		public function get maxDistance():Number
 		{
@@ -82,7 +92,7 @@ package org.flintparticles.twoD.actions
 		}
 		
 		/**
-		 * The acceleration force applied to approach the other particles.
+		 * The acceleration applied to approach the other particles.
 		 */
 		public function get acceleration():Number
 		{
@@ -95,7 +105,8 @@ package org.flintparticles.twoD.actions
 
 		/**
 		 * Returns a value of 10, so that the ApproachNeighbours action executes 
-		 * before other actions.
+		 * before accelerating actions that act on particles independently of
+		 * other particles, like Acceleration and GravityWell.
 		 * 
 		 * @see org.flintparticles.common.actions.Action#getDefaultPriority()
 		 */
@@ -105,7 +116,12 @@ package org.flintparticles.twoD.actions
 		}
 
 		/**
-		 * @inheritDoc
+		 * Instructs the emitter to produce a sorted particle array for optimizing
+		 * the calculations in the update method of this action.
+		 * 
+		 * @param emitter The emitter this action has been added to.
+		 * 
+		 * @see org.flintparticles.common.actions.Action#addedToEmitter()
 		 */
 		override public function addedToEmitter( emitter:Emitter ) : void
 		{
@@ -113,11 +129,11 @@ package org.flintparticles.twoD.actions
 		}
 		
 		/**
-		 * Causes the particle to check all nearby particles and move towards their 
-		 * average position.
+		 * Checks all particles near the current particle and applies the 
+		 * acceleration to move the particle towards their average position.
 		 * 
 		 * <p>This method is called by the emitter and need not be called by the 
-		 * user</p>
+		 * user.</p>
 		 * 
 		 * @param emitter The Emitter that created the particle.
 		 * @param particle The particle to be updated.

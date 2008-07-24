@@ -42,14 +42,16 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 </tr>
 </table>
 <p></p>
-  The Collide action detects collisions between particles and modifies their velocities
-  in response to the collision. All paticles are approximated to a circular shape for
-  the collisions and they are assumed to be off equal density.
+  The Collide action detects collisions between particles and modifies their 
+  velocities in response to the collision. All particles are approximated to 
+  a circular shape for the collisions and they are assumed to be of equal 
+  density.
   
-  <p>If the particles reach a stationary, or near stationary, state under an accelerating 
-  force (e.g. gravity) then they will fall through each other. This is due to the nature
-  of the alogorithm used, which is designed for speed of execution and sufficient accuracy 
-  when the particles are in motion, not for absolute precision.</p>
+  <p>If the particles reach a stationary, or near stationary, state under an 
+  accelerating force (e.g. gravity) then they will fall through each other. 
+  This is due to the nature of the alogorithm used, which is designed for 
+  speed of execution and sufficient accuracy when the particles are in motion, 
+  not for absolute precision.</p>
   <p></p>
 <br>
 <hr>
@@ -68,7 +70,8 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 </tr>
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#radius">radius</a> : Number<div class="summaryTableDescription">
-   The radius of a particle used when calculating the collisions.</div>
+   The radius used for the size of each particle used when calculating the 
+   collisions.</div>
 </td><td class="summaryTableOwnerCol">Collide</td>
 </tr>
 </table>
@@ -101,8 +104,8 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <div class="summarySignature">
 <a class="signatureLink" href="#addedToEmitter()">addedToEmitter</a>(emitter:<a href="../../common/emitters/Emitter.html">Emitter</a>):void</div>
 <div class="summaryTableDescription">
-   
-   This method does nothing.</div>
+   Instructs the emitter to produce a sorted particle array for optimizing
+   the calculations in the update method of this action.</div>
 </td><td class="summaryTableOwnerCol">Collide</td>
 </tr>
 <tr class="">
@@ -110,8 +113,8 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <div class="summarySignature">
 <a class="signatureLink" href="#getDefaultPriority()">getDefaultPriority</a>():Number</div>
 <div class="summaryTableDescription">
-   
-   Returns a default priority of 0 for this action.</div>
+   Returns a value of 10, so that the collide action executes before
+   other actions that move teh particles independently of each other.</div>
 </td><td class="summaryTableOwnerCol">Collide</td>
 </tr>
 <tr class="hideInheritedMethod">
@@ -127,8 +130,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <div class="summarySignature">
 <a class="signatureLink" href="#update()">update</a>(emitter:<a href="../../common/emitters/Emitter.html">Emitter</a>, particle:<a href="../../common/particles/Particle.html">Particle</a>, time:Number):void</div>
 <div class="summaryTableDescription">
-   
-   This method does nothing.</div>
+   Causes the particle to check for collisions against all other particles.</div>
 </td><td class="summaryTableOwnerCol">Collide</td>
 </tr>
 </table>
@@ -150,8 +152,8 @@ showHideInherited();
 <code>bounce:Number</code>&nbsp;&nbsp;[read-write]<p>
    The coefficient of restitution when the particles collide. A value of 
    1 gives a pure elastic collision, with no energy loss. A value
-   between 0 and 1 causes the particle to loose enegy in the collision. A value greater 
-   than 1 causes the particle to gain energy in the collision.
+   between 0 and 1 causes the particles to loose enegy in the collision. 
+   A value greater than 1 causes the particles to gain energy in the collision.
    </p><span class="label">Implementation</span>
 <br>
 <code>&nbsp;&nbsp;&nbsp;&nbsp;public function get bounce():Number</code>
@@ -167,9 +169,10 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>radius:Number</code>&nbsp;&nbsp;[read-write]<p>
-   The radius of a particle used when calculating the collisions. this
-   radius is multiplied by the scale property of each particle to get the particle's
-   actual size and relative mass for calculating the collision and response.
+   The radius used for the size of each particle used when calculating the 
+   collisions. This radius is multiplied by the scale property of each 
+   particle to get the particle's actual size and relative mass for 
+   calculating the collision and response.
    </p><span class="label">Implementation</span>
 <br>
 <code>&nbsp;&nbsp;&nbsp;&nbsp;public function get radius():Number</code>
@@ -194,19 +197,21 @@ showHideInherited();
    </p><span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
-<td width="20px"></td><td><code><span class="label">radius</span>:Number</code> &mdash; The radius of a particle used when calculating the collisions. this
-   radius is multiplied by the scale property of each particle to get the particle's
-   actual size and relative mass for calculating the collision and response.
+<td width="20px"></td><td><code><span class="label">radius</span>:Number</code> &mdash; The radius used for the size of each particle when 
+   calculating the collisions. This radius is multiplied by the scale 
+   property of each particle to get the particle's actual size and 
+   relative mass for calculating the collision and response.
    </td>
 </tr>
 <tr>
 <td class="paramSpacer">&nbsp;</td>
 </tr>
 <tr>
-<td width="20px"></td><td><code><span class="label">bounce</span>:Number</code> (default = <code>1</code>)<code></code> &mdash; The coefficient of restitution when the particles collide. A value of 
-   1 gives a pure elastic collision, with no energy loss. A value
-   between 0 and 1 causes the particle to loose enegy in the collision. A value greater 
-   than 1 causes the particle to gain energy in the collision.
+<td width="20px"></td><td><code><span class="label">bounce</span>:Number</code> (default = <code>1</code>)<code></code> &mdash; The coefficient of restitution when the particles collide. 
+   A value of 1 gives a pure elastic collision, with no energy loss. A 
+   value between 0 and 1 causes the particles to loose enegy in the 
+   collision. A value greater than 1 causes the particle to gain energy 
+   in the collision.
    </td>
 </tr>
 </table>
@@ -227,18 +232,19 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public override function addedToEmitter(emitter:<a href="../../common/emitters/Emitter.html">Emitter</a>):void</code><p>
-   
-   This method does nothing. Some derived classes override this method
-   to perform actions when the action is added to an emitter.
+   Instructs the emitter to produce a sorted particle array for optimizing
+   the calculations in the update method of this action.
    
    </p><span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
-<td width="20px"></td><td><code><span class="label">emitter</span>:<a href="../../common/emitters/Emitter.html">Emitter</a></code> &mdash; The Emitter that the Action was added to.
-   
-   </td>
+<td width="20px"></td><td><code><span class="label">emitter</span>:<a href="../../common/emitters/Emitter.html">Emitter</a></code></td>
 </tr>
 </table>
+<p>
+<span class="label">See also</span>
+</p>
+<div class="seeAlso">update()</div>
 </div>
 <a name="getDefaultPriority()"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
@@ -248,9 +254,8 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public override function getDefaultPriority():Number</code><p>
-   
-   Returns a default priority of 0 for this action. Derived classes 
-   override this method if they want a different default priority.
+   Returns a value of 10, so that the collide action executes before
+   other actions that move teh particles independently of each other.
    
    </p><p></p>
 <span class="label">Returns</span>
@@ -259,6 +264,12 @@ showHideInherited();
 <td width="20"></td><td><code>Number</code></td>
 </tr>
 </table>
+<p>
+<span class="label">See also</span>
+</p>
+<div class="seeAlso">
+<a href="../../common/actions/Action.html#getDefaultPriority()" target="">org.flintparticles.common.actions.Action.getDefaultPriority()</a>
+</div>
 </div>
 <a name="update()"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
@@ -268,11 +279,12 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public override function update(emitter:<a href="../../common/emitters/Emitter.html">Emitter</a>, particle:<a href="../../common/particles/Particle.html">Particle</a>, time:Number):void</code><p>
+   Causes the particle to check for collisions against all other particles.
    
-   This method does nothing. All derived classes override this method
-   to update each particle every frame.
+   </p><p>This method is called by the emitter and need not be called by the 
+   user.</p>
    
-   </p><span class="label">Parameters</span>
+   <span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
 <td width="20px"></td><td><code><span class="label">emitter</span>:<a href="../../common/emitters/Emitter.html">Emitter</a></code> &mdash; The Emitter that created the particle.
@@ -294,6 +306,12 @@ showHideInherited();
    </td>
 </tr>
 </table>
+<p>
+<span class="label">See also</span>
+</p>
+<div class="seeAlso">
+<a href="../../common/actions/Action.html#update()" target="">org.flintparticles.common.actions.Action.update()</a>
+</div>
 </div>
 <br>
 <br>

@@ -45,7 +45,16 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
   The AntiGravity action applies a force to the particle to push it away from
   a single point - the center of the effect. The force applied is inversely 
   proportional to the square of the distance from the particle to the point.
+  
+  <p>This is the same as the GravityWell action with a negative force.</p>
+  
   <p></p>
+<p>
+<span class="classHeaderTableLabel">See also</span>
+</p>
+<div class="seeAlso">
+<a href="../actions/GravityWell.html" target="">org.flintparticles.twoD.actions.GravityWell</a>
+</div>
 <br>
 <hr>
 </div>
@@ -131,7 +140,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <div class="summarySignature">
 <a class="signatureLink" href="#update()">update</a>(emitter:<a href="../../common/emitters/Emitter.html">Emitter</a>, particle:<a href="../../common/particles/Particle.html">Particle</a>, time:Number):void</div>
 <div class="summaryTableDescription">
-   Applies the anti-gravity force to a particle.</div>
+   Applies the anti-gravity force to a particle for the specified time period.</div>
 </td><td class="summaryTableOwnerCol">AntiGravity</td>
 </tr>
 </table>
@@ -152,9 +161,9 @@ showHideInherited();
 <div class="detailBody">
 <code>epsilon:Number</code>&nbsp;&nbsp;[read-write]<p>
    The minimum distance for which the anti-gravity force is calculated. 
-   Particles closer than this distance experience the anti-gravity as it they were 
-   this distance away. This stops the anti-gravity effect blowing up as distances get 
-   small.
+   Particles closer than this distance experience the anti-gravity as if 
+   they were this distance away. This stops the anti-gravity effect 
+   blowing up as distances get small.
    </p><span class="label">Implementation</span>
 <br>
 <code>&nbsp;&nbsp;&nbsp;&nbsp;public function get epsilon():Number</code>
@@ -228,31 +237,34 @@ showHideInherited();
    </p><span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
-<td width="20px"></td><td><code><span class="label">power</span>:Number</code> &mdash; The strength of the force - larger numbers produce a stronger force.
+<td width="20px"></td><td><code><span class="label">power</span>:Number</code> &mdash; The strength of the force - larger numbers produce a 
+   stronger force.
    </td>
 </tr>
 <tr>
 <td class="paramSpacer">&nbsp;</td>
 </tr>
 <tr>
-<td width="20px"></td><td><code><span class="label">x</span>:Number</code> &mdash; The x coordinate of the point away from which the force pushes the particles.
+<td width="20px"></td><td><code><span class="label">x</span>:Number</code> &mdash; The x coordinate of the point away from which the force pushes 
+   the particles.
    </td>
 </tr>
 <tr>
 <td class="paramSpacer">&nbsp;</td>
 </tr>
 <tr>
-<td width="20px"></td><td><code><span class="label">y</span>:Number</code> &mdash; The y coordinate of the point away from which the force pushes the particles.
+<td width="20px"></td><td><code><span class="label">y</span>:Number</code> &mdash; The y coordinate of the point away from which the force pushes 
+   the particles.
    </td>
 </tr>
 <tr>
 <td class="paramSpacer">&nbsp;</td>
 </tr>
 <tr>
-<td width="20px"></td><td><code><span class="label">epsilon</span>:Number</code> (default = <code>1</code>)<code></code> &mdash; The minimum distance for which the anti-gravity force is calculated. 
-   Particles closer than this distance experience the anti-gravity as it they were 
-   this distance away. This stops the anti-gravity effect blowing up as distances get 
-   small.
+<td width="20px"></td><td><code><span class="label">epsilon</span>:Number</code> (default = <code>1</code>)<code></code> &mdash; The minimum distance for which the anti-gravity force is 
+   calculated. Particles closer than this distance experience the 
+   anti-gravity as if they were this distance away. This stops the 
+   anti-gravity effect blowing up as distances get small.
    </td>
 </tr>
 </table>
@@ -273,7 +285,7 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public override function update(emitter:<a href="../../common/emitters/Emitter.html">Emitter</a>, particle:<a href="../../common/particles/Particle.html">Particle</a>, time:Number):void</code><p>
-   Applies the anti-gravity force to a particle.
+   Applies the anti-gravity force to a particle for the specified time period.
    
    </p><p>This method is called by the emitter and need not be called by the 
    user</p>

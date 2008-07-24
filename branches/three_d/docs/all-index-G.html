@@ -205,6 +205,14 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("GÂ
 </tr>
 <tr>
 <td width="20"></td><td>
+   Returns a value of -20, so that the DeathZone executes after all 
+   movement has occured.</td>
+</tr>
+<tr>
+<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/actions/class-list.html');" href="org/flintparticles/threeD/actions/MatchRotateVelocity.html#getDefaultPriority()">getDefaultPriority</a>() &mdash; Method in class org.flintparticles.threeD.actions.<a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/actions/class-list.html');" href="org/flintparticles/threeD/actions/MatchRotateVelocity.html">MatchRotateVelocity</a></td>
+</tr>
+<tr>
+<td width="20"></td><td>
    
    Returns a default priority of 0 for this action.</td>
 </tr>
@@ -241,6 +249,14 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("GÂ
    Returns a default priority of 0 for this action.</td>
 </tr>
 <tr>
+<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/actions/class-list.html');" href="org/flintparticles/threeD/actions/Rotate.html#getDefaultPriority()">getDefaultPriority</a>() &mdash; Method in class org.flintparticles.threeD.actions.<a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/actions/class-list.html');" href="org/flintparticles/threeD/actions/Rotate.html">Rotate</a></td>
+</tr>
+<tr>
+<td width="20"></td><td>
+   
+   Returns a default priority of 0 for this action.</td>
+</tr>
+<tr>
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/actions/class-list.html');" href="org/flintparticles/threeD/actions/SpeedLimit.html#getDefaultPriority()">getDefaultPriority</a>() &mdash; Method in class org.flintparticles.threeD.actions.<a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/actions/class-list.html');" href="org/flintparticles/threeD/actions/SpeedLimit.html">SpeedLimit</a></td>
 </tr>
 <tr>
@@ -262,7 +278,8 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("GÂ
 <tr>
 <td width="20"></td><td>
    Returns a value of 10, so that the ApproachNeighbours action executes 
-   before other actions.</td>
+   before accelerating actions that act on particles independently of
+   other particles, like Acceleration and GravityWell.</td>
 </tr>
 <tr>
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('org/flintparticles/twoD/actions/class-list.html');" href="org/flintparticles/twoD/actions/BoundingBox.html#getDefaultPriority()">getDefaultPriority</a>() &mdash; Method in class org.flintparticles.twoD.actions.<a onclick="javascript:loadClassListFrame('org/flintparticles/twoD/actions/class-list.html');" href="org/flintparticles/twoD/actions/BoundingBox.html">BoundingBox</a></td>
@@ -276,40 +293,43 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("GÂ
 </tr>
 <tr>
 <td width="20"></td><td>
-   
-   Returns a default priority of 0 for this action.</td>
+   Returns a value of 10, so that the collide action executes before
+   other actions that move teh particles independently of each other.</td>
 </tr>
 <tr>
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('org/flintparticles/twoD/actions/class-list.html');" href="org/flintparticles/twoD/actions/DeathZone.html#getDefaultPriority()">getDefaultPriority</a>() &mdash; Method in class org.flintparticles.twoD.actions.<a onclick="javascript:loadClassListFrame('org/flintparticles/twoD/actions/class-list.html');" href="org/flintparticles/twoD/actions/DeathZone.html">DeathZone</a></td>
 </tr>
 <tr>
 <td width="20"></td><td>
-   
-   Returns a default priority of 0 for this action.</td>
+   Returns a value of -20, so that the DeathZone executes after all 
+   movement has occured.</td>
 </tr>
 <tr>
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('org/flintparticles/twoD/actions/class-list.html');" href="org/flintparticles/twoD/actions/MatchRotateVelocity.html#getDefaultPriority()">getDefaultPriority</a>() &mdash; Method in class org.flintparticles.twoD.actions.<a onclick="javascript:loadClassListFrame('org/flintparticles/twoD/actions/class-list.html');" href="org/flintparticles/twoD/actions/MatchRotateVelocity.html">MatchRotateVelocity</a></td>
 </tr>
 <tr>
 <td width="20"></td><td>
-   
-   Returns a default priority of 0 for this action.</td>
+   Returns a value of 10, so that the MatchRotateVelocity action executes 
+   before rotating actions that act on particles independently of
+   other particles.</td>
 </tr>
 <tr>
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('org/flintparticles/twoD/actions/class-list.html');" href="org/flintparticles/twoD/actions/MatchVelocity.html#getDefaultPriority()">getDefaultPriority</a>() &mdash; Method in class org.flintparticles.twoD.actions.<a onclick="javascript:loadClassListFrame('org/flintparticles/twoD/actions/class-list.html');" href="org/flintparticles/twoD/actions/MatchVelocity.html">MatchVelocity</a></td>
 </tr>
 <tr>
 <td width="20"></td><td>
-   
-   Returns a default priority of 0 for this action.</td>
+   Returns a value of 10, so that the MatchVelocity action executes 
+   before accelerating actions that act on particles independently of
+   other particles, like Acceleration and GravityWell.</td>
 </tr>
 <tr>
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('org/flintparticles/twoD/actions/class-list.html');" href="org/flintparticles/twoD/actions/MinimumDistance.html#getDefaultPriority()">getDefaultPriority</a>() &mdash; Method in class org.flintparticles.twoD.actions.<a onclick="javascript:loadClassListFrame('org/flintparticles/twoD/actions/class-list.html');" href="org/flintparticles/twoD/actions/MinimumDistance.html">MinimumDistance</a></td>
 </tr>
 <tr>
 <td width="20"></td><td>
-   
-   Returns a default priority of 0 for this action.</td>
+   Returns a value of 10, so that the MinimumDistance action executes 
+   before accelerating actions that act on particles independently of
+   other particles, like Acceleration and GravityWell.</td>
 </tr>
 <tr>
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('org/flintparticles/twoD/actions/class-list.html');" href="org/flintparticles/twoD/actions/Move.html#getDefaultPriority()">getDefaultPriority</a>() &mdash; Method in class org.flintparticles.twoD.actions.<a onclick="javascript:loadClassListFrame('org/flintparticles/twoD/actions/class-list.html');" href="org/flintparticles/twoD/actions/Move.html">Move</a></td>
@@ -464,6 +484,14 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("GÂ
    The getLocation method returns a random point inside the zone.</td>
 </tr>
 <tr>
+<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('org/flintparticles/common/utils/class-list.html');" href="org/flintparticles/common/utils/PriorityArray.html#getProperty()">getProperty</a>(name) &mdash; Method in class org.flintparticles.common.utils.<a onclick="javascript:loadClassListFrame('org/flintparticles/common/utils/class-list.html');" href="org/flintparticles/common/utils/PriorityArray.html">PriorityArray</a></td>
+</tr>
+<tr>
+<td width="20"></td><td>
+   Provides Array access to read values from the PriorityArray
+   </td>
+</tr>
+<tr>
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/zones/class-list.html');" href="org/flintparticles/threeD/zones/BoxZone.html#getVolume()">getVolume</a>() &mdash; Method in class org.flintparticles.threeD.zones.<a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/zones/class-list.html');" href="org/flintparticles/threeD/zones/BoxZone.html">BoxZone</a></td>
 </tr>
 <tr>
@@ -542,8 +570,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("GÂ
 </tr>
 <tr>
 <td width="20"></td><td>
-   The constructor creates a GravityWell action for use by 
-   an emitter.</td>
+   The constructor creates a GravityWell action for use by an emitter.</td>
 </tr>
 <tr>
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('org/flintparticles/twoD/zones/class-list.html');" href="org/flintparticles/twoD/zones/GreyscaleZone.html">GreyscaleZone</a> &mdash; Class in package <a onclick="javascript:loadClassListFrame('org/flintparticles/twoD/zones/class-list.html');" href="org/flintparticles/twoD/zones/package-detail.html">org.flintparticles.twoD.zones</a></td>

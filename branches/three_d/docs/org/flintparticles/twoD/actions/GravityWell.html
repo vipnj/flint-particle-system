@@ -44,8 +44,19 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <p></p>
   The GravityWell action applies a force on the particle to draw it towards
   a single point. The force applied is inversely proportional to the square
-  of the distance from the particle to the point.
+  of the distance from the particle to the point, in accordance with Newton's
+  law of gravity.
+  
+  <p>This simulates the effect of gravity over large distances (as between
+  planets, for example). To simulate the effect of gravity at the surface
+  of the eacrth, use an Acceleration action with the direction of force 
+  downwards.</p>
+  
   <p></p>
+<p>
+<span class="classHeaderTableLabel">See also</span>
+</p>
+<div class="seeAlso">Acceleration</div>
 <br>
 <hr>
 </div>
@@ -63,17 +74,20 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 </tr>
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#power">power</a> : Number<div class="summaryTableDescription">
-   The strength of the gravity force.</div>
+   The strength of the gravity force - larger numbers produce a 
+   stronger force.</div>
 </td><td class="summaryTableOwnerCol">GravityWell</td>
 </tr>
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#x">x</a> : Number<div class="summaryTableDescription">
-   The x coordinate of the center of the gravity force.</div>
+   The x coordinate of the point towards which the force draws 
+   the particles.</div>
 </td><td class="summaryTableOwnerCol">GravityWell</td>
 </tr>
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#y">y</a> : Number<div class="summaryTableDescription">
-   The y coordinate of the center of the gravity force.</div>
+   The y coordinate of the point towards which the force draws 
+   the particles.</div>
 </td><td class="summaryTableOwnerCol">GravityWell</td>
 </tr>
 </table>
@@ -98,8 +112,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <div class="summarySignature">
 <a class="signatureLink" href="#GravityWell()">GravityWell</a>(power:Number, x:Number, y:Number, epsilon:Number = 100)</div>
 <div class="summaryTableDescription">
-   The constructor creates a GravityWell action for use by 
-   an emitter.</div>
+   The constructor creates a GravityWell action for use by an emitter.</div>
 </td><td class="summaryTableOwnerCol">GravityWell</td>
 </tr>
 <tr class="hideInheritedMethod">
@@ -131,8 +144,8 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <div class="summarySignature">
 <a class="signatureLink" href="#update()">update</a>(emitter:<a href="../../common/emitters/Emitter.html">Emitter</a>, particle:<a href="../../common/particles/Particle.html">Particle</a>, time:Number):void</div>
 <div class="summaryTableDescription">
-   
-   This method does nothing.</div>
+   Calculates the gravity force on the particle and applies it for
+   the period of time indicated.</div>
 </td><td class="summaryTableOwnerCol">GravityWell</td>
 </tr>
 </table>
@@ -153,9 +166,11 @@ showHideInherited();
 <div class="detailBody">
 <code>epsilon:Number</code>&nbsp;&nbsp;[read-write]<p>
    The minimum distance for which the gravity force is calculated. 
-   Particles closer than this distance experience the gravity as it they were 
-   this distance away. This stops the gravity effect blowing up as distances get 
-   small.
+   Particles closer than this distance experience the gravity as if
+   they were this distance away. This stops the gravity effect blowing 
+   up as distances get small.  For realistic gravity effects you will want 
+   a small epsilon ( ~1 ), but for stable visual effects a larger
+   epsilon (~100) is often better.
    </p><span class="label">Implementation</span>
 <br>
 <code>&nbsp;&nbsp;&nbsp;&nbsp;public function get epsilon():Number</code>
@@ -171,7 +186,8 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>power:Number</code>&nbsp;&nbsp;[read-write]<p>
-   The strength of the gravity force.
+   The strength of the gravity force - larger numbers produce a 
+   stronger force.
    </p><span class="label">Implementation</span>
 <br>
 <code>&nbsp;&nbsp;&nbsp;&nbsp;public function get power():Number</code>
@@ -187,7 +203,8 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>x:Number</code>&nbsp;&nbsp;[read-write]<p>
-   The x coordinate of the center of the gravity force.
+   The x coordinate of the point towards which the force draws 
+   the particles.
    </p><span class="label">Implementation</span>
 <br>
 <code>&nbsp;&nbsp;&nbsp;&nbsp;public function get x():Number</code>
@@ -203,7 +220,8 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>y:Number</code>&nbsp;&nbsp;[read-write]<p>
-   The y coordinate of the center of the gravity force.
+   The y coordinate of the point towards which the force draws 
+   the particles.
    </p><span class="label">Implementation</span>
 <br>
 <code>&nbsp;&nbsp;&nbsp;&nbsp;public function get y():Number</code>
@@ -221,38 +239,42 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public function GravityWell(power:Number, x:Number, y:Number, epsilon:Number = 100)</code><p>
-   The constructor creates a GravityWell action for use by 
-   an emitter. To add a GravityWell to all particles created by an emitter, use the
+   The constructor creates a GravityWell action for use by an emitter.
+   To add a GravityWell to all particles created by an emitter, use the
    emitter's addAction method.
    
    </p><span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
-<td width="20px"></td><td><code><span class="label">power</span>:Number</code> &mdash; The strength of the force - larger numbers produce a stringer force.
+<td width="20px"></td><td><code><span class="label">power</span>:Number</code> &mdash; The strength of the gravity force - larger numbers produce a 
+   stronger force.
    </td>
 </tr>
 <tr>
 <td class="paramSpacer">&nbsp;</td>
 </tr>
 <tr>
-<td width="20px"></td><td><code><span class="label">x</span>:Number</code> &mdash; The x coordinate of the point towards which the force draws the particles.
+<td width="20px"></td><td><code><span class="label">x</span>:Number</code> &mdash; The x coordinate of the point towards which the force draws 
+   the particles.
    </td>
 </tr>
 <tr>
 <td class="paramSpacer">&nbsp;</td>
 </tr>
 <tr>
-<td width="20px"></td><td><code><span class="label">y</span>:Number</code> &mdash; The y coordinate of the point towards which the force draws the particles.
+<td width="20px"></td><td><code><span class="label">y</span>:Number</code> &mdash; The y coordinate of the point towards which the force draws 
+   the particles.
    </td>
 </tr>
 <tr>
 <td class="paramSpacer">&nbsp;</td>
 </tr>
 <tr>
-<td width="20px"></td><td><code><span class="label">epsilon</span>:Number</code> (default = <code>100</code>)<code></code> &mdash; The minimum distance for which gravity is calculated. Particles closer
-   than this distance experience a gravity force as it they were this distance away.
-   This stops the gravity effect blowing up as distances get small. For realistic gravity 
-   effects you will want a small epsilon ( ~1 ), but for stable visual effects a larger
+<td width="20px"></td><td><code><span class="label">epsilon</span>:Number</code> (default = <code>100</code>)<code></code> &mdash; The minimum distance for which gravity is calculated. 
+   Particles closer than this distance experience a gravity force as if 
+   they were this distance away. This stops the gravity effect blowing 
+   up as distances get small. For realistic gravity effects you will want 
+   a small epsilon ( ~1 ), but for stable visual effects a larger
    epsilon (~100) is often better.
    </td>
 </tr>
@@ -274,11 +296,13 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public override function update(emitter:<a href="../../common/emitters/Emitter.html">Emitter</a>, particle:<a href="../../common/particles/Particle.html">Particle</a>, time:Number):void</code><p>
+   Calculates the gravity force on the particle and applies it for
+   the period of time indicated.
    
-   This method does nothing. All derived classes override this method
-   to update each particle every frame.
+   </p><p>This method is called by the emitter and need not be called by the 
+   user.</p>
    
-   </p><span class="label">Parameters</span>
+   <span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
 <td width="20px"></td><td><code><span class="label">emitter</span>:<a href="../../common/emitters/Emitter.html">Emitter</a></code> &mdash; The Emitter that created the particle.
@@ -300,6 +324,12 @@ showHideInherited();
    </td>
 </tr>
 </table>
+<p>
+<span class="label">See also</span>
+</p>
+<div class="seeAlso">
+<a href="../../common/actions/Action.html#update()" target="">org.flintparticles.common.actions.Action.update()</a>
+</div>
 </div>
 <br>
 <br>

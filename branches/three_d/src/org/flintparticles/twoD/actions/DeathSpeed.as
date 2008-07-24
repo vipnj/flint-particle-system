@@ -93,7 +93,7 @@ package org.flintparticles.twoD.actions
 		
 		/**
 		 * Checks the particle's speed and marks it as dead if it is moving faster 
-		 * than the speed limit, if this is a mximum speed limit, or slower than is 
+		 * than the speed limit, if this is a mximum speed limit, or slower if 
 		 * this is a minimum speed limit.
 		 * 
 		 * <p>This method is called by the emitter and need not be called by the 

@@ -51,6 +51,7 @@ package org.flintparticles.threeD.actions
 		private var _maxY : Number;
 		private var _minZ : Number;
 		private var _maxZ : Number;
+		private var _bounce : Number;
 
 		/**
 		 * The constructor creates a BoundingBox action for use by an emitter. 
@@ -65,8 +66,12 @@ package org.flintparticles.threeD.actions
 		 * @param maxY The maxY coordinate of the box.
 		 * @param minZ The minZ coordinate of the box.
 		 * @param maxZ The maxZ coordinate of the box.
+		 * @param bounce The coefficient of restitution when the particles bounce off the
+		 * sides of the box. A value of 1 gives a pure elastic collision, with no energy loss. 
+		 * A value between 0 and 1 causes the particle to loose enegy in the collision. A value 
+		 * greater than 1 causes the particle to gain energy in the collision.
 		 */
-		public function BoundingBox( minX:Number, maxX:Number, minY:Number, maxY:Number, minZ:Number, maxZ:Number )
+		public function BoundingBox( minX:Number, maxX:Number, minY:Number, maxY:Number, minZ:Number, maxZ:Number, bounce:Number = 1 )
 		{
 			this.minX = minX;
 			this.maxX = maxX;
@@ -74,6 +79,7 @@ package org.flintparticles.threeD.actions
 			this.maxY = maxY;
 			this.minZ = minZ;
 			this.maxZ = maxZ;
+			_bounce = bounce;
 		}
 		
 		/**
@@ -149,6 +155,21 @@ package org.flintparticles.threeD.actions
 		}
 
 		/**
+		 * The coefficient of restitution when the particles bounce off the
+		 * sides of the box. A value of 1 gives a pure pure elastic collision, with no energy loss. 
+		 * A value between 0 and 1 causes the particle to loose enegy in the collision. A value 
+		 * greater than 1 causes the particle to gain energy in the collision.
+		 */
+		public function get bounce():Number
+		{
+			return _bounce;
+		}
+		public function set bounce( value:Number ):void
+		{
+			_bounce = value;
+		}
+
+		/**
 		 * Returns a value of -20, so that the BoundingBox executes after all movement has occured.
 		 * 
 		 * @see org.flintparticles.common.actions.Action#getDefaultPriority()
@@ -190,32 +211,32 @@ package org.flintparticles.threeD.actions
 			var position:Number;
 			if ( p.velocity.x > 0 && ( position = p.position.x + halfWidth ) >= _maxX )
 			{
-				p.velocity.x = -p.velocity.x;
+				p.velocity.x = -p.velocity.x * _bounce;
 				p.position.x += 2 * ( _maxX - position );
 			}
 			else if ( p.velocity.x < 0 && ( position = p.position.x - halfWidth ) <= _minX )
 			{
-				p.velocity.x = -p.velocity.x;
+				p.velocity.x = -p.velocity.x * _bounce;
 				p.position.x += 2 * ( _minX - position );
 			}
 			if ( p.velocity.y > 0 && ( position = p.position.y + halfHeight ) >= _maxY )
 			{
-				p.velocity.y = -p.velocity.y;
+				p.velocity.y = -p.velocity.y * _bounce;
 				p.position.y += 2 * ( _maxY - position );
 			}
 			else if ( p.velocity.y < 0 && ( position = p.position.y - halfHeight ) <= _minY )
 			{
-				p.velocity.y = -p.velocity.y;
+				p.velocity.y = -p.velocity.y * _bounce;
 				p.position.y += 2 * ( _minY - position );
 			}
 			if ( p.velocity.z > 0 && ( position = p.position.z + halfDepth ) >= _maxZ )
 			{
-				p.velocity.z = -p.velocity.z;
+				p.velocity.z = -p.velocity.z * _bounce;
 				p.position.z += 2 * ( _maxZ - position );
 			}
 			else if ( p.velocity.z < 0 && ( position = p.position.z - halfDepth ) <= _minZ )
 			{
-				p.velocity.z = -p.velocity.z;
+				p.velocity.z = -p.velocity.z * _bounce;
 				p.position.z += 2 * ( _minZ - position );
 			}
 		}

@@ -64,7 +64,7 @@ package
 			
 			emitter.addInitializer( new ImageClass( Star, 12 ) );
 			emitter.addInitializer( new ColorInit( 0xFFFF33FF, 0xFF33FFFF ) );
-			emitter.addInitializer( new Velocity( new DiscZone( new Vector3D( 0, 250, 0 ), new Vector3D( 0, 1, 0 ), 60, 0 ) ) );
+			emitter.addInitializer( new Velocity( new DiscZone( new Vector3D( 0, 250, 0 ), new Vector3D( 0, 1, 0 ), 60 ) ) );
 			emitter.addInitializer( new Lifetime( 5 ) );
 			emitter.addInitializer( new RotateVelocity( new Vector3D( 0, 0, 1 ), -4, 4 ) );
 			

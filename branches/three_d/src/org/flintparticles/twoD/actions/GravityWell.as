@@ -38,7 +38,15 @@ package org.flintparticles.twoD.actions
 	/**
 	 * The GravityWell action applies a force on the particle to draw it towards
 	 * a single point. The force applied is inversely proportional to the square
-	 * of the distance from the particle to the point.
+	 * of the distance from the particle to the point, in accordance with Newton's
+	 * law of gravity.
+	 * 
+	 * <p>This simulates the effect of gravity over large distances (as between
+	 * planets, for example). To simulate the effect of gravity at the surface
+	 * of the eacrth, use an Acceleration action with the direction of force 
+	 * downwards.</p>
+	 * 
+	 * @see Acceleration
 	 */
 
 	public class GravityWell extends ActionBase
@@ -50,19 +58,23 @@ package org.flintparticles.twoD.actions
 		private var _gravityConst:Number = 10000; // just scales the power to a more reasonable number
 		
 		/**
-		 * The constructor creates a GravityWell action for use by 
-		 * an emitter. To add a GravityWell to all particles created by an emitter, use the
+		 * The constructor creates a GravityWell action for use by an emitter.
+		 * To add a GravityWell to all particles created by an emitter, use the
 		 * emitter's addAction method.
 		 * 
 		 * @see org.flintparticles.common.emitters.Emitter#addAction()
 		 * 
-		 * @param power The strength of the force - larger numbers produce a stringer force.
-		 * @param x The x coordinate of the point towards which the force draws the particles.
-		 * @param y The y coordinate of the point towards which the force draws the particles.
-		 * @param epsilon The minimum distance for which gravity is calculated. Particles closer
-		 * than this distance experience a gravity force as it they were this distance away.
-		 * This stops the gravity effect blowing up as distances get small. For realistic gravity 
-		 * effects you will want a small epsilon ( ~1 ), but for stable visual effects a larger
+		 * @param power The strength of the gravity force - larger numbers produce a 
+		 * stronger force.
+		 * @param x The x coordinate of the point towards which the force draws 
+		 * the particles.
+		 * @param y The y coordinate of the point towards which the force draws 
+		 * the particles.
+		 * @param epsilon The minimum distance for which gravity is calculated. 
+		 * Particles closer than this distance experience a gravity force as if 
+		 * they were this distance away. This stops the gravity effect blowing 
+		 * up as distances get small. For realistic gravity effects you will want 
+		 * a small epsilon ( ~1 ), but for stable visual effects a larger
 		 * epsilon (~100) is often better.
 		 */
 		public function GravityWell( power:Number, x:Number, y:Number, epsilon:Number = 100 )
@@ -74,7 +86,8 @@ package org.flintparticles.twoD.actions
 		}
 		
 		/**
-		 * The strength of the gravity force.
+		 * The strength of the gravity force - larger numbers produce a 
+		 * stronger force.
 		 */
 		public function get power():Number
 		{
@@ -86,7 +99,8 @@ package org.flintparticles.twoD.actions
 		}
 		
 		/**
-		 * The x coordinate of the center of the gravity force.
+		 * The x coordinate of the point towards which the force draws 
+		 * the particles.
 		 */
 		public function get x():Number
 		{
@@ -98,7 +112,8 @@ package org.flintparticles.twoD.actions
 		}
 		
 		/**
-		 * The y coordinate of the center of the gravity force.
+		 * The y coordinate of the point towards which the force draws 
+		 * the particles.
 		 */
 		public function get y():Number
 		{
@@ -111,9 +126,11 @@ package org.flintparticles.twoD.actions
 		
 		/**
 		 * The minimum distance for which the gravity force is calculated. 
-		 * Particles closer than this distance experience the gravity as it they were 
-		 * this distance away. This stops the gravity effect blowing up as distances get 
-		 * small.
+		 * Particles closer than this distance experience the gravity as if
+		 * they were this distance away. This stops the gravity effect blowing 
+		 * up as distances get small.  For realistic gravity effects you will want 
+		 * a small epsilon ( ~1 ), but for stable visual effects a larger
+		 * epsilon (~100) is often better.
 		 */
 		public function get epsilon():Number
 		{
@@ -125,7 +142,17 @@ package org.flintparticles.twoD.actions
 		}
 		
 		/**
-		 * @inheritDoc
+		 * Calculates the gravity force on the particle and applies it for
+		 * the period of time indicated.
+		 * 
+		 * <p>This method is called by the emitter and need not be called by the 
+		 * user.</p>
+		 * 
+		 * @param emitter The Emitter that created the particle.
+		 * @param particle The particle to be updated.
+		 * @param time The duration of the frame - used for time based updates.
+		 * 
+		 * @see org.flintparticles.common.actions.Action#update()
 		 */
 		override public function update( emitter:Emitter, particle:Particle, time:Number ):void
 		{

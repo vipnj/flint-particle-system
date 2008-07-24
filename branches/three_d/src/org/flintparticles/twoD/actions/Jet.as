@@ -37,7 +37,8 @@ package org.flintparticles.twoD.actions
 	import org.flintparticles.twoD.zones.Zone2D;	
 
 	/**
-	 * The Jet Action applies an acceleration to the particle only if it is in the specified zone. 
+	 * The Jet Action applies an acceleration to particles only if they are in 
+	 * the specified zone. 
 	 */
 
 	public class Jet extends ActionBase
@@ -48,19 +49,20 @@ package org.flintparticles.twoD.actions
 		private var _invert:Boolean;
 		
 		/**
-		 * The constructor creates a Jet action for use by 
-		 * an emitter. To add a Jet to all particles created by an emitter, use the
+		 * The constructor creates a Jet action for use by an emitter. 
+		 * To add a Jet to all particles created by an emitter, use the
 		 * emitter's addAction method.
 		 * 
 		 * @see org.flintparticles.common.emitters.Emitter#addAction()
 		 * 
-		 * @param accelerationX The x coordinate of the acceleration to apply, in pixels 
-		 * per second per second.
-		 * @param accelerationY The y coordinate of the acceleration to apply, in pixels 
-		 * per second per second.
+		 * @param accelerationX The x component of the acceleration to apply, in 
+		 * pixels per second per second.
+		 * @param accelerationY The y component of the acceleration to apply, in 
+		 * pixels per second per second.
 		 * @param zone The zone in which to apply the acceleration.
-		 * @param invertZone If false (the default) the acceleration is applied only to particles inside 
-		 * the zone. If true the acceleration is applied only to particles outside the zone.
+		 * @param invertZone If false (the default) the acceleration is applied 
+		 * only to particles inside the zone. If true the acceleration is applied 
+		 * only to particles outside the zone.
 		 */
 		public function Jet( accelerationX:Number, accelerationY:Number, zone:Zone2D, invertZone:Boolean = false )
 		{
@@ -71,7 +73,8 @@ package org.flintparticles.twoD.actions
 		}
 		
 		/**
-		 * The x coordinate of the acceleration.
+		 * The x component of the acceleration to apply, in 
+		 * pixels per second per second.
 		 */
 		public function get x():Number
 		{
@@ -83,7 +86,8 @@ package org.flintparticles.twoD.actions
 		}
 		
 		/**
-		 * The y coordinate of the acceleration.
+		 * The y component of the acceleration to apply, in 
+		 * pixels per second per second.
 		 */
 		public function get y():Number
 		{
@@ -107,9 +111,9 @@ package org.flintparticles.twoD.actions
 		}
 		
 		/**
-		 * If true, the zone is treated as the safe area and being ouside the zone
-		 * results in the particle dying. Otherwise, being inside the zone causes the
-		 * particle to die.
+		 * If false (the default) the acceleration is applied 
+		 * only to particles inside the zone. If true the acceleration is applied 
+		 * only to particles outside the zone.
 		 */
 		public function get invertZone():Boolean
 		{
@@ -121,7 +125,17 @@ package org.flintparticles.twoD.actions
 		}
 		
 		/**
-		 * @inheritDoc
+		 * Checks if the particle is inside the zone and, if so, applies the 
+		 * acceleration to the particle for the period of time indicated.
+		 * 
+		 * <p>This method is called by the emitter and need not be called by the 
+		 * user.</p>
+		 * 
+		 * @param emitter The Emitter that created the particle.
+		 * @param particle The particle to be updated.
+		 * @param time The duration of the frame - used for time based updates.
+		 * 
+		 * @see org.flintparticles.common.actions.Action#update()
 		 */
 		override public function update( emitter:Emitter, particle:Particle, time:Number ):void
 		{

@@ -92,9 +92,10 @@ package org.flintparticles.threeD.actions
 		}
 		
 		/**
-		 * @inheritDoc
+		 * Returns a value of -20, so that the DeathZone executes after all 
+		 * movement has occured.
 		 * 
-		 * <p>Returns a value of -20, so that the DeathZone executes after all movement has occured.</p>
+		 * @see org.flintparticles.common.actions.Action#getDefaultPriority()
 		 */
 		override public function getDefaultPriority():Number
 		{
@@ -102,7 +103,17 @@ package org.flintparticles.threeD.actions
 		}
 
 		/**
-		 * @inheritDoc
+		 * Checks whether the particle is inside the zone and kills it if it is
+		 * in the DeathZone region.
+		 * 
+		 * <p>This method is called by the emitter and need not be called by the 
+		 * user.</p>
+		 * 
+		 * @param emitter The Emitter that created the particle.
+		 * @param particle The particle to be updated.
+		 * @param time The duration of the frame - used for time based updates.
+		 * 
+		 * @see org.flintparticles.common.actions.Action#update()
 		 */
 		override public function update( emitter:Emitter, particle:Particle, time:Number ):void
 		{

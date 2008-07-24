@@ -37,14 +37,16 @@ package org.flintparticles.twoD.actions
 	import org.flintparticles.twoD.particles.Particle2D;	
 
 	/**
-	 * The Collide action detects collisions between particles and modifies their velocities
-	 * in response to the collision. All paticles are approximated to a circular shape for
-	 * the collisions and they are assumed to be off equal density.
+	 * The Collide action detects collisions between particles and modifies their 
+	 * velocities in response to the collision. All particles are approximated to 
+	 * a circular shape for the collisions and they are assumed to be of equal 
+	 * density.
 	 * 
-	 * <p>If the particles reach a stationary, or near stationary, state under an accelerating 
-	 * force (e.g. gravity) then they will fall through each other. This is due to the nature
-	 * of the alogorithm used, which is designed for speed of execution and sufficient accuracy 
-	 * when the particles are in motion, not for absolute precision.</p>
+	 * <p>If the particles reach a stationary, or near stationary, state under an 
+	 * accelerating force (e.g. gravity) then they will fall through each other. 
+	 * This is due to the nature of the alogorithm used, which is designed for 
+	 * speed of execution and sufficient accuracy when the particles are in motion, 
+	 * not for absolute precision.</p>
 	 */
 
 	public class Collide extends ActionBase
@@ -59,13 +61,15 @@ package org.flintparticles.twoD.actions
 		 * 
 		 * @see org.flintparticles.common.emitters.Emitter#addAction()
 		 * 
-		 * @param radius The radius of a particle used when calculating the collisions. this
-		 * radius is multiplied by the scale property of each particle to get the particle's
-		 * actual size and relative mass for calculating the collision and response.
-		 * @param bounce The coefficient of restitution when the particles collide. A value of 
-		 * 1 gives a pure elastic collision, with no energy loss. A value
-		 * between 0 and 1 causes the particle to loose enegy in the collision. A value greater 
-		 * than 1 causes the particle to gain energy in the collision.
+		 * @param radius The radius used for the size of each particle when 
+		 * calculating the collisions. This radius is multiplied by the scale 
+		 * property of each particle to get the particle's actual size and 
+		 * relative mass for calculating the collision and response.
+		 * @param bounce The coefficient of restitution when the particles collide. 
+		 * A value of 1 gives a pure elastic collision, with no energy loss. A 
+		 * value between 0 and 1 causes the particles to loose enegy in the 
+		 * collision. A value greater than 1 causes the particle to gain energy 
+		 * in the collision.
 		 */
 		public function Collide( radius:Number, bounce:Number= 1 )
 		{
@@ -74,9 +78,10 @@ package org.flintparticles.twoD.actions
 		}
 		
 		/**
-		 * The radius of a particle used when calculating the collisions. this
-		 * radius is multiplied by the scale property of each particle to get the particle's
-		 * actual size and relative mass for calculating the collision and response.
+		 * The radius used for the size of each particle used when calculating the 
+		 * collisions. This radius is multiplied by the scale property of each 
+		 * particle to get the particle's actual size and relative mass for 
+		 * calculating the collision and response.
 		 */
 		public function get radius():Number
 		{
@@ -90,8 +95,8 @@ package org.flintparticles.twoD.actions
 		/**
 		 * The coefficient of restitution when the particles collide. A value of 
 		 * 1 gives a pure elastic collision, with no energy loss. A value
-		 * between 0 and 1 causes the particle to loose enegy in the collision. A value greater 
-		 * than 1 causes the particle to gain energy in the collision.
+		 * between 0 and 1 causes the particles to loose enegy in the collision. 
+		 * A value greater than 1 causes the particles to gain energy in the collision.
 		 */
 		public function get bounce():Number
 		{
@@ -103,9 +108,10 @@ package org.flintparticles.twoD.actions
 		}
 
 		/**
-		 * @inheritDoc
+		 * Returns a value of 10, so that the collide action executes before
+		 * other actions that move teh particles independently of each other.
 		 * 
-		 * <p>Returns a value of 10, so that the MutualGravity action executes before other actions.</p>
+		 * @see org.flintparticles.common.actions.Action#getDefaultPriority()
 		 */
 		override public function getDefaultPriority():Number
 		{
@@ -113,7 +119,10 @@ package org.flintparticles.twoD.actions
 		}
 
 		/**
-		 * @inheritDoc
+		 * Instructs the emitter to produce a sorted particle array for optimizing
+		 * the calculations in the update method of this action.
+		 * 
+		 * @see update()
 		 */
 		override public function addedToEmitter( emitter:Emitter ) : void
 		{
@@ -121,7 +130,16 @@ package org.flintparticles.twoD.actions
 		}
 		
 		/**
-		 * @inheritDoc
+		 * Causes the particle to check for collisions against all other particles.
+		 * 
+		 * <p>This method is called by the emitter and need not be called by the 
+		 * user.</p>
+		 * 
+		 * @param emitter The Emitter that created the particle.
+		 * @param particle The particle to be updated.
+		 * @param time The duration of the frame - used for time based updates.
+		 * 
+		 * @see org.flintparticles.common.actions.Action#update()
 		 */
 		override public function update( emitter:Emitter, particle:Particle, time:Number ):void
 		{
@@ -144,7 +162,7 @@ package org.flintparticles.twoD.actions
 			{
 				other = particles[sortedX[i]];
 				collisionDist = other.scale * _radius + p.scale * _radius;
-				if( ( dx = other.x - p.x ) > collisionDist ) break;
+				if( ( dx = other.x - p.x ) > collisionDist ) continue;
 				dy = other.y - p.y;
 				if( dy > collisionDist || dy < -collisionDist ) continue;
 				distanceSq = dy * dy + dx * dx;
@@ -160,7 +178,7 @@ package org.flintparticles.twoD.actions
 					{
 						m1 = p.scale * p.scale;
 						m2 = other.scale * other.scale;
-						factor = ( 2 * _bounce * relN ) / ( m1 + m2 );
+						factor = ( ( 1 + _bounce ) * relN ) / ( m1 + m2 );
 						f1 = factor * m2;
 						f2 = -factor * m1;
 						p.velX -= f1 * dx;

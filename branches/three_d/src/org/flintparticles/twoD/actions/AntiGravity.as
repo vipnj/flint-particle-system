@@ -39,6 +39,10 @@ package org.flintparticles.twoD.actions
 	 * The AntiGravity action applies a force to the particle to push it away from
 	 * a single point - the center of the effect. The force applied is inversely 
 	 * proportional to the square of the distance from the particle to the point.
+	 * 
+	 * <p>This is the same as the GravityWell action with a negative force.</p>
+	 * 
+	 * @see org.flintparticles.twoD.actions.GravityWell
 	 */
 
 	public class AntiGravity extends ActionBase
@@ -46,7 +50,7 @@ package org.flintparticles.twoD.actions
 		private var _x:Number;
 		private var _y:Number;
 		private var _power:Number;
-		private var _gravityConst:Number = 10000; // this just scales the power so we don't have to use very large numbers
+		private var _gravityConst:Number = 10000; // this just scales the power so we don't have to use very large numbers when setting it
 		private var _epsilonSq:Number;
 		
 		/**
@@ -56,13 +60,16 @@ package org.flintparticles.twoD.actions
 		 * 
 		 * @see org.flintparticles.common.emitters.Emitter#addAction()
 		 * 
-		 * @param power The strength of the force - larger numbers produce a stronger force.
-		 * @param x The x coordinate of the point away from which the force pushes the particles.
-		 * @param y The y coordinate of the point away from which the force pushes the particles.
-		 * @param epsilon The minimum distance for which the anti-gravity force is calculated. 
-		 * Particles closer than this distance experience the anti-gravity as it they were 
-		 * this distance away. This stops the anti-gravity effect blowing up as distances get 
-		 * small.
+		 * @param power The strength of the force - larger numbers produce a 
+		 * stronger force.
+		 * @param x The x coordinate of the point away from which the force pushes 
+		 * the particles.
+		 * @param y The y coordinate of the point away from which the force pushes 
+		 * the particles.
+		 * @param epsilon The minimum distance for which the anti-gravity force is 
+		 * calculated. Particles closer than this distance experience the 
+		 * anti-gravity as if they were this distance away. This stops the 
+		 * anti-gravity effect blowing up as distances get small.
 		 */
 		public function AntiGravity( power:Number, x:Number, y:Number, epsilon:Number = 1 )
 		{
@@ -111,9 +118,9 @@ package org.flintparticles.twoD.actions
 		
 		/**
 		 * The minimum distance for which the anti-gravity force is calculated. 
-		 * Particles closer than this distance experience the anti-gravity as it they were 
-		 * this distance away. This stops the anti-gravity effect blowing up as distances get 
-		 * small.
+		 * Particles closer than this distance experience the anti-gravity as if 
+		 * they were this distance away. This stops the anti-gravity effect 
+		 * blowing up as distances get small.
 		 */
 		public function get epsilon():Number
 		{
@@ -125,7 +132,7 @@ package org.flintparticles.twoD.actions
 		}
 		
 		/**
-		 * Applies the anti-gravity force to a particle.
+		 * Applies the anti-gravity force to a particle for the specified time period.
 		 * 
 		 * <p>This method is called by the emitter and need not be called by the 
 		 * user</p>

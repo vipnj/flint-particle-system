@@ -103,43 +103,8 @@ package org.flintparticles.threeD.actions
 			}
 			toTarget.scaleBy( 1 / len );
 			var targetPerp:Vector3D = toTarget.subtract( velDirection.scaleBy( toTarget.dotProduct( velDirection ) ) );
-				p.velocity.incrementBy( targetPerp.scaleBy( acc / targetPerp.length ) );
-				p.velocity.scaleBy( velLength / p.velocity.length );
-			
-			
-/*			var p:Particle3D = Particle3D( particle );
-			var current:Vector3D = p.velocity.unit();
-			var target:Vector3D = p.position.subtract( _point ).normalize();
-			var axis:Vector3D = current.cross( target );
-			var angle:Number = Math.acos( current.dotProduct( target ) );
-			var moveBy:Number = _power * time;
-			if( angle <= moveBy && angle >= -moveBy )
-			{
-				p.velocity.assign( target.scaleBy( p.velocity.length ) );
-			}
-			else if( angle > moveBy )
-			{
-				angle = moveBy;
-				
-				
-				
-			p.rotation.setFromAxisRotation( axis, angle );
-			
-			
-			var turnLeft:Boolean = ( ( p.y - _y ) * p.velX + ( _x - p.x ) * p.velY > 0 );
-			var newAngle:Number;
-			if ( turnLeft )
-			{
-				newAngle = Math.atan2( p.velY, p.velX ) - _power * time;
-				
-			}
-			else
-			{
-				newAngle = Math.atan2( p.velY, p.velX ) + _power * time;
-			}
-			var len:Number = Math.sqrt( p.velX * p.velX + p.velY * p.velY );
-			p.velX = len * Math.cos( newAngle );
-			p.velY = len * Math.sin( newAngle );*/
+			p.velocity.incrementBy( targetPerp.scaleBy( acc / targetPerp.length ) );
+			p.velocity.scaleBy( velLength / p.velocity.length );
 		}
 	}
 }
