@@ -60,7 +60,7 @@ package
 			emitter.addInitializer( new ImageClass( Star, 12 ) );
 			emitter.addInitializer( new ColorInit( 0xFFFF33FF, 0xFF33FFFF ) );
 			emitter.addInitializer( new Position( new PointZone( new Point( 0, 0 ) ) ) );
-			emitter.addInitializer( new Velocity( new DiscSectorZone( new Point( 0, 0 ), 260, 360, -3 * Math.PI/5, -2 * Math.PI / 5 ) ) );
+			emitter.addInitializer( new Velocity( new DiscSectorZone( new Point( 0, 0 ), 360, 260, -3 * Math.PI/5, -2 * Math.PI / 5 ) ) );
 			emitter.addInitializer( new RotateVelocity( -4, 4 ) );
 			emitter.addInitializer( new Lifetime( 6 ) );
 			

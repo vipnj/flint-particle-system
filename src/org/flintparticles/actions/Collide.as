@@ -139,7 +139,7 @@ package org.flintparticles.actions
 			{
 				other = particles[sortedX[i]];
 				collisionDist = other.scale * _radius + particle.scale * _radius;
-				if( ( dx = other.x - particle.x ) > collisionDist ) break;
+				if( ( dx = other.x - particle.x ) > collisionDist ) continue;
 				dy = other.y - particle.y;
 				if( dy > collisionDist || dy < -collisionDist ) continue;
 				distanceSq = dy * dy + dx * dx;
@@ -155,7 +155,7 @@ package org.flintparticles.actions
 					{
 						m1 = particle.scale * particle.scale;
 						m2 = other.scale * other.scale;
-						factor = ( 2 * _bounce * relN ) / ( m1 + m2 );
+						factor = ( ( 1 + _bounce ) * relN ) / ( m1 + m2 );
 						f1 = factor * m2;
 						f2 = -factor * m1;
 						particle.velX -= f1 * dx;
