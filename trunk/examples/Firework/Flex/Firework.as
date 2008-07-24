@@ -66,7 +66,7 @@ package
 			
 			emitter.addInitializer( new SharedImage( new Dot( 2 ) ) );
 			emitter.addInitializer( new ColorInit( 0xFFFFFF00, 0xFFFF6600 ) );
-			emitter.addInitializer( new Velocity( new DiscZone( new Point( 0, 0 ), 120, 200 ) ) );
+			emitter.addInitializer( new Velocity( new DiscZone( new Point( 0, 0 ), 200, 120 ) ) );
 			emitter.addInitializer( new Lifetime( 5 ) );
 			
 			emitter.addAction( new Age( Quadratic.easeIn ) );
