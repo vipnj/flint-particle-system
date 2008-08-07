@@ -32,6 +32,7 @@ package org.flintparticles.threeD.emitters
 {
 	import org.flintparticles.common.emitters.Emitter;
 	import org.flintparticles.common.particles.Particle;
+	import org.flintparticles.common.particles.ParticleFactory;
 	import org.flintparticles.threeD.geom.Quaternion;
 	import org.flintparticles.threeD.geom.Vector3D;
 	import org.flintparticles.threeD.particles.Particle3D;
@@ -58,6 +59,14 @@ package org.flintparticles.threeD.emitters
 		 * default factory to manage the creation, reuse and destruction of particles
 		 */
 		protected static var _creator:ParticleCreator3D = new ParticleCreator3D();
+		
+		/**
+		 * The default particle factory used to manage the creation, reuse and destruction of particles.
+		 */
+		public static function get defaultParticleFactory():ParticleFactory
+		{
+			return _creator;
+		}
 		
 		/**
 		 * @private

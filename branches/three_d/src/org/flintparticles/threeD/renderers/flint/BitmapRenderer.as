@@ -208,7 +208,7 @@ package org.flintparticles.threeD.renderers.flint
 		 */
 		protected function createBitmap():void
 		{
-			if( !canvas )
+			if( !_canvas )
 			{
 				return;
 			}
@@ -239,19 +239,6 @@ package org.flintparticles.threeD.renderers.flint
 		{
 			_canvas = value;
 			createBitmap();
-		}
-
-		/**
-		 * When the renderer is no longer required, this method must be called by the 
-		 * user to free up memory used by the renderer. If you don't call this method
-		 * then the renderer's bitmap data will remain in memory.
-		 */
-		public function dispose():void
-		{
-			if( _bitmap && _bitmap.bitmapData )
-			{
-				_bitmap.bitmapData.dispose();
-			}
 		}
 
 		/**
@@ -378,7 +365,6 @@ package org.flintparticles.threeD.renderers.flint
 			{
 				matrix = new Matrix( scale, 0, 0, scale, pos.x - _canvas.x, -pos.y - _canvas.y );
 			}
-
 
 			_bitmap.bitmapData.draw( particle.image, matrix, particle.colorTransform, DisplayObject( particle.image ).blendMode, null, _smoothing );
 		}

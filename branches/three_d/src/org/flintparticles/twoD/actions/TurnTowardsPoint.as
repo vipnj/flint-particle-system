@@ -36,8 +36,8 @@ package org.flintparticles.twoD.actions
 	import org.flintparticles.twoD.particles.Particle2D;	
 
 	/**
-	 * The TurnTowardsPoint action causes the particle to constantly adjust its direction
-	 * so that it travels towards a particular point.
+	 * The TurnTowardsPoint action causes the particle to constantly adjust its 
+	 * direction so that it travels towards a particular point.
 	 */
 
 	public class TurnTowardsPoint extends ActionBase
@@ -47,8 +47,8 @@ package org.flintparticles.twoD.actions
 		private var _power:Number;
 		
 		/**
-		 * The constructor creates a TurnTowardsPoint action for use by 
-		 * an emitter. To add a TurnTowardsPoint to all particles created by an emitter, use the
+		 * The constructor creates a TurnTowardsPoint action for use by an emitter. 
+		 * To add a TurnTowardsPoint to all particles created by an emitter, use the
 		 * emitter's addAction method.
 		 * 
 		 * @see org.flintparticles.common.emitters.Emitter#addAction()
@@ -65,7 +65,7 @@ package org.flintparticles.twoD.actions
 		}
 		
 		/**
-		 * The strength of theturn action. Higher values produce a sharper turn.
+		 * The strength of the turn action. Higher values produce a sharper turn.
 		 */
 		public function get power():Number
 		{
@@ -101,7 +101,17 @@ package org.flintparticles.twoD.actions
 		}
 		
 		/**
-		 * @inheritDoc
+		 * Calculates the direction to the focus point and turns the particle towards 
+		 * this direction.
+		 * 
+		 * <p>This method is called by the emitter and need not be called by the 
+		 * user.</p>
+		 * 
+		 * @param emitter The Emitter that created the particle.
+		 * @param particle The particle to be updated.
+		 * @param time The duration of the frame - used for time based updates.
+		 * 
+		 * @see org.flintparticles.common.actions.Action#update()
 		 */
 		override public function update( emitter:Emitter, particle:Particle, time:Number ):void
 		{

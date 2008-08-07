@@ -37,7 +37,11 @@ package org.flintparticles.twoD.actions
 	import org.flintparticles.twoD.particles.Particle2D;	
 
 	/**
-	 * The MutualGravity Action applies forces to attract each particle towards the other particles.
+	 * The MutualGravity Action applies forces to attract each particle towards 
+	 * the other particles. The force applied is inversely proportional to the 
+	 * square of the distance between the particles, in accordance with Newton's
+	 * law of gravity. This simulates the effect of gravity over large distances 
+	 * (as between planets, for example).
 	 */
 	public class MutualGravity extends ActionBase
 	{
@@ -48,17 +52,23 @@ package org.flintparticles.twoD.actions
 		private var _gravityConst:Number = 1000; // scale sthe power
 		
 		/**
-		 * The constructor creates a MutualGravity action for use by 
-		 * an emitter. To add a MutualGravity to all particles created by an emitter, use the
+		 * The constructor creates a MutualGravity action for use by an emitter. 
+		 * To add a MutualGravity to all particles created by an emitter, use the
 		 * emitter's addAction method.
 		 * 
 		 * @see org.flintparticles.common.emitters.Emitter#addAction()
 		 * 
-		 * @param power The strength of the gravitational pull between the particles.
-		 * @param maxDistance The maximum distance between particles for the gravitational
-		 * effect to be calculated. You can speed up this action by reducing the maxDistance
-		 * since often only the closest other particles have a significant effect on the 
-		 * motion of a particle.
+		 * @param power The strength of the gravitational pull between the 
+		 * particles.
+		 * @param maxDistance The maximum distance between particles for the 
+		 * gravitational effect to be calculated. You can sometimes speed up 
+		 * the calculation of this action by 
+		 * reducing the maxDistance since often only the closest other particles 
+		 * have a significant effect on the motion of a particle.
+		 * @param epsilon The minimum distance for which gravity is calculated. 
+		 * Particles closer than this distance experience a gravity force as if 
+		 * they were this distance away. This stops the gravity effect blowing 
+		 * up as distances get small.
 		 */
 		public function MutualGravity( power:Number, maxDistance:Number, epsilon:Number = 1 )
 		{
@@ -82,9 +92,10 @@ package org.flintparticles.twoD.actions
 		
 		/**
 		 * The maximum distance between particles for the gravitational
-		 * effect to be calculated. You can speed up this action by reducing the maxDistance
-		 * since often only the closest other particles have a significant effect on the 
-		 * motion of a particle.
+		 * effect to be calculated. You can sometimes speed up the calculation 
+		 * of this action by reducing the 
+		 * maxDistance since often only the closest other particles have a 
+		 * significant effect on the motion of a particle.
 		 */
 		public function get maxDistance():Number
 		{
@@ -98,9 +109,9 @@ package org.flintparticles.twoD.actions
 		
 		/**
 		 * The minimum distance for which the gravity force is calculated. 
-		 * Particles closer than this distance experience the gravity as it they were 
-		 * this distance away. This stops the gravity effect blowing up as distances get 
-		 * small.
+		 * Particles closer than this distance experience the gravity as it they 
+		 * were this distance away. This stops the gravity effect blowing up as 
+		 * distances get very small.
 		 */
 		public function get epsilon():Number
 		{
@@ -112,9 +123,11 @@ package org.flintparticles.twoD.actions
 		}
 
 		/**
-		 * @inheritDoc
+		 * Returns a value of 10, so that the MatchVelocity action executes 
+		 * before accelerating actions that act on particles independently of
+		 * other particles, like Acceleration and GravityWell.
 		 * 
-		 * <p>Returns a value of 10, so that the MutualGravity action executes before other actions.</p>
+		 * @see org.flintparticles.common.actions.Action#getDefaultPriority()
 		 */
 		override public function getDefaultPriority():Number
 		{
@@ -122,7 +135,12 @@ package org.flintparticles.twoD.actions
 		}
 
 		/**
-		 * @inheritDoc
+		 * Instructs the emitter to produce a sorted particle array for optimizing
+		 * the calculations in the update method of this action.
+		 * 
+		 * @param emitter The emitter this action has been added to.
+		 * 
+		 * @see org.flintparticles.common.actions.Action#addedToEmitter()
 		 */
 		override public function addedToEmitter( emitter:Emitter ) : void
 		{
@@ -130,7 +148,17 @@ package org.flintparticles.twoD.actions
 		}
 		
 		/**
-		 * @inheritDoc
+		 * Checks all particles near the current particle and applies the 
+		 * gravity force between them.
+		 * 
+		 * <p>This method is called by the emitter and need not be called by the 
+		 * user.</p>
+		 * 
+		 * @param emitter The Emitter that created the particle.
+		 * @param particle The particle to be updated.
+		 * @param time The duration of the frame - used for time based updates.
+		 * 
+		 * @see org.flintparticles.common.actions.Action#update()
 		 */
 		override public function update( emitter : Emitter, particle : Particle, time : Number ) : void
 		{

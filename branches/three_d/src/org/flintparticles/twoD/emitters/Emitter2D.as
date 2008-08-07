@@ -32,6 +32,7 @@ package org.flintparticles.twoD.emitters
 {
 	import org.flintparticles.common.emitters.Emitter;
 	import org.flintparticles.common.particles.Particle;
+	import org.flintparticles.common.particles.ParticleFactory;
 	import org.flintparticles.common.utils.Maths;
 	import org.flintparticles.twoD.particles.Particle2D;
 	import org.flintparticles.twoD.particles.ParticleCreator2D;	
@@ -74,6 +75,14 @@ package org.flintparticles.twoD.emitters
 		 * default factory to manage the creation, reuse and destruction of particles
 		 */
 		protected static var _creator:ParticleCreator2D = new ParticleCreator2D();
+		
+		/**
+		 * The default particle factory used to manage the creation, reuse and destruction of particles.
+		 */
+		public static function get defaultParticleFactory():ParticleFactory
+		{
+			return _creator;
+		}
 		
 		/**
 		 * @private

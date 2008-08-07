@@ -30,7 +30,8 @@
 
 package org.flintparticles.threeD.zones 
 {
-	import org.flintparticles.threeD.geom.Vector3D;		
+	import org.flintparticles.threeD.geom.Matrix3D;
+	import org.flintparticles.threeD.geom.Vector3D;				
 
 	/**
 	 * The RectangleZone zone defines a rectangular shaped zone.
@@ -38,15 +39,14 @@ package org.flintparticles.threeD.zones
 
 	public class BoxZone implements Zone3D 
 	{
-		private var _xMin:Number;
-		private var _xMax:Number;
-		private var _yMin:Number;
-		private var _yMax:Number;
-		private var _zMin:Number;
-		private var _zMax:Number;
 		private var _width:Number;
 		private var _height:Number;
 		private var _depth:Number;
+		private var _center:Vector3D;
+		private var _upAxis:Vector3D;
+		private var _depthAxis:Vector3D;
+		private var _transformTo:Matrix3D;
+		private var _transformFrom:Matrix3D;
 		
 		/**
 		 * The constructor creates a RectangleZone zone.
@@ -56,17 +56,26 @@ package org.flintparticles.threeD.zones
 		 * @param right The right coordinate of the rectangle defining the region of the zone.
 		 * @param bottom The bottom coordinate of the rectangle defining the region of the zone.
 		 */
-		public function BoxZone( xMin:Number, xMax:Number, yMin:Number, yMax:Number, zMin:Number, zMax:Number )
+		public function BoxZone( width:Number, height:Number, depth:Number, center:Vector3D, upAxis:Vector3D, depthAxis:Vector3D )
 		{
-			_xMin = xMin;
-			_xMax = xMax;
-			_yMin = yMin;
-			_yMax = yMax;
-			_zMin = zMin;
-			_zMax = zMax;
-			_width = xMax - xMin;
-			_height = yMax - yMin;
-			_depth = zMax - zMin;
+			_width = width;
+			_height = height;
+			_depth = depth;
+			_center = center.clone();
+			_center.w = 1;
+			_upAxis = upAxis.unit();
+			_upAxis.w = 0;
+			_depthAxis = depthAxis.unit();
+			_depthAxis.w = 0;
+			init();
+		}
+		
+		private function init():void
+		{
+			_transformFrom = Matrix3D.newRotateCoordinateSpace( null, _upAxis, _depthAxis );
+			_transformFrom.appendTranslate( _center );
+			_transformFrom.prependTranslate( new Vector3D( -_width/2, -_height/2, -_depth/2 ) );
+			_transformTo = _transformFrom.inverse;
 		}
 		
 		/**
@@ -80,7 +89,8 @@ package org.flintparticles.threeD.zones
 		 */
 		public function contains( p:Vector3D ):Boolean
 		{
-			return p.x >= _xMin && p.x <= _xMax && p.y >= _yMin && p.y <= _yMax && p.z >= _zMin && p.z <= _zMax;
+			var q:Vector3D = _transformTo.transformVector( p );
+			return q.x >= 0 && q.x <= _width && q.y >= 0 && q.y <= _height && q.z >= 0 && q.z <= _depth;
 		}
 		
 		/**
@@ -92,7 +102,8 @@ package org.flintparticles.threeD.zones
 		 */
 		public function getLocation():Vector3D
 		{
-			return new Vector3D( _xMin + Math.random() * _width, _yMin + Math.random() * _height, _zMin + Math.random() * _depth, 1 );
+			var p:Vector3D = new Vector3D( Math.random() * _width, Math.random() * _height, Math.random() * _depth, 1 );
+			return _transformFrom.transformVectorSelf( p );
 		}
 		
 		/**

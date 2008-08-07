@@ -38,7 +38,11 @@ package org.flintparticles.twoD.actions
 	/**
 	 * The RotationalQuadraticDrag action applies drag to the particle to slow it 
 	 * down when it's rotating. The drag force is proportional to the square of the 
-	 * angular velocity of the particle.
+	 * angular velocity of the particle. For other types of rotational drag see the 
+	 * RotationalLinerDrag and RotationalFriction actions.
+	 * 
+	 * @see RotationalFriction
+	 * @see RotationalLinearDrag
 	 */
 
 	public class RotationalQuadraticDrag extends ActionBase
@@ -52,7 +56,8 @@ package org.flintparticles.twoD.actions
 		 * 
 		 * @see org.flintparticles.common.emitters.Emitter#addAction()
 		 * 
-		 * @param drag The amount of drag. A higher number produces a stronger drag force.
+		 * @param drag The amount of drag. A higher number produces a stronger drag 
+		 * force.
 		 */
 		public function RotationalQuadraticDrag( drag:Number )
 		{
@@ -72,7 +77,17 @@ package org.flintparticles.twoD.actions
 		}
 		
 		/**
-		 * @inheritDoc
+		 * Calculates the rotational drag on the particle and applies it for the 
+		 * period of time indicated.
+		 * 
+		 * <p>This method is called by the emitter and need not be called by the 
+		 * user.</p>
+		 * 
+		 * @param emitter The Emitter that created the particle.
+		 * @param particle The particle to be updated.
+		 * @param time The duration of the frame - used for time based updates.
+		 * 
+		 * @see org.flintparticles.common.actions.Action#update()
 		 */
 		override public function update( emitter:Emitter, particle:Particle, time:Number ):void
 		{

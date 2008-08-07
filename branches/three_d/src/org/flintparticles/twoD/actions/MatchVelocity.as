@@ -121,8 +121,8 @@ package org.flintparticles.twoD.actions
 		
 		/**
 		 * Checks all particles near the current particle and applies the 
-		 * angular acceleration to alter the particle's angular velocity
-		 * towards their average angular velocity.
+		 * acceleration to alter the particle's velocity
+		 * towards their average velocity.
 		 * 
 		 * <p>This method is called by the emitter and need not be called by the 
 		 * user.</p>

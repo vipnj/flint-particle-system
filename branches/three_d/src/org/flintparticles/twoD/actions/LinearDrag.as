@@ -38,6 +38,10 @@ package org.flintparticles.twoD.actions
 	/**
 	 * The LinearDrag action applies drag to the particle to slow it down when 
 	 * it's moving. The drag force is proportional to the speed of the particle.
+	 * For other types of drag see QuadraticDrag and Friction.
+	 * 
+	 * @see Friction
+	 * @see QuadraticDrag
 	 */
 
 	public class LinearDrag extends ActionBase

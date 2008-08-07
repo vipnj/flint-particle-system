@@ -38,7 +38,11 @@ package org.flintparticles.twoD.actions
 	/**
 	 * The RotationalLinearDrag action applies drag to the particle to slow it down 
 	 * when it's rotating. The drag force is proportional to the angular velocity of 
-	 * the particle.
+	 * the particle. For other types of rotational drag see RotationalQuadraticDrag 
+	 * and RotationalFriction.
+	 * 
+	 * @see RotationalFriction
+	 * @see RotationalQuadraticDrag
 	 */
 
 	public class RotationalLinearDrag extends ActionBase
@@ -46,13 +50,14 @@ package org.flintparticles.twoD.actions
 		private var _drag:Number;
 		
 		/**
-		 * The constructor creates a RotationalLinearDrag action for use by 
-		 * an emitter. To add a RotationalLinearDrag to all particles created by an 
+		 * The constructor creates a RotationalLinearDrag action for use by an emitter. 
+		 * To add a RotationalLinearDrag to all particles created by an 
 		 * emitter, use the emitter's addAction method.
 		 * 
 		 * @see org.flintparticles.common.emitters.Emitter#addAction()
 		 * 
-		 * @param drag The amount of drag. A higher number produces a stronger drag force.
+		 * @param drag The amount of drag. A higher number produces a stronger drag 
+		 * force.
 		 */
 		public function RotationalLinearDrag( drag:Number )
 		{
@@ -72,7 +77,17 @@ package org.flintparticles.twoD.actions
 		}
 		
 		/**
-		 * @inheritDoc
+		 * Calculates the rotational drag on the particle and applies it for the 
+		 * period of time indicated.
+		 * 
+		 * <p>This method is called by the emitter and need not be called by the 
+		 * user.</p>
+		 * 
+		 * @param emitter The Emitter that created the particle.
+		 * @param particle The particle to be updated.
+		 * @param time The duration of the frame - used for time based updates.
+		 * 
+		 * @see org.flintparticles.common.actions.Action#update()
 		 */
 		override public function update( emitter:Emitter, particle:Particle, time:Number ):void
 		{

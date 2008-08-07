@@ -36,7 +36,8 @@ package org.flintparticles.twoD.actions
 	import org.flintparticles.twoD.particles.Particle2D;	
 
 	/**
-	 * The TargetVelocity action adjusts the velocity of the particle towards the target velocity.
+	 * The TargetVelocity action adjusts the velocity of the particle towards the 
+	 * target velocity.
 	 */
 	public class TargetVelocity extends ActionBase
 	{
@@ -45,8 +46,8 @@ package org.flintparticles.twoD.actions
 		private var _rate:Number;
 		
 		/**
-		 * The constructor creates a TargetVelocity action for use by 
-		 * an emitter. To add a TargetVelocity to all particles created by an emitter, use the
+		 * The constructor creates a TargetVelocity action for use by an emitter. 
+		 * To add a TargetVelocity to all particles created by an emitter, use the
 		 * emitter's addAction method.
 		 * 
 		 * @see org.flintparticles.common.emitters.Emitter#addAction()
@@ -88,8 +89,8 @@ package org.flintparticles.twoD.actions
 		}
 		
 		/**
-		 * Adjusts how quickly the particle reaches the target angular velocity.
-		 * Larger numbers cause it to approach the target angular velocity more quickly.
+		 * Adjusts how quickly the particle reaches the target velocity.
+		 * Larger numbers cause it to approach the target velocity more quickly.
 		 */
 		public function get rate():Number
 		{
@@ -101,7 +102,18 @@ package org.flintparticles.twoD.actions
 		}
 		
 		/**
-		 * @inheritDoc
+		 * Calculates the difference between the particle's velocity and
+		 * the target and adjusts the velocity closer to the target by an
+		 * amount proportional to the difference, the time and the rate of convergence.
+		 * 
+		 * <p>This method is called by the emitter and need not be called by the 
+		 * user.</p>
+		 * 
+		 * @param emitter The Emitter that created the particle.
+		 * @param particle The particle to be updated.
+		 * @param time The duration of the frame - used for time based updates.
+		 * 
+		 * @see org.flintparticles.common.actions.Action#update()
 		 */
 		override public function update( emitter:Emitter, particle:Particle, time:Number ):void
 		{

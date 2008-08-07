@@ -128,6 +128,80 @@ package org.flintparticles.threeD.geom
 		}
 
 		/**
+		 * Creates a coordinate system rotation such that the x, y and z axes are
+		 * translated to unit vectors in the directions indicated. The parameter
+		 * ectors must be at right angles to each other. One parameter may be null, in
+		 * which case it is calculated from the cross product of the other two
+		 * parameters.
+		 * 
+		 * <p>This method is the basis for the look-at behaviour of cameras, for
+		 * example.</p>
+		 * 
+		 * @param axisX The direction the x axis points after the rotation.
+		 * @param axisY The direction the y axis points after the rotation.
+		 * @param axisZ The direction the z axis points after the rotation.
+		 */
+		public static function newRotateCoordinateSpace( axisX:Vector3D, axisY:Vector3D, axisZ:Vector3D ):Matrix3D
+		{
+			var aX:Vector3D;
+			var aY:Vector3D;
+			var aZ:Vector3D;
+			if( !axisX )
+			{
+				if( !axisY || !axisZ )
+				{
+					throw new Error( "You must define two axes in the coordinate space." );
+				}
+				aY = axisY.unit();
+				aZ = axisZ.unit();
+				if( Math.abs( aY.dotProduct( aZ ) ) > 0.01 )
+				{
+					throw new Error( "The new axes must be orthogonal." );
+				}
+				aX = aY.cross( aZ ).normalize();
+			}
+			else if( !axisY )
+			{
+				if( !axisX || !axisZ )
+				{
+					throw new Error( "You must define two axes in the coordinate space." );
+				}
+				aX = axisX.unit();
+				aZ = axisZ.unit();
+				if( Math.abs( aX.dotProduct( aZ ) ) > 0.01 )
+				{
+					throw new Error( "The new axes must be orthogonal." );
+				}
+				aY = aZ.cross( aX ).normalize();
+			}
+			else if( !axisZ )
+			{
+				if( !axisX || !axisY )
+				{
+					throw new Error( "You must define two axes in the coordinate space." );
+				}
+				aX = axisX.unit();
+				aY = axisY.unit();
+				if( Math.abs( aX.dotProduct( aY ) ) > 0.01 )
+				{
+					throw new Error( "The new axes must be orthogonal." );
+				}
+				aZ = aX.cross( aY ).normalize();
+			}
+			else
+			{
+				aX = axisX.unit();
+				aY = axisY.unit();
+				aZ = axisZ.unit();
+				if( Math.abs( aX.dotProduct( aY ) ) > 0.01 || Math.abs( aY.dotProduct( aZ ) ) > 0.01 || Math.abs( aZ.dotProduct( aX ) ) > 0.01 )
+				{
+					throw new Error( "The new axes must be orthogonal." );
+				}
+			}
+			return new Matrix3D( [ aX.x, aY.x, aZ.x, 0, aX.y, aY.y, aZ.y, 0, aX.z, aY.z, aZ.z, 0, 0, 0, 0, 1 ] );
+		}
+
+		/**
 		 * The value in row 1 column 1 of the matrix.
 		 * 
 		 * x 0 0 0
@@ -839,5 +913,9 @@ package org.flintparticles.threeD.geom
 			}
 		}
 		
+		public function toString():String
+		{
+			return rawData.toString();
+		}
 	}
 }

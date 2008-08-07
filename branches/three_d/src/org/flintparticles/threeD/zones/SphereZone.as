@@ -30,8 +30,7 @@
 
 package org.flintparticles.threeD.zones 
 {
-	import org.flintparticles.threeD.geom.Vector3D;
-	import org.flintparticles.threeD.geom.Vector3DUtils;
+	import org.flintparticles.threeD.geom.Vector3D;		
 
 	/**
 	 * The DiscZone zone defines a zone that contains all the points on a disc.1
@@ -39,19 +38,13 @@ package org.flintparticles.threeD.zones
 	 * have a hole in the middle.
 	 */
 
-	public class DiscZone implements Zone3D 
+	public class SphereZone implements Zone3D 
 	{
 		private var _center:Vector3D;
-		private var _normal:Vector3D;
 		private var _innerRadius:Number;
 		private var _innerRadiusSq:Number;
 		private var _outerRadius:Number;
 		private var _outerRadiusSq:Number;
-		private var _distToOrigin:Number;
-		private var _planeAxis1:Vector3D;
-		private var _planeAxis2:Vector3D;
-
-		private static const TWOPI:Number = Math.PI * 2;
 		
 		/**
 		 * The constructor creates a DiscZone 3D zone.
@@ -62,25 +55,14 @@ package org.flintparticles.threeD.zones
 		 * @param innerRadius The inner radius of the disc. This defines the hole 
 		 * in the center of the disc. If set to zero, there is no hole. 
 		 */
-		public function DiscZone( center:Vector3D, normal:Vector3D, outerRadius:Number, innerRadius:Number = 0 )
+		public function SphereZone( center:Vector3D, outerRadius:Number, innerRadius:Number = 0 )
 		{
 			_center = center.clone();
 			_center.w = 1;
-			_normal = normal.unit();
-			_normal.w = 0;
 			_innerRadius = innerRadius;
 			_innerRadiusSq = _innerRadius * _innerRadius;
 			_outerRadius = outerRadius;
 			_outerRadiusSq = _outerRadius * _outerRadius;
-			initPlane();
-		}
-		
-		private function initPlane():void
-		{
-			_distToOrigin = _normal.dotProduct( center );
-			var axes:Array = Vector3DUtils.getPerpendiculars( normal );
-			_planeAxis1 = axes[0];
-			_planeAxis2 = axes[1];
 		}
 		
 		/**
@@ -94,23 +76,6 @@ package org.flintparticles.threeD.zones
 		{
 			_center = value.clone();
 			_center.w = 1;
-			initPlane();
-		}
-
-		/**
-		 * The vector normal to the disc. When setting the vector, the vector is
-		 * normalized. So, when reading the vector this will be a normalized version
-		 * of the vector that is set.
-		 */
-		public function get normal() : Vector3D
-		{
-			return _normal.clone();
-		}
-		public function set normal( value : Vector3D ) : void
-		{
-			_normal = value.unit();
-			_normal.w = 0;
-			initPlane();
 		}
 
 		/**
@@ -149,19 +114,8 @@ package org.flintparticles.threeD.zones
 		 */
 		public function contains( p:Vector3D ):Boolean
 		{
-			// is not in plane if dist to origin along normal is different
-			var dist:Number = _normal.dotProduct( p );
-			if( Math.abs( dist - _distToOrigin ) > 0.1 ) // test for close, not exact
-			{
-				return false;
-			}
-			// test distance to center
-			var distToCenter:Number = Vector3D.distanceSquared( center, p );
-			if( distToCenter <= _outerRadius && distToCenter >= _innerRadius )
-			{
-				return true;
-			}
-			return false;
+			var distSq:Number = p.subtract( _center ).lengthSquared;
+			return distSq <= _outerRadiusSq && distSq >= _innerRadiusSq;
 		}
 		
 		/**
@@ -173,10 +127,17 @@ package org.flintparticles.threeD.zones
 		 */
 		public function getLocation():Vector3D
 		{
-			var rand:Number = Math.random();
-			var radius:Number = _innerRadius + (1 - rand * rand ) * ( _outerRadius - _innerRadius );
-			var angle:Number = Math.random() * TWOPI;
-			return _center.add( _planeAxis1.multiply( radius * Math.cos( angle ) ).incrementBy( _planeAxis2.multiply( radius * Math.sin( angle ) ) ) );
+			var rand:Vector3D;
+			do
+			{
+				rand = new Vector3D( Math.random() - 0.5, Math.random() - 0.5, Math.random() - 0.5 );
+			}
+			while ( rand.x == 0 && rand.y == 0 && rand.z == 0 );
+			rand.normalize();
+			var d:Number = Math.random();
+			d = _innerRadius + ( 1 - d * d ) * ( _outerRadius - _innerRadius );
+			rand.scaleBy( d / rand.length ).incrementBy( center );
+			return rand;
 		}
 		
 		/**
@@ -189,7 +150,7 @@ package org.flintparticles.threeD.zones
 		public function getVolume():Number
 		{
 			// treat as one pixel tall disc
-			return ( _outerRadius * _outerRadius - _innerRadius * _innerRadius ) * Math.PI;
+			return ( _outerRadiusSq * _outerRadius - _innerRadiusSq * _innerRadius ) * Math.PI * 4 / 3;
 		}
 	}
 }

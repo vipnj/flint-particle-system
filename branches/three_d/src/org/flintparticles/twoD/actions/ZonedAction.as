@@ -38,7 +38,8 @@ package org.flintparticles.twoD.actions
 	import org.flintparticles.twoD.zones.Zone2D;	
 
 	/**
-	 * The ZonedAction Action applies an action to the particle only if it is in the specified zone. 
+	 * The ZonedAction Action applies an action to the particle only if it is in 
+	 * the specified zone. 
 	 */
 
 	public class ZonedAction extends ActionBase
@@ -48,16 +49,17 @@ package org.flintparticles.twoD.actions
 		private var _invert:Boolean;
 		
 		/**
-		 * The constructor creates a ZonedAction action for use by 
-		 * an emitter. To add a ZonedAction to all particles created by an emitter, use the
+		 * The constructor creates a ZonedAction action for use by an emitter. 
+		 * To add a ZonedAction to all particles created by an emitter, use the
 		 * emitter's addAction method.
 		 * 
 		 * @see org.flintparticles.emitters.Emitter#addAction()
 		 * 
 		 * @param action The action to apply when inside the zone.
 		 * @param zone The zone in which to apply the action.
-		 * @param invertZone If false (the default) the action is applied only to particles inside 
-		 * the zone. If true the action is applied only to particles outside the zone.
+		 * @param invertZone If false (the default) the action is applied only to 
+		 * particles inside the zone. If true the action is applied only to 
+		 * particles outside the zone.
 		 */
 		public function ZonedAction( action:Action, zone:Zone2D, invertZone:Boolean = false )
 		{
@@ -91,8 +93,8 @@ package org.flintparticles.twoD.actions
 		}
 		
 		/**
-		 * If false (the default), the action is applied to particles inside the zone.
-		 * If true, the action is applied to particles outside the zone.
+		 * If false (the default), the action is applied only to particles inside 
+		 * the zone. If true, the action is applied only to particles outside the zone.
 		 */
 		public function get invertZone():Boolean
 		{
@@ -104,7 +106,9 @@ package org.flintparticles.twoD.actions
 		}
 		
 		/**
-		 * @inheritDoc
+		 * Returns the default priority of the action being used.
+		 * 
+		 * @see org.flintparticles.common.actions.Action#getDefaultPriority()
 		 */
 		override public function getDefaultPriority():Number
 		{
@@ -112,7 +116,11 @@ package org.flintparticles.twoD.actions
 		}
 		
 		/**
-		 * @inheritDoc
+		 * Calls the addedToEmitter method of the action being used.
+		 * 
+		 * @param emitter The emitter this action has been added to.
+		 * 
+		 * @see org.flintparticles.common.actions.Action#addedToEmitter()
 		 */
 		override public function addedToEmitter( emitter:Emitter ):void
 		{
@@ -120,7 +128,11 @@ package org.flintparticles.twoD.actions
 		}
 		
 		/**
-		 * @inheritDoc
+		 * Calls the removedFromEmitter method of the action being used.
+		 * 
+		 * @param emitter The emitter this action has been added to.
+		 * 
+		 * @see org.flintparticles.common.actions.Action#removedFromEmitter()
 		 */
 		override public function removedFromEmitter( emitter:Emitter ):void
 		{
@@ -128,7 +140,17 @@ package org.flintparticles.twoD.actions
 		}
 
 		/**
-		 * @inheritDoc
+		 * Checks if the particle is in the zone and if so calls the update
+		 * method of the action being used.
+		 * 
+		 * <p>This method is called by the emitter and need not be called by the 
+		 * user.</p>
+		 * 
+		 * @param emitter The Emitter that created the particle.
+		 * @param particle The particle to be updated.
+		 * @param time The duration of the frame - used for time based updates.
+		 * 
+		 * @see org.flintparticles.common.actions.Action#update()
 		 */
 		override public function update( emitter:Emitter, particle:Particle, time:Number ):void
 		{

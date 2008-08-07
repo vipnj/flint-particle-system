@@ -153,7 +153,7 @@ package org.flintparticles.twoD.zones
 		 */
 		public function getArea():Number
 		{
-			return Math.PI * _outerSq - Math.PI * _innerSq;
+			return Math.PI * ( _outerSq - _innerSq );
 		}
 	}
 }

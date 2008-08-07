@@ -688,25 +688,10 @@ package org.flintparticles.common.emitters
 		}
 		
 		/**
-		 * This method is a synonym for the dispose method. It stops the emitter 
-		 * and cleans out all the particles.
-		 * 
-		 * @see dispose()
+		 * Stops the emitter, killing all current particles and returning them to the 
+		 * particle factory for reuse.
 		 */
 		public function stop():void
-		{
-			dispose();
-		}
-		
-		/**
-		 * Cleans up the emitter prior to removal. If you don't call this method,
-		 * the garbage collector will clean up all the particles in the usual way.
-		 * If you use this method, the particles will be returned to the particle
-		 * factory for reuse and the particleDead event is sent for each particle.
-		 * 
-		 * @see stop()
-		 */
-		public function dispose():void
 		{
 			if( _useInternalTick )
 			{

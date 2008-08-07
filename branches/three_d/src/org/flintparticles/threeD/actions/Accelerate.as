@@ -74,7 +74,7 @@ package org.flintparticles.threeD.actions
 		}
 		
 		/**
-		 * Applies the acceleration to a particle.
+		 * Applies the acceleration to a particle for the specified time period.
 		 * 
 		 * <p>This method is called by the emitter and need not be called by the 
 		 * user</p>

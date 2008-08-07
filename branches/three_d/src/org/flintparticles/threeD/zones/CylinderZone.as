@@ -31,60 +31,56 @@
 package org.flintparticles.threeD.zones 
 {
 	import org.flintparticles.threeD.geom.Vector3D;
-	import org.flintparticles.threeD.geom.Vector3DUtils;
+	import org.flintparticles.threeD.geom.Vector3DUtils;			
 
 	/**
-	 * The DiscZone zone defines a zone that contains all the points on a disc.1
-	 * The disc can be positioned anywhere in 3D space. The disc may, optionally,
-	 * have a hole in the middle.
+	 * The CylinderZone zone defines a zone that contains all the points in a 
+	 * cylinder. The cylinder can be positioned anywhere in 3D space an may,
+	 * optionally, have a hole running down the centre of it.
 	 */
 
-	public class DiscZone implements Zone3D 
+	public class CylinderZone implements Zone3D 
 	{
 		private var _center:Vector3D;
-		private var _normal:Vector3D;
+		private var _axis:Vector3D;
 		private var _innerRadius:Number;
 		private var _innerRadiusSq:Number;
 		private var _outerRadius:Number;
 		private var _outerRadiusSq:Number;
-		private var _distToOrigin:Number;
-		private var _planeAxis1:Vector3D;
-		private var _planeAxis2:Vector3D;
-
-		private static const TWOPI:Number = Math.PI * 2;
+		private var _length:Number;
+		private var _perp1:Vector3D;
+		private var _perp2:Vector3D;
 		
 		/**
-		 * The constructor creates a DiscZone 3D zone.
+		 * The constructor creates a CylinderZone 3D zone.
 		 * 
-		 * @param centre The point at the center of the disc.
-		 * @param normal A vector normal to the disc.
-		 * @param outerRadius The outer radius of the disc.
-		 * @param innerRadius The inner radius of the disc. This defines the hole 
-		 * in the center of the disc. If set to zero, there is no hole. 
+		 * @param center The point at the center of one end of the cylinder.
+		 * @param axis A vector along the central axis of the cylinder from
+		 * the center and towards the other end of the cylinder.
+		 * @param length The length of the cylinder.
+		 * @param outerRadius The outer radius of the cylinder.
+		 * @param innerRadius The inner radius of the cylinder. This defines the 
+		 * hole in the center of the cylinder that runs the length of the cylinder.
+		 * If this is set to zero, there is no hole. 
 		 */
-		public function DiscZone( center:Vector3D, normal:Vector3D, outerRadius:Number, innerRadius:Number = 0 )
+		public function CylinderZone( center:Vector3D, axis:Vector3D, length:Number, outerRadius:Number, innerRadius:Number = 0 )
 		{
 			_center = center.clone();
 			_center.w = 1;
-			_normal = normal.unit();
-			_normal.w = 0;
+			_axis = axis.unit();
+			_axis.w = 0;
 			_innerRadius = innerRadius;
-			_innerRadiusSq = _innerRadius * _innerRadius;
+			_innerRadiusSq = innerRadius * innerRadius;
 			_outerRadius = outerRadius;
-			_outerRadiusSq = _outerRadius * _outerRadius;
-			initPlane();
-		}
-		
-		private function initPlane():void
-		{
-			_distToOrigin = _normal.dotProduct( center );
-			var axes:Array = Vector3DUtils.getPerpendiculars( normal );
-			_planeAxis1 = axes[0];
-			_planeAxis2 = axes[1];
+			_outerRadiusSq = outerRadius * outerRadius;
+			_length = length;
+			var axes:Array = Vector3DUtils.getPerpendiculars( _axis );
+			_perp1 = axes[0];
+			_perp2 = axes[1];
 		}
 		
 		/**
-		 * The point at the center of the disc.
+		 * The point at the center of one end of the cylinder.
 		 */
 		public function get center() : Vector3D
 		{
@@ -94,40 +90,35 @@ package org.flintparticles.threeD.zones
 		{
 			_center = value.clone();
 			_center.w = 1;
-			initPlane();
 		}
-
+		
 		/**
-		 * The vector normal to the disc. When setting the vector, the vector is
-		 * normalized. So, when reading the vector this will be a normalized version
-		 * of the vector that is set.
+		 * The central axis of the cylinder, from the center point towards the other end.
 		 */
-		public function get normal() : Vector3D
+		public function get axis() : Vector3D
 		{
-			return _normal.clone();
+			return _axis.clone();
 		}
-		public function set normal( value : Vector3D ) : void
+		public function set axis( value : Vector3D ) : void
 		{
-			_normal = value.unit();
-			_normal.w = 0;
-			initPlane();
+			_axis = value.clone();
+			_axis.w = 0;
 		}
-
+		
 		/**
-		 * The inner radius of the disc.
+		 * The length of the cylinder.
 		 */
-		public function get innerRadius() : Number
+		public function get length() : Number
 		{
-			return _innerRadius;
+			return _length;
 		}
-		public function set innerRadius( value : Number ) : void
+		public function set length( value : Number ) : void
 		{
-			_innerRadius = value;
-			_innerRadiusSq = _innerRadius * _innerRadius;
+			_length = value;
 		}
-
+		
 		/**
-		 * The outer radius of the disc.
+		 * The outer radius of the cylinder.
 		 */
 		public function get outerRadius() : Number
 		{
@@ -136,9 +127,22 @@ package org.flintparticles.threeD.zones
 		public function set outerRadius( value : Number ) : void
 		{
 			_outerRadius = value;
-			_outerRadiusSq = _outerRadius * _outerRadius;
 		}
-
+		
+		/**
+		 * The inner radius of the cylinder. This defines the 
+		 * hole in the center of the cylinder that runs the length of the cylinder.
+		 * If this is set to zero, there is no hole.
+		 */
+		public function get innerRadius() : Number
+		{
+			return _innerRadius;
+		}
+		public function set innerRadius( value : Number ) : void
+		{
+			_innerRadius = value;
+		}
+		
 		/**
 		 * The contains method determines whether a point is inside the zone.
 		 * This method is used by the initializers and actions that
@@ -149,19 +153,15 @@ package org.flintparticles.threeD.zones
 		 */
 		public function contains( p:Vector3D ):Boolean
 		{
-			// is not in plane if dist to origin along normal is different
-			var dist:Number = _normal.dotProduct( p );
-			if( Math.abs( dist - _distToOrigin ) > 0.1 ) // test for close, not exact
+			var q:Vector3D = p.subtract( _center );
+			var d:Number = q.dotProduct( _axis );
+			if( d < 0 || d > _length )
 			{
 				return false;
 			}
-			// test distance to center
-			var distToCenter:Number = Vector3D.distanceSquared( center, p );
-			if( distToCenter <= _outerRadius && distToCenter >= _innerRadius )
-			{
-				return true;
-			}
-			return false;
+			q.decrementBy( _axis.multiply( d ) );
+			var len:Number = q.lengthSquared;
+			return len >= _innerRadiusSq && len <= _outerRadiusSq;
 		}
 		
 		/**
@@ -173,10 +173,17 @@ package org.flintparticles.threeD.zones
 		 */
 		public function getLocation():Vector3D
 		{
-			var rand:Number = Math.random();
-			var radius:Number = _innerRadius + (1 - rand * rand ) * ( _outerRadius - _innerRadius );
-			var angle:Number = Math.random() * TWOPI;
-			return _center.add( _planeAxis1.multiply( radius * Math.cos( angle ) ).incrementBy( _planeAxis2.multiply( radius * Math.sin( angle ) ) ) );
+			var l:Number = Math.random() * _length;
+			
+			var r:Number = Math.random();
+			r = _innerRadius + ( 1 - r * r ) * ( _outerRadius - _innerRadius );
+			
+			var a:Number = Math.random() * 2 * Math.PI;
+			var p:Vector3D = _perp1.multiply( r * Math.cos( a ) );
+			p.incrementBy( _perp2.multiply( r * Math.sin( a ) ) );
+			p.incrementBy( _axis.multiply( l ) );
+			p.incrementBy( _center );
+			return p;
 		}
 		
 		/**
@@ -188,8 +195,7 @@ package org.flintparticles.threeD.zones
 		 */
 		public function getVolume():Number
 		{
-			// treat as one pixel tall disc
-			return ( _outerRadius * _outerRadius - _innerRadius * _innerRadius ) * Math.PI;
+			return ( _outerRadiusSq - _innerRadiusSq ) * _length * Math.PI;
 		}
 	}
 }

@@ -36,9 +36,8 @@ package org.flintparticles.twoD.actions
 	import org.flintparticles.twoD.particles.Particle2D;	
 
 	/**
-	 * The SpeedLimit action limits the particle's maximum speed to the specified
-	 * speed. The behaviour can be switched to instead limit the minimum speed to
-	 * the specified speed.
+	 * The SpeedLimit action limits each particle's maximum or minimum speed to the 
+	 * specified speed.
 	 */
 
 	public class SpeedLimit extends ActionBase
@@ -48,8 +47,8 @@ package org.flintparticles.twoD.actions
 		private var _isMinimum:Boolean;
 		
 		/**
-		 * The constructor creates a SpeedLimit action for use by 
-		 * an emitter. To add a SpeedLimit to all particles created by an emitter, use the
+		 * The constructor creates a SpeedLimit action for use by an emitter. 
+		 * To add a SpeedLimit to all particles created by an emitter, use the
 		 * emitter's addAction method.
 		 * 
 		 * @see org.flintparticles.common.emitters.Emitter#addAction()
@@ -92,9 +91,11 @@ package org.flintparticles.twoD.actions
 		}
 		
 		/**
-		 * @inheritDoc
+		 * Returns a value of -5, so that the SpeedLimit action executes 
+		 * after actions that modify the particle's speed but before the 
+		 * Move action moves the particle.
 		 * 
-		 * <p>Returns a value of -5, so that the SpeedLimit executes after all accelerations have occured.</p>
+		 * @see org.flintparticles.common.actions.Action#getDefaultPriority()
 		 */
 		override public function getDefaultPriority():Number
 		{
@@ -102,7 +103,17 @@ package org.flintparticles.twoD.actions
 		}
 
 		/**
-		 * @inheritDoc
+		 * Checks whether the particle's speed is above or below the speed limit
+		 * as appropriate and, if so, alters its speed to match the speed limit.
+		 * 
+		 * <p>This method is called by the emitter and need not be called by the 
+		 * user.</p>
+		 * 
+		 * @param emitter The Emitter that created the particle.
+		 * @param particle The particle to be updated.
+		 * @param time The duration of the frame - used for time based updates.
+		 * 
+		 * @see org.flintparticles.common.actions.Action#update()
 		 */
 		override public function update( emitter:Emitter, particle:Particle, time:Number ):void
 		{
