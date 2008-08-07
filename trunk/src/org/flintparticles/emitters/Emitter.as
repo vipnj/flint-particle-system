@@ -69,8 +69,17 @@ package org.flintparticles.emitters
 	[Event(name="particleCreated", type="org.flintparticles.events.FlintEvent")]
 
 	/**
-	 * Dispatched when an emitter contains no particles. Used, for example, to remove an
-	 * emitter when it contains no particles.
+	 * Dispatched when an emitter attempts to update the particles' state but it 
+	 * contains no particles. This event will be dispatched every time the update 
+	 * occurs while there are no particles in the emitter. The event will not be 
+	 * dispatched if the emitter is paused or after it is disposed.
+	 * 
+	 * <p>This event is used, for example, to remove an emitter when it contains no 
+	 * particles or to restart the emitter (see the firework example) or modify a 
+	 * counter when the emitter contains no particles.</p>
+	 * 
+	 * @see pause();
+	 * @see dispose();
 	 * 
 	 * @eventType org.flintparticles.events.FlintEvent.EMITTER_EMPTY
 	 */
