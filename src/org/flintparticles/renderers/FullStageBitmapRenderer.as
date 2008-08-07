@@ -37,7 +37,7 @@ package org.flintparticles.renderers
 	import flash.geom.Rectangle;	
 
 	/**
-	 * The FullStageBitmapRenderer is a custom BitmapRenderer whose canvas exactly covers
+	 * <i>[Deprecated]</i> The FullStageBitmapRenderer is a custom BitmapRenderer whose canvas exactly covers
 	 * the stage. This canvas sizing is only reliable when the display region for the swf 
 	 * is exactly the same size as the swf itself, so that no scaling occurs.
 	 * 
