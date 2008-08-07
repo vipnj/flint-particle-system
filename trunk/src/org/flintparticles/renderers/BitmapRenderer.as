@@ -208,7 +208,7 @@ package org.flintparticles.renderers
 		 */
 		protected function createBitmap():void
 		{
-			if( !canvas )
+			if( !_canvas )
 			{
 				return;
 			}

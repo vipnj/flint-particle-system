@@ -574,7 +574,10 @@ package org.flintparticles.emitters
 				_initializers[i].initialize( this, particle );
 			}
 			_particles.push( particle );
-			_renderer.addParticle( particle );
+			if( _renderer )
+			{	
+				_renderer.addParticle( particle );
+			}
 			dispatchEvent( new FlintEvent( FlintEvent.PARTICLE_CREATED, particle ) );
 			return particle;
 		}
@@ -675,7 +678,10 @@ package org.flintparticles.emitters
 			{
 				dispatchEvent( new FlintEvent( FlintEvent.EMITTER_EMPTY ) );
 			}
-			_renderer.renderParticles( _particles );
+			if( _renderer )
+			{	
+				_renderer.renderParticles( _particles );
+			}
 		}
 
 		/**

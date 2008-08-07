@@ -37,13 +37,9 @@ package org.flintparticles.renderers
 	import org.flintparticles.particles.Particle;	
 
 	/**
-	 * The FullStagePixelRenderer is a custom PixelRenderer whose canvas exactly covers
+	 * <i>[Deprecated]</i> The FullStagePixelRenderer is a custom PixelRenderer whose canvas exactly covers
 	 * the stage. This canvas sizing is only reliable when the display region for the swf 
 	 * is exactly the same size as the swf itself, so that no scaling occurs.
-	 * 
-	 * <p>It is more efficient to use a PixelRenderer with an appropriately defined canvas.
-	 * This class exists to allow the continued use of functionality that existed in the
-	 * PixelRenderer in early versions of Flint.</p>
 	 * 
 	 * <p>It is more efficient to use a PixelRenderer with an appropriately defined canvas.
 	 * <b>This class will be deprecated in future versions of Flint in favour of the following code.</b></p>
