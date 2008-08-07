@@ -68,8 +68,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <div class="summarySignature">
 <a class="signatureLink" href="#RotateToDirection()">RotateToDirection</a>()</div>
 <div class="summaryTableDescription">
-   The constructor creates a RotateToDirection action for use by 
-   an emitter.</div>
+   The constructor creates a RotateToDirection action for use by an emitter.</div>
 </td><td class="summaryTableOwnerCol">RotateToDirection</td>
 </tr>
 <tr class="hideInheritedMethod">
@@ -101,8 +100,8 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <div class="summarySignature">
 <a class="signatureLink" href="#update()">update</a>(emitter:<a href="../../common/emitters/Emitter.html">Emitter</a>, particle:<a href="../../common/particles/Particle.html">Particle</a>, time:Number):void</div>
 <div class="summaryTableDescription">
-   
-   This method does nothing.</div>
+   Calculates a new rotation based on the direction of the
+   particle's velocity and applies it to the particle.</div>
 </td><td class="summaryTableOwnerCol">RotateToDirection</td>
 </tr>
 </table>
@@ -122,8 +121,8 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public function RotateToDirection()</code><p>
-   The constructor creates a RotateToDirection action for use by 
-   an emitter. To add a RotateToDirection to all particles created by an emitter, use the
+   The constructor creates a RotateToDirection action for use by an emitter. 
+   To add a RotateToDirection to all particles created by an emitter, use the
    emitter's addAction method.
    
    </p><p>
@@ -143,11 +142,13 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public override function update(emitter:<a href="../../common/emitters/Emitter.html">Emitter</a>, particle:<a href="../../common/particles/Particle.html">Particle</a>, time:Number):void</code><p>
+   Calculates a new rotation based on the direction of the
+   particle's velocity and applies it to the particle.
    
-   This method does nothing. All derived classes override this method
-   to update each particle every frame.
+   </p><p>This method is called by the emitter and need not be called by the 
+   user.</p>
    
-   </p><span class="label">Parameters</span>
+   <span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
 <td width="20px"></td><td><code><span class="label">emitter</span>:<a href="../../common/emitters/Emitter.html">Emitter</a></code> &mdash; The Emitter that created the particle.
@@ -169,6 +170,12 @@ showHideInherited();
    </td>
 </tr>
 </table>
+<p>
+<span class="label">See also</span>
+</p>
+<div class="seeAlso">
+<a href="../../common/actions/Action.html#update()" target="">org.flintparticles.common.actions.Action.update()</a>
+</div>
 </div>
 <br>
 <br>

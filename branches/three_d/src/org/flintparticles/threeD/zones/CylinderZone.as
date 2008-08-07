@@ -35,7 +35,7 @@ package org.flintparticles.threeD.zones
 
 	/**
 	 * The CylinderZone zone defines a zone that contains all the points in a 
-	 * cylinder. The cylinder can be positioned anywhere in 3D space an may,
+	 * cylinder. The cylinder can be positioned anywhere in 3D space and may,
 	 * optionally, have a hole running down the centre of it.
 	 */
 
@@ -50,6 +50,7 @@ package org.flintparticles.threeD.zones
 		private var _length:Number;
 		private var _perp1:Vector3D;
 		private var _perp2:Vector3D;
+		private var _dirty:Boolean;
 		
 		/**
 		 * The constructor creates a CylinderZone 3D zone.
@@ -74,9 +75,15 @@ package org.flintparticles.threeD.zones
 			_outerRadius = outerRadius;
 			_outerRadiusSq = outerRadius * outerRadius;
 			_length = length;
+			_dirty = true;
+		}
+		
+		private function init():void
+		{
 			var axes:Array = Vector3DUtils.getPerpendiculars( _axis );
 			_perp1 = axes[0];
 			_perp2 = axes[1];
+			_dirty = false;
 		}
 		
 		/**
@@ -103,6 +110,7 @@ package org.flintparticles.threeD.zones
 		{
 			_axis = value.clone();
 			_axis.w = 0;
+			_dirty = true;
 		}
 		
 		/**
@@ -149,10 +157,15 @@ package org.flintparticles.threeD.zones
 		 * use the zone. Usually, it need not be called directly by the user.
 		 * 
 		 * @param p The location to test.
-		 * @return true if the location is inside the zone, false if it is outside.
+		 * @return true if the location is inside the cylinder, false if it is outside.
 		 */
 		public function contains( p:Vector3D ):Boolean
 		{
+			if( _dirty )
+			{
+				init();
+			}
+
 			var q:Vector3D = p.subtract( _center );
 			var d:Number = q.dotProduct( _axis );
 			if( d < 0 || d > _length )
@@ -169,10 +182,15 @@ package org.flintparticles.threeD.zones
 		 * This method is used by the initializers and actions that
 		 * use the zone. Usually, it need not be called directly by the user.
 		 * 
-		 * @return a random point inside the zone.
+		 * @return a random point inside the cylinder.
 		 */
 		public function getLocation():Vector3D
 		{
+			if( _dirty )
+			{
+				init();
+			}
+
 			var l:Number = Math.random() * _length;
 			
 			var r:Number = Math.random();
@@ -191,7 +209,7 @@ package org.flintparticles.threeD.zones
 		 * This method is used by the MultiZone class. Usually, 
 		 * it need not be called directly by the user.
 		 * 
-		 * @return a random point inside the zone.
+		 * @return The volume of the cylinder
 		 */
 		public function getVolume():Number
 		{

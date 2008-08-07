@@ -94,7 +94,7 @@ package org.flintparticles.threeD.zones
 		 * This method is used by the MultiZone class. Usually, 
 		 * it need not be called directly by the user.
 		 * 
-		 * @return a random point inside the zone.
+		 * @return A value of 1 because the zone contains a single point.
 		 */
 		public function getVolume():Number
 		{

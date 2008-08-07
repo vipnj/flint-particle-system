@@ -336,43 +336,60 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("GÂ
 </tr>
 <tr>
 <td width="20"></td><td>
-   
-   Returns a default priority of 0 for this action.</td>
+   Returns a value of -10, so that the Move action executes 
+   after most other actions, particularly after actions that change the
+   particle's velocity like Accelerate.</td>
 </tr>
 <tr>
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('org/flintparticles/twoD/actions/class-list.html');" href="org/flintparticles/twoD/actions/MutualGravity.html#getDefaultPriority()">getDefaultPriority</a>() &mdash; Method in class org.flintparticles.twoD.actions.<a onclick="javascript:loadClassListFrame('org/flintparticles/twoD/actions/class-list.html');" href="org/flintparticles/twoD/actions/MutualGravity.html">MutualGravity</a></td>
 </tr>
 <tr>
 <td width="20"></td><td>
-   
-   Returns a default priority of 0 for this action.</td>
+   Returns a value of 10, so that the MatchVelocity action executes 
+   before accelerating actions that act on particles independently of
+   other particles, like Acceleration and GravityWell.</td>
 </tr>
 <tr>
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('org/flintparticles/twoD/actions/class-list.html');" href="org/flintparticles/twoD/actions/Rotate.html#getDefaultPriority()">getDefaultPriority</a>() &mdash; Method in class org.flintparticles.twoD.actions.<a onclick="javascript:loadClassListFrame('org/flintparticles/twoD/actions/class-list.html');" href="org/flintparticles/twoD/actions/Rotate.html">Rotate</a></td>
 </tr>
 <tr>
 <td width="20"></td><td>
-   
-   Returns a default priority of 0 for this action.</td>
+   Returns a value of -10, so that the Rotate action executes 
+   after most other actions, particularly after actions that change the
+   particle's angular velocity.</td>
 </tr>
 <tr>
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('org/flintparticles/twoD/actions/class-list.html');" href="org/flintparticles/twoD/actions/SpeedLimit.html#getDefaultPriority()">getDefaultPriority</a>() &mdash; Method in class org.flintparticles.twoD.actions.<a onclick="javascript:loadClassListFrame('org/flintparticles/twoD/actions/class-list.html');" href="org/flintparticles/twoD/actions/SpeedLimit.html">SpeedLimit</a></td>
 </tr>
 <tr>
 <td width="20"></td><td>
-   
-   Returns a default priority of 0 for this action.</td>
+   Returns a value of -5, so that the SpeedLimit action executes 
+   after actions that modify the particle's speed but before the 
+   Move action moves the particle.</td>
 </tr>
 <tr>
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('org/flintparticles/twoD/actions/class-list.html');" href="org/flintparticles/twoD/actions/ZonedAction.html#getDefaultPriority()">getDefaultPriority</a>() &mdash; Method in class org.flintparticles.twoD.actions.<a onclick="javascript:loadClassListFrame('org/flintparticles/twoD/actions/class-list.html');" href="org/flintparticles/twoD/actions/ZonedAction.html">ZonedAction</a></td>
 </tr>
 <tr>
 <td width="20"></td><td>
-   
-   Returns a default priority of 0 for this action.</td>
+   Returns the default priority of the action being used.</td>
 </tr>
 <tr>
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/zones/class-list.html');" href="org/flintparticles/threeD/zones/BoxZone.html#getLocation()">getLocation</a>() &mdash; Method in class org.flintparticles.threeD.zones.<a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/zones/class-list.html');" href="org/flintparticles/threeD/zones/BoxZone.html">BoxZone</a></td>
+</tr>
+<tr>
+<td width="20"></td><td>
+   The getLocation method returns a random point inside the box.</td>
+</tr>
+<tr>
+<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/zones/class-list.html');" href="org/flintparticles/threeD/zones/ConeZone.html#getLocation()">getLocation</a>() &mdash; Method in class org.flintparticles.threeD.zones.<a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/zones/class-list.html');" href="org/flintparticles/threeD/zones/ConeZone.html">ConeZone</a></td>
+</tr>
+<tr>
+<td width="20"></td><td>
+   The getLocation method returns a random point inside the zone.</td>
+</tr>
+<tr>
+<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/zones/class-list.html');" href="org/flintparticles/threeD/zones/CylinderZone.html#getLocation()">getLocation</a>() &mdash; Method in class org.flintparticles.threeD.zones.<a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/zones/class-list.html');" href="org/flintparticles/threeD/zones/CylinderZone.html">CylinderZone</a></td>
 </tr>
 <tr>
 <td width="20"></td><td>
@@ -405,6 +422,13 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("GÂ
 <tr>
 <td width="20"></td><td>
    The getLocation method returns a random point inside the zone.</td>
+</tr>
+<tr>
+<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/zones/class-list.html');" href="org/flintparticles/threeD/zones/SphereZone.html#getLocation()">getLocation</a>() &mdash; Method in class org.flintparticles.threeD.zones.<a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/zones/class-list.html');" href="org/flintparticles/threeD/zones/SphereZone.html">SphereZone</a></td>
+</tr>
+<tr>
+<td width="20"></td><td>
+   The getLocation method returns a random point inside the sphere.</td>
 </tr>
 <tr>
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/zones/class-list.html');" href="org/flintparticles/threeD/zones/Zone3D.html#getLocation()">getLocation</a>() &mdash; Method in interface org.flintparticles.threeD.zones.<a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/zones/class-list.html');" href="org/flintparticles/threeD/zones/Zone3D.html">Zone3D</a></td>
@@ -484,6 +508,18 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("GÂ
    The getLocation method returns a random point inside the zone.</td>
 </tr>
 <tr>
+<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/geom/class-list.html');" href="org/flintparticles/threeD/geom/Vector3DUtils.html#getPerpendicular()">getPerpendicular</a>(v:<a href="org/flintparticles/threeD/geom/Vector3D.html" onclick="javascript:loadClassListFrame('org/flintparticles/threeD/geom./class-list.html');">org.flintparticles.threeD.geom:Vector3D</a>) &mdash; Static method in class org.flintparticles.threeD.geom.<a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/geom/class-list.html');" href="org/flintparticles/threeD/geom/Vector3DUtils.html">Vector3DUtils</a></td>
+</tr>
+<tr>
+<td width="20"></td><td></td>
+</tr>
+<tr>
+<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/geom/class-list.html');" href="org/flintparticles/threeD/geom/Vector3DUtils.html#getPerpendiculars()">getPerpendiculars</a>(normal:<a href="org/flintparticles/threeD/geom/Vector3D.html" onclick="javascript:loadClassListFrame('org/flintparticles/threeD/geom./class-list.html');">org.flintparticles.threeD.geom:Vector3D</a>) &mdash; Static method in class org.flintparticles.threeD.geom.<a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/geom/class-list.html');" href="org/flintparticles/threeD/geom/Vector3DUtils.html">Vector3DUtils</a></td>
+</tr>
+<tr>
+<td width="20"></td><td></td>
+</tr>
+<tr>
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('org/flintparticles/common/utils/class-list.html');" href="org/flintparticles/common/utils/PriorityArray.html#getProperty()">getProperty</a>(name) &mdash; Method in class org.flintparticles.common.utils.<a onclick="javascript:loadClassListFrame('org/flintparticles/common/utils/class-list.html');" href="org/flintparticles/common/utils/PriorityArray.html">PriorityArray</a></td>
 </tr>
 <tr>
@@ -493,6 +529,20 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("GÂ
 </tr>
 <tr>
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/zones/class-list.html');" href="org/flintparticles/threeD/zones/BoxZone.html#getVolume()">getVolume</a>() &mdash; Method in class org.flintparticles.threeD.zones.<a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/zones/class-list.html');" href="org/flintparticles/threeD/zones/BoxZone.html">BoxZone</a></td>
+</tr>
+<tr>
+<td width="20"></td><td>
+   The getArea method returns the volume of the box.</td>
+</tr>
+<tr>
+<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/zones/class-list.html');" href="org/flintparticles/threeD/zones/ConeZone.html#getVolume()">getVolume</a>() &mdash; Method in class org.flintparticles.threeD.zones.<a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/zones/class-list.html');" href="org/flintparticles/threeD/zones/ConeZone.html">ConeZone</a></td>
+</tr>
+<tr>
+<td width="20"></td><td>
+   The getArea method returns the size of the zone.</td>
+</tr>
+<tr>
+<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/zones/class-list.html');" href="org/flintparticles/threeD/zones/CylinderZone.html#getVolume()">getVolume</a>() &mdash; Method in class org.flintparticles.threeD.zones.<a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/zones/class-list.html');" href="org/flintparticles/threeD/zones/CylinderZone.html">CylinderZone</a></td>
 </tr>
 <tr>
 <td width="20"></td><td>
@@ -525,6 +575,13 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("GÂ
 <tr>
 <td width="20"></td><td>
    The getArea method returns the size of the zone.</td>
+</tr>
+<tr>
+<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/zones/class-list.html');" href="org/flintparticles/threeD/zones/SphereZone.html#getVolume()">getVolume</a>() &mdash; Method in class org.flintparticles.threeD.zones.<a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/zones/class-list.html');" href="org/flintparticles/threeD/zones/SphereZone.html">SphereZone</a></td>
+</tr>
+<tr>
+<td width="20"></td><td>
+   The getVolume method returns the volume of the sphere.</td>
 </tr>
 <tr>
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/zones/class-list.html');" href="org/flintparticles/threeD/zones/Zone3D.html#getVolume()">getVolume</a>() &mdash; Method in interface org.flintparticles.threeD.zones.<a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/zones/class-list.html');" href="org/flintparticles/threeD/zones/Zone3D.html">Zone3D</a></td>

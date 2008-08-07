@@ -42,8 +42,10 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 </tr>
 </table>
 <p></p>
-  The Rotate action updates the rotation of the particle based on its angular velocity.
-  It uses a Euler integrator to calculate the new rotation, hence the name.
+  The Rotate action updates the rotation of the particle based on its angular 
+  velocity. It uses a Euler integrator to calculate the new rotation. If you 
+  want an emitter's particles to rotate then you must add a Rotate action, or 
+  a similar custom action, to the emitter
   <p></p>
 <br>
 <hr>
@@ -68,8 +70,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <div class="summarySignature">
 <a class="signatureLink" href="#Rotate()">Rotate</a>()</div>
 <div class="summaryTableDescription">
-   The constructor creates a Rotate action for use by 
-   an emitter.</div>
+   The constructor creates a Rotate action for use by an emitter.</div>
 </td><td class="summaryTableOwnerCol">Rotate</td>
 </tr>
 <tr class="hideInheritedMethod">
@@ -85,8 +86,9 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <div class="summarySignature">
 <a class="signatureLink" href="#getDefaultPriority()">getDefaultPriority</a>():Number</div>
 <div class="summaryTableDescription">
-   
-   Returns a default priority of 0 for this action.</div>
+   Returns a value of -10, so that the Rotate action executes 
+   after most other actions, particularly after actions that change the
+   particle's angular velocity.</div>
 </td><td class="summaryTableOwnerCol">Rotate</td>
 </tr>
 <tr class="hideInheritedMethod">
@@ -102,8 +104,8 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <div class="summarySignature">
 <a class="signatureLink" href="#update()">update</a>(emitter:<a href="../../common/emitters/Emitter.html">Emitter</a>, particle:<a href="../../common/particles/Particle.html">Particle</a>, time:Number):void</div>
 <div class="summaryTableDescription">
-   
-   This method does nothing.</div>
+   Updates the particle's rotation based on its angular velocity and the period of 
+   time indicated.</div>
 </td><td class="summaryTableOwnerCol">Rotate</td>
 </tr>
 </table>
@@ -123,8 +125,8 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public function Rotate()</code><p>
-   The constructor creates a Rotate action for use by 
-   an emitter. To add a Rotate to all particles created by an emitter, use the
+   The constructor creates a Rotate action for use by an emitter. 
+   To add a Rotate to all particles created by an emitter, use the
    emitter's addAction method.
    
    </p><p>
@@ -144,9 +146,9 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public override function getDefaultPriority():Number</code><p>
-   
-   Returns a default priority of 0 for this action. Derived classes 
-   override this method if they want a different default priority.
+   Returns a value of -10, so that the Rotate action executes 
+   after most other actions, particularly after actions that change the
+   particle's angular velocity.
    
    </p><p></p>
 <span class="label">Returns</span>
@@ -155,6 +157,12 @@ showHideInherited();
 <td width="20"></td><td><code>Number</code></td>
 </tr>
 </table>
+<p>
+<span class="label">See also</span>
+</p>
+<div class="seeAlso">
+<a href="../../common/actions/Action.html#getDefaultPriority()" target="">org.flintparticles.common.actions.Action.getDefaultPriority()</a>
+</div>
 </div>
 <a name="update()"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
@@ -164,11 +172,13 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public override function update(emitter:<a href="../../common/emitters/Emitter.html">Emitter</a>, particle:<a href="../../common/particles/Particle.html">Particle</a>, time:Number):void</code><p>
+   Updates the particle's rotation based on its angular velocity and the period of 
+   time indicated.
    
-   This method does nothing. All derived classes override this method
-   to update each particle every frame.
+   </p><p>This method is called by the emitter and need not be called by the 
+   user.</p>
    
-   </p><span class="label">Parameters</span>
+   <span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
 <td width="20px"></td><td><code><span class="label">emitter</span>:<a href="../../common/emitters/Emitter.html">Emitter</a></code> &mdash; The Emitter that created the particle.
@@ -190,6 +200,12 @@ showHideInherited();
    </td>
 </tr>
 </table>
+<p>
+<span class="label">See also</span>
+</p>
+<div class="seeAlso">
+<a href="../../common/actions/Action.html#update()" target="">org.flintparticles.common.actions.Action.update()</a>
+</div>
 </div>
 <br>
 <br>

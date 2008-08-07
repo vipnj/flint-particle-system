@@ -34,7 +34,7 @@ package org.flintparticles.threeD.zones
 	import org.flintparticles.threeD.geom.Vector3DUtils;
 
 	/**
-	 * The DiscZone zone defines a zone that contains all the points on a disc.1
+	 * The DiscZone zone defines a zone that contains all the points on a disc.
 	 * The disc can be positioned anywhere in 3D space. The disc may, optionally,
 	 * have a hole in the middle.
 	 */
@@ -50,6 +50,7 @@ package org.flintparticles.threeD.zones
 		private var _distToOrigin:Number;
 		private var _planeAxis1:Vector3D;
 		private var _planeAxis2:Vector3D;
+		private var _dirty:Boolean;
 
 		private static const TWOPI:Number = Math.PI * 2;
 		
@@ -72,15 +73,16 @@ package org.flintparticles.threeD.zones
 			_innerRadiusSq = _innerRadius * _innerRadius;
 			_outerRadius = outerRadius;
 			_outerRadiusSq = _outerRadius * _outerRadius;
-			initPlane();
+			_dirty = true;
 		}
 		
-		private function initPlane():void
+		private function init():void
 		{
 			_distToOrigin = _normal.dotProduct( center );
 			var axes:Array = Vector3DUtils.getPerpendiculars( normal );
 			_planeAxis1 = axes[0];
 			_planeAxis2 = axes[1];
+			_dirty = false;
 		}
 		
 		/**
@@ -94,7 +96,7 @@ package org.flintparticles.threeD.zones
 		{
 			_center = value.clone();
 			_center.w = 1;
-			initPlane();
+			_dirty = true;
 		}
 
 		/**
@@ -110,7 +112,7 @@ package org.flintparticles.threeD.zones
 		{
 			_normal = value.unit();
 			_normal.w = 0;
-			initPlane();
+			_dirty = true;
 		}
 
 		/**
@@ -149,6 +151,10 @@ package org.flintparticles.threeD.zones
 		 */
 		public function contains( p:Vector3D ):Boolean
 		{
+			if( _dirty )
+			{
+				init();
+			}
 			// is not in plane if dist to origin along normal is different
 			var dist:Number = _normal.dotProduct( p );
 			if( Math.abs( dist - _distToOrigin ) > 0.1 ) // test for close, not exact
@@ -173,6 +179,10 @@ package org.flintparticles.threeD.zones
 		 */
 		public function getLocation():Vector3D
 		{
+			if( _dirty )
+			{
+				init();
+			}
 			var rand:Number = Math.random();
 			var radius:Number = _innerRadius + (1 - rand * rand ) * ( _outerRadius - _innerRadius );
 			var angle:Number = Math.random() * TWOPI;
@@ -184,7 +194,7 @@ package org.flintparticles.threeD.zones
 		 * This method is used by the MultiZone class. Usually, 
 		 * it need not be called directly by the user.
 		 * 
-		 * @return a random point inside the zone.
+		 * @return The surface area of the disc.
 		 */
 		public function getVolume():Number
 		{

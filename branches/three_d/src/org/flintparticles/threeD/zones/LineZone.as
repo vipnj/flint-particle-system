@@ -43,7 +43,7 @@ package org.flintparticles.threeD.zones
 		private var _length:Vector3D;
 		
 		/**
-		 * The constructor creates a LineZone zone.
+		 * The constructor creates a LineZone 3D zone.
 		 * 
 		 * @param point1 The point at one end of the line.
 		 * @param point2 The point at the other end of the line.
@@ -122,7 +122,7 @@ package org.flintparticles.threeD.zones
 		 * This method is used by the MultiZone class. Usually, 
 		 * it need not be called directly by the user.
 		 * 
-		 * @return a random point inside the zone.
+		 * @return The length of the line.
 		 */
 		public function getVolume():Number
 		{

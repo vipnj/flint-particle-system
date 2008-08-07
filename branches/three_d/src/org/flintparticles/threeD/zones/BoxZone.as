@@ -34,7 +34,7 @@ package org.flintparticles.threeD.zones
 	import org.flintparticles.threeD.geom.Vector3D;				
 
 	/**
-	 * The RectangleZone zone defines a rectangular shaped zone.
+	 * The BoxZone zone defines a cuboid or box shaped zone.
 	 */
 
 	public class BoxZone implements Zone3D 
@@ -47,14 +47,19 @@ package org.flintparticles.threeD.zones
 		private var _depthAxis:Vector3D;
 		private var _transformTo:Matrix3D;
 		private var _transformFrom:Matrix3D;
+		private var _dirty:Boolean;
 		
 		/**
-		 * The constructor creates a RectangleZone zone.
+		 * The constructor creates a BoxZone 3D zone.
 		 * 
-		 * @param left The left coordinate of the rectangle defining the region of the zone.
-		 * @param top The top coordinate of the rectangle defining the region of the zone.
-		 * @param right The right coordinate of the rectangle defining the region of the zone.
-		 * @param bottom The bottom coordinate of the rectangle defining the region of the zone.
+		 * @param width The width of the box.
+		 * @param height The height of the box.
+		 * @param depth The depth of the box.
+		 * @param center The point at the center of the box.
+		 * @param upAxis The axis along which the height is measured. The box is rotated
+		 * so that the height is in this direction.
+		 * @param depthAxis The axis along which the depth is measured. The box is rotated
+		 * so that the depth is in this direction.
 		 */
 		public function BoxZone( width:Number, height:Number, depth:Number, center:Vector3D, upAxis:Vector3D, depthAxis:Vector3D )
 		{
@@ -67,7 +72,7 @@ package org.flintparticles.threeD.zones
 			_upAxis.w = 0;
 			_depthAxis = depthAxis.unit();
 			_depthAxis.w = 0;
-			init();
+			_dirty = true;
 		}
 		
 		private function init():void
@@ -76,10 +81,94 @@ package org.flintparticles.threeD.zones
 			_transformFrom.appendTranslate( _center );
 			_transformFrom.prependTranslate( new Vector3D( -_width/2, -_height/2, -_depth/2 ) );
 			_transformTo = _transformFrom.inverse;
+			_dirty = false;
 		}
 		
 		/**
-		 * The contains method determines whether a point is inside the zone.
+		 * The width of the box.
+		 */
+		public function get width() : Number
+		{
+			return _width;
+		}
+		public function set width( value : Number ) : void
+		{
+			_width = value;
+			_dirty = true;
+		}
+		
+		/**
+		 * The height of the box.
+		 */
+		public function get height() : Number
+		{
+			return _height;
+		}
+		public function set height( value : Number ) : void
+		{
+			_height = value;
+			_dirty = true;
+		}
+		
+		/**
+		 * The depth of the box.
+		 */
+		public function get depth() : Number
+		{
+			return _depth;
+		}
+		public function set depth( value : Number ) : void
+		{
+			_depth = value;
+			_dirty = true;
+		}
+
+		/**
+		 * The point at the center of the box.
+		 */
+		public function get center() : Vector3D
+		{
+			return _center.clone();
+		}
+		public function set center( value : Vector3D ) : void
+		{
+			_center = value.clone();
+			_center.w = 1;
+			_dirty = true;
+		}
+
+		/**
+		 * The axis along which the height is measured. The box is rotated
+		 * so that the height is in this direction.
+		 */
+		public function get upAxis() : Vector3D
+		{
+			return _upAxis.clone();
+		}
+		public function set upAxis( value : Vector3D ) : void
+		{
+			_upAxis = value.clone();
+			_upAxis.w = 0;
+			_dirty = true;
+		}
+
+		/**
+		 * The axis along which the depth is measured. The box is rotated
+		 * so that the depth is in this direction.
+		 */
+		public function get depthAxis() : Vector3D
+		{
+			return _depthAxis.clone();
+		}
+		public function set depthAxis( value : Vector3D ) : void
+		{
+			_depthAxis = value.clone();
+			_depthAxis.w = 0;
+			_dirty = true;
+		}
+
+		/**
+		 * The contains method determines whether a point is inside the box.
 		 * This method is used by the initializers and actions that
 		 * use the zone. Usually, it need not be called directly by the user.
 		 * 
@@ -89,12 +178,16 @@ package org.flintparticles.threeD.zones
 		 */
 		public function contains( p:Vector3D ):Boolean
 		{
+			if( _dirty )
+			{
+				init();
+			}
 			var q:Vector3D = _transformTo.transformVector( p );
 			return q.x >= 0 && q.x <= _width && q.y >= 0 && q.y <= _height && q.z >= 0 && q.z <= _depth;
 		}
 		
 		/**
-		 * The getLocation method returns a random point inside the zone.
+		 * The getLocation method returns a random point inside the box.
 		 * This method is used by the initializers and actions that
 		 * use the zone. Usually, it need not be called directly by the user.
 		 * 
@@ -102,16 +195,20 @@ package org.flintparticles.threeD.zones
 		 */
 		public function getLocation():Vector3D
 		{
+			if( _dirty )
+			{
+				init();
+			}
 			var p:Vector3D = new Vector3D( Math.random() * _width, Math.random() * _height, Math.random() * _depth, 1 );
 			return _transformFrom.transformVectorSelf( p );
 		}
 		
 		/**
-		 * The getArea method returns the size of the zone.
+		 * The getArea method returns the volume of the box.
 		 * This method is used by the MultiZone class. Usually, 
 		 * it need not be called directly by the user.
 		 * 
-		 * @return a random point inside the zone.
+		 * @return the volume of the box.
 		 */
 		public function getVolume():Number
 		{

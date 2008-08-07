@@ -30,10 +30,6 @@
 
 package org.flintparticles.twoD.actions 
 {
-	import org.flintparticles.common.actions.ActionBase;
-	import org.flintparticles.common.emitters.Emitter;
-	import org.flintparticles.common.particles.Particle;
-	import org.flintparticles.twoD.particles.Particle2D;	
 
 	/**
 	 * The AntiGravity action applies a force to the particle to push it away from
@@ -45,14 +41,8 @@ package org.flintparticles.twoD.actions
 	 * @see org.flintparticles.twoD.actions.GravityWell
 	 */
 
-	public class AntiGravity extends ActionBase
+	public class AntiGravity extends GravityWell
 	{
-		private var _x:Number;
-		private var _y:Number;
-		private var _power:Number;
-		private var _gravityConst:Number = 10000; // this just scales the power so we don't have to use very large numbers when setting it
-		private var _epsilonSq:Number;
-		
 		/**
 		 * The constructor creates an AntiGravity action for use by an emitter. 
 		 * To add an AntiGravity to all particles created by an emitter, use the
@@ -73,91 +63,20 @@ package org.flintparticles.twoD.actions
 		 */
 		public function AntiGravity( power:Number, x:Number, y:Number, epsilon:Number = 1 )
 		{
-			_power = power * _gravityConst;
-			_x = x;
-			_y = y;
-			_epsilonSq = epsilon * epsilon;
+			super( -power, x, y, epsilon );
 		}
 		
 		/**
 		 * The strength of the anti-gravity force - larger numbers produce a 
 		 * stronger force.
 		 */
-		public function get power():Number
+		override public function get power():Number
 		{
-			return _power / _gravityConst;
+			return -super.power;
 		}
-		public function set power( value:Number ):void
+		override public function set power( value:Number ):void
 		{
-			_power = value * _gravityConst;
-		}
-		
-		/**
-		 * The x coordinate of the center of the anti-gravity force.
-		 */
-		public function get x():Number
-		{
-			return _x;
-		}
-		public function set x( value:Number ):void
-		{
-			_x = value;
-		}
-		
-		/**
-		 * The y coordinate of the center of the anti-gravity force.
-		 */
-		public function get y():Number
-		{
-			return _y;
-		}
-		public function set y( value:Number ):void
-		{
-			_y = value;
-		}
-		
-		/**
-		 * The minimum distance for which the anti-gravity force is calculated. 
-		 * Particles closer than this distance experience the anti-gravity as if 
-		 * they were this distance away. This stops the anti-gravity effect 
-		 * blowing up as distances get small.
-		 */
-		public function get epsilon():Number
-		{
-			return Math.sqrt( _epsilonSq );
-		}
-		public function set epsilon( value:Number ):void
-		{
-			_epsilonSq = value * value;
-		}
-		
-		/**
-		 * Applies the anti-gravity force to a particle for the specified time period.
-		 * 
-		 * <p>This method is called by the emitter and need not be called by the 
-		 * user</p>
-		 * 
-		 * @param emitter The Emitter that created the particle.
-		 * @param particle The particle to be updated.
-		 * @param time The duration of the frame - used for time based updates.
-		 * 
-		 * @see org.flintparticles.common.actions.Action#update()
-		 */
-		override public function update( emitter:Emitter, particle:Particle, time:Number ):void
-		{
-			var p:Particle2D = Particle2D( particle );
-			var x:Number = p.x - _x;
-			var y:Number = p.y - _y;
-			var dSq:Number = x * x + y * y;
-			if( dSq == 0 )
-			{
-				return;
-			}
-			var d:Number = Math.sqrt( dSq );
-			if( dSq < _epsilonSq ) dSq = _epsilonSq;
-			var factor:Number = ( _power * time ) / ( dSq * d );
-			p.velX += x * factor;
-			p.velY += y * factor;
+			super.power = -value;
 		}
 	}
 }

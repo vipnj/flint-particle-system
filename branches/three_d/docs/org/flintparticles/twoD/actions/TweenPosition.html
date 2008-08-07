@@ -43,8 +43,9 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 </table>
 <p></p>
   The TweenPosition action adjusts the particle's position between two
-  locations as it ages. This action
-  should be used in conjunction with the Age action.
+  locations as it ages. The position is relative to the particle's energy,
+  which changes as the particle ages in accordance with the energy easing
+  function used. This action should be used in conjunction with the Age action.
   <p></p>
 <br>
 <hr>
@@ -58,22 +59,22 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 </tr>
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#endX">endX</a> : Number<div class="summaryTableDescription">
-   The X value for the particle at the end of its life.</div>
+   The X value for the particle's position when its energy is 0.</div>
 </td><td class="summaryTableOwnerCol">TweenPosition</td>
 </tr>
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#endY">endY</a> : Number<div class="summaryTableDescription">
-   The y value for the particle at the end of its life.</div>
+   The y value for the particle's position when its energy is 0.</div>
 </td><td class="summaryTableOwnerCol">TweenPosition</td>
 </tr>
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#startX">startX</a> : Number<div class="summaryTableDescription">
-   The x position for the particle at the start of its life.</div>
+   The x position for the particle's position when its energy is 1.</div>
 </td><td class="summaryTableOwnerCol">TweenPosition</td>
 </tr>
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#startY">startY</a> : Number<div class="summaryTableDescription">
-   The y position for the particle at the start of its life.</div>
+   The y position for the particle's position when its energy is 1.</div>
 </td><td class="summaryTableOwnerCol">TweenPosition</td>
 </tr>
 </table>
@@ -98,8 +99,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <div class="summarySignature">
 <a class="signatureLink" href="#TweenPosition()">TweenPosition</a>(startX:Number, startY:Number, endX:Number, endY:Number)</div>
 <div class="summaryTableDescription">
-   The constructor creates a TweenPosition action for use by 
-   an emitter.</div>
+   The constructor creates a TweenPosition action for use by an emitter.</div>
 </td><td class="summaryTableOwnerCol">TweenPosition</td>
 </tr>
 <tr class="hideInheritedMethod">
@@ -131,8 +131,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <div class="summarySignature">
 <a class="signatureLink" href="#update()">update</a>(emitter:<a href="../../common/emitters/Emitter.html">Emitter</a>, particle:<a href="../../common/particles/Particle.html">Particle</a>, time:Number):void</div>
 <div class="summaryTableDescription">
-   
-   This method does nothing.</div>
+   Calculates the current position of the particle based on it's energy.</div>
 </td><td class="summaryTableOwnerCol">TweenPosition</td>
 </tr>
 </table>
@@ -152,7 +151,7 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>endX:Number</code>&nbsp;&nbsp;[read-write]<p>
-   The X value for the particle at the end of its life.
+   The X value for the particle's position when its energy is 0.
    </p><span class="label">Implementation</span>
 <br>
 <code>&nbsp;&nbsp;&nbsp;&nbsp;public function get endX():Number</code>
@@ -168,7 +167,7 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>endY:Number</code>&nbsp;&nbsp;[read-write]<p>
-   The y value for the particle at the end of its life.
+   The y value for the particle's position when its energy is 0.
    </p><span class="label">Implementation</span>
 <br>
 <code>&nbsp;&nbsp;&nbsp;&nbsp;public function get endY():Number</code>
@@ -184,7 +183,7 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>startX:Number</code>&nbsp;&nbsp;[read-write]<p>
-   The x position for the particle at the start of its life.
+   The x position for the particle's position when its energy is 1.
    </p><span class="label">Implementation</span>
 <br>
 <code>&nbsp;&nbsp;&nbsp;&nbsp;public function get startX():Number</code>
@@ -200,7 +199,7 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>startY:Number</code>&nbsp;&nbsp;[read-write]<p>
-   The y position for the particle at the start of its life.
+   The y position for the particle's position when its energy is 1.
    </p><span class="label">Implementation</span>
 <br>
 <code>&nbsp;&nbsp;&nbsp;&nbsp;public function get startY():Number</code>
@@ -218,39 +217,35 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public function TweenPosition(startX:Number, startY:Number, endX:Number, endY:Number)</code><p>
-   The constructor creates a TweenPosition action for use by 
-   an emitter. To add a TweenPosition to all particles created by an emitter, use the
+   The constructor creates a TweenPosition action for use by an emitter. 
+   To add a TweenPosition to all particles created by an emitter, use the
    emitter's addAction method.
    
    </p><span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
-<td width="20px"></td><td><code><span class="label">startX</span>:Number</code> &mdash; The x value for the particle at the
-   start of its life.
+<td width="20px"></td><td><code><span class="label">startX</span>:Number</code> &mdash; The x value for the particle's position when its energy is 1.
    </td>
 </tr>
 <tr>
 <td class="paramSpacer">&nbsp;</td>
 </tr>
 <tr>
-<td width="20px"></td><td><code><span class="label">startY</span>:Number</code> &mdash; The y value for the particle at the
-   start of its life.
+<td width="20px"></td><td><code><span class="label">startY</span>:Number</code> &mdash; The y value for the particle's position when its energy is 1.
    </td>
 </tr>
 <tr>
 <td class="paramSpacer">&nbsp;</td>
 </tr>
 <tr>
-<td width="20px"></td><td><code><span class="label">endX</span>:Number</code> &mdash; The x value of the particle at the end of its
-   life.
+<td width="20px"></td><td><code><span class="label">endX</span>:Number</code> &mdash; The x value of the particle's position when its energy is 0.
    </td>
 </tr>
 <tr>
 <td class="paramSpacer">&nbsp;</td>
 </tr>
 <tr>
-<td width="20px"></td><td><code><span class="label">endY</span>:Number</code> &mdash; The y value of the particle at the end of its
-   life.
+<td width="20px"></td><td><code><span class="label">endY</span>:Number</code> &mdash; The y value of the particle's position when its energy is 0.
    </td>
 </tr>
 </table>
@@ -271,11 +266,12 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public override function update(emitter:<a href="../../common/emitters/Emitter.html">Emitter</a>, particle:<a href="../../common/particles/Particle.html">Particle</a>, time:Number):void</code><p>
+   Calculates the current position of the particle based on it's energy.
    
-   This method does nothing. All derived classes override this method
-   to update each particle every frame.
+   </p><p>This method is called by the emitter and need not be called by the 
+   user.</p>
    
-   </p><span class="label">Parameters</span>
+   <span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
 <td width="20px"></td><td><code><span class="label">emitter</span>:<a href="../../common/emitters/Emitter.html">Emitter</a></code> &mdash; The Emitter that created the particle.
@@ -297,6 +293,12 @@ showHideInherited();
    </td>
 </tr>
 </table>
+<p>
+<span class="label">See also</span>
+</p>
+<div class="seeAlso">
+<a href="../../common/actions/Action.html#update()" target="">org.flintparticles.common.actions.Action.update()</a>
+</div>
 </div>
 <br>
 <br>

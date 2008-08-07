@@ -34,9 +34,9 @@ package org.flintparticles.threeD.zones
 	import org.flintparticles.threeD.geom.Vector3DUtils;			
 
 	/**
-	 * The DiscZone zone defines a zone that contains all the points on a disc.1
-	 * The disc can be positioned anywhere in 3D space. The disc may, optionally,
-	 * have a hole in the middle.
+	 * The ConeZone zone defines a zone that contains all the points inside a cone.
+	 * The cone can be positioned anywhere in 3D space. The cone may, optionally,
+	 * have its top removed, leaving a truncated base as the zone.
 	 */
 
 	public class ConeZone implements Zone3D 
@@ -48,33 +48,46 @@ package org.flintparticles.threeD.zones
 		private var _maxDist:Number;
 		private var _perp1:Vector3D;
 		private var _perp2:Vector3D;
+		private var _dirty:Boolean;
 		
 		/**
-		 * The constructor creates a DiscZone 3D zone.
+		 * The constructor creates a ConeZone 3D zone.
 		 * 
-		 * @param centre The point at the apex of the disc.
-		 * @param normal A vector normal to the disc.
-		 * @param outerRadius The outer radius of the disc.
-		 * @param innerRadius The inner radius of the disc. This defines the hole 
-		 * in the apex of the disc. If set to zero, there is no hole. 
+		 * @param apex The point at the apex of the cone.
+		 * @param axis A vector along the central axis of the cone from
+		 * the apex and towards the base of the cone.
+		 * @param angle The angle at the apex of the cone.
+		 * @param height The height of the cone.
+		 * @param truncatedHeight The height at which the top of the cone is removed, leaving 
+		 * just the base from height to truncatedHeight. 
 		 */
-		public function ConeZone( apex:Vector3D, axis:Vector3D, angle:Number, maxDistance:Number, minDistance:Number = 0 )
+		public function ConeZone( apex:Vector3D, axis:Vector3D, angle:Number, height:Number, truncatedHeight:Number = 0 )
 		{
 			_apex = apex.clone();
 			_apex.w = 1;
 			_axis = axis.unit();
 			_axis.w = 0;
 			_angle = angle;
-			_minDist = minDistance;
-			_maxDist = maxDistance;
+			_minDist = truncatedHeight;
+			_maxDist = height;
+			_dirty = true;
+		}
+		
+		private function init():void
+		{
 			var axes:Array = Vector3DUtils.getPerpendiculars( _axis );
 			_perp1 = axes[0];
 			_perp2 = axes[1];
-			
+			_dirty = false;
 		}
-		
+
+		private function radiusAtHeight( h:Number ):Number
+		{
+			return Math.tan( _angle / 2 ) * h;
+		}
+
 		/**
-		 * The point at the apex of the disc.
+		 * The point at the apex of the cone.
 		 */
 		public function get apex() : Vector3D
 		{
@@ -85,12 +98,58 @@ package org.flintparticles.threeD.zones
 			_apex = value.clone();
 			_apex.w = 1;
 		}
-		
-		private function radiusAtHeight( h:Number ):Number
-		{
-			return Math.tan( _angle / 2 ) * h;
-		}
 
+		/**
+		 * The central axis of the cone, from the apex towards the base.
+		 */
+		public function get axis() : Vector3D
+		{
+			return _axis.clone();
+		}
+		public function set axis( value : Vector3D ) : void
+		{
+			_axis = value.clone();
+			_axis.w = 0;
+			_dirty = true;
+		}
+		
+		/**
+		 * The angle at the apex of the cone.
+		 */
+		public function get angle() : Number
+		{
+			return _angle;
+		}
+		public function set angle( value : Number ) : void
+		{
+			_angle = value;
+		}
+		
+		/**
+		 * The height of the cone.
+		 */
+		public function get height() : Number
+		{
+			return _maxDist;
+		}
+		public function set height( value : Number ) : void
+		{
+			_maxDist = value;
+		}
+		
+		/**
+		 * The height at which the top of the cone is removed, leaving 
+		 * just the base from height to truncatedHeight.
+		 */
+		public function get truncatedHeight() : Number
+		{
+			return _minDist;
+		}
+		public function set truncatedHeight( value : Number ) : void
+		{
+			_minDist = value;
+		}
+		
 		/**
 		 * The contains method determines whether a point is inside the zone.
 		 * This method is used by the initializers and actions that
@@ -101,6 +160,11 @@ package org.flintparticles.threeD.zones
 		 */
 		public function contains( p:Vector3D ):Boolean
 		{
+			if( _dirty )
+			{
+				init();
+			}
+
 			var q:Vector3D = p.subtract( _apex );
 			var d:Number = q.dotProduct( _axis );
 			if( d < _minDist || d > _maxDist )
@@ -122,6 +186,11 @@ package org.flintparticles.threeD.zones
 		 */
 		public function getLocation():Vector3D
 		{
+			if( _dirty )
+			{
+				init();
+			}
+
 			var h:Number = Math.random();
 			h = _minDist + ( 1 - h * h ) * ( _maxDist - _minDist );
 			

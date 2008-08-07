@@ -68,7 +68,7 @@ package org.flintparticles.threeD.zones
 		/**
 		 * The removeZone method is used to remove a zone from this MultiZone object.
 		 * 
-		 * @param zone The zone you want to add.
+		 * @param zone The zone you want to remove.
 		 */
 		public function removeZone( zone:Zone3D ):void
 		{
@@ -141,7 +141,7 @@ package org.flintparticles.threeD.zones
 		 * This method is used by the MultiZone class. Usually, 
 		 * it need not be called directly by the user.
 		 * 
-		 * @return a random point inside the zone.
+		 * @return The volume of all the zones combined.
 		 */
 		public function getVolume():Number
 		{

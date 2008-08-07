@@ -33,9 +33,9 @@ package org.flintparticles.threeD.zones
 	import org.flintparticles.threeD.geom.Vector3D;		
 
 	/**
-	 * The DiscZone zone defines a zone that contains all the points on a disc.1
-	 * The disc can be positioned anywhere in 3D space. The disc may, optionally,
-	 * have a hole in the middle.
+	 * The SphereZone zone defines a zone that contains all the points in a sphere.
+	 * The sphere can be positioned anywhere in 3D space and may, optionally,
+	 * be hollow in the middle.
 	 */
 
 	public class SphereZone implements Zone3D 
@@ -47,13 +47,12 @@ package org.flintparticles.threeD.zones
 		private var _outerRadiusSq:Number;
 		
 		/**
-		 * The constructor creates a DiscZone 3D zone.
+		 * The constructor creates a SphereZone 3D zone.
 		 * 
-		 * @param centre The point at the center of the disc.
-		 * @param normal A vector normal to the disc.
-		 * @param outerRadius The outer radius of the disc.
-		 * @param innerRadius The inner radius of the disc. This defines the hole 
-		 * in the center of the disc. If set to zero, there is no hole. 
+		 * @param center The point at the center of the sphere.
+		 * @param outerRadius The outer radius of the sphere.
+		 * @param innerRadius The inner radius of the sphere. This defines the hollow 
+		 * center of the sphere. If set to zero, the sphere is solid throughout. 
 		 */
 		public function SphereZone( center:Vector3D, outerRadius:Number, innerRadius:Number = 0 )
 		{
@@ -66,7 +65,7 @@ package org.flintparticles.threeD.zones
 		}
 		
 		/**
-		 * The point at the center of the disc.
+		 * The point at the center of the sphere.
 		 */
 		public function get center() : Vector3D
 		{
@@ -79,7 +78,7 @@ package org.flintparticles.threeD.zones
 		}
 
 		/**
-		 * The inner radius of the disc.
+		 * The radius of the hollow center of the sphere.
 		 */
 		public function get innerRadius() : Number
 		{
@@ -92,7 +91,7 @@ package org.flintparticles.threeD.zones
 		}
 
 		/**
-		 * The outer radius of the disc.
+		 * The outer radius of the sphere.
 		 */
 		public function get outerRadius() : Number
 		{
@@ -105,7 +104,7 @@ package org.flintparticles.threeD.zones
 		}
 
 		/**
-		 * The contains method determines whether a point is inside the zone.
+		 * The contains method determines whether a point is inside the sphere.
 		 * This method is used by the initializers and actions that
 		 * use the zone. Usually, it need not be called directly by the user.
 		 * 
@@ -119,11 +118,11 @@ package org.flintparticles.threeD.zones
 		}
 		
 		/**
-		 * The getLocation method returns a random point inside the zone.
+		 * The getLocation method returns a random point inside the sphere.
 		 * This method is used by the initializers and actions that
 		 * use the zone. Usually, it need not be called directly by the user.
 		 * 
-		 * @return a random point inside the zone.
+		 * @return A random point inside the zone.
 		 */
 		public function getLocation():Vector3D
 		{
@@ -141,11 +140,11 @@ package org.flintparticles.threeD.zones
 		}
 		
 		/**
-		 * The getArea method returns the size of the zone.
+		 * The getVolume method returns the volume of the sphere.
 		 * This method is used by the MultiZone class. Usually, 
 		 * it need not be called directly by the user.
 		 * 
-		 * @return a random point inside the zone.
+		 * @return the volume of the sphere.
 		 */
 		public function getVolume():Number
 		{

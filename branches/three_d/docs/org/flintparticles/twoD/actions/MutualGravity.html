@@ -42,7 +42,11 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 </tr>
 </table>
 <p></p>
-  The MutualGravity Action applies forces to attract each particle towards the other particles.
+  The MutualGravity Action applies forces to attract each particle towards 
+  the other particles. The force applied is inversely proportional to the 
+  square of the distance between the particles, in accordance with Newton's
+  law of gravity. This simulates the effect of gravity over large distances 
+  (as between planets, for example).
   <p></p>
 <br>
 <hr>
@@ -92,8 +96,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <div class="summarySignature">
 <a class="signatureLink" href="#MutualGravity()">MutualGravity</a>(power:Number, maxDistance:Number, epsilon:Number = 1)</div>
 <div class="summaryTableDescription">
-   The constructor creates a MutualGravity action for use by 
-   an emitter.</div>
+   The constructor creates a MutualGravity action for use by an emitter.</div>
 </td><td class="summaryTableOwnerCol">MutualGravity</td>
 </tr>
 <tr class="">
@@ -101,8 +104,8 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <div class="summarySignature">
 <a class="signatureLink" href="#addedToEmitter()">addedToEmitter</a>(emitter:<a href="../../common/emitters/Emitter.html">Emitter</a>):void</div>
 <div class="summaryTableDescription">
-   
-   This method does nothing.</div>
+   Instructs the emitter to produce a sorted particle array for optimizing
+   the calculations in the update method of this action.</div>
 </td><td class="summaryTableOwnerCol">MutualGravity</td>
 </tr>
 <tr class="">
@@ -110,8 +113,9 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <div class="summarySignature">
 <a class="signatureLink" href="#getDefaultPriority()">getDefaultPriority</a>():Number</div>
 <div class="summaryTableDescription">
-   
-   Returns a default priority of 0 for this action.</div>
+   Returns a value of 10, so that the MatchVelocity action executes 
+   before accelerating actions that act on particles independently of
+   other particles, like Acceleration and GravityWell.</div>
 </td><td class="summaryTableOwnerCol">MutualGravity</td>
 </tr>
 <tr class="hideInheritedMethod">
@@ -127,8 +131,8 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <div class="summarySignature">
 <a class="signatureLink" href="#update()">update</a>(emitter:<a href="../../common/emitters/Emitter.html">Emitter</a>, particle:<a href="../../common/particles/Particle.html">Particle</a>, time:Number):void</div>
 <div class="summaryTableDescription">
-   
-   This method does nothing.</div>
+   Checks all particles near the current particle and applies the 
+   gravity force between them.</div>
 </td><td class="summaryTableOwnerCol">MutualGravity</td>
 </tr>
 </table>
@@ -149,9 +153,9 @@ showHideInherited();
 <div class="detailBody">
 <code>epsilon:Number</code>&nbsp;&nbsp;[read-write]<p>
    The minimum distance for which the gravity force is calculated. 
-   Particles closer than this distance experience the gravity as it they were 
-   this distance away. This stops the gravity effect blowing up as distances get 
-   small.
+   Particles closer than this distance experience the gravity as it they 
+   were this distance away. This stops the gravity effect blowing up as 
+   distances get very small.
    </p><span class="label">Implementation</span>
 <br>
 <code>&nbsp;&nbsp;&nbsp;&nbsp;public function get epsilon():Number</code>
@@ -168,9 +172,10 @@ showHideInherited();
 <div class="detailBody">
 <code>maxDistance:Number</code>&nbsp;&nbsp;[read-write]<p>
    The maximum distance between particles for the gravitational
-   effect to be calculated. You can speed up this action by reducing the maxDistance
-   since often only the closest other particles have a significant effect on the 
-   motion of a particle.
+   effect to be calculated. You can sometimes speed up the calculation 
+   of this action by reducing the 
+   maxDistance since often only the closest other particles have a 
+   significant effect on the motion of a particle.
    </p><span class="label">Implementation</span>
 <br>
 <code>&nbsp;&nbsp;&nbsp;&nbsp;public function get maxDistance():Number</code>
@@ -204,31 +209,37 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public function MutualGravity(power:Number, maxDistance:Number, epsilon:Number = 1)</code><p>
-   The constructor creates a MutualGravity action for use by 
-   an emitter. To add a MutualGravity to all particles created by an emitter, use the
+   The constructor creates a MutualGravity action for use by an emitter. 
+   To add a MutualGravity to all particles created by an emitter, use the
    emitter's addAction method.
    
    </p><span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
-<td width="20px"></td><td><code><span class="label">power</span>:Number</code> &mdash; The strength of the gravitational pull between the particles.
+<td width="20px"></td><td><code><span class="label">power</span>:Number</code> &mdash; The strength of the gravitational pull between the 
+   particles.
    </td>
 </tr>
 <tr>
 <td class="paramSpacer">&nbsp;</td>
 </tr>
 <tr>
-<td width="20px"></td><td><code><span class="label">maxDistance</span>:Number</code> &mdash; The maximum distance between particles for the gravitational
-   effect to be calculated. You can speed up this action by reducing the maxDistance
-   since often only the closest other particles have a significant effect on the 
-   motion of a particle.
+<td width="20px"></td><td><code><span class="label">maxDistance</span>:Number</code> &mdash; The maximum distance between particles for the 
+   gravitational effect to be calculated. You can sometimes speed up 
+   the calculation of this action by 
+   reducing the maxDistance since often only the closest other particles 
+   have a significant effect on the motion of a particle.
    </td>
 </tr>
 <tr>
 <td class="paramSpacer">&nbsp;</td>
 </tr>
 <tr>
-<td width="20px"></td><td><code><span class="label">epsilon</span>:Number</code> (default = <code>1</code>)<code></code></td>
+<td width="20px"></td><td><code><span class="label">epsilon</span>:Number</code> (default = <code>1</code>)<code></code> &mdash; The minimum distance for which gravity is calculated. 
+   Particles closer than this distance experience a gravity force as if 
+   they were this distance away. This stops the gravity effect blowing 
+   up as distances get small.
+   </td>
 </tr>
 </table>
 <p>
@@ -248,18 +259,23 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public override function addedToEmitter(emitter:<a href="../../common/emitters/Emitter.html">Emitter</a>):void</code><p>
-   
-   This method does nothing. Some derived classes override this method
-   to perform actions when the action is added to an emitter.
+   Instructs the emitter to produce a sorted particle array for optimizing
+   the calculations in the update method of this action.
    
    </p><span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
-<td width="20px"></td><td><code><span class="label">emitter</span>:<a href="../../common/emitters/Emitter.html">Emitter</a></code> &mdash; The Emitter that the Action was added to.
+<td width="20px"></td><td><code><span class="label">emitter</span>:<a href="../../common/emitters/Emitter.html">Emitter</a></code> &mdash; The emitter this action has been added to.
    
    </td>
 </tr>
 </table>
+<p>
+<span class="label">See also</span>
+</p>
+<div class="seeAlso">
+<a href="../../common/actions/Action.html#addedToEmitter()" target="">org.flintparticles.common.actions.Action.addedToEmitter()</a>
+</div>
 </div>
 <a name="getDefaultPriority()"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
@@ -269,9 +285,9 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public override function getDefaultPriority():Number</code><p>
-   
-   Returns a default priority of 0 for this action. Derived classes 
-   override this method if they want a different default priority.
+   Returns a value of 10, so that the MatchVelocity action executes 
+   before accelerating actions that act on particles independently of
+   other particles, like Acceleration and GravityWell.
    
    </p><p></p>
 <span class="label">Returns</span>
@@ -280,6 +296,12 @@ showHideInherited();
 <td width="20"></td><td><code>Number</code></td>
 </tr>
 </table>
+<p>
+<span class="label">See also</span>
+</p>
+<div class="seeAlso">
+<a href="../../common/actions/Action.html#getDefaultPriority()" target="">org.flintparticles.common.actions.Action.getDefaultPriority()</a>
+</div>
 </div>
 <a name="update()"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
@@ -289,11 +311,13 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public override function update(emitter:<a href="../../common/emitters/Emitter.html">Emitter</a>, particle:<a href="../../common/particles/Particle.html">Particle</a>, time:Number):void</code><p>
+   Checks all particles near the current particle and applies the 
+   gravity force between them.
    
-   This method does nothing. All derived classes override this method
-   to update each particle every frame.
+   </p><p>This method is called by the emitter and need not be called by the 
+   user.</p>
    
-   </p><span class="label">Parameters</span>
+   <span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
 <td width="20px"></td><td><code><span class="label">emitter</span>:<a href="../../common/emitters/Emitter.html">Emitter</a></code> &mdash; The Emitter that created the particle.
@@ -315,6 +339,12 @@ showHideInherited();
    </td>
 </tr>
 </table>
+<p>
+<span class="label">See also</span>
+</p>
+<div class="seeAlso">
+<a href="../../common/actions/Action.html#update()" target="">org.flintparticles.common.actions.Action.update()</a>
+</div>
 </div>
 <br>
 <br>
