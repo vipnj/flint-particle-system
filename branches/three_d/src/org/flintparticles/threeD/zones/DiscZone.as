@@ -163,7 +163,7 @@ package org.flintparticles.threeD.zones
 			}
 			// test distance to center
 			var distToCenter:Number = Vector3D.distanceSquared( center, p );
-			if( distToCenter <= _outerRadius && distToCenter >= _innerRadius )
+			if( distToCenter <= _outerRadiusSq && distToCenter >= _innerRadiusSq )
 			{
 				return true;
 			}

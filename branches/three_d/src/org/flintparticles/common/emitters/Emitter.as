@@ -69,7 +69,18 @@ package org.flintparticles.common.emitters
 	[Event(name="particleAdded", type="org.flintparticles.common.events.ParticleEvent")]
 
 	/**
-	 * Dispatched when an emitter contains no particles.
+	 * Dispatched when an emitter attempts to update the particles' state but it 
+	 * contains no particles. This event will be dispatched every time the update 
+	 * occurs and there are no particles in the emitter. The update does not occur
+	 * when the emitter has not yet been started, when the emitter is paused, and
+	 * after the emitter has been stopped, so the event will not be dispatched 
+	 * at these times.
+	 * 
+	 * <p>See the firework example for an example that uses this event.</p>
+	 * 
+	 * @see start();
+	 * @see pause();
+	 * @see stop();
 	 * 
 	 * @eventType org.flintparticles.common.events.FlintEvent.EMITTER_EMPTY
 	 */
@@ -84,7 +95,7 @@ package org.flintparticles.common.emitters
 	[Event(name="emitterUpdated", type="org.flintparticles.common.events.EmitterEvent")]
 
 	/**
-	 * The Emitter class is the basse class for the Emitter2D and Emitter3D classes.
+	 * The Emitter class is the base class for the Emitter2D and Emitter3D classes.
 	 * The emitter class contains the common behavioour used by these two concrete
 	 * classes.
 	 * 

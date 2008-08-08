@@ -101,7 +101,7 @@ package org.flintparticles.common.utils
 			var len:uint = _values.length;
 			for( var i:uint = 0; i < len; ++i )
 			{
-				if( _values[i].priority > priority )
+				if( _values[i].priority < priority )
 				{
 					break;
 				}
