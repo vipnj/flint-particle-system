@@ -38,10 +38,9 @@ package
 	import org.flintparticles.common.initializers.*;
 	import org.flintparticles.threeD.actions.*;
 	import org.flintparticles.threeD.emitters.Emitter3D;
-	import org.flintparticles.threeD.geom.Matrix3D;
 	import org.flintparticles.threeD.geom.Vector3D;
 	import org.flintparticles.threeD.initializers.*;
-	import org.flintparticles.threeD.renderers.flint.*;
+	import org.flintparticles.threeD.renderers.*;
 	import org.flintparticles.threeD.zones.*;	
 
 	/**
@@ -69,8 +68,9 @@ package
 			emitter.addAction( new Collide( 10, 1 ) );
 			emitter.addAction( new BoundingBox( -250, 250, -250, 250, -250, 250 ) );
 			
-			var renderer:BitmapRenderer = new BitmapRenderer( new Rectangle( -250, -250, 500, 500 ) );
-			renderer.cameraTransform = Matrix3D.newTranslate( new Vector3D( 0, 100, -300 ) );
+			var renderer:BitmapRenderer = new BitmapRenderer( new Rectangle( -300, -300, 600, 600 ) );
+			renderer.camera.position = new Vector3D( 0, 200, -500 );
+			renderer.camera.target = new Vector3D( 0, 0, 0 );
 			renderer.addEmitter( emitter );
 			renderer.x = 250;
 			renderer.y = 250;

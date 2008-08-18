@@ -97,7 +97,7 @@ package org.flintparticles.threeD.geom
 			return new Matrix3D( [
 				cos + axis.x * axis.x * oneMinCos, axis.x * axis.y * oneMinCos - axis.z * sin, axis.x * axis.z  * oneMinCos + axis.y * sin, 0,
 				axis.x * axis.y * oneMinCos + axis.z * sin, cos + axis.y * axis.y * oneMinCos, axis.y * axis.z * oneMinCos - axis.x * sin, 0,
-				axis.x * axis.z  * oneMinCos - axis.y * sin, 0, axis.y * axis.z * oneMinCos + axis.x * sin, 0, cos + axis.z * axis.z * oneMinCos, 0,
+				axis.x * axis.z  * oneMinCos - axis.y * sin, axis.y * axis.z * oneMinCos + axis.x * sin,  cos + axis.z * axis.z * oneMinCos, 0,
 				0, 0, 0, 1 ] );
 		}
 		

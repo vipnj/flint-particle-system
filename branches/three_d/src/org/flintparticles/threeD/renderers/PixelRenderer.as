@@ -28,7 +28,7 @@
  * THE SOFTWARE.
  */
 
-package org.flintparticles.threeD.renderers.flint
+package org.flintparticles.threeD.renderers
 {
 	import flash.display.Bitmap;
 	import flash.display.BitmapData;
@@ -89,7 +89,7 @@ package org.flintparticles.threeD.renderers.flint
 		override protected function drawParticle( particle:Particle3D ):void
 		{
 			var pos:Vector3D = Vector3D( particle.dictionary[this] );
-			if( pos.z < _nearDistance || pos.z > _farDistance )
+			if( pos.z < _camera.nearPlaneDistance || pos.z > _camera.farPlaneDistance )
 			{
 				return;
 			}

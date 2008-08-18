@@ -28,11 +28,13 @@
  * THE SOFTWARE.
  */
 
-package org.flintparticles.threeD.renderers.flint
+package org.flintparticles.threeD.renderers
 {
 	import flash.display.DisplayObject;
 	
 	import org.flintparticles.common.particles.Particle;
+	import org.flintparticles.common.renderers.RendererBase;
+	import org.flintparticles.threeD.geom.Matrix3D;	
 	import org.flintparticles.threeD.geom.Quaternion;
 	import org.flintparticles.threeD.geom.Vector3D;
 	import org.flintparticles.threeD.particles.Particle3D;	
@@ -57,8 +59,17 @@ package org.flintparticles.threeD.renderers.flint
 	 * it is not suitable in situations where the same particle will be displayed 
 	 * by two different renderers.</p> 
 	 */
-	public class DisplayObjectRenderer extends Flint3DRendererBase
+	public class DisplayObjectRenderer extends RendererBase
 	{
+		/**
+		 * @private
+		 */
+		protected var _zSort:Boolean;
+		/**
+		 * @private
+		 */
+		protected var _camera:Camera;
+
 		/**
 		 * The constructor creates a DisplayObject3DRenderer. After creation the
 		 * renderer should be added to the display list of a DisplayObjectContainer 
@@ -73,7 +84,32 @@ package org.flintparticles.threeD.renderers.flint
 		 */
 		public function DisplayObjectRenderer( zSort:Boolean = true)
 		{
-			super( zSort );
+			_zSort = zSort;
+			_camera = new Camera();
+		}
+		
+		/**
+		 * Indicates whether the particles should be sorted in distance order for display.
+		 */
+		public function get zSort():Boolean
+		{
+			return _zSort;
+		}
+		public function set zSort( value:Boolean ):void
+		{
+			_zSort = value;
+		}
+		
+		/**
+		 * The camera controls the view for the renderer
+		 */
+		public function get camera():Camera
+		{
+			return _camera;
+		}
+		public function set camera( value:Camera ):void
+		{
+			_camera = value;
 		}
 		
 		/**
@@ -87,10 +123,7 @@ package org.flintparticles.threeD.renderers.flint
 		 */
 		override protected function renderParticles( particles:Array ):void
 		{
-			if( _dirty )
-			{
-				calculateTransform();
-			}
+			var transform:Matrix3D = _camera.transform;
 			var particle:Particle3D;
 			var img:DisplayObject;
 			var len:int = particles.length;
@@ -98,15 +131,15 @@ package org.flintparticles.threeD.renderers.flint
 			{
 				particle = particles[i];
 				img = particle.image;
-				var pos:Vector3D = _projectionTransform.transformVector( particle.position );
+				var pos:Vector3D = transform.transformVector( particle.position );
 				particle.dictionary[this] = pos.z;
-				if( pos.z < _nearDistance || pos.z > _farDistance )
+				if( pos.z < _camera.nearPlaneDistance || pos.z > _camera.farPlaneDistance )
 				{
 					img.visible = false;
 				}
 				else
 				{
-					var scale:Number = particle.scale * _projectionDistance / pos.z;
+					var scale:Number = particle.scale * _camera.projectionDistance / pos.z;
 					pos.project();
 					img.scaleX = scale;
 					img.scaleY = scale;
@@ -120,19 +153,18 @@ package org.flintparticles.threeD.renderers.flint
 					}
 					else
 					{
-						var axis:Vector3D = _projectionTransform.transformVector( new Vector3D( particle.rotation.x, particle.rotation.y, particle.rotation.z ) );
-						if( axis.z == 0 )
+						var axis:Vector3D = transform.transformVector( new Vector3D( particle.rotation.x, particle.rotation.y, particle.rotation.z ) );
+						if( axis.z != 0 )
 						{
-							return;
-						}
-						var rot:Number = 2 * Math.acos( particle.rotation.w ) * 180 / Math.PI;
-						if( axis.z > 0 )
-						{
-							img.rotation = -rot;
-						}
-						else
-						{
-							img.rotation = rot;
+							var rot:Number = 2 * Math.acos( particle.rotation.w ) * 180 / Math.PI;
+							if( axis.z > 0 )
+							{
+								img.rotation = -rot;
+							}
+							else
+							{
+								img.rotation = rot;
+							}
 						}
 					}
 				}

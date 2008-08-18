@@ -33,6 +33,7 @@ package org.flintparticles.threeD.initializers
 	import org.flintparticles.common.emitters.Emitter;
 	import org.flintparticles.common.initializers.InitializerBase;
 	import org.flintparticles.common.particles.Particle;
+	import org.flintparticles.threeD.geom.Vector3D;
 	import org.flintparticles.threeD.particles.Particle3D;
 	import org.flintparticles.threeD.zones.Zone3D;	
 
@@ -84,7 +85,9 @@ package org.flintparticles.threeD.initializers
 		{
 			// TODO: account for emitter rotation in this code
 			var p:Particle3D = Particle3D( particle );
-			p.position.incrementBy( zone.getLocation() );
+			var position:Vector3D = zone.getLocation();
+			position.w = 0;
+			p.position.incrementBy( position );
 		}
 	}
 }

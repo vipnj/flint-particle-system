@@ -45,7 +45,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 </tr>
 </table>
 <p></p>
-  The Emitter class is the basse class for the Emitter2D and Emitter3D classes.
+  The Emitter class is the base class for the Emitter2D and Emitter3D classes.
   The emitter class contains the common behavioour used by these two concrete
   classes.
   
@@ -349,7 +349,8 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <a class="signatureLink" href="#event:emitterEmpty">emitterEmpty</a>
 </div>
 </td><td class="summaryTableDescription summaryTableCol">
-  Dispatched when an emitter contains no particles.</td><td class="summaryTableOwnerCol">Emitter</td>
+  Dispatched when an emitter attempts to update the particles' state but it 
+  contains no particles.</td><td class="summaryTableOwnerCol">Emitter</td>
 </tr>
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
@@ -1068,9 +1069,20 @@ showHideInherited();
 <span class="label">Event object type: </span><a href="../events/EmitterEvent.html"><code>org.flintparticles.common.events.EmitterEvent</code></a>
 <br>
 <p></p><p>
-  Dispatched when an emitter contains no particles.
+  Dispatched when an emitter attempts to update the particles' state but it 
+  contains no particles. This event will be dispatched every time the update 
+  occurs and there are no particles in the emitter. The update does not occur
+  when the emitter has not yet been started, when the emitter is paused, and
+  after the emitter has been stopped, so the event will not be dispatched 
+  at these times.
   
-  </p></div>
+  </p><p>See the firework example for an example that uses this event.</p>
+  
+  <p>
+<span class="label">See also</span>
+</p>
+<div class="seeAlso">start();<br>pause();<br>stop();</div>
+</div>
 <a name="event:emitterUpdated"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
 <tr>

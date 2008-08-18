@@ -28,7 +28,7 @@
  * THE SOFTWARE.
  */
 
-package org.flintparticles.threeD.renderers.flint
+package org.flintparticles.threeD.renderers
 {
 	import flash.display.Bitmap;
 	import flash.display.BitmapData;
@@ -38,6 +38,8 @@ package org.flintparticles.threeD.renderers.flint
 	import flash.geom.Point;
 	import flash.geom.Rectangle;
 	
+	import org.flintparticles.common.renderers.RendererBase;
+	import org.flintparticles.threeD.geom.Matrix3D;	
 	import org.flintparticles.threeD.geom.Quaternion;
 	import org.flintparticles.threeD.geom.Vector3D;
 	import org.flintparticles.threeD.particles.Particle3D;	
@@ -70,10 +72,19 @@ package org.flintparticles.threeD.renderers.flint
 	 * display objects in its display list. To enable mouse events for the renderer
 	 * or its children set the mouseEnabled or mouseChildren properties to true.</p>
 	 */
-	public class BitmapRenderer extends Flint3DRendererBase
+	public class BitmapRenderer extends RendererBase
 	{
 		protected static var ZERO_POINT:Point = new Point( 0, 0 );
 		
+		/**
+		 * @private
+		 */
+		protected var _zSort:Boolean;
+		/**
+		 * @private
+		 */
+		protected var _camera:Camera;
+
 		/**
 		 * @private
 		 */
@@ -121,7 +132,8 @@ package org.flintparticles.threeD.renderers.flint
 		 */
 		public function BitmapRenderer( canvas:Rectangle, zSort:Boolean = true, smoothing:Boolean = false )
 		{
-			super( zSort );
+			_zSort = zSort;
+			_camera = new Camera();
 			mouseEnabled = false;
 			mouseChildren = false;
 			_zSort = zSort;
@@ -130,6 +142,30 @@ package org.flintparticles.threeD.renderers.flint
 			_postFilters = new Array();
 			_canvas = canvas;
 			createBitmap();
+		}
+		
+		/**
+		 * Indicates whether the particles should be sorted in distance order for display.
+		 */
+		public function get zSort():Boolean
+		{
+			return _zSort;
+		}
+		public function set zSort( value:Boolean ):void
+		{
+			_zSort = value;
+		}
+		
+		/**
+		 * The camera controls the view for the renderer
+		 */
+		public function get camera():Camera
+		{
+			return _camera;
+		}
+		public function set camera( value:Camera ):void
+		{
+			_camera = value;
 		}
 		
 		/**
@@ -257,10 +293,7 @@ package org.flintparticles.threeD.renderers.flint
 			{
 				return;
 			}
-			if( _dirty )
-			{
-				calculateTransform();
-			}
+			var transform:Matrix3D = _camera.transform;
 			
 			var i:int;
 			var len:int;
@@ -279,7 +312,7 @@ package org.flintparticles.threeD.renderers.flint
 			for( i = 0; i < len; ++i )
 			{
 				particle = particles[i];
-				particle.dictionary[this] = _projectionTransform.transformVector( particle.position );
+				particle.dictionary[this] = transform.transformVector( particle.position );
 			}
 			if( _zSort )
 			{
@@ -334,24 +367,23 @@ package org.flintparticles.threeD.renderers.flint
 		protected function drawParticle( particle:Particle3D ):void
 		{
 			var pos:Vector3D = Vector3D( particle.dictionary[this] );
-			if( pos.z < _nearDistance || pos.z > _farDistance )
+			if( pos.z < _camera.nearPlaneDistance || pos.z > _camera.farPlaneDistance )
 			{
 				return;
 			}
-			var scale:Number = particle.scale * _projectionDistance / pos.z;
+			var scale:Number = particle.scale * _camera.projectionDistance / pos.z;
 			pos.project();
 			var rot:Number = 0;
 			if( !particle.rotation.equals( Quaternion.IDENTITY ) )
 			{
-				var axis:Vector3D = _projectionTransform.transformVector( new Vector3D( particle.rotation.x, particle.rotation.y, particle.rotation.z ) );
-				if( axis.z == 0 )
+				var axis:Vector3D = _camera.transform.transformVector( new Vector3D( particle.rotation.x, particle.rotation.y, particle.rotation.z ) );
+				if( axis.z != 0 )
 				{
-					return;
-				}
-				rot = 2 * Math.acos( particle.rotation.w );
-				if( axis.z > 0 )
-				{
-					rot = -rot;
+					rot = 2 * Math.acos( particle.rotation.w );
+					if( axis.z > 0 )
+					{
+						rot = -rot;
+					}
 				}
 			}
 			var matrix:Matrix;

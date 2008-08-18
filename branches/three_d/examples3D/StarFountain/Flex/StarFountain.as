@@ -38,10 +38,9 @@ package
 	import org.flintparticles.common.initializers.*;
 	import org.flintparticles.threeD.actions.*;
 	import org.flintparticles.threeD.emitters.Emitter3D;
-	import org.flintparticles.threeD.geom.Matrix3D;
 	import org.flintparticles.threeD.geom.Vector3D;
 	import org.flintparticles.threeD.initializers.*;
-	import org.flintparticles.threeD.renderers.flint.*;
+	import org.flintparticles.threeD.renderers.*;
 	import org.flintparticles.threeD.zones.*;	
 
 	[SWF(width='500', height='500', frameRate='61', backgroundColor='#000000')]
@@ -55,6 +54,7 @@ package
 	public class StarFountain extends Sprite
 	{
 		private var emitter:Emitter3D;
+		private var renderer:DisplayObjectRenderer;
 		
 		public function StarFountain()
 		{
@@ -73,8 +73,10 @@ package
 			emitter.addAction( new Accelerate( new Vector3D( 0, -150, 0 ) ) );
 			emitter.addAction( new Age() );
 			
-			var renderer:DisplayObjectRenderer = new DisplayObjectRenderer();
-			renderer.cameraTransform = Matrix3D.newTranslate( new Vector3D( 0, 100, -300 ) );
+			renderer = new DisplayObjectRenderer();
+			renderer.camera.dolly( -300 );
+			renderer.camera.lift( 100 );
+			renderer.camera.target = new Vector3D( 0, 100, 0 );
 			renderer.addEmitter( emitter );
 			renderer.x = 250;
 			renderer.y = 250;
