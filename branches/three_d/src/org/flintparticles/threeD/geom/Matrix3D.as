@@ -799,6 +799,23 @@ package org.flintparticles.threeD.geom
 		}
 
 		/**
+		 * Transform a Vector3D using this matrix, storing the result in a second vector.
+		 * 
+		 * @param v The vector to transform.
+		 * @param u The vector for the result.
+		 * 
+		 * @return The result of the transformation.
+		 */
+		public function transformVectorOther( v:Vector3D, u:Vector3D ):Vector3D
+		{
+			u.x = n11 * v.x + n12 * v.y + n13 * v.z + n14 * v.w;
+			u.y = n21 * v.x + n22 * v.y + n23 * v.z + n24 * v.w;
+			u.z = n31 * v.x + n32 * v.y + n33 * v.z + n34 * v.w;
+			u.w = n41 * v.x + n42 * v.y + n43 * v.z + n44 * v.w;
+			return u;
+		}
+
+		/**
 		 * Transform a Vector3D using this matrix, storing the result in the original 
 		 * vector.
 		 * 

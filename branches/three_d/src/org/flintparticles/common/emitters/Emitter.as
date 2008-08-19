@@ -38,11 +38,12 @@ package org.flintparticles.common.emitters
 	import org.flintparticles.common.counters.ZeroCounter;
 	import org.flintparticles.common.events.EmitterEvent;
 	import org.flintparticles.common.events.ParticleEvent;
+	import org.flintparticles.common.events.UpdateEvent;
 	import org.flintparticles.common.initializers.Initializer;
 	import org.flintparticles.common.particles.Particle;
-	import org.flintparticles.common.particles.ParticleFactory;	
-	import org.flintparticles.common.utils.EmitterUpdater;
-	import org.flintparticles.common.utils.PriorityArray;
+	import org.flintparticles.common.particles.ParticleFactory;
+	import org.flintparticles.common.utils.FrameUpdater;
+	import org.flintparticles.common.utils.PriorityArray;	
 
 	/**
 	 * Dispatched when a particle dies and is about to be removed from the system.
@@ -129,20 +130,6 @@ package org.flintparticles.common.emitters
 		/**
 		 * @private
 		 */
-		protected static function get emitterUpdater():EmitterUpdater
-		{
-			if( _emitterUpdater ==  null )
-			{
-				_emitterUpdater = new EmitterUpdater();
-				_emitterUpdater.start();
-			}
-			return _emitterUpdater;
-		}
-		private static var _emitterUpdater:EmitterUpdater = null;
-		
-		/**
-		 * @private
-		 */
 		protected var _particleFactory:ParticleFactory;
 		
 		/**
@@ -201,7 +188,7 @@ package org.flintparticles.common.emitters
 		}
 
 		/**
-		 * The maximum duration, in seconds, for a single update frame, in seconds.
+		 * The maximum duration for a single update frame, in seconds.
 		 * 
 		 * <p>Under some circumstances related to the Flash player (e.g. on MacOSX, when the 
 		 * user right-clicks on the flash movie) the flash movie will freeze for a period. When the
@@ -219,7 +206,6 @@ package org.flintparticles.common.emitters
 		{
 			return _maximumFrameTime;
 		}
-
 		public function set maximumFrameTime( value : Number ) : void
 		{
 			_maximumFrameTime = value;
@@ -479,11 +465,11 @@ package org.flintparticles.common.emitters
 				{
 					if( _useInternalTick )
 					{
-						emitterUpdater.addEmitter( this );
+						FrameUpdater.instance.addEventListener( UpdateEvent.UPDATE, updateEventListener );
 					}
 					else
 					{
-						emitterUpdater.removeEmitter( this );
+						FrameUpdater.instance.removeEventListener( UpdateEvent.UPDATE, updateEventListener );
 					}
 				}
 			}
@@ -587,7 +573,7 @@ package org.flintparticles.common.emitters
 		{
 			if( _useInternalTick )
 			{
-				emitterUpdater.addEmitter( this );
+				FrameUpdater.instance.addEventListener( UpdateEvent.UPDATE, updateEventListener );
 			}
 			_started = true;
 			_running = true;
@@ -601,6 +587,14 @@ package org.flintparticles.common.emitters
 			{
 				createParticle();
 			}
+		}
+		
+		/**
+		 * Update event listener used to fire the update function when using teh internal tick.
+		 */
+		private function updateEventListener( ev:UpdateEvent ):void
+		{
+			update( ev.time );
 		}
 		
 		/**
@@ -706,7 +700,7 @@ package org.flintparticles.common.emitters
 		{
 			if( _useInternalTick )
 			{
-				emitterUpdater.removeEmitter( this );
+				FrameUpdater.instance.removeEventListener( UpdateEvent.UPDATE, updateEventListener );
 			}
 			_started = false;
 			var len:int = _particles.length;

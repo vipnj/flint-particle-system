@@ -35,7 +35,7 @@ package org.flintparticles.common.utils
 	import flash.events.EventDispatcher;
 	import flash.utils.getTimer;
 	
-	import org.flintparticles.common.emitters.Emitter;	
+	import org.flintparticles.common.events.UpdateEvent;	
 
 	/**
 	 * This class is used to provide a constant tick event to update the emitters
@@ -47,73 +47,37 @@ package org.flintparticles.common.utils
 	 * 
 	 * @see org.flintparticles.common.emitters.Emitter.Emitter()
 	 */
-	public class EmitterUpdater extends EventDispatcher
+	public class FrameUpdater extends EventDispatcher
 	{
+		private static var _instance:FrameUpdater;
+		/**
+		 * This is a singleton instance. There's no requirement to use this singleton -
+		 * the constructor isn't private (or in any other way restricted) and nothing
+		 * will go wrong if you create multiple instances of the class. The singleton
+		 * instance is provided for speed and memory optimization - it is usually 
+		 * possible for all code to use the same instance and this singleton makes it
+		 * easy for code to do this by all code using this singleton instance.
+		 */
+		public static function get instance():FrameUpdater
+		{
+			if( _instance ==  null )
+			{
+				_instance = new FrameUpdater();
+			}
+			return _instance;
+		}
+		
 		private var _shape:Shape;
 		private var _time:Number;
-		private var _running:Boolean;
-		private var _emitters:Array;
 		
 		/**
 		 * The constructor creates an EmitterUpdater object.
 		 */
-		public function EmitterUpdater()
+		public function FrameUpdater()
 		{
 			_shape = new Shape();
-			_emitters = new Array();
-		}
-
-		/**
-		 * Starts the EmitterUpdater
-		 */
-		public function start():void
-		{
-			if( !_running )
-			{
-				_shape.addEventListener( Event.ENTER_FRAME, frameUpdate );
-				_time = getTimer();
-				_running = true;
-			}
-		}
-		
-		/**
-		 * Stops the EmitterUpdater
-		 */
-		public function stop():void
-		{
-			if( _running )
-			{
-				_shape.removeEventListener( Event.ENTER_FRAME, frameUpdate );
-				_running = false;
-			}
-		}
-		
-		/**
-		 * Adds an emitter to the EmitterUpdater. Once added, the emitter's
-		 * update method will be called every frame.
-		 * 
-		 * @param emitter The emitter to add.
-		 */
-		public function addEmitter( emitter:Emitter ):void
-		{
-			var i:int = _emitters.indexOf( emitter );
-			if( i == -1 )
-			{
-				_emitters.push( emitter );
-			}
-		}
-		
-		/**
-		 * Removes an emitter from the EmitterUpdater. Once removed, the emitter's
-		 * update method will no longer be called by the EmitterUpdater.
-		 */
-		public function removeEmitter( emitter:Emitter ):void
-		{
-			var i:int = _emitters.indexOf( emitter );
-			if( i != -1 )
-			{
-				_emitters.splice( i, 1 );
-			}
+			_shape.addEventListener( Event.ENTER_FRAME, frameUpdate );
+			_time = getTimer();
 		}
 
 		private function frameUpdate( ev:Event ):void
@@ -121,10 +85,7 @@ package org.flintparticles.common.utils
 			var oldTime:int = _time;
 			_time = getTimer();
 			var frameTime:Number = ( _time - oldTime ) * 0.001;
-			for each( var emitter:Emitter in _emitters )
-			{
-				emitter.update( frameTime );
-			}
+			dispatchEvent( new UpdateEvent( UpdateEvent.UPDATE, frameTime ) );
 		}
 	}
 }

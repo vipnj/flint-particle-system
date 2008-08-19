@@ -51,6 +51,8 @@ package org.flintparticles.common.particles
 		 */
 		public var color:uint = 0xFFFFFFFF;
 		
+		private var _colorTransform:ColorTransform;
+		private var _previousColor:uint;
 		/**
 		 * The scale of the particle ( 1 is normal size ).
 		 */
@@ -121,6 +123,7 @@ package org.flintparticles.common.particles
 			isDead = false;
 			image = null;
 			_dictionary = null;
+			_colorTransform = null;
 		}
 		
 		/**
@@ -128,11 +131,16 @@ package org.flintparticles.common.particles
 		 */
 		public function get colorTransform():ColorTransform
 		{
-			return new ColorTransform( ( ( color >>> 16 ) & 255 ) / 255,
+			if( !_colorTransform || _previousColor != color )
+			{
+				_colorTransform = new ColorTransform( ( ( color >>> 16 ) & 255 ) / 255,
 			                           ( ( color >>> 8 ) & 255 ) / 255,
 			                           ( ( color ) & 255 ) / 255,
 			                           ( ( color >>> 24 ) & 255 ) / 255,
 			                           0,0,0,0 );
+			    _previousColor = color;
+			}
+			return _colorTransform;
 		}
 	}
 }

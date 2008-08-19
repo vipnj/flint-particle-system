@@ -57,6 +57,13 @@ package org.flintparticles.twoD.actions
 		private var _epsilonSq:Number;
 		private var _gravityConst:Number = 10000; // just scales the power to a more reasonable number
 		
+		private var lp:Particle2D;
+		private var lx:Number;
+		private var ly:Number;
+		private var ldSq:Number;
+		private var ld:Number;
+		private var lfactor:Number;
+		
 		/**
 		 * The constructor creates a GravityWell action for use by an emitter.
 		 * To add a GravityWell to all particles created by an emitter, use the
@@ -156,19 +163,19 @@ package org.flintparticles.twoD.actions
 		 */
 		override public function update( emitter:Emitter, particle:Particle, time:Number ):void
 		{
-			var p:Particle2D = Particle2D( particle );
-			var x:Number = _x - p.x;
-			var y:Number = _y - p.y;
-			var dSq:Number = x * x + y * y;
-			if( dSq == 0 )
+			lp = Particle2D( particle );
+			lx = _x - lp.x;
+			ly = _y - lp.y;
+			ldSq = lx * lx + ly * ly;
+			if( ldSq == 0 )
 			{
 				return;
 			}
-			var d:Number = Math.sqrt( dSq );
-			if( dSq < _epsilonSq ) dSq = _epsilonSq;
-			var factor:Number = ( _power * time ) / ( dSq * d );
-			p.velX += x * factor;
-			p.velY += y * factor;
+			ld = Math.sqrt( ldSq );
+			if( ldSq < _epsilonSq ) ldSq = _epsilonSq;
+			lfactor = ( _power * time ) / ( ldSq * ld );
+			lp.velX += lx * lfactor;
+			lp.velY += ly * lfactor;
 		}
 	}
 }

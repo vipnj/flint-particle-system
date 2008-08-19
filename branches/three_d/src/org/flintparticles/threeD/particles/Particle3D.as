@@ -66,6 +66,16 @@ package org.flintparticles.threeD.particles
 		public var sortID:int;
 		
 		/**
+		 * Position vector projected into screen space. Used by renderers.
+		 */
+		public var projectedPosition:Vector3D;
+		
+		/**
+		 * z depth of particle in renderer's camera space
+		 */
+		public var zDepth:Number;
+		
+		/**
 		 * Creates a Particle3D. Alternatively particles can be reused by using an
 		 * instance of the Particle3DCreator class to create them. Usually the 
 		 * emitter will create the particles and the user doesn't need to create 
@@ -83,10 +93,12 @@ package org.flintparticles.threeD.particles
 		{
 			super.initialize();
 			position = new Vector3D( 0, 0, 0, 1 );
+			projectedPosition = new Vector3D( 0, 0, 0, 1 );
 			velocity = new Vector3D( 0, 0, 0, 0 );
 			rotation = new Quaternion( 1, 0, 0, 0 );
 			angVelocity = new Vector3D( 0, 0, 0, 0 );
 			sortID = -1;
+			zDepth = 0;
 		}
 	}
 }

@@ -40,6 +40,7 @@ package
 	import org.flintparticles.threeD.geom.Vector3D;
 	import org.flintparticles.threeD.initializers.*;
 	import org.flintparticles.threeD.renderers.*;
+	import org.flintparticles.threeD.renderers.controllers.*;
 	import org.flintparticles.threeD.zones.*;	
 
 	[SWF(width='500', height='500', frameRate='61', backgroundColor='#000000')]
@@ -53,6 +54,7 @@ package
 	public class Collisions extends Sprite
 	{
 		private var emitter:Emitter3D;
+		private var orbitter:OrbitCamera;
 		
 		public function Collisions()
 		{
@@ -78,6 +80,9 @@ package
 			addChild( renderer );
 
 			emitter.start();
+			
+			orbitter = new OrbitCamera( stage, renderer.camera );
+			orbitter.start();
 		}
 	}
 }

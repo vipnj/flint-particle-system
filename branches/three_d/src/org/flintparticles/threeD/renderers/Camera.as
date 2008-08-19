@@ -1,10 +1,42 @@
+/*
+ * FLINT PARTICLE SYSTEM
+ * .....................
+ * 
+ * Author: Richard Lord (Big Room)
+ * Copyright (c) Big Room Ventures Ltd. 2008
+ * http://flintparticles.org
+ * 
+ * 
+ * Licence Agreement
+ * 
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ * 
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ */
+
 package org.flintparticles.threeD.renderers 
 {
 	import org.flintparticles.threeD.geom.Matrix3D;
 	import org.flintparticles.threeD.geom.Vector3D;		
 
 	/**
-	 * @author user
+	 * The camera class is used by Flint's internal 3D renderers to manage the view on the 3D
+	 * world that is displayed by the renderer. Each renderer has a camera property, which is
+	 * its camera object.
 	 */
 	public class Camera 
 	{
@@ -26,6 +58,10 @@ package org.flintparticles.threeD.renderers
 		private var _pTrack:Vector3D;
 		private var _pFront:Vector3D;
 		
+		/**
+		 * The constructor creates a Camera object. Usually, users don't need to create camera
+		 * objects, but will use the camera objects that are properties of Flint's renderers.
+		 */
 		public function Camera()
 		{
 			_position = Vector3D.ZERO.clone();
@@ -175,8 +211,8 @@ package org.flintparticles.threeD.renderers
 		/**
 		 * Tilt the camera up or down.
 		 * 
-		 * @param The angle (in radians) to tilt the camera. Positive values tilt down,
-		 * negative values tilt up.
+		 * @param The angle (in radians) to tilt the camera. Positive values tilt up,
+		 * negative values tilt down.
 		 */
 		public function tilt( angle:Number ):void
 		{
@@ -227,7 +263,7 @@ package org.flintparticles.threeD.renderers
 			{
 				throw new Error( "Attempting to orbit camera when no target is set" );
 			}
-			var m:Matrix3D = Matrix3D.newRotateAboutAxis( up, angle );
+			var m:Matrix3D = Matrix3D.newRotateAboutAxis( up, -angle );
 			m.transformVectorSelf( _position );
 			_pDirection = null;
 			_pTrack = null;

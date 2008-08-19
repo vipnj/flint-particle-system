@@ -88,7 +88,7 @@ package org.flintparticles.threeD.renderers
 		 */
 		override protected function drawParticle( particle:Particle3D ):void
 		{
-			var pos:Vector3D = Vector3D( particle.dictionary[this] );
+			var pos:Vector3D = particle.projectedPosition;
 			if( pos.z < _camera.nearPlaneDistance || pos.z > _camera.farPlaneDistance )
 			{
 				return;

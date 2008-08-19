@@ -82,7 +82,7 @@ package org.flintparticles.threeD.renderers
 		 * @param zSort Whether to sort the particles according to their
 		 * z order when rendering them or not.
 		 */
-		public function DisplayObjectRenderer( zSort:Boolean = true)
+		public function DisplayObjectRenderer( zSort:Boolean = true )
 		{
 			_zSort = zSort;
 			_camera = new Camera();
@@ -123,6 +123,8 @@ package org.flintparticles.threeD.renderers
 		 */
 		override protected function renderParticles( particles:Array ):void
 		{
+			var pos:Vector3D = new Vector3D();
+			var axis:Vector3D = new Vector3D();
 			var transform:Matrix3D = _camera.transform;
 			var particle:Particle3D;
 			var img:DisplayObject;
@@ -131,8 +133,8 @@ package org.flintparticles.threeD.renderers
 			{
 				particle = particles[i];
 				img = particle.image;
-				var pos:Vector3D = transform.transformVector( particle.position );
-				particle.dictionary[this] = pos.z;
+				transform.transformVectorOther( particle.position, pos );
+				particle.zDepth = pos.z;
 				if( pos.z < _camera.nearPlaneDistance || pos.z > _camera.farPlaneDistance )
 				{
 					img.visible = false;
@@ -153,7 +155,8 @@ package org.flintparticles.threeD.renderers
 					}
 					else
 					{
-						var axis:Vector3D = transform.transformVector( new Vector3D( particle.rotation.x, particle.rotation.y, particle.rotation.z ) );
+						axis.reset( particle.rotation.x, particle.rotation.y, particle.rotation.z );
+						transform.transformVectorSelf( axis );
 						if( axis.z != 0 )
 						{
 							var rot:Number = 2 * Math.acos( particle.rotation.w ) * 180 / Math.PI;
@@ -184,20 +187,7 @@ package org.flintparticles.threeD.renderers
 		 */
 		protected function sortOnZ( p1:Particle3D, p2:Particle3D ):int
 		{
-			/*
-			 * TODO: does this work?
-			 * return Number( p2.dictionary[this] ) - Number( p1.dictionary[this] )
-			 */
-			var order:Number = Number( p2.dictionary[this] ) - Number( p1.dictionary[this] );
-			if( order < 0 )
-			{
-				return -1;
-			}
-			if( order > 0 )
-			{
-				return 1;
-			}
-			return 0;
+			return p2.zDepth - p1.zDepth;
 		}
 
 		/**

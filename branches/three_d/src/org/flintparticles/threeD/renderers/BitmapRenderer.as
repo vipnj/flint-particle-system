@@ -294,7 +294,6 @@ package org.flintparticles.threeD.renderers
 				return;
 			}
 			var transform:Matrix3D = _camera.transform;
-			
 			var i:int;
 			var len:int;
 			var particle:Particle3D;
@@ -312,7 +311,8 @@ package org.flintparticles.threeD.renderers
 			for( i = 0; i < len; ++i )
 			{
 				particle = particles[i];
-				particle.dictionary[this] = transform.transformVector( particle.position );
+				particle.projectedPosition = transform.transformVector( particle.position );
+				particle.zDepth = particle.projectedPosition.z;
 			}
 			if( _zSort )
 			{
@@ -339,20 +339,7 @@ package org.flintparticles.threeD.renderers
 		 */
 		protected function sortOnZ( p1:Particle3D, p2:Particle3D ):int
 		{
-			/*
-			 * TODO: does this work?
-			 * return Number( p2.dictionary[this] ) - Number( p1.dictionary[this] )
-			 */
-			var order:Number = Vector3D( p2.dictionary[this] ).z - Vector3D( p1.dictionary[this] ).z;
-			if( order < 0 )
-			{
-				return -1;
-			}
-			if( order > 0 )
-			{
-				return 1;
-			}
-			return 0;
+			return p2.zDepth - p1.zDepth;
 		}
 
 		/**
@@ -366,7 +353,7 @@ package org.flintparticles.threeD.renderers
 		 */
 		protected function drawParticle( particle:Particle3D ):void
 		{
-			var pos:Vector3D = Vector3D( particle.dictionary[this] );
+			var pos:Vector3D = particle.projectedPosition;
 			if( pos.z < _camera.nearPlaneDistance || pos.z > _camera.farPlaneDistance )
 			{
 				return;
@@ -376,7 +363,8 @@ package org.flintparticles.threeD.renderers
 			var rot:Number = 0;
 			if( !particle.rotation.equals( Quaternion.IDENTITY ) )
 			{
-				var axis:Vector3D = _camera.transform.transformVector( new Vector3D( particle.rotation.x, particle.rotation.y, particle.rotation.z ) );
+				var axis:Vector3D = new Vector3D( particle.rotation.x, particle.rotation.y, particle.rotation.z );
+				_camera.transform.transformVectorSelf( axis );
 				if( axis.z != 0 )
 				{
 					rot = 2 * Math.acos( particle.rotation.w );

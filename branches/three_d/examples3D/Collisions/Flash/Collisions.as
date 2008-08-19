@@ -41,6 +41,7 @@ package
 	import org.flintparticles.threeD.geom.Vector3D;
 	import org.flintparticles.threeD.initializers.*;
 	import org.flintparticles.threeD.renderers.*;
+	import org.flintparticles.threeD.renderers.control.*;
 	import org.flintparticles.threeD.zones.*;	
 
 	/**
@@ -52,6 +53,8 @@ package
 	public class Collisions extends Sprite
 	{
 		private var emitter:Emitter3D;
+		private var var renderer:BitmapRenderer;
+		private var orbitter:OrbitCamera;
 		
 		public function Collisions()
 		{
@@ -68,7 +71,7 @@ package
 			emitter.addAction( new Collide( 10, 1 ) );
 			emitter.addAction( new BoundingBox( -250, 250, -250, 250, -250, 250 ) );
 			
-			var renderer:BitmapRenderer = new BitmapRenderer( new Rectangle( -300, -300, 600, 600 ) );
+			renderer = new BitmapRenderer( new Rectangle( -300, -300, 600, 600 ) );
 			renderer.camera.position = new Vector3D( 0, 200, -500 );
 			renderer.camera.target = new Vector3D( 0, 0, 0 );
 			renderer.addEmitter( emitter );
@@ -77,6 +80,9 @@ package
 			addChild( renderer );
 
 			emitter.start();
+			
+			orbitter = new OrbitCamera( stage, renderer.camera );
+			orbitter.start();
 		}
 	}
 }
