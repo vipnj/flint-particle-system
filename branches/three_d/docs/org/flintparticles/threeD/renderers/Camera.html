@@ -39,6 +39,9 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 </tr>
 </table>
 <p></p>
+  The camera class is used by Flint's internal 3D renderers to manage the view on the 3D
+  world that is displayed by the renderer. Each renderer has a camera property, which is
+  its camera object.
   <p></p>
 <br>
 <hr>
@@ -110,7 +113,8 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
 <a class="signatureLink" href="#Camera()">Camera</a>()</div>
-<div class="summaryTableDescription"></div>
+<div class="summaryTableDescription">
+   The constructor creates a Camera object.</div>
 </td><td class="summaryTableOwnerCol">Camera</td>
 </tr>
 <tr class="">
@@ -352,8 +356,10 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>public function Camera()</code>
-</div>
+<code>public function Camera()</code><p>
+   The constructor creates a Camera object. Usually, users don't need to create camera
+   objects, but will use the camera objects that are properties of Flint's renderers.
+   </p></div>
 <a name="methodDetail"></a>
 <div class="detailSectionHeader">Method detail</div>
 <a name="dolly()"></a>
@@ -464,8 +470,8 @@ showHideInherited();
    </p><span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
-<td width="20px"></td><td><code><span class="label">angle</span>:Number</code> &mdash; angle (in radians) to tilt the camera. Positive values tilt down,
-   negative values tilt up.
+<td width="20px"></td><td><code><span class="label">angle</span>:Number</code> &mdash; angle (in radians) to tilt the camera. Positive values tilt up,
+   negative values tilt down.
    </td>
 </tr>
 </table>
