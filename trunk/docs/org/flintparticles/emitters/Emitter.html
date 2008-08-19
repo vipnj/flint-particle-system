@@ -898,12 +898,13 @@ showHideInherited();
 <p></p><p>
   Dispatched when an emitter attempts to update the particles' state but it 
   contains no particles. This event will be dispatched every time the update 
-  occurs while there are no particles in the emitter. The event will not be 
-  dispatched if the emitter is paused or after it is disposed.
+  occurs and there are no particles in the emitter. The update does not occur
+  when the emitter has not yet been started, when the emitter is paused, and
+  after the emitter has been disposed. So the event will not be dispatched 
+  at these times.
   
-  </p><p>This event is used, for example, to remove an emitter when it contains no 
-  particles or to restart the emitter (see the firework example) or modify a 
-  counter when the emitter contains no particles.</p>
+  </p><p>See the <a href="http://flintparticles.org/examples/logo-firework">firework
+  example</a> for an example that uses this event.</p>
   
   <p>
 <span class="label">See also</span>
