@@ -46,6 +46,10 @@ package org.flintparticles.twoD.actions
 		private var _zone:Zone2D;
 		private var _invertZone:Boolean;
 		
+		private var p:Particle2D;
+		private var inside:Boolean;
+		
+		
 		/**
 		 * The constructor creates a DeathZone action for use by an emitter. 
 		 * To add a DeathZone to all particles created by an emitter, use the
@@ -117,15 +121,21 @@ package org.flintparticles.twoD.actions
 		 */
 		override public function update( emitter:Emitter, particle:Particle, time:Number ):void
 		{
-			var p:Particle2D = Particle2D( particle );
-			var inside:Boolean = _zone.contains( p.x, p.y );
+			p = Particle2D( particle );
+			inside = _zone.contains( p.x, p.y );
 			if ( _invertZone )
 			{
-				inside = !inside;
+				if( !inside )
+				{
+					p.isDead = true;
+				}
 			}
-			if ( inside )
+			else
 			{
-				p.isDead = true;
+				if ( inside )
+				{
+					p.isDead = true;
+				}
 			}
 		}
 	}

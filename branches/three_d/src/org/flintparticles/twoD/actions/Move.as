@@ -43,6 +43,7 @@ package org.flintparticles.twoD.actions
 	 */
 	public class Move extends ActionBase
 	{
+		private var p:Particle2D;
 		/**
 		 * The constructor creates a Move action for use by an emitter. 
 		 * To add a Move to all particles created by an emitter, use the
@@ -81,7 +82,7 @@ package org.flintparticles.twoD.actions
 		 */
 		override public function update( emitter:Emitter, particle:Particle, time:Number ):void
 		{
-			var p:Particle2D = Particle2D( particle );
+			p = Particle2D( particle );
 			p.x += p.velX * time;
 			p.y += p.velY * time;
 		}

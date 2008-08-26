@@ -30,7 +30,6 @@
 
 package org.flintparticles.twoD.renderers
 {
-	import flash.display.Bitmap;
 	import flash.display.BitmapData;
 	import flash.geom.Rectangle;
 	
@@ -82,7 +81,7 @@ package org.flintparticles.twoD.renderers
 		 */
 		override protected function drawParticle( particle:Particle2D ):void
 		{
-			_bitmap.bitmapData.setPixel32( Math.round( particle.x - _canvas.x ), Math.round( particle.y - _canvas.y ), particle.color );
+			_bitmapData.setPixel32( Math.round( particle.x - _canvas.x ), Math.round( particle.y - _canvas.y ), particle.color );
 		}
 	}
 }

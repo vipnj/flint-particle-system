@@ -84,6 +84,8 @@ package org.flintparticles.twoD.renderers
 		 * @private
 		 */
 		protected var _bitmap:Bitmap;
+		
+		protected var _bitmapData:BitmapData;
 		/**
 		 * @private
 		 */
@@ -212,16 +214,18 @@ package org.flintparticles.twoD.renderers
 			{
 				return;
 			}
-			if( _bitmap && _bitmap.bitmapData )
+			if( _bitmap && _bitmapData )
 			{
-				_bitmap.bitmapData.dispose();
+				_bitmapData.dispose();
+				_bitmapData = null;
 			}
 			if( _bitmap )
 			{
 				removeChild( _bitmap );
 			}
 			_bitmap = new Bitmap( null, "auto", _smoothing);
-			_bitmap.bitmapData = new BitmapData( _canvas.width, _canvas.height, true, 0 );
+			_bitmapData = new BitmapData( _canvas.width, _canvas.height, true, 0 );
+			_bitmap.bitmapData = _bitmapData;
 			addChild( _bitmap );
 			_bitmap.x = _canvas.x;
 			_bitmap.y = _canvas.y;
@@ -252,15 +256,15 @@ package org.flintparticles.twoD.renderers
 			}
 			var i:int;
 			var len:int;
-			_bitmap.bitmapData.lock();
+			_bitmapData.lock();
 			len = _preFilters.length;
 			for( i = 0; i < len; ++i )
 			{
-				_bitmap.bitmapData.applyFilter( _bitmap.bitmapData, _bitmap.bitmapData.rect, BitmapRenderer.ZERO_POINT, _preFilters[i] );
+				_bitmapData.applyFilter( _bitmapData, _bitmapData.rect, BitmapRenderer.ZERO_POINT, _preFilters[i] );
 			}
 			if( len == 0 && _postFilters.length == 0 )
 			{
-				_bitmap.bitmapData.fillRect( _bitmap.bitmapData.rect, 0 );
+				_bitmapData.fillRect( _bitmap.bitmapData.rect, 0 );
 			}
 			len = particles.length;
 			if ( len )
@@ -273,13 +277,13 @@ package org.flintparticles.twoD.renderers
 			len = _postFilters.length;
 			for( i = 0; i < len; ++i )
 			{
-				_bitmap.bitmapData.applyFilter( _bitmap.bitmapData, _bitmap.bitmapData.rect, BitmapRenderer.ZERO_POINT, _postFilters[i] );
+				_bitmapData.applyFilter( _bitmapData, _bitmapData.rect, BitmapRenderer.ZERO_POINT, _postFilters[i] );
 			}
 			if( _colorMap )
 			{
-				_bitmap.bitmapData.paletteMap( _bitmap.bitmapData, _bitmap.bitmapData.rect, ZERO_POINT, _colorMap[1] , _colorMap[2] , _colorMap[3] , _colorMap[0] );
+				_bitmapData.paletteMap( _bitmapData, _bitmapData.rect, ZERO_POINT, _colorMap[1] , _colorMap[2] , _colorMap[3] , _colorMap[0] );
 			}
-			_bitmap.bitmapData.unlock();
+			_bitmapData.unlock();
 		}
 		
 		/**
@@ -293,7 +297,7 @@ package org.flintparticles.twoD.renderers
 			var matrix:Matrix;
 			matrix = particle.matrixTransform;
 			matrix.translate( -_canvas.x, -_canvas.y );
-			_bitmap.bitmapData.draw( particle.image, matrix, particle.colorTransform, DisplayObject( particle.image ).blendMode, null, _smoothing );
+			_bitmapData.draw( particle.image, matrix, particle.colorTransform, DisplayObject( particle.image ).blendMode, null, _smoothing );
 		}
 	}
 }

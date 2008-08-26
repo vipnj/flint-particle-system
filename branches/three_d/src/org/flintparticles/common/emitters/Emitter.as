@@ -153,7 +153,6 @@ package org.flintparticles.common.emitters
 		 */
 		protected var _counter:Counter;
 
-		protected var _activitiesPriority:Array;
 		/**
 		 * @private
 		 */

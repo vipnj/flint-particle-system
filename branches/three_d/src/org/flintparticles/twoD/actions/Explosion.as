@@ -239,7 +239,10 @@ package org.flintparticles.twoD.actions
 			var dSq:Number = x * x + y * y;
 			if( dSq == 0 )
 			{
-				return;
+				dSq = 0.02;
+				x = 0.1;
+				y = 0.1;
+//				return;
 			}
 			var d:Number = Math.sqrt( dSq );
 			
