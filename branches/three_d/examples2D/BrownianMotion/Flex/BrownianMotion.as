@@ -1,4 +1,3 @@
-
 /*
  * FLINT PARTICLE SYSTEM
  * .....................
@@ -30,50 +29,30 @@
 
 package
 {
-	import flash.display.Sprite;
 	import flash.geom.Point;
-	import flash.geom.Rectangle;
 	
-	import org.flintparticles.twoD.actions.*;
 	import org.flintparticles.common.counters.*;
 	import org.flintparticles.common.displayObjects.Dot;
-	import org.flintparticles.twoD.emitters.Emitter2D;
 	import org.flintparticles.common.initializers.*;
+	import org.flintparticles.twoD.actions.*;
+	import org.flintparticles.twoD.emitters.Emitter2D;
 	import org.flintparticles.twoD.initializers.*;
-	import org.flintparticles.twoD.renderers.*;
 	import org.flintparticles.twoD.zones.*;	
 
-	/**
-	 * This example creates a set of colliding balls.
-	 * 
-	 * <p>This is the document class for the Flash project.</p>
-	 */
-
-	public class Collisions extends Sprite
+	public class BrownianMotion extends Emitter2D
 	{
-		private var emitter:Emitter2D;
-		
-		public function Collisions()
+		public function BrownianMotion()
 		{
-			emitter = new Emitter2D();
-
-			emitter.counter = new Blast( 150 );
+			counter = new Blast( 100 );
 			
-			emitter.addInitializer( new SharedImage( new Dot( 10 ) ) );
-			emitter.addInitializer( new ColorInit( 0xFFFF33FF, 0xFF33FFFF ) );
-			emitter.addInitializer( new Position( new PointZone( new Point( 250, 250 ) ) ) );
-			emitter.addInitializer( new Velocity( new DiscZone( new Point( 0, 0 ), 100, 50 ) ) );
-			emitter.addInitializer( new ScaleInit( 0.2, 1 ) );
+			addInitializer( new ImageClass( Dot, 10 ) );
+			addInitializer( new Position( new RectangleZone( 0, 0, 500, 500 ) ) );
+			addInitializer( new Velocity( new DiscZone( new Point( 0, 0 ), 150, 100 ) ) );
+			addInitializer( new ScalesInit( [0.2, 1],[9, 1] ) );
 			
-			emitter.addAction( new Move() );
-			emitter.addAction( new Collide( 10, 1 ) );
-			emitter.addAction( new BoundingBox( 0, 0, 500, 500 ) );
-			
-			var renderer:BitmapRenderer = new BitmapRenderer( new Rectangle( 0, 0, 500, 500 ) );
-			renderer.addEmitter( emitter );
-			addChild( renderer );
-
-			emitter.start();
+			addAction( new Move() );
+			addAction( new Collide( 10, 1 ) );
+			addAction( new BoundingBox( 0, 0, 500, 500, 1 ) );
 		}
 	}
 }
