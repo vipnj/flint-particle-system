@@ -47,16 +47,18 @@ package org.flintparticles.common.utils
 	 * so the items in the PriorityArray can be looped through in
 	 * the same manner as a standard Array.</p>
 	 */
-	public class PriorityArray extends Proxy
+	public class RatioArray extends Proxy
 	{
 		private var _values:Array;
+		private var _totalRatios:Number;
 		
 		/**
 		 * Then constructor function is used to create a PriorityArray
 		 */
-		public function PriorityArray()
+		public function RatioArray()
 		{
 			_values = new Array();
+			_totalRatios = 0;
 		}
 		
 		/**
@@ -96,17 +98,10 @@ package org.flintparticles.common.utils
 		 * @param priority the priority to lpace on the item
 		 * @return the length of the PriorityArray
 		 */
-		public function add( value:*, priority:Number ):uint
+		public function add( value:*, ratio:Number ):uint
 		{
-			var len:uint = _values.length;
-			for( var i:uint = 0; i < len; ++i )
-			{
-				if( _values[i].priority < priority )
-				{
-					break;
-				}
-			}
-			_values.splice( i, 0, new Pair( priority, value ) );
+			_totalRatios += ratio;
+			_values.push( new Pair( ratio, value ) );
 			return _values.length;
 		}
 		
@@ -122,6 +117,7 @@ package org.flintparticles.common.utils
 			{
 				if( _values[i].value == value )
 				{
+					_totalRatios -= _values[i].ratio;
 					_values.splice( i, 1 );
 					return true;
 				}
@@ -175,17 +171,36 @@ package org.flintparticles.common.utils
 		{
 			return _values.length;
 		}
+
+		/**
+		 * 
+		 */
+		public function getRandomValue():*
+		{
+			var position:Number = Math.random() * _totalRatios;
+			var current:Number = 0;
+			var len:int = _values.length;
+			for( var i:int = 0; i < len; ++i )
+			{
+				current += _values[i].ratio;
+				if( current >= position )
+				{
+					return _values[i].value;
+				}
+			}
+			return _values[len-1].value;
+		}
 	}
 }
 
 class Pair
 {
-	internal var priority:Number;
+	internal var ratio:Number;
 	internal var value:*;
 	
-	public function Pair( priority:Number, value:* )
+	public function Pair( ratio:Number, value:* )
 	{
-		this.priority = priority;
+		this.ratio = ratio;
 		this.value = value;
 	}
 }

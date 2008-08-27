@@ -32,90 +32,67 @@ package org.flintparticles.common.initializers
 {
 	import org.flintparticles.common.emitters.Emitter;
 	import org.flintparticles.common.particles.Particle;
-	import org.flintparticles.common.utils.RatioArray;
-	import org.flintparticles.common.utils.construct;	
+	import org.flintparticles.common.utils.RatioArray;	
 
 	/**
-	 * The ImageClasses Initializer sets the DisplayObject to use to draw
-	 * the particle. It selects one of multiple images that are passed to it.
-	 * It is used with the DisplayObjectRenderer. When using the
-	 * BitmapRenderer it is more efficient to use the SharedImage Initializer.
+	 * The ColorsInit initializer sets the color of the particle. It selects 
+	 * one of multiple colors, using optional weighting values to produce an uneven
+	 * distribution for the colors.
 	 */
 
-	public class ImageClasses extends InitializerBase
+	public class ScalesInit extends InitializerBase
 	{
-		private var _images:RatioArray;
+		private var _scales:RatioArray;
 		
 		/**
-		 * The constructor creates a ImageClasses initializer for use by 
-		 * an emitter. To add a ImageClasses to all particles created by 
+		 * The constructor creates a ColorsInit initializer for use by 
+		 * an emitter. To add a ColorsInit to all particles created by 
 		 * an emitter, use the emitter's addInitializer method.
 		 * 
-		 * @param images An array containing the classes to use for 
-		 * each particle created by the emitter.
-		 * @param weights The weighting to apply to each displayObject. If no weighting
-		 * values are passed, the images are used with equal probability.
+		 * @param colors An array containing the Colors to use for 
+		 * each particle created by the emitter, as 32bit ARGB values.
+		 * @param weights The weighting to apply to each color. If no weighting
+		 * values are passed, the colors are all assigned a weighting of 1.
 		 * 
 		 * @see org.flintparticles.common.emitters.Emitter#addInitializer()
 		 */
-		public function ImageClasses( images:Array, weights:Array = null )
+		public function ScalesInit( scales:Array, weights:Array = null )
 		{
-			_images = new RatioArray;
-			var len:int = images.length;
+			_scales = new RatioArray;
+			var len:int = scales.length;
 			var i:int;
 			if( weights != null && weights.length == len )
 			{
 				for( i = 0; i < len; ++i )
 				{
-					addImage( images[i], weights[i] );
+					_scales.add( scales[i], weights[i] );
 				}
 			}
 			else
 			{
 				for( i = 0; i < len; ++i )
 				{
-					addImage( images[i], 1 );
+					_scales.add( scales[i], 1 );
 				}
 			}
 		}
 		
-		public function addImage( image:*, weight:Number = 1 ):void
+		public function addScale( scale:Number, weight:Number = 1 ):void
 		{
-			if( image is Array )
-			{
-				var parameters:Array = image as Array;
-				var img:Class = parameters.shift();
-				_images.add( new Pair( img, parameters ), weight );
-			}
-			else
-			{
-				_images.add( new Pair( image, [] ), weight );
-			}
+			_scales.add( scale, weight );
 		}
 		
-		public function removeImage( image:* ):void
+		public function removeScale( scale:Number ):void
 		{
-			_images.remove( image );
+			_scales.remove( scale );
 		}
-
+		
 		/**
 		 * @inheritDoc
 		 */
 		override public function initialize( emitter:Emitter, particle:Particle ):void
 		{
-			var img:Pair = _images.getRandomValue();
-			particle.image = construct( img.image, img.parameters );
+			particle.scale = _scales.getRandomValue();
 		}
-	}
-}
-class Pair
-{
-	internal var image:Class;
-	internal var parameters:Array;
-	
-	public function Pair( image:Class, parameters:Array )
-	{
-		this.image = image;
-		this.parameters = parameters;
 	}
 }

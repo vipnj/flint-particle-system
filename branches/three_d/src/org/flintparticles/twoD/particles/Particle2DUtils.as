@@ -1,8 +1,11 @@
 package org.flintparticles.twoD.particles 
 {
+	import flash.display.Bitmap;
 	import flash.display.BitmapData;
 	import flash.display.DisplayObject;
+	import flash.display.Sprite;
 	import flash.geom.Point;
+	import flash.geom.Rectangle;
 	
 	import org.flintparticles.common.particles.ParticleFactory;
 	import org.flintparticles.common.utils.DisplayObjectUtils;
@@ -100,6 +103,67 @@ package org.flintparticles.twoD.particles
 						p.x = x + offsetX;
 						p.y = y + offsetY;
 						p.color = bitmapData.getPixel32( x, y );
+						particles.push( p );
+					}
+				}
+			}
+			return particles;
+		}
+		
+		public static function createRectangleParticlesFromBitmapData( bitmapData:BitmapData, size:uint, factory:ParticleFactory = null, offsetX:Number = 0, offsetY:Number = 0 ):Array
+		{
+			var particles:Array = new Array();
+			var width:int = bitmapData.width;
+			var height:int = bitmapData.height;
+			var y:int;
+			var x:int;
+			var halfSize:Number = size * 0.5;
+			offsetX += halfSize;
+			offsetY += halfSize;
+			var p:Particle2D;
+			var b:BitmapData;
+			var m:Bitmap;
+			var s:Sprite;
+			var zero:Point = new Point( 0, 0 );
+			if( factory )
+			{
+				for( y = 0; y < height; y += size )
+				{
+					for( x = 0; x < width; x += size )
+					{
+						p = Particle2D( factory.createParticle() );
+						p.x = x + offsetX;
+						p.y = y + offsetY;
+						b = new BitmapData( size, size, true, 0 );
+						if( y + size < width )
+						b.copyPixels( bitmapData, new Rectangle( x, y, size, size ), zero );
+						m = new Bitmap( b );
+						m.x = -halfSize;
+						m.y = -halfSize;
+						s = new Sprite();
+						s.addChild( m );
+						p.image = m;
+						particles.push( p );
+					}
+				}
+			}
+			else
+			{
+				for( y = 0; y < height; ++y )
+				{
+					for( x = 0; x < width; ++x )
+					{
+						p = new Particle2D();
+						p.x = x + offsetX;
+						p.y = y + offsetY;
+						b = new BitmapData( size, size, true, 0 );
+						b.copyPixels( bitmapData, new Rectangle( x, y, size, size ), zero );
+						m = new Bitmap( b );
+						m.x = -halfSize;
+						m.y = -halfSize;
+						s = new Sprite();
+						s.addChild( m );
+						p.image = m;
 						particles.push( p );
 					}
 				}

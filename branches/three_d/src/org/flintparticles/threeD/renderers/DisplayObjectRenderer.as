@@ -69,6 +69,8 @@ package org.flintparticles.threeD.renderers
 		 * @private
 		 */
 		protected var _camera:Camera;
+		
+		private var toDegrees:Number = 180 / Math.PI;
 
 		/**
 		 * The constructor creates a DisplayObject3DRenderer. After creation the
@@ -159,7 +161,7 @@ package org.flintparticles.threeD.renderers
 						transform.transformVectorSelf( axis );
 						if( axis.z != 0 )
 						{
-							var rot:Number = 2 * Math.acos( particle.rotation.w ) * 180 / Math.PI;
+							var rot:Number = 2 * Math.acos( particle.rotation.w ) * toDegrees;
 							if( axis.z > 0 )
 							{
 								img.rotation = -rot;
@@ -168,6 +170,14 @@ package org.flintparticles.threeD.renderers
 							{
 								img.rotation = rot;
 							}
+							if( camera.direction.z < 0 )
+							{
+								img.rotation += 180;
+							}
+						}
+						else
+						{
+							trace( "zero" );
 						}
 					}
 				}

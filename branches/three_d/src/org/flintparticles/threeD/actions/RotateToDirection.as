@@ -34,7 +34,9 @@ package org.flintparticles.threeD.actions
 	import org.flintparticles.common.actions.ActionBase;
 	import org.flintparticles.common.emitters.Emitter;
 	import org.flintparticles.common.particles.Particle;
+	import org.flintparticles.threeD.geom.Quaternion;
 	import org.flintparticles.threeD.geom.Vector3D;
+	import org.flintparticles.threeD.geom.Vector3DUtils;
 	import org.flintparticles.threeD.particles.Particle3D;	
 
 	/**
@@ -57,7 +59,7 @@ package org.flintparticles.threeD.actions
 		{
 			if( directionAxis == null )
 			{
-				_directionAxis = Vector3D.AXISZ;
+				_directionAxis = Vector3D.AXISX;
 			}
 			else
 			{
@@ -71,9 +73,24 @@ package org.flintparticles.threeD.actions
 		override public function update( emitter : Emitter, particle : Particle, time : Number ) : void
 		{
 			var p:Particle3D = Particle3D( particle );
+			if( p.velocity.equals( Vector3D.ZERO ) )
+			{
+				return;
+			}
 			var target:Vector3D = p.velocity.unit();
-			var axis:Vector3D = _directionAxis.cross( target );
-			var angle:Number = -Math.acos( _directionAxis.dotProduct( target ) );
+			if( target.equals( _directionAxis ) )
+			{
+				p.rotation = Quaternion.IDENTITY.clone();
+				return;
+			}
+			if( target.equals( _directionAxis.negative ) )
+			{
+				var v:Vector3D = Vector3DUtils.getPerpendicular( _directionAxis );
+				p.rotation = new Quaternion( 0, v.x, v.y, v.z );
+				return;
+			}
+			var axis:Vector3D = target.cross( _directionAxis );
+			var angle:Number = Math.acos( _directionAxis.dotProduct( target ) );
 			p.rotation.setFromAxisRotation( axis, angle );
 		}
 	}

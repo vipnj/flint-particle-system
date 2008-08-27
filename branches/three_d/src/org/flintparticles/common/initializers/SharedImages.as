@@ -31,7 +31,8 @@
 package org.flintparticles.common.initializers 
 {
 	import org.flintparticles.common.emitters.Emitter;
-	import org.flintparticles.common.particles.Particle;	
+	import org.flintparticles.common.particles.Particle;
+	import org.flintparticles.common.utils.RatioArray;	
 
 	/**
 	 * The SharedImages Initializer sets the DisplayObject to use to draw
@@ -47,8 +48,7 @@ package org.flintparticles.common.initializers
 
 	public class SharedImages extends InitializerBase
 	{
-		private var _images:Array;
-		private var _ratios:Array;
+		private var _images:RatioArray;
 		
 		/**
 		 * The constructor creates a SharedImages initializer for use by 
@@ -57,36 +57,40 @@ package org.flintparticles.common.initializers
 		 * 
 		 * @param images An array containing the DisplayObjects to use for 
 		 * each particle created by the emitter.
-		 * @param ratios The weighting to apply to each displayObject. If no weighting
+		 * @param weights The weighting to apply to each displayObject. If no weighting
 		 * values are passed, the images are used with equal probability.
 		 * 
 		 * @see org.flintparticles.common.emitters.Emitter#addInitializer()
 		 */
-		public function SharedImages( images:Array, ratios:Array = null )
+		public function SharedImages( images:Array, weights:Array = null )
 		{
-			_images = images;
+			_images = new RatioArray;
 			var len:int = images.length;
-			_ratios = new Array();
 			var i:int;
-			if( ratios != null && ratios.length == len )
+			if( weights != null && weights.length == len )
 			{
-				var total:Number = 0;
 				for( i = 0; i < len; ++i )
 				{
-					total += ratios[i];
-				}
-				for( i = 0; i < len; ++i )
-				{
-					_ratios.push( ratios[i] / total );
+					_images.add( images[i], weights[i] );
 				}
 			}
 			else
 			{
 				for( i = 0; i < len; ++i )
 				{
-					_ratios.push( (i + 1) / len );
+					_images.add( images[i], 1 );
 				}
 			}
+		}
+		
+		public function addImage( image:*, weight:Number = 1 ):void
+		{
+			_images.add( image, weight );
+		}
+		
+		public function removeImage( image:* ):void
+		{
+			_images.remove( image );
 		}
 		
 		/**
@@ -94,17 +98,7 @@ package org.flintparticles.common.initializers
 		 */
 		override public function initialize( emitter:Emitter, particle:Particle ):void
 		{
-			var rand:Number = Math.random();
-			var len:int = _images.length;
-			for( var i:int = 0; i < len; ++i )
-			{
-				if( _ratios[i] >= rand )
-				{
-					particle.image = _images[i];
-					return;
-				}
-			}
-			particle.image = _images[ len - 1 ]; // in case of rounding error
+			particle.image = _images.getRandomValue();
 		}
 	}
 }

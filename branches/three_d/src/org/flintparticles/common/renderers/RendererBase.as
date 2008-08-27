@@ -55,8 +55,9 @@ package org.flintparticles.common.renderers
 			}
 			emitter.addEventListener( EmitterEvent.EMITTER_UPDATED, emitterUpdated, false, 0, true );
 			emitter.addEventListener( ParticleEvent.PARTICLE_CREATED, particleAdded, false, 0, true );
+			emitter.addEventListener( ParticleEvent.PARTICLE_ADDED, particleAdded, false, 0, true );
 			emitter.addEventListener( ParticleEvent.PARTICLE_DEAD, particleRemoved, false, 0, true );
-			for each( var p:Particle in emitter )
+			for each( var p:Particle in emitter.particles )
 			{
 				addParticle( p );
 			}
@@ -82,8 +83,9 @@ package org.flintparticles.common.renderers
 					_emitters.splice( i, 1 );
 					emitter.removeEventListener( EmitterEvent.EMITTER_UPDATED, emitterUpdated );
 					emitter.removeEventListener( ParticleEvent.PARTICLE_CREATED, particleAdded );
+					emitter.removeEventListener( ParticleEvent.PARTICLE_ADDED, particleAdded );
 					emitter.removeEventListener( ParticleEvent.PARTICLE_DEAD, particleRemoved );
-					for each( var p:Particle in emitter )
+					for each( var p:Particle in emitter.particles )
 					{
 						removeParticle( p );
 					}

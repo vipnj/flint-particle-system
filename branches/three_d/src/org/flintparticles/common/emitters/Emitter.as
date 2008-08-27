@@ -563,6 +563,17 @@ package org.flintparticles.common.emitters
 				dispatchEvent( new ParticleEvent( ParticleEvent.PARTICLE_ADDED, particles[i] ) );
 			}
 		}
+
+		public function killAllParticles():void
+		{
+			var len:int = _particles.length;
+			for ( var i:int = 0; i < len; ++i )
+			{
+				dispatchEvent( new ParticleEvent( ParticleEvent.PARTICLE_DEAD, _particles[i] ) );
+				_particleFactory.disposeParticle( _particles[i] );
+			}
+			_particles.length = 0;
+		}
 		
 		/**
 		 * Starts the emitter. Until start is called, the emitter will not emit or 
@@ -702,13 +713,7 @@ package org.flintparticles.common.emitters
 				FrameUpdater.instance.removeEventListener( UpdateEvent.UPDATE, updateEventListener );
 			}
 			_started = false;
-			var len:int = _particles.length;
-			for ( var i:int = 0; i < len; ++i )
-			{
-				dispatchEvent( new ParticleEvent( ParticleEvent.PARTICLE_DEAD, _particles[i] ) );
-				_particleFactory.disposeParticle( _particles[i] );
-			}
-			_particles.length = 0;
+			killAllParticles();
 		}
 		
 		/**
