@@ -1,4 +1,3 @@
-
 /*
  * FLINT PARTICLE SYSTEM
  * .....................
@@ -31,48 +30,28 @@
 package
 {
 	import flash.display.Sprite;
-	import flash.geom.Point;
+	import flash.filters.BlurFilter;
+	import flash.geom.Rectangle;
 	
-	import org.flintparticles.common.counters.*;
-	import org.flintparticles.common.displayObjects.Dot;
-	import org.flintparticles.common.initializers.*;
-	import org.flintparticles.twoD.actions.*;
 	import org.flintparticles.twoD.emitters.Emitter2D;
-	import org.flintparticles.twoD.initializers.*;
-	import org.flintparticles.twoD.renderers.*;
-	import org.flintparticles.twoD.zones.*;
+	import org.flintparticles.twoD.renderers.*;	
 
-	/**
-	 * This example creates snow.
-	 * 
-	 * <p>This is the document class for the Flash project.</p>
-	 */
-
-	public class Snowfall extends Sprite
+	[SWF(width='400', height='400', frameRate='61', backgroundColor='#000000')]
+	
+	public class Main extends Sprite
 	{
 		private var emitter:Emitter2D;
 		
-		public function Snowfall()
+		public function Main()
 		{
-			emitter = new Emitter2D();
+			emitter = new MutualG();
 
-			emitter.counter = new Steady( 50 );
-			
-			emitter.addInitializer( new ImageClass( Dot, 2 ) );
-			emitter.addInitializer( new Position( new LineZone( new Point( -5, -5 ), new Point( 505, -5 ) ) ) );
-			emitter.addInitializer( new Velocity( new PointZone( new Point( 0, 50 ) ) ) );
-			emitter.addInitializer( new ScaleInit( 0.75, 1.5 ) );
-			
-			emitter.addAction( new Move() );
-			emitter.addAction( new DeathZone( new RectangleZone( -10, -10, 510, 410 ), true ) );
-			emitter.addAction( new RandomDrift( 10, 10 ) );
-			
-			var renderer:DisplayObjectRenderer = new DisplayObjectRenderer();
+			var renderer:BitmapRenderer = new BitmapRenderer( new Rectangle( 0, 0, 400, 400 ) );
+			renderer.addFilter( new BlurFilter( 2, 2, 1 ) );
 			renderer.addEmitter( emitter );
 			addChild( renderer );
-			
-			emitter.start();
-			emitter.runAhead( 10 );
+
+			emitter.start( );
 		}
 	}
 }

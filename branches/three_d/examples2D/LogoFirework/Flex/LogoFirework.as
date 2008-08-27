@@ -1,4 +1,3 @@
-
 /*
  * FLINT PARTICLE SYSTEM
  * .....................
@@ -31,11 +30,7 @@
 package
 {
 	import flash.display.Bitmap;
-	import flash.display.Sprite;
-	import flash.filters.BlurFilter;
-	import flash.filters.ColorMatrixFilter;
 	import flash.geom.Point;
-	import flash.geom.Rectangle;
 	
 	import org.flintparticles.common.actions.*;
 	import org.flintparticles.common.counters.*;
@@ -45,53 +40,30 @@ package
 	import org.flintparticles.twoD.actions.*;
 	import org.flintparticles.twoD.emitters.Emitter2D;
 	import org.flintparticles.twoD.initializers.*;
-	import org.flintparticles.twoD.renderers.*;
 	import org.flintparticles.twoD.zones.*;	
 
-	[SWF(width='500', height='300', frameRate='61', backgroundColor='#000000')]
-	
-	/**
-	 * This example creates an image from flying particles. This is the code for the Flex project.
-	 * 
-	 * <p>This is the document class for the Flex project.</p>
-	 */
-
-	public class LogoFirework extends Sprite
+	public class LogoFirework extends Emitter2D
 	{
 		[Embed(source="assets/flint.png")]
 		public var Logo:Class;
 
-		private var emitter:Emitter2D;
-		
 		public function LogoFirework()
 		{
-			emitter = new Emitter2D();
-
-			emitter.counter = new Blast( 1500 );
+			counter = new Blast( 1500 );
 			
-			emitter.addInitializer( new ColorInit( 0xFFFF3300, 0xFFFFFF00 ) );
-			emitter.addInitializer( new Lifetime( 6 ) );
-			emitter.addInitializer( new Position( new DiscZone( new Point( 0, 0 ), 10 ) ) );
+			addInitializer( new ColorInit( 0xFFFF3300, 0xFFFFFF00 ) );
+			addInitializer( new Lifetime( 6 ) );
+			addInitializer( new Position( new DiscZone( new Point( 0, 0 ), 10 ) ) );
 			var bitmap:Bitmap = new Logo();
-			emitter.addInitializer( new Velocity( new BitmapDataZone( bitmap.bitmapData, -132, -300 ) ) );
+			addInitializer( new Velocity( new BitmapDataZone( bitmap.bitmapData, -132, -300 ) ) );
 			
-			emitter.addAction( new Age( Quadratic.easeIn ) );
-			emitter.addAction( new Fade( 1.0, 0 ) );
-			emitter.addAction( new Move() );
-			emitter.addAction( new LinearDrag( 0.5 ) );
-			emitter.addAction( new Accelerate( 0, 70 ) );
+			addAction( new Age( Quadratic.easeIn ) );
+			addAction( new Fade( 1.0, 0 ) );
+			addAction( new Move() );
+			addAction( new LinearDrag( 0.5 ) );
+			addAction( new Accelerate( 0, 70 ) );
 			
-			emitter.addEventListener( EmitterEvent.EMITTER_EMPTY, restart );
-
-			var renderer:PixelRenderer = new PixelRenderer( new Rectangle( 0, 0, 500, 300 ) );
-			renderer.addFilter( new BlurFilter( 2, 2, 1 ) );
-			renderer.addFilter( new ColorMatrixFilter( [ 1,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0.96,0 ] ) );
-			renderer.addEmitter( emitter );
-			addChild( renderer );
-			
-			emitter.x = 250;
-			emitter.y = 300;
-			emitter.start( );
+			addEventListener( EmitterEvent.EMITTER_EMPTY, restart );
 		}
 		
 		public function restart( ev:EmitterEvent ):void

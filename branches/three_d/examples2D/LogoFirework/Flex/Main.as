@@ -1,4 +1,3 @@
-
 /*
  * FLINT PARTICLE SYSTEM
  * .....................
@@ -32,47 +31,30 @@ package
 {
 	import flash.display.Sprite;
 	import flash.filters.BlurFilter;
+	import flash.filters.ColorMatrixFilter;
 	import flash.geom.Rectangle;
 	
-	import org.flintparticles.common.counters.*;
-	import org.flintparticles.common.displayObjects.Dot;
-	import org.flintparticles.common.initializers.*;
-	import org.flintparticles.twoD.actions.*;
 	import org.flintparticles.twoD.emitters.Emitter2D;
-	import org.flintparticles.twoD.initializers.*;
-	import org.flintparticles.twoD.renderers.*;
-	import org.flintparticles.twoD.zones.*;	
+	import org.flintparticles.twoD.renderers.*;	
 
-	/**
-	 * This example creates an abstract effect using Mutual Gravity to attract the particles to each other.
-	 * 
-	 * <p>This is the document class for the Flash project.</p>
-	 */
-
-	public class MutualG extends Sprite
+	[SWF(width='500', height='300', frameRate='61', backgroundColor='#000000')]
+	
+	public class Main extends Sprite
 	{
 		private var emitter:Emitter2D;
 		
-		public function MutualG()
+		public function Main()
 		{
-			emitter = new Emitter2D();
+			emitter = new LogoFirework();
 
-			emitter.counter = new Blast( 30 );
-			
-			emitter.addInitializer( new SharedImage( new Dot( 2 ) ) );
-			emitter.addInitializer( new ColorInit( 0xFFFF00FF, 0xFF00FFFF ) );
-			emitter.addInitializer( new Position( new RectangleZone( 10, 10, 380, 380 ) ) );
-
-			emitter.addAction( new MutualGravity( 10, 500, 3 ) );
-			emitter.addAction( new BoundingBox( 0, 0, 400, 400 ) );
-			emitter.addAction( new SpeedLimit( 150 ) );
-			emitter.addAction( new Move() );
-			
-			var renderer:BitmapRenderer = new BitmapRenderer( new Rectangle( 0, 0, 400, 400 ) );
+			var renderer:PixelRenderer = new PixelRenderer( new Rectangle( 0, 0, 500, 300 ) );
 			renderer.addFilter( new BlurFilter( 2, 2, 1 ) );
+			renderer.addFilter( new ColorMatrixFilter( [ 1,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0.96,0 ] ) );
 			renderer.addEmitter( emitter );
 			addChild( renderer );
-
+			
+			emitter.x = 250;
+			emitter.y = 300;
 			emitter.start( );
 		}
 	}

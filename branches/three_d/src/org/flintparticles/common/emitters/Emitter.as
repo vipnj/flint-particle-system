@@ -168,7 +168,7 @@ package org.flintparticles.common.emitters
 		/**
 		 * @private
 		 */
-		protected var _maximumFrameTime:Number = 0.5;
+		protected var _maximumFrameTime:Number = 0.1;
 
 		/**
 		 * The constructor creates an emitter.

@@ -1,4 +1,3 @@
-
 /*
  * FLINT PARTICLE SYSTEM
  * .....................
@@ -30,7 +29,6 @@
 
 package
 {
-	import flash.display.Sprite;
 	import flash.geom.Point;
 	
 	import org.flintparticles.common.counters.*;
@@ -39,41 +37,22 @@ package
 	import org.flintparticles.twoD.actions.*;
 	import org.flintparticles.twoD.emitters.Emitter2D;
 	import org.flintparticles.twoD.initializers.*;
-	import org.flintparticles.twoD.renderers.*;
 	import org.flintparticles.twoD.zones.*;	
 
-	[SWF(width='400', height='400', frameRate='61', backgroundColor='#000000')]
-	
-	/**
-	 * This example creates rain.
-	 * 
-	 * <p>This is the document class for the Flex project.</p>
-	 */
-
-	public class Rain extends Sprite
+	public class Rain extends Emitter2D
 	{
-		private var emitter:Emitter2D;
-		
 		public function Rain()
 		{
-			emitter = new Emitter2D();
-			emitter.counter = new Steady( 300 );
+			counter = new Steady( 300 );
 			
-			emitter.addInitializer( new ImageClass( Line, 8 ) );
-			emitter.addInitializer( new Position( new LineZone( new Point( 5, 5 ), new Point( 505, 5 ) ) ) );
-			emitter.addInitializer( new Velocity( new PointZone( new Point( -60, 300 ) ) ) );
-			emitter.addInitializer( new ColorInit( 0x66FFFFFF, 0x66FFFFFF ) );
+			addInitializer( new ImageClass( Line, 8 ) );
+			addInitializer( new Position( new LineZone( new Point( 5, 5 ), new Point( 505, 5 ) ) ) );
+			addInitializer( new Velocity( new PointZone( new Point( -60, 300 ) ) ) );
+			addInitializer( new ColorInit( 0x66FFFFFF, 0x66FFFFFF ) );
 			
-			emitter.addAction( new Move() );
-			emitter.addAction( new DeathZone( new RectangleZone( -10, -10, 510, 610 ), true ) );
-			emitter.addAction( new RotateToDirection() );
-			
-			var renderer:DisplayObjectRenderer = new DisplayObjectRenderer();
-			renderer.addEmitter( emitter );
-			addChild( renderer );
-			
-			emitter.start();
-			emitter.runAhead( 5, 30 );
+			addAction( new Move() );
+			addAction( new DeathZone( new RectangleZone( -10, -10, 510, 610 ), true ) );
+			addAction( new RotateToDirection() );
 		}
 	}
 }

@@ -27,32 +27,31 @@
  * THE SOFTWARE.
  */
 
-package
-{
-	import flash.geom.Point;
-	
-	import org.flintparticles.common.counters.*;
-	import org.flintparticles.common.displayObjects.Dot;
-	import org.flintparticles.common.initializers.*;
-	import org.flintparticles.twoD.actions.*;
-	import org.flintparticles.twoD.emitters.Emitter2D;
-	import org.flintparticles.twoD.initializers.*;
-	import org.flintparticles.twoD.zones.*;	
+import org.flintparticles.common.counters.*;
+import org.flintparticles.common.displayObjects.Dot;
+import org.flintparticles.common.initializers.*;
+import org.flintparticles.twoD.actions.*;
+import org.flintparticles.twoD.emitters.Emitter2D;
+import org.flintparticles.twoD.initializers.*;
+import org.flintparticles.twoD.renderers.*;
+import org.flintparticles.twoD.zones.*;
 
-	public class Snowfall extends Emitter2D
-	{
-		public function Snowfall()
-		{
-			counter = new Steady( 50 );
-			
-			addInitializer( new ImageClass( Dot, 2 ) );
-			addInitializer( new Position( new LineZone( new Point( -5, -5 ), new Point( 505, -5 ) ) ) );
-			addInitializer( new Velocity( new PointZone( new Point( 0, 50 ) ) ) );
-			addInitializer( new ScaleInit( 0.75, 1.5 ) );
-			
-			addAction( new Move() );
-			addAction( new DeathZone( new RectangleZone( -10, -10, 510, 410 ), true ) );
-			addAction( new RandomDrift( 10, 10 ) );
-		}
-	}
-}
+var emitter:Emitter2D = new Emitter2D();
+
+emitter.counter = new Steady( 50 );
+
+emitter.addInitializer( new ImageClass( Dot, 2 ) );
+emitter.addInitializer( new Position( new LineZone( new Point( -5, -5 ), new Point( 505, -5 ) ) ) );
+emitter.addInitializer( new Velocity( new PointZone( new Point( 0, 50 ) ) ) );
+emitter.addInitializer( new ScaleInit( 0.75, 1.5 ) );
+
+emitter.addAction( new Move() );
+emitter.addAction( new DeathZone( new RectangleZone( -10, -10, 510, 410 ), true ) );
+emitter.addAction( new RandomDrift( 10, 10 ) );
+
+var renderer:DisplayObjectRenderer = new DisplayObjectRenderer();
+renderer.addEmitter( emitter );
+addChild( renderer );
+
+emitter.start();
+emitter.runAhead( 10 );

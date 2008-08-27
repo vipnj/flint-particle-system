@@ -1,4 +1,3 @@
-
 /*
  * FLINT PARTICLE SYSTEM
  * .....................
@@ -30,11 +29,8 @@
 
 package
 {
-	import flash.display.Sprite;
-	import flash.filters.BlurFilter;
-	import flash.filters.ColorMatrixFilter;
+	import flash.display.DisplayObject;
 	import flash.geom.Point;
-	import flash.geom.Rectangle;
 	
 	import org.flintparticles.common.actions.*;
 	import org.flintparticles.common.counters.*;
@@ -44,44 +40,24 @@ package
 	import org.flintparticles.twoD.activities.FollowMouse;
 	import org.flintparticles.twoD.emitters.Emitter2D;
 	import org.flintparticles.twoD.initializers.*;
-	import org.flintparticles.twoD.renderers.*;
-	import org.flintparticles.twoD.zones.*;		
+	import org.flintparticles.twoD.zones.*;	
 
-	[SWF(width='400', height='400', frameRate='61', backgroundColor='#000000')]
-	
-	/**
-	 * This example creates a sparkler effect.
-	 * 
-	 * <p>This is the document class for the Flex project.</p>
-	 */
-	
-	public class Sparkler extends Sprite
+	public class Sparkler extends Emitter2D
 	{
-		private var emitter:Emitter2D;
-		
-		public function Sparkler()
+		public function Sparkler( renderer:DisplayObject )
 		{
-			emitter = new Emitter2D();
-			emitter.counter = new Steady( 150 );
+			counter = new Steady( 150 );
 			
-			emitter.addInitializer( new SharedImage( new Line( 8 ) ) );
-			emitter.addInitializer( new ColorInit( 0xFFFFCC00, 0xFFFFCC00 ) );
-			emitter.addInitializer( new Velocity( new DiscZone( new Point( 0, 0 ), 350, 200 ) ) );
-			emitter.addInitializer( new Lifetime( 0.2, 0.4 ) );
+			addInitializer( new SharedImage( new Line( 8 ) ) );
+			addInitializer( new ColorInit( 0xFFFFCC00, 0xFFFFCC00 ) );
+			addInitializer( new Velocity( new DiscZone( new Point( 0, 0 ), 350, 200 ) ) );
+			addInitializer( new Lifetime( 0.2, 0.4 ) );
 			
-			emitter.addAction( new Age() );
-			emitter.addAction( new Move() );
-			emitter.addAction( new RotateToDirection() );
+			addAction( new Age() );
+			addAction( new Move() );
+			addAction( new RotateToDirection() );
 			
-			var renderer:BitmapRenderer = new BitmapRenderer( new Rectangle( 0, 0, 400, 400 ) );
-			renderer.addFilter( new BlurFilter( 2, 2, 1 ) );
-			renderer.addFilter( new ColorMatrixFilter( [ 1,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0.95,0 ] ) );
-			renderer.addEmitter( emitter );
-			addChild( renderer );
-			
-			emitter.addActivity( new FollowMouse( renderer ) );
-			
-			emitter.start( );
+			addActivity( new FollowMouse( renderer ) );
 		}
 	}
 }

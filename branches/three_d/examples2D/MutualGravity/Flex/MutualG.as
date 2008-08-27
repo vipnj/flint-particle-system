@@ -1,4 +1,3 @@
-
 /*
  * FLINT PARTICLE SYSTEM
  * .....................
@@ -30,52 +29,28 @@
 
 package
 {
-	import flash.display.Sprite;
-	import flash.filters.BlurFilter;
-	import flash.geom.Rectangle;
-	
 	import org.flintparticles.common.counters.*;
 	import org.flintparticles.common.displayObjects.Dot;
 	import org.flintparticles.common.initializers.*;
 	import org.flintparticles.twoD.actions.*;
 	import org.flintparticles.twoD.emitters.Emitter2D;
 	import org.flintparticles.twoD.initializers.*;
-	import org.flintparticles.twoD.renderers.*;
 	import org.flintparticles.twoD.zones.*;	
 
-	[SWF(width='400', height='400', frameRate='61', backgroundColor='#000000')]
-	
-	/**
-	 * This example creates an abstract effect using Mutual Gravity to attract the particles to each other.
-	 * 
-	 * <p>This is the document class for the Flex project.</p>
-	 */
-
-	public class MutualG extends Sprite
+	public class MutualG extends Emitter2D
 	{
-		private var emitter:Emitter2D;
-		
 		public function MutualG()
 		{
-			emitter = new Emitter2D();
-
-			emitter.counter = new Blast( 30 );
+			counter = new Blast( 30 );
 			
-			emitter.addInitializer( new SharedImage( new Dot( 2 ) ) );
-			emitter.addInitializer( new ColorInit( 0xFFFF00FF, 0xFF00FFFF ) );
-			emitter.addInitializer( new Position( new RectangleZone( 10, 10, 380, 380 ) ) );
+			addInitializer( new SharedImage( new Dot( 2 ) ) );
+			addInitializer( new ColorInit( 0xFFFF00FF, 0xFF00FFFF ) );
+			addInitializer( new Position( new RectangleZone( 10, 10, 380, 380 ) ) );
 
-			emitter.addAction( new MutualGravity( 10, 500, 3 ) );
-			emitter.addAction( new BoundingBox( 0, 0, 400, 400 ) );
-			emitter.addAction( new SpeedLimit( 150 ) );
-			emitter.addAction( new Move() );
-			
-			var renderer:BitmapRenderer = new BitmapRenderer( new Rectangle( 0, 0, 400, 400 ) );
-			renderer.addFilter( new BlurFilter( 2, 2, 1 ) );
-			renderer.addEmitter( emitter );
-			addChild( renderer );
-
-			emitter.start( );
+			addAction( new MutualGravity( 10, 500, 3 ) );
+			addAction( new BoundingBox( 0, 0, 400, 400 ) );
+			addAction( new SpeedLimit( 150 ) );
+			addAction( new Move() );
 		}
 	}
 }

@@ -1,4 +1,3 @@
-
 /*
  * FLINT PARTICLE SYSTEM
  * .....................
@@ -34,44 +33,30 @@ package
 	import flash.geom.Point;
 	
 	import org.flintparticles.common.counters.*;
-	import org.flintparticles.common.displayObjects.Line;
+	import org.flintparticles.common.displayObjects.Dot;
 	import org.flintparticles.common.initializers.*;
 	import org.flintparticles.twoD.actions.*;
 	import org.flintparticles.twoD.emitters.Emitter2D;
 	import org.flintparticles.twoD.initializers.*;
 	import org.flintparticles.twoD.renderers.*;
-	import org.flintparticles.twoD.zones.*;	
+	import org.flintparticles.twoD.zones.*;
 
-	/**
-	 * This example creates rain.
-	 * 
-	 * <p>This is the document class for the Flash project.</p>
-	 */
-
-	public class Rain extends Sprite
+	[SWF(width='500', height='400', frameRate='61', backgroundColor='#000000')]
+	
+	public class Main extends Sprite
 	{
 		private var emitter:Emitter2D;
 		
-		public function Rain()
+		public function Main()
 		{
-			emitter = new Emitter2D();
-			emitter.counter = new Steady( 300 );
-			
-			emitter.addInitializer( new ImageClass( Line, 8 ) );
-			emitter.addInitializer( new Position( new LineZone( new Point( 5, 5 ), new Point( 505, 5 ) ) ) );
-			emitter.addInitializer( new Velocity( new PointZone( new Point( -60, 300 ) ) ) );
-			emitter.addInitializer( new ColorInit( 0x66FFFFFF, 0x66FFFFFF ) );
-			
-			emitter.addAction( new Move() );
-			emitter.addAction( new DeathZone( new RectangleZone( -10, -10, 510, 610 ), true ) );
-			emitter.addAction( new RotateToDirection() );
-			
+			emitter = new Snowfall();
+
 			var renderer:DisplayObjectRenderer = new DisplayObjectRenderer();
 			renderer.addEmitter( emitter );
 			addChild( renderer );
 			
 			emitter.start();
-			emitter.runAhead( 5, 30 );
+			emitter.runAhead( 10 );
 		}
 	}
 }

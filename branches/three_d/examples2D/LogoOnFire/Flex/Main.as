@@ -29,30 +29,38 @@
 
 package
 {
-	import flash.geom.Point;
+	import flash.display.Bitmap;
+	import flash.display.Sprite;
+	import flash.geom.Rectangle;
 	
-	import org.flintparticles.common.counters.*;
-	import org.flintparticles.common.displayObjects.Dot;
-	import org.flintparticles.common.initializers.*;
-	import org.flintparticles.twoD.actions.*;
 	import org.flintparticles.twoD.emitters.Emitter2D;
-	import org.flintparticles.twoD.initializers.*;
-	import org.flintparticles.twoD.zones.*;	
+	import org.flintparticles.twoD.renderers.*;	
 
-	public class Snowfall extends Emitter2D
+	[SWF(width='500', height='200', frameRate='61', backgroundColor='#000000')]
+	
+	public class Main extends Sprite
 	{
-		public function Snowfall()
+		[Embed(source="assets/flint.png")]
+		public var Logo:Class;
+
+		private var emitter:Emitter2D;
+		
+		public function Main()
 		{
-			counter = new Steady( 50 );
+			emitter = new LogoFire();
+
+			var renderer:BitmapRenderer = new BitmapRenderer( new Rectangle( 0, 0, 500, 200 ) );
+			renderer.addEmitter( emitter );
+			addChild( renderer );
 			
-			addInitializer( new ImageClass( Dot, 2 ) );
-			addInitializer( new Position( new LineZone( new Point( -5, -5 ), new Point( 505, -5 ) ) ) );
-			addInitializer( new Velocity( new PointZone( new Point( 0, 50 ) ) ) );
-			addInitializer( new ScaleInit( 0.75, 1.5 ) );
-			
-			addAction( new Move() );
-			addAction( new DeathZone( new RectangleZone( -10, -10, 510, 410 ), true ) );
-			addAction( new RandomDrift( 10, 10 ) );
+			emitter.x = 118;
+			emitter.y = 70;
+			emitter.start( );
+
+			var bitmap:Bitmap = new Logo();
+			addChild( bitmap );
+			bitmap.x = 118;
+			bitmap.y = 70;
 		}
 	}
 }

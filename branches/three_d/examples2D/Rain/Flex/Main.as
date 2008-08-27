@@ -29,30 +29,27 @@
 
 package
 {
-	import flash.geom.Point;
+	import flash.display.Sprite;
 	
-	import org.flintparticles.common.counters.*;
-	import org.flintparticles.common.displayObjects.Dot;
-	import org.flintparticles.common.initializers.*;
-	import org.flintparticles.twoD.actions.*;
 	import org.flintparticles.twoD.emitters.Emitter2D;
-	import org.flintparticles.twoD.initializers.*;
-	import org.flintparticles.twoD.zones.*;	
+	import org.flintparticles.twoD.renderers.*;	
 
-	public class Snowfall extends Emitter2D
+	[SWF(width='400', height='400', frameRate='61', backgroundColor='#000000')]
+	
+	public class Main extends Sprite
 	{
-		public function Snowfall()
+		private var emitter:Emitter2D;
+		
+		public function Main()
 		{
-			counter = new Steady( 50 );
+			emitter = new Rain();
 			
-			addInitializer( new ImageClass( Dot, 2 ) );
-			addInitializer( new Position( new LineZone( new Point( -5, -5 ), new Point( 505, -5 ) ) ) );
-			addInitializer( new Velocity( new PointZone( new Point( 0, 50 ) ) ) );
-			addInitializer( new ScaleInit( 0.75, 1.5 ) );
+			var renderer:DisplayObjectRenderer = new DisplayObjectRenderer();
+			renderer.addEmitter( emitter );
+			addChild( renderer );
 			
-			addAction( new Move() );
-			addAction( new DeathZone( new RectangleZone( -10, -10, 510, 410 ), true ) );
-			addAction( new RandomDrift( 10, 10 ) );
+			emitter.start();
+			emitter.runAhead( 5, 30 );
 		}
 	}
 }
