@@ -29,30 +29,26 @@
 
 package
 {
-	import flash.geom.Point;
+	import flash.display.Sprite;
 	
-	import org.flintparticles.common.counters.*;
-	import org.flintparticles.common.initializers.*;
-	import org.flintparticles.twoD.actions.*;
 	import org.flintparticles.twoD.emitters.Emitter2D;
-	import org.flintparticles.twoD.initializers.*;
-	import org.flintparticles.twoD.zones.*;	
+	import org.flintparticles.twoD.renderers.*;	
 
-	public class GravityWells extends Emitter2D
+	[SWF(width='700', height='500', frameRate='61', backgroundColor='#CCCCCC')]
+	
+	public class Main extends Sprite
 	{
-		public function GravityWells()
+		private var emitter:Emitter2D;
+		
+		public function Main()
 		{
-			counter = new Blast( 4000 );
+			emitter = new Flock();
 			
-			addInitializer( new ColorInit( 0xFFFF00FF, 0xFF00FFFF ) );
-			addInitializer( new Position( new DiscZone( new Point( 200, 200 ), 200 ) ) );
-
-			addAction( new Move() );
-			addAction( new GravityWell( 25, 200, 200 ) );
-			addAction( new GravityWell( 25, 75, 75 ) );
-			addAction( new GravityWell( 25, 325, 325 ) );
-			addAction( new GravityWell( 25, 75, 325 ) );
-			addAction( new GravityWell( 25, 325, 75 ) );
+			var renderer:DisplayObjectRenderer = new DisplayObjectRenderer();
+			renderer.addEmitter( emitter );
+			addChild( renderer );
+			
+			emitter.start( );
 		}
 	}
 }

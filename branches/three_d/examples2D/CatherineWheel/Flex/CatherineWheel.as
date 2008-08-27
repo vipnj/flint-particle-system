@@ -42,8 +42,6 @@ package
 	import org.flintparticles.twoD.initializers.*;
 	import org.flintparticles.twoD.zones.*;	
 
-	[SWF(width='600', height='600', frameRate='61', backgroundColor='#000000')]
-
 	public class CatherineWheel extends Emitter2D
 	{
 		public function CatherineWheel()

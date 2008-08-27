@@ -1,4 +1,3 @@
-
 /*
  * FLINT PARTICLE SYSTEM
  * .....................
@@ -30,11 +29,7 @@
 
 package
 {
-	import flash.display.Sprite;
-	import flash.filters.BlurFilter;
-	import flash.filters.ColorMatrixFilter;
 	import flash.geom.Point;
-	import flash.geom.Rectangle;
 	
 	import org.flintparticles.common.actions.*;
 	import org.flintparticles.common.counters.*;
@@ -45,54 +40,31 @@ package
 	import org.flintparticles.twoD.actions.*;
 	import org.flintparticles.twoD.emitters.Emitter2D;
 	import org.flintparticles.twoD.initializers.*;
-	import org.flintparticles.twoD.renderers.*;
 	import org.flintparticles.twoD.zones.*;	
 
-	[SWF(width='500', height='400', frameRate='61', backgroundColor='#000000')]
-	
-	/**
-	 * This example creates a firework like effect.
-	 * 
-	 * <p>This is the document class for the Flex project.</p>
-	 */
-
-	public class Firework extends Sprite
+	public class Firework extends Emitter2D
 	{
-		private var emitter:Emitter2D;
-		
 		public function Firework()
 		{
-			emitter = new Emitter2D();
-
-			emitter.counter = new Blast( 700 );
+			counter = new Blast( 700 );
 			
-			emitter.addInitializer( new SharedImage( new Dot( 2 ) ) );
-			emitter.addInitializer( new ColorInit( 0xFFFFFF00, 0xFFFF6600 ) );
-			emitter.addInitializer( new Velocity( new DiscZone( new Point( 0, 0 ), 200, 120 ) ) );
-			emitter.addInitializer( new Lifetime( 5 ) );
+			addInitializer( new SharedImage( new Dot( 2 ) ) );
+			addInitializer( new ColorInit( 0xFFFFFF00, 0xFFFF6600 ) );
+			addInitializer( new Velocity( new DiscZone( new Point( 0, 0 ), 200, 120 ) ) );
+			addInitializer( new Lifetime( 5 ) );
 			
-			emitter.addAction( new Age( Quadratic.easeIn ) );
-			emitter.addAction( new Move() );
-			emitter.addAction( new Fade() );
-			emitter.addAction( new Accelerate( 0, 50 ) );
-			emitter.addAction( new LinearDrag( 0.5 ) );
+			addAction( new Age( Quadratic.easeIn ) );
+			addAction( new Move() );
+			addAction( new Fade() );
+			addAction( new Accelerate( 0, 50 ) );
+			addAction( new LinearDrag( 0.5 ) );
 			
-			emitter.addEventListener( EmitterEvent.EMITTER_EMPTY, restart );
-			
-			var renderer:BitmapRenderer = new BitmapRenderer( new Rectangle( 0, 0, 500, 400 ) );
-			renderer.addFilter( new BlurFilter( 2, 2, 1 ) );
-			renderer.addFilter( new ColorMatrixFilter( [ 1,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0.95,0 ] ) );
-			renderer.addEmitter( emitter );
-			addChild( renderer );
-			
-			emitter.x = 250;
-			emitter.y = 150;
-			emitter.start();
+			addEventListener( EmitterEvent.EMITTER_EMPTY, restart );
 		}
 		
 		public function restart( ev:EmitterEvent ):void
 		{
-			Emitter2D( ev.target ).start();
+			start();
 		}
 	}
 }

@@ -1,4 +1,3 @@
-
 /*
  * FLINT PARTICLE SYSTEM
  * .....................
@@ -30,7 +29,6 @@
 
 package
 {
-	import flash.display.Sprite;
 	import flash.geom.Point;
 	
 	import org.flintparticles.common.counters.*;
@@ -38,48 +36,29 @@ package
 	import org.flintparticles.twoD.actions.*;
 	import org.flintparticles.twoD.emitters.Emitter2D;
 	import org.flintparticles.twoD.initializers.*;
-	import org.flintparticles.twoD.renderers.*;
 	import org.flintparticles.twoD.zones.*;	
 
-	[SWF(width='700', height='500', frameRate='61', backgroundColor='#CCCCCC')]
-	
-	/**
-	 * This example creates a flocking effect.
-	 * 
-	 * <p>This is the document class for the Flex project.</p>
-	 */
-
-	public class Flocking extends Sprite
+	public class Flock extends Emitter2D
 	{
 		[Embed(source='assets/bird.swf', symbol='Bird')]
 		public var Bird:Class;
 		
-		private var emitter:Emitter2D;
-		
-		public function Flocking()
+		public function Flock()
 		{
-			emitter = new Emitter2D();
-			emitter.counter = new Blast( 150 );
+			counter = new Blast( 150 );
 			
-			emitter.addInitializer( new ImageClass( Bird ) );
-			emitter.addInitializer( new ColorInit( 0xFFFF00FF, 0xFF00FFFF ) );
-			emitter.addInitializer( new Position( new RectangleZone( 10, 10, 680, 480 ) ) );
-			emitter.addInitializer( new Velocity( new DiscZone( new Point( 0, 0 ), 150, 100 ) ) );
+			addInitializer( new ImageClass( Bird ) );
+			addInitializer( new Position( new RectangleZone( 10, 10, 680, 480 ) ) );
+			addInitializer( new Velocity( new DiscZone( new Point( 0, 0 ), 150, 100 ) ) );
 
-			emitter.addAction( new ApproachNeighbours( 100, 100 ) );
-			emitter.addAction( new MatchVelocity( 20, 200 ) );
-			emitter.addAction( new MinimumDistance( 10, 400 ) );
-			emitter.addAction( new SpeedLimit( 100, true ) );
-			emitter.addAction( new RotateToDirection() );
-			emitter.addAction( new BoundingBox( 0, 0, 700, 500 ) );
-			emitter.addAction( new SpeedLimit( 200 ) );
-			emitter.addAction( new Move() );
-			
-			var renderer:DisplayObjectRenderer = new DisplayObjectRenderer();
-			renderer.addEmitter( emitter );
-			addChild( renderer );
-			
-			emitter.start( );
+			addAction( new ApproachNeighbours( 150, 100 ) );
+			addAction( new MatchVelocity( 20, 200 ) );
+			addAction( new MinimumDistance( 10, 600 ) );
+			addAction( new SpeedLimit( 100, true ) );
+			addAction( new RotateToDirection() );
+			addAction( new BoundingBox( 0, 0, 700, 500 ) );
+			addAction( new SpeedLimit( 200 ) );
+			addAction( new Move() );
 		}
 	}
 }

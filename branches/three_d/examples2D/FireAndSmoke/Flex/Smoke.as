@@ -31,28 +31,31 @@ package
 {
 	import flash.geom.Point;
 	
+	import org.flintparticles.common.actions.*;
 	import org.flintparticles.common.counters.*;
+	import org.flintparticles.common.displayObjects.RadialDot;
 	import org.flintparticles.common.initializers.*;
 	import org.flintparticles.twoD.actions.*;
 	import org.flintparticles.twoD.emitters.Emitter2D;
 	import org.flintparticles.twoD.initializers.*;
 	import org.flintparticles.twoD.zones.*;	
 
-	public class GravityWells extends Emitter2D
+	public class Smoke extends Emitter2D
 	{
-		public function GravityWells()
+		public function Smoke()
 		{
-			counter = new Blast( 4000 );
-			
-			addInitializer( new ColorInit( 0xFFFF00FF, 0xFF00FFFF ) );
-			addInitializer( new Position( new DiscZone( new Point( 200, 200 ), 200 ) ) );
-
-			addAction( new Move() );
-			addAction( new GravityWell( 25, 200, 200 ) );
-			addAction( new GravityWell( 25, 75, 75 ) );
-			addAction( new GravityWell( 25, 325, 325 ) );
-			addAction( new GravityWell( 25, 75, 325 ) );
-			addAction( new GravityWell( 25, 325, 75 ) );
+			counter = new Steady( 10 );
+      
+			addInitializer( new Lifetime( 11, 12 ) );
+			addInitializer( new Velocity( new DiscSectorZone( new Point( 0, 0 ), 40, 30, -4 * Math.PI / 7, -3 * Math.PI / 7 ) ) );
+			addInitializer( new SharedImage( new RadialDot( 6 ) ) );
+      
+			addAction( new Age( ) );
+			addAction( new Move( ) );
+			addAction( new LinearDrag( 0.01 ) );
+			addAction( new Scale( 1, 15 ) );
+			addAction( new Fade( 0.15, 0 ) );
+			addAction( new RandomDrift( 15, 15 ) );
 		}
 	}
 }

@@ -1,3 +1,4 @@
+
 /*
  * FLINT PARTICLE SYSTEM
  * .....................
@@ -29,30 +30,41 @@
 
 package
 {
-	import flash.geom.Point;
+	import flash.display.Sprite;
+	import flash.geom.Rectangle;
 	
-	import org.flintparticles.common.counters.*;
-	import org.flintparticles.common.initializers.*;
-	import org.flintparticles.twoD.actions.*;
 	import org.flintparticles.twoD.emitters.Emitter2D;
-	import org.flintparticles.twoD.initializers.*;
-	import org.flintparticles.twoD.zones.*;	
+	import org.flintparticles.twoD.renderers.*;	
 
-	public class GravityWells extends Emitter2D
+	[SWF(width='300', height='400', frameRate='61', backgroundColor='#000000')]
+	
+	/**
+	 * This example creates fire and smoke using two emitters.
+	 * 
+	 * <p>This is the document class for the Flex project.</p>
+	 */
+
+	public class Main extends Sprite
 	{
-		public function GravityWells()
+		private var smoke:Emitter2D;
+		private var fire:Emitter2D;
+		
+		public function Main()
 		{
-			counter = new Blast( 4000 );
+			smoke = new Smoke();
+			smoke.x = 150;
+			smoke.y = 380;
+			smoke.start();
 			
-			addInitializer( new ColorInit( 0xFFFF00FF, 0xFF00FFFF ) );
-			addInitializer( new Position( new DiscZone( new Point( 200, 200 ), 200 ) ) );
-
-			addAction( new Move() );
-			addAction( new GravityWell( 25, 200, 200 ) );
-			addAction( new GravityWell( 25, 75, 75 ) );
-			addAction( new GravityWell( 25, 325, 325 ) );
-			addAction( new GravityWell( 25, 75, 325 ) );
-			addAction( new GravityWell( 25, 325, 75 ) );
+			fire = new Fire();
+			fire.x = 150;
+			fire.y = 380;
+			fire.start();
+			
+			var renderer:BitmapRenderer = new BitmapRenderer( new Rectangle( 0, 0, 300, 400 ) );
+			renderer.addEmitter( smoke );
+			renderer.addEmitter( fire );
+			addChild( renderer );
 		}
 	}
 }

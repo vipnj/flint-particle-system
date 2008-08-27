@@ -27,32 +27,32 @@
  * THE SOFTWARE.
  */
 
-package
-{
-	import flash.geom.Point;
-	
-	import org.flintparticles.common.counters.*;
-	import org.flintparticles.common.initializers.*;
-	import org.flintparticles.twoD.actions.*;
-	import org.flintparticles.twoD.emitters.Emitter2D;
-	import org.flintparticles.twoD.initializers.*;
-	import org.flintparticles.twoD.zones.*;	
+import org.flintparticles.common.counters.*;
+import org.flintparticles.common.initializers.*;
+import org.flintparticles.twoD.actions.*;
+import org.flintparticles.twoD.emitters.Emitter2D;
+import org.flintparticles.twoD.initializers.*;
+import org.flintparticles.twoD.renderers.*;
+import org.flintparticles.twoD.zones.*;	
 
-	public class GravityWells extends Emitter2D
-	{
-		public function GravityWells()
-		{
-			counter = new Blast( 4000 );
-			
-			addInitializer( new ColorInit( 0xFFFF00FF, 0xFF00FFFF ) );
-			addInitializer( new Position( new DiscZone( new Point( 200, 200 ), 200 ) ) );
+var emitter:Emitter2D = new Emitter2D();
+emitter.counter = new Blast( 150 );
 
-			addAction( new Move() );
-			addAction( new GravityWell( 25, 200, 200 ) );
-			addAction( new GravityWell( 25, 75, 75 ) );
-			addAction( new GravityWell( 25, 325, 325 ) );
-			addAction( new GravityWell( 25, 75, 325 ) );
-			addAction( new GravityWell( 25, 325, 75 ) );
-		}
-	}
-}
+emitter.addInitializer( new ImageClass( Bird ) );
+emitter.addInitializer( new Position( new RectangleZone( 10, 10, 680, 480 ) ) );
+emitter.addInitializer( new Velocity( new DiscZone( new Point( 0, 0 ), 150, 100 ) ) );
+
+emitter.addAction( new ApproachNeighbours( 150, 100 ) );
+emitter.addAction( new MatchVelocity( 20, 200 ) );
+emitter.addAction( new MinimumDistance( 10, 600 ) );
+emitter.addAction( new SpeedLimit( 100, true ) );
+emitter.addAction( new RotateToDirection() );
+emitter.addAction( new BoundingBox( 0, 0, 700, 500 ) );
+emitter.addAction( new SpeedLimit( 200 ) );
+emitter.addAction( new Move() );
+
+var renderer:DisplayObjectRenderer = new DisplayObjectRenderer();
+renderer.addEmitter( emitter );
+addChild( renderer );
+
+emitter.start( );

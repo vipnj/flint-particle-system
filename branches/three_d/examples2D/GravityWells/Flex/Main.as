@@ -1,4 +1,3 @@
-
 /*
  * FLINT PARTICLE SYSTEM
  * .....................
@@ -33,42 +32,21 @@ package
 	import flash.display.Sprite;
 	import flash.filters.BlurFilter;
 	import flash.filters.ColorMatrixFilter;
-	import flash.geom.Point;
 	import flash.geom.Rectangle;
 	
-	import org.flintparticles.common.counters.*;
-	import org.flintparticles.common.initializers.*;
-	import org.flintparticles.twoD.actions.*;
 	import org.flintparticles.twoD.emitters.Emitter2D;
-	import org.flintparticles.twoD.initializers.*;
-	import org.flintparticles.twoD.renderers.*;
-	import org.flintparticles.twoD.zones.*;	
+	import org.flintparticles.twoD.renderers.*;	
 
-	/**
-	 * This example creates an abstract effect using 5 GravityWells and thousands of particles.
-	 * 
-	 * <p>This is the document class for the Flash project.</p>
-	 */
-	public class GravityWells extends Sprite
+	[SWF(width='400', height='400', frameRate='61', backgroundColor='#000000')]
+
+	public class Main extends Sprite
 	{
 		private var emitter:Emitter2D;
 		
-		public function GravityWells()
+		public function Main()
 		{
-			emitter = new Emitter2D();
+			emitter = new GravityWells();
 
-			emitter.counter = new Blast( 4000 );
-			
-			emitter.addInitializer( new ColorInit( 0xFFFF00FF, 0xFF00FFFF ) );
-			emitter.addInitializer( new Position( new DiscZone( new Point( 200, 200 ), 200 ) ) );
-
-			emitter.addAction( new Move() );
-			emitter.addAction( new GravityWell( 25, 200, 200 ) );
-			emitter.addAction( new GravityWell( 25, 75, 75 ) );
-			emitter.addAction( new GravityWell( 25, 325, 325 ) );
-			emitter.addAction( new GravityWell( 25, 75, 325 ) );
-			emitter.addAction( new GravityWell( 25, 325, 75 ) );
-			
 			var renderer:PixelRenderer = new PixelRenderer( new Rectangle( 0, 0, 400, 400 ) );
 			renderer.addFilter( new BlurFilter( 2, 2, 1 ) );
 			renderer.addFilter( new ColorMatrixFilter( [ 1,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0.99,0 ] ) );

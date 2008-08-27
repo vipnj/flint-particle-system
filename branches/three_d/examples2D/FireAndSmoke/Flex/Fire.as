@@ -1,4 +1,3 @@
-
 /*
  * FLINT PARTICLE SYSTEM
  * .....................
@@ -30,51 +29,34 @@
 
 package
 {
-	import flash.display.Sprite;
 	import flash.geom.Point;
 	
+	import org.flintparticles.common.actions.*;
 	import org.flintparticles.common.counters.*;
+	import org.flintparticles.common.displayObjects.RadialDot;
 	import org.flintparticles.common.initializers.*;
 	import org.flintparticles.twoD.actions.*;
 	import org.flintparticles.twoD.emitters.Emitter2D;
 	import org.flintparticles.twoD.initializers.*;
-	import org.flintparticles.twoD.renderers.*;
 	import org.flintparticles.twoD.zones.*;	
 
-	/**
-	 * This example creates a flocking effect.
-	 * 
-	 * <p>This is the document class for the Flash project.</p>
-	 */
-
-	public class Flocking extends Sprite
+	public class Fire extends Emitter2D
 	{
-		private var emitter:Emitter2D;
-		
-		public function Flocking()
+		public function Fire()
 		{
-			emitter = new Emitter2D();
-			emitter.counter = new Blast( 150 );
-			
-			emitter.addInitializer( new ImageClass( Bird ) );
-			emitter.addInitializer( new ColorInit( 0xFFFF00FF, 0xFF00FFFF ) );
-			emitter.addInitializer( new Position( new RectangleZone( 10, 10, 680, 480 ) ) );
-			emitter.addInitializer( new Velocity( new DiscZone( new Point( 0, 0 ), 150, 100 ) ) );
+			counter = new Steady( 60 );
 
-			emitter.addAction( new ApproachNeighbours( 100, 100 ) );
-			emitter.addAction( new MatchVelocity( 20, 200 ) );
-			emitter.addAction( new MinimumDistance( 10, 400 ) );
-			emitter.addAction( new SpeedLimit( 100, true ) );
-			emitter.addAction( new RotateToDirection() );
-			emitter.addAction( new BoundingBox( 0, 0, 700, 500 ) );
-			emitter.addAction( new SpeedLimit( 200 ) );
-			emitter.addAction( new Move() );
-			
-			var renderer:DisplayObjectRenderer = new DisplayObjectRenderer();
-			renderer.addEmitter( emitter );
-			addChild( renderer );
-			
-			emitter.start( );
+			addInitializer( new Lifetime( 2, 3 ) );
+			addInitializer( new Velocity( new DiscSectorZone( new Point( 0, 0 ), 20, 10, -Math.PI, 0 ) ) );
+			addInitializer( new Position( new DiscZone( new Point( 0, 0 ), 3 ) ) );
+			addInitializer( new ImageClass( RadialDot, 5 ) );
+
+			addAction( new Age( ) );
+			addAction( new Move( ) );
+			addAction( new LinearDrag( 1 ) );
+			addAction( new Accelerate( 0, -40 ) );
+			addAction( new ColorChange( 0xFFFFCC00, 0x00CC0000 ) );
+			addAction( new Scale( 1, 1.5 ) );
 		}
 	}
 }
