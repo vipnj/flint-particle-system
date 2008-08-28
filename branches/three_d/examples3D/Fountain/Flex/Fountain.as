@@ -1,4 +1,3 @@
-
 /*
  * FLINT PARTICLE SYSTEM
  * .....................
@@ -30,59 +29,28 @@
 
 package
 {
-	import flash.display.Sprite;
-	import flash.geom.Rectangle;
-	
+	import org.flintparticles.common.actions.*;
 	import org.flintparticles.common.counters.*;
-	import org.flintparticles.common.displayObjects.Dot;
 	import org.flintparticles.common.initializers.*;
 	import org.flintparticles.threeD.actions.*;
 	import org.flintparticles.threeD.emitters.Emitter3D;
 	import org.flintparticles.threeD.geom.Vector3D;
 	import org.flintparticles.threeD.initializers.*;
-	import org.flintparticles.threeD.renderers.*;
-	import org.flintparticles.threeD.renderers.control.*;
 	import org.flintparticles.threeD.zones.*;	
 
-	/**
-	 * This example creates a set of colliding balls.
-	 * 
-	 * <p>This is the document class for the Flash project.</p>
-	 */
-
-	public class Collisions extends Sprite
+	public class Fountain extends Emitter3D
 	{
-		private var emitter:Emitter3D;
-		private var var renderer:BitmapRenderer;
-		private var orbitter:OrbitCamera;
-		
-		public function Collisions()
+		public function Fountain()
 		{
-			emitter = new Emitter3D();
-
-			emitter.counter = new Blast( 150 );
+			counter = new Steady( 500 );
 			
-			emitter.addInitializer( new SharedImage( new Dot( 10 ) ) );
-			emitter.addInitializer( new ColorInit( 0xFFFF33FF, 0xFF33FFFF ) );
-			emitter.addInitializer( new Position( new PointZone( new Vector3D( 0, 0, 0 ) ) ) );
-			emitter.addInitializer( new Velocity( new DiscZone( new Vector3D( 0, 0, 0 ), new Vector3D( 0, 1, 0 ), 100, 50 ) ) );
+			addInitializer( new ColorInit( 0xFFCCCCFF, 0xFF6666FF ) );
+			addInitializer( new Velocity( new DiscZone( new Vector3D( 0, 250, 0 ), new Vector3D( 0, 1, 0 ), 60 ) ) );
+			addInitializer( new Lifetime( 3.2 ) );
 			
-			emitter.addAction( new Move() );
-			emitter.addAction( new Collide( 10, 1 ) );
-			emitter.addAction( new BoundingBox( -250, 250, -250, 250, -250, 250 ) );
-			
-			renderer = new BitmapRenderer( new Rectangle( -300, -300, 600, 600 ) );
-			renderer.camera.position = new Vector3D( 0, 200, -500 );
-			renderer.camera.target = new Vector3D( 0, 0, 0 );
-			renderer.addEmitter( emitter );
-			renderer.x = 250;
-			renderer.y = 250;
-			addChild( renderer );
-
-			emitter.start();
-			
-			orbitter = new OrbitCamera( stage, renderer.camera );
-			orbitter.start();
+			addAction( new Move() );
+			addAction( new Accelerate( new Vector3D( 0, -150, 0 ) ) );
+			addAction( new Age() );
 		}
 	}
 }

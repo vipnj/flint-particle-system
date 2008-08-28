@@ -1,4 +1,3 @@
-
 /*
  * FLINT PARTICLE SYSTEM
  * .....................
@@ -31,54 +30,40 @@
 package
 {
 	import flash.display.Sprite;
+	import flash.filters.BlurFilter;
+	import flash.filters.ColorMatrixFilter;
+	import flash.geom.Rectangle;
+	import flash.text.TextField;
 	
-	import org.flintparticles.common.actions.*;
-	import org.flintparticles.common.counters.*;
-	import org.flintparticles.common.displayObjects.Star;
-	import org.flintparticles.common.initializers.*;
-	import org.flintparticles.threeD.actions.*;
 	import org.flintparticles.threeD.emitters.Emitter3D;
 	import org.flintparticles.threeD.geom.Vector3D;
-	import org.flintparticles.threeD.initializers.*;
 	import org.flintparticles.threeD.renderers.*;
-	import org.flintparticles.threeD.renderers.controllers.*;
-	import org.flintparticles.threeD.zones.*;	
+	import org.flintparticles.threeD.renderers.controllers.*;	
 
 	[SWF(width='500', height='500', frameRate='61', backgroundColor='#000000')]
 	
-	/**
-	 * This example creates a fountain of stars.
-	 * 
-	 * <p>This is the document class for the Flex project.</p>
-	 */
-
-	public class StarFountain extends Sprite
+	public class Main extends Sprite
 	{
 		private var emitter:Emitter3D;
-		private var renderer:DisplayObjectRenderer;
+		private var renderer:BitmapRenderer;
 		private var orbitter:OrbitCamera;
 		
-		public function StarFountain()
+		public function Main()
 		{
-			emitter = new Emitter3D();
+			var txt:TextField = new TextField();
+			txt.text = "Use arrow keys to track in/out and orbit around the fountain.";
+			txt.autoSize = "left";
+			txt.textColor = 0xFFFFFF;
+			addChild( txt );
 
-			emitter.counter = new Steady( 50 );
+			emitter = new Fountain();
 			
-			emitter.addInitializer( new ImageClass( Star, 12 ) );
-			emitter.addInitializer( new ColorInit( 0xFFFF33FF, 0xFF33FFFF ) );
-			emitter.addInitializer( new Velocity( new DiscZone( new Vector3D( 0, 250, 0 ), new Vector3D( 0, 1, 0 ), 60 ) ) );
-			emitter.addInitializer( new Lifetime( 5 ) );
-			emitter.addInitializer( new RotateVelocity( new Vector3D( 0, 0, 1 ), -4, 4 ) );
-			
-			emitter.addAction( new Move() );
-			emitter.addAction( new Rotate() );
-			emitter.addAction( new Accelerate( new Vector3D( 0, -150, 0 ) ) );
-			emitter.addAction( new Age() );
-			
-			renderer = new DisplayObjectRenderer();
+			renderer = new PixelRenderer( new Rectangle( -250, -250, 500, 500 ), false );
 			renderer.camera.dolly( -300 );
 			renderer.camera.lift( 100 );
 			renderer.camera.target = new Vector3D( 0, 100, 0 );
+			renderer.addFilter( new BlurFilter( 2, 2, 1 ) );
+			renderer.addFilter( new ColorMatrixFilter( [ 1,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0.99,0 ] ) );
 			renderer.addEmitter( emitter );
 			renderer.x = 250;
 			renderer.y = 250;

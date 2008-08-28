@@ -29,60 +29,35 @@
 
 package
 {
-	import flash.display.Sprite;
-	import flash.geom.Rectangle;
-	
 	import org.flintparticles.common.counters.*;
-	import org.flintparticles.common.displayObjects.Dot;
 	import org.flintparticles.common.initializers.*;
 	import org.flintparticles.threeD.actions.*;
 	import org.flintparticles.threeD.emitters.Emitter3D;
 	import org.flintparticles.threeD.geom.Vector3D;
 	import org.flintparticles.threeD.initializers.*;
-	import org.flintparticles.threeD.renderers.*;
-	import org.flintparticles.threeD.renderers.controllers.*;
 	import org.flintparticles.threeD.zones.*;	
 
-	[SWF(width='500', height='500', frameRate='61', backgroundColor='#000000')]
-	
-	/**
-	 * This example creates a set of colliding balls.
-	 * 
-	 * <p>This is the document class for the Flex project.</p>
-	 */
-
-	public class Collisions extends Sprite
+	public class Flock extends Emitter3D
 	{
-		private var emitter:Emitter3D;
-		private var orbitter:OrbitCamera;
+		[Embed(source='assets/bird.swf', symbol='Bird')]
+		public var Bird:Class;
 		
-		public function Collisions()
+		public function Flock()
 		{
-			emitter = new Emitter3D();
+			counter = new Blast( 150 );
+			
+			addInitializer( new ImageClass( Bird ) );
+			addInitializer( new Position( new BoxZone( 580, 380, 580, new Vector3D( 0, 0, 0 ), new Vector3D( 0, 1, 0 ), new Vector3D( 0, 0, 1 ) ) ) );
+			addInitializer( new Velocity( new SphereZone( new Vector3D( 0, 0, 0 ), 150, 100 ) ) );
 
-			emitter.counter = new Blast( 150 );
-			
-			emitter.addInitializer( new SharedImage( new Dot( 10 ) ) );
-			emitter.addInitializer( new ColorInit( 0xFFFF33FF, 0xFF33FFFF ) );
-			emitter.addInitializer( new Position( new PointZone( new Vector3D( 0, 0, 0 ) ) ) );
-			emitter.addInitializer( new Velocity( new DiscZone( new Vector3D( 0, 0, 0 ), new Vector3D( 0, 1, 0 ), 100, 50 ) ) );
-			
-			emitter.addAction( new Move() );
-			emitter.addAction( new Collide( 10, 1 ) );
-			emitter.addAction( new BoundingBox( -250, 250, -250, 250, -250, 250 ) );
-			
-			var renderer:BitmapRenderer = new BitmapRenderer( new Rectangle( -300, -300, 600, 600 ) );
-			renderer.camera.position = new Vector3D( 0, 200, -500 );
-			renderer.camera.target = new Vector3D( 0, 0, 0 );
-			renderer.addEmitter( emitter );
-			renderer.x = 250;
-			renderer.y = 250;
-			addChild( renderer );
-
-			emitter.start();
-			
-			orbitter = new OrbitCamera( stage, renderer.camera );
-			orbitter.start();
+			addAction( new ApproachNeighbours( 200, 100 ) );
+			addAction( new MatchVelocity( 40, 200 ) );
+			addAction( new MinimumDistance( 20, 600 ) );
+			addAction( new RotateToDirection( Vector3D.AXISX ) );
+			addAction( new BoundingBox( -300, 300, -200, 200, -300, 300 ) );
+			addAction( new SpeedLimit( 100, true ) );
+			addAction( new SpeedLimit( 200 ) );
+			addAction( new Move() );
 		}
 	}
 }

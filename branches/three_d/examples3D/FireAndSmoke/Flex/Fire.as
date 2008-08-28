@@ -1,4 +1,3 @@
-
 /*
  * FLINT PARTICLE SYSTEM
  * .....................
@@ -30,63 +29,33 @@
 
 package
 {
-	import flash.display.Sprite;
-	
 	import org.flintparticles.common.actions.*;
 	import org.flintparticles.common.counters.*;
-	import org.flintparticles.common.displayObjects.Star;
+	import org.flintparticles.common.displayObjects.RadialDot;
 	import org.flintparticles.common.initializers.*;
 	import org.flintparticles.threeD.actions.*;
 	import org.flintparticles.threeD.emitters.Emitter3D;
 	import org.flintparticles.threeD.geom.Vector3D;
 	import org.flintparticles.threeD.initializers.*;
-	import org.flintparticles.threeD.renderers.*;
-	import org.flintparticles.threeD.renderers.controllers.*;
 	import org.flintparticles.threeD.zones.*;	
 
-	/**
-	 * This example creates a fountain of stars.
-	 * 
-	 * <p>This is the document class for the Flash project.</p>
-	 */
-
-	public class StarFountain extends Sprite
+	public class Fire extends Emitter3D
 	{
-		private var emitter:Emitter3D;
-		private var renderer:DisplayObjectRenderer;
-		private var orbitter:OrbitCamera;
-		
-		public function StarFountain()
+		public function Fire()
 		{
-			emitter = new Emitter3D();
+			counter = new Steady( 60 );
 
-			emitter.counter = new Steady( 50 );
-			
-			emitter.addInitializer( new ImageClass( Star, 12 ) );
-			emitter.addInitializer( new ColorInit( 0xFFFF33FF, 0xFF33FFFF ) );
-			emitter.addInitializer( new Velocity( new DiscZone( new Vector3D( 0, 250, 0 ), new Vector3D( 0, 1, 0 ), 60 ) ) );
-			emitter.addInitializer( new Lifetime( 5 ) );
-			emitter.addInitializer( new RotateVelocity( new Vector3D( 0, 0, 1 ), -4, 4 ) );
-			
-			emitter.addAction( new Move() );
-			emitter.addAction( new Rotate() );
-			emitter.addAction( new Accelerate( new Vector3D( 0, -150, 0 ) ) );
-			emitter.addAction( new Age() );
-			
-			renderer = new DisplayObjectRenderer();
-			renderer.camera.dolly( -300 );
-			renderer.camera.lift( 100 );
-			renderer.camera.target = new Vector3D( 0, 100, 0 );
-			renderer.addEmitter( emitter );
-			renderer.x = 250;
-			renderer.y = 250;
-			addChild( renderer );
-			
-			emitter.position = new Vector3D( 0, 0, 0, 1 );
-			emitter.start( );
-			
-			orbitter = new OrbitCamera( stage, renderer.camera );
-			orbitter.start();
+			addInitializer( new Lifetime( 2, 3 ) );
+			addInitializer( new Velocity( new DiscZone( new Vector3D( 0, 0, 0 ), new Vector3D( 0, 1, 0 ), 10 ) ) );
+			addInitializer( new Position( new DiscZone( new Vector3D( 0, 0, 0 ), new Vector3D( 0, 1, 0 ), 3 ) ) );
+			addInitializer( new ImageClass( RadialDot, 5 ) );
+
+			addAction( new Age( ) );
+			addAction( new Move( ) );
+			addAction( new LinearDrag( 1 ) );
+			addAction( new Accelerate( new Vector3D( 0, 40, 0 ) ) );
+			addAction( new ColorChange( 0xFFFFCC00, 0x00CC0000 ) );
+			addAction( new Scale( 1, 1.5 ) );
 		}
 	}
 }

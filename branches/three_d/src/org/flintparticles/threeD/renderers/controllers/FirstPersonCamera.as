@@ -334,11 +334,11 @@ package org.flintparticles.threeD.renderers.controllers
 			}
 			if( upDown )
 			{
-				camera.tilt( _rotationRate * time );
+				camera.tilt( -_rotationRate * time );
 			}
 			if( downDown )
 			{
-				camera.tilt( -_rotationRate * time );
+				camera.tilt( _rotationRate * time );
 			}
 		}
 		
