@@ -160,6 +160,10 @@ package org.flintparticles.common.emitters
 		/**
 		 * @private
 		 */
+		protected var _fixedFrameTime:Number = 0;
+		/**
+		 * @private
+		 */
 		protected var _running:Boolean = false;
 		/**
 		 * @private
@@ -474,6 +478,31 @@ package org.flintparticles.common.emitters
 			}
 		}
 		
+		/**
+		 * Indicates a fixed time (in seconds) to use for every frame. Setting 
+		 * this property causes the emitter to bypass its frame timing 
+		 * functionality and use the given time for every frame. This enables
+		 * the particle system to be frame based rather than time based.
+		 * 
+		 * <p>To return to time based animation, set this value to zero (the 
+		 * default).</p>
+		 * 
+		 * <p>This feature only works if useInternalTick is true (the default).</p>
+		 * 
+		 * @see #useInternalTick
+		 */		
+		public function get fixedFrameTime():Number
+		{
+			return _fixedFrameTime;
+		}
+		public function set fixedFrameTime( value:Number ):void
+		{
+			_fixedFrameTime = value;
+		}
+		
+		/**
+		 * Indicates if the emitter is currently running.
+		 */
 		public function get running():Boolean
 		{
 			return _running;
@@ -604,7 +633,14 @@ package org.flintparticles.common.emitters
 		 */
 		private function updateEventListener( ev:UpdateEvent ):void
 		{
-			update( ev.time );
+			if( _fixedFrameTime )
+			{
+				update( _fixedFrameTime );
+			}
+			else
+			{
+				update( ev.time );
+			}
 		}
 		
 		/**

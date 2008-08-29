@@ -34,9 +34,7 @@ package org.flintparticles.threeD.renderers
 	
 	import org.flintparticles.common.particles.Particle;
 	import org.flintparticles.common.renderers.RendererBase;
-	import org.flintparticles.threeD.geom.Matrix3D;	
-	import org.flintparticles.threeD.geom.Quaternion;
-	import org.flintparticles.threeD.geom.Vector3D;
+	import org.flintparticles.threeD.geom.*;	
 	import org.flintparticles.threeD.particles.Particle3D;	
 
 	/**
