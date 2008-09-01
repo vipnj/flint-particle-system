@@ -4,17 +4,17 @@
 
 The repository contains both the current version of Flint and the alpha of the new version of Flint, currently in development.
 
-==== Version 1.0.x ====
+==== Version 1.0.4 ====
 
-The current version, version 1.0.x, is in the repository trunk. This version supports 2D particle effects only. Use this command to anonymously check out the version 1.0.x source code.
+The final 1.0 release, version 1.0.4, is in the repository tags. This version supports 2D particle effects only. Use this command to anonymously check out the version 1.0.4 source code, examples and documentation.
 
-{{{svn checkout http://flint-particle-system.googlecode.com/svn/trunk/ flint-particle-system-read-only}}}
+{{{svn checkout http://flint-particle-system.googlecode.com/svn/tags/1_0_4/ flint-particle-system-1.0.4-read-only}}}
 
 ==== Version 2 alpha ====
 
-The early alpha of version 2 is in a repository branch. This version will support 3D particle effects in addition to 2D particle effects. The 2D contents of this version should be fairly stable, but there is still a lot of work to do on the 3D effects. Use this command to anonymously check out the version 2 alpha source code.
+The latest alpha of version 2 is in the repository trunk. This version supports 3D particle effects in addition to 2D particle effects. This version is fairly stable, but is lacking some 3D features, particularly renderers for Papervision3D and Away3D. Use this command to anonymously check out the version 2 alpha source code.
 
-{{{svn checkout http://flint-particle-system.googlecode.com/svn/branch/three_d/ flint-particle-system-2-read-only}}}
+{{{svn checkout http://flint-particle-system.googlecode.com/svn/trunk/ flint-particle-system-2-read-only}}}
 
 ==== GUI and IDE access ====
 
