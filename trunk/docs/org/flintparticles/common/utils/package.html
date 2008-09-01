@@ -39,44 +39,36 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Pa
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
-<a class="signatureLink" href="#interpolateColors()">interpolateColors</a>(color1:uint, color2:uint, ratio:Number):uint</div>
+<a class="signatureLink" href="#construct()">construct</a>(type:Class, parameters:Array):*</div>
 <div class="summaryTableDescription">
-  This function is used to find a color between two other colors.</div>
+  This function is used to construct an object from the class and an array of parameters.</div>
 </td><td class="summaryTableOwnerCol">org.flintparticles.common.utils</td>
 </tr>
 </table>
 </div>
 <a name="methodDetail"></a>
 <div class="detailSectionHeader">Function detail</div>
-<a name="interpolateColors()"></a>
+<a name="construct()"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
 <tr>
-<td class="detailHeaderName">interpolateColors</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">function</td>
+<td class="detailHeaderName">construct</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">function</td>
 </tr>
 </table>
 <div class="detailBody">
-<code>public function interpolateColors(color1:uint, color2:uint, ratio:Number):uint</code><p>
-  This function is used to find a color between two other colors.
+<code>public function construct(type:Class, parameters:Array):*</code><p>
+  This function is used to construct an object from the class and an array of parameters.
   
   </p><span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
-<td width="20px"></td><td><code><span class="label">color1</span>:uint</code> &mdash; The first color.
+<td width="20px"></td><td><code><span class="label">type</span>:Class</code> &mdash; The class to construct.
   </td>
 </tr>
 <tr>
 <td class="paramSpacer">&nbsp;</td>
 </tr>
 <tr>
-<td width="20px"></td><td><code><span class="label">color2</span>:uint</code> &mdash; The second color.
-  </td>
-</tr>
-<tr>
-<td class="paramSpacer">&nbsp;</td>
-</tr>
-<tr>
-<td width="20px"></td><td><code><span class="label">ratio</span>:Number</code> &mdash; The proportion of the first color to use. The rest of the color 
-  is made from the second color.
+<td width="20px"></td><td><code><span class="label">parameters</span>:Array</code> &mdash; An array of up to ten parameters to pass to the constructor.
   </td>
 </tr>
 </table>
@@ -84,14 +76,12 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Pa
 <span class="label">Returns</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
-<td width="20"></td><td><code>uint</code> &mdash; The color created.
-  </td>
+<td width="20"></td><td><code>*</code></td>
 </tr>
 </table>
 </div>
 <p></p>
-<center class="copyright"> 
-</center>
+<center class="copyright">&copy; Big Room Ventures Ltd. 2008</center>
 </div>
 </body>
 </html>

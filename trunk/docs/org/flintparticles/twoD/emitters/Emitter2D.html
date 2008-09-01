@@ -101,6 +101,11 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 </td><td class="summaryTableOwnerCol">Emitter2D</td>
 </tr>
 <tr class="hideInheritedProperty">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol"><a class="signatureLink" href="../../common/emitters/Emitter.html#fixedFrameTime">fixedFrameTime</a> : Number<div class="summaryTableDescription">
+   Indicates a fixed time (in seconds) to use for every frame.</div>
+</td><td class="summaryTableOwnerCol"><a href="../../common/emitters/Emitter.html">Emitter</a></td>
+</tr>
+<tr class="hideInheritedProperty">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol"><a class="signatureLink" href="../../common/emitters/Emitter.html#maximumFrameTime">maximumFrameTime</a> : Number<div class="summaryTableDescription">
    The maximum duration for a single update frame, in seconds.</div>
 </td><td class="summaryTableOwnerCol"><a href="../../common/emitters/Emitter.html">Emitter</a></td>
@@ -128,7 +133,8 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 </td><td class="summaryTableOwnerCol">Emitter2D</td>
 </tr>
 <tr class="hideInheritedProperty">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol"><a class="signatureLink" href="../../common/emitters/Emitter.html#running">running</a> : Boolean<div class="summaryTableDescription"></div>
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol"><a class="signatureLink" href="../../common/emitters/Emitter.html#running">running</a> : Boolean<div class="summaryTableDescription">
+   Indicates if the emitter is currently running.</div>
 </td><td class="summaryTableOwnerCol"><a href="../../common/emitters/Emitter.html">Emitter</a></td>
 </tr>
 <tr class="">
@@ -158,27 +164,6 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#y">y</a> : Number<div class="summaryTableDescription">
    Indicates the y coordinate of the Emitter within the particle system's coordinate space.</div>
 </td><td class="summaryTableOwnerCol">Emitter2D</td>
-</tr>
-</table>
-</div>
-<a name="protectedPropertySummary"></a>
-<div class="summarySection">
-<div class="summaryTableTitle">Protected Properties</div>
-<div class="showHideLinks">
-<div class="hideInheritedProtectedProperty" id="hideInheritedProtectedProperty">
-<a onclick="javascript:setInheritedVisible(false,'ProtectedProperty');" href="#protectedPropertySummary" class="showHideLink"><img src="../../../../images/expanded.gif" class="showHideLinkImage"> Hide Inherited Protected Properties</a>
-</div>
-<div class="showInheritedProtectedProperty" id="showInheritedProtectedProperty">
-<a onclick="javascript:setInheritedVisible(true,'ProtectedProperty');" href="#protectedPropertySummary" class="showHideLink"><img src="../../../../images/collapsed.gif" class="showHideLinkImage"> Show Inherited Protected Properties</a>
-</div>
-</div>
-<table id="summaryTableProtectedProperty" class="summaryTable hideInheritedProtectedProperty" cellpadding="3" cellspacing="0">
-<tr>
-<th>&nbsp;</th><th colspan="2">Property</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
-</tr>
-<tr class="hideInheritedProtectedProperty">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol"><a class="signatureLink" href="../../common/emitters/Emitter.html#_activitiesPriority">_activitiesPriority</a> : Array<div class="summaryTableDescription"></div>
-</td><td class="summaryTableOwnerCol"><a href="../../common/emitters/Emitter.html">Emitter</a></td>
 </tr>
 </table>
 </div>
@@ -283,6 +268,13 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <a class="signatureLink" href="../../common/emitters/Emitter.html#hasInitializerOfType()">hasInitializerOfType</a>(initializerClass:Class):Boolean</div>
 <div class="summaryTableDescription">
    Detects if the emitter is using an initializer of a particular class.</div>
+</td><td class="summaryTableOwnerCol"><a href="../../common/emitters/Emitter.html">Emitter</a></td>
+</tr>
+<tr class="hideInheritedMethod">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="../../common/emitters/Emitter.html#killAllParticles()">killAllParticles</a>():void</div>
+<div class="summaryTableDescription"></div>
 </td><td class="summaryTableOwnerCol"><a href="../../common/emitters/Emitter.html">Emitter</a></td>
 </tr>
 <tr class="hideInheritedMethod">
@@ -615,9 +607,8 @@ showHideInherited();
 <hr>
 <br>
 <p></p>
-<center class="copyright"> 
-</center>
+<center class="copyright">&copy; Big Room Ventures Ltd. 2008</center>
 </div>
 </body>
 </html>
-<!-- -->
+<!--© Big Room Ventures Ltd. 2008-->

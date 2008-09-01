@@ -4,7 +4,7 @@
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="../../../../style.css" type="text/css" media="screen">
 <link rel="stylesheet" href="../../../../print.css" type="text/css" media="print">
-<meta content="Emitter,org.flintparticles.common.emitters.Emitter,_activitiesPriority,counter,maximumFrameTime,particleFactory,particles,running,useInternalTick,addAction,addActivity,addExistingParticles,addInitializer,createParticle,hasAction,hasActionOfType,hasActivity,hasActivityOfType,hasInitializer,hasInitializerOfType,initParticle,pause,removeAction,removeActivity,removeInitializer,resume,runAhead,sortParticles,start,stop,update" name="keywords">
+<meta content="Emitter,org.flintparticles.common.emitters.Emitter,counter,fixedFrameTime,maximumFrameTime,particleFactory,particles,running,useInternalTick,addAction,addActivity,addExistingParticles,addInitializer,createParticle,hasAction,hasActionOfType,hasActivity,hasActivityOfType,hasInitializer,hasInitializerOfType,initParticle,killAllParticles,pause,removeAction,removeActivity,removeInitializer,resume,runAhead,sortParticles,start,stop,update" name="keywords">
 <title>org.flintparticles.common.emitters.Emitter</title>
 </head>
 <body>
@@ -90,6 +90,11 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 </td><td class="summaryTableOwnerCol">Emitter</td>
 </tr>
 <tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#fixedFrameTime">fixedFrameTime</a> : Number<div class="summaryTableDescription">
+   Indicates a fixed time (in seconds) to use for every frame.</div>
+</td><td class="summaryTableOwnerCol">Emitter</td>
+</tr>
+<tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#maximumFrameTime">maximumFrameTime</a> : Number<div class="summaryTableDescription">
    The maximum duration for a single update frame, in seconds.</div>
 </td><td class="summaryTableOwnerCol">Emitter</td>
@@ -107,26 +112,14 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 </td><td class="summaryTableOwnerCol">Emitter</td>
 </tr>
 <tr class="">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#running">running</a> : Boolean<div class="summaryTableDescription">[read-only]</div>
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#running">running</a> : Boolean<div class="summaryTableDescription">[read-only]
+   Indicates if the emitter is currently running.</div>
 </td><td class="summaryTableOwnerCol">Emitter</td>
 </tr>
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#useInternalTick">useInternalTick</a> : Boolean<div class="summaryTableDescription">
    Indicates whether the emitter should manage its own internal update
    tick.</div>
-</td><td class="summaryTableOwnerCol">Emitter</td>
-</tr>
-</table>
-</div>
-<a name="protectedPropertySummary"></a>
-<div class="summarySection">
-<div class="summaryTableTitle">Protected Properties</div>
-<table id="summaryTableProtectedProperty" class="summaryTable " cellpadding="3" cellspacing="0">
-<tr>
-<th>&nbsp;</th><th colspan="2">Property</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
-</tr>
-<tr class="">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#_activitiesPriority">_activitiesPriority</a> : Array<div class="summaryTableDescription"></div>
 </td><td class="summaryTableOwnerCol">Emitter</td>
 </tr>
 </table>
@@ -224,6 +217,13 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <a class="signatureLink" href="#hasInitializerOfType()">hasInitializerOfType</a>(initializerClass:Class):Boolean</div>
 <div class="summaryTableDescription">
    Detects if the emitter is using an initializer of a particular class.</div>
+</td><td class="summaryTableOwnerCol">Emitter</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#killAllParticles()">killAllParticles</a>():void</div>
+<div class="summaryTableDescription"></div>
 </td><td class="summaryTableOwnerCol">Emitter</td>
 </tr>
 <tr class="">
@@ -394,19 +394,10 @@ showHideInherited();
 <div class="MainContent">
 <a name="propertyDetail"></a>
 <div class="detailSectionHeader">Property detail</div>
-<a name="_activitiesPriority"></a>
-<table cellspacing="0" cellpadding="0" class="detailHeader">
-<tr>
-<td class="detailHeaderName">_activitiesPriority</td><td class="detailHeaderType">property</td>
-</tr>
-</table>
-<div class="detailBody">
-<code>protected var _activitiesPriority:Array</code>
-</div>
 <a name="counter"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
 <tr>
-<td class="detailHeaderName">counter</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+<td class="detailHeaderName">counter</td><td class="detailHeaderType">property</td>
 </tr>
 </table>
 <div class="detailBody">
@@ -419,6 +410,37 @@ showHideInherited();
 <br>
 <code>&nbsp;&nbsp;&nbsp;&nbsp;public function set counter(value:<a href="../counters/Counter.html">Counter</a>):void</code>
 <br>
+</div>
+<a name="fixedFrameTime"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">fixedFrameTime</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>fixedFrameTime:Number</code>&nbsp;&nbsp;[read-write]<p>
+   Indicates a fixed time (in seconds) to use for every frame. Setting 
+   this property causes the emitter to bypass its frame timing 
+   functionality and use the given time for every frame. This enables
+   the particle system to be frame based rather than time based.
+   
+   </p><p>To return to time based animation, set this value to zero (the 
+   default).</p>
+   
+   <p>This feature only works if useInternalTick is true (the default).</p>
+   
+   <span class="label">Implementation</span>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function get fixedFrameTime():Number</code>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function set fixedFrameTime(value:Number):void</code>
+<br>
+<p>
+<span class="label">See also</span>
+</p>
+<div class="seeAlso">
+<a href="../emitters/Emitter.html#useInternalTick" target="">useInternalTick</a>
+</div>
 </div>
 <a name="maximumFrameTime"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
@@ -494,7 +516,9 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>running:Boolean</code>&nbsp;&nbsp;[read-only]<span class="label">Implementation</span>
+<code>running:Boolean</code>&nbsp;&nbsp;[read-only]<p>
+   Indicates if the emitter is currently running.
+   </p><span class="label">Implementation</span>
 <br>
 <code>&nbsp;&nbsp;&nbsp;&nbsp;public function get running():Boolean</code>
 <br>
@@ -875,6 +899,15 @@ showHideInherited();
 </tr>
 </table>
 </div>
+<a name="killAllParticles()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">killAllParticles</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function killAllParticles():void</code>
+</div>
 <a name="pause()"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
 <tr>
@@ -1144,9 +1177,8 @@ showHideInherited();
 <hr>
 <br>
 <p></p>
-<center class="copyright"> 
-</center>
+<center class="copyright">&copy; Big Room Ventures Ltd. 2008</center>
 </div>
 </body>
 </html>
-<!-- -->
+<!--© Big Room Ventures Ltd. 2008-->
