@@ -4,7 +4,7 @@
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="../../../../style.css" type="text/css" media="screen">
 <link rel="stylesheet" href="../../../../print.css" type="text/css" media="print">
-<meta content="Collide,org.flintparticles.threeD.actions.Collide,bounce,radius,addedToEmitter,getDefaultPriority,update" name="keywords">
+<meta content="Collide,org.flintparticles.threeD.actions.Collide,bounce,addedToEmitter,getDefaultPriority,update" name="keywords">
 <title>org.flintparticles.threeD.actions.Collide</title>
 </head>
 <body>
@@ -66,11 +66,6 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
    The coefficient of restitution when the particles collide.</div>
 </td><td class="summaryTableOwnerCol">Collide</td>
 </tr>
-<tr class="">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#radius">radius</a> : Number<div class="summaryTableDescription">
-   The radius of a particle used when calculating the collisions.</div>
-</td><td class="summaryTableOwnerCol">Collide</td>
-</tr>
 </table>
 </div>
 <a name="methodSummary"></a>
@@ -91,7 +86,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
-<a class="signatureLink" href="#Collide()">Collide</a>(radius:Number, bounce:Number = 1)</div>
+<a class="signatureLink" href="#Collide()">Collide</a>(bounce:Number = 1)</div>
 <div class="summaryTableDescription">
    The constructor creates a Collide action for use by  an emitter.</div>
 </td><td class="summaryTableOwnerCol">Collide</td>
@@ -159,24 +154,6 @@ showHideInherited();
 <code>&nbsp;&nbsp;&nbsp;&nbsp;public function set bounce(value:Number):void</code>
 <br>
 </div>
-<a name="radius"></a>
-<table cellspacing="0" cellpadding="0" class="detailHeader">
-<tr>
-<td class="detailHeaderName">radius</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
-</tr>
-</table>
-<div class="detailBody">
-<code>radius:Number</code>&nbsp;&nbsp;[read-write]<p>
-   The radius of a particle used when calculating the collisions. this
-   radius is multiplied by the scale property of each particle to get the particle's
-   actual size and relative mass for calculating the collision and response.
-   </p><span class="label">Implementation</span>
-<br>
-<code>&nbsp;&nbsp;&nbsp;&nbsp;public function get radius():Number</code>
-<br>
-<code>&nbsp;&nbsp;&nbsp;&nbsp;public function set radius(value:Number):void</code>
-<br>
-</div>
 <a name="constructorDetail"></a>
 <div class="detailSectionHeader">Constructor detail</div>
 <a name="Collide()"></a>
@@ -186,22 +163,13 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>public function Collide(radius:Number, bounce:Number = 1)</code><p>
+<code>public function Collide(bounce:Number = 1)</code><p>
    The constructor creates a Collide action for use by  an emitter.
    To add a Collide to all particles created by an emitter, use the
    emitter's addAction method.
    
    </p><span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
-<tr>
-<td width="20px"></td><td><code><span class="label">radius</span>:Number</code> &mdash; The radius of a particle used when calculating the collisions. this
-   radius is multiplied by the scale property of each particle to get the particle's
-   actual size and relative mass for calculating the collision and response.
-   </td>
-</tr>
-<tr>
-<td class="paramSpacer">&nbsp;</td>
-</tr>
 <tr>
 <td width="20px"></td><td><code><span class="label">bounce</span>:Number</code> (default = <code>1</code>)<code></code> &mdash; The coefficient of restitution when the particles collide. A value of 
    1 gives a pure elastic collision, with no energy loss. A value

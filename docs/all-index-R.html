@@ -50,19 +50,20 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("RÂ
    The constructor creates a RadialDot with the  specified radius.</td>
 </tr>
 <tr>
-<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/actions/class-list.html');" href="org/flintparticles/threeD/actions/Collide.html#radius">radius</a> &mdash; Property in class org.flintparticles.threeD.actions.<a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/actions/class-list.html');" href="org/flintparticles/threeD/actions/Collide.html">Collide</a></td>
+<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('org/flintparticles/common/initializers/class-list.html');" href="org/flintparticles/common/initializers/CollisionRadiusInit.html#radius">radius</a> &mdash; Property in class org.flintparticles.common.initializers.<a onclick="javascript:loadClassListFrame('org/flintparticles/common/initializers/class-list.html');" href="org/flintparticles/common/initializers/CollisionRadiusInit.html">CollisionRadiusInit</a></td>
 </tr>
 <tr>
 <td width="20"></td><td>
-   The radius of a particle used when calculating the collisions.</td>
+   The collision radius for particles
+   initialized by the instance.</td>
 </tr>
 <tr>
-<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('org/flintparticles/twoD/actions/class-list.html');" href="org/flintparticles/twoD/actions/Collide.html#radius">radius</a> &mdash; Property in class org.flintparticles.twoD.actions.<a onclick="javascript:loadClassListFrame('org/flintparticles/twoD/actions/class-list.html');" href="org/flintparticles/twoD/actions/Collide.html">Collide</a></td>
+<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('org/flintparticles/common/particles/class-list.html');" href="org/flintparticles/common/particles/Particle.html#radius">radius</a> &mdash; Property in class org.flintparticles.common.particles.<a onclick="javascript:loadClassListFrame('org/flintparticles/common/particles/class-list.html');" href="org/flintparticles/common/particles/Particle.html">Particle</a></td>
 </tr>
 <tr>
 <td width="20"></td><td>
-   The radius used for the size of each particle used when calculating the 
-   collisions.</td>
+   The radius of the particle, for collision approximation
+   </td>
 </tr>
 <tr>
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/actions/class-list.html');" href="org/flintparticles/threeD/actions/RandomDrift.html">RandomDrift</a> &mdash; Class in package <a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/actions/class-list.html');" href="org/flintparticles/threeD/actions/package-detail.html">org.flintparticles.threeD.actions</a></td>
@@ -334,6 +335,12 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("RÂ
    This method does nothing.</td>
 </tr>
 <tr>
+<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('org/flintparticles/common/initializers/class-list.html');" href="org/flintparticles/common/initializers/InitializerGroup.html#removedFromEmitter()">removedFromEmitter</a>(emitter:<a href="org/flintparticles/common/emitters/Emitter.html" onclick="javascript:loadClassListFrame('org/flintparticles/common/emitters./class-list.html');">org.flintparticles.common.emitters:Emitter</a>) &mdash; Method in class org.flintparticles.common.initializers.<a onclick="javascript:loadClassListFrame('org/flintparticles/common/initializers/class-list.html');" href="org/flintparticles/common/initializers/InitializerGroup.html">InitializerGroup</a></td>
+</tr>
+<tr>
+<td width="20"></td><td></td>
+</tr>
+<tr>
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/actions/class-list.html');" href="org/flintparticles/threeD/actions/Explosion.html#removedFromEmitter()">removedFromEmitter</a>(emitter:<a href="org/flintparticles/common/emitters/Emitter.html" onclick="javascript:loadClassListFrame('org/flintparticles/common/emitters./class-list.html');">org.flintparticles.common.emitters:Emitter</a>) &mdash; Method in class org.flintparticles.threeD.actions.<a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/actions/class-list.html');" href="org/flintparticles/threeD/actions/Explosion.html">Explosion</a></td>
 </tr>
 <tr>
@@ -437,7 +444,31 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("RÂ
    of the emitters that is being rendered by this renderer.</td>
 </tr>
 <tr>
-<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('org/flintparticles/common/initializers/class-list.html');" href="org/flintparticles/common/initializers/ScalesInit.html#removeScale()">removeScale</a>(scale) &mdash; Method in class org.flintparticles.common.initializers.<a onclick="javascript:loadClassListFrame('org/flintparticles/common/initializers/class-list.html');" href="org/flintparticles/common/initializers/ScalesInit.html">ScalesInit</a></td>
+<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('org/flintparticles/common/initializers/class-list.html');" href="org/flintparticles/common/initializers/ChooseInitializer.html#removeScale()">removeScale</a>(initializer) &mdash; Method in class org.flintparticles.common.initializers.<a onclick="javascript:loadClassListFrame('org/flintparticles/common/initializers/class-list.html');" href="org/flintparticles/common/initializers/ChooseInitializer.html">ChooseInitializer</a></td>
+</tr>
+<tr>
+<td width="20"></td><td></td>
+</tr>
+<tr>
+<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('org/flintparticles/common/initializers/class-list.html');" href="org/flintparticles/common/initializers/InitializerGroup.html#removeScale()">removeScale</a>(initializer:<a href="org/flintparticles/common/initializers/Initializer.html" onclick="javascript:loadClassListFrame('org/flintparticles/common/initializers./class-list.html');">org.flintparticles.common.initializers:Initializer</a>) &mdash; Method in class org.flintparticles.common.initializers.<a onclick="javascript:loadClassListFrame('org/flintparticles/common/initializers/class-list.html');" href="org/flintparticles/common/initializers/InitializerGroup.html">InitializerGroup</a></td>
+</tr>
+<tr>
+<td width="20"></td><td></td>
+</tr>
+<tr>
+<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('org/flintparticles/common/initializers/class-list.html');" href="org/flintparticles/common/initializers/ScaleImagesInit.html#removeScale()">removeScale</a>(scale) &mdash; Method in class org.flintparticles.common.initializers.<a onclick="javascript:loadClassListFrame('org/flintparticles/common/initializers/class-list.html');" href="org/flintparticles/common/initializers/ScaleImagesInit.html">ScaleImagesInit</a></td>
+</tr>
+<tr>
+<td width="20"></td><td></td>
+</tr>
+<tr>
+<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/initializers/class-list.html');" href="org/flintparticles/threeD/initializers/ScaleAllsInit.html#removeScale()">removeScale</a>(scale) &mdash; Method in class org.flintparticles.threeD.initializers.<a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/initializers/class-list.html');" href="org/flintparticles/threeD/initializers/ScaleAllsInit.html">ScaleAllsInit</a></td>
+</tr>
+<tr>
+<td width="20"></td><td></td>
+</tr>
+<tr>
+<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('org/flintparticles/twoD/initializers/class-list.html');" href="org/flintparticles/twoD/initializers/ScaleAllsInit.html#removeScale()">removeScale</a>(scale) &mdash; Method in class org.flintparticles.twoD.initializers.<a onclick="javascript:loadClassListFrame('org/flintparticles/twoD/initializers/class-list.html');" href="org/flintparticles/twoD/initializers/ScaleAllsInit.html">ScaleAllsInit</a></td>
 </tr>
 <tr>
 <td width="20"></td><td></td>
