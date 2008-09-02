@@ -37,18 +37,35 @@ import org.flintparticles.twoD.initializers.*;
 import org.flintparticles.twoD.renderers.*;
 import org.flintparticles.twoD.zones.*;	
 
+var txt:TextField = new TextField();
+txt.text = "Hold down the shift key to hide the air particles.";
+txt.autoSize = "left";
+txt.textColor = 0xFFFFFF;
+addChild( txt );
+
 var emitter:Emitter2D = new Emitter2D();
+emitter.counter = new Blast( 250 );
 
-emitter.counter = new Blast( 100 );
+var air:InitializerGroup = new InitializerGroup();
+air.addInitializer( new ImageClass( Dot, 2 ) );
+air.addInitializer( new ColorInit( 0xFF666666, 0xFF666666 ) );
+air.addInitializer( new MassInit( 1 ) );
+air.addInitializer( new CollisionRadiusInit( 2 ) );
 
-emitter.addInitializer( new ImageClass( Dot, 10 ) );
+var smoke:InitializerGroup = new InitializerGroup();
+smoke.addInitializer( new ImageClass( Dot, 10 ) );
+smoke.addInitializer( new ColorInit( 0xFFFFFFFF, 0xFFFFFFFF ) );
+smoke.addInitializer( new MassInit( 10 ) );
+smoke.addInitializer( new CollisionRadiusInit( 10 ) );
+
 emitter.addInitializer( new Position( new RectangleZone( 0, 0, 500, 500 ) ) );
 emitter.addInitializer( new Velocity( new DiscZone( new Point( 0, 0 ), 150, 100 ) ) );
-emitter.addInitializer( new ScalesInit( [0.2, 1],[9, 1] ) );
+emitter.addInitializer( new ChooseInitializer( [ air, smoke ], [ 19, 1 ] ) );
 
 emitter.addAction( new Move() );
-emitter.addAction( new Collide( 10, 1 ) );
+emitter.addAction( new Collide( 1 ) );
 emitter.addAction( new BoundingBox( 0, 0, 500, 500, 1 ) );
+emitter.addAction( new ShowAirAction( stage ) );
 
 var renderer:DisplayObjectRenderer = new DisplayObjectRenderer();
 renderer.addEmitter( emitter );

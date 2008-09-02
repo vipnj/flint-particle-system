@@ -196,45 +196,34 @@ package org.flintparticles.threeD.actions
 		override public function update( emitter : Emitter, particle : Particle, time : Number ) : void
 		{
 			var p:Particle3D = Particle3D( particle );
-			var halfWidth:Number;
-			var halfHeight:Number;
-			var halfDepth:Number = 0;
-			if( p.image )
-			{
-				halfWidth = p.scale * p.image.width * 0.5;
-				halfHeight = p.scale * p.image.height * 0.5;
-			}
-			else
-			{
-				halfWidth = halfHeight = 0;
-			}
+			var radius:Number = p.radius;
 			var position:Number;
-			if ( p.velocity.x > 0 && ( position = p.position.x + halfWidth ) >= _maxX )
+			if ( p.velocity.x > 0 && ( position = p.position.x + radius ) >= _maxX )
 			{
 				p.velocity.x = -p.velocity.x * _bounce;
 				p.position.x += 2 * ( _maxX - position );
 			}
-			else if ( p.velocity.x < 0 && ( position = p.position.x - halfWidth ) <= _minX )
+			else if ( p.velocity.x < 0 && ( position = p.position.x - radius ) <= _minX )
 			{
 				p.velocity.x = -p.velocity.x * _bounce;
 				p.position.x += 2 * ( _minX - position );
 			}
-			if ( p.velocity.y > 0 && ( position = p.position.y + halfHeight ) >= _maxY )
+			if ( p.velocity.y > 0 && ( position = p.position.y + radius ) >= _maxY )
 			{
 				p.velocity.y = -p.velocity.y * _bounce;
 				p.position.y += 2 * ( _maxY - position );
 			}
-			else if ( p.velocity.y < 0 && ( position = p.position.y - halfHeight ) <= _minY )
+			else if ( p.velocity.y < 0 && ( position = p.position.y - radius ) <= _minY )
 			{
 				p.velocity.y = -p.velocity.y * _bounce;
 				p.position.y += 2 * ( _minY - position );
 			}
-			if ( p.velocity.z > 0 && ( position = p.position.z + halfDepth ) >= _maxZ )
+			if ( p.velocity.z > 0 && ( position = p.position.z + radius ) >= _maxZ )
 			{
 				p.velocity.z = -p.velocity.z * _bounce;
 				p.position.z += 2 * ( _maxZ - position );
 			}
-			else if ( p.velocity.z < 0 && ( position = p.position.z - halfDepth ) <= _minZ )
+			else if ( p.velocity.z < 0 && ( position = p.position.z - radius ) <= _minZ )
 			{
 				p.velocity.z = -p.velocity.z * _bounce;
 				p.position.z += 2 * ( _minZ - position );

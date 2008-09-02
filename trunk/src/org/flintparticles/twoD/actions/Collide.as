@@ -51,7 +51,6 @@ package org.flintparticles.twoD.actions
 
 	public class Collide extends ActionBase
 	{
-		private var _radius:Number;
 		private var _bounce:Number;
 		
 		/**
@@ -61,35 +60,15 @@ package org.flintparticles.twoD.actions
 		 * 
 		 * @see org.flintparticles.common.emitters.Emitter#addAction()
 		 * 
-		 * @param radius The radius used for the size of each particle when 
-		 * calculating the collisions. This radius is multiplied by the scale 
-		 * property of each particle to get the particle's actual size and 
-		 * relative mass for calculating the collision and response.
 		 * @param bounce The coefficient of restitution when the particles collide. 
 		 * A value of 1 gives a pure elastic collision, with no energy loss. A 
 		 * value between 0 and 1 causes the particles to loose enegy in the 
 		 * collision. A value greater than 1 causes the particle to gain energy 
 		 * in the collision.
 		 */
-		public function Collide( radius:Number, bounce:Number= 1 )
+		public function Collide( bounce:Number= 1 )
 		{
-			_radius = radius;
 			_bounce = bounce;
-		}
-		
-		/**
-		 * The radius used for the size of each particle used when calculating the 
-		 * collisions. This radius is multiplied by the scale property of each 
-		 * particle to get the particle's actual size and relative mass for 
-		 * calculating the collision and response.
-		 */
-		public function get radius():Number
-		{
-			return _radius;
-		}
-		public function set radius( value:Number ):void
-		{
-			_radius = value;
 		}
 		
 		/**
@@ -161,7 +140,7 @@ package org.flintparticles.twoD.actions
 			for( i = p.sortID + 1; i < len; ++i )
 			{
 				other = particles[sortedX[i]];
-				collisionDist = other.scale * _radius + p.scale * _radius;
+				collisionDist = other.radius + p.radius;
 				if( ( dx = other.x - p.x ) > collisionDist ) continue;
 				dy = other.y - p.y;
 				if( dy > collisionDist || dy < -collisionDist ) continue;
@@ -176,8 +155,8 @@ package org.flintparticles.twoD.actions
 					relN = n1 - n2;
 					if( relN > 0 ) // colliding, not separating
 					{
-						m1 = p.scale * p.scale;
-						m2 = other.scale * other.scale;
+						m1 = p.mass;
+						m2 = other.mass;
 						factor = ( ( 1 + _bounce ) * relN ) / ( m1 + m2 );
 						f1 = factor * m2;
 						f2 = -factor * m1;

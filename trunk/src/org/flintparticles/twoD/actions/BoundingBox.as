@@ -30,8 +30,6 @@
 
 package org.flintparticles.twoD.actions 
 {
-	import flash.display.DisplayObject;
-	
 	import org.flintparticles.common.actions.ActionBase;
 	import org.flintparticles.common.emitters.Emitter;
 	import org.flintparticles.common.particles.Particle;
@@ -168,35 +166,24 @@ package org.flintparticles.twoD.actions
 		override public function update( emitter : Emitter, particle : Particle, time : Number ) : void
 		{
 			var p:Particle2D = Particle2D( particle );
-			var halfWidth:Number;
-			var halfHeight:Number;
-			if( particle.image && particle.image is DisplayObject )
-			{
-				var img:DisplayObject = particle.image;
-				halfWidth = particle.scale * img.width * 0.5;
-				halfHeight = particle.scale * img.height * 0.5;
-			}
-			else
-			{
-				halfWidth = halfHeight = 0;
-			}
+			var radius:Number = particle.radius;
 			var position:Number;
-			if ( p.velX > 0 && ( position = p.x + halfWidth ) >= _right )
+			if ( p.velX > 0 && ( position = p.x + radius ) >= _right )
 			{
 				p.velX = -p.velX * _bounce;
 				p.x += 2 * ( _right - position );
 			}
-			else if ( p.velX < 0 && ( position = p.x - halfWidth ) <= _left )
+			else if ( p.velX < 0 && ( position = p.x - radius ) <= _left )
 			{
 				p.velX = -p.velX * _bounce;
 				p.x += 2 * ( _left - position );
 			}
-			if ( p.velY > 0 && ( position = p.y + halfHeight ) >= _bottom )
+			if ( p.velY > 0 && ( position = p.y + radius ) >= _bottom )
 			{
 				p.velY = -p.velY * _bounce;
 				p.y += 2 * ( _bottom - position );
 			}
-			else if ( p.velY < 0 && ( position = p.y - halfHeight ) <= _top )
+			else if ( p.velY < 0 && ( position = p.y - radius ) <= _top )
 			{
 				p.velY = -p.velY * _bounce;
 				p.y += 2 * ( _top - position );

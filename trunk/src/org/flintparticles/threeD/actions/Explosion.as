@@ -219,14 +219,14 @@ package org.flintparticles.threeD.actions
 			var factor:Number;
 			if( d < _oldRadius || d > _radius )
 			{
-				factor = time * power * ( offset + oldOffset ) / ( _radius * 2 * d );
+				factor = time * power * ( offset + oldOffset ) / ( _radius * 2 * d * p.mass );
 			}
 			else
 			{
 				var ratio:Number = ( 1 - oldOffset ) / _radiusChange;
-				var f1:Number = ratio * time * power * ( oldOffset + 1 ) / ( _radius * 2 * d );
-				var f2:Number = ( 1 - ratio ) * time * power * ( offset + 1 ) / ( _radius * 2 * d );
-				factor = f1 + f2;
+				var f1:Number = ratio * time * power * ( oldOffset + 1 );
+				var f2:Number = ( 1 - ratio ) * time * power * ( offset + 1 );
+				factor = ( f1 + f2 ) / ( _radius * 2 * d * p.mass );
 			}
 			p.velocity.incrementBy( dist.scaleBy( factor ) );
 		}

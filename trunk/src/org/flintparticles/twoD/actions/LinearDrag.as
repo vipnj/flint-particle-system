@@ -91,7 +91,7 @@ package org.flintparticles.twoD.actions
 		override public function update( emitter:Emitter, particle:Particle, time:Number ):void
 		{
 			var p:Particle2D = Particle2D( particle );
-			var scale:Number = 1 - _drag * time;
+			var scale:Number = 1 - _drag * time / p.mass;
 			if( scale < 0 )
 			{
 				p.velX = 0;

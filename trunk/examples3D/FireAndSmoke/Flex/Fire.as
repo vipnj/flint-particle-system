@@ -55,7 +55,7 @@ package
 			addAction( new LinearDrag( 1 ) );
 			addAction( new Accelerate( new Vector3D( 0, 40, 0 ) ) );
 			addAction( new ColorChange( 0xFFFFCC00, 0x00CC0000 ) );
-			addAction( new Scale( 1, 1.5 ) );
+			addAction( new ScaleImage( 1, 1.5 ) );
 		}
 	}
 }

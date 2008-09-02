@@ -52,7 +52,7 @@ emitter.addAction( new Move() );
 emitter.addAction( new LinearDrag( 1 ) );
 emitter.addAction( new Accelerate( 0, -40 ) );
 emitter.addAction( new ColorChange( 0xFFFF9900, 0x00CC0000 ) );
-emitter.addAction( new Scale( 1, 1.5 ) );
+emitter.addAction( new ScaleImage( 1, 1.5 ) );
 
 var renderer:BitmapRenderer = new BitmapRenderer( new Rectangle( 0, 0, 500, 200 ) );
 renderer.addEmitter( emitter );

@@ -59,7 +59,25 @@ package org.flintparticles.threeD.particles
 		 * the axis of rotation and whose magnitude indicates the number of rotations per second.
 		 */
 		public var angVelocity:Vector3D;
-	
+
+		private var _previousMass:Number;
+		private var _previousRadius:Number;
+		private var _inertia:Number;
+		
+		/**
+		 * The moment of inertia of the particle about its center point
+		 */
+		public function get inertia():Number
+		{
+			if( mass != _previousMass || radius != _previousRadius )
+			{
+				_inertia = mass * radius * radius * 0.4;
+				_previousMass = mass;
+				_previousRadius = radius;
+			}
+			return _inertia;
+		}
+
 		/**
 		 * The position of the particle in the emitter's x-axis spacial sorted array
 		 */

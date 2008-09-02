@@ -34,7 +34,7 @@ package org.flintparticles.common.actions
 	import org.flintparticles.common.particles.Particle;			
 
 	/**
-	 * The Scale action adjusts the size of the particle as it ages.
+	 * The ScaleImage action adjusts the size of the particles imnage as it ages.
 	 * It uses the particle's energy level to decide what size the particle
 	 * should be.
 	 * 
@@ -43,18 +43,23 @@ package org.flintparticles.common.actions
 	 * 
 	 * <p>This action should be used in conjunction with the Age action.</p>
 	 * 
+	 * <p>If you also want to adjust the mass and collision radius of the particle, use
+	 * the ScaleAll action.</p>
+	 * 
+	 * @see org.flintparticles.twoD.actions.ScaleAll
+	 * @see org.flintparticles.threeD.actions.ScaleAll
 	 * @see org.flintparticles.common.actions.Action
 	 * @see org.flintparticles.common.actions.Age
 	 */
 
-	public class Scale extends ActionBase
+	public class ScaleImage extends ActionBase
 	{
 		private var _diffScale:Number;
 		private var _endScale:Number;
 		
 		/**
-		 * The constructor creates a Scale action for use by an emitter. 
-		 * To add a Scale to all particles created by an emitter, use the
+		 * The constructor creates a ScaleImage action for use by an emitter. 
+		 * To add a ScaleImage to all particles created by an emitter, use the
 		 * emitter's addAction method.
 		 * 
 		 * @see org.flintparticles.common.emitters.Emitter#addAction()
@@ -64,7 +69,7 @@ package org.flintparticles.common.actions
 		 * @param endScale The scale factor for the particle when its energy
 		 * is 0 - usually at the end of its lifetime. A scale of 1 is normal size.
 		 */
-		public function Scale( startScale:Number = 1, endScale:Number = 1 )
+		public function ScaleImage( startScale:Number = 1, endScale:Number = 1 )
 		{
 			_diffScale = startScale - endScale;
 			_endScale = endScale;

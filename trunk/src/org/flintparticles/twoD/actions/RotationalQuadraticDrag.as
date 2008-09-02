@@ -96,7 +96,7 @@ package org.flintparticles.twoD.actions
 			{
 				return;
 			}
-			var scale:Number = 1 - _drag * time * p.angVelocity;
+			var scale:Number = 1 - _drag * time * p.angVelocity / p.inertia;
 			if( scale < 0 )
 			{
 				p.angVelocity = 0;

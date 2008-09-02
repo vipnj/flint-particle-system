@@ -28,23 +28,30 @@
  * THE SOFTWARE.
  */
 
-package org.flintparticles.common.initializers 
+package org.flintparticles.twoD.initializers 
 {
 	import org.flintparticles.common.emitters.Emitter;
+	import org.flintparticles.common.initializers.InitializerBase;
 	import org.flintparticles.common.particles.Particle;	
 
 	/**
-	 * The ScaleInit Initializer sets the size of the particle.
+	 * The ScaleAllInit Initializer sets the size of the particles image
+	 * and adjusts its mass and collision radius accordingly.
+	 * 
+	 * <p>If you want to adjust only the image size use
+	 * the ScaleImageInit initializer.</p>
+	 * 
+	 * @see org.flintparticles.common.initializers.ScaleImageInit
 	 */
 
-	public class ScaleInit extends InitializerBase
+	public class ScaleAllInit extends InitializerBase
 	{
 		private var _min:Number;
 		private var _max:Number;
 		
 		/**
-		 * The constructor creates a ScaleInit initializer for use by 
-		 * an emitter. To add a ScaleInit to all particles created by an emitter, use the
+		 * The constructor creates a ScaleAllInit initializer for use by 
+		 * an emitter. To add a ScaleAllInit to all particles created by an emitter, use the
 		 * emitter's addInitializer method.
 		 * 
 		 * <p>The scale factor of particles initialized by this class
@@ -54,12 +61,12 @@ package org.flintparticles.common.initializers
 		 * 
 		 * @param minScale the minimum scale factor for particles
 		 * initialized by the instance.
-		 * @param maxScale the maximum lifetime for particles
+		 * @param maxScale the maximum scale factor for particles
 		 * initialized by the instance.
 		 * 
 		 * @see org.flintparticles.common.emitters.Emitter#addInitializer().
 		 */
-		public function ScaleInit( minScale:Number, maxScale:Number = NaN )
+		public function ScaleAllInit( minScale:Number, maxScale:Number = NaN )
 		{
 			_min = minScale;
 			if( isNaN( maxScale ) )
@@ -114,17 +121,32 @@ package org.flintparticles.common.initializers
 		
 		/**
 		 * @inheritDoc
+		 * 
+		 * returns -10 to ensure it occurs after the mass and radius assignment classes 
+		 * classes like CollisionRadiusInit and MassInit.
+		 */
+		override public function getDefaultPriority():Number
+		{
+			return -10;
+		}
+		
+		/**
+		 * @inheritDoc
 		 */
 		override public function initialize( emitter:Emitter, particle:Particle ):void
 		{
+			var scale:Number;
 			if( _max == _min )
 			{
-				particle.scale = _min;
+				scale = _min;
 			}
 			else
 			{
-				particle.scale = _min + Math.random() * ( _max - _min );
+				scale = _min + Math.random() * ( _max - _min );
 			}
+			particle.scale = scale;
+			particle.mass *= scale * scale;
+			particle.radius *= scale;
 		}
 	}
 }

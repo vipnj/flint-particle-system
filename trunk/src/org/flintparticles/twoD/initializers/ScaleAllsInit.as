@@ -28,35 +28,42 @@
  * THE SOFTWARE.
  */
 
-package org.flintparticles.common.initializers 
+package org.flintparticles.twoD.initializers 
 {
 	import org.flintparticles.common.emitters.Emitter;
+	import org.flintparticles.common.initializers.InitializerBase;
 	import org.flintparticles.common.particles.Particle;
 	import org.flintparticles.common.utils.RatioArray;	
 
 	/**
-	 * The ColorsInit initializer sets the color of the particle. It selects 
-	 * one of multiple colors, using optional weighting values to produce an uneven
-	 * distribution for the colors.
+	 * The ScaleAllsInit initializer sets the scale of the particles image
+	 * and adjusts its mass and collision radius accordingly. It selects 
+	 * one of multiple scales, using optional weighting values to produce an uneven
+	 * distribution for the scales.
+	 * 
+	 * <p>If you want to adjust only the image size use
+	 * the ScaleImageInit initializer.</p>
+	 * 
+	 * @see org.flintparticles.common.initializers.ScaleImagesInit
 	 */
 
-	public class ScalesInit extends InitializerBase
+	public class ScaleAllsInit extends InitializerBase
 	{
 		private var _scales:RatioArray;
 		
 		/**
-		 * The constructor creates a ColorsInit initializer for use by 
-		 * an emitter. To add a ColorsInit to all particles created by 
+		 * The constructor creates a ScaleAllsInit initializer for use by 
+		 * an emitter. To add a ScaleAllsInit to all particles created by 
 		 * an emitter, use the emitter's addInitializer method.
 		 * 
-		 * @param colors An array containing the Colors to use for 
-		 * each particle created by the emitter, as 32bit ARGB values.
-		 * @param weights The weighting to apply to each color. If no weighting
-		 * values are passed, the colors are all assigned a weighting of 1.
+		 * @param colors An array containing the scales to use for 
+		 * each particle created by the emitter.
+		 * @param weights The weighting to apply to each scale. If no weighting
+		 * values are passed, the scales are all assigned a weighting of 1.
 		 * 
 		 * @see org.flintparticles.common.emitters.Emitter#addInitializer()
 		 */
-		public function ScalesInit( scales:Array, weights:Array = null )
+		public function ScaleAllsInit( scales:Array, weights:Array = null )
 		{
 			_scales = new RatioArray;
 			var len:int = scales.length;
@@ -86,13 +93,27 @@ package org.flintparticles.common.initializers
 		{
 			_scales.remove( scale );
 		}
-		
+
+		/**
+		 * @inheritDoc
+		 * 
+		 * returns -10 to ensure it occurs after the mass and radius assignment classes 
+		 * classes like CollisionRadiusInit and MassInit.
+		 */
+		override public function getDefaultPriority():Number
+		{
+			return -10;
+		}
+
 		/**
 		 * @inheritDoc
 		 */
 		override public function initialize( emitter:Emitter, particle:Particle ):void
 		{
-			particle.scale = _scales.getRandomValue();
+			var scale:Number = _scales.getRandomValue();
+			particle.scale = scale;
+			particle.mass *= scale * scale;
+			particle.radius *= scale;
 		}
 	}
 }

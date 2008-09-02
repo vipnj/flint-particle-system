@@ -48,7 +48,7 @@ package
 			addInitializer( new ImageClass( Dot, 2 ) );
 			addInitializer( new Position( new LineZone( new Point( -5, -5 ), new Point( 505, -5 ) ) ) );
 			addInitializer( new Velocity( new PointZone( new Point( 0, 50 ) ) ) );
-			addInitializer( new ScaleInit( 0.75, 1.5 ) );
+			addInitializer( new ScaleImageInit( 0.75, 1.5 ) );
 			
 			addAction( new Move() );
 			addAction( new DeathZone( new RectangleZone( -10, -10, 510, 410 ), true ) );

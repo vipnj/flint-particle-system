@@ -73,6 +73,24 @@ package org.flintparticles.twoD.particles
 		 */
 		public var angVelocity:Number = 0;
 
+		private var _previousMass:Number;
+		private var _previousRadius:Number;
+		private var _inertia:Number;
+		
+		/**
+		 * The moment of inertia of the particle about its center point
+		 */
+		public function get inertia():Number
+		{
+			if( mass != _previousMass || radius != _previousRadius )
+			{
+				_inertia = mass * radius * radius * 0.5;
+				_previousMass = mass;
+				_previousRadius = radius;
+			}
+			return _inertia;
+		}
+
 		/**
 		 * The position in the emitter's horizontal spacial sorted array
 		 */

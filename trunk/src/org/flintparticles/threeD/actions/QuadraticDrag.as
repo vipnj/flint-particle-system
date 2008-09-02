@@ -82,7 +82,7 @@ package org.flintparticles.threeD.actions
 			{
 				return;
 			}
-			var scale:Number = 1 - _drag * time * Math.sqrt( len2 );
+			var scale:Number = 1 - _drag * time * Math.sqrt( len2 ) / p.mass;
 			if( scale < 0 )
 			{
 				p.velocity.assign( Vector3D.ZERO );
