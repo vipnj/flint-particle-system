@@ -162,6 +162,10 @@ package org.flintparticles.twoD.actions
 		 */
 		override public function update( emitter : Emitter, particle : Particle, time : Number ) : void
 		{
+			if( particle.mass == 0 )
+			{
+				return;
+			}
 			var p:Particle2D = Particle2D( particle );
 			var e:Emitter2D = Emitter2D( emitter );
 			var particles:Array = e.particles;
@@ -177,6 +181,10 @@ package org.flintparticles.twoD.actions
 			for( i = p.sortID + 1; i < len; ++i )
 			{
 				other = particles[sortedX[i]];
+				if( other.mass == 0 )
+				{
+					continue;
+				}
 				if( ( dx = other.x - p.x ) > _maxDistance ) break;
 				dy = other.y - p.y;
 				if( dy > _maxDistance || dy < -_maxDistance ) continue;
@@ -189,10 +197,10 @@ package org.flintparticles.twoD.actions
 						distanceSq = _epsilonSq;
 					}
 					factor = ( _power * time ) / ( distanceSq * distance );
-					p.velX += ( dx *= factor );
-					p.velY += ( dy *= factor );
-					other.velX -= dx;
-					other.velY -= dy;
+					p.velX += ( dx *= factor ) * other.mass;
+					p.velY += ( dy *= factor ) * other.mass;
+					other.velX -= dx * p.mass;
+					other.velY -= dy * p.mass;
 				} 
 			}
 		}

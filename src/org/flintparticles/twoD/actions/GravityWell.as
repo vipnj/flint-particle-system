@@ -163,6 +163,10 @@ package org.flintparticles.twoD.actions
 		 */
 		override public function update( emitter:Emitter, particle:Particle, time:Number ):void
 		{
+			if( particle.mass == 0 )
+			{
+				return;
+			}
 			lp = Particle2D( particle );
 			lx = _x - lp.x;
 			ly = _y - lp.y;

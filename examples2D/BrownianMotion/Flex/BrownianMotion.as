@@ -29,6 +29,7 @@
 
 package
 {
+	import flash.display.DisplayObject;
 	import flash.geom.Point;
 	
 	import org.flintparticles.common.counters.*;
@@ -41,18 +42,30 @@ package
 
 	public class BrownianMotion extends Emitter2D
 	{
-		public function BrownianMotion()
+		public function BrownianMotion( stage:DisplayObject )
 		{
-			counter = new Blast( 100 );
+			counter = new Blast( 250 );
 			
-			addInitializer( new ImageClass( Dot, 10 ) );
+			var air:InitializerGroup = new InitializerGroup();
+			air.addInitializer( new ImageClass( Dot, 2 ) );
+			air.addInitializer( new ColorInit( 0xFF666666, 0xFF666666 ) );
+			air.addInitializer( new MassInit( 1 ) );
+			air.addInitializer( new CollisionRadiusInit( 2 ) );
+			
+			var smoke:InitializerGroup = new InitializerGroup();
+			smoke.addInitializer( new ImageClass( Dot, 10 ) );
+			smoke.addInitializer( new ColorInit( 0xFFFFFFFF, 0xFFFFFFFF ) );
+			smoke.addInitializer( new MassInit( 10 ) );
+			smoke.addInitializer( new CollisionRadiusInit( 10 ) );
+			
 			addInitializer( new Position( new RectangleZone( 0, 0, 500, 500 ) ) );
 			addInitializer( new Velocity( new DiscZone( new Point( 0, 0 ), 150, 100 ) ) );
-			addInitializer( new ScalesInit( [0.2, 1],[9, 1] ) );
+			addInitializer( new ChooseInitializer( [ air, smoke ], [ 19, 1 ] ) );
 			
 			addAction( new Move() );
-			addAction( new Collide( 10, 1 ) );
+			addAction( new Collide( 1 ) );
 			addAction( new BoundingBox( 0, 0, 500, 500, 1 ) );
+			addAction( new ShowAirAction( stage ) );
 		}
 	}
 }

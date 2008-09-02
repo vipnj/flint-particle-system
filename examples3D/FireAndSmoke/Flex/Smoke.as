@@ -52,7 +52,7 @@ package
 			addAction( new Age( ) );
 			addAction( new Move( ) );
 			addAction( new LinearDrag( 0.01 ) );
-			addAction( new Scale( 1, 15 ) );
+			addAction( new ScaleImage( 1, 15 ) );
 			addAction( new Fade( 0.15, 0 ) );
 			addAction( new RandomDrift( 15, 15, 15 ) );
 		}

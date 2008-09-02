@@ -77,7 +77,7 @@ package org.flintparticles.threeD.actions
 		override public function update( emitter:Emitter, particle:Particle, time:Number ):void
 		{
 			var p:Particle3D = Particle3D( particle );
-			var scale:Number = 1 - _drag * time;
+			var scale:Number = 1 - _drag * time / p.mass;
 			if( scale < 0 )
 			{
 				p.velocity.assign( Vector3D.ZERO );

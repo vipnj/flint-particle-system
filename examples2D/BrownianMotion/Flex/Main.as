@@ -42,7 +42,13 @@ package
 		
 		public function Main()
 		{
-			emitter = new BrownianMotion();
+			var txt:TextField = new TextField();
+			txt.text = "Hold down the shift key to hide the air particles.";
+			txt.autoSize = "left";
+			txt.textColor = 0xFFFFFF;
+			addChild( txt );
+
+			emitter = new BrownianMotion( stage );
 
 			var renderer:DisplayObjectRenderer = new DisplayObjectRenderer();
 			renderer.addEmitter( emitter );

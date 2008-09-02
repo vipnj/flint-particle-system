@@ -84,7 +84,7 @@ package org.flintparticles.threeD.actions
 			{
 				return;
 			}
-			var scale:Number = 1 - _friction * time / p.angVelocity.length;
+			var scale:Number = 1 - ( _friction * time ) / ( p.angVelocity.length * p.inertia );
 			if( scale < 0 )
 			{
 				p.angVelocity.reset( 0, 0, 0, 0 );

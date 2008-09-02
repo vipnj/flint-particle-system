@@ -82,7 +82,7 @@ package org.flintparticles.threeD.actions
 			{
 				return;
 			}
-			var scale:Number = 1 - _drag * time;
+			var scale:Number = 1 - _drag * time / p.inertia;
 			if( scale < 0 )
 			{
 				p.angVelocity.reset( 0, 0, 0, 0 );

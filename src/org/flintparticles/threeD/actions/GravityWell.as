@@ -117,6 +117,10 @@ package org.flintparticles.threeD.actions
 		 */
 		override public function update( emitter:Emitter, particle:Particle, time:Number ):void
 		{
+			if( particle.mass == 0 )
+			{
+				return;
+			}
 			var p:Particle3D = Particle3D( particle );
 			var offset:Vector3D = _position.subtract( p.position );
 			var dSq:Number = offset.lengthSquared;

@@ -61,7 +61,7 @@ package
 			addAction( new LinearDrag( 1 ) );
 			addAction( new Accelerate( 0, -40 ) );
 			addAction( new ColorChange( 0xFFFF9900, 0x00CC0000 ) );
-			addAction( new Scale( 1, 1.5 ) );
+			addAction( new ScaleImage( 1, 1.5 ) );
 		}
 	}
 }

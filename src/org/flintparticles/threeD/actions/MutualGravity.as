@@ -140,6 +140,10 @@ package org.flintparticles.threeD.actions
 		 */
 		override public function update( emitter : Emitter, particle : Particle, time : Number ) : void
 		{
+			if( particle.mass == 0 )
+			{
+				return;
+			}
 			var p:Particle3D = Particle3D( particle );
 			var e:Emitter3D = Emitter3D( emitter );
 			var particles:Array = e.particles;
@@ -153,6 +157,10 @@ package org.flintparticles.threeD.actions
 			for( i = p.sortID + 1; i < len; ++i )
 			{
 				other = particles[sortedX[i]];
+				if( other.mass == 0 )
+				{
+					continue;
+				}
 				if( ( d.x = other.position.x - p.position.x ) > _maxDistance ) break;
 				d.y = other.position.y - p.position.y;
 				if( d.y > _maxDistance || d.y < -_maxDistance ) continue;
@@ -167,8 +175,8 @@ package org.flintparticles.threeD.actions
 						distanceSq = _epsilonSq;
 					}
 					factor = ( _power * time ) / ( distanceSq * distance );
-					p.velocity.incrementBy( d.scaleBy( factor ) );
-					other.velocity.decrementBy( d );
+					p.velocity.incrementBy( d.scaleBy( factor * other.mass ) );
+					other.velocity.decrementBy( d.scaleBy( p.mass / other.mass ) );
 				} 
 			}
 		}

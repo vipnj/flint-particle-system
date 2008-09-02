@@ -55,7 +55,7 @@ smoke.addInitializer( new SharedImage( new RadialDot( 6 ) ) );
 smoke.addAction( new Age( ) );
 smoke.addAction( new Move( ) );
 smoke.addAction( new LinearDrag( 0.01 ) );
-smoke.addAction( new Scale( 1, 15 ) );
+smoke.addAction( new ScaleImage( 1, 15 ) );
 smoke.addAction( new Fade( 0.15, 0 ) );
 smoke.addAction( new RandomDrift( 15, 15, 15 ) );
 
@@ -74,7 +74,7 @@ fire.addAction( new Move( ) );
 fire.addAction( new LinearDrag( 1 ) );
 fire.addAction( new Accelerate( new Vector3D( 0, 40, 0 ) ) );
 fire.addAction( new ColorChange( 0xFFFFCC00, 0x00CC0000 ) );
-fire.addAction( new Scale( 1, 1.5 ) );
+fire.addAction( new ScaleImage( 1, 1.5 ) );
 
 fire.start( );
 

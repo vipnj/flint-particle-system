@@ -43,7 +43,7 @@ emitter.counter = new Steady( 50 );
 emitter.addInitializer( new ImageClass( Dot, 2 ) );
 emitter.addInitializer( new Position( new LineZone( new Point( -5, -5 ), new Point( 505, -5 ) ) ) );
 emitter.addInitializer( new Velocity( new PointZone( new Point( 0, 50 ) ) ) );
-emitter.addInitializer( new ScaleInit( 0.75, 1.5 ) );
+emitter.addInitializer( new ScaleImageInit( 0.75, 1.5 ) );
 
 emitter.addAction( new Move() );
 emitter.addAction( new DeathZone( new RectangleZone( -10, -10, 510, 410 ), true ) );

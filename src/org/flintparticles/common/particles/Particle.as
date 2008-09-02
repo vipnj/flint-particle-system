@@ -53,11 +53,22 @@ package org.flintparticles.common.particles
 		
 		private var _colorTransform:ColorTransform;
 		private var _previousColor:uint;
+		
 		/**
 		 * The scale of the particle ( 1 is normal size ).
 		 */
 		public var scale:Number = 1;
 		
+		/**
+		 * The mass of the particle ( 1 is the default ).
+		 */
+		public var mass:Number = 1;
+		
+		/**
+		 * The radius of the particle, for collision approximation
+		 */
+		public var radius:Number = 1;
+
 		/**
 		 * The object used to display the image. In a 2D particle, this is usually
 		 * a DisplayObject. In a 3D particle, this may be a DisplayObject, for 
@@ -117,6 +128,8 @@ package org.flintparticles.common.particles
 		{
 			color = 0xFFFFFFFF;
 			scale = 1;
+			mass = 1;
+			radius = 1;
 			lifetime = 0;
 			age = 0;
 			energy = 1;
