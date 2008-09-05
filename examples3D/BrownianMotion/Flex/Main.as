@@ -30,6 +30,7 @@
 package
 {
 	import flash.display.Sprite;
+	import flash.text.TextField;
 	
 	import org.flintparticles.threeD.emitters.Emitter3D;
 	import org.flintparticles.threeD.geom.Vector3D;
@@ -40,17 +41,17 @@ package
 	
 	public class Main extends Sprite
 	{
-		var txt:TextField = new TextField();
-		txt.text = "Hold down the shift key to hide the air particles.";
-		txt.autoSize = "left";
-		txt.textColor = 0xFFFFFF;
-		addChild( txt );
-
 		private var emitter:Emitter3D;
 		private var orbitter:OrbitCamera;
 		
 		public function Main()
 		{
+			var txt:TextField = new TextField();
+			txt.text = "Hold down the shift key to hide the air particles.";
+			txt.autoSize = "left";
+			txt.textColor = 0xFFFFFF;
+			addChild( txt );
+
 			emitter = new BrownianMotion( stage );
 
 			var renderer:DisplayObjectRenderer = new DisplayObjectRenderer();
