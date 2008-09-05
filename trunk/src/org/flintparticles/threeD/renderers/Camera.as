@@ -156,10 +156,10 @@ package org.flintparticles.threeD.renderers
 		{
 			if( !_transform )
 			{
-				var realUp:Vector3D = _direction.cross( _track );
+				var realUp:Vector3D = _direction.crossProduct( _track );
 				_transform = Matrix3D.newRotateCoordinateSpace( null, realUp, _direction );
 			
-				_transform.appendTranslate( _position );
+				_transform.appendTranslation( _position.x, _position.y, _position.z );
 				_transform.invert();
 				var projectionTransform:Matrix3D = new Matrix3D( [
 					_projectionDistance, 0, 0, 0,
@@ -216,7 +216,7 @@ package org.flintparticles.threeD.renderers
 		 */
 		public function tilt( angle:Number ):void
 		{
-			var m:Matrix3D = Matrix3D.newRotateAboutAxis( _track, angle );
+			var m:Matrix3D = Matrix3D.newRotate( angle, _track );
 			m.transformVectorSelf( _direction );
 			_transform = null;
 			_target = null;
@@ -230,7 +230,7 @@ package org.flintparticles.threeD.renderers
 		 */
 		public function pan( angle:Number ):void
 		{
-			var m:Matrix3D = Matrix3D.newRotateAboutAxis( _up, angle );
+			var m:Matrix3D = Matrix3D.newRotate( angle, _up );
 			m.transformVectorSelf( _direction );
 			_pTrack = null;
 			_transform = null;
@@ -245,7 +245,7 @@ package org.flintparticles.threeD.renderers
 		 */
 		public function roll( angle:Number ):void
 		{
-			var m:Matrix3D = Matrix3D.newRotateAboutAxis( _front, angle );
+			var m:Matrix3D = Matrix3D.newRotate( angle, _front );
 			m.transformVectorSelf( _up );
 			_pTrack = null;
 			_transform = null;
@@ -263,7 +263,7 @@ package org.flintparticles.threeD.renderers
 			{
 				throw new Error( "Attempting to orbit camera when no target is set" );
 			}
-			var m:Matrix3D = Matrix3D.newRotateAboutAxis( up, -angle );
+			var m:Matrix3D = Matrix3D.newRotate( -angle, up );
 			m.transformVectorSelf( _position );
 			_pDirection = null;
 			_pTrack = null;
@@ -325,7 +325,7 @@ package org.flintparticles.threeD.renderers
 		{
 			if( _pTrack == null )
 			{
-				_pTrack = _up.cross( _direction );
+				_pTrack = _up.crossProduct( _direction );
 			}
 			_pFront == null;
 			return _pTrack;
@@ -335,7 +335,7 @@ package org.flintparticles.threeD.renderers
 		{
 			if( _pFront == null )
 			{
-				_pFront = _track.cross( _up );
+				_pFront = _track.crossProduct( _up );
 			}
 			return _pFront;
 		}

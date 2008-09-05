@@ -89,6 +89,28 @@ package org.flintparticles.common.utils
 			}
 		}
 
+		override flash_proxy function nextNameIndex( index:int ):int
+		{
+			if( index < _values.length )
+			{
+				return index + 1;
+			}
+			else
+			{
+				return 0;
+			}
+		}
+		
+		override flash_proxy function nextName( index:int ):String
+		{
+			return ( index - 1 ).toString();
+		}
+		
+		override flash_proxy function nextValue( index:int ):*
+		{
+			return _values[ index - 1 ];
+		}
+		
 		/**
 		 * Adds a value to the PriorityArray.
 		 * 

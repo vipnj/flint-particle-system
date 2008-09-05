@@ -89,7 +89,7 @@ package org.flintparticles.threeD.actions
 				p.rotation = new Quaternion( 0, v.x, v.y, v.z );
 				return;
 			}
-			var axis:Vector3D = target.cross( _directionAxis );
+			var axis:Vector3D = target.crossProduct( _directionAxis );
 			var angle:Number = Math.acos( _directionAxis.dotProduct( target ) );
 			p.rotation.setFromAxisRotation( axis, angle );
 		}

@@ -64,13 +64,15 @@ package org.flintparticles.threeD.geom
 		/**
 		 * Creates a new Matrix3D for translation.
 		 * 
-		 * @param translation A vector representing the translation.
+		 * @param x The translation along the x axis.
+		 * @param y The translation along the y axis.
+		 * @param z The translation along the z axis.
 		 * 
 		 * @return The new matrix
 		 */
-		public static function newTranslate( translation:Vector3D ):Matrix3D
+		public static function newTranslation( x:Number, y:Number, z:Number ):Matrix3D
 		{
-			return new Matrix3D( [1,0,0,translation.x,0,1,0,translation.y,0,0,1,translation.z,0,0,0,1] );
+			return new Matrix3D( [1,0,0,x,0,1,0,y,0,0,1,z,0,0,0,1] );
 		}
 	
 		/**
@@ -78,59 +80,37 @@ package org.flintparticles.threeD.geom
 		 * 
 		 * @param angle The angle in radians for the rotation
 		 * @param axis The axis to rotate around
+		 * @param pivotPoint The point the axis passes through. The default value is the origin.
 		 * 
 		 * @return The new matrix
 		 */
-		public static function newRotateAboutAxis( axis:Vector3D, angle:Number = NaN ):Matrix3D
+		public static function newRotate( angle:Number, axis:Vector3D, pivotPoint:Vector3D = null ):Matrix3D
 		{
-			if( isNaN( angle ) )
-			{
-				angle = axis.w;
-			}
 			if ( angle == 0 )
 			{
-				return Matrix3D( IDENTITY.clone() );
+				return IDENTITY.clone();
 			}
 			const sin:Number = Math.sin( angle );
 			const cos:Number = Math.cos( angle );
 			const oneMinCos:Number = 1 - cos;
-			return new Matrix3D( [
+			var rotate:Matrix3D = new Matrix3D( [
 				cos + axis.x * axis.x * oneMinCos, axis.x * axis.y * oneMinCos - axis.z * sin, axis.x * axis.z  * oneMinCos + axis.y * sin, 0,
 				axis.x * axis.y * oneMinCos + axis.z * sin, cos + axis.y * axis.y * oneMinCos, axis.y * axis.z * oneMinCos - axis.x * sin, 0,
 				axis.x * axis.z  * oneMinCos - axis.y * sin, axis.y * axis.z * oneMinCos + axis.x * sin,  cos + axis.z * axis.z * oneMinCos, 0,
 				0, 0, 0, 1 ] );
+			
+			if( pivotPoint )
+			{
+				rotate.prependTranslation( -pivotPoint.x, -pivotPoint.y, -pivotPoint.z );
+				rotate.appendTranslation( pivotPoint.x, pivotPoint.y, pivotPoint.z );
+			}
+			return rotate;
 		}
 		
 		/**
-		 * Creates a new Matrix3D for rotation about an axis through an
-		 * arbitrary point.
-		 * 
-		 * @param point The point the axis passes through
-		 * @param angle The angle in radians for the rotation
-		 * @param axis The axis to rotate around
-		 * 
-		 * @return The new matrix
-		 */
-		public static function newRotateAboutAxisThroughPoint( point:Vector3D, axis:Vector3D, angle:Number = NaN ):Matrix3D
-		{
-			if( isNaN( angle ) )
-			{
-				angle = axis.w;
-			}
-			if ( angle == 0 )
-			{
-				return Matrix3D( IDENTITY.clone() );
-			}
-			var m:Matrix3D = newTranslate( point.negative );
-			m.appendRotateAboutAxis( axis, angle );
-			m.appendTranslate( point );
-			return m;
-		}
-
-		/**
 		 * Creates a coordinate system rotation such that the x, y and z axes are
 		 * translated to unit vectors in the directions indicated. The parameter
-		 * ectors must be at right angles to each other. One parameter may be null, in
+		 * vectors must be at right angles to each other. One parameter may be null, in
 		 * which case it is calculated from the cross product of the other two
 		 * parameters.
 		 * 
@@ -158,7 +138,7 @@ package org.flintparticles.threeD.geom
 				{
 					throw new Error( "The new axes must be orthogonal." );
 				}
-				aX = aY.cross( aZ ).normalize();
+				aX = aY.crossProduct( aZ ).normalize();
 			}
 			else if( !axisY )
 			{
@@ -172,7 +152,7 @@ package org.flintparticles.threeD.geom
 				{
 					throw new Error( "The new axes must be orthogonal." );
 				}
-				aY = aZ.cross( aX ).normalize();
+				aY = aZ.crossProduct( aX ).normalize();
 			}
 			else if( !axisZ )
 			{
@@ -186,7 +166,7 @@ package org.flintparticles.threeD.geom
 				{
 					throw new Error( "The new axes must be orthogonal." );
 				}
-				aZ = aX.cross( aY ).normalize();
+				aZ = aX.crossProduct( aY ).normalize();
 			}
 			else
 			{
@@ -528,13 +508,15 @@ package org.flintparticles.threeD.geom
 		 * Append a translation transformation to this matrix, applying the 
 		 * translation after the transformations already in this matrix.
 		 * 
-		 * @param v The vector for the transformation
+		 * @param x The translation along the x axis.
+		 * @param y The translation along the y axis.
+		 * @param z The translation along the z axis.
 		 * 
 		 * @return A reference to this matrix
 		 */
-		public function appendTranslate( v:Vector3D ):Matrix3D
+		public function appendTranslation( x:Number, y:Number, z:Number ):Matrix3D
 		{
-			return append( newTranslate( v ) );
+			return append( newTranslation( x, y, z ) );
 		}
 	
 		/**
@@ -544,45 +526,35 @@ package org.flintparticles.threeD.geom
 		 * @param angle The rotation angle in radians. If this is not set, the
 		 * w coordinate of the axis is used as the angle.
 		 * @param axis The vector to rotate around
+		 * @param pivotPoint The point the axis passes through. The default value is the origin.
 		 * 
 		 * @return A reference to this matrix
 		 */
-		public function appendRotateAboutAxis( axis:Vector3D, angle:Number = NaN ):Matrix3D
+		public function appendRotate( angle:Number, axis:Vector3D, pivotPoint:Vector3D = null ):Matrix3D
 		{
-			if( isNaN( angle ) )
-			{
-				angle = axis.w;
-			}
 			if ( angle == 0 )
 			{
 				return this;
 			}
-			return append( newRotateAboutAxis( axis, angle ) );
+			return append( newRotate( angle, axis, pivotPoint ) );
 		}
 
 		/**
-		 * Append a rotation about an axis through an arbitrary point
-		 * transformation to this matrix, applying the rotation
-		 * after the transformations already in this matrix.
+		 * Append a coordinate system rotation such that the x, y and z axes are
+		 * translated to unit vectors in the directions indicated. The parameter
+		 * vectors must be at right angles to each other. One parameter may be null, in
+		 * which case it is calculated from the cross product of the other two
+		 * parameters.
 		 * 
-		 * @param point A point the axis passes through.
-		 * @param angle The rotation angle in radians.
-		 * @param axis The vector to rotate around. If this is not set the 
-		 * w coordinate of the axis is used as the angle.
+		 * @param axisX The direction the x axis points after the rotation.
+		 * @param axisY The direction the y axis points after the rotation.
+		 * @param axisZ The direction the z axis points after the rotation.
 		 * 
 		 * @return A reference to this matrix
 		 */
-		public function appendRotateAboutAxisThroughPoint( point:Vector3D, axis:Vector3D, angle:Number = NaN ):Matrix3D
+		public function appendRotateCoordinateSpace( axisX:Vector3D, axisY:Vector3D, axisZ:Vector3D ):Matrix3D
 		{
-			if( isNaN( angle ) )
-			{
-				angle = axis.w;
-			}
-			if ( angle == 0 )
-			{
-				return this;
-			}
-			return append( newRotateAboutAxisThroughPoint( point, axis, angle ) );
+			return append( newRotateCoordinateSpace( axisX, axisY, axisZ ) );
 		}
 
 		/**
@@ -651,13 +623,15 @@ package org.flintparticles.threeD.geom
 		 * Prepend a translation transformation to this matrix, applying the 
 		 * translation before the transformations already in this matrix.
 		 * 
-		 * @param v The vector for the transformation
+		 * @param x The translation along the x axis.
+		 * @param y The translation along the y axis.
+		 * @param z The translation along the z axis.
 		 * 
 		 * @return A reference to this matrix
 		 */
-		public function prependTranslate( v:Vector3D ):Matrix3D
+		public function prependTranslation( x:Number, y:Number, z:Number ):Matrix3D
 		{
-			return prepend( newTranslate( v ) );
+			return prepend( newTranslation( x, y, z ) );
 		}
 	
 		/**
@@ -667,45 +641,17 @@ package org.flintparticles.threeD.geom
 		 * @param angle The rotation angle in radians. If this is not set, the
 		 * w coordinate of the axis is used as the angle.
 		 * @param axis The vector to rotate around
+		 * @param pivotPoint The point the axis passes through. The default value is the origin.
 		 * 
 		 * @return A reference to this matrix
 		 */
-		public function prependRotateAboutAxis( axis:Vector3D, angle:Number = NaN ):Matrix3D
+		public function prependRotate( angle:Number, axis:Vector3D, pivotPoint:Vector3D = null ):Matrix3D
 		{
-			if( isNaN( angle ) )
-			{
-				angle = axis.w;
-			}
 			if ( angle == 0 )
 			{
 				return this;
 			}
-			return prepend( newRotateAboutAxis( axis, angle ) );
-		}
-
-		/**
-		 * Prepend a rotation about an axis through an arbitrary point
-		 * transformation to this matrix, applying the rotation
-		 * before the transformations already in this matrix.
-		 * 
-		 * @param point A point the axis passes through.
-		 * @param angle The rotation angle in radians.
-		 * @param axis The vector to rotate around. If this is not set the 
-		 * w coordinate of the axis is used as the angle.
-		 * 
-		 * @return A reference to this matrix
-		 */
-		public function prependRotateAboutAxisThroughPoint( point:Vector3D, axis:Vector3D, angle:Number = NaN ):Matrix3D
-		{
-			if( isNaN( angle ) )
-			{
-				angle = axis.w;
-			}
-			if ( angle == 0 )
-			{
-				return this;
-			}
-			return prepend( newRotateAboutAxisThroughPoint( point, axis, angle ) );
+			return prepend( newRotate( angle, axis, pivotPoint ) );
 		}
 
 		/**
@@ -881,7 +827,10 @@ package org.flintparticles.threeD.geom
 			n14 = value.x;
 			n24 = value.y;
 			n34 = value.z;
-			n44 = value.w;
+			if( value.w != 0 )
+			{
+				n44 = value.w;
+			}
 		}
 		
 		/**
