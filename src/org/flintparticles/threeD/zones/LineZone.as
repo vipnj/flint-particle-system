@@ -97,7 +97,7 @@ package org.flintparticles.threeD.zones
 		public function contains( p:Vector3D ):Boolean
 		{
 			// is not on line through points if cross product is not zero
-			if( ! p.subtract( _point1 ).cross( _length ).equals( Vector3D.ZERO ) )
+			if( ! p.subtract( _point1 ).crossProduct( _length ).equals( Vector3D.ZERO ) )
 			{
 				return false;
 			}

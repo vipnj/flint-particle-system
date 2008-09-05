@@ -358,7 +358,7 @@ package org.flintparticles.threeD.geom
 		 * 
 		 * @return The cross product of the two vectors
 		 */
-		public function cross( v:Vector3D ):Vector3D
+		public function crossProduct( v:Vector3D ):Vector3D
 		{
 			return new Vector3D( y * v.z - z * v.y, z * v.x - x * v.z, x * v.y - y * v.x );
 		}

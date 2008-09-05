@@ -9,7 +9,7 @@ package org.flintparticles.threeD.geom
 		public static function getPerpendiculars( normal:Vector3D ):Array
 		{
 			var p1:Vector3D = getPerpendicular( normal );
-			var p2:Vector3D = normal.cross( p1 ).normalize();
+			var p2:Vector3D = normal.crossProduct( p1 ).normalize();
 			return [ p1, p2 ];
 		}
 		
