@@ -38,7 +38,7 @@ package org.flintparticles.threeD.renderers
 	import flash.geom.Point;
 	import flash.geom.Rectangle;
 	
-	import org.flintparticles.common.renderers.RendererBase;
+	import org.flintparticles.common.renderers.SpriteRendererBase;
 	import org.flintparticles.threeD.geom.Matrix3D;	
 	import org.flintparticles.threeD.geom.Quaternion;
 	import org.flintparticles.threeD.geom.Vector3D;
@@ -72,7 +72,7 @@ package org.flintparticles.threeD.renderers
 	 * display objects in its display list. To enable mouse events for the renderer
 	 * or its children set the mouseEnabled or mouseChildren properties to true.</p>
 	 */
-	public class BitmapRenderer extends RendererBase
+	public class BitmapRenderer extends SpriteRendererBase
 	{
 		protected static var ZERO_POINT:Point = new Point( 0, 0 );
 		

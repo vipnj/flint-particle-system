@@ -38,7 +38,7 @@ package org.flintparticles.twoD.renderers
 	import flash.geom.Point;
 	import flash.geom.Rectangle;
 	
-	import org.flintparticles.common.renderers.RendererBase;
+	import org.flintparticles.common.renderers.SpriteRendererBase;
 	import org.flintparticles.twoD.particles.Particle2D;	
 
 	/**
@@ -76,7 +76,7 @@ package org.flintparticles.twoD.renderers
 	 * 
 	 * @see org.flintparticles.twoD.renderers.FullStageBitmapRenderer
 	 */
-	public class BitmapRenderer extends RendererBase
+	public class BitmapRenderer extends SpriteRendererBase
 	{
 		protected static var ZERO_POINT:Point = new Point( 0, 0 );
 		

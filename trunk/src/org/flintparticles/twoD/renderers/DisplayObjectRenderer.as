@@ -33,7 +33,7 @@ package org.flintparticles.twoD.renderers
 	import flash.display.DisplayObject;
 	
 	import org.flintparticles.common.particles.Particle;
-	import org.flintparticles.common.renderers.RendererBase;
+	import org.flintparticles.common.renderers.SpriteRendererBase;
 	import org.flintparticles.twoD.particles.Particle2D;	
 
 	/**
@@ -55,7 +55,7 @@ package org.flintparticles.twoD.renderers
 	 * it is not suitable in situations where the same particle will be displayed 
 	 * by two different renderers.</p> 
 	 */
-	public class DisplayObjectRenderer extends RendererBase
+	public class DisplayObjectRenderer extends SpriteRendererBase
 	{
 		/**
 		 * The constructor creates a DisplayObjectRenderer. After creation it should

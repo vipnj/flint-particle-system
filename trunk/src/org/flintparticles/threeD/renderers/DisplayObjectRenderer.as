@@ -33,7 +33,7 @@ package org.flintparticles.threeD.renderers
 	import flash.display.DisplayObject;
 	
 	import org.flintparticles.common.particles.Particle;
-	import org.flintparticles.common.renderers.RendererBase;
+	import org.flintparticles.common.renderers.SpriteRendererBase;
 	import org.flintparticles.threeD.geom.*;	
 	import org.flintparticles.threeD.particles.Particle3D;	
 
@@ -57,7 +57,7 @@ package org.flintparticles.threeD.renderers
 	 * it is not suitable in situations where the same particle will be displayed 
 	 * by two different renderers.</p> 
 	 */
-	public class DisplayObjectRenderer extends RendererBase
+	public class DisplayObjectRenderer extends SpriteRendererBase
 	{
 		/**
 		 * @private
