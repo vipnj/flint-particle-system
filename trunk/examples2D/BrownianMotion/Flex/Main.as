@@ -30,6 +30,7 @@
 package
 {
 	import flash.display.Sprite;
+	import flash.text.TextField;
 	
 	import org.flintparticles.twoD.emitters.Emitter2D;
 	import org.flintparticles.twoD.renderers.*;	
