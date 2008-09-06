@@ -21,8 +21,7 @@ package org.flintparticles.threeD.away3d
 		}
 		
 		/**
-		 * This method positions and scales the particles according to the
-		 * particles' positions relative to the camera viewport.
+		 * This method applies the particle's state to the associated image property.
 		 * 
 		 * <p>This method is called internally by Flint and shouldn't need to be called
 		 * by the user.</p>
@@ -44,8 +43,8 @@ package org.flintparticles.threeD.away3d
 		
 		/**
 		 * This method is called when a particle is added to an emitter -
-		 * usually becaus ethe emitter has just created the particle. The
-		 * method adds the particle's image to the renderer's display list.
+		 * usually because the emitter has just created the particle. The
+		 * method adds the particle's image to the container's display list.
 		 * It is called internally by Flint and need not be called by the user.
 		 * 
 		 * @param particle The particle being added to the emitter.
@@ -58,7 +57,7 @@ package org.flintparticles.threeD.away3d
 		/**
 		 * This method is called when a particle is removed from an emitter -
 		 * usually because the particle is dying. The method removes the 
-		 * particle's image from the renderer's display list. It is called 
+		 * particle's image from the container's display list. It is called 
 		 * internally by Flint and need not be called by the user.
 		 * 
 		 * @param particle The particle being removed from the emitter.
