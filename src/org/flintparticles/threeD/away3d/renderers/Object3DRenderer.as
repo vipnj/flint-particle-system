@@ -1,4 +1,4 @@
-package org.flintparticles.threeD.away3d 
+package org.flintparticles.threeD.away3d.renderers 
 {
 	import org.flintparticles.common.particles.Particle;
 	import org.flintparticles.common.renderers.RendererBase;

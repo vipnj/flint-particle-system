@@ -28,12 +28,11 @@
  * THE SOFTWARE.
  */
 
-package org.flintparticles.threeD.away3d
+package org.flintparticles.threeD.away3d.initializers
 {
 	import org.flintparticles.common.emitters.Emitter;
 	import org.flintparticles.common.initializers.InitializerBase;
-	import org.flintparticles.common.particles.Particle;
-	import org.flintparticles.common.utils.construct;	
+	import org.flintparticles.common.particles.Particle;	
 
 	/**
 	 * The ImageClass Initializer sets the DisplayObject to use to draw
@@ -101,7 +100,7 @@ package org.flintparticles.threeD.away3d
 			{
 				p[name] = _parameters[name];
 			}
-			particle.image = construct( _imageClass, [ p ] );
+			particle.image = new _imageClass( p );
 		}
 	}
 }

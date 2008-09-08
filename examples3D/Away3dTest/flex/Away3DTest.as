@@ -7,8 +7,8 @@ package
 	import org.flintparticles.common.counters.Steady;
 	import org.flintparticles.common.initializers.Lifetime;
 	import org.flintparticles.threeD.actions.*;
-	import org.flintparticles.threeD.away3d.A3DImageClass;
-	import org.flintparticles.threeD.away3d.Object3DRenderer;
+	import org.flintparticles.threeD.away3d.initializers.A3DImageClass;
+	import org.flintparticles.threeD.away3d.renderers.Object3DRenderer;
 	import org.flintparticles.threeD.emitters.Emitter3D;
 	import org.flintparticles.threeD.geom.Vector3D;
 	import org.flintparticles.threeD.initializers.*;
