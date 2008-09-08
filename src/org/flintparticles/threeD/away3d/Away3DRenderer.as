@@ -1,4 +1,4 @@
-package org.flintparticles.threeD.away3d.renderers 
+package org.flintparticles.threeD.away3d 
 {
 	import org.flintparticles.common.particles.Particle;
 	import org.flintparticles.common.renderers.RendererBase;
@@ -12,11 +12,11 @@ package org.flintparticles.threeD.away3d.renderers
 	/**
 	 * 
 	 */
-	public class Object3DRenderer extends RendererBase
+	public class Away3DRenderer extends RendererBase
 	{
 		private var _container:ObjectContainer3D;
 		
-		public function Object3DRenderer( container:ObjectContainer3D )
+		public function Away3DRenderer( container:ObjectContainer3D )
 		{
 			super();
 			_container = container;
