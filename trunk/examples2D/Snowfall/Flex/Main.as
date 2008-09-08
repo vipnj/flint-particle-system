@@ -30,16 +30,9 @@
 package
 {
 	import flash.display.Sprite;
-	import flash.geom.Point;
 	
-	import org.flintparticles.common.counters.*;
-	import org.flintparticles.common.displayObjects.Dot;
-	import org.flintparticles.common.initializers.*;
-	import org.flintparticles.twoD.actions.*;
 	import org.flintparticles.twoD.emitters.Emitter2D;
-	import org.flintparticles.twoD.initializers.*;
-	import org.flintparticles.twoD.renderers.*;
-	import org.flintparticles.twoD.zones.*;
+	import org.flintparticles.twoD.renderers.*;	
 
 	[SWF(width='500', height='400', frameRate='61', backgroundColor='#000000')]
 	
