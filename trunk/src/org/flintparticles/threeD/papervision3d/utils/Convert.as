@@ -1,4 +1,4 @@
-package org.flintparticles.threeD.papervision3d 
+package org.flintparticles.threeD.papervision3d.utils 
 {
 	import org.flintparticles.threeD.geom.Vector3D;
 	import org.flintparticles.threeD.geom.Matrix3D;
