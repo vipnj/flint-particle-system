@@ -4,10 +4,13 @@ package
 	import flash.events.Event;
 	
 	import org.flintparticles.common.actions.Age;
+	import org.flintparticles.common.actions.ColorChange;
 	import org.flintparticles.common.counters.Steady;
+	import org.flintparticles.common.displayObjects.Star;
 	import org.flintparticles.common.initializers.Lifetime;
 	import org.flintparticles.threeD.actions.*;
-	import org.flintparticles.threeD.away3d.initializers.A3DImageClass;
+	import org.flintparticles.threeD.away3d.initializers.DisplayObjectImageClass;
+	import org.flintparticles.threeD.away3d.initializers.Object3DImageClass;
 	import org.flintparticles.threeD.away3d.renderers.Object3DRenderer;
 	import org.flintparticles.threeD.emitters.Emitter3D;
 	import org.flintparticles.threeD.geom.Vector3D;
@@ -39,11 +42,13 @@ package
 			emitter.addInitializer( new Position( new PointZone( new Vector3D( 0, -100, 0 ) ) ) );
 			emitter.addInitializer( new Velocity( new DiscZone( new Vector3D( 0, 270, 0 ), new Vector3D( 0, 1, 0 ), 60 ) ) );
 			emitter.addInitializer( new Lifetime( 4 ) );
-			emitter.addInitializer( new A3DImageClass( Sphere, { radius:10, segmentsW:4, segmentsH:4 } ) );
+			emitter.addInitializer( new Object3DImageClass( Sphere, { radius:10, segmentsW:4, segmentsH:4 } ) );
+//			emitter.addInitializer( new DisplayObjectImageClass( Star, 10 ) );
 			
 			emitter.addAction( new Move() );
 			emitter.addAction( new Accelerate( new Vector3D( 0, -150, 0 ) ) );
 			emitter.addAction( new Age() );
+			emitter.addAction( new ColorChange( 0xFFCC0000, 0x00FF9900 ) );
 			
 			renderer = new Object3DRenderer( view.scene );
 			renderer.addEmitter( emitter );
@@ -59,3 +64,7 @@ package
 		}
 	}
 }
+
+import org.flintparticles.threeD.away3d.initializers.Object3DImageClass;
+
+import away3d.primitives.Sphere;

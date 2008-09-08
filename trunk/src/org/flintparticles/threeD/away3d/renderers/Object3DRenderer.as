@@ -5,7 +5,9 @@ package org.flintparticles.threeD.away3d.renderers
 	import org.flintparticles.threeD.particles.Particle3D;
 	
 	import away3d.containers.ObjectContainer3D;
-	import away3d.core.base.Object3D;	
+	import away3d.core.base.Mesh;
+	import away3d.core.base.Object3D;
+	import away3d.sprites.MovieClipSprite;	
 
 	/**
 	 * 
@@ -21,7 +23,7 @@ package org.flintparticles.threeD.away3d.renderers
 		}
 		
 		/**
-		 * This method applies the particle's state to the associated image property.
+		 * This method applies the particle's state to the associated image object.
 		 * 
 		 * <p>This method is called internally by Flint and shouldn't need to be called
 		 * by the user.</p>
@@ -38,6 +40,35 @@ package org.flintparticles.threeD.away3d.renderers
 				o.y = p.position.y;
 				o.z = p.position.z;
 				o.scaleX = o.scaleY = o.scaleZ = p.scale;
+				// rotation
+				
+				// mesh rendering
+				if( o is Mesh )
+				{
+					if( Mesh( o ).material["hasOwnProperty"]( "color" ) )
+					{
+						Mesh( o ).material["color"] = p.color & 0xFFFFFF;
+					}
+					if( Mesh( o ).material["hasOwnProperty"]( "alpha" ) )
+					{
+						Mesh( o ).material["alpha"] = p.alpha;
+					}
+				}
+				
+				// display object rendering
+				else if( o is MovieClipSprite )
+				{
+					MovieClipSprite( o ).movieclip.transform.colorTransform = p.colorTransform;
+					MovieClipSprite( o ).scaling = p.scale;
+				}
+				
+				// others
+				else
+				{
+					// can't do color transform
+					// will try alpha - only works if objects have own canvas
+					o.alpha = p.alpha;
+				}
 			}
 		}
 		
