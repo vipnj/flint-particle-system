@@ -155,5 +155,10 @@ package org.flintparticles.common.particles
 			}
 			return _colorTransform;
 		}
+		
+		public function get alpha():Number
+		{
+			return ( ( color & 0xFF000000 ) >>> 24 ) / 255;
+		}
 	}
 }
