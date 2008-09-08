@@ -11,7 +11,7 @@ package
 	import org.flintparticles.threeD.actions.*;
 	import org.flintparticles.threeD.away3d.initializers.DisplayObjectImageClass;
 	import org.flintparticles.threeD.away3d.initializers.Object3DImageClass;
-	import org.flintparticles.threeD.away3d.renderers.Object3DRenderer;
+	import org.flintparticles.threeD.away3d.Away3DRenderer;
 	import org.flintparticles.threeD.emitters.Emitter3D;
 	import org.flintparticles.threeD.geom.Vector3D;
 	import org.flintparticles.threeD.initializers.*;
@@ -29,7 +29,7 @@ package
 	{
 		private var view:View3D;
 		private var emitter:Emitter3D;
-		private var renderer:Object3DRenderer;
+		private var renderer:Away3DRenderer;
 		
 		public function Away3DTest()
 		{
@@ -50,7 +50,7 @@ package
 			emitter.addAction( new Age() );
 			emitter.addAction( new ColorChange( 0xFFCC0000, 0x00FF9900 ) );
 			
-			renderer = new Object3DRenderer( view.scene );
+			renderer = new Away3DRenderer( view.scene );
 			renderer.addEmitter( emitter );
 			emitter.start();
 
@@ -64,7 +64,3 @@ package
 		}
 	}
 }
-
-import org.flintparticles.threeD.away3d.initializers.Object3DImageClass;
-
-import away3d.primitives.Sphere;

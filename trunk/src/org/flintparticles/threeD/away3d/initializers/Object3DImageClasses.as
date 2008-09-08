@@ -28,21 +28,20 @@
  * THE SOFTWARE.
  */
 
-package org.flintparticles.common.initializers 
+package org.flintparticles.threeD.away3d.initializers
 {
 	import org.flintparticles.common.emitters.Emitter;
+	import org.flintparticles.common.initializers.InitializerBase;
 	import org.flintparticles.common.particles.Particle;
-	import org.flintparticles.common.utils.RatioArray;
-	import org.flintparticles.common.utils.construct;	
+	import org.flintparticles.common.utils.RatioArray;	
 
 	/**
-	 * The ImageClasses Initializer sets the DisplayObject to use to draw
-	 * the particle. It selects one of multiple images that are passed to it.
-	 * It is used with the DisplayObjectRenderer. When using the
+	 * The ImageClass Initializer sets the DisplayObject to use to draw
+	 * the particle. It is used with the DisplayObjectRenderer. When using the
 	 * BitmapRenderer it is more efficient to use the SharedImage Initializer.
 	 */
 
-	public class ImageClasses extends InitializerBase
+	public class Object3DImageClasses extends InitializerBase
 	{
 		private var _images:RatioArray;
 		
@@ -58,39 +57,48 @@ package org.flintparticles.common.initializers
 		 * 
 		 * @see org.flintparticles.common.emitters.Emitter#addInitializer()
 		 */
-		public function ImageClasses( images:Array, weights:Array = null )
+		public function Object3DImageClasses( images:Array, parameters:Array = null, weights:Array = null )
 		{
 			_images = new RatioArray;
+			if( parameters == null )
+			{
+				parameters = [];
+			}
 			var len:int = images.length;
 			var i:int;
 			if( weights != null && weights.length == len )
 			{
 				for( i = 0; i < len; ++i )
 				{
-					addImage( images[i], weights[i] );
+					if( parameters[i] )
+					{
+						addImage( images[i], parameters[i], weights[i] );
+					}
+					else
+					{
+						addImage( images[i], null, weights[i] );
+					}
 				}
 			}
 			else
 			{
 				for( i = 0; i < len; ++i )
 				{
-					addImage( images[i], 1 );
+					if( parameters[i] )
+					{
+						addImage( images[i], parameters[i], 1 );
+					}
+					else
+					{
+						addImage( images[i], null, 1 );
+					}
 				}
 			}
 		}
 		
-		public function addImage( image:*, weight:Number = 1 ):void
+		public function addImage( image:Class, parameters:Object = null, weight:Number = 1 ):void
 		{
-			if( image is Array )
-			{
-				var parameters:Array = Array( image ).concat();
-				var img:Class = parameters.shift();
-				_images.add( new Pair( img, parameters ), weight );
-			}
-			else
-			{
-				_images.add( new Pair( image, [] ), weight );
-			}
+			_images.add( new Pair( image, parameters ), weight );
 		}
 		
 		public function removeImage( image:* ):void
@@ -104,16 +112,24 @@ package org.flintparticles.common.initializers
 		override public function initialize( emitter:Emitter, particle:Particle ):void
 		{
 			var img:Pair = _images.getRandomValue();
-			particle.image = construct( img.image, img.parameters );
+
+			// copy the parameters object because the class will modify the object it's sent
+			var p:Object = new Object();
+			for( var name:String in img.parameters )
+			{
+				p[name] = img.parameters[name];
+			}
+			var imgClass:Class = img.image as Class;
+			particle.image = new imgClass( p );
 		}
 	}
 }
 class Pair
 {
 	internal var image:Class;
-	internal var parameters:Array;
+	internal var parameters:Object;
 	
-	public function Pair( image:Class, parameters:Array )
+	public function Pair( image:Class, parameters:Object )
 	{
 		this.image = image;
 		this.parameters = parameters;
