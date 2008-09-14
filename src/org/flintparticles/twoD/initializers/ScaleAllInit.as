@@ -146,7 +146,7 @@ package org.flintparticles.twoD.initializers
 			}
 			particle.scale = scale;
 			particle.mass *= scale * scale;
-			particle.radius *= scale;
+			particle.collisionRadius *= scale;
 		}
 	}
 }

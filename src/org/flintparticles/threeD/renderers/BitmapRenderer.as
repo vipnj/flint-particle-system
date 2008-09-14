@@ -75,6 +75,8 @@ package org.flintparticles.threeD.renderers
 	public class BitmapRenderer extends SpriteRendererBase
 	{
 		protected static var ZERO_POINT:Point = new Point( 0, 0 );
+
+		protected var toDegrees:Number = 180 / Math.PI;
 		
 		/**
 		 * @private
@@ -360,20 +362,25 @@ package org.flintparticles.threeD.renderers
 			}
 			var scale:Number = particle.scale * _camera.projectionDistance / pos.z;
 			pos.project();
+			
 			var rot:Number = 0;
-			if( !particle.rotation.equals( Quaternion.IDENTITY ) )
+			var transform:Matrix3D = _camera.transform;			
+			var facing:Vector3D;
+			if( particle.rotation.equals( Quaternion.IDENTITY ) )
 			{
-				var axis:Vector3D = new Vector3D( particle.rotation.x, particle.rotation.y, particle.rotation.z );
-				_camera.transform.transformVectorSelf( axis );
-				if( axis.z != 0 )
-				{
-					rot = 2 * Math.acos( particle.rotation.w );
-					if( axis.z > 0 )
-					{
-						rot = -rot;
-					}
-				}
+				facing = particle.faceAxis.clone();
 			}
+			else
+			{
+				var m:Matrix3D = particle.rotation.toMatrixTransformation();
+				facing = m.transformVector( particle.faceAxis );
+			}
+			transform.transformVectorSelf( facing );
+			if( facing.x != 0 || facing.y != 0 )
+			{
+				rot = Math.atan2( -facing.y, facing.x );
+			}
+
 			var matrix:Matrix;
 			if( rot )
 			{

@@ -113,7 +113,7 @@ package org.flintparticles.threeD.initializers
 			var scale:Number = _scales.getRandomValue();
 			particle.scale = scale;
 			particle.mass *= scale * scale * scale;
-			particle.radius *= scale;
+			particle.collisionRadius *= scale;
 		}
 	}
 }

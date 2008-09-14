@@ -122,7 +122,7 @@ package org.flintparticles.twoD.actions
 
 			particle.scale = scale;
 			particle.mass *= change * change;
-			particle.radius *= change;
+			particle.collisionRadius *= change;
 		}
 	}
 }

@@ -196,7 +196,7 @@ package org.flintparticles.threeD.actions
 		override public function update( emitter : Emitter, particle : Particle, time : Number ) : void
 		{
 			var p:Particle3D = Particle3D( particle );
-			var radius:Number = p.radius;
+			var radius:Number = p.collisionRadius;
 			var position:Number;
 			if ( p.velocity.x > 0 && ( position = p.position.x + radius ) >= _maxX )
 			{

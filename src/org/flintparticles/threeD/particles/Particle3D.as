@@ -59,6 +59,12 @@ package org.flintparticles.threeD.particles
 		 * the axis of rotation and whose magnitude indicates the number of rotations per second.
 		 */
 		public var angVelocity:Vector3D;
+		
+		/**
+		 * The axis in the particle's own coordinate space that
+		 * indicates the direction that the particle is facing.
+		 */
+		public var faceAxis:Vector3D;
 
 		private var _previousMass:Number;
 		private var _previousRadius:Number;
@@ -69,11 +75,11 @@ package org.flintparticles.threeD.particles
 		 */
 		public function get inertia():Number
 		{
-			if( mass != _previousMass || radius != _previousRadius )
+			if( mass != _previousMass || collisionRadius != _previousRadius )
 			{
-				_inertia = mass * radius * radius * 0.4;
+				_inertia = mass * collisionRadius * collisionRadius * 0.4;
 				_previousMass = mass;
-				_previousRadius = radius;
+				_previousRadius = collisionRadius;
 			}
 			return _inertia;
 		}
@@ -112,6 +118,7 @@ package org.flintparticles.threeD.particles
 			super.initialize();
 			position = new Vector3D( 0, 0, 0, 1 );
 			projectedPosition = new Vector3D( 0, 0, 0, 1 );
+			faceAxis = new Vector3D( 1, 0, 0, 0 );
 			velocity = new Vector3D( 0, 0, 0, 0 );
 			rotation = new Quaternion( 1, 0, 0, 0 );
 			angVelocity = new Vector3D( 0, 0, 0, 0 );

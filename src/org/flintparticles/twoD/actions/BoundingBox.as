@@ -166,7 +166,7 @@ package org.flintparticles.twoD.actions
 		override public function update( emitter : Emitter, particle : Particle, time : Number ) : void
 		{
 			var p:Particle2D = Particle2D( particle );
-			var radius:Number = particle.radius;
+			var radius:Number = particle.collisionRadius;
 			var position:Number;
 			if ( p.velX > 0 && ( position = p.x + radius ) >= _right )
 			{

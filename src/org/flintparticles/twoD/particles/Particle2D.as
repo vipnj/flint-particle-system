@@ -82,11 +82,11 @@ package org.flintparticles.twoD.particles
 		 */
 		public function get inertia():Number
 		{
-			if( mass != _previousMass || radius != _previousRadius )
+			if( mass != _previousMass || collisionRadius != _previousRadius )
 			{
-				_inertia = mass * radius * radius * 0.5;
+				_inertia = mass * collisionRadius * collisionRadius * 0.5;
 				_previousMass = mass;
-				_previousRadius = radius;
+				_previousRadius = collisionRadius;
 			}
 			return _inertia;
 		}

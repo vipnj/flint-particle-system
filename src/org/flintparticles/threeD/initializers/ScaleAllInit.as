@@ -146,7 +146,7 @@ package org.flintparticles.threeD.initializers
 			}
 			particle.scale = scale;
 			particle.mass *= scale * scale * scale;
-			particle.radius *= scale;
+			particle.collisionRadius *= scale;
 		}
 	}
 }

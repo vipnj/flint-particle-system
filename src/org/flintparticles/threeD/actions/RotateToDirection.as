@@ -46,8 +46,6 @@ package org.flintparticles.threeD.actions
 
 	public class RotateToDirection extends ActionBase
 	{
-		private var _directionAxis:Vector3D;
-		
 		/**
 		 * The constructor creates a RotateToDirection action for use by 
 		 * an emitter. To add a RotateToDirection to all particles created by an emitter, use the
@@ -55,16 +53,8 @@ package org.flintparticles.threeD.actions
 		 * 
 		 * @see org.flintparticles.common.emitters.Emitter#addAction()
 		 */
-		public function RotateToDirection( directionAxis:Vector3D = null )
+		public function RotateToDirection()
 		{
-			if( directionAxis == null )
-			{
-				_directionAxis = Vector3D.AXISX;
-			}
-			else
-			{
-				_directionAxis = directionAxis.unit();
-			}
 		}
 
 		/**
@@ -78,19 +68,19 @@ package org.flintparticles.threeD.actions
 				return;
 			}
 			var target:Vector3D = p.velocity.unit();
-			if( target.equals( _directionAxis ) )
+			if( target.equals( p.faceAxis ) )
 			{
 				p.rotation = Quaternion.IDENTITY.clone();
 				return;
 			}
-			if( target.equals( _directionAxis.negative ) )
+			if( target.equals( p.faceAxis.negative ) )
 			{
-				var v:Vector3D = Vector3DUtils.getPerpendicular( _directionAxis );
+				var v:Vector3D = Vector3DUtils.getPerpendicular( p.faceAxis );
 				p.rotation = new Quaternion( 0, v.x, v.y, v.z );
 				return;
 			}
-			var axis:Vector3D = target.crossProduct( _directionAxis );
-			var angle:Number = Math.acos( _directionAxis.dotProduct( target ) );
+			var axis:Vector3D = target.crossProduct( p.faceAxis );
+			var angle:Number = Math.acos( p.faceAxis.dotProduct( target ) );
 			p.rotation.setFromAxisRotation( axis, angle );
 		}
 	}
