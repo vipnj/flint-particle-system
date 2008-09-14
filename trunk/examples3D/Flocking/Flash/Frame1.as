@@ -54,7 +54,7 @@ emitter.addInitializer( new Velocity( new SphereZone( new Vector3D( 0, 0, 0 ), 1
 emitter.addAction( new ApproachNeighbours( 200, 100 ) );
 emitter.addAction( new MatchVelocity( 40, 200 ) );
 emitter.addAction( new MinimumDistance( 20, 600 ) );
-emitter.addAction( new RotateToDirection( Vector3D.AXISX ) );
+emitter.addAction( new RotateToDirection() );
 emitter.addAction( new BoundingBox( -300, 300, -200, 200, -300, 300 ) );
 emitter.addAction( new SpeedLimit( 100, true ) );
 emitter.addAction( new SpeedLimit( 200 ) );

@@ -48,7 +48,7 @@ package
 			addInitializer( new Lifetime( 2, 3 ) );
 			addInitializer( new Velocity( new DiscZone( new Vector3D( 0, 0, 0 ), new Vector3D( 0, 1, 0 ), 10 ) ) );
 			addInitializer( new Position( new DiscZone( new Vector3D( 0, 0, 0 ), new Vector3D( 0, 1, 0 ), 3 ) ) );
-			addInitializer( new ImageClass( RadialDot, 5 ) );
+			addInitializer( new SharedImage( new RadialDot( 5 ) ) );
 
 			addAction( new Age( ) );
 			addAction( new Move( ) );

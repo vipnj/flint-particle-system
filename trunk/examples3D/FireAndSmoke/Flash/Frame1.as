@@ -67,7 +67,7 @@ fire.counter = new Steady( 60 );
 fire.addInitializer( new Lifetime( 2, 3 ) );
 fire.addInitializer( new Velocity( new DiscZone( new Vector3D( 0, 0, 0 ), new Vector3D( 0, 1, 0 ), 10 ) ) );
 fire.addInitializer( new Position( new DiscZone( new Vector3D( 0, 0, 0 ), new Vector3D( 0, 1, 0 ), 3 ) ) );
-fire.addInitializer( new ImageClass( RadialDot, 5 ) );
+fire.addInitializer( new SharedImage( new RadialDot( 5 ) ) );
 
 fire.addAction( new Age( ) );
 fire.addAction( new Move( ) );
