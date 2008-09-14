@@ -28,55 +28,62 @@
  * THE SOFTWARE.
  */
 
-package org.flintparticles.common.initializers 
+package org.flintparticles.threeD.initializers 
 {
 	import org.flintparticles.common.emitters.Emitter;
-	import org.flintparticles.common.particles.Particle;	
+	import org.flintparticles.common.initializers.InitializerBase;
+	import org.flintparticles.common.particles.Particle;
+	import org.flintparticles.threeD.geom.Vector3D;
+	import org.flintparticles.threeD.particles.Particle3D;	
 
 	/**
-	 * The CollisionRadiusInit Initializer sets the collision radius of the particle.
-	 * During collisions the particle is treated as a sphere (3D) or circle (2D), regardless of its actual
-	 * shape. This sets the size of that sphere or circle.
+	 * The FaceAxis Initializer sets the face axis of the particle. The face axis
+	 * is a unit vector in the coordinate space of the particle that indicates the
+	 * "forward" direction for the particle.
+	 * 
+	 * <p>The face axis is used when rotating the particle to the direction of
+	 * motion and when using a display object to represent the paticle - the display
+	 * object is rotated so that its x axis points in teh direction of the facing axis
+	 * of the particle.</p>
 	 */
 
-	public class CollisionRadiusInit extends InitializerBase
+	public class FaceAxis extends InitializerBase
 	{
-		private var _radius:Number;
-		
+		private var _axis : Vector3D;
+
 		/**
-		 * The constructor creates a CollisionRadiusInit initializer for use by 
-		 * an emitter. To add a CollisionRadiusInit to all particles created by an emitter, use the
+		 * The constructor creates a FaceAxis initializer for use by 
+		 * an emitter. To add a FaceAxis to all particles created by an emitter, use the
 		 * emitter's addInitializer method.
 		 * 
-		 * @param radius The collision radius for particles
-		 * initialized by the instance.
+		 * @param axis The face axis for the particles.
 		 * 
-		 * @see org.flintparticles.common.emitters.Emitter#addInitializer().
+ 		 * @see org.flintparticles.common.emitters.Emitter#addInitializer()
 		 */
-		public function CollisionRadiusInit( radius:Number )
+		public function FaceAxis( axis : Vector3D )
 		{
-			_radius = radius;
+			_axis = axis.unit();
 		}
 		
 		/**
-		 * The collision radius for particles
-		 * initialized by the instance.
+		 * The face axis of the particles.
 		 */
-		public function get radius():Number
+		public function get axis():Vector3D
 		{
-			return _radius;
+			return _axis;
 		}
-		public function set radius( value:Number ):void
+		public function set axis( value:Vector3D ):void
 		{
-			_radius = value;
+			_axis = value;
 		}
 		
 		/**
 		 * @inheritDoc
 		 */
-		override public function initialize( emitter:Emitter, particle:Particle ):void
+		override public function initialize( emitter : Emitter, particle : Particle ) : void
 		{
-			particle.collisionRadius = _radius;
+			var p:Particle3D = Particle3D( particle );
+			p.faceAxis = _axis.clone();
 		}
 	}
 }

@@ -130,7 +130,7 @@ package org.flintparticles.threeD.actions
 			for( i = p.sortID + 1; i < len; ++i )
 			{
 				other = particles[sortedX[i]];
-				collisionDist = other.radius + p.radius;
+				collisionDist = other.collisionRadius + p.collisionRadius;
 				if( ( d.x = other.position.x - p.position.x ) > collisionDist ) continue;
 				d.y = other.position.y - p.position.y;
 				if( d.y > collisionDist || d.y < -collisionDist ) continue;

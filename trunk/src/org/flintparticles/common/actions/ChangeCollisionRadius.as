@@ -112,7 +112,7 @@ package org.flintparticles.common.actions
 		 */
 		override public function update( emitter:Emitter, particle:Particle, time:Number ):void
 		{
-			particle.radius = _endRadius + _diffRadius * particle.energy;
+			particle.collisionRadius = _endRadius + _diffRadius * particle.energy;
 		}
 	}
 }

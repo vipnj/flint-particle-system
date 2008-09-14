@@ -140,7 +140,7 @@ package org.flintparticles.twoD.actions
 			for( i = p.sortID + 1; i < len; ++i )
 			{
 				other = particles[sortedX[i]];
-				collisionDist = other.radius + p.radius;
+				collisionDist = other.collisionRadius + p.collisionRadius;
 				if( ( dx = other.x - p.x ) > collisionDist ) continue;
 				dy = other.y - p.y;
 				if( dy > collisionDist || dy < -collisionDist ) continue;

@@ -34,7 +34,7 @@ package org.flintparticles.threeD.renderers
 	
 	import org.flintparticles.common.particles.Particle;
 	import org.flintparticles.common.renderers.SpriteRendererBase;
-	import org.flintparticles.threeD.geom.*;	
+	import org.flintparticles.threeD.geom.*;
 	import org.flintparticles.threeD.particles.Particle3D;	
 
 	/**
@@ -124,11 +124,11 @@ package org.flintparticles.threeD.renderers
 		override protected function renderParticles( particles:Array ):void
 		{
 			var pos:Vector3D = new Vector3D();
-			var axis:Vector3D = new Vector3D();
 			var transform:Matrix3D = _camera.transform;
 			var particle:Particle3D;
 			var img:DisplayObject;
 			var len:int = particles.length;
+			var facing:Vector3D;
 			for( var i:int = 0; i < len; ++i )
 			{
 				particle = particles[i];
@@ -151,32 +151,18 @@ package org.flintparticles.threeD.renderers
 					img.visible = true;
 					if( particle.rotation.equals( Quaternion.IDENTITY ) )
 					{
-						img.rotation = 0;
+						facing = particle.faceAxis.clone();
 					}
 					else
 					{
-						axis.reset( particle.rotation.x, particle.rotation.y, particle.rotation.z );
-						transform.transformVectorSelf( axis );
-						if( axis.z != 0 )
-						{
-							var rot:Number = 2 * Math.acos( particle.rotation.w ) * toDegrees;
-							if( axis.z > 0 )
-							{
-								img.rotation = -rot;
-							}
-							else
-							{
-								img.rotation = rot;
-							}
-							if( camera.direction.z < 0 )
-							{
-								img.rotation += 180;
-							}
-						}
-						else
-						{
-							trace( "zero" );
-						}
+						var m:Matrix3D = particle.rotation.toMatrixTransformation();
+						facing = m.transformVector( particle.faceAxis );
+					}
+					transform.transformVectorSelf( facing );
+					if( facing.x != 0 || facing.y != 0 )
+					{
+						var angle:Number = Math.atan2( -facing.y, facing.x );
+						img.rotation = angle * toDegrees;
 					}
 				}
 			}
