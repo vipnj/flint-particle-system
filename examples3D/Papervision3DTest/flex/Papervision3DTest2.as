@@ -5,7 +5,6 @@ package
 	
 	import org.flintparticles.common.actions.Age;
 	import org.flintparticles.common.actions.ColorChange;
-	import org.flintparticles.common.actions.ScaleImage;
 	import org.flintparticles.common.counters.*;
 	import org.flintparticles.common.initializers.Lifetime;
 	import org.flintparticles.threeD.actions.*;

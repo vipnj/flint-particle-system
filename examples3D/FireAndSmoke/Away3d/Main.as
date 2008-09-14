@@ -29,35 +29,46 @@
 
 package
 {
-	import org.flintparticles.common.counters.*;
-	import org.flintparticles.common.initializers.*;
-	import org.flintparticles.threeD.actions.*;
+	import flash.display.Sprite;
+	import flash.events.Event;
+	
+	import org.flintparticles.threeD.away3d.Away3DRenderer;
 	import org.flintparticles.threeD.emitters.Emitter3D;
-	import org.flintparticles.threeD.geom.Vector3D;
-	import org.flintparticles.threeD.initializers.*;
-	import org.flintparticles.threeD.zones.*;	
+	
+	import away3d.containers.View3D;	
 
-	public class Flock extends Emitter3D
+	[SWF(width='400', height='400', frameRate='61', backgroundColor='#000000')]
+	
+	public class Main extends Sprite
 	{
-		[Embed(source='assets/bird.swf', symbol='Bird')]
-		public var Bird:Class;
+		private var smoke:Emitter3D;
+		private var fire:Emitter3D;
+		private var view:View3D;
+		private var renderer:Away3DRenderer;
 		
-		public function Flock()
+		public function Main()
 		{
-			counter = new Blast( 150 );
+			smoke = new Smoke();
+			smoke.position.y = -200;
+			smoke.start( );
 			
-			addInitializer( new ImageClass( Bird ) );
-			addInitializer( new Position( new BoxZone( 580, 380, 580, new Vector3D( 0, 0, 0 ), new Vector3D( 0, 1, 0 ), new Vector3D( 0, 0, 1 ) ) ) );
-			addInitializer( new Velocity( new SphereZone( new Vector3D( 0, 0, 0 ), 150, 100 ) ) );
-
-			addAction( new ApproachNeighbours( 200, 100 ) );
-			addAction( new MatchVelocity( 40, 200 ) );
-			addAction( new MinimumDistance( 20, 600 ) );
-			addAction( new RotateToDirection() );
-			addAction( new BoundingBox( -300, 300, -200, 200, -300, 300 ) );
-			addAction( new SpeedLimit( 100, true ) );
-			addAction( new SpeedLimit( 200 ) );
-			addAction( new Move() );
+			fire = new Fire();
+			fire.position.y = -200;
+			fire.start( );
+			
+			view = new View3D({x:200,y:200});
+			addChild(view);
+			renderer = new Away3DRenderer( view.scene );
+			renderer.addEmitter( smoke );
+			renderer.addEmitter( fire );
+			
+			addEventListener( Event.ENTER_FRAME, render );
+		}
+		
+		private function render( ev:Event ):void
+		{
+			// render the view
+			view.render();
 		}
 	}
 }

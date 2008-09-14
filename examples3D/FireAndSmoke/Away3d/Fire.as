@@ -29,35 +29,34 @@
 
 package
 {
+	import org.flintparticles.common.actions.*;
 	import org.flintparticles.common.counters.*;
+	import org.flintparticles.common.displayObjects.RadialDot;
 	import org.flintparticles.common.initializers.*;
 	import org.flintparticles.threeD.actions.*;
+	import org.flintparticles.threeD.away3d.initializers.DisplayObjectImageClass;
 	import org.flintparticles.threeD.emitters.Emitter3D;
 	import org.flintparticles.threeD.geom.Vector3D;
 	import org.flintparticles.threeD.initializers.*;
 	import org.flintparticles.threeD.zones.*;	
 
-	public class Flock extends Emitter3D
+	public class Fire extends Emitter3D
 	{
-		[Embed(source='assets/bird.swf', symbol='Bird')]
-		public var Bird:Class;
-		
-		public function Flock()
+		public function Fire()
 		{
-			counter = new Blast( 150 );
-			
-			addInitializer( new ImageClass( Bird ) );
-			addInitializer( new Position( new BoxZone( 580, 380, 580, new Vector3D( 0, 0, 0 ), new Vector3D( 0, 1, 0 ), new Vector3D( 0, 0, 1 ) ) ) );
-			addInitializer( new Velocity( new SphereZone( new Vector3D( 0, 0, 0 ), 150, 100 ) ) );
+			counter = new Steady( 50 );
 
-			addAction( new ApproachNeighbours( 200, 100 ) );
-			addAction( new MatchVelocity( 40, 200 ) );
-			addAction( new MinimumDistance( 20, 600 ) );
-			addAction( new RotateToDirection() );
-			addAction( new BoundingBox( -300, 300, -200, 200, -300, 300 ) );
-			addAction( new SpeedLimit( 100, true ) );
-			addAction( new SpeedLimit( 200 ) );
-			addAction( new Move() );
+			addInitializer( new Lifetime( 2, 3 ) );
+			addInitializer( new Velocity( new DiscZone( new Vector3D( 0, 0, 0 ), new Vector3D( 0, 1, 0 ), 10 ) ) );
+			addInitializer( new Position( new DiscZone( new Vector3D( 0, 0, 0 ), new Vector3D( 0, 1, 0 ), 3 ) ) );
+			addInitializer( new DisplayObjectImageClass( RadialDot, 5 ) );
+
+			addAction( new Age( ) );
+			addAction( new Move( ) );
+			addAction( new LinearDrag( 1 ) );
+			addAction( new Accelerate( new Vector3D( 0, 40, 0 ) ) );
+			addAction( new ColorChange( 0xFFFFCC00, 0x00CC0000 ) );
+			addAction( new ScaleImage( 1, 1.5 ) );
 		}
 	}
 }
