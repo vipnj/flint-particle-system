@@ -1,3 +1,33 @@
+/*
+ * FLINT PARTICLE SYSTEM
+ * .....................
+ * 
+ * Author: Richard Lord (Big Room)
+ * Copyright (c) Big Room Ventures Ltd. 2008
+ * http://flintparticles.org
+ * 
+ * 
+ * Licence Agreement
+ * 
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ * 
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ */
+
 package org.flintparticles.threeD.papervision3d 
 {
 	import org.flintparticles.common.particles.Particle;
@@ -7,12 +37,26 @@ package org.flintparticles.threeD.papervision3d
 	import org.papervision3d.core.geom.renderables.Particle;
 
 	/**
+	 * Renders the particles in an Papervision3D Particles object.
 	 * 
+	 * <p>To use this renderer, the particles' image properties should be 
+	 * Papervision3D particles, renderable in a Papervision3D Particles object.
+	 * This renderer doesn't update the scene, but copies each particle's 
+	 * properties to its image object so next time the Papervision3D scene is 
+	 * rendered the image objects are drawn according to the state of the particle
+	 * system.</p>
 	 */
 	public class PV3DParticleRenderer extends RendererBase
 	{
 		private var _container:Particles;
 		
+		/**
+		 * The constructor creates an Papervision3D particle renderer for displaying the
+		 * particles in a Papervision3D Particles object.
+		 * 
+		 * @param container A Papervision3D Particles object. The particle display
+		 * objects are created inside this Particles object.
+		 */
 		public function PV3DParticleRenderer( container:Particles )
 		{
 			super();
@@ -20,7 +64,7 @@ package org.flintparticles.threeD.papervision3d
 		}
 		
 		/**
-		 * This method applies the particle's state to the associated image object.
+		 * This method copies the particle's state to the associated image object.
 		 * 
 		 * <p>This method is called internally by Flint and shouldn't need to be called
 		 * by the user.</p>

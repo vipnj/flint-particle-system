@@ -38,11 +38,14 @@ package org.flintparticles.threeD.away3d.initializers
 	import away3d.sprites.MovieClipSprite;	
 
 	/**
-	 * The ImageClass Initializer sets the DisplayObject to use to draw
-	 * the particle. It is used with the DisplayObjectRenderer. When using the
-	 * BitmapRenderer it is more efficient to use the SharedImage Initializer.
+	 * The DisplayObjectImageClass initializer sets the DisplayObject to use to 
+	 * draw the particle in a 3D scene. It is used with the Away3D renderer when
+	 * particles should be represented by a display object.
+	 * 
+	 * <p>The initializer creates an Away3D MovieClipSprite, with the display object
+	 * as the image source (the movieClip property), for rendering the display 
+	 * object in an Away3D scene.</p>
 	 */
-
 	public class DisplayObjectImageClass extends InitializerBase
 	{
 		private var _imageClass:Class;
