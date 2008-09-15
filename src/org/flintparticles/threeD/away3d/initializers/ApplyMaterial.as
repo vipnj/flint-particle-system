@@ -38,25 +38,24 @@ package org.flintparticles.threeD.away3d.initializers
 	import away3d.core.base.Object3D;	
 
 	/**
-	 * The ImageClass Initializer sets the DisplayObject to use to draw
-	 * the particle. It is used with the DisplayObjectRenderer. When using the
-	 * BitmapRenderer it is more efficient to use the SharedImage Initializer.
+	 * The ApplyMaterial initializer sets a material to apply to the Away3D
+	 * object that is used when rendering the particle. To use this initializer,
+	 * the particle's image object must be an Away3D Object3D.
 	 */
-
 	public class ApplyMaterial extends InitializerBase
 	{
 		private var _materialClass:Class;
 		private var _parameters:Array;
 		
 		/**
-		 * The constructor creates an ImageClass initializer for use by 
-		 * an emitter. To add an ImageClass to all particles created by an emitter, use the
-		 * emitter's addInitializer method.
+		 * The constructor creates an ApplyMaterial initializer for use by 
+		 * an emitter. To add an ApplyMaterial to all particles created by 
+		 * an emitter, use the emitter's addInitializer method.
 		 * 
-		 * @param imageClass The class to use when creating
-		 * the particles' DisplayObjects.
+		 * @param materialClass The class to use when creating
+		 * the particles' material.
 		 * @param parameters The parameters to pass to the constructor
-		 * for the image class.
+		 * for the material class.
 		 * 
 		 * @see org.flintparticles.common.emitters.Emitter#addInitializer()
 		 */
@@ -66,14 +65,17 @@ package org.flintparticles.threeD.away3d.initializers
 			_parameters = parameters;
 		}
 		
+		/**
+		 * Returns -10 to ensure that the ApplyMaterial is applied after the
+		 * ImageInit classes which define the image object.
+		 */
 		override public function getDefaultPriority():Number
 		{
 			return -10;
 		}
 		
 		/**
-		 * The class to use when creating
-		 * the particles' DisplayObjects.
+		 * The class to use when creating the particles' material.
 		 */
 		public function get materialClass():Class
 		{
@@ -86,7 +88,7 @@ package org.flintparticles.threeD.away3d.initializers
 		
 		/**
 		 * The parameters to pass to the constructor
-		 * for the image class.
+		 * for the material class.
 		 */
 		public function get parameters():Array
 		{

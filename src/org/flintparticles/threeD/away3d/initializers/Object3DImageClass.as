@@ -35,23 +35,22 @@ package org.flintparticles.threeD.away3d.initializers
 	import org.flintparticles.common.particles.Particle;	
 
 	/**
-	 * The ImageClass Initializer sets the DisplayObject to use to draw
-	 * the particle. It is used with the DisplayObjectRenderer. When using the
-	 * BitmapRenderer it is more efficient to use the SharedImage Initializer.
+	 * The Object3DImageClass initializer sets the 3D Object to use to 
+	 * draw the particle in a 3D scene. It is used with the Away3D renderer when
+	 * particles should be represented by a 3D object.
 	 */
-
 	public class Object3DImageClass extends InitializerBase
 	{
 		private var _imageClass:Class;
 		private var _parameters:Object;
 		
 		/**
-		 * The constructor creates an ImageClass initializer for use by 
-		 * an emitter. To add an ImageClass to all particles created by an emitter, use the
-		 * emitter's addInitializer method.
+		 * The constructor creates an Object3DImageClass initializer for use by 
+		 * an emitter. To add an ImageClass to all particles created by an emitter, 
+		 * use the emitter's addInitializer method.
 		 * 
 		 * @param imageClass The class to use when creating
-		 * the particles' DisplayObjects.
+		 * the particles' image object.
 		 * @param parameters The parameters to pass to the constructor
 		 * for the image class.
 		 * 
