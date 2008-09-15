@@ -3,18 +3,17 @@ package org.flintparticles.threeD.papervision3d
 	import org.flintparticles.common.particles.Particle;
 	import org.flintparticles.common.renderers.RendererBase;
 	import org.flintparticles.threeD.particles.Particle3D;
-	
-	import org.papervision3d.core.proto.DisplayObjectContainer3D;
-	import org.papervision3d.objects.DisplayObject3D;	
+	import org.papervision3d.core.geom.Particles;
+	import org.papervision3d.core.geom.renderables.Particle;
 
 	/**
 	 * 
 	 */
-	public class Papervision3DRenderer extends RendererBase
+	public class PV3DParticleRenderer extends RendererBase
 	{
-		private var _container:DisplayObjectContainer3D;
+		private var _container:Particles;
 		
-		public function Papervision3DRenderer( container:DisplayObjectContainer3D )
+		public function PV3DParticleRenderer( container:Particles )
 		{
 			super();
 			_container = container;
@@ -30,18 +29,28 @@ package org.flintparticles.threeD.papervision3d
 		 */
 		override protected function renderParticles( particles:Array ):void
 		{
-			var o:DisplayObject3D;
+			var o:org.papervision3d.core.geom.renderables.Particle;
 			for each( var p:Particle3D in particles )
 			{
 				o = p.image;
 				o.x = p.position.x;
 				o.y = p.position.y;
 				o.z = p.position.z;
-				o.scaleX = o.scaleY = o.scaleZ = p.scale;
-				// rotation
+				if( p.dictionary["pv3dBaseSize"] )
+				{
+					o.size = p.scale * p.dictionary["pv3dBaseSize"];
+				}
+				else
+				{
+					o.size = p.scale;
+				}
+				// TODO: rotation
 				
-				o.material.fillColor = p.color & 0xFFFFFF;
-				o.material.fillAlpha = p.alpha;
+				if( o.material )
+				{
+					o.material.fillColor = p.color & 0xFFFFFF;
+					o.material.fillAlpha = p.alpha;
+				}
 			}
 		}
 		
@@ -53,9 +62,9 @@ package org.flintparticles.threeD.papervision3d
 		 * 
 		 * @param particle The particle being added to the emitter.
 		 */
-		override protected function addParticle( particle:Particle ):void
+		override protected function addParticle( particle:org.flintparticles.common.particles.Particle ):void
 		{
-			_container.addChild( DisplayObject3D( particle.image ) );
+			_container.addParticle( org.papervision3d.core.geom.renderables.Particle( particle.image ) );
 		}
 		
 		/**
@@ -66,9 +75,9 @@ package org.flintparticles.threeD.papervision3d
 		 * 
 		 * @param particle The particle being removed from the emitter.
 		 */
-		override protected function removeParticle( particle:Particle ):void
+		override protected function removeParticle( particle:org.flintparticles.common.particles.Particle ):void
 		{
-			_container.removeChild( DisplayObject3D( particle.image ) );
+			_container.removeParticle( org.papervision3d.core.geom.renderables.Particle( particle.image ) );
 		}
 	}
 }

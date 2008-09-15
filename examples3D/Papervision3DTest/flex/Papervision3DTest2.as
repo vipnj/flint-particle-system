@@ -11,8 +11,9 @@ package
 	import org.flintparticles.threeD.emitters.Emitter3D;
 	import org.flintparticles.threeD.geom.Vector3D;
 	import org.flintparticles.threeD.initializers.*;
-	import org.flintparticles.threeD.papervision3d.Papervision3DParticleRenderer;
-	import org.flintparticles.threeD.papervision3d.initializers.ParticleImageClass;
+	import org.flintparticles.threeD.papervision3d.PV3DParticleRenderer;
+	import org.flintparticles.threeD.papervision3d.initializers.ApplyMaterial;
+	import org.flintparticles.threeD.papervision3d.initializers.PV3DImageClass;
 	import org.flintparticles.threeD.zones.*;
 	import org.papervision3d.cameras.Camera3D;
 	import org.papervision3d.core.geom.Particles;
@@ -32,7 +33,7 @@ package
 		private var viewport:Viewport3D;
 		private var emitter:Emitter3D;
 		private var renderer:BasicRenderEngine;
-		private var flintRenderer:Papervision3DParticleRenderer;
+		private var flintRenderer:PV3DParticleRenderer;
 		private var scene:Scene3D;
 		private var camera:Camera3D;
 		
@@ -55,14 +56,15 @@ package
 			emitter.addInitializer( new Position( new PointZone( new Vector3D( 0, -100, 0 ) ) ) );
 			emitter.addInitializer( new Velocity( new DiscZone( new Vector3D( 0, 270, 0 ), new Vector3D( 0, 1, 0 ), 60 ) ) );
 			emitter.addInitializer( new Lifetime( 4 ) );
-			emitter.addInitializer( new ParticleImageClass( Particle, new ParticleMaterial( 0xFFFFFF, 1, 1 ), 10 ) );
+			emitter.addInitializer( new PV3DImageClass( Particle, null, 20 ) );
+			emitter.addInitializer( new ApplyMaterial( ParticleMaterial, 0xFFFFFF, 1, 1 ) );
 			
 			emitter.addAction( new Move() );
 			emitter.addAction( new Accelerate( new Vector3D( 0, -150, 0 ) ) );
 			emitter.addAction( new Age() );
 			emitter.addAction( new ColorChange( 0xFFCC0000, 0x00FFFFFF ) );
 			
-			flintRenderer = new Papervision3DParticleRenderer( particles );
+			flintRenderer = new PV3DParticleRenderer( particles );
 			flintRenderer.addEmitter( emitter );
 			emitter.start();
 

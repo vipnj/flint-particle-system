@@ -34,19 +34,16 @@ package org.flintparticles.threeD.papervision3d.initializers
 	import org.flintparticles.common.initializers.InitializerBase;
 	import org.flintparticles.common.particles.Particle;
 	import org.flintparticles.common.utils.construct;
-	import org.flintparticles.threeD.papervision3d.utils.cloneMaterial;
-	import org.papervision3d.core.proto.MaterialObject3D;	
-
+	
 	/**
 	 * The ImageClass Initializer sets the DisplayObject to use to draw
 	 * the particle. It is used with the DisplayObjectRenderer. When using the
 	 * BitmapRenderer it is more efficient to use the SharedImage Initializer.
 	 */
 
-	public class TriangleMeshImageClass extends InitializerBase
+	public class ApplyMaterial extends InitializerBase
 	{
-		private var _imageClass:Class;
-		private var _material:MaterialObject3D;
+		private var _materialClass:Class;
 		private var _parameters:Array;
 		
 		/**
@@ -61,37 +58,28 @@ package org.flintparticles.threeD.papervision3d.initializers
 		 * 
 		 * @see org.flintparticles.common.emitters.Emitter#addInitializer()
 		 */
-		public function TriangleMeshImageClass( imageClass:Class, material:MaterialObject3D = null, ...parameters )
+		public function ApplyMaterial( materialClass:Class, ...parameters )
 		{
-			_imageClass = imageClass;
-			_material = material;
+			_materialClass = materialClass;
 			_parameters = parameters;
 		}
 		
-		/**
-		 * The class to use when creating
-		 * the particles' DisplayObjects.
-		 */
-		public function get imageClass():Class
+		override public function getDefaultPriority():Number
 		{
-			return _imageClass;
-		}
-		public function set imageClass( value:Class ):void
-		{
-			_imageClass = value;
+			return -10;
 		}
 		
 		/**
 		 * The class to use when creating
 		 * the particles' DisplayObjects.
 		 */
-		public function get material():MaterialObject3D
+		public function get materialClass():Class
 		{
-			return _material;
+			return _materialClass;
 		}
-		public function set material( value:MaterialObject3D ):void
+		public function set materialClass( value:Class ):void
 		{
-			_material = value;
+			_materialClass = value;
 		}
 		
 		/**
@@ -112,17 +100,10 @@ package org.flintparticles.threeD.papervision3d.initializers
 		 */
 		override public function initialize( emitter:Emitter, particle:Particle ):void
 		{
-			if( _material )
+			if( particle.image && particle.image["hasOwnProperty"]( "material" ) )
 			{
-				// cloning doesn't work on most papervision materials so we have our own function to do it
-				_parameters.unshift( cloneMaterial( _material ) );
+				particle.image["material"] = construct( _materialClass, _parameters );
 			}
-			else
-			{
-				_parameters.unshift( null );
-			}
-			particle.image = construct( _imageClass, _parameters );
-			_parameters.shift();
 		}
 	}
 }

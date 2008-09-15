@@ -33,9 +33,7 @@ package org.flintparticles.threeD.papervision3d.initializers
 	import org.flintparticles.common.emitters.Emitter;
 	import org.flintparticles.common.initializers.InitializerBase;
 	import org.flintparticles.common.particles.Particle;
-	import org.flintparticles.common.utils.construct;
-	import org.flintparticles.threeD.papervision3d.utils.cloneMaterial;
-	import org.papervision3d.core.proto.MaterialObject3D;	
+	import org.flintparticles.common.utils.construct;	
 
 	/**
 	 * The ImageClass Initializer sets the DisplayObject to use to draw
@@ -43,10 +41,9 @@ package org.flintparticles.threeD.papervision3d.initializers
 	 * BitmapRenderer it is more efficient to use the SharedImage Initializer.
 	 */
 
-	public class ParticleImageClass extends InitializerBase
+	public class PV3DImageClass extends InitializerBase
 	{
 		private var _imageClass:Class;
-		private var _material:MaterialObject3D;
 		private var _parameters:Array;
 		
 		/**
@@ -61,10 +58,9 @@ package org.flintparticles.threeD.papervision3d.initializers
 		 * 
 		 * @see org.flintparticles.common.emitters.Emitter#addInitializer()
 		 */
-		public function ParticleImageClass( imageClass:Class, material:MaterialObject3D = null, ...parameters )
+		public function PV3DImageClass( imageClass:Class, ...parameters )
 		{
 			_imageClass = imageClass;
-			_material = material;
 			_parameters = parameters;
 		}
 		
@@ -79,19 +75,6 @@ package org.flintparticles.threeD.papervision3d.initializers
 		public function set imageClass( value:Class ):void
 		{
 			_imageClass = value;
-		}
-		
-		/**
-		 * The class to use when creating
-		 * the particles' DisplayObjects.
-		 */
-		public function get material():MaterialObject3D
-		{
-			return _material;
-		}
-		public function set material( value:MaterialObject3D ):void
-		{
-			_material = value;
 		}
 		
 		/**
@@ -112,18 +95,11 @@ package org.flintparticles.threeD.papervision3d.initializers
 		 */
 		override public function initialize( emitter:Emitter, particle:Particle ):void
 		{
-			if( _material )
-			{
-				// cloning doesn't work on most papervision materials so we have our own function to do it
-				_parameters.unshift( cloneMaterial( _material ) );
-			}
-			else
-			{
-				_parameters.unshift( null );
-			}
 			particle.image = construct( _imageClass, _parameters );
-			_parameters.shift();
-			particle.dictionary["pv3dBaseSize"] = particle.image.size;
+			if( particle.image["hasOwnProperty"]( "size" ) )
+			{
+				particle.dictionary["pv3dBaseSize"] = particle.image["size"];
+			}
 		}
 	}
 }
