@@ -33,7 +33,6 @@ package
 	
 	import org.flintparticles.common.actions.*;
 	import org.flintparticles.common.counters.*;
-	import org.flintparticles.common.displayObjects.RadialDot;
 	import org.flintparticles.common.initializers.*;
 	import org.flintparticles.twoD.actions.*;
 	import org.flintparticles.twoD.emitters.Emitter2D;
@@ -42,6 +41,9 @@ package
 
 	public class Fire extends Emitter2D
 	{
+		[Embed(source='assets/fireblob.swf', symbol='FireBlob')]
+		public var FireBlob:Class;
+
 		public function Fire()
 		{
 			counter = new Steady( 60 );
@@ -49,7 +51,7 @@ package
 			addInitializer( new Lifetime( 2, 3 ) );
 			addInitializer( new Velocity( new DiscSectorZone( new Point( 0, 0 ), 20, 10, -Math.PI, 0 ) ) );
 			addInitializer( new Position( new DiscZone( new Point( 0, 0 ), 3 ) ) );
-			addInitializer( new ImageClass( RadialDot, 5 ) );
+			addInitializer( new SharedImage( new FireBlob() ) );
 
 			addAction( new Age( ) );
 			addAction( new Move( ) );
@@ -57,6 +59,7 @@ package
 			addAction( new Accelerate( 0, -40 ) );
 			addAction( new ColorChange( 0xFFFFCC00, 0x00CC0000 ) );
 			addAction( new ScaleImage( 1, 1.5 ) );
+			addAction( new RotateToDirection() );
 		}
 	}
 }

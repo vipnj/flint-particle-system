@@ -31,34 +31,31 @@ package
 {
 	import org.flintparticles.common.actions.*;
 	import org.flintparticles.common.counters.*;
+	import org.flintparticles.common.displayObjects.RadialDot;
 	import org.flintparticles.common.initializers.*;
 	import org.flintparticles.threeD.actions.*;
 	import org.flintparticles.threeD.emitters.Emitter3D;
 	import org.flintparticles.threeD.geom.Vector3D;
 	import org.flintparticles.threeD.initializers.*;
+	import org.flintparticles.threeD.papervision3d.initializers.PV3DDisplayObjectClass;
 	import org.flintparticles.threeD.zones.*;	
 
-	public class Fire extends Emitter3D
+	public class Smoke extends Emitter3D
 	{
-		[Embed(source='assets/fireblob.swf', symbol='FireBlob')]
-		public var FireBlob:Class;
-
-		public function Fire()
+		public function Smoke()
 		{
-			counter = new Steady( 60 );
-
-			addInitializer( new Lifetime( 2, 3 ) );
-			addInitializer( new Velocity( new DiscZone( new Vector3D( 0, 0, 0 ), new Vector3D( 0, 1, 0 ), 20 ) ) );
-			addInitializer( new Position( new DiscZone( new Vector3D( 0, 0, 0 ), new Vector3D( 0, 1, 0 ), 3 ) ) );
-			addInitializer( new SharedImage( new FireBlob() ) );
-
+			counter = new Steady( 9 );
+      
+			addInitializer( new Lifetime( 11, 12 ) );
+			addInitializer( new Velocity( new ConeZone( new Vector3D( 0, 0, 0 ), new Vector3D( 0, 1, 0 ), 0.5, 40, 30 ) ) );
+			addInitializer( new PV3DDisplayObjectClass( RadialDot, 90 ) );
+      
 			addAction( new Age( ) );
 			addAction( new Move( ) );
-			addAction( new LinearDrag( 1 ) );
-			addAction( new Accelerate( new Vector3D( 0, 40, 0 ) ) );
-			addAction( new ColorChange( 0xFFFFCC00, 0x00CC0000 ) );
-			addAction( new ScaleImage( 1, 1.5 ) );
-			addAction( new RotateToDirection() );
+			addAction( new LinearDrag( 0.01 ) );
+			addAction( new ScaleImage( 0.07, 1 ) );
+			addAction( new Fade( 0.15, 0 ) );
+			addAction( new RandomDrift( 15, 15, 15 ) );
 		}
 	}
 }

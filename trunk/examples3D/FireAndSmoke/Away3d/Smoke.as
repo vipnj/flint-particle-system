@@ -34,7 +34,7 @@ package
 	import org.flintparticles.common.displayObjects.RadialDot;
 	import org.flintparticles.common.initializers.*;
 	import org.flintparticles.threeD.actions.*;
-	import org.flintparticles.threeD.away3d.initializers.DisplayObjectImageClass;
+	import org.flintparticles.threeD.away3d.initializers.A3DDisplayObjectClass;
 	import org.flintparticles.threeD.emitters.Emitter3D;
 	import org.flintparticles.threeD.geom.Vector3D;
 	import org.flintparticles.threeD.initializers.*;
@@ -48,7 +48,7 @@ package
       
 			addInitializer( new Lifetime( 11, 12 ) );
 			addInitializer( new Velocity( new ConeZone( new Vector3D( 0, 0, 0 ), new Vector3D( 0, 1, 0 ), 0.5, 40, 30 ) ) );
-			addInitializer( new DisplayObjectImageClass( RadialDot, 6 ) );
+			addInitializer( new A3DDisplayObjectClass( RadialDot, 6 ) );
       
 			addAction( new Age( ) );
 			addAction( new Move( ) );

@@ -65,9 +65,9 @@ var fire:Emitter3D = new Emitter3D();
 fire.counter = new Steady( 60 );
 
 fire.addInitializer( new Lifetime( 2, 3 ) );
-fire.addInitializer( new Velocity( new DiscZone( new Vector3D( 0, 0, 0 ), new Vector3D( 0, 1, 0 ), 10 ) ) );
+fire.addInitializer( new Velocity( new DiscZone( new Vector3D( 0, 0, 0 ), new Vector3D( 0, 1, 0 ), 20 ) ) );
 fire.addInitializer( new Position( new DiscZone( new Vector3D( 0, 0, 0 ), new Vector3D( 0, 1, 0 ), 3 ) ) );
-fire.addInitializer( new SharedImage( new RadialDot( 5 ) ) );
+fire.addInitializer( new SharedImage( new FireBlob() ) );
 
 fire.addAction( new Age( ) );
 fire.addAction( new Move( ) );
@@ -75,6 +75,7 @@ fire.addAction( new LinearDrag( 1 ) );
 fire.addAction( new Accelerate( new Vector3D( 0, 40, 0 ) ) );
 fire.addAction( new ColorChange( 0xFFFFCC00, 0x00CC0000 ) );
 fire.addAction( new ScaleImage( 1, 1.5 ) );
+fire.addAction( new RotateToDirection() );
 
 fire.start( );
 

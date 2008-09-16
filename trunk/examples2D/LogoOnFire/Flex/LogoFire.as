@@ -29,39 +29,42 @@
 
 package
 {
-	import flash.display.Bitmap;
-	import flash.geom.Point;
-	
 	import org.flintparticles.common.actions.*;
 	import org.flintparticles.common.counters.*;
-	import org.flintparticles.common.displayObjects.RadialDot;
+	import org.flintparticles.common.energyEasing.TwoWay;
 	import org.flintparticles.common.initializers.*;
 	import org.flintparticles.twoD.actions.*;
 	import org.flintparticles.twoD.emitters.Emitter2D;
 	import org.flintparticles.twoD.initializers.*;
-	import org.flintparticles.twoD.zones.*;	
+	import org.flintparticles.twoD.zones.*;
+	
+	import flash.display.Bitmap;
+	import flash.geom.Point;	
 
 	public class LogoFire extends Emitter2D
 	{
 		[Embed(source="assets/flint.png")]
 		public var Logo:Class;
+		[Embed(source='assets/fireblob.swf', symbol='FireBlob')]
+		public var FireBlob:Class;
 
 		public function LogoFire()
 		{
-			counter = new Steady( 250 );
+			counter = new Steady( 600 );
 			
-			addInitializer( new Lifetime( 1.5 ) );
-			addInitializer( new Velocity( new DiscSectorZone( new Point( 0, 0 ), 20, 10, -Math.PI, 0 ) ) );
+			addInitializer( new Lifetime( 0.8 ) );
+			addInitializer( new Velocity( new DiscSectorZone( new Point( 0, 0 ), 10, 5, -Math.PI * 0.75, -Math.PI * 0.25 ) ) );
 			var bitmap:Bitmap = new Logo();
 			addInitializer( new Position( new BitmapDataZone( bitmap.bitmapData ) ) );
-			addInitializer( new ImageClass( RadialDot, 7 ) );
+			addInitializer( new ImageClass( FireBlob ) );
 			
-			addAction( new Age() );
+			addAction( new Age( TwoWay.quadratic ) );
 			addAction( new Move() );
 			addAction( new LinearDrag( 1 ) );
-			addAction( new Accelerate( 0, -40 ) );
-			addAction( new ColorChange( 0xFFFF9900, 0x00CC0000 ) );
-			addAction( new ScaleImage( 1, 1.5 ) );
+			addAction( new Accelerate( 0, -20 ) );
+			addAction( new ColorChange( 0xFFFF9900, 0x00FFDD66 ) );
+			addAction( new ScaleImage( 1.4, 2 ) );
+			addAction( new RotateToDirection() );
 		}
 	}
 }
