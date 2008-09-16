@@ -46,6 +46,8 @@ package org.flintparticles.threeD.actions
 
 	public class Explosion extends ActionBase implements FrameUpdatable
 	{
+		private static const POWER_FACTOR:Number = 100000;
+		
 		private var _updateActivity:UpdateOnFrame;
 		private var _center:Vector3D;
 		private var _power:Number;
@@ -64,7 +66,9 @@ package org.flintparticles.threeD.actions
 		 * 
 		 * @see org.flintparticles.common.emitters.Emitter#addAction()
 		 * 
-		 * @param power The strength of the explosion - larger numbers produce a stronger force.
+		 * @param power The strength of the explosion - larger numbers produce a stronger 
+		 * force.  (The scale of value has been altered from previous versions
+		 * so small numbers now produce a visible effect.)
 		 * @param center The center of the explosion.
 		 * @param expansionRate The rate at which the shockwave moves out from the explosion, in pixels per second.
 		 * @param depth The depth (front-edge to back-edge) of the shock wave.
@@ -87,11 +91,11 @@ package org.flintparticles.threeD.actions
 		 */
 		public function get power():Number
 		{
-			return _power;
+			return _power / POWER_FACTOR;
 		}
 		public function set power( value:Number ):void
 		{
-			_power = value;
+			_power = value * POWER_FACTOR;
 		}
 		
 		/**
@@ -219,13 +223,13 @@ package org.flintparticles.threeD.actions
 			var factor:Number;
 			if( d < _oldRadius || d > _radius )
 			{
-				factor = time * power * ( offset + oldOffset ) / ( _radius * 2 * d * p.mass );
+				factor = time * _power * ( offset + oldOffset ) / ( _radius * 2 * d * p.mass );
 			}
 			else
 			{
 				var ratio:Number = ( 1 - oldOffset ) / _radiusChange;
-				var f1:Number = ratio * time * power * ( oldOffset + 1 );
-				var f2:Number = ( 1 - ratio ) * time * power * ( offset + 1 );
+				var f1:Number = ratio * time * _power * ( oldOffset + 1 );
+				var f2:Number = ( 1 - ratio ) * time * _power * ( offset + 1 );
 				factor = ( f1 + f2 ) / ( _radius * 2 * d * p.mass );
 			}
 			p.velocity.incrementBy( dist.scaleBy( factor ) );

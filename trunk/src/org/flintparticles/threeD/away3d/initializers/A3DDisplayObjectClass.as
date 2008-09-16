@@ -38,7 +38,7 @@ package org.flintparticles.threeD.away3d.initializers
 	import away3d.sprites.MovieClipSprite;	
 
 	/**
-	 * The DisplayObjectImageClass initializer sets the DisplayObject to use to 
+	 * The A3DDisplayObjectClass initializer sets the DisplayObject to use to 
 	 * draw the particle in a 3D scene. It is used with the Away3D renderer when
 	 * particles should be represented by a display object.
 	 * 
@@ -46,7 +46,8 @@ package org.flintparticles.threeD.away3d.initializers
 	 * as the image source (the movieClip property), for rendering the display 
 	 * object in an Away3D scene.</p>
 	 */
-	public class DisplayObjectImageClass extends InitializerBase
+
+	public class A3DDisplayObjectClass extends InitializerBase
 	{
 		private var _imageClass:Class;
 		private var _parameters:Array;
@@ -63,7 +64,7 @@ package org.flintparticles.threeD.away3d.initializers
 		 * 
 		 * @see org.flintparticles.common.emitters.Emitter#addInitializer()
 		 */
-		public function DisplayObjectImageClass( imageClass:Class, ...parameters )
+		public function A3DDisplayObjectClass( imageClass:Class, ...parameters )
 		{
 			_imageClass = imageClass;
 			_parameters = parameters;

@@ -34,7 +34,7 @@ package org.flintparticles.threeD.papervision3d
 	import org.flintparticles.common.renderers.RendererBase;
 	import org.flintparticles.threeD.particles.Particle3D;
 	import org.papervision3d.core.geom.Particles;
-	import org.papervision3d.core.geom.renderables.Particle;
+	import org.papervision3d.core.geom.renderables.Particle;	
 
 	/**
 	 * Renders the particles in an Papervision3D Particles object.
@@ -92,6 +92,7 @@ package org.flintparticles.threeD.papervision3d
 				
 				if( o.material )
 				{
+					// this only works for some materials
 					o.material.fillColor = p.color & 0xFFFFFF;
 					o.material.fillAlpha = p.alpha;
 				}

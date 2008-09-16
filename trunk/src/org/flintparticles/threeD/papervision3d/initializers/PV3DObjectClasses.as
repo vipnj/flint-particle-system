@@ -28,23 +28,22 @@
  * THE SOFTWARE.
  */
 
-package org.flintparticles.threeD.away3d.initializers
+package org.flintparticles.threeD.papervision3d.initializers 
 {
 	import org.flintparticles.common.emitters.Emitter;
 	import org.flintparticles.common.initializers.InitializerBase;
 	import org.flintparticles.common.particles.Particle;
 	import org.flintparticles.common.utils.RatioArray;
-	import org.flintparticles.common.utils.construct;
-	
-	import away3d.sprites.MovieClipSprite;	
+	import org.flintparticles.common.utils.construct;	
 
 	/**
-	 * The ImageClass Initializer sets the DisplayObject to use to draw
-	 * the particle. It is used with the DisplayObjectRenderer. When using the
+	 * The ImageClasses Initializer sets the DisplayObject to use to draw
+	 * the particle. It selects one of multiple images that are passed to it.
+	 * It is used with the DisplayObjectRenderer. When using the
 	 * BitmapRenderer it is more efficient to use the SharedImage Initializer.
 	 */
 
-	public class DisplayObjectImageClasses extends InitializerBase
+	public class PV3DObjectClasses extends InitializerBase
 	{
 		private var _images:RatioArray;
 		
@@ -60,7 +59,7 @@ package org.flintparticles.threeD.away3d.initializers
 		 * 
 		 * @see org.flintparticles.common.emitters.Emitter#addInitializer()
 		 */
-		public function DisplayObjectImageClasses( images:Array, weights:Array = null )
+		public function PV3DObjectClasses( images:Array, weights:Array = null )
 		{
 			_images = new RatioArray;
 			var len:int = images.length;
@@ -99,14 +98,18 @@ package org.flintparticles.threeD.away3d.initializers
 		{
 			_images.remove( image );
 		}
-		
+
 		/**
 		 * @inheritDoc
 		 */
 		override public function initialize( emitter:Emitter, particle:Particle ):void
 		{
 			var img:Pair = _images.getRandomValue();
-			particle.image = new MovieClipSprite( construct( img.image, img.parameters ), { rescale:true } );
+			particle.image = construct( img.image, img.parameters );
+			if( particle.image["hasOwnProperty"]( "size" ) )
+			{
+				particle.dictionary["pv3dBaseSize"] = particle.image["size"];
+			}
 		}
 	}
 }
