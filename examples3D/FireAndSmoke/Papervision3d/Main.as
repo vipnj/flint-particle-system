@@ -29,32 +29,52 @@
 
 package
 {
-	import flash.display.Sprite;
-	import flash.events.Event;
-	
-	import org.flintparticles.threeD.away3d.Away3DRenderer;
 	import org.flintparticles.threeD.emitters.Emitter3D;
+	import org.flintparticles.threeD.papervision3d.PV3DRenderer;
+	import org.papervision3d.cameras.Camera3D;
+	import org.papervision3d.render.BasicRenderEngine;
+	import org.papervision3d.scenes.Scene3D;
+	import org.papervision3d.view.Viewport3D;
 	
-	import away3d.containers.View3D;	
+	import flash.display.Sprite;
+	import flash.events.Event;	
 
 	[SWF(width='400', height='400', frameRate='61', backgroundColor='#000000')]
 	
 	public class Main extends Sprite
 	{
-		private var emitter:Emitter3D;
-		private var view:View3D;
-		private var renderer:Away3DRenderer;
-		
+		private var viewport:Viewport3D;
+		private var smoke:Emitter3D;
+		private var fire:Emitter3D;
+		private var renderer:BasicRenderEngine;
+		private var flintRenderer:PV3DRenderer;
+		private var scene:Scene3D;
+		private var camera:Camera3D;
+
 		public function Main()
 		{
-			emitter = new BrownianMotion( stage );
-
-			view = new View3D({x:200,y:200});
-			addChild(view);
-			renderer = new Away3DRenderer( view.scene );
-			renderer.addEmitter( emitter );
-
-			emitter.start();
+			viewport = new Viewport3D( 400, 400 );
+			addChild( viewport );
+			
+			renderer = new BasicRenderEngine();
+			scene = new Scene3D();
+			camera = new Camera3D();
+			camera.z = -500;
+			
+			smoke = new Smoke();
+			smoke.position.y = -200;
+			smoke.start( );
+			
+			fire = new Fire();
+			fire.position.y = -200;
+			fire.start( );
+			
+			flintRenderer = new PV3DRenderer( scene );
+			// unfortunately, papervision can't cope with drawing the smoke.
+			// This may well be a problem (or at least, a lack of optimisation)
+			// in my code. I welcome any solutions.
+//			flintRenderer.addEmitter( smoke );
+			flintRenderer.addEmitter( fire );
 			
 			addEventListener( Event.ENTER_FRAME, render );
 		}
@@ -62,7 +82,7 @@ package
 		private function render( ev:Event ):void
 		{
 			// render the view
-			view.render();
+			renderer.renderScene( scene, camera, viewport);
 		}
 	}
 }

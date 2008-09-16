@@ -62,7 +62,7 @@ fire.counter = new Steady( 60 );
 fire.addInitializer( new Lifetime( 2, 3 ) );
 fire.addInitializer( new Velocity( new DiscSectorZone( new Point( 0, 0 ), 20, 10, -Math.PI, 0 ) ) );
 fire.addInitializer( new Position( new DiscZone( new Point( 0, 0 ), 3 ) ) );
-fire.addInitializer( new ImageClass( RadialDot, 5 ) );
+fire.addInitializer( new SharedImage( new FireBlob() ) );
 
 fire.addAction( new Age( ) );
 fire.addAction( new Move( ) );
@@ -70,12 +70,13 @@ fire.addAction( new LinearDrag( 1 ) );
 fire.addAction( new Accelerate( 0, -40 ) );
 fire.addAction( new ColorChange( 0xFFFFCC00, 0x00CC0000 ) );
 fire.addAction( new ScaleImage( 1, 1.5 ) );
+fire.addAction( new RotateToDirection() );
 
 fire.x = 150;
 fire.y = 380;
 fire.start( );
 
 var renderer:BitmapRenderer = new BitmapRenderer( new Rectangle( 0, 0, 300, 400 ) );
-renderer.addEmitter( smoke );
 renderer.addEmitter( fire );
+renderer.addEmitter( smoke );
 addChild( renderer );

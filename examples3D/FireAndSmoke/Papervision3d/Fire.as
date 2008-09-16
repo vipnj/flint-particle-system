@@ -36,6 +36,7 @@ package
 	import org.flintparticles.threeD.emitters.Emitter3D;
 	import org.flintparticles.threeD.geom.Vector3D;
 	import org.flintparticles.threeD.initializers.*;
+	import org.flintparticles.threeD.papervision3d.initializers.PV3DDisplayObjectClass;
 	import org.flintparticles.threeD.zones.*;	
 
 	public class Fire extends Emitter3D
@@ -50,7 +51,7 @@ package
 			addInitializer( new Lifetime( 2, 3 ) );
 			addInitializer( new Velocity( new DiscZone( new Vector3D( 0, 0, 0 ), new Vector3D( 0, 1, 0 ), 20 ) ) );
 			addInitializer( new Position( new DiscZone( new Vector3D( 0, 0, 0 ), new Vector3D( 0, 1, 0 ), 3 ) ) );
-			addInitializer( new SharedImage( new FireBlob() ) );
+			addInitializer( new PV3DDisplayObjectClass( FireBlob ) );
 
 			addAction( new Age( ) );
 			addAction( new Move( ) );

@@ -78,7 +78,7 @@ package
 		private function explode( ev:MouseEvent ):void
 		{
 			var p:Point = renderer.globalToLocal( new Point( ev.stageX, ev.stageY ) );
-			emitter.addAction( new Explosion( 500000, p.x, p.y, 500 ) );
+			emitter.addAction( new Explosion( 8, p.x, p.y, 500 ) );
 			emitter.addAction( new Move() );
 			emitter.addAction( new DeathZone( new RectangleZone( -5, -5, 505, 355 ), true ) );
 		}

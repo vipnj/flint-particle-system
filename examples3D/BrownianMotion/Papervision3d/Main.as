@@ -29,38 +29,54 @@
 
 package
 {
-	import flash.display.Bitmap;
-	import flash.display.Sprite;
-	import flash.geom.Rectangle;
+	import org.flintparticles.threeD.emitters.Emitter3D;
+	import org.flintparticles.threeD.papervision3d.PV3DParticleRenderer;
+	import org.papervision3d.cameras.Camera3D;
+	import org.papervision3d.core.geom.Particles;
+	import org.papervision3d.render.BasicRenderEngine;
+	import org.papervision3d.scenes.Scene3D;
+	import org.papervision3d.view.Viewport3D;
 	
-	import org.flintparticles.twoD.emitters.Emitter2D;
-	import org.flintparticles.twoD.renderers.*;	
+	import flash.display.Sprite;
+	import flash.events.Event;	
 
-	[SWF(width='500', height='200', frameRate='61', backgroundColor='#000000')]
+	[SWF(width='400', height='400', frameRate='61', backgroundColor='#000000')]
 	
 	public class Main extends Sprite
 	{
-		[Embed(source="assets/flint.png")]
-		public var Logo:Class;
+		private var viewport:Viewport3D;
+		private var emitter:Emitter3D;
+		private var pv3dRenderer:BasicRenderEngine;
+		private var flintRenderer:PV3DParticleRenderer;
+		private var scene:Scene3D;
+		private var camera:Camera3D;
 
-		private var emitter:Emitter2D;
-		
 		public function Main()
 		{
-			var bitmap:Bitmap = new Logo();
-			addChild( bitmap );
-			bitmap.x = 118;
-			bitmap.y = 70;
-
-			emitter = new LogoFire();
-
-			var renderer:BitmapRenderer = new BitmapRenderer( new Rectangle( 0, 0, 500, 200 ) );
-			renderer.addEmitter( emitter );
-			addChild( renderer );
+			viewport = new Viewport3D( 400, 400 );
+			addChild( viewport );
 			
-			emitter.x = 118;
-			emitter.y = 70;
-			emitter.start( );
+			pv3dRenderer = new BasicRenderEngine();
+			scene = new Scene3D();
+			camera = new Camera3D();
+			camera.z = -400;
+			
+			var particles:Particles = new Particles();
+			scene.addChild( particles );
+			
+			emitter = new BrownianMotion( stage );
+
+			flintRenderer = new PV3DParticleRenderer( particles );
+			flintRenderer.addEmitter( emitter );
+			emitter.start();
+			
+			addEventListener( Event.ENTER_FRAME, render );
+		}
+		
+		private function render( ev:Event ):void
+		{
+			// render the view
+			pv3dRenderer.renderScene( scene, camera, viewport);
 		}
 	}
 }

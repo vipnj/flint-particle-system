@@ -38,27 +38,19 @@ package
 	import org.flintparticles.threeD.initializers.*;
 	import org.flintparticles.threeD.zones.*;	
 
-	public class Fire extends Emitter3D
+	public class Fountain extends Emitter3D
 	{
-		[Embed(source='assets/fireblob.swf', symbol='FireBlob')]
-		public var FireBlob:Class;
-
-		public function Fire()
+		public function Fountain()
 		{
-			counter = new Steady( 60 );
-
-			addInitializer( new Lifetime( 2, 3 ) );
-			addInitializer( new Velocity( new DiscZone( new Vector3D( 0, 0, 0 ), new Vector3D( 0, 1, 0 ), 20 ) ) );
-			addInitializer( new Position( new DiscZone( new Vector3D( 0, 0, 0 ), new Vector3D( 0, 1, 0 ), 3 ) ) );
-			addInitializer( new SharedImage( new FireBlob() ) );
-
-			addAction( new Age( ) );
-			addAction( new Move( ) );
-			addAction( new LinearDrag( 1 ) );
-			addAction( new Accelerate( new Vector3D( 0, 40, 0 ) ) );
-			addAction( new ColorChange( 0xFFFFCC00, 0x00CC0000 ) );
-			addAction( new ScaleImage( 1, 1.5 ) );
-			addAction( new RotateToDirection() );
+			counter = new Steady( 500 );
+			
+			addInitializer( new ColorInit( 0xFFCCCCFF, 0xFF6666FF ) );
+			addInitializer( new Velocity( new DiscZone( new Vector3D( 0, 250, 0 ), new Vector3D( 0, 1, 0 ), 60 ) ) );
+			addInitializer( new Lifetime( 3.2 ) );
+			
+			addAction( new Move() );
+			addAction( new Accelerate( new Vector3D( 0, -150, 0 ) ) );
+			addAction( new Age() );
 		}
 	}
 }

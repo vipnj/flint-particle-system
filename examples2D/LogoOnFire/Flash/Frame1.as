@@ -27,6 +27,7 @@
  * THE SOFTWARE.
  */
 
+import org.flintparticles.common.debug.*;
 import org.flintparticles.common.actions.*;
 import org.flintparticles.common.counters.*;
 import org.flintparticles.common.displayObjects.RadialDot;
@@ -36,23 +37,29 @@ import org.flintparticles.twoD.emitters.Emitter2D;
 import org.flintparticles.twoD.initializers.*;
 import org.flintparticles.twoD.renderers.*;
 import org.flintparticles.twoD.zones.*;	
+import org.flintparticles.common.energyEasing.TwoWay;
+
+var bitmapData:BitmapData = new Logo( 265, 80);
+var bitmap:Bitmap = new Bitmap();
+bitmap.bitmapData = bitmapData;
+addChild( bitmap );
+bitmap.x = 118;
+bitmap.y = 70;
 
 var emitter:Emitter2D = new Emitter2D();
+emitter.counter = new Steady( 600 );
 
-emitter.counter = new Steady( 250 );
-
-emitter.addInitializer( new Lifetime( 1.5 ) );
-emitter.addInitializer( new Velocity( new DiscSectorZone( new Point( 0, 0 ), 20, 10, -Math.PI, 0 ) ) );
-var bitmapData:BitmapData = new Logo( 265, 80);
+emitter.addInitializer( new Lifetime( 0.8 ) );
+emitter.addInitializer( new Velocity( new DiscSectorZone( new Point( 0, 0 ), 10, 5, -Math.PI * 0.75, -Math.PI * 0.25 ) ) );
 emitter.addInitializer( new Position( new BitmapDataZone( bitmapData ) ) );
-emitter.addInitializer( new ImageClass( RadialDot, 7 ) );
+emitter.addInitializer( new ImageClass( FireBlob ) );
 
-emitter.addAction( new Age() );
+emitter.addAction( new Age( TwoWay.quadratic ) );
 emitter.addAction( new Move() );
-emitter.addAction( new LinearDrag( 1 ) );
-emitter.addAction( new Accelerate( 0, -40 ) );
-emitter.addAction( new ColorChange( 0xFFFF9900, 0x00CC0000 ) );
-emitter.addAction( new ScaleImage( 1, 1.5 ) );
+emitter.addAction( new Accelerate( 0, -20 ) );
+emitter.addAction( new ColorChange( 0xFFFF9900, 0x00FFDD66 ) );
+emitter.addAction( new ScaleImage( 1.4, 2.0 ) );
+emitter.addAction( new RotateToDirection() );
 
 var renderer:BitmapRenderer = new BitmapRenderer( new Rectangle( 0, 0, 500, 200 ) );
 renderer.addEmitter( emitter );
@@ -62,8 +69,3 @@ emitter.x = 118;
 emitter.y = 70;
 emitter.start( );
 
-var bitmap:Bitmap = new Bitmap();
-bitmap.bitmapData = bitmapData;
-addChild( bitmap );
-bitmap.x = 118;
-bitmap.y = 70;
