@@ -41,7 +41,7 @@ package org.flintparticles.threeD.away3d.initializers
 	 * BitmapRenderer it is more efficient to use the SharedImage Initializer.
 	 */
 
-	public class Object3DImageClasses extends InitializerBase
+	public class A3DObjectClasses extends InitializerBase
 	{
 		private var _images:RatioArray;
 		
@@ -57,7 +57,7 @@ package org.flintparticles.threeD.away3d.initializers
 		 * 
 		 * @see org.flintparticles.common.emitters.Emitter#addInitializer()
 		 */
-		public function Object3DImageClasses( images:Array, parameters:Array = null, weights:Array = null )
+		public function A3DObjectClasses( images:Array, parameters:Array = null, weights:Array = null )
 		{
 			_images = new RatioArray;
 			if( parameters == null )

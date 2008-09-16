@@ -28,37 +28,36 @@
  * THE SOFTWARE.
  */
 
-package org.flintparticles.threeD.papervision3d.initializers
+package org.flintparticles.threeD.away3d.initializers
 {
 	import org.flintparticles.common.emitters.Emitter;
 	import org.flintparticles.common.initializers.InitializerBase;
-	import org.flintparticles.common.particles.Particle;
-	import org.flintparticles.common.utils.construct;	
+	import org.flintparticles.common.particles.Particle;	
 
 	/**
-	 * The ImageClass Initializer sets the DisplayObject to use to draw
-	 * the particle. It is used with the DisplayObjectRenderer. When using the
-	 * BitmapRenderer it is more efficient to use the SharedImage Initializer.
+	 * The A3DObjectClass initializer sets the 3D Object to use to 
+	 * draw the particle in a 3D scene. It is used with the Away3D renderer when
+	 * particles should be represented by a 3D object.
 	 */
 
-	public class PV3DImageClass extends InitializerBase
+	public class A3DObjectClass extends InitializerBase
 	{
 		private var _imageClass:Class;
-		private var _parameters:Array;
+		private var _parameters:Object;
 		
 		/**
-		 * The constructor creates an ImageClass initializer for use by 
-		 * an emitter. To add an ImageClass to all particles created by an emitter, use the
-		 * emitter's addInitializer method.
+		 * The constructor creates an A3DObjectClass initializer for use by 
+		 * an emitter. To add an ImageClass to all particles created by an emitter, 
+		 * use the emitter's addInitializer method.
 		 * 
 		 * @param imageClass The class to use when creating
-		 * the particles' DisplayObjects.
+		 * the particles' image object.
 		 * @param parameters The parameters to pass to the constructor
 		 * for the image class.
 		 * 
 		 * @see org.flintparticles.common.emitters.Emitter#addInitializer()
 		 */
-		public function PV3DImageClass( imageClass:Class, ...parameters )
+		public function A3DObjectClass( imageClass:Class, parameters:Object )
 		{
 			_imageClass = imageClass;
 			_parameters = parameters;
@@ -81,11 +80,11 @@ package org.flintparticles.threeD.papervision3d.initializers
 		 * The parameters to pass to the constructor
 		 * for the image class.
 		 */
-		public function get parameters():Array
+		public function get parameters():Object
 		{
 			return _parameters;
 		}
-		public function set parameters( value:Array ):void
+		public function set parameters( value:Object ):void
 		{
 			_parameters = value;
 		}
@@ -95,11 +94,13 @@ package org.flintparticles.threeD.papervision3d.initializers
 		 */
 		override public function initialize( emitter:Emitter, particle:Particle ):void
 		{
-			particle.image = construct( _imageClass, _parameters );
-			if( particle.image["hasOwnProperty"]( "size" ) )
+			// copy the parameters object because the class will modify the object it's sent
+			var p:Object = new Object();
+			for( var name:String in _parameters )
 			{
-				particle.dictionary["pv3dBaseSize"] = particle.image["size"];
+				p[name] = _parameters[name];
 			}
+			particle.image = new _imageClass( p );
 		}
 	}
 }

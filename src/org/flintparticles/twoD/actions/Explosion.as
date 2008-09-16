@@ -46,6 +46,8 @@ package org.flintparticles.twoD.actions
 
 	public class Explosion extends ActionBase implements FrameUpdatable
 	{
+		private static const POWER_FACTOR:Number = 100000;
+		
 		private var _updateActivity:UpdateOnFrame;
 		private var _x:Number;
 		private var _y:Number;
@@ -66,7 +68,8 @@ package org.flintparticles.twoD.actions
 		 * @see org.flintparticles.common.emitters.Emitter#addAction()
 		 * 
 		 * @param power The strength of the explosion - larger numbers produce a 
-		 * stronger force.
+		 * stronger force. (The scale of value has been altered from previous versions
+		 * so small numbers now produce a visible effect.)
 		 * @param x The x coordinate of the center of the explosion.
 		 * @param y The y coordinate of the center of the explosion.
 		 * @param expansionRate The rate at which the shockwave moves out from the 
@@ -79,7 +82,7 @@ package org.flintparticles.twoD.actions
 		 */
 		public function Explosion( power:Number, x:Number, y:Number, expansionRate:Number = 300, depth:Number = 10, epsilon:Number = 1 )
 		{
-			_power = power;
+			_power = power * POWER_FACTOR;
 			_x = x;
 			_y = y;
 			_expansionRate = expansionRate;
@@ -93,11 +96,11 @@ package org.flintparticles.twoD.actions
 		 */
 		public function get power():Number
 		{
-			return _power;
+			return _power / POWER_FACTOR;
 		}
 		public function set power( value:Number ):void
 		{
-			_power = value;
+			_power = value * POWER_FACTOR;
 		}
 		
 		/**
@@ -273,13 +276,13 @@ package org.flintparticles.twoD.actions
 			var factor:Number;
 			if( d < _oldRadius || d > _radius )
 			{
-				factor = time * power * ( offset + oldOffset ) / ( _radius * 2 * d * p.mass );
+				factor = time * _power * ( offset + oldOffset ) / ( _radius * 2 * d * p.mass );
 			}
 			else
 			{
 				var ratio:Number = ( 1 - oldOffset ) / _radiusChange;
-				var f1:Number = ratio * time * power * ( oldOffset + 1 );
-				var f2:Number = ( 1 - ratio ) * time * power * ( offset + 1 );
+				var f1:Number = ratio * time * _power * ( oldOffset + 1 );
+				var f2:Number = ( 1 - ratio ) * time * _power * ( offset + 1 );
 				factor = ( f1 + f2 ) / ( _radius * 2 * d * p.mass );
 			}
 			p.velX += x * factor;
