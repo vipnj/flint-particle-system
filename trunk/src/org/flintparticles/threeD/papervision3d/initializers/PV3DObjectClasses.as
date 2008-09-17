@@ -84,7 +84,7 @@ package org.flintparticles.threeD.papervision3d.initializers
 		{
 			if( image is Array )
 			{
-				var parameters:Array = Array( image ).concat();
+				var parameters:Array = ( image as Array ).concat();
 				var img:Class = parameters.shift();
 				_images.add( new Pair( img, parameters ), weight );
 			}

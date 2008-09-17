@@ -37,7 +37,7 @@ package org.flintparticles.threeD.papervision3d
 	import org.papervision3d.core.geom.renderables.Particle;	
 
 	/**
-	 * Renders the particles in an Papervision3D Particles object.
+	 * Renders the particles in a Papervision3D Particles object.
 	 * 
 	 * <p>To use this renderer, the particles' image properties should be 
 	 * Papervision3D particles, renderable in a Papervision3D Particles object.

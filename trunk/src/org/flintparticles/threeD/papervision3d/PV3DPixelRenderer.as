@@ -7,11 +7,11 @@ package org.flintparticles.threeD.papervision3d
 	import org.papervision3d.core.geom.renderables.Pixel3D;	
 
 	/**
-	 * Renders the particles as pixels in an Papervision3D scene.
+	 * Renders the particles as pixels in a Papervision3D Pixels object.
 	 * 
-	 * This renderer fails to work because of a bug in Papervision3D. The bug report and fix are
-	 * at http://code.google.com/p/papervision3d/issues/detail?id=102. Hopefully the fix will
-	 * be included in a later version of Papervision3D.
+	 * <p>This renderer fails to work because of a bug in Papervision3D. The bug report and fix are
+	 * at <a href="http://code.google.com/p/papervision3d/issues/detail?id=102">http://code.google.com/p/papervision3d/issues/detail?id=102</a>.
+	 * Hopefully the fix will be included in a later version of Papervision3D.</p>
 	 */
 	public class PV3DPixelRenderer extends RendererBase
 	{
