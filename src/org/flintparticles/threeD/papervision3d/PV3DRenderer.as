@@ -43,7 +43,7 @@ package org.flintparticles.threeD.papervision3d
 	import org.papervision3d.objects.primitives.Plane;	
 
 	/**
-	 * Renders the particles in an Papervision3D scene.
+	 * Renders the particles in a Papervision3D scene.
 	 * 
 	 * <p>To use this renderer, the particles' image properties should be 
 	 * Papervision3D objects, renderable in a Papervision3D scene. This renderer
