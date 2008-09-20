@@ -12,7 +12,7 @@ The final 1.0 release, version 1.0.4, is in the repository tags. This version su
 
 ==== Version 2 alpha ====
 
-The latest alpha of version 2 is in the repository trunk. This version supports 3D particle effects in addition to 2D particle effects. This version is fairly stable, but is lacking some 3D features, particularly renderers for Papervision3D and Away3D. Use this command to anonymously check out the version 2 alpha source code.
+The latest alpha of version 2 is in the repository trunk. This version supports 3D particle effects in addition to 2D particle effects. This version is fairly stable, but is lacking a few features that we intend to add before declaring it a beta release.
 
 {{{svn checkout http://flint-particle-system.googlecode.com/svn/trunk/ flint-particle-system-2-read-only}}}
 
