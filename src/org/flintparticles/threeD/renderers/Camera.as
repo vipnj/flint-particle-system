@@ -45,6 +45,7 @@ package org.flintparticles.threeD.renderers
 		private var _farDistance:Number = 2000;
 
 		private var _transform:Matrix3D;
+		private var _spaceTransform:Matrix3D;
 		
 		private var _position:Vector3D;
 		private var _up:Vector3D;
@@ -87,7 +88,7 @@ package org.flintparticles.threeD.renderers
 			_target.w = 1;
 			_pDirection = null;
 			_pTrack = null;
-			_transform = null;
+			_spaceTransform = null;
 		}
 		
 		/**
@@ -101,7 +102,7 @@ package org.flintparticles.threeD.renderers
 		{
 			_position = value.clone();
 			_position.w = 1;
-			_transform = null;
+			_spaceTransform = null;
 			if( _target )
 			{
 				_pDirection = null;
@@ -125,7 +126,7 @@ package org.flintparticles.threeD.renderers
 			_pDirection = value.unit();
 			_pDirection.w = 0;
 			_target = null;
-			_transform = null;
+			_spaceTransform = null;
 			_pTrack = null;
 		}
 		
@@ -141,7 +142,7 @@ package org.flintparticles.threeD.renderers
 		{
 			_up = value.unit();
 			_up.w = 0;
-			_transform = null;
+			_spaceTransform = null;
 			_pTrack = null;
 		}
 		
@@ -154,13 +155,9 @@ package org.flintparticles.threeD.renderers
 		 */
 		public function get transform():Matrix3D
 		{
-			if( !_transform )
+			if( !_spaceTransform || !_transform )
 			{
-				var realUp:Vector3D = _direction.crossProduct( _track );
-				_transform = Matrix3D.newRotateCoordinateSpace( null, realUp, _direction );
-			
-				_transform.appendTranslation( _position.x, _position.y, _position.z );
-				_transform.invert();
+				_transform = spaceTransform.clone();
 				var projectionTransform:Matrix3D = new Matrix3D( [
 					_projectionDistance, 0, 0, 0,
 					0, _projectionDistance, 0, 0,
@@ -171,7 +168,24 @@ package org.flintparticles.threeD.renderers
 			}
 			return _transform;
 		}
-		
+
+		/**
+		 * The transform matrix that converts positions in world space to positions in camera space.
+		 * The projection transform is not part of this transform.
+		 * 
+		 * @see org.flintparticles.threeD.geom.Vector3D#project()
+		 */
+		public function get spaceTransform():Matrix3D
+		{
+			if( !_spaceTransform )
+			{
+				var realUp:Vector3D = _direction.crossProduct( _track );
+				_spaceTransform = Matrix3D.newBasisTransform( _track.unit(), realUp.unit(), _direction.unit() );
+				_spaceTransform.prependTranslation( -_position.x, -_position.y, -_position.z );
+			}
+			return _spaceTransform;
+		}
+				
 		/**
 		 * Dolly or Track the camera in/out in the direction it's facing.
 		 * 
@@ -181,7 +195,7 @@ package org.flintparticles.threeD.renderers
 		public function dolly( distance:Number ):void
 		{
 			_position.incrementBy( _direction.multiply( distance ) );
-			_transform = null;
+			_spaceTransform = null;
 		}
 		
 		/**
@@ -193,7 +207,7 @@ package org.flintparticles.threeD.renderers
 		public function lift( distance:Number ):void
 		{
 			_position.incrementBy( _up.multiply( distance ) );
-			_transform = null;
+			_spaceTransform = null;
 		}
 		
 		/**
@@ -205,7 +219,7 @@ package org.flintparticles.threeD.renderers
 		public function track( distance:Number ):void
 		{
 			_position.incrementBy( _track.multiply( distance ) );
-			_transform = null;
+			_spaceTransform = null;
 		}
 		
 		/**
@@ -218,7 +232,7 @@ package org.flintparticles.threeD.renderers
 		{
 			var m:Matrix3D = Matrix3D.newRotate( angle, _track );
 			m.transformVectorSelf( _direction );
-			_transform = null;
+			_spaceTransform = null;
 			_target = null;
 		}
 		
@@ -233,7 +247,7 @@ package org.flintparticles.threeD.renderers
 			var m:Matrix3D = Matrix3D.newRotate( angle, _up );
 			m.transformVectorSelf( _direction );
 			_pTrack = null;
-			_transform = null;
+			_spaceTransform = null;
 			_target = null;
 		}
 
@@ -248,7 +262,7 @@ package org.flintparticles.threeD.renderers
 			var m:Matrix3D = Matrix3D.newRotate( angle, _front );
 			m.transformVectorSelf( _up );
 			_pTrack = null;
-			_transform = null;
+			_spaceTransform = null;
 		}
 		
 		/**
@@ -267,7 +281,7 @@ package org.flintparticles.threeD.renderers
 			m.transformVectorSelf( _position );
 			_pDirection = null;
 			_pTrack = null;
-			_transform = null;
+			_spaceTransform = null;
 		}
 		 
 		/**

@@ -160,14 +160,6 @@ package org.flintparticles.twoD.zones
 		 */
 		public function getLocation() : Point
 		{
-/*			do
-			{
-				var x : Number = Math.random( ) * _width;
-				var y : Number = Math.random( ) * _height;
-				var pixel : uint = _bitmapData.getPixel32( Math.round( x ), Math.round( y ) );
-			}
-			while( ( pixel >> 24 & 0xFF ) == 0 );
-			return new Point( x + _left, y + _top );*/
 			return _validPoints[ Math.floor( Math.random() * _validPoints.length ) ];
 		}
 

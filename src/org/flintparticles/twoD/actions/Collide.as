@@ -31,6 +31,8 @@
 package org.flintparticles.twoD.actions 
 {
 	import org.flintparticles.common.actions.ActionBase;
+	import org.flintparticles.common.activities.FrameUpdatable;
+	import org.flintparticles.common.activities.UpdateOnFrame;
 	import org.flintparticles.common.emitters.Emitter;
 	import org.flintparticles.common.particles.Particle;
 	import org.flintparticles.twoD.emitters.Emitter2D;
@@ -49,9 +51,11 @@ package org.flintparticles.twoD.actions
 	 * not for absolute precision.</p>
 	 */
 
-	public class Collide extends ActionBase
+	public class Collide extends ActionBase implements FrameUpdatable
 	{
 		private var _bounce:Number;
+		private var _maxDistance:Number;
+		private var _updateActivity:UpdateOnFrame;
 		
 		/**
 		 * The constructor creates a Collide action for use by  an emitter.
@@ -69,6 +73,7 @@ package org.flintparticles.twoD.actions
 		public function Collide( bounce:Number= 1 )
 		{
 			_bounce = bounce;
+			_maxDistance = 0;
 		}
 		
 		/**
@@ -99,14 +104,74 @@ package org.flintparticles.twoD.actions
 
 		/**
 		 * Instructs the emitter to produce a sorted particle array for optimizing
-		 * the calculations in the update method of this action.
+		 * the calculations in the update method of this action and
+		 * adds an UpdateOnFrame activity to the emitter to call this objects
+		 * frameUpdate method once per frame.
 		 * 
-		 * @see update()
+		 * @param emitter The emitter this action has been added to.
+		 * 
+		 * @see frameUpdate()
+		 * @see org.flintparticles.common.activities.UpdateOnFrame
+		 * @see org.flintparticles.common.actions.Action#addedToEmitter()
 		 */
 		override public function addedToEmitter( emitter:Emitter ) : void
 		{
 			Emitter2D( emitter ).spaceSort = true;
+			_updateActivity = new UpdateOnFrame( this );
+			emitter.addActivity( _updateActivity );
 		}
+
+		/**
+		 * Removes the UpdateOnFrame activity that was added to the emitter in the
+		 * addedToEmitter method.
+		 * 
+		 * @param emitter The emitter this action has been added to.
+		 * 
+		 * @see addedToEmitter()
+		 * @see org.flintparticles.common.activities.UpdateOnFrame
+		 * @see org.flintparticles.common.actions.Action#removedFromEmitter()
+		 */
+		override public function removedFromEmitter( emitter:Emitter ):void
+		{
+			if( _updateActivity )
+			{
+				emitter.removeActivity( _updateActivity );
+			}
+		}
+		
+		/**
+		 * Called every frame before the particles are updated, this method
+		 * calculates the collision radius of the largest two particles, which
+		 * aids in optimizing the collision calculations.
+		 * 
+		 * <p>This method is called using an UpdateOnFrame activity that is
+		 * created in the addedToEmitter method.</p>
+		 * 
+		 * @param emitter The emitter that is using this action.
+		 * @param time The duration of the current animation frame.
+		 * 
+		 * @see org.flintparticles.common.activities.UpdateOnFrame
+		 */
+		public function frameUpdate( emitter:Emitter, time:Number ):void
+		{
+			var particles:Array = emitter.particles;
+			var max1:Number = 0;
+			var max2:Number = 0;
+			for each( var p:Particle in particles )
+			{
+				if( p.collisionRadius > max1 )
+				{
+					max2 = max1;
+					max1 = p.collisionRadius;
+				}
+				else if( p.collisionRadius > max2 )
+				{
+					max2 = p.collisionRadius;
+				}
+			}
+			_maxDistance = max1 + max2;
+		}
+		
 		
 		/**
 		 * Causes the particle to check for collisions against all other particles.
@@ -140,8 +205,9 @@ package org.flintparticles.twoD.actions
 			for( i = p.sortID + 1; i < len; ++i )
 			{
 				other = particles[sortedX[i]];
+				if( ( dx = other.x - p.x ) > _maxDistance ) break;
 				collisionDist = other.collisionRadius + p.collisionRadius;
-				if( ( dx = other.x - p.x ) > collisionDist ) continue;
+				if( dx > collisionDist ) continue;
 				dy = other.y - p.y;
 				if( dy > collisionDist || dy < -collisionDist ) continue;
 				distanceSq = dy * dy + dx * dx;
