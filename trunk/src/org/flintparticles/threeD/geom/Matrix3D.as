@@ -108,78 +108,24 @@ package org.flintparticles.threeD.geom
 		}
 		
 		/**
-		 * Creates a coordinate system rotation such that the x, y and z axes are
-		 * translated to unit vectors in the directions indicated. The parameter
-		 * vectors must be at right angles to each other. One parameter may be null, in
-		 * which case it is calculated from the cross product of the other two
-		 * parameters.
+		 * Creates a coordinate system transformation such that the vectors
+		 * indicated are transformed to the x, y and z axes. The vectors need
+		 * not be perpendicular, but they must form a basis for 3D space.
 		 * 
-		 * <p>This method is the basis for the look-at behaviour of cameras, for
-		 * example.</p>
-		 * 
-		 * @param axisX The direction the x axis points after the rotation.
-		 * @param axisY The direction the y axis points after the rotation.
-		 * @param axisZ The direction the z axis points after the rotation.
+		 * @param axisX The vector that is translated to ( 1, 0, 0 ) by the transform.
+		 * @param axisY The vector that is translated to ( 0, 1, 0 ) by the transform.
+		 * @param axisZ The vector that is translated to ( 0, 0, 1 ) by the transform.
 		 */
-		public static function newRotateCoordinateSpace( axisX:Vector3D, axisY:Vector3D, axisZ:Vector3D ):Matrix3D
+		public static function newBasisTransform( axisX:Vector3D, axisY:Vector3D, axisZ:Vector3D ):Matrix3D
 		{
-			var aX:Vector3D;
-			var aY:Vector3D;
-			var aZ:Vector3D;
-			if( !axisX )
-			{
-				if( !axisY || !axisZ )
-				{
-					throw new Error( "You must define two axes in the coordinate space." );
-				}
-				aY = axisY.unit();
-				aZ = axisZ.unit();
-				if( Math.abs( aY.dotProduct( aZ ) ) > 0.01 )
-				{
-					throw new Error( "The new axes must be orthogonal." );
-				}
-				aX = aY.crossProduct( aZ ).normalize();
-			}
-			else if( !axisY )
-			{
-				if( !axisX || !axisZ )
-				{
-					throw new Error( "You must define two axes in the coordinate space." );
-				}
-				aX = axisX.unit();
-				aZ = axisZ.unit();
-				if( Math.abs( aX.dotProduct( aZ ) ) > 0.01 )
-				{
-					throw new Error( "The new axes must be orthogonal." );
-				}
-				aY = aZ.crossProduct( aX ).normalize();
-			}
-			else if( !axisZ )
-			{
-				if( !axisX || !axisY )
-				{
-					throw new Error( "You must define two axes in the coordinate space." );
-				}
-				aX = axisX.unit();
-				aY = axisY.unit();
-				if( Math.abs( aX.dotProduct( aY ) ) > 0.01 )
-				{
-					throw new Error( "The new axes must be orthogonal." );
-				}
-				aZ = aX.crossProduct( aY ).normalize();
-			}
-			else
-			{
-				aX = axisX.unit();
-				aY = axisY.unit();
-				aZ = axisZ.unit();
-				if( Math.abs( aX.dotProduct( aY ) ) > 0.01 || Math.abs( aY.dotProduct( aZ ) ) > 0.01 || Math.abs( aZ.dotProduct( aX ) ) > 0.01 )
-				{
-					throw new Error( "The new axes must be orthogonal." );
-				}
-			}
-			return new Matrix3D( [ aX.x, aY.x, aZ.x, 0, aX.y, aY.y, aZ.y, 0, aX.z, aY.z, aZ.z, 0, 0, 0, 0, 1 ] );
+			var m:Matrix3D = new Matrix3D( [ axisX.x, axisY.x, axisZ.x, 0, 
+											 axisX.y, axisY.y, axisZ.y, 0,
+											 axisX.z, axisY.z, axisZ.z, 0,
+											 0, 0, 0, 1 ] );
+			m.invert();
+			return m;
 		}
+
 
 		/**
 		 * The value in row 1 column 1 of the matrix.
@@ -443,6 +389,35 @@ package org.flintparticles.threeD.geom
 		}
 
 		/**
+		 * Compare another matrix with this one
+		 * 
+		 * @param m the matrix to compare with
+		 * @param e The small variation allowed between the values representing
+		 * the matrices
+		 * 
+		 * @return true if the matrices are the within e of each other, false otherwise
+		 */
+		public function nearEquals( m:Matrix3D, e:Number ):Boolean
+		{
+			return Math.abs( m.n11 - n11 ) <= e
+				&& Math.abs( m.n12 - n12 ) <= e
+				&& Math.abs( m.n13 - n13 ) <= e
+				&& Math.abs( m.n14 - n14 ) <= e
+				&& Math.abs( m.n21 - n21 ) <= e
+				&& Math.abs( m.n22 - n22 ) <= e
+				&& Math.abs( m.n23 - n23 ) <= e
+				&& Math.abs( m.n24 - n24 ) <= e
+				&& Math.abs( m.n31 - n31 ) <= e
+				&& Math.abs( m.n32 - n32 ) <= e
+				&& Math.abs( m.n33 - n33 ) <= e
+				&& Math.abs( m.n34 - n34 ) <= e
+				&& Math.abs( m.n41 - n41 ) <= e
+				&& Math.abs( m.n42 - n42 ) <= e
+				&& Math.abs( m.n43 - n43 ) <= e
+				&& Math.abs( m.n44 - n44 ) <= e;
+		}
+
+		/**
 		 * Add another transformation matrix to this one, applying the new
 		 * transformation after the transformations already in this matrix.
 		 * 
@@ -540,21 +515,19 @@ package org.flintparticles.threeD.geom
 		}
 
 		/**
-		 * Append a coordinate system rotation such that the x, y and z axes are
-		 * translated to unit vectors in the directions indicated. The parameter
-		 * vectors must be at right angles to each other. One parameter may be null, in
-		 * which case it is calculated from the cross product of the other two
-		 * parameters.
+		 * Append a coordinate system transformation such that the vectors
+		 * indicated are transformed to the x, y and z axes. The vectors need
+		 * not be perpendicular, but they must form a basis for 3D space.
 		 * 
-		 * @param axisX The direction the x axis points after the rotation.
-		 * @param axisY The direction the y axis points after the rotation.
-		 * @param axisZ The direction the z axis points after the rotation.
+		 * @param axisX The vector that is translated to ( 1, 0, 0 ) by the transform.
+		 * @param axisY The vector that is translated to ( 0, 1, 0 ) by the transform.
+		 * @param axisZ The vector that is translated to ( 0, 0, 1 ) by the transform.
 		 * 
 		 * @return A reference to this matrix
 		 */
-		public function appendRotateCoordinateSpace( axisX:Vector3D, axisY:Vector3D, axisZ:Vector3D ):Matrix3D
+		public function appendBasisTransform( axisX:Vector3D, axisY:Vector3D, axisZ:Vector3D ):Matrix3D
 		{
-			return append( newRotateCoordinateSpace( axisX, axisY, axisZ ) );
+			return append( newBasisTransform( axisX, axisY, axisZ ) );
 		}
 
 		/**
@@ -652,6 +625,22 @@ package org.flintparticles.threeD.geom
 				return this;
 			}
 			return prepend( newRotate( angle, axis, pivotPoint ) );
+		}
+
+		/**
+		 * Prepend a coordinate system transformation such that the vectors
+		 * indicated are transformed to the x, y and z axes. The vectors need
+		 * not be perpendicular, but they must form a basis for 3D space.
+		 * 
+		 * @param axisX The vector that is translated to ( 1, 0, 0 ) by the transform.
+		 * @param axisY The vector that is translated to ( 0, 1, 0 ) by the transform.
+		 * @param axisZ The vector that is translated to ( 0, 0, 1 ) by the transform.
+		 * 
+		 * @return A reference to this matrix
+		 */
+		public function prependBasisTransform( axisX:Vector3D, axisY:Vector3D, axisZ:Vector3D ):Matrix3D
+		{
+			return prepend( newBasisTransform( axisX, axisY, axisZ ) );
 		}
 
 		/**

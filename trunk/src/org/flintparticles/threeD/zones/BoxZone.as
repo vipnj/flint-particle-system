@@ -77,7 +77,7 @@ package org.flintparticles.threeD.zones
 		
 		private function init():void
 		{
-			_transformFrom = Matrix3D.newRotateCoordinateSpace( null, _upAxis, _depthAxis );
+			_transformFrom = Matrix3D.newBasisTransform( _upAxis.crossProduct( _depthAxis ), _upAxis, _depthAxis );
 			_transformFrom.appendTranslation( _center.x, _center.y, _center.z );
 			_transformFrom.prependTranslation( -_width/2, -_height/2, -_depth/2 );
 			_transformTo = _transformFrom.inverse;
@@ -147,7 +147,7 @@ package org.flintparticles.threeD.zones
 		}
 		public function set upAxis( value : Vector3D ) : void
 		{
-			_upAxis = value.clone();
+			_upAxis = value.unit();
 			_upAxis.w = 0;
 			_dirty = true;
 		}
@@ -162,7 +162,7 @@ package org.flintparticles.threeD.zones
 		}
 		public function set depthAxis( value : Vector3D ) : void
 		{
-			_depthAxis = value.clone();
+			_depthAxis = value.unit();
 			_depthAxis.w = 0;
 			_dirty = true;
 		}

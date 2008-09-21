@@ -25,6 +25,11 @@ package org.flintparticles.common.renderers
 	{
 		/**
 		 * @private
+		 * 
+		 * We retain assigned emitters in this array merely so the reference exists and they are not
+		 * garbage collected. This ensures the expected behaviour is achieved - an emitter that exists
+		 * on a renderer is not garbage collected, an emitter that does not exist on a renderer may be 
+		 * garbage collected if no other references exist.
 		 */
 		protected var _emitters:Array;
 		
