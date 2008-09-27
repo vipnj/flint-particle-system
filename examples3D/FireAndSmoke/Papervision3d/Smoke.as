@@ -44,16 +44,16 @@ package
 	{
 		public function Smoke()
 		{
-			counter = new Steady( 9 );
+			counter = new Steady( 7 );
       
 			addInitializer( new Lifetime( 11, 12 ) );
 			addInitializer( new Velocity( new ConeZone( new Vector3D( 0, 0, 0 ), new Vector3D( 0, 1, 0 ), 0.5, 40, 30 ) ) );
-			addInitializer( new PV3DDisplayObjectClass( RadialDot, 90 ) );
+			addInitializer( new PV3DDisplayObjectClass( RadialDot, 6 ) );
       
 			addAction( new Age( ) );
 			addAction( new Move( ) );
 			addAction( new LinearDrag( 0.01 ) );
-			addAction( new ScaleImage( 0.07, 1 ) );
+			addAction( new ScaleImage( 1, 15 ) );
 			addAction( new Fade( 0.15, 0 ) );
 			addAction( new RandomDrift( 15, 15, 15 ) );
 		}

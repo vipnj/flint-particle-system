@@ -33,7 +33,8 @@ package
 	import flash.filters.BlurFilter;
 	import flash.filters.ColorMatrixFilter;
 	import flash.geom.Rectangle;
-	
+	import flash.text.TextField;
+
 	import org.flintparticles.twoD.emitters.Emitter2D;
 	import org.flintparticles.twoD.renderers.*;	
 
@@ -45,6 +46,12 @@ package
 		
 		public function Main()
 		{
+			var txt:TextField = new TextField();
+			txt.text = "Move the mouse over this box.";
+			txt.autoSize = "left";
+			txt.textColor = 0xFFFFFF;
+			addChild( txt );
+
 			var renderer:BitmapRenderer = new BitmapRenderer( new Rectangle( 0, 0, 400, 400 ) );
 			renderer.addFilter( new BlurFilter( 2, 2, 1 ) );
 			renderer.addFilter( new ColorMatrixFilter( [ 1,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0.95,0 ] ) );

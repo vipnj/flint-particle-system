@@ -53,30 +53,29 @@ package
 
 		public function Main()
 		{
+			smoke = new Smoke();
+			smoke.start( );
+			
+			fire = new Fire();
+			fire.start( );
+			
 			viewport = new Viewport3D( 400, 400 );
 			addChild( viewport );
 			
 			renderer = new BasicRenderEngine();
 			scene = new Scene3D();
 			camera = new Camera3D();
-			camera.z = -500;
-			
-			smoke = new Smoke();
-			smoke.position.y = -200;
-			smoke.start( );
-			
-			fire = new Fire();
-			fire.position.y = -200;
-			fire.start( );
+			camera.z = -400;
+			camera.y = 150;
 			
 			flintRenderer = new PV3DRenderer( scene );
 			// unfortunately, papervision can't cope with drawing the smoke.
 			// This may well be a problem (or at least, a lack of optimisation)
 			// in my code. I welcome any solutions.
-//			flintRenderer.addEmitter( smoke );
+			flintRenderer.addEmitter( smoke );
 			flintRenderer.addEmitter( fire );
 			
-			addEventListener( Event.ENTER_FRAME, render );
+			addEventListener( Event.ENTER_FRAME, render, false, 0, true );
 		}
 		
 		private function render( ev:Event ):void

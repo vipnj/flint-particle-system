@@ -29,13 +29,14 @@
 
 package
 {
-	import flash.display.Sprite;
-	import flash.events.Event;
+	import away3d.containers.View3D;
+	import away3d.core.math.Number3D;
 	
 	import org.flintparticles.threeD.away3d.Away3DRenderer;
 	import org.flintparticles.threeD.emitters.Emitter3D;
 	
-	import away3d.containers.View3D;	
+	import flash.display.Sprite;
+	import flash.events.Event;	
 
 	[SWF(width='400', height='400', frameRate='61', backgroundColor='#000000')]
 	
@@ -49,20 +50,21 @@ package
 		public function Main()
 		{
 			smoke = new Smoke();
-			smoke.position.y = -200;
 			smoke.start( );
 			
 			fire = new Fire();
-			fire.position.y = -200;
 			fire.start( );
 			
 			view = new View3D({x:200,y:200});
+			view.camera.y = 150;
+			view.camera.z = 750;
+			view.camera.lookAt( new Number3D( 0, 150, 0 ) );
 			addChild(view);
 			renderer = new Away3DRenderer( view.scene );
 			renderer.addEmitter( smoke );
 			renderer.addEmitter( fire );
 			
-			addEventListener( Event.ENTER_FRAME, render );
+			addEventListener( Event.ENTER_FRAME, render, false, 0, true );
 		}
 		
 		private function render( ev:Event ):void

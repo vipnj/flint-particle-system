@@ -48,7 +48,7 @@ renderer.addEmitter( emitter );
 addChild( renderer );
 emitter.start();
 
-stage.addEventListener( MouseEvent.CLICK, explode );
+stage.addEventListener( MouseEvent.CLICK, explode, false, 0, true );
 		
 function explode( ev:MouseEvent ):void
 {

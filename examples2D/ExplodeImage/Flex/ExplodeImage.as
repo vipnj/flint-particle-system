@@ -72,7 +72,7 @@ package
 			renderer.addEmitter( emitter );
 			emitter.start();
 			
-			stage.addEventListener( MouseEvent.CLICK, explode );
+			stage.addEventListener( MouseEvent.CLICK, explode, false, 0, true );
 		}
 		
 		private function explode( ev:MouseEvent ):void

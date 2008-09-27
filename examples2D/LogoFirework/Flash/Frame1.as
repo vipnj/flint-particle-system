@@ -53,7 +53,7 @@ emitter.addAction( new Move() );
 emitter.addAction( new LinearDrag( 0.5 ) );
 emitter.addAction( new Accelerate( 0, 70 ) );
 
-emitter.addEventListener( EmitterEvent.EMITTER_EMPTY, restart );
+emitter.addEventListener( EmitterEvent.EMITTER_EMPTY, restart, false, 0, true );
 
 var renderer:PixelRenderer = new PixelRenderer( new Rectangle( 0, 0, 500, 300 ) );
 renderer.addFilter( new BlurFilter( 2, 2, 1 ) );

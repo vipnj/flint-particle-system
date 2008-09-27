@@ -58,7 +58,7 @@ orbitter.start();
 
 var emitter:Emitter3D = new Whizzer( new LineZone( new Vector3D( -200, 0, 0 ), new Vector3D( 200, 0, 0) ) );
 renderer.addEmitter( emitter );
-emitter.addEventListener( ParticleEvent.PARTICLE_DEAD, whizzBang );
+emitter.addEventListener( ParticleEvent.PARTICLE_DEAD, whizzBang, false, 0, true );
 emitter.start();
 
 emitter = new Candle( new Vector3D( 150, 0, 150 ) );
@@ -80,12 +80,13 @@ emitter.start();
 function whizzBang( ev:ParticleEvent ):void
 {
 	var bang:Emitter3D = new SphereBang( Particle3D( ev.particle ).position );
-	bang.addEventListener( EmitterEvent.EMITTER_EMPTY, removeEmitter );
+	bang.addEventListener( EmitterEvent.EMITTER_EMPTY, removeEmitter, false, 0, true );
 	renderer.addEmitter( bang );
 	bang.start();
 }
-		
+
 function removeEmitter( ev:EmitterEvent ):void
 {
+	ev.target.removeEventListener( EmitterEvent.EMITTER_EMPTY, removeEmitter );
 	renderer.removeEmitter( Emitter3D( ev.target ) );
 }
