@@ -40,7 +40,7 @@ import org.flintparticles.twoD.zones.*;
 
 var smoke:Emitter2D = new Emitter2D();
 smoke.counter = new Steady( 10 );
-  
+
 smoke.addInitializer( new Lifetime( 11, 12 ) );
 smoke.addInitializer( new Velocity( new DiscSectorZone( new Point( 0, 0 ), 40, 30, -4 * Math.PI / 7, -3 * Math.PI / 7 ) ) );
 smoke.addInitializer( new SharedImage( new RadialDot( 6 ) ) );

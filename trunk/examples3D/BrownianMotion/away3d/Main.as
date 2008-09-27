@@ -56,7 +56,7 @@ package
 
 			emitter.start();
 			
-			addEventListener( Event.ENTER_FRAME, render );
+			addEventListener( Event.ENTER_FRAME, render, false, 0, true );
 		}
 		
 		private function render( ev:Event ):void

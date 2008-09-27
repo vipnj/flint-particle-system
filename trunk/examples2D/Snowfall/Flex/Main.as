@@ -34,20 +34,29 @@ package
 	import org.flintparticles.twoD.emitters.Emitter2D;
 	import org.flintparticles.twoD.renderers.*;	
 
-	[SWF(width='500', height='400', frameRate='61', backgroundColor='#000000')]
+	[SWF(width='600', height='400', frameRate='61', backgroundColor='#000000')]
 	
 	public class Main extends Sprite
 	{
+		[Embed(source="assets/Snow_1.png")]
+		public var SnowBackground:Class;
+		[Embed(source="assets/Snow_1_over.png")]
+		public var SnowForeground:Class;
+
 		private var emitter:Emitter2D;
 		
 		public function Main()
 		{
 			emitter = new Snowfall();
+			
+			addChild( new SnowBackground() );
 
 			var renderer:DisplayObjectRenderer = new DisplayObjectRenderer();
 			renderer.addEmitter( emitter );
 			addChild( renderer );
 			
+			addChild( new SnowForeground() );
+
 			emitter.start();
 			emitter.runAhead( 10 );
 		}

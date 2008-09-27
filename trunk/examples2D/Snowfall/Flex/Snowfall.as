@@ -32,8 +32,9 @@ package
 	import flash.geom.Point;
 	
 	import org.flintparticles.common.counters.*;
-	import org.flintparticles.common.displayObjects.Dot;
+	import org.flintparticles.common.displayObjects.RadialDot;
 	import org.flintparticles.common.initializers.*;
+	import org.flintparticles.common.actions.*;
 	import org.flintparticles.twoD.actions.*;
 	import org.flintparticles.twoD.emitters.Emitter2D;
 	import org.flintparticles.twoD.initializers.*;
@@ -43,16 +44,16 @@ package
 	{
 		public function Snowfall()
 		{
-			counter = new Steady( 50 );
+			counter = new Steady( 150 );
 			
-			addInitializer( new ImageClass( Dot, 2 ) );
-			addInitializer( new Position( new LineZone( new Point( -5, -5 ), new Point( 505, -5 ) ) ) );
-			addInitializer( new Velocity( new PointZone( new Point( 0, 50 ) ) ) );
-			addInitializer( new ScaleImageInit( 0.75, 1.5 ) );
-			
+			addInitializer( new ImageClass( RadialDot, 2 ) );
+			addInitializer( new Position( new LineZone( new Point( -5, -5 ), new Point( 605, -5 ) ) ) );
+			addInitializer( new Velocity( new PointZone( new Point( 0, 65 ) ) ) );
+			addInitializer( new ScaleImageInit( 0.75, 2 ) );
+
 			addAction( new Move() );
-			addAction( new DeathZone( new RectangleZone( -10, -10, 510, 410 ), true ) );
-			addAction( new RandomDrift( 10, 10 ) );
+			addAction( new DeathZone( new RectangleZone( -10, -10, 620, 420 ), true ) );
+			addAction( new RandomDrift( 20, 20 ) );
 		}
 	}
 }

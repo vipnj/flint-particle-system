@@ -63,7 +63,7 @@ package
 			addAction( new LinearDrag( 0.5 ) );
 			addAction( new Accelerate( 0, 70 ) );
 			
-			addEventListener( EmitterEvent.EMITTER_EMPTY, restart );
+			addEventListener( EmitterEvent.EMITTER_EMPTY, restart, false, 0, true );
 		}
 		
 		public function restart( ev:EmitterEvent ):void

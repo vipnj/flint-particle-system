@@ -54,7 +54,7 @@ emitter.addAction( new Fade() );
 emitter.addAction( new Accelerate( 0, 50 ) );
 emitter.addAction( new LinearDrag( 0.5 ) );
 
-emitter.addEventListener( EmitterEvent.EMITTER_EMPTY, restart );
+emitter.addEventListener( EmitterEvent.EMITTER_EMPTY, restart, false, 0, true );
 
 var renderer:BitmapRenderer = new BitmapRenderer( new Rectangle( 0, 0, 500, 400 ) );
 renderer.addFilter( new BlurFilter( 2, 2, 1 ) );
