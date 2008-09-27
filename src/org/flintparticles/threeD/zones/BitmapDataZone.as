@@ -30,11 +30,12 @@
 
 package org.flintparticles.threeD.zones 
 {
-	import org.flintparticles.threeD.geom.Matrix3D;
-	import org.flintparticles.threeD.geom.Vector3D;
-	
 	import flash.display.BitmapData;
-	import flash.geom.Point;	
+	import flash.geom.Point;
+	
+	import org.flintparticles.common.utils.FastRatioArray;
+	import org.flintparticles.threeD.geom.Matrix3D;
+	import org.flintparticles.threeD.geom.Vector3D;	
 
 	/**
 	 * The BitmapData zone defines a shaped zone based on a BitmapData object.
@@ -55,7 +56,7 @@ package org.flintparticles.threeD.zones
 		private var _distToOrigin:Number;
 		private var _dirty:Boolean;
 		private var _volume : Number;
-		private var _validPoints : Array;
+		private var _validPoints : FastRatioArray;
 		
 		/**
 		 * The constructor creates a BitmapDataZone zone. To avoid distorting the zone, the top
@@ -146,21 +147,21 @@ package org.flintparticles.threeD.zones
 		 */
 		public function invalidate():void
 		{
-			_validPoints = new Array();
+			_validPoints = new FastRatioArray();
 			_volume = 0;
 			for( var x : int = 0; x < _bitmapData.width ; ++x )
 			{
 				for( var y : int = 0; y < _bitmapData.height ; ++y )
 				{
 					var pixel : uint = _bitmapData.getPixel32( x, y );
-					if ( ( pixel >> 24 & 0xFF ) != 0 )
+					var ratio : Number = ( pixel >> 24 & 0xFF ) / 0xFF;
+					if ( ratio != 0 )
 					{
-						++_volume;
-						_validPoints.push( new Point( x, _bitmapData.height-y ) );
+						_validPoints.add( new Point( x, _bitmapData.height-y ), ratio );
 					}
 				}
 			}
-			_volume = _top.crossProduct( _left ).length * _volume / ( _bitmapData.width * _bitmapData.height );
+			_volume = _top.crossProduct( _left ).length * _validPoints.totalRatios / ( _bitmapData.width * _bitmapData.height );
 			_dirty = true;
 		}
 
@@ -216,8 +217,7 @@ package org.flintparticles.threeD.zones
 			{
 				init();
 			}
-			var point:Point =  _validPoints[ Math.floor( Math.random() * _validPoints.length ) ];
-			
+			var point:Point =  _validPoints.getRandomValue().clone();
 			return _scaledWidth.multiply( point.x ).incrementBy( _scaledHeight.multiply( point.y ) ).incrementBy( _corner );
 		}
 		
