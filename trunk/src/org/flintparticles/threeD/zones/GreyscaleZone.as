@@ -30,11 +30,12 @@
 
 package org.flintparticles.threeD.zones 
 {
-	import org.flintparticles.threeD.geom.Matrix3D;
-	import org.flintparticles.threeD.geom.Vector3D;
-	
 	import flash.display.BitmapData;
-	import flash.geom.Point;	
+	import flash.geom.Point;
+	
+	import org.flintparticles.common.utils.FastRatioArray;
+	import org.flintparticles.threeD.geom.Matrix3D;
+	import org.flintparticles.threeD.geom.Vector3D;	
 
 	/**
 	 * The Greyscale zone defines a shaped zone based on a BitmapData object.
@@ -55,9 +56,8 @@ package org.flintparticles.threeD.zones
 		private var _basis : Matrix3D;
 		private var _distToOrigin:Number;
 		private var _dirty:Boolean;
-		private var _area : Number;
 		private var _volume : Number;
-		private var _validPoints : Array;
+		private var _validPoints : FastRatioArray;
 		
 		/**
 		 * The constructor creates a Greyscale zone. To avoid distorting the zone, the top
@@ -148,8 +148,7 @@ package org.flintparticles.threeD.zones
 		 */
 		public function invalidate():void
 		{
-			_validPoints = new Array();
-			_area = 0;
+			_validPoints = new FastRatioArray();
 			for( var x : int = 0; x < _bitmapData.width ; ++x )
 			{
 				for( var y : int = 0; y < _bitmapData.height ; ++y )
@@ -158,12 +157,11 @@ package org.flintparticles.threeD.zones
 					var grey : Number = 0.11 * ( pixel & 0xFF ) + 0.59 * ( ( pixel >>> 8 ) & 0xFF ) + 0.3 * ( ( pixel >>> 16 ) & 0xFF );
 					if ( grey != 0 )
 					{
-						_area += grey / 255;
-						_validPoints.push( new WeightedPoint( x, _bitmapData.height-y, _volume ) );
+						_validPoints.add( new Point( x, _bitmapData.height-y ), grey / 255 );
 					}
 				}
 			}
-			_volume = _top.crossProduct( _left ).length * _area / ( _bitmapData.width * _bitmapData.height );
+			_volume = _top.crossProduct( _left ).length * _validPoints.totalRatios / ( _bitmapData.width * _bitmapData.height );
 			_dirty = true;
 		}
 
@@ -219,23 +217,7 @@ package org.flintparticles.threeD.zones
 			{
 				init();
 			}
-			var value:Number = Math.random() * _volume;
-			var low:uint = 0;
-			var mid:uint;
-			var high:uint = _validPoints.length;
-			while( low < high )
-			{
-				mid = Math.floor( ( low + high ) * 0.5 );
-				if( _validPoints[ mid ].weight < value )
-				{
-					low = mid + 1;
-				}
-				else
-				{
-					high = mid;
-				}
-			}
-			var point:Point =  _validPoints[low].point;
+			var point:Point =  _validPoints.getRandomValue().clone();
 			
 			return _scaledWidth.multiply( point.x ).incrementBy( _scaledHeight.multiply( point.y ) ).incrementBy( _corner );
 		}
@@ -251,19 +233,5 @@ package org.flintparticles.threeD.zones
 		{
 			return _volume;
 		}
-	}
-}
-
-import flash.geom.Point;
-
-class WeightedPoint 
-{
-	public var point:Point;
-	public var weight:Number;
-	
-	public function WeightedPoint( x:int, y:int, topWeight:Number ):void
-	{
-		point = new Point( x, y );
-		weight = topWeight;
 	}
 }

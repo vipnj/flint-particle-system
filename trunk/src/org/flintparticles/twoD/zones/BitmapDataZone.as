@@ -31,7 +31,9 @@
 package org.flintparticles.twoD.zones 
 {
 	import flash.display.BitmapData;
-	import flash.geom.Point;	
+	import flash.geom.Point;
+	
+	import org.flintparticles.common.utils.FastRatioArray;	
 
 	/**
 	 * The BitmapData zone defines a shaped zone based on a BitmapData object.
@@ -42,14 +44,11 @@ package org.flintparticles.twoD.zones
 	public class BitmapDataZone implements Zone2D 
 	{
 		private var _bitmapData : BitmapData;
-		private var _left : Number;
-		private var _top : Number;
-		private var _right : Number;
-		private var _bottom : Number;
-		private var _width : Number;
-		private var _height : Number;
-		private var _area : Number;
-		private var _validPoints : Array;
+		private var _offsetX : Number;
+		private var _offsetY : Number;
+		private var _scaleX : Number;
+		private var _scaleY : Number;
+		private var _validPoints : FastRatioArray;
 		
 		/**
 		 * The constructor creates a BitmapDataZone object.
@@ -59,12 +58,16 @@ package org.flintparticles.twoD.zones
 		 * to reposition the zone
 		 * @param yOffset A vertical offset to apply to the pixels in the BitmapData object 
 		 * to reposition the zone
+		 * @param scaleX A scale factor to stretch the bitmap horizontally
+		 * @param scaleY A scale factor to stretch the bitmap vertically
 		 */
-		public function BitmapDataZone( bitmapData : BitmapData, xOffset : Number = 0, yOffset : Number = 0 )
+		public function BitmapDataZone( bitmapData : BitmapData, offsetX : Number = 0, offsetY : Number = 0, scaleX:Number = 1, scaleY:Number = 1 )
 		{
 			_bitmapData = bitmapData;
-			_left = xOffset;
-			_top = yOffset;
+			_offsetX = offsetX;
+			_offsetY = offsetY;
+			_scaleX = scaleX;
+			_scaleY = scaleY;
 			invalidate();
 		}
 		
@@ -85,28 +88,50 @@ package org.flintparticles.twoD.zones
 		 * A horizontal offset to apply to the pixels in the BitmapData object 
 		 * to reposition the zone
 		 */
-		public function get xOffset() : Number
+		public function get offsetX() : Number
 		{
-			return _left;
+			return _offsetX;
 		}
-		public function set xOffset( value : Number ) : void
+		public function set offsetX( value : Number ) : void
 		{
-			_left = value;
-			invalidate();
+			_offsetX = value;
 		}
 
 		/**
 		 * A vertical offset to apply to the pixels in the BitmapData object 
 		 * to reposition the zone
 		 */
-		public function get yOffset() : Number
+		public function get offsetY() : Number
 		{
-			return _top;
+			return _offsetY;
 		}
-		public function set yOffset( value : Number ) : void
+		public function set offsetY( value : Number ) : void
 		{
-			_top = value;
-			invalidate();
+			_offsetY = value;
+		}
+
+		/**
+		 * A scale factor to stretch the bitmap horizontally
+		 */
+		public function get scaleX() : Number
+		{
+			return _scaleX;
+		}
+		public function set scaleX( value : Number ) : void
+		{
+			_scaleX = value;
+		}
+
+		/**
+		 * A scale factor to stretch the bitmap vertically
+		 */
+		public function get scaleY() : Number
+		{
+			return _scaleY;
+		}
+		public function set scaleY( value : Number ) : void
+		{
+			_scaleY = value;
 		}
 
 		/**
@@ -116,22 +141,16 @@ package org.flintparticles.twoD.zones
 		 */
 		public function invalidate():void
 		{
-			_width = _bitmapData.width;
-			_height = _bitmapData.height;
-			_right = _left + _width;
-			_bottom = _top + _height;
-			
-			_validPoints = new Array();
-			_area = 0;
-			for( var x : int = 0; x < _width ; ++x )
+			_validPoints = new FastRatioArray();
+			for( var x : int = 0; x < _bitmapData.width ; ++x )
 			{
-				for( var y : int = 0; y < _height ; ++y )
+				for( var y : int = 0; y < _bitmapData.height ; ++y )
 				{
 					var pixel : uint = _bitmapData.getPixel32( x, y );
-					if ( ( pixel >> 24 & 0xFF ) != 0 )
+					var ratio : Number = ( pixel >> 24 & 0xFF ) / 0xFF;
+					if ( ratio != 0 )
 					{
-						++_area;
-						_validPoints.push( new Point( x + _left, y + _top ) );
+						_validPoints.add( new Point( x, y ), ratio );
 					}
 				}
 			}
@@ -145,9 +164,10 @@ package org.flintparticles.twoD.zones
 		 */
 		public function contains( x : Number, y : Number ) : Boolean
 		{
-			if( x >= _left && x <= _right && y >= _top && y <= _bottom )
+			if( x >= _offsetX && x <= _offsetX + _bitmapData.width * scaleX
+				&& y >= _offsetY && y <= _offsetY + _bitmapData.height * scaleY )
 			{
-				var pixel : uint = _bitmapData.getPixel32( Math.round( x - _left ), Math.round( y - _top ) );
+				var pixel : uint = _bitmapData.getPixel32( Math.round( ( x - _offsetX ) / _scaleX ), Math.round( ( y - _offsetY ) / _scaleY ) );
 				return ( pixel >> 24 & 0xFF ) != 0;
 			}
 			return false;
@@ -160,7 +180,10 @@ package org.flintparticles.twoD.zones
 		 */
 		public function getLocation() : Point
 		{
-			return _validPoints[ Math.floor( Math.random() * _validPoints.length ) ];
+			var p:Point = _validPoints.getRandomValue().clone();
+			p.x = p.x * _scaleX + _offsetX;
+			p.y = p.y * _scaleY + _offsetY;
+			return p; 
 		}
 
 		
@@ -173,7 +196,7 @@ package org.flintparticles.twoD.zones
 		 */
 		public function getArea() : Number
 		{
-			return _area;
+			return _validPoints.totalRatios * _scaleX * _scaleY;
 		}
 	}
 }
