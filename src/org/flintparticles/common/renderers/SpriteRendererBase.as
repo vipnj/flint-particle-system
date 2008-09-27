@@ -185,5 +185,10 @@ package org.flintparticles.common.renderers
 		protected function renderParticles( particles:Array ):void
 		{
 		}
+
+		public function get emitters():Array
+		{
+			return _emitters;
+		}
 	}
 }
