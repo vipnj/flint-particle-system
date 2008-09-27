@@ -76,7 +76,7 @@ package org.flintparticles.common.utils
 		public function FrameUpdater()
 		{
 			_shape = new Shape();
-			_shape.addEventListener( Event.ENTER_FRAME, frameUpdate );
+			_shape.addEventListener( Event.ENTER_FRAME, frameUpdate, false, 0, true );
 			_time = getTimer();
 		}
 

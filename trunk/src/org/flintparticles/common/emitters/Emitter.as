@@ -468,7 +468,7 @@ package org.flintparticles.common.emitters
 				{
 					if( _useInternalTick )
 					{
-						FrameUpdater.instance.addEventListener( UpdateEvent.UPDATE, updateEventListener );
+						FrameUpdater.instance.addEventListener( UpdateEvent.UPDATE, updateEventListener, false, 0, true );
 					}
 					else
 					{
@@ -612,7 +612,7 @@ package org.flintparticles.common.emitters
 		{
 			if( _useInternalTick )
 			{
-				FrameUpdater.instance.addEventListener( UpdateEvent.UPDATE, updateEventListener );
+				FrameUpdater.instance.addEventListener( UpdateEvent.UPDATE, updateEventListener, false, 0, true );
 			}
 			_started = true;
 			_running = true;

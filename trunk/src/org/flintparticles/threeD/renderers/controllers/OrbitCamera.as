@@ -166,7 +166,7 @@ package org.flintparticles.threeD.renderers.controllers
 				{
 					if( _useInternalTick )
 					{
-						FrameUpdater.instance.addEventListener( UpdateEvent.UPDATE, updateEventListener );
+						FrameUpdater.instance.addEventListener( UpdateEvent.UPDATE, updateEventListener, false, 0, true );
 					}
 					else
 					{
@@ -200,8 +200,8 @@ package org.flintparticles.threeD.renderers.controllers
 				_stage.removeEventListener( KeyboardEvent.KEY_UP, keyUp );
 			}
 			_stage = value;
-			_stage.addEventListener( KeyboardEvent.KEY_DOWN, keyDown );
-			_stage.addEventListener( KeyboardEvent.KEY_UP, keyUp );
+			_stage.addEventListener( KeyboardEvent.KEY_DOWN, keyDown, false, 0, true );
+			_stage.addEventListener( KeyboardEvent.KEY_UP, keyUp, false, 0, true );
 		}
 		
 		private function keyDown( ev:KeyboardEvent ):void
@@ -306,7 +306,7 @@ package org.flintparticles.threeD.renderers.controllers
 		{
 			if( _useInternalTick )
 			{
-				FrameUpdater.instance.addEventListener( UpdateEvent.UPDATE, updateEventListener );
+				FrameUpdater.instance.addEventListener( UpdateEvent.UPDATE, updateEventListener, false, 0, true );
 			}
 			_running = true;
 		}

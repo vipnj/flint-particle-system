@@ -53,7 +53,7 @@ package org.flintparticles.common.debug
 	   	{
 				textColor = color;
 				_times = new Array();
-				addEventListener( Event.ENTER_FRAME, onEnterFrame1 );
+				addEventListener( Event.ENTER_FRAME, onEnterFrame1, false, 0, true );
 	    }
 
 		private function onEnterFrame1( ev:Event ):void
@@ -61,7 +61,7 @@ package org.flintparticles.common.debug
 			if ( _times.push( getTimer() ) > 9 )
 			{
 				removeEventListener( Event.ENTER_FRAME, onEnterFrame1 );
-				addEventListener( Event.ENTER_FRAME, onEnterFrame2 );
+				addEventListener( Event.ENTER_FRAME, onEnterFrame2, false, 0, true );
 			}
 		}
 	
