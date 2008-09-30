@@ -69,9 +69,6 @@ package
 			camera.y = 150;
 			
 			flintRenderer = new PV3DRenderer( scene );
-			// unfortunately, papervision can't cope with drawing the smoke.
-			// This may well be a problem (or at least, a lack of optimisation)
-			// in my code. I welcome any solutions.
 			flintRenderer.addEmitter( smoke );
 			flintRenderer.addEmitter( fire );
 			
