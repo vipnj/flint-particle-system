@@ -46,6 +46,7 @@ package org.flintparticles.threeD.actions
 		private var _acc:Vector3D;
 		private var _zone:Zone3D;
 		private var _invert:Boolean;
+		private var _temp:Vector3D;
 		
 		/**
 		 * The constructor creates a Jet action for use by 
@@ -67,6 +68,7 @@ package org.flintparticles.threeD.actions
 			this.acceleration = acceleration;
 			this.zone = zone;
 			this.invertZone = invertZone;
+			_temp = new Vector3D();
 		}
 		
 		/**
@@ -118,14 +120,14 @@ package org.flintparticles.threeD.actions
 			{
 				if( !_invert )
 				{
-					p.velocity.incrementBy( _acc.multiply( time ) );
+					p.velocity.incrementBy( _acc.multiply( time, _temp ) );
 				}
 			}
 			else
 			{
 				if( _invert )
 				{
-					p.velocity.incrementBy( _acc.multiply( time ) );
+					p.velocity.incrementBy( _acc.multiply( time, _temp ) );
 				}
 			}
 		}

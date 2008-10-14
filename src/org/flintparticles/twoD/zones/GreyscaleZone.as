@@ -33,7 +33,7 @@ package org.flintparticles.twoD.zones
 	import flash.display.BitmapData;
 	import flash.geom.Point;
 	
-	import org.flintparticles.common.utils.FastRatioArray;	
+	import org.flintparticles.common.utils.FastWeightedArray;	
 
 	/**
 	 * The Greyscale zone defines a shaped zone based on a BitmapData object.
@@ -49,7 +49,7 @@ package org.flintparticles.twoD.zones
 		private var _offsetY : Number;
 		private var _scaleX : Number;
 		private var _scaleY : Number;
-		private var _validPoints : FastRatioArray;
+		private var _validPoints : FastWeightedArray;
 		
 		/**
 		 * The constructor creates a GreyscaleZone object.
@@ -140,7 +140,7 @@ package org.flintparticles.twoD.zones
 		 */
 		public function invalidate():void
 		{
-			_validPoints = new FastRatioArray();
+			_validPoints = new FastWeightedArray();
 			for( var x : uint = 0; x < bitmapData.width ; ++x )
 			{
 				for( var y : uint = 0; y < bitmapData.height ; ++y )

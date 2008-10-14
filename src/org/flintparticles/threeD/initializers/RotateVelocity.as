@@ -139,7 +139,7 @@ package org.flintparticles.threeD.initializers
 			{
 				angle = _min + Math.random() * ( _max - _min );
 			}
-			p.angVelocity = axis.multiply( angle );
+			p.angVelocity.assign( axis ).scaleBy( angle );
 		}
 	}
 }

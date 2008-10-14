@@ -33,6 +33,7 @@ package org.flintparticles.threeD.activities
 	import org.flintparticles.common.activities.ActivityBase;
 	import org.flintparticles.common.emitters.Emitter;
 	import org.flintparticles.threeD.emitters.Emitter3D;
+	import org.flintparticles.threeD.geom.Quaternion;
 	import org.flintparticles.threeD.geom.Vector3D;	
 
 	/**
@@ -41,6 +42,8 @@ package org.flintparticles.threeD.activities
 	public class RotateEmitter extends ActivityBase
 	{
 		private var _angularVelocity:Vector3D;
+		private var q:Quaternion;
+		private var temp:Quaternion;
 		
 		/**
 		 * The constructor creates a RotateEmitter activity for use by 
@@ -54,7 +57,9 @@ package org.flintparticles.threeD.activities
 		 */
 		public function RotateEmitter( angularVelocity:Vector3D )
 		{
-			this.angularVelocity = angularVelocity;
+			_angularVelocity = angularVelocity.clone();
+			temp = new Quaternion();
+			q = new Quaternion( 0, angularVelocity.x * 0.5, angularVelocity.y * 0.5, angularVelocity.z * 0.5 );
 		}
 		
 		/**
@@ -68,6 +73,10 @@ package org.flintparticles.threeD.activities
 		public function set angularVelocity( value:Vector3D ):void
 		{
 			_angularVelocity = value.clone();
+			q.w = 0;
+			q.x = _angularVelocity.x * 0.5;
+			q.y = _angularVelocity.y * 0.5;
+			q.z = _angularVelocity.z * 0.5;
 		}
 		
 		/**
@@ -75,7 +84,10 @@ package org.flintparticles.threeD.activities
 		 */
 		override public function update( emitter : Emitter, time : Number ) : void
 		{
-			Emitter3D( emitter ).rotation.incrementBy( _angularVelocity.multiply( time ) );
+			var e:Emitter3D = Emitter3D( emitter );
+			temp.assign( q );
+			temp.postMultiplyBy( e.rotation );
+			e.rotation.incrementBy( temp.scaleBy( time ) ).normalize();
 		}
 	}
 }

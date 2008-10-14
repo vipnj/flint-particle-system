@@ -31,39 +31,40 @@
 package org.flintparticles.common.utils
 {
 	/**
-	 * A PriorityArray is a collection of values that are permanently
-	 * sorted according to their priority. When values are added to
-	 * the PriorityArray their priority is indicated. They are then
-	 * placed into the Array in sequence according to this priority.
+	 * A FastWeightedArray performes the same purpose as a WeightedArray 
+	 * but this array is optimized to select random items in a large array 
+	 * much more rapidly. In improving the speed if the array, it is necessary
+	 * to loose the functionality to remove items from the FastWeightedArray, so
+	 * the original WeightedArray also still available.
 	 * 
-	 * <p>Due to the nature of a PriorityArray, there are no facilities
+	 * <p>The FastWeightedArray is a collection of values that are weighted. When 
+	 * a random value is required from the collection, the value returned
+	 * is randomly selkected based on the weightings.</p>
+	 * 
+	 * <p>Due to the nature of a FastWeightedArray, there are no facilities
 	 * to push, unshift or splice items into the array. All items are 
-	 * added to the PriorityArray using the add method.</p>
-	 * 
-	 * <p>The array items can be accessed using standard Array access
-	 * so the items in the PriorityArray can be looped through in
-	 * the same manner as a standard Array.</p>
+	 * added to the FastWeightedArray using the add method.</p>
 	 */
-	public class FastRatioArray
+	public class FastWeightedArray
 	{
 		private var _values:Array;
 		private var _totalRatios:Number;
 		
 		/**
-		 * Then constructor function is used to create a PriorityArray
+		 * Then constructor function is used to create a FastWeightedArray
 		 */
-		public function FastRatioArray()
+		public function FastWeightedArray()
 		{
 			_values = new Array();
 			_totalRatios = 0;
 		}
 		
 		/**
-		 * Adds a value to the RatioArray.
+		 * Adds a value to the FastWeightedArray.
 		 * 
 		 * @param value the value to add
-		 * @param priority the priority to lpace on the item
-		 * @return the length of the PriorityArray
+		 * @param weight the weighting to place on the item
+		 * @return the length of the FastWeightedArray
 		 */
 		public function add( value:*, ratio:Number ):uint
 		{
@@ -73,7 +74,7 @@ package org.flintparticles.common.utils
 		}
 		
 		/**
-		 * Empties the PriorityArray. After calling this method the PriorityArray 
+		 * Empties the FastWeightedArray. After calling this method the FastWeightedArray 
 		 * contains no items.
 		 */
 		public function clear():void
@@ -83,20 +84,27 @@ package org.flintparticles.common.utils
 		}
 		
 		/**
-		 * The number of items in the PriorityArray
+		 * The number of items in the FastWeightedArray
 		 */
 		public function get length():uint
 		{
 			return _values.length;
 		}
 		
+		/**
+		 * The sum of the weights of all the values.
+		 */
 		public function get totalRatios():Number
 		{
 			return _totalRatios;
 		}
 
 		/**
+		 * Returns a random value from the FastWeightedArray. The weighting of the values is
+		 * used when selcting the random value, so items with a higher weighting are
+		 * more likely to be seleted.
 		 * 
+		 * @return A randomly selected item from the array.
 		 */
 		public function getRandomValue():*
 		{

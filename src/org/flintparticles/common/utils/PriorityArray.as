@@ -115,7 +115,7 @@ package org.flintparticles.common.utils
 		 * Adds a value to the PriorityArray.
 		 * 
 		 * @param value the value to add
-		 * @param priority the priority to lpace on the item
+		 * @param priority the priority to place on the item
 		 * @return the length of the PriorityArray
 		 */
 		public function add( value:*, priority:Number ):uint
