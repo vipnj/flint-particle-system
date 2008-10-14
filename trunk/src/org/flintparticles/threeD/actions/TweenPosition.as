@@ -46,6 +46,7 @@ package org.flintparticles.threeD.actions
 	{
 		private var _diff:Vector3D;
 		private var _end:Vector3D;
+		private var _temp:Vector3D;
 		
 		/**
 		 * The constructor creates a TweenPosition action for use by 
@@ -69,6 +70,7 @@ package org.flintparticles.threeD.actions
 			_end = end.clone();
 			_diff.w = 0;
 			_end.w = 1;
+			_temp = new Vector3D();
 		}
 		
 		/**
@@ -104,8 +106,7 @@ package org.flintparticles.threeD.actions
 		 */
 		override public function update( emitter:Emitter, particle:Particle, time:Number ):void
 		{
-			var p:Particle3D = Particle3D( particle );
-			p.position = _diff.multiply( particle.energy ).incrementBy( _end );
+			Particle3D( particle ).position = _diff.multiply( particle.energy, _temp ).incrementBy( _end );
 		}
 	}
 }

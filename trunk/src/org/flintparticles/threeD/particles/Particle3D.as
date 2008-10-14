@@ -87,7 +87,7 @@ package org.flintparticles.threeD.particles
 		/**
 		 * The position of the particle in the emitter's x-axis spacial sorted array
 		 */
-		public var sortID:int;
+		public var sortID:int = -1;
 		
 		/**
 		 * Position vector projected into screen space. Used by renderers.
@@ -97,7 +97,7 @@ package org.flintparticles.threeD.particles
 		/**
 		 * z depth of particle in renderer's camera space
 		 */
-		public var zDepth:Number;
+		public var zDepth:Number = 0;
 		
 		/**
 		 * Creates a Particle3D. Alternatively particles can be reused by using an
@@ -108,6 +108,12 @@ package org.flintparticles.threeD.particles
 		public function Particle3D()
 		{
 			super();
+			position = new Vector3D( 0, 0, 0, 1 );
+			projectedPosition = new Vector3D( 0, 0, 0, 1 );
+			faceAxis = new Vector3D( 1, 0, 0, 0 );
+			velocity = new Vector3D( 0, 0, 0, 0 );
+			rotation = new Quaternion( 1, 0, 0, 0 );
+			angVelocity = new Vector3D( 0, 0, 0, 0 );
 		}
 		
 		/**
@@ -116,12 +122,12 @@ package org.flintparticles.threeD.particles
 		override public function initialize():void
 		{
 			super.initialize();
-			position = new Vector3D( 0, 0, 0, 1 );
-			projectedPosition = new Vector3D( 0, 0, 0, 1 );
-			faceAxis = new Vector3D( 1, 0, 0, 0 );
-			velocity = new Vector3D( 0, 0, 0, 0 );
-			rotation = new Quaternion( 1, 0, 0, 0 );
-			angVelocity = new Vector3D( 0, 0, 0, 0 );
+			position.reset( 0, 0, 0, 1 );
+			projectedPosition.reset( 0, 0, 0, 1 );
+			faceAxis.reset( 1, 0, 0, 0 );
+			velocity.reset( 0, 0, 0, 0 );
+			rotation.reset( 1, 0, 0, 0 );
+			angVelocity.reset( 0, 0, 0, 0 );
 			sortID = -1;
 			zDepth = 0;
 		}

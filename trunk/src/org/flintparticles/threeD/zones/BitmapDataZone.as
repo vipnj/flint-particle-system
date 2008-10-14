@@ -33,7 +33,7 @@ package org.flintparticles.threeD.zones
 	import flash.display.BitmapData;
 	import flash.geom.Point;
 	
-	import org.flintparticles.common.utils.FastRatioArray;
+	import org.flintparticles.common.utils.FastWeightedArray;
 	import org.flintparticles.threeD.geom.Matrix3D;
 	import org.flintparticles.threeD.geom.Vector3D;	
 
@@ -56,7 +56,7 @@ package org.flintparticles.threeD.zones
 		private var _distToOrigin:Number;
 		private var _dirty:Boolean;
 		private var _volume : Number;
-		private var _validPoints : FastRatioArray;
+		private var _validPoints : FastWeightedArray;
 		
 		/**
 		 * The constructor creates a BitmapDataZone zone. To avoid distorting the zone, the top
@@ -147,7 +147,7 @@ package org.flintparticles.threeD.zones
 		 */
 		public function invalidate():void
 		{
-			_validPoints = new FastRatioArray();
+			_validPoints = new FastWeightedArray();
 			_volume = 0;
 			for( var x : int = 0; x < _bitmapData.width ; ++x )
 			{

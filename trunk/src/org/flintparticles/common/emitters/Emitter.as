@@ -661,9 +661,13 @@ package org.flintparticles.common.emitters
 		 */
 		public function update( time:Number ):void
 		{
-			if( !_running || time > _maximumFrameTime )
+			if( !_running )
 			{
 				return;
+			}
+			if( time > _maximumFrameTime )
+			{
+				time = _maximumFrameTime;
 			}
 			var i:int;
 			var particle:Particle;

@@ -44,6 +44,7 @@ package org.flintparticles.threeD.actions
 	public class Accelerate extends ActionBase
 	{
 		private var _acc:Vector3D;
+		private var _temp:Vector3D;
 		
 		/**
 		 * The constructor creates an Acceleration action for use by an emitter. 
@@ -57,6 +58,7 @@ package org.flintparticles.threeD.actions
 		 */
 		public function Accelerate( acceleration:Vector3D )
 		{
+			_temp = new Vector3D();
 			this.acceleration = acceleration;
 		}
 		
@@ -87,8 +89,7 @@ package org.flintparticles.threeD.actions
 		 */
 		override public function update( emitter:Emitter, particle:Particle, time:Number ):void
 		{
-			var p:Particle3D = Particle3D( particle );
-			p.velocity.incrementBy( _acc.multiply( time ) );
+			Particle3D( particle ).velocity.incrementBy( _acc.multiply( time, _temp ) );
 		}
 	}
 }

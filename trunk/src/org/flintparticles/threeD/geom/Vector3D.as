@@ -217,50 +217,75 @@ package org.flintparticles.threeD.geom
 		/**
 		 * Makes a copy of this Vector3D object.
 		 * 
+		 * @param result The vector to hold the copy of this vector. If
+		 * no vector is passed, a new vector is created.
+		 * 
 		 * @return A copy of this Vector3D
 		 */
-		public function clone():Vector3D
+		public function clone( result:Vector3D = null ):Vector3D
 		{
-			return new Vector3D( x, y, z, w );
+			if( result == null )
+			{
+				result = new Vector3D();
+			}
+			return result.reset( x, y, z, w );
 		}
 		
 		/**
-		 * Adds another vector to this one, returning a new vector.
+		 * Adds another vector to this one, returning the result.
 		 * The w coordinate is used.
 		 * 
 		 * @param v the vector to add
+		 * @param result The vector to hold the result of the addition. If
+		 * no vector is passed, a new vector is created.
 		 * 
 		 * @return the result of the addition
 		 */
-		public function add( v:Vector3D ):Vector3D
+		public function add( v:Vector3D, result:Vector3D = null ):Vector3D
 		{
-			return new Vector3D( x + v.x, y + v.y, z + v.z, w + v.w );
+			if( result == null )
+			{
+				result = new Vector3D();
+			}
+			return result.reset( x + v.x, y + v.y, z + v.z, w + v.w );
 		}
 		
 		/**
-		 * Subtract another vector from this one, returning a new vector. The
+		 * Subtract another vector from this one, returning the result. The
 		 * w coordinate is used.
 		 * 
 		 * @param v The vector to subtract
+		 * @param result The vector to hold the result of the subtraction. If
+		 * no vector is passed, a new vector is created.
 		 * 
 		 * @return The result of the subtraction
 		 */		
-		public function subtract( v:Vector3D ):Vector3D
+		public function subtract( v:Vector3D, result:Vector3D = null ):Vector3D
 		{
-			return new Vector3D( x - v.x, y - v.y, z - v.z, w - v.w );
+			if( result == null )
+			{
+				result = new Vector3D();
+			}
+			return result.reset( x - v.x, y - v.y, z - v.z, w - v.w );
 		}
 
 		/**
-		 * Multiply this vector by a number, returning a new vector.
+		 * Multiply this vector by a number, returning the result.
 		 * The w coordinate is unchanged.
 		 * 
 		 * @param s The number to multiply by
+		 * @param result The vector to hold the result of the multiplication. If
+		 * no vector is passed, a new vector is created.
 		 * 
 		 * @return The result of the multiplication
 		 */
-		public function multiply( s:Number ):Vector3D
+		public function multiply( s:Number, result:Vector3D = null ):Vector3D
 		{
-			return new Vector3D( x * s, y * s, z * s, w );
+			if( result == null )
+			{
+				result = new Vector3D();
+			}
+			return result.reset( x * s, y * s, z * s, w );
 		}
 		
 		/**
@@ -355,12 +380,18 @@ package org.flintparticles.threeD.geom
 		 * The w coordinate is not used.
 		 * 
 		 * @param v The vector to calculate the cross product with
+		 * @param result The vector to hold the result of the cross product. If
+		 * no vector is passed, a new vector is created.
 		 * 
 		 * @return The cross product of the two vectors
 		 */
-		public function crossProduct( v:Vector3D ):Vector3D
+		public function crossProduct( v:Vector3D, result:Vector3D = null ):Vector3D
 		{
-			return new Vector3D( y * v.z - z * v.y, z * v.x - x * v.z, x * v.y - y * v.x );
+			if( result == null )
+			{
+				result = new Vector3D;
+			}
+			return result.reset( y * v.z - z * v.y, z * v.x - x * v.z, x * v.y - y * v.x );
 		}
 		
 		/**
@@ -381,14 +412,21 @@ package org.flintparticles.threeD.geom
 		
 		/**
 		 * Get the negative of this vector - a vector the same length but in the 
-		 * opposite direction. The sign of the x, y and z coordinates is chaged.
+		 * opposite direction. The sign of the x, y and z coordinates is changed.
 		 * The w coordinate is unchanged.
+		 * 
+		 * @param result The vector to hold the result of the negation. If
+		 * no vector is passed, a new vector is created.
 		 * 
 		 * @return the negative of this vector
 		 */
-		public function get negative():Vector3D
+		public function negative( result:Vector3D = null ):Vector3D
 		{
-			return new Vector3D( -x, -y, -z, w );
+			if( result == null )
+			{
+				result = new Vector3D;
+			}
+			return result.reset( -x, -y, -z, w );
 		}
 		
 		/**
@@ -450,11 +488,18 @@ package org.flintparticles.threeD.geom
 		 * Create a unit vector in the same direction as this one. The w coordinate 
 		 * is not changed.
 		 * 
+		 * @param result The vector to hold the unit vector result. If
+		 * no vector is passed, a new vector is created.
+		 * 
 		 * @return A unit vector in the same direction as this one.
 		 */
-		public function unit():Vector3D
+		public function unit( result:Vector3D = null ):Vector3D
 		{
-			return clone().normalize();
+			if( result == null )
+			{
+				result = new Vector3D();
+			}
+			return result.reset( x, y, z, w ).normalize();
 		}
 		
 		/**

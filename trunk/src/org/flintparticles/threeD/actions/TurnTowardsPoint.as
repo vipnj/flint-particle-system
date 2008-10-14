@@ -45,6 +45,9 @@ package org.flintparticles.threeD.actions
 	{
 		private var _point:Vector3D;
 		private var _power:Number;
+		private var _velDirection:Vector3D;
+		private var _toTarget:Vector3D;
+		private var _targetPerp:Vector3D;
 		
 		/**
 		 * The constructor creates a TurnTowardsPoint action for use by 
@@ -60,6 +63,9 @@ package org.flintparticles.threeD.actions
 		{
 			_power = power;
 			_point = point.clone();
+			_velDirection = new Vector3D();
+			_toTarget = new Vector3D();
+			_targetPerp = new Vector3D();
 		}
 		
 		/**
@@ -92,18 +98,18 @@ package org.flintparticles.threeD.actions
 		override public function update( emitter:Emitter, particle:Particle, time:Number ):void
 		{
 			var p:Particle3D = Particle3D( particle );
-			var velDirection:Vector3D = p.velocity.unit();
+			p.velocity.unit( _velDirection );
 			var velLength:Number = p.velocity.length;
 			var acc:Number = power * time;
-			var toTarget:Vector3D = _point.subtract( p.position );
-			var len:Number = toTarget.length;
+			_point.subtract( p.position, _toTarget );
+			var len:Number = _toTarget.length;
 			if( len == 0 )
 			{
 				return;
 			}
-			toTarget.scaleBy( 1 / len );
-			var targetPerp:Vector3D = toTarget.subtract( velDirection.scaleBy( toTarget.dotProduct( velDirection ) ) );
-			p.velocity.incrementBy( targetPerp.scaleBy( acc / targetPerp.length ) );
+			_toTarget.scaleBy( 1 / len );
+			_toTarget.subtract( _velDirection.scaleBy( _toTarget.dotProduct( _velDirection ) ), _targetPerp );
+			p.velocity.incrementBy( _targetPerp.scaleBy( acc / _targetPerp.length ) );
 			p.velocity.scaleBy( velLength / p.velocity.length );
 		}
 	}

@@ -32,7 +32,7 @@ package org.flintparticles.common.initializers
 {
 	import org.flintparticles.common.emitters.Emitter;
 	import org.flintparticles.common.particles.Particle;
-	import org.flintparticles.common.utils.RatioArray;	
+	import org.flintparticles.common.utils.WeightedArray;	
 
 	/**
 	 * The SharedImages Initializer sets the DisplayObject to use to draw
@@ -48,7 +48,7 @@ package org.flintparticles.common.initializers
 
 	public class SharedImages extends InitializerBase
 	{
-		private var _images:RatioArray;
+		private var _images:WeightedArray;
 		
 		/**
 		 * The constructor creates a SharedImages initializer for use by 
@@ -64,7 +64,7 @@ package org.flintparticles.common.initializers
 		 */
 		public function SharedImages( images:Array, weights:Array = null )
 		{
-			_images = new RatioArray;
+			_images = new WeightedArray;
 			var len:int = images.length;
 			var i:int;
 			if( weights != null && weights.length == len )

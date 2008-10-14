@@ -60,6 +60,7 @@ package org.flintparticles.threeD.actions
 		 * Temporary variables created as class members to avoid creating new objects all the time
 		 */
 		private var d:Vector3D;
+		private var _temp:Vector3D;
 
 		/**
 		 * The constructor creates a Collide action for use by  an emitter.
@@ -78,6 +79,7 @@ package org.flintparticles.threeD.actions
 			_bounce = bounce;
 			_maxDistance = 0;
 			d = new Vector3D();
+			_temp = new Vector3D();
 		}
 		
 		/**
@@ -218,8 +220,8 @@ package org.flintparticles.threeD.actions
 						factor = ( ( 1 + _bounce ) * relN ) / ( m1 + m2 );
 						f1 = factor * m2;
 						f2 = -factor * m1;
-						p.velocity.decrementBy( d.multiply( f1 ) );
-						other.velocity.decrementBy( d.multiply( f2 ) );
+						p.velocity.decrementBy( d.multiply( f1, _temp ) );
+						other.velocity.decrementBy( d.multiply( f2, _temp ) );
 					}
 				} 
 			}

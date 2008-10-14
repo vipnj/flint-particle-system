@@ -32,7 +32,7 @@ package org.flintparticles.common.initializers
 {
 	import org.flintparticles.common.emitters.Emitter;
 	import org.flintparticles.common.particles.Particle;
-	import org.flintparticles.common.utils.RatioArray;	
+	import org.flintparticles.common.utils.WeightedArray;	
 
 	/**
 	 * The ScaleImagesInit initializer sets the scale of the particles image. It selects 
@@ -48,7 +48,7 @@ package org.flintparticles.common.initializers
 
 	public class ScaleImagesInit extends InitializerBase
 	{
-		private var _scales:RatioArray;
+		private var _scales:WeightedArray;
 		
 		/**
 		 * The constructor creates a ScaleImagesInit initializer for use by 
@@ -64,7 +64,7 @@ package org.flintparticles.common.initializers
 		 */
 		public function ScaleImagesInit( scales:Array, weights:Array = null )
 		{
-			_scales = new RatioArray;
+			_scales = new WeightedArray;
 			var len:int = scales.length;
 			var i:int;
 			if( weights != null && weights.length == len )

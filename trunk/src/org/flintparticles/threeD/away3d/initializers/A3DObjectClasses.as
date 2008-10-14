@@ -33,7 +33,7 @@ package org.flintparticles.threeD.away3d.initializers
 	import org.flintparticles.common.emitters.Emitter;
 	import org.flintparticles.common.initializers.InitializerBase;
 	import org.flintparticles.common.particles.Particle;
-	import org.flintparticles.common.utils.RatioArray;	
+	import org.flintparticles.common.utils.WeightedArray;	
 
 	/**
 	 * The ImageClass Initializer sets the DisplayObject to use to draw
@@ -43,7 +43,7 @@ package org.flintparticles.threeD.away3d.initializers
 
 	public class A3DObjectClasses extends InitializerBase
 	{
-		private var _images:RatioArray;
+		private var _images:WeightedArray;
 		
 		/**
 		 * The constructor creates a ImageClasses initializer for use by 
@@ -59,7 +59,7 @@ package org.flintparticles.threeD.away3d.initializers
 		 */
 		public function A3DObjectClasses( images:Array, parameters:Array = null, weights:Array = null )
 		{
-			_images = new RatioArray;
+			_images = new WeightedArray;
 			if( parameters == null )
 			{
 				parameters = [];

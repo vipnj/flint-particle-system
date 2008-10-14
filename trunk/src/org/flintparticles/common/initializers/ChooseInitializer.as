@@ -32,7 +32,7 @@ package org.flintparticles.common.initializers
 {
 	import org.flintparticles.common.emitters.Emitter;
 	import org.flintparticles.common.particles.Particle;
-	import org.flintparticles.common.utils.RatioArray;	
+	import org.flintparticles.common.utils.WeightedArray;	
 
 	/**
 	 * The ChooseInitializer initializer selects one of multiple initializers, using 
@@ -45,7 +45,7 @@ package org.flintparticles.common.initializers
 
 	public class ChooseInitializer extends InitializerBase
 	{
-		private var _initializers:RatioArray;
+		private var _initializers:WeightedArray;
 		
 		/**
 		 * The constructor creates a ChooseInitializer initializer for use by 
@@ -60,7 +60,7 @@ package org.flintparticles.common.initializers
 		 */
 		public function ChooseInitializer( initializers:Array, weights:Array = null )
 		{
-			_initializers = new RatioArray;
+			_initializers = new WeightedArray;
 			var len:int = initializers.length;
 			var i:int;
 			if( weights != null && weights.length == len )
@@ -84,7 +84,7 @@ package org.flintparticles.common.initializers
 			_initializers.add( initializer, weight );
 		}
 		
-		public function removeScale( initializer:Number ):void
+		public function removeInitializer( initializer:Number ):void
 		{
 			_initializers.remove( initializer );
 		}

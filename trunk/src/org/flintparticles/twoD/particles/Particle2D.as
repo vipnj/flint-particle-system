@@ -94,7 +94,7 @@ package org.flintparticles.twoD.particles
 		/**
 		 * The position in the emitter's horizontal spacial sorted array
 		 */
-		public var sortID:uint;
+		public var sortID:uint = 0;
 		
 		/**
 		 * Creates a particle. Alternatively particles can be reused by using the ParticleCreator to create

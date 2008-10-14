@@ -68,14 +68,16 @@ package org.flintparticles.common.counters
 		}
 		
 		/**
-		 * Does nothing
+		 * Does nothing. Since the blast counter emits a single blast and then
+		 * stops, stopping it changes nothing.
 		 */
 		public function stop():void
 		{
 		}
 		
 		/**
-		 * Does nothing
+		 * Does nothing. Since the blast counter emits a single blast and then
+		 * stops, stopping and resuming it changes nothing.
 		 */
 		public function resume():void
 		{

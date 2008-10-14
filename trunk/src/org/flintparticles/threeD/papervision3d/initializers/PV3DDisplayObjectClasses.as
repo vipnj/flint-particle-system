@@ -33,7 +33,7 @@ package org.flintparticles.threeD.papervision3d.initializers
 	import org.flintparticles.common.emitters.Emitter;
 	import org.flintparticles.common.initializers.InitializerBase;
 	import org.flintparticles.common.particles.Particle;
-	import org.flintparticles.common.utils.RatioArray;
+	import org.flintparticles.common.utils.WeightedArray;
 	import org.flintparticles.common.utils.construct;
 	import org.papervision3d.materials.MovieMaterial;
 	import org.papervision3d.objects.primitives.Plane;
@@ -48,7 +48,7 @@ package org.flintparticles.threeD.papervision3d.initializers
 
 	public class PV3DDisplayObjectClasses extends InitializerBase
 	{
-		private var _images:RatioArray;
+		private var _images:WeightedArray;
 		
 		/**
 		 * The constructor creates a ImageClasses initializer for use by 
@@ -64,7 +64,7 @@ package org.flintparticles.threeD.papervision3d.initializers
 		 */
 		public function PV3DDisplayObjectClasses( images:Array, weights:Array = null )
 		{
-			_images = new RatioArray;
+			_images = new WeightedArray;
 			var len:int = images.length;
 			var i:int;
 			if( weights != null && weights.length == len )

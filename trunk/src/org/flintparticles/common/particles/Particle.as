@@ -51,7 +51,7 @@ package org.flintparticles.common.particles
 		 */
 		public var color:uint = 0xFFFFFFFF;
 		
-		private var _colorTransform:ColorTransform;
+		private var _colorTransform:ColorTransform = null;
 		private var _previousColor:uint;
 		
 		/**
@@ -118,7 +118,6 @@ package org.flintparticles.common.particles
 		 */
 		public function Particle()
 		{
-			initialize();
 		}
 		
 		/**

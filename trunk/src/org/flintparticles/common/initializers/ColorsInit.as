@@ -32,7 +32,7 @@ package org.flintparticles.common.initializers
 {
 	import org.flintparticles.common.emitters.Emitter;
 	import org.flintparticles.common.particles.Particle;
-	import org.flintparticles.common.utils.RatioArray;	
+	import org.flintparticles.common.utils.WeightedArray;	
 
 	/**
 	 * The ColorsInit initializer sets the color of the particle. It selects 
@@ -42,7 +42,7 @@ package org.flintparticles.common.initializers
 
 	public class ColorsInit extends InitializerBase
 	{
-		private var _colors:RatioArray;
+		private var _colors:WeightedArray;
 		
 		/**
 		 * The constructor creates a ColorsInit initializer for use by 
@@ -58,7 +58,7 @@ package org.flintparticles.common.initializers
 		 */
 		public function ColorsInit( colors:Array, weights:Array = null )
 		{
-			_colors = new RatioArray;
+			_colors = new WeightedArray;
 			var len:int = colors.length;
 			var i:int;
 			if( weights != null && weights.length == len )

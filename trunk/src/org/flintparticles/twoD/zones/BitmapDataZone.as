@@ -33,7 +33,7 @@ package org.flintparticles.twoD.zones
 	import flash.display.BitmapData;
 	import flash.geom.Point;
 	
-	import org.flintparticles.common.utils.FastRatioArray;	
+	import org.flintparticles.common.utils.FastWeightedArray;	
 
 	/**
 	 * The BitmapData zone defines a shaped zone based on a BitmapData object.
@@ -48,7 +48,7 @@ package org.flintparticles.twoD.zones
 		private var _offsetY : Number;
 		private var _scaleX : Number;
 		private var _scaleY : Number;
-		private var _validPoints : FastRatioArray;
+		private var _validPoints : FastWeightedArray;
 		
 		/**
 		 * The constructor creates a BitmapDataZone object.
@@ -141,7 +141,7 @@ package org.flintparticles.twoD.zones
 		 */
 		public function invalidate():void
 		{
-			_validPoints = new FastRatioArray();
+			_validPoints = new FastWeightedArray();
 			for( var x : int = 0; x < _bitmapData.width ; ++x )
 			{
 				for( var y : int = 0; y < _bitmapData.height ; ++y )
