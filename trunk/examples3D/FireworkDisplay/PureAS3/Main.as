@@ -35,6 +35,7 @@ package
 	import flash.geom.Rectangle;
 	import flash.text.TextField;
 	
+	import org.flintparticles.common.emitters.Emitter;
 	import org.flintparticles.common.events.EmitterEvent;
 	import org.flintparticles.common.events.ParticleEvent;
 	import org.flintparticles.threeD.emitters.Emitter3D;
@@ -111,8 +112,7 @@ package
 		
 		public function destroy():void
 		{
-			var emitters:Emitters = renderer.emitters;
-			for each( e:Emitter in emitters )
+			for each( var e:Emitter in renderer.emitters )
 			{
 				e.stop();
 			}
