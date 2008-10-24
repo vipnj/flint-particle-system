@@ -4,22 +4,22 @@
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="../../../../style.css" type="text/css" media="screen">
 <link rel="stylesheet" href="../../../../print.css" type="text/css" media="print">
-<meta content="FastRatioArray,org.flintparticles.common.utils.FastRatioArray,length,totalRatios,add,clear,getRandomValue" name="keywords">
-<title>org.flintparticles.common.utils.FastRatioArray</title>
+<meta content="FastWeightedArray,org.flintparticles.common.utils.FastWeightedArray,length,totalRatios,add,clear,getRandomValue" name="keywords">
+<title>org.flintparticles.common.utils.FastWeightedArray</title>
 </head>
 <body>
 <script type="text/javascript" language="javascript" src="../../../../asdoc.js"></script><script type="text/javascript" language="javascript" src="../../../../cookies.js"></script><script type="text/javascript" language="javascript">
 <!--
-				asdocTitle = 'FastRatioArray - Flint Particle System documentation';
+				asdocTitle = 'FastWeightedArray - Flint Particle System documentation';
 				var baseRef = '../../../../';
 				window.onload = configPage;
 			--></script>
 <table style="display:none" id="titleTable" cellspacing="0" cellpadding="0" class="titleTable">
 <tr>
-<td align="left" class="titleTableTitle">Flint Particle System documentation v2.0 beta</td><td align="right" class="titleTableTopNav"><a onclick="loadClassListFrame('../../../../all-classes.html')" href="../../../../package-summary.html">All&nbsp;Packages</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../../../all-classes.html')" href="../../../../class-summary.html">All&nbsp;Classes</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../../../index-list.html')" href="../../../../all-index-A.html">Index</a>&nbsp;|&nbsp;<a href="../../../../index.html?org/flintparticles/common/utils/FastRatioArray.html&amp;org/flintparticles/common/utils/class-list.html" id="framesLink1">Frames</a><a onclick="parent.location=document.location" href="" style="display:none" id="noFramesLink1">No&nbsp;Frames</a></td><td rowspan="3" align="right" class="titleTableLogo"><img alt="Adobe Logo" title="Adobe Logo" class="logoImage" src="../../../../images/logo.jpg"></td>
+<td align="left" class="titleTableTitle">Flint Particle System documentation v2.0</td><td align="right" class="titleTableTopNav"><a onclick="loadClassListFrame('../../../../all-classes.html')" href="../../../../package-summary.html">All&nbsp;Packages</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../../../all-classes.html')" href="../../../../class-summary.html">All&nbsp;Classes</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../../../index-list.html')" href="../../../../all-index-A.html">Index</a>&nbsp;|&nbsp;<a href="../../../../index.html?org/flintparticles/common/utils/FastWeightedArray.html&amp;org/flintparticles/common/utils/class-list.html" id="framesLink1">Frames</a><a onclick="parent.location=document.location" href="" style="display:none" id="noFramesLink1">No&nbsp;Frames</a></td><td rowspan="3" align="right" class="titleTableLogo"><img alt="Adobe Logo" title="Adobe Logo" class="logoImage" src="../../../../images/logo.jpg"></td>
 </tr>
 <tr class="titleTableRow2">
-<td align="left" id="subTitle" class="titleTableSubTitle">Class&nbsp;FastRatioArray</td><td align="right" id="subNav" class="titleTableSubNav"><a href="#propertySummary">Properties</a>&nbsp;| <a href="#methodSummary">Methods</a></td>
+<td align="left" id="subTitle" class="titleTableSubTitle">Class&nbsp;FastWeightedArray</td><td align="right" id="subNav" class="titleTableSubNav"><a href="#propertySummary">Properties</a>&nbsp;| <a href="#methodSummary">Methods</a></td>
 </tr>
 <tr class="titleTableRow3">
 <td colspan="2">&nbsp;</td>
@@ -27,7 +27,7 @@
 </table>
 <script type="text/javascript" language="javascript">
 <!--
-if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Class FastRatioArray"); titleBar_setSubNav(false,true,false,false,false,false,true,false,false,false,false,false,false,false);}
+if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Class FastWeightedArray"); titleBar_setSubNav(false,true,false,false,false,false,true,false,false,false,false,false,false,false);}
 --></script>
 <div class="MainContent">
 <table cellspacing="0" cellpadding="0" class="classHeaderTable">
@@ -35,22 +35,23 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <td class="classHeaderTableLabel">Package</td><td><a onclick="javascript:loadClassListFrame('class-list.html')" href="package-detail.html">org.flintparticles.common.utils</a></td>
 </tr>
 <tr>
-<td class="classHeaderTableLabel">Class</td><td class="classSignature">public class FastRatioArray</td>
+<td class="classHeaderTableLabel">Class</td><td class="classSignature">public class FastWeightedArray</td>
 </tr>
 </table>
 <p></p>
-  A PriorityArray is a collection of values that are permanently
-  sorted according to their priority. When values are added to
-  the PriorityArray their priority is indicated. They are then
-  placed into the Array in sequence according to this priority.
+  A FastWeightedArray performes the same purpose as a WeightedArray 
+  but this array is optimized to select random items in a large array 
+  much more rapidly. In improving the speed if the array, it is necessary
+  to loose the functionality to remove items from the FastWeightedArray, so
+  the original WeightedArray also still available.
   
-  <p>Due to the nature of a PriorityArray, there are no facilities
+  <p>The FastWeightedArray is a collection of values that are weighted. When 
+  a random value is required from the collection, the value returned
+  is randomly selkected based on the weightings.</p>
+  
+  <p>Due to the nature of a FastWeightedArray, there are no facilities
   to push, unshift or splice items into the array. All items are 
-  added to the PriorityArray using the add method.</p>
-  
-  <p>The array items can be accessed using standard Array access
-  so the items in the PriorityArray can be looped through in
-  the same manner as a standard Array.</p>
+  added to the FastWeightedArray using the add method.</p>
   <p></p>
 <br>
 <hr>
@@ -64,13 +65,14 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 </tr>
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#length">length</a> : uint<div class="summaryTableDescription">[read-only]
-   The number of items in the PriorityArray
+   The number of items in the FastWeightedArray
    </div>
-</td><td class="summaryTableOwnerCol">FastRatioArray</td>
+</td><td class="summaryTableOwnerCol">FastWeightedArray</td>
 </tr>
 <tr class="">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#totalRatios">totalRatios</a> : Number<div class="summaryTableDescription">[read-only]</div>
-</td><td class="summaryTableOwnerCol">FastRatioArray</td>
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#totalRatios">totalRatios</a> : Number<div class="summaryTableDescription">[read-only]
+   The sum of the weights of all the values.</div>
+</td><td class="summaryTableOwnerCol">FastWeightedArray</td>
 </tr>
 </table>
 </div>
@@ -84,36 +86,35 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
-<a class="signatureLink" href="#FastRatioArray()">FastRatioArray</a>()</div>
+<a class="signatureLink" href="#FastWeightedArray()">FastWeightedArray</a>()</div>
 <div class="summaryTableDescription">
-   Then constructor function is used to create a PriorityArray
+   Then constructor function is used to create a FastWeightedArray
    </div>
-</td><td class="summaryTableOwnerCol">FastRatioArray</td>
+</td><td class="summaryTableOwnerCol">FastWeightedArray</td>
 </tr>
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
 <a class="signatureLink" href="#add()">add</a>(value:*, ratio:Number):uint</div>
 <div class="summaryTableDescription">
-   Adds a value to the RatioArray.</div>
-</td><td class="summaryTableOwnerCol">FastRatioArray</td>
+   Adds a value to the FastWeightedArray.</div>
+</td><td class="summaryTableOwnerCol">FastWeightedArray</td>
 </tr>
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
 <a class="signatureLink" href="#clear()">clear</a>():void</div>
 <div class="summaryTableDescription">
-   Empties the PriorityArray.</div>
-</td><td class="summaryTableOwnerCol">FastRatioArray</td>
+   Empties the FastWeightedArray.</div>
+</td><td class="summaryTableOwnerCol">FastWeightedArray</td>
 </tr>
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
 <a class="signatureLink" href="#getRandomValue()">getRandomValue</a>():*</div>
 <div class="summaryTableDescription">
-   
-   </div>
-</td><td class="summaryTableOwnerCol">FastRatioArray</td>
+   Returns a random value from the FastWeightedArray.</div>
+</td><td class="summaryTableOwnerCol">FastWeightedArray</td>
 </tr>
 </table>
 </div>
@@ -132,7 +133,7 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>length:uint</code>&nbsp;&nbsp;[read-only]<p>
-   The number of items in the PriorityArray
+   The number of items in the FastWeightedArray
    </p><span class="label">Implementation</span>
 <br>
 <code>&nbsp;&nbsp;&nbsp;&nbsp;public function get length():uint</code>
@@ -145,22 +146,24 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>totalRatios:Number</code>&nbsp;&nbsp;[read-only]<span class="label">Implementation</span>
+<code>totalRatios:Number</code>&nbsp;&nbsp;[read-only]<p>
+   The sum of the weights of all the values.
+   </p><span class="label">Implementation</span>
 <br>
 <code>&nbsp;&nbsp;&nbsp;&nbsp;public function get totalRatios():Number</code>
 <br>
 </div>
 <a name="constructorDetail"></a>
 <div class="detailSectionHeader">Constructor detail</div>
-<a name="FastRatioArray()"></a>
+<a name="FastWeightedArray()"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
 <tr>
-<td class="detailHeaderName">FastRatioArray</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">constructor</td>
+<td class="detailHeaderName">FastWeightedArray</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">constructor</td>
 </tr>
 </table>
 <div class="detailBody">
-<code>public function FastRatioArray()</code><p>
-   Then constructor function is used to create a PriorityArray
+<code>public function FastWeightedArray()</code><p>
+   Then constructor function is used to create a FastWeightedArray
    </p></div>
 <a name="methodDetail"></a>
 <div class="detailSectionHeader">Method detail</div>
@@ -172,7 +175,7 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public function add(value:*, ratio:Number):uint</code><p>
-   Adds a value to the RatioArray.
+   Adds a value to the FastWeightedArray.
    
    </p><span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
@@ -184,7 +187,7 @@ showHideInherited();
 <td class="paramSpacer">&nbsp;</td>
 </tr>
 <tr>
-<td width="20px"></td><td><code><span class="label">ratio</span>:Number</code> &mdash; the priority to lpace on the item
+<td width="20px"></td><td><code><span class="label">ratio</span>:Number</code> &mdash; the weighting to place on the item
    </td>
 </tr>
 </table>
@@ -192,7 +195,7 @@ showHideInherited();
 <span class="label">Returns</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
-<td width="20"></td><td><code>uint</code> &mdash; the length of the PriorityArray
+<td width="20"></td><td><code>uint</code> &mdash; the length of the FastWeightedArray
    </td>
 </tr>
 </table>
@@ -205,7 +208,7 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public function clear():void</code><p>
-   Empties the PriorityArray. After calling this method the PriorityArray 
+   Empties the FastWeightedArray. After calling this method the FastWeightedArray 
    contains no items.
    </p></div>
 <a name="getRandomValue()"></a>
@@ -216,12 +219,16 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public function getRandomValue():*</code><p>
+   Returns a random value from the FastWeightedArray. The weighting of the values is
+   used when selcting the random value, so items with a higher weighting are
+   more likely to be seleted.
    
    </p><p></p>
 <span class="label">Returns</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
-<td width="20"></td><td><code>*</code></td>
+<td width="20"></td><td><code>*</code> &mdash; A randomly selected item from the array.
+   </td>
 </tr>
 </table>
 </div>
