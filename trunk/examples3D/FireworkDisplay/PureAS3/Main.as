@@ -94,8 +94,20 @@ package
 			emitter = new Candle( new Vector3D( -150, 0, -150 ) );
 			renderer.addEmitter( emitter );
 			emitter.start();
+			
+			emitter = new CatherineWheel( new Vector3D( -200, 200, 50 ) );
+			renderer.addEmitter( emitter );
+			emitter.start();
+			
+			emitter = new CatherineWheel( new Vector3D( 0, 200, 50 ) );
+			renderer.addEmitter( emitter );
+			emitter.start();
+			
+			emitter = new CatherineWheel( new Vector3D( 200, 200, 50 ) );
+			renderer.addEmitter( emitter );
+			emitter.start();
 		}
-		
+
 		public function whizzBang( ev:ParticleEvent ):void
 		{
 			var bang:Emitter3D = new SphereBang( Particle3D( ev.particle ).position );
@@ -106,7 +118,7 @@ package
 		
 		public function removeEmitter( ev:EmitterEvent ):void
 		{
-			ev.target.removeEventListener( EmitterEvent.EMITTER_EMPTY, removeEmitter );
+			Emitter3D( ev.target ).removeEventListener( EmitterEvent.EMITTER_EMPTY, removeEmitter );
 			renderer.removeEmitter( Emitter3D( ev.target ) );
 		}
 		
