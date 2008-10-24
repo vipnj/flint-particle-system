@@ -81,6 +81,7 @@ package org.flintparticles.threeD.emitters
 		 * @private
 		 */
 		protected var _rotationTransform:Matrix3D;
+		private var _rotTransformRotation:Quaternion;
 		
 		/**
 		 * The array of particle indices sorted based on the particles' x 
@@ -107,6 +108,7 @@ package org.flintparticles.threeD.emitters
 			_position = new Vector3D( 0, 0, 0, 1 );
 			_rotation = Quaternion.IDENTITY.clone();
 			_rotationTransform = Matrix3D.IDENTITY.clone();
+			_rotTransformRotation = Quaternion.IDENTITY.clone();
 		}
 
 		/**
@@ -133,7 +135,6 @@ package org.flintparticles.threeD.emitters
 		public function set rotation( value:Quaternion ):void
 		{
 			_rotation = value;
-			_rotationTransform = value.toMatrixTransformation();
 		}
 		
 		/**
@@ -143,6 +144,11 @@ package org.flintparticles.threeD.emitters
 		 */
 		public function get rotationTransform():Matrix3D
 		{
+			if( !_rotTransformRotation.equals( _rotation ) )
+			{
+				_rotationTransform = _rotation.toMatrixTransformation();
+				_rotTransformRotation = _rotation.clone();
+			}
 			return _rotationTransform;
 		}
 		
