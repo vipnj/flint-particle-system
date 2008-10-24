@@ -4,7 +4,7 @@
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="../../../../style.css" type="text/css" media="screen">
 <link rel="stylesheet" href="../../../../print.css" type="text/css" media="print">
-<meta content="Vector3D,org.flintparticles.threeD.geom.Vector3D,AXISW,AXISX,AXISY,AXISZ,ZERO,w,x,y,z,length,lengthSquared,negative,add,assign,clone,crossProduct,decrementBy,distance,distanceSquared,dotProduct,equals,incrementBy,multiply,nearEquals,negate,normalize,project,reset,scaleBy,subtract,toString,unit" name="keywords">
+<meta content="Vector3D,org.flintparticles.threeD.geom.Vector3D,AXISW,AXISX,AXISY,AXISZ,ZERO,w,x,y,z,length,lengthSquared,add,assign,clone,crossProduct,decrementBy,distance,distanceSquared,dotProduct,equals,incrementBy,multiply,nearEquals,negate,negative,normalize,project,reset,scaleBy,subtract,toString,unit" name="keywords">
 <title>org.flintparticles.threeD.geom.Vector3D</title>
 </head>
 <body>
@@ -16,7 +16,7 @@
 			--></script>
 <table style="display:none" id="titleTable" cellspacing="0" cellpadding="0" class="titleTable">
 <tr>
-<td align="left" class="titleTableTitle">Flint Particle System documentation v2.0 beta</td><td align="right" class="titleTableTopNav"><a onclick="loadClassListFrame('../../../../all-classes.html')" href="../../../../package-summary.html">All&nbsp;Packages</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../../../all-classes.html')" href="../../../../class-summary.html">All&nbsp;Classes</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../../../index-list.html')" href="../../../../all-index-A.html">Index</a>&nbsp;|&nbsp;<a href="../../../../index.html?org/flintparticles/threeD/geom/Vector3D.html&amp;org/flintparticles/threeD/geom/class-list.html" id="framesLink1">Frames</a><a onclick="parent.location=document.location" href="" style="display:none" id="noFramesLink1">No&nbsp;Frames</a></td><td rowspan="3" align="right" class="titleTableLogo"><img alt="Adobe Logo" title="Adobe Logo" class="logoImage" src="../../../../images/logo.jpg"></td>
+<td align="left" class="titleTableTitle">Flint Particle System documentation v2.0</td><td align="right" class="titleTableTopNav"><a onclick="loadClassListFrame('../../../../all-classes.html')" href="../../../../package-summary.html">All&nbsp;Packages</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../../../all-classes.html')" href="../../../../class-summary.html">All&nbsp;Classes</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../../../index-list.html')" href="../../../../all-index-A.html">Index</a>&nbsp;|&nbsp;<a href="../../../../index.html?org/flintparticles/threeD/geom/Vector3D.html&amp;org/flintparticles/threeD/geom/class-list.html" id="framesLink1">Frames</a><a onclick="parent.location=document.location" href="" style="display:none" id="noFramesLink1">No&nbsp;Frames</a></td><td rowspan="3" align="right" class="titleTableLogo"><img alt="Adobe Logo" title="Adobe Logo" class="logoImage" src="../../../../images/logo.jpg"></td>
 </tr>
 <tr class="titleTableRow2">
 <td align="left" id="subTitle" class="titleTableSubTitle">Class&nbsp;Vector3D</td><td align="right" id="subNav" class="titleTableSubNav"><a href="#propertySummary">Properties</a>&nbsp;| <a href="#methodSummary">Methods</a>&nbsp;| <a href="#constantSummary">Constants</a></td>
@@ -104,13 +104,6 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 </td><td class="summaryTableOwnerCol">Vector3D</td>
 </tr>
 <tr class="">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#negative">negative</a> : <a href="../geom/Vector3D.html">Vector3D</a>
-<div class="summaryTableDescription">[read-only]
-   Get the negative of this vector - a vector the same length but in the 
-   opposite direction.</div>
-</td><td class="summaryTableOwnerCol">Vector3D</td>
-</tr>
-<tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#w">w</a> : Number<div class="summaryTableDescription">
    The w coordinate of the vector.</div>
 </td><td class="summaryTableOwnerCol">Vector3D</td>
@@ -151,10 +144,10 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
-<a class="signatureLink" href="#add()">add</a>(v:<a href="Vector3D.html">Vector3D</a>):<a href="../geom/Vector3D.html">Vector3D</a>
+<a class="signatureLink" href="#add()">add</a>(v:<a href="Vector3D.html">Vector3D</a>, result:<a href="Vector3D.html">Vector3D</a> = null):<a href="../geom/Vector3D.html">Vector3D</a>
 </div>
 <div class="summaryTableDescription">
-   Adds another vector to this one, returning a new vector.</div>
+   Adds another vector to this one, returning the result.</div>
 </td><td class="summaryTableOwnerCol">Vector3D</td>
 </tr>
 <tr class="">
@@ -169,7 +162,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
-<a class="signatureLink" href="#clone()">clone</a>():<a href="../geom/Vector3D.html">Vector3D</a>
+<a class="signatureLink" href="#clone()">clone</a>(result:<a href="Vector3D.html">Vector3D</a> = null):<a href="../geom/Vector3D.html">Vector3D</a>
 </div>
 <div class="summaryTableDescription">
    Makes a copy of this Vector3D object.</div>
@@ -178,7 +171,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
-<a class="signatureLink" href="#crossProduct()">crossProduct</a>(v:<a href="Vector3D.html">Vector3D</a>):<a href="../geom/Vector3D.html">Vector3D</a>
+<a class="signatureLink" href="#crossProduct()">crossProduct</a>(v:<a href="Vector3D.html">Vector3D</a>, result:<a href="Vector3D.html">Vector3D</a> = null):<a href="../geom/Vector3D.html">Vector3D</a>
 </div>
 <div class="summaryTableDescription">
    Calculate the cross product of this vector with another.</div>
@@ -239,10 +232,10 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
-<a class="signatureLink" href="#multiply()">multiply</a>(s:Number):<a href="../geom/Vector3D.html">Vector3D</a>
+<a class="signatureLink" href="#multiply()">multiply</a>(s:Number, result:<a href="Vector3D.html">Vector3D</a> = null):<a href="../geom/Vector3D.html">Vector3D</a>
 </div>
 <div class="summaryTableDescription">
-   Multiply this vector by a number, returning a new vector.</div>
+   Multiply this vector by a number, returning the result.</div>
 </td><td class="summaryTableOwnerCol">Vector3D</td>
 </tr>
 <tr class="">
@@ -260,6 +253,16 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 </div>
 <div class="summaryTableDescription">
    Negate this vector.</div>
+</td><td class="summaryTableOwnerCol">Vector3D</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#negative()">negative</a>(result:<a href="Vector3D.html">Vector3D</a> = null):<a href="../geom/Vector3D.html">Vector3D</a>
+</div>
+<div class="summaryTableDescription">
+   Get the negative of this vector - a vector the same length but in the 
+   opposite direction.</div>
 </td><td class="summaryTableOwnerCol">Vector3D</td>
 </tr>
 <tr class="">
@@ -304,10 +307,10 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
-<a class="signatureLink" href="#subtract()">subtract</a>(v:<a href="Vector3D.html">Vector3D</a>):<a href="../geom/Vector3D.html">Vector3D</a>
+<a class="signatureLink" href="#subtract()">subtract</a>(v:<a href="Vector3D.html">Vector3D</a>, result:<a href="Vector3D.html">Vector3D</a> = null):<a href="../geom/Vector3D.html">Vector3D</a>
 </div>
 <div class="summaryTableDescription">
-   Subtract another vector from this one, returning a new vector.</div>
+   Subtract another vector from this one, returning the result.</div>
 </td><td class="summaryTableOwnerCol">Vector3D</td>
 </tr>
 <tr class="">
@@ -323,7 +326,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
-<a class="signatureLink" href="#unit()">unit</a>():<a href="../geom/Vector3D.html">Vector3D</a>
+<a class="signatureLink" href="#unit()">unit</a>(result:<a href="Vector3D.html">Vector3D</a> = null):<a href="../geom/Vector3D.html">Vector3D</a>
 </div>
 <div class="summaryTableDescription">
    Create a unit vector in the same direction as this one.</div>
@@ -403,23 +406,6 @@ showHideInherited();
    </p><span class="label">Implementation</span>
 <br>
 <code>&nbsp;&nbsp;&nbsp;&nbsp;public function get lengthSquared():Number</code>
-<br>
-</div>
-<a name="negative"></a>
-<table cellspacing="0" cellpadding="0" class="detailHeader">
-<tr>
-<td class="detailHeaderName">negative</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
-</tr>
-</table>
-<div class="detailBody">
-<code>negative:<a href="../geom/Vector3D.html">Vector3D</a></code>&nbsp;&nbsp;[read-only]<p>
-   Get the negative of this vector - a vector the same length but in the 
-   opposite direction. The sign of the x, y and z coordinates is chaged.
-   The w coordinate is unchanged.
-   
-   </p><span class="label">Implementation</span>
-<br>
-<code>&nbsp;&nbsp;&nbsp;&nbsp;public function get negative():<a href="../geom/Vector3D.html">Vector3D</a></code>
 <br>
 </div>
 <a name="w"></a>
@@ -523,14 +509,22 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>public function add(v:<a href="Vector3D.html">Vector3D</a>):<a href="../geom/Vector3D.html">Vector3D</a></code><p>
-   Adds another vector to this one, returning a new vector.
+<code>public function add(v:<a href="Vector3D.html">Vector3D</a>, result:<a href="Vector3D.html">Vector3D</a> = null):<a href="../geom/Vector3D.html">Vector3D</a></code><p>
+   Adds another vector to this one, returning the result.
    The w coordinate is used.
    
    </p><span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
 <td width="20px"></td><td><code><span class="label">v</span>:<a href="Vector3D.html">Vector3D</a></code> &mdash; the vector to add
+   </td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">result</span>:<a href="Vector3D.html">Vector3D</a></code> (default = <code>null</code>)<code></code> &mdash; The vector to hold the result of the addition. If
+   no vector is passed, a new vector is created.
    
    </td>
 </tr>
@@ -584,10 +578,19 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>public function clone():<a href="../geom/Vector3D.html">Vector3D</a></code><p>
+<code>public function clone(result:<a href="Vector3D.html">Vector3D</a> = null):<a href="../geom/Vector3D.html">Vector3D</a></code><p>
    Makes a copy of this Vector3D object.
    
-   </p><p></p>
+   </p><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">result</span>:<a href="Vector3D.html">Vector3D</a></code> (default = <code>null</code>)<code></code> &mdash; The vector to hold the copy of this vector. If
+   no vector is passed, a new vector is created.
+   
+   </td>
+</tr>
+</table>
+<p></p>
 <span class="label">Returns</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
@@ -606,7 +609,7 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>public function crossProduct(v:<a href="Vector3D.html">Vector3D</a>):<a href="../geom/Vector3D.html">Vector3D</a></code><p>
+<code>public function crossProduct(v:<a href="Vector3D.html">Vector3D</a>, result:<a href="Vector3D.html">Vector3D</a> = null):<a href="../geom/Vector3D.html">Vector3D</a></code><p>
    Calculate the cross product of this vector with another. 
    The w coordinate is not used.
    
@@ -614,6 +617,14 @@ showHideInherited();
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
 <td width="20px"></td><td><code><span class="label">v</span>:<a href="Vector3D.html">Vector3D</a></code> &mdash; The vector to calculate the cross product with
+   </td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">result</span>:<a href="Vector3D.html">Vector3D</a></code> (default = <code>null</code>)<code></code> &mdash; The vector to hold the result of the cross product. If
+   no vector is passed, a new vector is created.
    
    </td>
 </tr>
@@ -821,14 +832,22 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>public function multiply(s:Number):<a href="../geom/Vector3D.html">Vector3D</a></code><p>
-   Multiply this vector by a number, returning a new vector.
+<code>public function multiply(s:Number, result:<a href="Vector3D.html">Vector3D</a> = null):<a href="../geom/Vector3D.html">Vector3D</a></code><p>
+   Multiply this vector by a number, returning the result.
    The w coordinate is unchanged.
    
    </p><span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
 <td width="20px"></td><td><code><span class="label">s</span>:Number</code> &mdash; The number to multiply by
+   </td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">result</span>:<a href="Vector3D.html">Vector3D</a></code> (default = <code>null</code>)<code></code> &mdash; The vector to hold the result of the multiplication. If
+   no vector is passed, a new vector is created.
    
    </td>
 </tr>
@@ -898,6 +917,39 @@ showHideInherited();
 <tr>
 <td width="20"></td><td><code><a href="../geom/Vector3D.html">Vector3D</a></code> &mdash; 
                         a reference to this Vector3D object.
+   
+                        
+                     </td>
+</tr>
+</table>
+</div>
+<a name="negative()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">negative</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function negative(result:<a href="Vector3D.html">Vector3D</a> = null):<a href="../geom/Vector3D.html">Vector3D</a></code><p>
+   Get the negative of this vector - a vector the same length but in the 
+   opposite direction. The sign of the x, y and z coordinates is changed.
+   The w coordinate is unchanged.
+   
+   </p><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">result</span>:<a href="Vector3D.html">Vector3D</a></code> (default = <code>null</code>)<code></code> &mdash; The vector to hold the result of the negation. If
+   no vector is passed, a new vector is created.
+   
+   </td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code><a href="../geom/Vector3D.html">Vector3D</a></code> &mdash; 
+                        the negative of this vector
    
                         
                      </td>
@@ -1038,14 +1090,22 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>public function subtract(v:<a href="Vector3D.html">Vector3D</a>):<a href="../geom/Vector3D.html">Vector3D</a></code><p>
-   Subtract another vector from this one, returning a new vector. The
+<code>public function subtract(v:<a href="Vector3D.html">Vector3D</a>, result:<a href="Vector3D.html">Vector3D</a> = null):<a href="../geom/Vector3D.html">Vector3D</a></code><p>
+   Subtract another vector from this one, returning the result. The
    w coordinate is used.
    
    </p><span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
 <td width="20px"></td><td><code><span class="label">v</span>:<a href="Vector3D.html">Vector3D</a></code> &mdash; The vector to subtract
+   </td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">result</span>:<a href="Vector3D.html">Vector3D</a></code> (default = <code>null</code>)<code></code> &mdash; The vector to hold the result of the subtraction. If
+   no vector is passed, a new vector is created.
    
    </td>
 </tr>
@@ -1088,11 +1148,20 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>public function unit():<a href="../geom/Vector3D.html">Vector3D</a></code><p>
+<code>public function unit(result:<a href="Vector3D.html">Vector3D</a> = null):<a href="../geom/Vector3D.html">Vector3D</a></code><p>
    Create a unit vector in the same direction as this one. The w coordinate 
    is not changed.
    
-   </p><p></p>
+   </p><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">result</span>:<a href="Vector3D.html">Vector3D</a></code> (default = <code>null</code>)<code></code> &mdash; The vector to hold the unit vector result. If
+   no vector is passed, a new vector is created.
+   
+   </td>
+</tr>
+</table>
+<p></p>
 <span class="label">Returns</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
