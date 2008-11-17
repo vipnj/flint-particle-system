@@ -69,10 +69,10 @@ package org.flintparticles.twoD.particles
 				particle.rotation = Maths.asRadians( obj.rotation );
 			}
 			particle.image = obj;
-			var rad:Number = ( obj.width + obj.height ) / 2;
+			var rad:Number = ( obj.width + obj.height ) / 4;
 			if( rad != 0 )
 			{
-				particle.collisionRadius = ( obj.width + obj.height ) / 4;
+				particle.collisionRadius = rad;
 			}
 			return particle;
 		}
