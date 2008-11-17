@@ -72,7 +72,7 @@ package org.flintparticles.twoD.particles
 			var rad:Number = ( obj.width + obj.height ) / 2;
 			if( rad != 0 )
 			{
-				particle.collisionRadius = ( obj.width + obj.height ) / 2;
+				particle.collisionRadius = ( obj.width + obj.height ) / 4;
 			}
 			return particle;
 		}
