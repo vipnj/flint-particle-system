@@ -141,14 +141,13 @@ package org.flintparticles.twoD.particles
 						p.x = x + offsetX;
 						p.y = y + offsetY;
 						b = new BitmapData( size, size, true, 0 );
-						if( y + size < width )
 						b.copyPixels( bitmapData, new Rectangle( x, y, size, size ), zero );
 						m = new Bitmap( b );
 						m.x = -halfSize;
 						m.y = -halfSize;
 						s = new Sprite();
 						s.addChild( m );
-						p.image = m;
+						p.image = s;
 						p.collisionRadius = halfSize;
 						particles.push( p );
 					}
@@ -170,7 +169,7 @@ package org.flintparticles.twoD.particles
 						m.y = -halfSize;
 						s = new Sprite();
 						s.addChild( m );
-						p.image = m;
+						p.image = s;
 						p.collisionRadius = halfSize;
 						particles.push( p );
 					}
