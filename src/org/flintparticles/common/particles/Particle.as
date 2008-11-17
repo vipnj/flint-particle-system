@@ -105,7 +105,7 @@ package org.flintparticles.common.particles
 		{
 			if( _dictionary == null )
 			{
-				_dictionary = new Dictionary();
+				_dictionary = new Dictionary( true );
 			}
 			return _dictionary;
 		}

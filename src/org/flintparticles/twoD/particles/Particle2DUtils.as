@@ -9,7 +9,8 @@ package org.flintparticles.twoD.particles
 	
 	import org.flintparticles.common.particles.ParticleFactory;
 	import org.flintparticles.common.utils.DisplayObjectUtils;
-	import org.flintparticles.common.utils.Maths;	
+	import org.flintparticles.common.utils.Maths;
+	import org.flintparticles.common.particles.Particle;	
 
 	public class Particle2DUtils 
 	{
@@ -68,6 +69,11 @@ package org.flintparticles.twoD.particles
 				particle.rotation = Maths.asRadians( obj.rotation );
 			}
 			particle.image = obj;
+			var rad:Number = ( obj.width + obj.height ) / 2;
+			if( rad != 0 )
+			{
+				particle.collisionRadius = ( obj.width + obj.height ) / 2;
+			}
 			return particle;
 		}
 
@@ -143,6 +149,7 @@ package org.flintparticles.twoD.particles
 						s = new Sprite();
 						s.addChild( m );
 						p.image = m;
+						p.collisionRadius = halfSize;
 						particles.push( p );
 					}
 				}
@@ -164,6 +171,7 @@ package org.flintparticles.twoD.particles
 						s = new Sprite();
 						s.addChild( m );
 						p.image = m;
+						p.collisionRadius = halfSize;
 						particles.push( p );
 					}
 				}
