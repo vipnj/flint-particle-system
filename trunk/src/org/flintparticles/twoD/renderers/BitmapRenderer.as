@@ -299,5 +299,13 @@ package org.flintparticles.twoD.renderers
 			matrix.translate( -_canvas.x, -_canvas.y );
 			_bitmapData.draw( particle.image, matrix, particle.colorTransform, DisplayObject( particle.image ).blendMode, null, _smoothing );
 		}
+		
+		/**
+		 * The bitmap data of the renderer.
+		 */
+		public function get bitmapData() : BitmapData
+		{
+			return _bitmapData;
+		}
 	}
 }
