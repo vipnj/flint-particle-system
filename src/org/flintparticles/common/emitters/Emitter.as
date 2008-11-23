@@ -444,6 +444,10 @@ package org.flintparticles.common.emitters
 		public function set counter( value:Counter ):void
 		{
 			_counter = value;
+			if( running )
+			{
+				_counter.startEmitter( this );
+			}
 		}
 		
 		/**
