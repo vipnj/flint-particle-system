@@ -118,7 +118,7 @@ package org.flintparticles.common.utils
 		 */
 		override flash_proxy function nextValue( index:int ):*
 		{
-			return _values[ index - 1 ];
+			return _values[ index - 1 ].value;
 		}
 
 		/**
