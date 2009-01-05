@@ -30,32 +30,20 @@
 
 package org.flintparticles.twoD.renderers
 {
-	import flash.display.DisplayObject;
-	
 	import org.flintparticles.common.particles.Particle;
 	import org.flintparticles.common.renderers.SpriteRendererBase;
 	import org.flintparticles.twoD.particles.Particle2D;	
 
 	/**
-	 * The DisplayObjectRenderer adds particles to its display list 
-	 * and lets the flash player render them in its usual way.
+	 * The VectorLineRenderer draws particles as continuous lines mapping the 
+	 * path the particle travels. This is useful for effects like hair and
+	 * grass.
 	 * 
-	 * <p>Particles may be represented by any DisplayObject and each particle 
-	 * must use a different DisplayObject instance. The DisplayObject
-	 * to be used should not be defined using the SharedImage initializer
-	 * because this shares one DisplayObject instance between all the particles.
-	 * The ImageClass initializer is commonly used because this creates a new 
-	 * DisplayObject for each particle.</p>
-	 * 
-	 * <p>The DisplayObjectRenderer has mouse events disabled for itself and any 
-	 * display objects in its display list. To enable mouse events for the renderer
-	 * or its children set the mouseEnabled or mouseChildren properties to true.</p>
-	 * 
-	 * <p>Because the DisplayObject3DRenderer directly uses the particle's image,
-	 * it is not suitable in situations where the same particle will be simultaneously
-	 * displayed by two different renderers.</p> 
+	 * <p>The VectorLineRenderer uses the color and alpha of the particle
+	 * for the color of the current line segment, and uses the scale of
+	 * the particle for the line width.</p> 
 	 */
-	public class DisplayObjectRenderer extends SpriteRendererBase
+	public class VectorLineRenderer extends SpriteRendererBase
 	{
 		/**
 		 * The constructor creates a DisplayObjectRenderer. After creation it should
@@ -65,7 +53,7 @@ package org.flintparticles.twoD.renderers
 		 * 
 		 * @see org.flintparticles.twoD.emitters.Emitter#renderer
 		 */
-		public function DisplayObjectRenderer()
+		public function VectorLineRenderer()
 		{
 			super();
 		}
@@ -76,31 +64,14 @@ package org.flintparticles.twoD.renderers
 		override protected function renderParticles( particles:Array ):void
 		{
 			var particle:Particle2D;
-			var img:DisplayObject;
 			var len:int = particles.length;
 			for( var i:int = 0; i < len; ++i )
 			{
 				particle = particles[i];
-				img = particle.image;
-				img.transform.colorTransform = particle.colorTransform;
-				img.transform.matrix = particle.matrixTransform;
+				graphics.lineStyle( particle.scale, particle.color & 0xFFFFFF, particle.color >>> 24 );
+				graphics.moveTo( particle.previousX, particle.previousY );
+				graphics.lineTo( particle.x, particle.y );
 			}
-		}
-		
-		/**
-		 * @inheritDoc
-		 */
-		override protected function addParticle( particle:Particle ):void
-		{
-			addChildAt( particle.image, 0 );
-		}
-		
-		/**
-		 * @inheritDoc
-		 */
-		override protected function removeParticle( particle:Particle ):void
-		{
-			removeChild( particle.image );
 		}
 	}
 }

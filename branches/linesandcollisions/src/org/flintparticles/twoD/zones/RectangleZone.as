@@ -30,13 +30,15 @@
 
 package org.flintparticles.twoD.zones 
 {
-	import flash.geom.Point;
+	import org.flintparticles.twoD.particles.Particle2D;
+	
+	import flash.geom.Point;	
 
 	/**
 	 * The RectangleZone zone defines a rectangular shaped zone.
 	 */
 
-	public class RectangleZone implements Zone2D 
+	public class RectangleZone implements Zone2D, InteractiveZone2D
 	{
 		private var _left : Number;
 		private var _top : Number;
@@ -155,6 +157,11 @@ package org.flintparticles.twoD.zones
 		public function getArea():Number
 		{
 			return _width * _height;
+		}
+		
+		public function collideParticle( particle:Particle2D, bounce:Number = 1 ):Boolean
+		{
+			return false;
 		}
 	}
 }

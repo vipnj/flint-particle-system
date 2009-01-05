@@ -83,6 +83,8 @@ package org.flintparticles.twoD.actions
 		override public function update( emitter:Emitter, particle:Particle, time:Number ):void
 		{
 			p = Particle2D( particle );
+			p.previousX = p.x;
+			p.previousY = p.y;
 			p.x += p.velX * time;
 			p.y += p.velY * time;
 		}

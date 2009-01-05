@@ -56,6 +56,14 @@ package org.flintparticles.twoD.particles
 		 */
 		public var y:Number = 0;
 		/**
+		 * The x coordinate of the particle prior to the latest update.
+		 */
+		public var previousX:Number = 0;
+		/**
+		 * The y coordinate of the particle prior to the latest update.
+		 */
+		public var previousY:Number = 0;
+		/**
 		 * The x coordinate of the velocity of the particle in pixels per second.
 		 */
 		public var velX:Number = 0;
@@ -114,6 +122,8 @@ package org.flintparticles.twoD.particles
 			super.initialize();
 			x = 0;
 			y = 0;
+			previousX = 0;
+			previousY = 0;
 			velX = 0;
 			velY = 0;
 			rotation = 0;
