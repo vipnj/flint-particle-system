@@ -67,7 +67,7 @@ package org.flintparticles.twoD.initializers
 		 * 
 		 * @see org.flintparticles.common.emitters.Emitter#addInitializer()
 		 */
-		public function Velocity( zone:Zone2D )
+		public function Velocity( zone:Zone2D = null )
 		{
 			_zone = zone;
 		}

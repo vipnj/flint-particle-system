@@ -61,7 +61,7 @@ package org.flintparticles.twoD.actions
 		 * @param endX The x value of the particle's position when its energy is 0.
 		 * @param endY The y value of the particle's position when its energy is 0.
 		 */
-		public function TweenPosition( startX:Number, startY:Number, endX:Number, endY:Number )
+		public function TweenPosition( startX:Number = 0, startY:Number = 0, endX:Number = 0, endY:Number = 0 )
 		{
 			_diffX = startX - endX;
 			_endX = endX;

@@ -59,7 +59,7 @@ package org.flintparticles.twoD.actions
 		 * @param friction The amount of friction. A higher number produces a 
 		 * stronger frictional force.
 		 */
-		public function Friction( friction:Number )
+		public function Friction( friction:Number = 0 )
 		{
 			_friction = friction;
 		}

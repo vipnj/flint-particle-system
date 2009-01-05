@@ -63,7 +63,7 @@ package org.flintparticles.threeD.initializers
 		 * 
 		 * @see org.flintparticles.common.emitters.Emitter#addInitializer()
 		 */
-		public function ScaleAllsInit( scales:Array, weights:Array = null )
+		public function ScaleAllsInit( scales:Array = [], weights:Array = null )
 		{
 			_scales = new WeightedArray;
 			var len:int = scales.length;

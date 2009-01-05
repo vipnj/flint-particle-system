@@ -60,7 +60,7 @@ package org.flintparticles.threeD.actions
 		 * and particles outside the zone are killed. If false, particles
 		 * inside the zone are killed.
 		 */
-		public function DeathZone( zone:Zone3D, zoneIsSafe:Boolean = false )
+		public function DeathZone( zone:Zone3D = null, zoneIsSafe:Boolean = false )
 		{
 			this.zone = zone;
 			this.zoneIsSafe = zoneIsSafe;

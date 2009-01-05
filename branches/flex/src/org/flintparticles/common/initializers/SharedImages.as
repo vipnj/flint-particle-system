@@ -62,7 +62,7 @@ package org.flintparticles.common.initializers
 		 * 
 		 * @see org.flintparticles.common.emitters.Emitter#addInitializer()
 		 */
-		public function SharedImages( images:Array, weights:Array = null )
+		public function SharedImages( images:Array = [], weights:Array = null )
 		{
 			_images = new WeightedArray;
 			var len:int = images.length;

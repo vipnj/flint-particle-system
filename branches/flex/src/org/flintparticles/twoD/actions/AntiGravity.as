@@ -61,7 +61,7 @@ package org.flintparticles.twoD.actions
 		 * anti-gravity as if they were this distance away. This stops the 
 		 * anti-gravity effect blowing up as distances get small.
 		 */
-		public function AntiGravity( power:Number, x:Number, y:Number, epsilon:Number = 1 )
+		public function AntiGravity( power:Number = 0, x:Number = 0, y:Number = 0, epsilon:Number = 1 )
 		{
 			super( -power, x, y, epsilon );
 		}

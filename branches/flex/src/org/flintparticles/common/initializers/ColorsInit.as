@@ -56,7 +56,7 @@ package org.flintparticles.common.initializers
 		 * 
 		 * @see org.flintparticles.common.emitters.Emitter#addInitializer()
 		 */
-		public function ColorsInit( colors:Array, weights:Array = null )
+		public function ColorsInit( colors:Array = [], weights:Array = null )
 		{
 			_colors = new WeightedArray;
 			var len:int = colors.length;

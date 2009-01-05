@@ -52,7 +52,7 @@ package org.flintparticles.common.counters
 		 * 
 		 * @see org.flintparticles.common.emitter.Emitter.counter
 		 */
-		public function Pulse( period:Number, quantity:uint )
+		public function Pulse( period:Number = 1, quantity:uint = 0 )
 		{
 			_stop = false;
 			_quantity = quantity;

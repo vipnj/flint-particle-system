@@ -59,7 +59,7 @@ package org.flintparticles.threeD.actions
 		 * are accelerated to the speed limit, otherwise particles travelling faster
 		 * than the speed limit are decelerated to the speed limit.
 		 */
-		public function SpeedLimit( speed:Number, isMinimum:Boolean = false )
+		public function SpeedLimit( speed:Number = Number.MAX_VALUE, isMinimum:Boolean = false )
 		{
 			this.limit = speed;
 			this.isMinimum = isMinimum;

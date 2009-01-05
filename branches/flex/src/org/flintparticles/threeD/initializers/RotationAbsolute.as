@@ -64,7 +64,7 @@ package org.flintparticles.threeD.initializers
 		 * 
  		 * @see org.flintparticles.common.emitters.Emitter#addInitializer()
 		 */
-		public function RotationAbsolute( axis : Vector3D, minAngle : Number, maxAngle : Number = NaN )
+		public function RotationAbsolute( axis:Vector3D = null, minAngle:Number = 0, maxAngle:Number = NaN )
 		{
 			_axis = axis.unit();
 			_min = minAngle;

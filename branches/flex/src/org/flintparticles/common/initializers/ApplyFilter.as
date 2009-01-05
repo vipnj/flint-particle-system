@@ -53,7 +53,7 @@ package org.flintparticles.common.initializers
 		 * 
 		 * @see org.flintparticles.common.emitters.Emitter#addInitializer()
 		 */
-		public function ApplyFilter( filter:BitmapFilter )
+		public function ApplyFilter( filter:BitmapFilter = null )
 		{
 			_filter = filter;
 		}

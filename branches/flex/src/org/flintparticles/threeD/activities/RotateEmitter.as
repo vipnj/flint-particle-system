@@ -55,7 +55,7 @@ package org.flintparticles.threeD.activities
 		 * @para angularVelocity The angular velocity for the emitter in 
 		 * radians per second.
 		 */
-		public function RotateEmitter( angularVelocity:Vector3D )
+		public function RotateEmitter( angularVelocity:Vector3D = null )
 		{
 			_angularVelocity = angularVelocity.clone();
 			temp = new Quaternion();

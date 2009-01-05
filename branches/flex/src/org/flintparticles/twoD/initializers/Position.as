@@ -62,7 +62,7 @@ package org.flintparticles.twoD.initializers
 		 * 
 		 * @see org.flintparticles.common.emitters.Emitter#addInitializer()
 		 */
-		public function Position( zone : Zone2D )
+		public function Position( zone : Zone2D = null )
 		{
 			_zone = zone;
 		}

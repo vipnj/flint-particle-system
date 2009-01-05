@@ -63,7 +63,7 @@ package org.flintparticles.threeD.actions
 		 * @param invertZone If false (the default) the acceleration is applied only to particles inside 
 		 * the zone. If true the acceleration is applied only to particles outside the zone.
 		 */
-		public function Jet( acceleration:Vector3D, accelerationY:Number, zone:Zone3D, invertZone:Boolean = false )
+		public function Jet( acceleration:Vector3D = null, accelerationY:Number = 0, zone:Zone3D = null, invertZone:Boolean = false )
 		{
 			this.acceleration = acceleration;
 			this.zone = zone;

@@ -67,7 +67,7 @@ package org.flintparticles.threeD.actions
 		 * @param acceleration The angular acceleration applied to adjust velocity to match that
 		 * of the other particles.
 		 */
-		public function MatchRotateVelocity( maxDistance:Number, acceleration:Number )
+		public function MatchRotateVelocity( maxDistance:Number = 0, acceleration:Number = 0 )
 		{
 			this.maxDistance = maxDistance;
 			this.acceleration = acceleration;

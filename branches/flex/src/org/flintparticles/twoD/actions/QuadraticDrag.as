@@ -58,7 +58,7 @@ package org.flintparticles.twoD.actions
 		 * @param drag The amount of drag. A higher number produces a stronger 
 		 * drag force.
 		 */
-		public function QuadraticDrag( drag:Number )
+		public function QuadraticDrag( drag:Number = 0 )
 		{
 			_drag = drag;
 		}

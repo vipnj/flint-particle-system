@@ -57,7 +57,7 @@ package org.flintparticles.twoD.actions
 		 * @param accelerationY The y coordinate of the acceleration to apply, in 
 		 * pixels per second per second.
 		 */
-		public function Accelerate( accelerationX:Number, accelerationY:Number )
+		public function Accelerate( accelerationX:Number = 0, accelerationY:Number = 0 )
 		{
 			_x = accelerationX;
 			_y = accelerationY;

@@ -57,7 +57,7 @@ package org.flintparticles.twoD.actions
 		 * @param x The x coordinate of the point towards which the particle turns.
 		 * @param y The y coordinate of the point towards which the particle turns.
 		 */
-		public function TurnTowardsPoint( x:Number, y:Number, power:Number )
+		public function TurnTowardsPoint( x:Number = 0, y:Number = 0, power:Number = 0 )
 		{
 			_power = power;
 			_x = x;

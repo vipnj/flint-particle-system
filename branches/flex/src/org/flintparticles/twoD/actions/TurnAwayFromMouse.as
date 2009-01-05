@@ -50,7 +50,7 @@ package org.flintparticles.twoD.actions
 		 * @param renderer The display object whose coordinate system the mouse position is 
 		 * converted to. This is usually the renderer for the particle system created by the emitter.
 		 */
-		public function TurnAwayFromMouse( power:Number, renderer:DisplayObject )
+		public function TurnAwayFromMouse( power:Number = 0, renderer:DisplayObject = null )
 		{
 			super( -power, renderer );
 		}

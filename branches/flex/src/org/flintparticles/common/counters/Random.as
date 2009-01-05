@@ -53,7 +53,7 @@ package org.flintparticles.common.counters
 		 * 
 		 * @see org.flintparticles.common.emitter.Emitter.counter
 		 */
-		public function Random( minRate:Number, maxRate:Number )
+		public function Random( minRate:Number = 0, maxRate:Number = 0 )
 		{
 			_stop = false;
 			_minRate = minRate;

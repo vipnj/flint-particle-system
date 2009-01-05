@@ -1,6 +1,7 @@
 
 package org.flintparticles.common.renderers 
 {
+	import flash.display.Stage;
 	import flash.events.Event;
 	
 	import org.flintparticles.common.emitters.Emitter;
@@ -9,6 +10,8 @@ package org.flintparticles.common.renderers
 	import org.flintparticles.common.particles.Particle;
 	import org.flintparticles.common.renderers.Renderer;	
 
+	import mx.core.UIComponent;
+	
 	/**
 	 * The base class used by all the Flint renderers. This class manages
 	 * various aspects of the rendering process.
@@ -19,7 +22,7 @@ package org.flintparticles.common.renderers
 	 * and renderParticles at the appropriate times. Many derived classes need 
 	 * only implement these three methods to manage the rendering of the particles.</p>
 	 */
-	public class RendererBase implements Renderer 
+	public class FlexRendererBase extends UIComponent implements Renderer 
 	{
 		/**
 		 * @private
@@ -34,9 +37,13 @@ package org.flintparticles.common.renderers
 		/**
 		 * The constructor creates a RendererBase class.
 		 */
-		public function RendererBase()
+		public function FlexRendererBase()
 		{
+			super();
 			_emitters = new Array();
+			mouseEnabled = false;
+			mouseChildren = false;
+			addEventListener( Event.ADDED_TO_STAGE, addedToStage, false, 0, true );
 		}
 		
 		/**
@@ -49,6 +56,10 @@ package org.flintparticles.common.renderers
 		public function addEmitter( emitter : Emitter ) : void
 		{
 			_emitters.push( emitter );
+			if( stage )
+			{
+				stage.invalidate();
+			}
 			emitter.addEventListener( EmitterEvent.EMITTER_UPDATED, emitterUpdated, false, 0, true );
 			emitter.addEventListener( ParticleEvent.PARTICLE_CREATED, particleAdded, false, 0, true );
 			emitter.addEventListener( ParticleEvent.PARTICLE_ADDED, particleAdded, false, 0, true );
@@ -56,6 +67,10 @@ package org.flintparticles.common.renderers
 			for each( var p:Particle in emitter.particles )
 			{
 				addParticle( p );
+			}
+			if( _emitters.length == 1 )
+			{
+				addEventListener( Event.RENDER, updateParticles, false, 0, true );
 			}
 		}
 
@@ -81,25 +96,65 @@ package org.flintparticles.common.renderers
 					{
 						removeParticle( p );
 					}
+					if( _emitters.length == 0 )
+					{
+						removeEventListener( Event.RENDER, updateParticles );
+						renderParticles( [] );
+					}
+					else
+					{
+						stage.invalidate();
+					}
 					return;
 				}
+			}
+		}
+		
+		private function addedToStage( ev:Event ):void
+		{
+			if( stage )
+			{
+				stage.invalidate();
 			}
 		}
 		
 		private function particleAdded( ev:ParticleEvent ):void
 		{
 			addParticle( ev.particle );
+			if( stage )
+			{
+				stage.invalidate();
+			}
 		}
 		
 		private function particleRemoved( ev:ParticleEvent ):void
 		{
 			removeParticle( ev.particle );
+			if( stage )
+			{
+				stage.invalidate();
+			}
 		}
 
 		private function emitterUpdated( ev:EmitterEvent ):void
 		{
-			renderParticles( Emitter( ev.target ).particles );
+			if( stage )
+			{
+				stage.invalidate();
+			}
 		}
+		
+		private function updateParticles( ev:Event ) : void
+		{
+			var particles:Array = new Array();
+			for( var i:int = 0; i < _emitters.length; ++i )
+			{
+				particles = particles.concat( _emitters[i].particles );
+			}
+			renderParticles( particles );
+		}
+		
+		
 		
 		/**
 		 * The addParticle method is called when a particle is added to one of
@@ -151,6 +206,17 @@ package org.flintparticles.common.renderers
 			{
 				addEmitter( e );
 			}
+		}
+		
+		
+		override protected function measure():void
+		{
+			super.measure();
+	
+			measuredWidth=200;
+			measuredMinWidth=0;
+			measuredHeight=200;
+			measuredMinHeight=0;
 		}
 	}
 }

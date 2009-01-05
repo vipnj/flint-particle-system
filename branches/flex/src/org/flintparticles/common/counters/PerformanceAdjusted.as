@@ -67,7 +67,7 @@ package org.flintparticles.common.counters
 		 * if your movie's frame rate is 30fps and you want to target this rate, 
 		 * set the target rate to 26fps.
 		 */
-		public function PerformanceAdjusted( rateMin:Number, rateMax:Number, targetFrameRate:Number )
+		public function PerformanceAdjusted( rateMin:Number = 0, rateMax:Number = 0, targetFrameRate:Number = 24 )
 		{
 			_stop = false;
 			_rateMin = rateMin;

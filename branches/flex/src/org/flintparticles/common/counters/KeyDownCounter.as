@@ -45,7 +45,8 @@ package org.flintparticles.common.counters
 		private var _keyCode:uint;
 		private var _isDown:Boolean;
 		private var _stop:Boolean;
-		
+		private var _stage:Stage;
+
 		/**
 		 * The constructor creates a ZonedAction action for use by 
 		 * an emitter. To add a ZonedAction to all particles created by an emitter, use the
@@ -57,14 +58,23 @@ package org.flintparticles.common.counters
 		 * @param keyCode The key code of the key that controls the counter.
 		 * @param stage A reference to the stage.
 		 */
-		public function KeyDownCounter( counter:Counter, keyCode:uint, stage:Stage )
+		public function KeyDownCounter( counter:Counter = null, keyCode:uint = 0, stage:Stage = null )
 		{
 			_stop = false;
 			_counter = counter;
 			_keyCode = keyCode;
 			_isDown = false;
-			stage.addEventListener( KeyboardEvent.KEY_DOWN, keyDownListener, false, 0, true );
-			stage.addEventListener( KeyboardEvent.KEY_UP, keyUpListener, false, 0, true );
+			_stage = stage;
+			createListeners();
+		}
+		
+		private function createListeners():void
+		{
+			if( stage )
+			{
+				stage.addEventListener( KeyboardEvent.KEY_DOWN, keyDownListener, false, 0, true );
+				stage.addEventListener( KeyboardEvent.KEY_UP, keyUpListener, false, 0, true );
+			}
 		}
 		
 		private function keyDownListener( ev:KeyboardEvent ):void
@@ -106,6 +116,18 @@ package org.flintparticles.common.counters
 			_keyCode = value;
 		}
 		
+		/**
+		 * A reference to the stage
+		 */
+		public function get stage():Stage
+		{
+			return _stage;
+		}
+		public function set stage( value:Stage ):void
+		{
+			_stage = value;
+			createListeners();
+		}
 		
 		public function startEmitter( emitter:Emitter ):uint
 		{

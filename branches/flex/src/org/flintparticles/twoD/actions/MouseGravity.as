@@ -70,7 +70,7 @@ package org.flintparticles.twoD.actions
 		 * small epsilon ( ~1 ), but for stable visual effects a larger epsilon 
 		 * (~100) is often better.
 		 */
-		public function MouseGravity( power:Number, renderer:DisplayObject, epsilon:Number = 100 )
+		public function MouseGravity( power:Number = 0, renderer:DisplayObject = null, epsilon:Number = 100 )
 		{
 			_power = power * _gravityConst;
 			_epsilonSq = epsilon * epsilon;

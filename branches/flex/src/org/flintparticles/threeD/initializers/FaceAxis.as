@@ -42,8 +42,8 @@ package org.flintparticles.threeD.initializers
 	 * "forward" direction for the particle.
 	 * 
 	 * <p>The face axis is used when rotating the particle to the direction of
-	 * motion and when using a display object to represent the paticle - the display
-	 * object is rotated so that its x axis points in teh direction of the facing axis
+	 * motion and when using a display object to represent the particle - the display
+	 * object is rotated so that its x axis points in the direction of the facing axis
 	 * of the particle.</p>
 	 */
 

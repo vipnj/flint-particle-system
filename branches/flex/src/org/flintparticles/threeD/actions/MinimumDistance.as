@@ -65,7 +65,7 @@ package org.flintparticles.threeD.actions
 		 * particles.
 		 * @param acceleration The acceleration force applied to avoid the other particles.
 		 */
-		public function MinimumDistance( minimum:Number, acceleration:Number )
+		public function MinimumDistance( minimum:Number = 0, acceleration:Number = 0 )
 		{
 			this.minimum = minimum;
 			this.acceleration = acceleration;

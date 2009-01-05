@@ -51,7 +51,7 @@ package org.flintparticles.common.initializers
 		 * 
 		 * @see org.flintparticles.common.emitters.Emitter#addInitializer().
 		 */
-		public function MassInit( mass:Number )
+		public function MassInit( mass:Number = 1 )
 		{
 			_mass = mass;
 		}

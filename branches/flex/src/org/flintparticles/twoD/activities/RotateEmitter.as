@@ -51,7 +51,7 @@ package org.flintparticles.twoD.activities
 		 * @para angularVelocity The angular velocity for the emitter in 
 		 * radians per second.
 		 */
-		public function RotateEmitter( angularVelocity:Number )
+		public function RotateEmitter( angularVelocity:Number = 0 )
 		{
 			_angularVelocity = angularVelocity;
 		}

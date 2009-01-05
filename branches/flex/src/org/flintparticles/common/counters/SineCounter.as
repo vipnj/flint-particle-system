@@ -59,7 +59,7 @@ package org.flintparticles.common.counters
 		 * 
 		 * @see org.flintparticles.common.emitter.Emitter.counter
 		 */
-		public function SineCounter( period:Number, rateMax:Number, rateMin:Number = 0 )
+		public function SineCounter( period:Number = 1, rateMax:Number = 0, rateMin:Number = 0 )
 		{
 			_stop = false;
 			_period = period;

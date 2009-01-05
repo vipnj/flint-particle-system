@@ -57,7 +57,7 @@ package org.flintparticles.twoD.actions
 		 * @param rate Adjusts how quickly the particle reaches the target velocity.
 		 * Larger numbers cause it to approach the target velocity more quickly.
 		 */
-		public function TargetVelocity( targetVelocityX:Number, targetVelocityY:Number, rate:Number = 0.1 )
+		public function TargetVelocity( targetVelocityX:Number = 0, targetVelocityY:Number = 0, rate:Number = 0.1 )
 		{
 			_velX = targetVelocityX;
 			_velY = targetVelocityY;

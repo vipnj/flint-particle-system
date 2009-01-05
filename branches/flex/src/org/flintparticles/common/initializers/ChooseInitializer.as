@@ -58,7 +58,7 @@ package org.flintparticles.common.initializers
 		 * 
 		 * @see org.flintparticles.common.emitters.Emitter#addInitializer()
 		 */
-		public function ChooseInitializer( initializers:Array, weights:Array = null )
+		public function ChooseInitializer( initializers:Array = [], weights:Array = null )
 		{
 			_initializers = new WeightedArray;
 			var len:int = initializers.length;

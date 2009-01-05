@@ -59,7 +59,7 @@ package org.flintparticles.common.actions
 		 * @param rate Adjusts how quickly the particle reaches the target color.
 		 * Larger numbers cause it to approach the target color more quickly.
 		 */
-		public function TargetColor( targetColor:uint, rate:Number = 0.1 )
+		public function TargetColor( targetColor:uint= 0xFFFFFF, rate:Number = 0.1 )
 		{
 			_red = ( targetColor >>> 16 ) & 255;
 			_green = ( targetColor >>> 8 ) & 255;

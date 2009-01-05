@@ -61,7 +61,7 @@ package org.flintparticles.twoD.actions
 		 * particles inside the zone. If true the action is applied only to 
 		 * particles outside the zone.
 		 */
-		public function ZonedAction( action:Action, zone:Zone2D, invertZone:Boolean = false )
+		public function ZonedAction( action:Action = null, zone:Zone2D = null, invertZone:Boolean = false )
 		{
 			_action = action;
 			_zone = zone;

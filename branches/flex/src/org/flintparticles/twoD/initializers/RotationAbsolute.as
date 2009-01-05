@@ -60,7 +60,7 @@ package org.flintparticles.twoD.initializers
 		 * 
  		 * @see org.flintparticles.common.emitters.Emitter#addInitializer()
 		 */
-		public function RotationAbsolute( minAngle : Number, maxAngle : Number = NaN )
+		public function RotationAbsolute( minAngle : Number = 0, maxAngle : Number = NaN )
 		{
 			_min = minAngle;
 			_max = maxAngle;

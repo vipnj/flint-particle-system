@@ -64,7 +64,7 @@ package org.flintparticles.twoD.actions
 		 * only to particles inside the zone. If true the acceleration is applied 
 		 * only to particles outside the zone.
 		 */
-		public function Jet( accelerationX:Number, accelerationY:Number, zone:Zone2D, invertZone:Boolean = false )
+		public function Jet( accelerationX:Number = 0, accelerationY:Number = 0, zone:Zone2D = null, invertZone:Boolean = false )
 		{
 			_x = accelerationX;
 			_y = accelerationY;

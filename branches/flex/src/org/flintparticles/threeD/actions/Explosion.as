@@ -77,7 +77,7 @@ package org.flintparticles.threeD.actions
 		 * this distance away. This stops the explosion effect blowing up as distances get 
 		 * small.
 		 */
-		public function Explosion( power:Number, center:Vector3D, expansionRate:Number = 300, depth:Number = 10, epsilon:Number = 1 )
+		public function Explosion( power:Number = 0, center:Vector3D = null, expansionRate:Number = 300, depth:Number = 10, epsilon:Number = 1 )
 		{
 			this.power = power;
 			this.center = center;

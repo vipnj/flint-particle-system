@@ -64,7 +64,7 @@ package org.flintparticles.twoD.actions
 		 * and particles outside the zone are killed. If false, particles
 		 * inside the zone are killed.
 		 */
-		public function DeathZone( zone:Zone2D, zoneIsSafe:Boolean = false )
+		public function DeathZone( zone:Zone2D = null, zoneIsSafe:Boolean = false )
 		{
 			_zone = zone;
 			_invertZone = zoneIsSafe;

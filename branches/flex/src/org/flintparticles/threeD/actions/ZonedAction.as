@@ -59,7 +59,7 @@ package org.flintparticles.threeD.actions
 		 * @param invertZone If false (the default) the action is applied only to particles inside 
 		 * the zone. If true the action is applied only to particles outside the zone.
 		 */
-		public function ZonedAction( action:Action, zone:Zone3D, invertZone:Boolean = false )
+		public function ZonedAction( action:Action = null, zone:Zone3D = null, invertZone:Boolean = false )
 		{
 			_action = action;
 			_zone = zone;

@@ -70,7 +70,7 @@ package org.flintparticles.twoD.actions
 		 * @param acceleration The size of the acceleration applied to approach the 
 		 * other particles.
 		 */
-		public function ApproachNeighbours( maxDistance:Number, acceleration:Number )
+		public function ApproachNeighbours( maxDistance:Number = 0, acceleration:Number = 0 )
 		{
 			_max = maxDistance;
 			_maxSq = maxDistance * maxDistance;

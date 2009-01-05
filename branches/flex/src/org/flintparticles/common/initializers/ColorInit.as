@@ -58,7 +58,7 @@ package org.flintparticles.common.initializers
 		 * 
 		 * @see org.flintparticles.common.emitters.Emitter#addInitializer()
 		 */
-		public function ColorInit( color1:uint, color2:uint )
+		public function ColorInit( color1:uint= 0xFFFFFF, color2:uint = 0xFFFFFF )
 		{
 			_min = color1;
 			_max = color2;

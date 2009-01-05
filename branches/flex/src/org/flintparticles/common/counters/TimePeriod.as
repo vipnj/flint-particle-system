@@ -67,7 +67,7 @@ package org.flintparticles.common.counters
 		 * 
 		 * @see org.flintparticles.common.emitter.Emitter.counter
 		 */
-		public function TimePeriod( numParticles : uint, duration : Number, easing : Function = null )
+		public function TimePeriod( numParticles : uint = 0, duration : Number = 0, easing : Function = null )
 		{
 			_particles = numParticles;
 			_duration = duration;

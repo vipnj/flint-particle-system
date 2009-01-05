@@ -67,7 +67,7 @@ package org.flintparticles.threeD.actions
 		 * @param acceleration The acceleration force applied to approach the other 
 		 * particles.
 		 */
-		public function ApproachNeighbours( maxDistance:Number, acceleration:Number )
+		public function ApproachNeighbours( maxDistance:Number = 0, acceleration:Number = 0 )
 		{
 			this.maxDistance = maxDistance;
 			this.acceleration = acceleration;

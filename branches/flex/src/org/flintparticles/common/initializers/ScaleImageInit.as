@@ -65,7 +65,7 @@ package org.flintparticles.common.initializers
 		 * 
 		 * @see org.flintparticles.common.emitters.Emitter#addInitializer().
 		 */
-		public function ScaleImageInit( minScale:Number, maxScale:Number = NaN )
+		public function ScaleImageInit( minScale:Number = 1, maxScale:Number = NaN )
 		{
 			_min = minScale;
 			if( isNaN( maxScale ) )

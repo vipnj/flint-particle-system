@@ -50,7 +50,7 @@ package org.flintparticles.common.counters
 		 * 
 		 * @see org.flintparticles.common.emitter.Emitter.counter
 		 */
-		public function Blast( startCount:uint )
+		public function Blast( startCount:uint = 0 )
 		{
 			_startCount = startCount;
 		}

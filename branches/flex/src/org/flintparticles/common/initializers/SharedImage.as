@@ -59,7 +59,7 @@ package org.flintparticles.common.initializers
 		 * 
 		 * @see org.flintparticles.common.emitters.Emitter#addInitializer()
 		 */
-		public function SharedImage( image:DisplayObject )
+		public function SharedImage( image:DisplayObject = null )
 		{
 			_image = image;
 		}

@@ -71,7 +71,7 @@ package org.flintparticles.threeD.actions
 		 * A value between 0 and 1 causes the particle to loose enegy in the collision. A value 
 		 * greater than 1 causes the particle to gain energy in the collision.
 		 */
-		public function BoundingBox( minX:Number, maxX:Number, minY:Number, maxY:Number, minZ:Number, maxZ:Number, bounce:Number = 1 )
+		public function BoundingBox( minX:Number = 0, maxX:Number = 0, minY:Number = 0, maxY:Number = 0, minZ:Number = 0, maxZ:Number = 0, bounce:Number = 1 )
 		{
 			this.minX = minX;
 			this.maxX = maxX;
