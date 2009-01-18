@@ -31,6 +31,7 @@
 package org.flintparticles.threeD.particles
 {
 	import org.flintparticles.common.particles.Particle;
+	import org.flintparticles.common.particles.ParticleFactory;
 	import org.flintparticles.threeD.geom.Quaternion;
 	import org.flintparticles.threeD.geom.Vector3D;	
 
@@ -130,6 +131,28 @@ package org.flintparticles.threeD.particles
 			angVelocity.reset( 0, 0, 0, 0 );
 			sortID = -1;
 			zDepth = 0;
+		}
+
+		override public function clone( factory:ParticleFactory = null ):Particle
+		{
+			var p:Particle3D;
+			if( factory )
+			{
+				p = factory.createParticle() as Particle3D;
+			}
+			else
+			{
+				p = new Particle3D();
+			}
+			cloneInto( p );
+			p.position = position.clone();
+			p.projectedPosition = projectedPosition.clone();
+			p.faceAxis = faceAxis.clone();
+			p.velocity = velocity.clone();
+			p.rotation = rotation.clone();
+			p.angVelocity = angVelocity.clone();
+			p.zDepth = zDepth;
+			return p;
 		}
 	}
 }
