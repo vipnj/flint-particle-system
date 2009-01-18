@@ -182,6 +182,14 @@ package org.flintparticles.common.particles
 			return p;
 		}
 		
+		/**
+		 * Creates a new particle with all the same properties as this one.
+		 * 
+		 * <p>Note that the new particle will use the same image object as the one you're cloning.
+		 * This is fine if the particles are used with a Bitmaprenderer, but if they are used with a 
+		 * DisplayObjectRenderer you will need to replace teh image property with a new image, otherwise
+		 * only one of the particles (original or clone) will be displayed.</p>
+		 */
 		public function clone( factory:ParticleFactory = null ):Particle
 		{
 			var p:Particle;

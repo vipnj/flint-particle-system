@@ -133,6 +133,9 @@ package org.flintparticles.threeD.particles
 			zDepth = 0;
 		}
 
+		/**
+		 * @inheritDoc
+		 */
 		override public function clone( factory:ParticleFactory = null ):Particle
 		{
 			var p:Particle3D;
