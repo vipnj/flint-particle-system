@@ -131,7 +131,10 @@ package org.flintparticles.twoD.particles
 			var sin:Number = scale * Math.sin( rotation );
 			return new Matrix( cos, sin, -sin, cos, x, y );
 		}
-
+		
+		/**
+		 * @inheritDoc
+		 */
 		override public function clone( factory:ParticleFactory = null ):Particle
 		{
 			var p:Particle2D;
