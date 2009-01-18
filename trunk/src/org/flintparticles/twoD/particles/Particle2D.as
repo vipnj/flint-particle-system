@@ -30,9 +30,10 @@
 
 package org.flintparticles.twoD.particles
 {
-	import flash.geom.Matrix;
+	import org.flintparticles.common.particles.Particle;
+	import org.flintparticles.common.particles.ParticleFactory;
 	
-	import org.flintparticles.common.particles.Particle;	
+	import flash.geom.Matrix;	
 
 	/**
 	 * The Particle class is a set of public properties shared by all particles.
@@ -94,7 +95,7 @@ package org.flintparticles.twoD.particles
 		/**
 		 * The position in the emitter's horizontal spacial sorted array
 		 */
-		public var sortID:uint = 0;
+		public var sortID:int = -1;
 		
 		/**
 		 * Creates a particle. Alternatively particles can be reused by using the ParticleCreator to create
@@ -118,7 +119,7 @@ package org.flintparticles.twoD.particles
 			velY = 0;
 			rotation = 0;
 			angVelocity = 0;
-			sortID = 0;
+			sortID = -1;
 		}
 		
 		/**
@@ -129,6 +130,27 @@ package org.flintparticles.twoD.particles
 			var cos:Number = scale * Math.cos( rotation );
 			var sin:Number = scale * Math.sin( rotation );
 			return new Matrix( cos, sin, -sin, cos, x, y );
+		}
+
+		override public function clone( factory:ParticleFactory = null ):Particle
+		{
+			var p:Particle2D;
+			if( factory )
+			{
+				p = factory.createParticle() as Particle2D;
+			}
+			else
+			{
+				p = new Particle2D();
+			}
+			cloneInto( p );
+			p.x = x;
+			p.y = y;
+			p.velX = velX;
+			p.velY = velY;
+			p.rotation = rotation;
+			p.angVelocity = angVelocity;
+			return p;
 		}
 	}
 }

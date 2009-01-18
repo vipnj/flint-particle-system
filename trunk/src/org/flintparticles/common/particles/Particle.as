@@ -159,5 +159,41 @@ package org.flintparticles.common.particles
 		{
 			return ( ( color & 0xFF000000 ) >>> 24 ) / 255;
 		}
+
+		protected function cloneInto( p:Particle ):Particle
+		{
+			p.color = color;
+			p.scale = scale;
+			p.mass = mass;
+			p.collisionRadius = collisionRadius;
+			p.lifetime = lifetime;
+			p.age = age;
+			p.energy = energy;
+			p.isDead = isDead;
+			p.image = image;
+			if( _dictionary )
+			{
+				p._dictionary = new Dictionary( true );
+				for( var key:Object in _dictionary )
+				{
+					p._dictionary[ key ] = _dictionary[ key ];
+				}
+			}
+			return p;
+		}
+		
+		public function clone( factory:ParticleFactory = null ):Particle
+		{
+			var p:Particle;
+			if( factory )
+			{
+				p = factory.createParticle();
+			}
+			else
+			{
+				p = new Particle();
+			}
+			return cloneInto( p );
+		}
 	}
 }
