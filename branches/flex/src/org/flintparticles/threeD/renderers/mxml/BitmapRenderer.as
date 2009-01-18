@@ -28,29 +28,37 @@
  * THE SOFTWARE.
  */
 
-package org.flintparticles.twoD.renderers
+package org.flintparticles.threeD.renderers.mxml
 {
+	import org.flintparticles.common.renderers.FlexRendererBase;
+	import org.flintparticles.threeD.geom.Matrix3D;
+	import org.flintparticles.threeD.geom.Quaternion;
+	import org.flintparticles.threeD.geom.Vector3D;
+	import org.flintparticles.threeD.particles.Particle3D;
+	import org.flintparticles.threeD.renderers.Camera;
+	
 	import flash.display.Bitmap;
 	import flash.display.BitmapData;
 	import flash.display.DisplayObject;
 	import flash.filters.BitmapFilter;
 	import flash.geom.Matrix;
 	import flash.geom.Point;
-	import flash.geom.Rectangle;
-	
-	import org.flintparticles.common.renderers.SpriteRendererBase;
-	import org.flintparticles.twoD.particles.Particle2D;	
+	import flash.geom.Rectangle;	
 
 	/**
-	 * The BitmapRenderer draws particles onto a single Bitmap display object. The
-	 * region of the particle system covered by this bitmap object must be defined
-	 * in the canvas property of the BitmapRenderer. Particles outside this region
-	 * are not drawn.
+	 * The BitmapRenderer is a native Flint 3D renderer that draws particles
+	 * onto a single Bitmap display object. The particles are drawn face-on to the
+	 * camera, with perspective applied to position and scale the particles.
+	 * 
+	 * <p>The region of the projection plane drawn by this renderer must be 
+	 * defined in the canvas property of the BitmapRenderer. Particles outside this 
+	 * region are not drawn.</p>
 	 * 
 	 * <p>The image to be used for each particle is the particle's image property.
 	 * This is a DisplayObject, but this DisplayObject is not used directly. Instead
 	 * it is copied into the bitmap with the various properties of the particle 
-	 * applied. Consequently each particle may be represented by the same 
+	 * applied, including 3D positioning and perspective relative to the renderer's
+	 * camera position. Consequently each particle may be represented by the same 
 	 * DisplayObject instance and the SharedImage initializer can be used with this 
 	 * renderer.</p>
 	 * 
@@ -64,28 +72,29 @@ package org.flintparticles.twoD.renderers
 	 * <p>The BitmapRenderer has mouse events disabled for itself and any 
 	 * display objects in its display list. To enable mouse events for the renderer
 	 * or its children set the mouseEnabled or mouseChildren properties to true.</p>
-	 * 
-	 * <p><i>This class has been modified in version 1.0.1 of Flint to fix various
-	 * limitations in the previous version. Specifically, the canvas for drawing
-	 * the particles on must now be specified by the developer (it previously 
-	 * defaulted to the size and position of the stage).</i></p>
-	 * 
-	 * <p><i>The previous behaviour, while still flawed, has been improved and 
-	 * given its own renderer, the FullStageBitmapRenderer. To retain the previous
-	 * behaviour, please use the FullStageBitmapRenderer.</i></p>
-	 * 
-	 * @see org.flintparticles.twoD.renderers.FullStageBitmapRenderer
 	 */
-	public class BitmapRenderer extends SpriteRendererBase
+	public class BitmapRenderer extends FlexRendererBase
 	{
 		protected static var ZERO_POINT:Point = new Point( 0, 0 );
+
+		protected var toDegrees:Number = 180 / Math.PI;
 		
+		/**
+		 * @private
+		 */
+		protected var _zSort:Boolean;
+		/**
+		 * @private
+		 */
+		protected var _camera:Camera;
+
 		/**
 		 * @private
 		 */
 		protected var _bitmap:Bitmap;
 		
 		protected var _bitmapData:BitmapData;
+
 		/**
 		 * @private
 		 */
@@ -97,7 +106,7 @@ package org.flintparticles.twoD.renderers
 		/**
 		 * @private
 		 */
-		protected var _colorMap:Array;
+		protected var _paletteMap:Array;
 		/**
 		 * @private
 		 */
@@ -107,14 +116,21 @@ package org.flintparticles.twoD.renderers
 		 */
 		protected var _canvas:Rectangle;
 
+		private var _canvasChanged:Boolean = true;
+
 		/**
 		 * The constructor creates a BitmapRenderer. After creation it should be
 		 * added to the display list of a DisplayObjectContainer to place it on 
-		 * the stage and should be applied to an Emitter using the Emitter's
-		 * renderer property.
+		 * the stage.
+		 * 
+		 * <p>Emitter's should be added to the renderer using the renderer's
+		 * addEmitter method. The renderer displays all the particles created
+		 * by the emitter's that have been added to it.</p>
 		 * 
 		 * @param canvas The area within the renderer on which particles can be drawn.
 		 * Particles outside this area will not be drawn.
+		 * @param zSort Whether to sort the particles according to their
+		 * z order when rendering them or not.
 		 * @param smoothing Whether to use smoothing when scaling the Bitmap and, if the
 		 * particles are represented by bitmaps, when drawing the particles.
 		 * Smoothing removes pixelation when images are scaled and rotated, but it
@@ -122,16 +138,49 @@ package org.flintparticles.twoD.renderers
 		 * 
 		 * @see org.flintparticles.twoD.emitters.Emitter#renderer
 		 */
-		public function BitmapRenderer( canvas:Rectangle, smoothing:Boolean = false )
+		public function BitmapRenderer( canvas:Rectangle = null, zSort:Boolean = true, smoothing:Boolean = false )
 		{
-			super();
+			_zSort = zSort;
+			_camera = new Camera();
 			mouseEnabled = false;
 			mouseChildren = false;
+			_zSort = zSort;
 			_smoothing = smoothing;
 			_preFilters = new Array();
 			_postFilters = new Array();
-			_canvas = canvas;
+			if( canvas == null )
+			{
+				_canvas = new Rectangle( 0, 0, 0, 0 );
+			}
+			else
+			{
+				_canvas = canvas;
+			}
 			createBitmap();
+		}
+		
+		/**
+		 * Indicates whether the particles should be sorted in distance order for display.
+		 */
+		public function get zSort():Boolean
+		{
+			return _zSort;
+		}
+		public function set zSort( value:Boolean ):void
+		{
+			_zSort = value;
+		}
+		
+		/**
+		 * The camera controls the view for the renderer
+		 */
+		public function get camera():Camera
+		{
+			return _camera;
+		}
+		public function set camera( value:Camera ):void
+		{
+			_camera = value;
 		}
 		
 		/**
@@ -191,18 +240,18 @@ package org.flintparticles.twoD.renderers
 		 */
 		public function setPaletteMap( red : Array = null , green : Array = null , blue : Array = null, alpha : Array = null ) : void
 		{
-			_colorMap = new Array(4);
-			_colorMap[0] = alpha;
-			_colorMap[1] = red;
-			_colorMap[2] = green;
-			_colorMap[3] = blue;
+			_paletteMap = new Array(4);
+			_paletteMap[0] = alpha;
+			_paletteMap[1] = red;
+			_paletteMap[2] = green;
+			_paletteMap[3] = blue;
 		}
 		/**
 		 * Clears any palette map that has been set for the renderer.
 		 */
 		public function clearPaletteMap() : void
 		{
-			_colorMap = null;
+			_paletteMap = null;
 		}
 		
 		/**
@@ -210,10 +259,6 @@ package org.flintparticles.twoD.renderers
 		 */
 		protected function createBitmap():void
 		{
-			if( !_canvas )
-			{
-				return;
-			}
 			if( _bitmap && _bitmapData )
 			{
 				_bitmapData.dispose();
@@ -223,6 +268,10 @@ package org.flintparticles.twoD.renderers
 			{
 				removeChild( _bitmap );
 				_bitmap = null;
+			}
+			if( !_canvas || _canvas.width == 0 || _canvas.height == 0 )
+			{
+				return;
 			}
 			_bitmap = new Bitmap( null, "auto", _smoothing);
 			_bitmapData = new BitmapData( Math.ceil( _canvas.width ), Math.ceil( _canvas.height ), true, 0 );
@@ -243,7 +292,48 @@ package org.flintparticles.twoD.renderers
 		public function set canvas( value:Rectangle ):void
 		{
 			_canvas = value;
-			createBitmap();
+			_canvasChanged = true;
+			invalidateDisplayList();
+		}
+		public function get canvasX():Number
+		{
+			return _canvas.x;
+		}
+		public function set canvasX( value:Number ):void
+		{
+			_canvas.x = value;
+			_canvasChanged = true;
+			invalidateDisplayList();
+		}
+		public function get canvasY():Number
+		{
+			return _canvas.y;
+		}
+		public function set canvasY( value:Number ):void
+		{
+			_canvas.y = value;
+			_canvasChanged = true;
+			invalidateDisplayList();
+		}
+		public function get canvasWidth():Number
+		{
+			return _canvas.width;
+		}
+		public function set canvasWidth( value:Number ):void
+		{
+			_canvas.width = value;
+			_canvasChanged = true;
+			invalidateDisplayList();
+		}
+		public function get canvasHeight():Number
+		{
+			return _canvas.height;
+		}
+		public function set canvasHeight( value:Number ):void
+		{
+			_canvas.height = value;
+			_canvasChanged = true;
+			invalidateDisplayList();
 		}
 
 		public function get smoothing():Boolean
@@ -258,9 +348,16 @@ package org.flintparticles.twoD.renderers
 				_bitmap.smoothing = value;
 			}
 		}
-		
+
 		/**
-		 * @inheritDoc
+		 * This method draws the particles in the bitmap image, positioning and
+		 * scaling them according to their positions relative to the camera 
+		 * viewport.
+		 * 
+		 * <p>This method is called internally by Flint and shouldn't need to be called
+		 * by the user.</p>
+		 * 
+		 * @param particles The particles to be rendered.
 		 */
 		override protected function renderParticles( particles:Array ):void
 		{
@@ -268,8 +365,10 @@ package org.flintparticles.twoD.renderers
 			{
 				return;
 			}
+			var transform:Matrix3D = _camera.transform;
 			var i:int;
 			var len:int;
+			var particle:Particle3D;
 			_bitmapData.lock();
 			len = _preFilters.length;
 			for( i = 0; i < len; ++i )
@@ -278,42 +377,95 @@ package org.flintparticles.twoD.renderers
 			}
 			if( len == 0 && _postFilters.length == 0 )
 			{
-				_bitmapData.fillRect( _bitmap.bitmapData.rect, 0 );
+				_bitmapData.fillRect( _bitmapData.rect, 0 );
 			}
 			len = particles.length;
-			if ( len )
+			for( i = 0; i < len; ++i )
 			{
-				for( i = len; i--; ) // draw new particles first so they are behind old particles
-				{
-					drawParticle( particles[i] );
-				}
+				particle = particles[i];
+				particle.projectedPosition = transform.transformVector( particle.position );
+				particle.zDepth = particle.projectedPosition.z;
+			}
+			if( _zSort )
+			{
+				particles.sort( sortOnZ );
+			}
+			for( i = 0; i < len; ++i )
+			{
+				drawParticle( particles[i] );
 			}
 			len = _postFilters.length;
 			for( i = 0; i < len; ++i )
 			{
 				_bitmapData.applyFilter( _bitmapData, _bitmapData.rect, BitmapRenderer.ZERO_POINT, _postFilters[i] );
 			}
-			if( _colorMap )
+			if( _paletteMap )
 			{
-				_bitmapData.paletteMap( _bitmapData, _bitmapData.rect, ZERO_POINT, _colorMap[1] , _colorMap[2] , _colorMap[3] , _colorMap[0] );
+				_bitmapData.paletteMap( _bitmapData, _bitmapData.rect, ZERO_POINT, _paletteMap[1] , _paletteMap[2] , _paletteMap[3] , _paletteMap[0] );
 			}
 			_bitmapData.unlock();
 		}
 		
 		/**
-		 * Used internally here and in derived classes to alter the manner of 
-		 * the particle rendering.
+		 * @private
+		 */
+		protected function sortOnZ( p1:Particle3D, p2:Particle3D ):int
+		{
+			return p2.zDepth - p1.zDepth;
+		}
+
+		/**
+		 * Used internally here and in derived classes to render a single particle.
+		 * Each particle is positioned and perspective scaling applied here.
+		 * 
+		 * <p>Derived classes can modify the rendering of individual particles
+		 * by overriding this method.</p>
 		 * 
 		 * @param particle The particle to draw on the bitmap.
 		 */
-		protected function drawParticle( particle:Particle2D ):void
+		protected function drawParticle( particle:Particle3D ):void
 		{
+			var pos:Vector3D = particle.projectedPosition;
+			if( pos.z < _camera.nearPlaneDistance || pos.z > _camera.farPlaneDistance )
+			{
+				return;
+			}
+			var scale:Number = particle.scale * _camera.projectionDistance / pos.z;
+			pos.project();
+			
+			var rot:Number = 0;
+			var transform:Matrix3D = _camera.transform;			
+			var facing:Vector3D;
+			if( particle.rotation.equals( Quaternion.IDENTITY ) )
+			{
+				facing = particle.faceAxis.clone();
+			}
+			else
+			{
+				var m:Matrix3D = particle.rotation.toMatrixTransformation();
+				facing = m.transformVector( particle.faceAxis );
+			}
+			transform.transformVectorSelf( facing );
+			if( facing.x != 0 || facing.y != 0 )
+			{
+				rot = Math.atan2( -facing.y, facing.x );
+			}
+
 			var matrix:Matrix;
-			matrix = particle.matrixTransform;
-			matrix.translate( -_canvas.x, -_canvas.y );
+			if( rot )
+			{
+				var cos:Number = scale * Math.cos( rot );
+				var sin:Number = scale * Math.sin( rot );
+				matrix = new Matrix( cos, sin, -sin, cos, pos.x - _canvas.x, -pos.y - _canvas.y );
+			}
+			else
+			{
+				matrix = new Matrix( scale, 0, 0, scale, pos.x - _canvas.x, -pos.y - _canvas.y );
+			}
+
 			_bitmapData.draw( particle.image, matrix, particle.colorTransform, DisplayObject( particle.image ).blendMode, null, _smoothing );
 		}
-		
+
 		/**
 		 * The bitmap data of the renderer.
 		 */
@@ -321,5 +473,16 @@ package org.flintparticles.twoD.renderers
 		{
 			return _bitmapData;
 		}
+
+		override protected function updateDisplayList( unscaledWidth:Number, unscaledHeight:Number ):void
+		{
+			super.updateDisplayList( unscaledWidth, unscaledHeight );
+			
+			if( _canvasChanged )
+			{
+				createBitmap();
+			}
+		}
+
 	}
 }

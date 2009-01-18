@@ -52,8 +52,8 @@ package org.flintparticles.twoD.renderers
 	 * or its children set the mouseEnabled or mouseChildren properties to true.</p>
 	 * 
 	 * <p>Because the DisplayObject3DRenderer directly uses the particle's image,
-	 * it is not suitable in situations where the same particle will be displayed 
-	 * by two different renderers.</p> 
+	 * it is not suitable in situations where the same particle will be simultaneously
+	 * displayed by two different renderers.</p> 
 	 */
 	public class DisplayObjectRenderer extends SpriteRendererBase
 	{

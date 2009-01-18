@@ -279,6 +279,19 @@ package org.flintparticles.threeD.renderers
 			createBitmap();
 		}
 
+		public function get smoothing():Boolean
+		{
+			return _smoothing;
+		}
+		public function set smoothing( value:Boolean ):void
+		{
+			_smoothing = value;
+			if( _bitmap )
+			{
+				_bitmap.smoothing = value;
+			}
+		}
+
 		/**
 		 * This method draws the particles in the bitmap image, positioning and
 		 * scaling them according to their positions relative to the camera 

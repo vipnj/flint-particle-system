@@ -28,18 +28,22 @@
  * THE SOFTWARE.
  */
 
-package org.flintparticles.twoD.renderers.mxml
+package org.flintparticles.threeD.renderers.mxml
 {
-	import flash.display.BitmapData;
-	import flash.geom.Rectangle;
+	import org.flintparticles.threeD.geom.Vector3D;
+	import org.flintparticles.threeD.particles.Particle3D;
 	
-	import org.flintparticles.twoD.particles.Particle2D;	
+	import flash.display.Bitmap;
+	import flash.display.BitmapData;
+	import flash.geom.Rectangle;	
 
 	/**
-	 * The PixelRenderer draws particles as single pixels on a Bitmap display object. The
-	 * region of the particle system covered by this bitmap object must be defined
-	 * in the canvas property of the PixelRenderer. Particles outside this region
-	 * are not drawn.
+	 * The PixelRenderer is a native Flint 3D renderer that draws particles
+	 * as single pixels on a Bitmap display object.
+	 * 
+	 * <p>The region of the projection plane drawn by this renderer must be 
+	 * defined in the canvas property of the BitmapRenderer. Particles outside this 
+	 * region are not drawn.</p>
 	 * 
 	 * <p>The PixelRenderer allows the use of BitmapFilters to modify the appearance
 	 * of the bitmap. Every frame, under normal circumstances, the Bitmap used to
@@ -51,37 +55,46 @@ package org.flintparticles.twoD.renderers.mxml
 	 * <p>The PixelRenderer has mouse events disabled for itself and any 
 	 * display objects in its display list. To enable mouse events for the renderer
 	 * or its children set the mouseEnabled or mouseChildren properties to true.</p>
-	 * 
-	 * <p><i>This class has been modified in version 1.0.1 of Flint to fix various
-	 * limitations in the previous version. Specifically, the canvas for drawing
-	 * the particles on must now be specified by the developer (it previously 
-	 * defaulted to the size and position of the stage).</i></p>
-	 * 
-	 * <p><i>The previous behaviour, while still flawed, has been improved
-	 * and given its own renderer, the FullStagePixelRenderer. To retain the previous
-	 * behaviour, please use the FullStagePixelRenderer.</i></p>
-	 * 
-	 * @see org.flintparticles.twoD.renderers.FullStagePixelRenderer
 	 */
 	public class PixelRenderer extends BitmapRenderer
 	{
 		/**
 		 * The constructor creates a PixelRenderer. After creation it should be
 		 * added to the display list of a DisplayObjectContainer to place it on 
-		 * the stage and should be applied to an Emitter using the Emitter's
-		 * renderer property.
+		 * the stage.
+		 * 
+		 * <p>Emitter's should be added to the renderer using the renderer's
+		 * addEmitter method. The renderer displays all the particles created
+		 * by the emitter's that have been added to it.</p>
+		 * 
+		 * @param canvas The area within the renderer on which particles can be drawn.
+		 * Particles outside this area will not be drawn.
+		 * @param zSort Whether to sort the particles according to their
+		 * z order when rendering them or not.
+		 * 
+		 * @see org.flintparticles.twoD.emitters.Emitter#renderer
 		 */
-		public function PixelRenderer( canvas:Rectangle = null )
+		public function PixelRenderer( canvas:Rectangle= null, zSort:Boolean = false )
 		{
-			super( canvas );
+			super( canvas, zSort );
 		}
 		
 		/**
-		 * Used internally to draw the particles.
+		 * This is the method that draws each particle. calculates the position
+		 * of the particle in teh camera's viewport and draws the particle
+		 * as a single pixel in that location.
+		 * 
+		 * @param particle The particle to draw on the bitmap.
 		 */
-		override protected function drawParticle( particle:Particle2D ):void
+		override protected function drawParticle( particle:Particle3D ):void
 		{
-			_bitmapData.setPixel32( Math.round( particle.x - _canvas.x ), Math.round( particle.y - _canvas.y ), particle.color );
+			var pos:Vector3D = particle.projectedPosition;
+			if( pos.z < _camera.nearPlaneDistance || pos.z > _camera.farPlaneDistance )
+			{
+				return;
+			}
+			pos.project();
+			_bitmap.bitmapData.setPixel32( Math.round( pos.x - _canvas.x ), Math.round( -pos.y - _canvas.y ), particle.color );
 		}
 	}
 }

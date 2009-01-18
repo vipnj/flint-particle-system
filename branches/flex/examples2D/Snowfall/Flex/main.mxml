@@ -1,46 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml"
-	xmlns:r="org.flintparticles.twoD.renderers.mxml.*"
-	xmlns:e="org.flintparticles.twoD.emitters.*"
-	xmlns:c="org.flintparticles.common.counters.*"
-	xmlns:j="org.flintparticles.common.initializers.*"
-	xmlns:i="org.flintparticles.twoD.initializers.*"
-	xmlns:a="org.flintparticles.twoD.actions.*"
-	layout="absolute" initialize="init()"
-	width="600" height="400">
+<mx:Application
+	xmlns:mx="http://www.adobe.com/2006/mxml"
+	xmlns:f="http://flintparticles.org/2009/flint2d"
+	layout="absolute" width="600" height="400">
+	
+	<mx:Script>
+		<![CDATA[
+			import org.flintparticles.twoD.zones.*;
+			import org.flintparticles.common.displayObjects.*;
+		]]>
+	</mx:Script>
 
-<mx:Script>
-	<![CDATA[
-		import org.flintparticles.common.displayObjects.RadialDot;
-		import org.flintparticles.twoD.zones.*;
-		
-		private function init():void
-		{
-			emitter.start();
-			emitter.runAhead( 10 );
-		}
-	]]>
-</mx:Script>
 <mx:Image source="@Embed(source='assets/Snow_1.png')"/>
-<r:DisplayObjectRenderer id="renderer" width="600" height="400">
-	<r:emitters>
-		<e:Emitter2D id="emitter">
-			<e:counter>
-				<c:Steady rate="150"/>
-			</e:counter>
-			<e:initializers>
-				<i:Position zone="{new LineZone( new Point( -5, -5 ), new Point( 605, -5 ) )}"/>
-				<i:Velocity zone="{new PointZone( new Point( 0, 65 ) )}"/>
-				<j:ImageClass imageClass="{RadialDot}" parameters="[2]"/>
-				<j:ScaleImageInit minScale="0.75" maxScale="2"/>
-			</e:initializers>
-			<e:actions>
-				<a:Move/>
-				<a:DeathZone zone="{new RectangleZone( -10, -10, 620, 420 )}" zoneIsSafe="true"/>
-				<a:RandomDrift driftX="20" driftY="20"/>
-			</e:actions>
-		</e:Emitter2D>
-	</r:emitters>
-</r:DisplayObjectRenderer>
+<f:DisplayObjectRenderer id="renderer" width="600" height="400">
+	<f:emitters>
+		<f:Emitter2D id="emitter" autoStart="true" runAheadTime="10">
+			<f:counter>
+				<f:Steady rate="150"/>
+			</f:counter>
+			<f:initializers>
+				<f:Position zone="{new LineZone( new Point( -5, -5 ), new Point( 605, -5 ) )}"/>
+				<f:Velocity zone="{new PointZone( new Point( 0, 65 ) )}"/>
+				<f:ImageClass imageClass="{RadialDot}" parameters="[2]"/>
+				<f:ScaleImageInit minScale="0.75" maxScale="2"/>
+			</f:initializers>
+			<f:actions>
+				<f:Move/>
+				<f:DeathZone zone="{new RectangleZone( -10, -10, 620, 420 )}" zoneIsSafe="true"/>
+				<f:RandomDrift driftX="20" driftY="20"/>
+			</f:actions>
+		</f:Emitter2D>
+	</f:emitters>
+</f:DisplayObjectRenderer>
 <mx:Image source="@Embed(source='assets/Snow_1_over.png')"/>
 </mx:Application>

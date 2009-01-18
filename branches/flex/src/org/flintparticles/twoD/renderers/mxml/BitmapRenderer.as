@@ -1,4 +1,4 @@
-/*
+﻿/*
  * FLINT PARTICLE SYSTEM
  * .....................
  * 
@@ -106,10 +106,8 @@ package org.flintparticles.twoD.renderers.mxml
 		 * @private
 		 */
 		protected var _canvas:Rectangle;
-		/**
-		 * @private
-		 */
-		protected var _clearBetweenFrames:Boolean;
+		
+		private var _canvasChanged:Boolean = true;
 		
 		/**
 		 * The constructor creates a BitmapRenderer. After creation it should be
@@ -126,7 +124,7 @@ package org.flintparticles.twoD.renderers.mxml
 		 * 
 		 * @see org.flintparticles.twoD.emitters.Emitter#renderer
 		 */
-		public function BitmapRenderer( canvas:Rectangle, smoothing:Boolean = false )
+		public function BitmapRenderer( canvas:Rectangle = null, smoothing:Boolean = false )
 		{
 			super();
 			mouseEnabled = false;
@@ -134,9 +132,15 @@ package org.flintparticles.twoD.renderers.mxml
 			_smoothing = smoothing;
 			_preFilters = new Array();
 			_postFilters = new Array();
-			_canvas = canvas;
+			if( canvas == null )
+			{
+				_canvas = new Rectangle( 0, 0, 0, 0 );
+			}
+			else
+			{
+				_canvas = canvas;
+			}
 			createBitmap();
-			_clearBetweenFrames = true;
 		}
 		
 		/**
@@ -215,10 +219,6 @@ package org.flintparticles.twoD.renderers.mxml
 		 */
 		protected function createBitmap():void
 		{
-			if( !_canvas )
-			{
-				return;
-			}
 			if( _bitmap && _bitmapData )
 			{
 				_bitmapData.dispose();
@@ -227,9 +227,14 @@ package org.flintparticles.twoD.renderers.mxml
 			if( _bitmap )
 			{
 				removeChild( _bitmap );
+				_bitmap = null;
+			}
+			if( !_canvas || _canvas.width == 0 || _canvas.height == 0 )
+			{
+				return;
 			}
 			_bitmap = new Bitmap( null, "auto", _smoothing);
-			_bitmapData = new BitmapData( _canvas.width, _canvas.height, true, 0 );
+			_bitmapData = new BitmapData( Math.ceil( _canvas.width ), Math.ceil( _canvas.height ), true, 0 );
 			_bitmap.bitmapData = _bitmapData;
 			addChild( _bitmap );
 			_bitmap.x = _canvas.x;
@@ -247,26 +252,61 @@ package org.flintparticles.twoD.renderers.mxml
 		public function set canvas( value:Rectangle ):void
 		{
 			_canvas = value;
-			createBitmap();
+			_canvasChanged = true;
+			invalidateDisplayList();
 		}
 		
-		/**
-		 * Controls whether the display is cleared between each render frame.
-		 * If you use pre-render filters, this value is ignored and the display is
-		 * not cleared. If you use no filters or only post-render filters, this value 
-		 * governs whether the screen is cleared.
-		 * 
-		 * <p>For BitmapRenderer and PixelRenderer, this value defaults to true.
-		 * For BitmapLineRenderer it defaults to false.</p>
-		 */
-		public function get clearBetweenFrames():Boolean
+		public function get canvasX():Number
 		{
-			return _clearBetweenFrames;
+			return _canvas.x;
 		}
-		public function set clearBetweenFrames( value:Boolean ):void
+		public function set canvasX( value:Number ):void
 		{
-			_clearBetweenFrames = value;
-			createBitmap();
+			_canvas.x = value;
+			_canvasChanged = true;
+			invalidateDisplayList();
+		}
+		public function get canvasY():Number
+		{
+			return _canvas.y;
+		}
+		public function set canvasY( value:Number ):void
+		{
+			_canvas.y = value;
+			_canvasChanged = true;
+			invalidateDisplayList();
+		}
+		public function get canvasWidth():Number
+		{
+			return _canvas.width;
+		}
+		public function set canvasWidth( value:Number ):void
+		{
+			_canvas.width = value;
+			_canvasChanged = true;
+			invalidateDisplayList();
+		}
+		public function get canvasHeight():Number
+		{
+			return _canvas.height;
+		}
+		public function set canvasHeight( value:Number ):void
+		{
+			_canvas.height = value;
+			_canvasChanged = true;
+			invalidateDisplayList();
+		}
+		public function get smoothing():Boolean
+		{
+			return _smoothing;
+		}
+		public function set smoothing( value:Boolean ):void
+		{
+			_smoothing = value;
+			if( _bitmap )
+			{
+				_bitmap.smoothing = value;
+			}
 		}
 		
 		/**
@@ -286,7 +326,7 @@ package org.flintparticles.twoD.renderers.mxml
 			{
 				_bitmapData.applyFilter( _bitmapData, _bitmapData.rect, BitmapRenderer.ZERO_POINT, _preFilters[i] );
 			}
-			if( _clearBetweenFrames && len == 0 )
+			if( len == 0 && _postFilters.length == 0 )
 			{
 				_bitmapData.fillRect( _bitmap.bitmapData.rect, 0 );
 			}
@@ -331,5 +371,16 @@ package org.flintparticles.twoD.renderers.mxml
 		{
 			return _bitmapData;
 		}
+
+		override protected function updateDisplayList( unscaledWidth:Number, unscaledHeight:Number ):void
+		{
+			super.updateDisplayList( unscaledWidth, unscaledHeight );
+			
+			if( _canvasChanged )
+			{
+				createBitmap();
+			}
+		}
+
 	}
 }
