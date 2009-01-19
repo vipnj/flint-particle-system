@@ -63,9 +63,13 @@ package org.flintparticles.twoD.initializers
 		 * 
 		 * @see org.flintparticles.common.emitters.Emitter#addInitializer()
 		 */
-		public function ScaleAllsInit( scales:Array = [], weights:Array = null )
+		public function ScaleAllsInit( scales:Array = null, weights:Array = null )
 		{
 			_scales = new WeightedArray;
+			if( scales == null )
+			{
+				return;
+			}
 			var len:int = scales.length;
 			var i:int;
 			if( weights != null && weights.length == len )
