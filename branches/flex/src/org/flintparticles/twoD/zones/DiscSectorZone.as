@@ -68,7 +68,7 @@ package org.flintparticles.twoD.zones
 		 * direction (towards the graphical y axis). Angles are converted to a value between 0 
 		 * and two times PI.
 		 */
-		public function DiscSectorZone( center:Point, outerRadius:Number, innerRadius:Number, minAngle:Number, maxAngle:Number )
+		public function DiscSectorZone( center:Point = null, outerRadius:Number = 0, innerRadius:Number = 0, minAngle:Number = 0, maxAngle:Number = 0 )
 		{
 			if( outerRadius < innerRadius )
 			{
@@ -81,34 +81,43 @@ package org.flintparticles.twoD.zones
 			_outerSq = _outerRadius * _outerRadius;
 			_minAngle = minAngle;
 			_maxAngle = maxAngle;
-			while ( _maxAngle > TWOPI )
+			if( _maxAngle )
 			{
-				_maxAngle -= TWOPI;
-			}
-			while ( _maxAngle < 0 )
-			{
-				_maxAngle += TWOPI;
-			}
-			_minAllowed = _maxAngle - TWOPI;
-			if ( minAngle == maxAngle )
-			{
-				_minAngle = _maxAngle;
-			}
-			else
-			{
-				_minAngle = clamp( _minAngle );
+				while ( _maxAngle > TWOPI )
+				{
+					_maxAngle -= TWOPI;
+				}
+				while ( _maxAngle < 0 )
+				{
+					_maxAngle += TWOPI;
+				}
+				_minAllowed = _maxAngle - TWOPI;
+				if( _minAngle )
+				{
+					if ( minAngle == maxAngle )
+					{
+						_minAngle = _maxAngle;
+					}
+					else
+					{
+						_minAngle = clamp( _minAngle );
+					}
+				}
 			}
 		}
 		
 		private function clamp( angle:Number ):Number
 		{
-			while ( angle > _maxAngle )
+			if( _maxAngle )
 			{
-				angle -= TWOPI;
-			}
-			while ( angle < _minAllowed )
-			{
-				angle += TWOPI;
+				while ( angle > _maxAngle )
+				{
+					angle -= TWOPI;
+				}
+				while ( angle < _minAllowed )
+				{
+					angle += TWOPI;
+				}
 			}
 			return angle;
 		}

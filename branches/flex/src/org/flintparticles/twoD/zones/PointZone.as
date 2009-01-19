@@ -45,7 +45,7 @@ package org.flintparticles.twoD.zones
 		 * 
 		 * @param point The point that is the zone.
 		 */
-		public function PointZone( point:Point )
+		public function PointZone( point:Point = null )
 		{
 			_point = point;
 		}

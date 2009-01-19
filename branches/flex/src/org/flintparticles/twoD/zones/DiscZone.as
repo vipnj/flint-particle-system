@@ -57,7 +57,7 @@ package org.flintparticles.twoD.zones
 		 * are excluded from the zone. If this parameter is not set then all 
 		 * points inside the outer radius are included in the zone.
 		 */
-		public function DiscZone( center:Point, outerRadius:Number, innerRadius:Number = 0 )
+		public function DiscZone( center:Point = null, outerRadius:Number = 0, innerRadius:Number = 0 )
 		{
 			if( outerRadius < innerRadius )
 			{

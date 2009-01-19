@@ -31,6 +31,8 @@
 package org.flintparticles.twoD.zones 
 {
 	import flash.geom.Point;
+	
+	import org.flintparticles.threeD.geom.Vector3D;
 
 	/**
 	 * The LineZone zone defines a zone that contains all the points on a line.
@@ -48,11 +50,14 @@ package org.flintparticles.twoD.zones
 		 * @param point1 The point at one end of the line.
 		 * @param point2 The point at the other end of the line.
 		 */
-		public function LineZone( point1:Point, point2:Point )
+		public function LineZone( point1:Point = null, point2:Point = null )
 		{
 			_point1 = point1;
 			_point2 = point2;
-			_length = point2.subtract( point1 );
+			if( _point1 && _point2 )
+			{
+				_length = point2.subtract( point1 );
+			}
 		}
 		
 		/**
@@ -66,7 +71,10 @@ package org.flintparticles.twoD.zones
 		public function set point1( value : Point ) : void
 		{
 			_point1 = value;
-			_length = point2.subtract( point1 );
+			if( _point1 && _point2 )
+			{
+				_length = point2.subtract( point1 );
+			}
 		}
 
 		/**
@@ -80,7 +88,10 @@ package org.flintparticles.twoD.zones
 		public function set point2( value : Point ) : void
 		{
 			_point2 = value;
-			_length = point2.subtract( point1 );
+			if( _point1 && _point2 )
+			{
+				_length = point2.subtract( point1 );
+			}
 		}
 
 		/**

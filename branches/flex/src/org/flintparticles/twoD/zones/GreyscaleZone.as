@@ -60,7 +60,7 @@ package org.flintparticles.twoD.zones
 		 * @param offsetY A vertical offset to apply to the pixels in the BitmapData object 
 		 * to reposition the zone
 		 */
-		public function GreyscaleZone( bitmapData : BitmapData, offsetX : Number = 0, offsetY : Number = 0, scaleX:Number = 1, scaleY:Number = 1 )
+		public function GreyscaleZone( bitmapData : BitmapData = null, offsetX : Number = 0, offsetY : Number = 0, scaleX:Number = 1, scaleY:Number = 1 )
 		{
 			_bitmapData = bitmapData;
 			_offsetX = offsetX;
@@ -140,6 +140,10 @@ package org.flintparticles.twoD.zones
 		 */
 		public function invalidate():void
 		{
+			if( ! _bitmapData )
+			{
+				return;
+			}
 			_validPoints = new FastWeightedArray();
 			for( var x : uint = 0; x < bitmapData.width ; ++x )
 			{
