@@ -194,6 +194,46 @@ package org.flintparticles.twoD.renderers.mxml
 		}
 		
 		/**
+		 * The array of all filters being applied before rendering.
+		 */
+		public function get preFilters():Array
+		{
+			return _preFilters.slice();
+		}
+		public function set preFilters( value:Array ):void
+		{
+			var filter:BitmapFilter;
+			for each( filter in _preFilters )
+			{
+				removeFilter( filter );
+			}
+			for each( filter in value )
+			{
+				addFilter( filter, false );
+			}
+		}
+
+		/**
+		 * The array of all filters being applied before rendering.
+		 */
+		public function get postFilters():Array
+		{
+			return _postFilters.slice();
+		}
+		public function set postFilters( value:Array ):void
+		{
+			var filter:BitmapFilter;
+			for each( filter in _postFilters )
+			{
+				removeFilter( filter );
+			}
+			for each( filter in value )
+			{
+				addFilter( filter, true );
+			}
+		}
+		
+		/**
 		 * Sets a palette map for the renderer. See the paletteMap method in flash's BitmapData object for
 		 * information about how palette maps work. The palette map will be applied to the full canvas of the 
 		 * renderer after all filters have been applied and the particles have been drawn.

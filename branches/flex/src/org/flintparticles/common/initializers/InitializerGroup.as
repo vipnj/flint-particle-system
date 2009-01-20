@@ -65,6 +65,28 @@ package org.flintparticles.common.initializers
 			_initializers = new PriorityArray();
 		}
 		
+		public function get initializers():Array
+		{
+			var a:Array;
+			for each( var initializer:Initializer in _initializers )
+			{
+				a.push( initializer );
+			}
+			return a;
+		}
+		public function set initializers( value:Array ):void
+		{
+			var initializer:Initializer;
+			for each( initializer in _initializers )
+			{
+				removeInitializer( initializer );
+			}
+			for each( initializer in value )
+			{
+				addInitializer( initializer );
+			}
+		}
+
 		public function addInitializer( initializer:Initializer, priority:Number = NaN ):void
 		{
 			if( isNaN( priority ) )
