@@ -89,6 +89,7 @@ package
 		{
 			var p:Point = renderer.globalToLocal( new Point( ev.stageX, ev.stageY ) );
 			emitter.addAction( new Explosion( 8, new Vector3D( p.x, -p.y, 50 ), 500 ) );
+			stage.removeEventListener( MouseEvent.CLICK, explode );
 		}
 	}
 }

@@ -160,6 +160,9 @@ package org.flintparticles.common.particles
 			return ( ( color & 0xFF000000 ) >>> 24 ) / 255;
 		}
 
+		/**
+		 * @private
+		 */
 		protected function cloneInto( p:Particle ):Particle
 		{
 			p.color = color;
