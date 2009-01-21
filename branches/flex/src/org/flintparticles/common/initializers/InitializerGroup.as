@@ -100,6 +100,14 @@ package org.flintparticles.common.initializers
 			}
 		}
 		
+		public function removeInitializer( initializer:Initializer ):void
+		{
+			if( _initializers.remove( initializer ) )
+			{
+				initializer.removedFromEmitter( _emitter );
+			}
+		}
+		
 		public function removeScale( initializer:Initializer ):void
 		{
 			if( _initializers.remove( initializer ) )
