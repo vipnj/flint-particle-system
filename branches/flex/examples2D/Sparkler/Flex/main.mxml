@@ -2,7 +2,7 @@
 <mx:Application
 	xmlns:mx="http://www.adobe.com/2006/mxml"
 	xmlns:f="http://flintparticles.org/2009/flint2d"
-	xmlns:filters="http://flash.filters.*"
+	xmlns:filters="flash.filters.*"
 	layout="absolute" width="400" height="400"
 	backgroundColor="#000000">
 	
@@ -39,7 +39,7 @@
 				<f:RotateToDirection/>
 			</f:actions>
 			<f:activities>
-				<f:FollowMouse renderer="renderer"/>
+				<f:FollowMouse renderer="{renderer}"/>
 			</f:activities>
 		</f:Emitter>
 	</f:emitters>
