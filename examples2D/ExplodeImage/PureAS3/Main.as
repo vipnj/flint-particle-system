@@ -30,33 +30,31 @@
 
 package
 {
-	import org.flintparticles.threeD.actions.*;
-	import org.flintparticles.threeD.emitters.Emitter3D;
-	import org.flintparticles.threeD.geom.Vector3D;
-	import org.flintparticles.threeD.particles.Particle3DUtils;
-	import org.flintparticles.threeD.renderers.*;
-	import org.flintparticles.threeD.zones.FrustrumZone;
-	
 	import flash.display.Bitmap;
 	import flash.display.Sprite;
 	import flash.events.MouseEvent;
 	import flash.geom.Point;
-	import flash.geom.Rectangle;
-	import flash.text.TextField;	
+	import flash.text.TextField;
+	
+	import org.flintparticles.twoD.actions.*;
+	import org.flintparticles.twoD.emitters.Emitter2D;
+	import org.flintparticles.twoD.particles.Particle2DUtils;
+	import org.flintparticles.twoD.renderers.*;
+	import org.flintparticles.twoD.zones.RectangleZone;	
 
 	[SWF(width='500', height='350', frameRate='61', backgroundColor='#000000')]
 	
-	public class ExplodeImage extends Sprite
+	public class Main extends Sprite
 	{
 		// width:384 height:255
 		[Embed(source="assets/184098.jpg")]
 		public var Image1:Class;
 
-		private var emitter:Emitter3D;
+		private var emitter:Emitter2D;
 		private var bitmap:Bitmap;
 		private var renderer:DisplayObjectRenderer;
 		
-		public function ExplodeImage()
+		public function Main()
 		{
 			var txt:TextField = new TextField();
 			txt.text = "Click on the image";
@@ -65,31 +63,24 @@ package
 
 			bitmap = new Image1();
 			
-			renderer = new DisplayObjectRenderer();
-			renderer.camera.dolly( -400 );
-			renderer.camera.projectionDistance = 400;
-			renderer.y = 175;
-			renderer.x = 250;
-			addChild( renderer );
-			
-			emitter = new Emitter3D();
-			emitter.addAction( new Move() );
-			emitter.addAction( new DeathZone( new FrustrumZone( renderer.camera, new Rectangle( -250, -175, 500, 350 ) ), true ) );
-			emitter.position = new Vector3D( 0, 0, 0, 1 );
-
-			var particles:Array = Particle3DUtils.createRectangleParticlesFromBitmapData( bitmap.bitmapData, 20, emitter.particleFactory, new Vector3D( -192, 127, 0 ) );
+			emitter = new Emitter2D();
+			var particles:Array = Particle2DUtils.createRectangleParticlesFromBitmapData( bitmap.bitmapData, 10, emitter.particleFactory, 56, 47 );
 			emitter.addExistingParticles( particles, false );
-									
+			
+			renderer = new DisplayObjectRenderer();
+			addChild( renderer );
 			renderer.addEmitter( emitter );
 			emitter.start();
+			
 			stage.addEventListener( MouseEvent.CLICK, explode, false, 0, true );
 		}
 		
 		private function explode( ev:MouseEvent ):void
 		{
 			var p:Point = renderer.globalToLocal( new Point( ev.stageX, ev.stageY ) );
-			emitter.addAction( new Explosion( 8, new Vector3D( p.x, -p.y, 50 ), 500 ) );
-			stage.removeEventListener( MouseEvent.CLICK, explode );
+			emitter.addAction( new Explosion( 8, p.x, p.y, 500 ) );
+			emitter.addAction( new Move() );
+			emitter.addAction( new DeathZone( new RectangleZone( -5, -5, 505, 355 ), true ) );
 		}
 	}
 }
