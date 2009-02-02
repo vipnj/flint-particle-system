@@ -315,22 +315,16 @@ package org.flintparticles.threeD.renderers.mxml
 			_canvasChanged = true;
 			invalidateDisplayList();
 		}
-		public function get canvasWidth():Number
+		override public function set width( value:Number ):void
 		{
-			return _canvas.width;
-		}
-		public function set canvasWidth( value:Number ):void
-		{
+			super.width = value;
 			_canvas.width = value;
 			_canvasChanged = true;
 			invalidateDisplayList();
 		}
-		public function get canvasHeight():Number
+		override public function set height( value:Number ):void
 		{
-			return _canvas.height;
-		}
-		public function set canvasHeight( value:Number ):void
-		{
+			super.height = value;
 			_canvas.height = value;
 			_canvasChanged = true;
 			invalidateDisplayList();
