@@ -17,7 +17,9 @@
 .titleTableTitle {
 	padding-left: 15px;
 	padding-right: 5px;
-	font-size: 13px;
+	font-family: "Trebuchet MS", "Bitstream Vera Sans", verdana, lucida, arial, helvetica, sans-serif;
+	font-size: 16px;
+	font-weight: bold;
 	height: 44px;
 	background-image: url(images/titleTableTop.jpg);
 	background-repeat: repeat-x;
@@ -166,7 +168,7 @@ html>body .summaryTable {
 }
 .summaryTable th {
 	color: #FFFFFF;
-	background-color: #627C9D;
+	background-color: #777777;
 	white-space: nowrap;
 }
 .summaryTable td {
@@ -326,7 +328,7 @@ html>body .summaryTable {
 	margin-bottom: 20px;
 }
 .exampleHeader {
-	background-color: #C8D1DF;
+	background-color: #D0D0D0;
 	padding-left: 10px;
 	padding-top: 3px;
 	padding-bottom: 3px;
@@ -443,23 +445,23 @@ table.withBorder {
 
 /* Links */
 a:link {
-	color: #0000CC;
+	color: #990000;
 	text-decoration: none;
 }
 
 a:visited {
-    color: #0000CC;
+    color: #990000;
 	text-decoration: none;
 }
 
 a:hover {
 	text-decoration: underline;
-	color: #0000CC;
+	color: #990000;
 }
 
 a:active {
 	text-decoration: none;
-	color: #CC0000;
+	color: #FF0000;
 }
 
 /* Headings */
@@ -513,7 +515,7 @@ h5 {
 }
 .flashOnlyX {
 	display:none;
-	color: #00CCFF;
+	color: #FF9900;
 }
 .hide {
 	display:none;
@@ -562,4 +564,9 @@ html>body .listing pre
 .pageTop
 {
 	height:10px;
+}
+
+#framesLink1
+{
+	padding-right: 10px;
 }
