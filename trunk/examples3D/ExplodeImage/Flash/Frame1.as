@@ -49,7 +49,7 @@ addChild( renderer );
 
 var emitter:Emitter3D = new Emitter3D();
 emitter.addAction( new Move() );
-emitter.addAction( new DeathZone( new FrustrumZone( renderer.camera, new Rectangle( -250, -175, 500, 350 ) ), true ) );
+emitter.addAction( new DeathZone( new FrustrumZone( renderer.camera, new Rectangle( -290, -215, 580, 430 ) ), true ) );
 emitter.position = new Vector3D( 0, 0, 0, 1 );
 
 var particles:Array = Particle3DUtils.createRectangleParticlesFromBitmapData( new Image1(384,255), 20, emitter.particleFactory, new Vector3D( -192, 127, 0 ) );
