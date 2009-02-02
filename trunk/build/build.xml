@@ -344,8 +344,6 @@
 
 	
 	<target name="asdocs" description="Clean and build asdocs">
-		<delete dir="../docs" failOnError="false" includeEmptyDirs="true"/>
-		<mkdir dir="../docs"/>
 		<exec executable="${flexsdk.dir}/bin/asdoc.exe" failonerror="true">
 			
 			<arg line='-output ../docs'/>
