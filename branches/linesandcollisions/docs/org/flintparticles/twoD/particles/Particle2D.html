@@ -4,19 +4,19 @@
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="../../../../style.css" type="text/css" media="screen">
 <link rel="stylesheet" href="../../../../print.css" type="text/css" media="print">
-<meta content="Particle2D,org.flintparticles.twoD.particles.Particle2D,angVelocity,rotation,sortID,velX,velY,x,y,inertia,matrixTransform,initialize" name="keywords">
+<meta content="Particle2D,org.flintparticles.twoD.particles.Particle2D,angVelocity,previousX,previousY,rotation,sortID,velX,velY,x,y,inertia,matrixTransform,clone,initialize" name="keywords">
 <title>org.flintparticles.twoD.particles.Particle2D</title>
 </head>
 <body>
 <script type="text/javascript" language="javascript" src="../../../../asdoc.js"></script><script type="text/javascript" language="javascript" src="../../../../cookies.js"></script><script type="text/javascript" language="javascript">
 <!--
-				asdocTitle = 'Particle2D - Flint Particle System documentation';
+				asdocTitle = 'Particle2D - Flint Particles documentation';
 				var baseRef = '../../../../';
 				window.onload = configPage;
 			--></script>
 <table style="display:none" id="titleTable" cellspacing="0" cellpadding="0" class="titleTable">
 <tr>
-<td align="left" class="titleTableTitle">Flint Particle System documentation v2.0</td><td align="right" class="titleTableTopNav"><a onclick="loadClassListFrame('../../../../all-classes.html')" href="../../../../package-summary.html">All&nbsp;Packages</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../../../all-classes.html')" href="../../../../class-summary.html">All&nbsp;Classes</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../../../index-list.html')" href="../../../../all-index-A.html">Index</a>&nbsp;|&nbsp;<a href="../../../../index.html?org/flintparticles/twoD/particles/Particle2D.html&amp;org/flintparticles/twoD/particles/class-list.html" id="framesLink1">Frames</a><a onclick="parent.location=document.location" href="" style="display:none" id="noFramesLink1">No&nbsp;Frames</a></td><td rowspan="3" align="right" class="titleTableLogo"><img alt="Adobe Logo" title="Adobe Logo" class="logoImage" src="../../../../images/logo.jpg"></td>
+<td align="left" class="titleTableTitle">Flint Particles documentation v2.0.1</td><td align="right" class="titleTableTopNav"><a onclick="loadClassListFrame('../../../../all-classes.html')" href="../../../../package-summary.html">All&nbsp;Packages</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../../../all-classes.html')" href="../../../../class-summary.html">All&nbsp;Classes</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../../../index-list.html')" href="../../../../all-index-A.html">Index</a>&nbsp;|&nbsp;<a href="../../../../index.html?org/flintparticles/twoD/particles/Particle2D.html&amp;org/flintparticles/twoD/particles/class-list.html" id="framesLink1">Frames</a><a onclick="parent.location=document.location" href="" style="display:none" id="noFramesLink1">No&nbsp;Frames</a></td>
 </tr>
 <tr class="titleTableRow2">
 <td align="left" id="subTitle" class="titleTableSubTitle">Class&nbsp;Particle2D</td><td align="right" id="subNav" class="titleTableSubNav"><a href="#propertySummary">Properties</a>&nbsp;| <a href="#methodSummary">Methods</a></td>
@@ -142,6 +142,16 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 </td><td class="summaryTableOwnerCol">Particle2D</td>
 </tr>
 <tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#previousX">previousX</a> : Number = 0<div class="summaryTableDescription">
+   The x coordinate of the particle prior to the latest update.</div>
+</td><td class="summaryTableOwnerCol">Particle2D</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#previousY">previousY</a> : Number = 0<div class="summaryTableDescription">
+   The y coordinate of the particle prior to the latest update.</div>
+</td><td class="summaryTableOwnerCol">Particle2D</td>
+</tr>
+<tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#rotation">rotation</a> : Number = 0<div class="summaryTableDescription">
    The rotation of the particle in radians.</div>
 </td><td class="summaryTableOwnerCol">Particle2D</td>
@@ -152,7 +162,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 </td><td class="summaryTableOwnerCol"><a href="../../common/particles/Particle.html">Particle</a></td>
 </tr>
 <tr class="">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#sortID">sortID</a> : uint = 0<div class="summaryTableDescription">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#sortID">sortID</a> : int = -1<div class="summaryTableDescription">
    The position in the emitter's horizontal spacial sorted array
    </div>
 </td><td class="summaryTableOwnerCol">Particle2D</td>
@@ -192,6 +202,16 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <a class="signatureLink" href="#Particle2D()">Particle2D</a>()</div>
 <div class="summaryTableDescription">
    Creates a particle.</div>
+</td><td class="summaryTableOwnerCol">Particle2D</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#clone()">clone</a>(factory:<a href="../../common/particles/ParticleFactory.html">ParticleFactory</a> = null):<a href="../../common/particles/Particle.html">Particle</a>
+</div>
+<div class="summaryTableDescription">
+   
+   Creates a new particle with all the same properties as this one.</div>
 </td><td class="summaryTableOwnerCol">Particle2D</td>
 </tr>
 <tr class="">
@@ -249,6 +269,26 @@ showHideInherited();
 <code>&nbsp;&nbsp;&nbsp;&nbsp;public function get matrixTransform():Matrix</code>
 <br>
 </div>
+<a name="previousX"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">previousX</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public var previousX:Number = 0</code><p>
+   The x coordinate of the particle prior to the latest update.
+   </p></div>
+<a name="previousY"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">previousY</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public var previousY:Number = 0</code><p>
+   The y coordinate of the particle prior to the latest update.
+   </p></div>
 <a name="rotation"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
 <tr>
@@ -266,7 +306,7 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>public var sortID:uint = 0</code><p>
+<code>public var sortID:int = -1</code><p>
    The position in the emitter's horizontal spacial sorted array
    </p></div>
 <a name="velX"></a>
@@ -325,10 +365,39 @@ showHideInherited();
    </p></div>
 <a name="methodDetail"></a>
 <div class="detailSectionHeader">Method detail</div>
+<a name="clone()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">clone</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public override function clone(factory:<a href="../../common/particles/ParticleFactory.html">ParticleFactory</a> = null):<a href="../../common/particles/Particle.html">Particle</a></code><p>
+   
+   Creates a new particle with all the same properties as this one.
+   
+   </p><p>Note that the new particle will use the same image object as the one you're cloning.
+   This is fine if the particles are used with a Bitmaprenderer, but if they are used with a 
+   DisplayObjectRenderer you will need to replace teh image property with a new image, otherwise
+   only one of the particles (original or clone) will be displayed.</p>
+   <span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">factory</span>:<a href="../../common/particles/ParticleFactory.html">ParticleFactory</a></code> (default = <code>null</code>)<code></code></td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code><a href="../../common/particles/Particle.html">Particle</a></code></td>
+</tr>
+</table>
+</div>
 <a name="initialize()"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
 <tr>
-<td class="detailHeaderName">initialize</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td>
+<td class="detailHeaderName">initialize</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
 </tr>
 </table>
 <div class="detailBody">
@@ -340,8 +409,8 @@ showHideInherited();
 <hr>
 <br>
 <p></p>
-<center class="copyright">&copy; Big Room Ventures Ltd. 2008</center>
+<center class="copyright">&copy; Big Room Ventures Ltd. 2009</center>
 </div>
 </body>
 </html>
-<!--© Big Room Ventures Ltd. 2008-->
+<!--© Big Room Ventures Ltd. 2009-->
