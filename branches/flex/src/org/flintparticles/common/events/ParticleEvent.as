@@ -53,11 +53,17 @@ package org.flintparticles.common.events
 		 * The event dispatched by an emitter when a pre-existing particle is added to it.
 		 */
 		public static var PARTICLE_ADDED:String = "particleAdded";
+
+		/**
+		 * The event dispatched by an emitter when a particle collides with another object.
+		 */
+		public static var PARTICLES_COLLISION:String = "particlesCollision";
 		
 		/**
 		 * The particle to which the event relates.
 		 */
 		public var particle:Particle;
+		public var otherObject:*;
 		
 		/**
 		 * The constructor creates a ParticleEvent object.

@@ -10,13 +10,13 @@
 <body>
 <script type="text/javascript" language="javascript" src="../../../../asdoc.js"></script><script type="text/javascript" language="javascript" src="../../../../cookies.js"></script><script type="text/javascript" language="javascript">
 <!--
-				asdocTitle = 'ColorChange - Flint Particle System documentation';
+				asdocTitle = 'ColorChange - Flint Particles documentation';
 				var baseRef = '../../../../';
 				window.onload = configPage;
 			--></script>
 <table style="display:none" id="titleTable" cellspacing="0" cellpadding="0" class="titleTable">
 <tr>
-<td align="left" class="titleTableTitle">Flint Particle System documentation v2.0</td><td align="right" class="titleTableTopNav"><a onclick="loadClassListFrame('../../../../all-classes.html')" href="../../../../package-summary.html">All&nbsp;Packages</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../../../all-classes.html')" href="../../../../class-summary.html">All&nbsp;Classes</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../../../index-list.html')" href="../../../../all-index-A.html">Index</a>&nbsp;|&nbsp;<a href="../../../../index.html?org/flintparticles/common/actions/ColorChange.html&amp;org/flintparticles/common/actions/class-list.html" id="framesLink1">Frames</a><a onclick="parent.location=document.location" href="" style="display:none" id="noFramesLink1">No&nbsp;Frames</a></td><td rowspan="3" align="right" class="titleTableLogo"><img alt="Adobe Logo" title="Adobe Logo" class="logoImage" src="../../../../images/logo.jpg"></td>
+<td align="left" class="titleTableTitle">Flint Particles documentation v2.0.1</td><td align="right" class="titleTableTopNav"><a onclick="loadClassListFrame('../../../../all-classes.html')" href="../../../../package-summary.html">All&nbsp;Packages</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../../../all-classes.html')" href="../../../../class-summary.html">All&nbsp;Classes</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../../../index-list.html')" href="../../../../all-index-A.html">Index</a>&nbsp;|&nbsp;<a href="../../../../index.html?org/flintparticles/common/actions/ColorChange.html&amp;org/flintparticles/common/actions/class-list.html" id="framesLink1">Frames</a><a onclick="parent.location=document.location" href="" style="display:none" id="noFramesLink1">No&nbsp;Frames</a></td>
 </tr>
 <tr class="titleTableRow2">
 <td align="left" id="subTitle" class="titleTableSubTitle">Class&nbsp;ColorChange</td><td align="right" id="subNav" class="titleTableSubNav"><a href="#propertySummary">Properties</a>&nbsp;| <a href="#methodSummary">Methods</a></td>
@@ -99,7 +99,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
-<a class="signatureLink" href="#ColorChange()">ColorChange</a>(startColor:uint, endColor:uint)</div>
+<a class="signatureLink" href="#ColorChange()">ColorChange</a>(startColor:uint = 0xFFFFFF, endColor:uint = 0xFFFFFF)</div>
 <div class="summaryTableDescription">
    The constructor creates a ColorChange action for use by an emitter.</div>
 </td><td class="summaryTableOwnerCol">ColorChange</td>
@@ -187,7 +187,7 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>public function ColorChange(startColor:uint, endColor:uint)</code><p>
+<code>public function ColorChange(startColor:uint = 0xFFFFFF, endColor:uint = 0xFFFFFF)</code><p>
    The constructor creates a ColorChange action for use by an emitter. 
    To add a ColorChange to all particles created by an emitter, use the
    emitter's addAction method.
@@ -195,7 +195,7 @@ showHideInherited();
    </p><span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
-<td width="20px"></td><td><code><span class="label">startColor</span>:uint</code> &mdash; The 32bit (ARGB) color of the particle when its
+<td width="20px"></td><td><code><span class="label">startColor</span>:uint</code> (default = <code>0xFFFFFF</code>)<code></code> &mdash; The 32bit (ARGB) color of the particle when its
    energy is 1 - usually at the beginning of its life.
    </td>
 </tr>
@@ -203,7 +203,7 @@ showHideInherited();
 <td class="paramSpacer">&nbsp;</td>
 </tr>
 <tr>
-<td width="20px"></td><td><code><span class="label">endColor</span>:uint</code> &mdash; The 32bit (ARGB) color of the particle when its 
+<td width="20px"></td><td><code><span class="label">endColor</span>:uint</code> (default = <code>0xFFFFFF</code>)<code></code> &mdash; The 32bit (ARGB) color of the particle when its 
    energy is 0 - usually at the end of its life.
    </td>
 </tr>
@@ -265,8 +265,8 @@ showHideInherited();
 <hr>
 <br>
 <p></p>
-<center class="copyright">&copy; Big Room Ventures Ltd. 2008</center>
+<center class="copyright">&copy; Big Room Ventures Ltd. 2009</center>
 </div>
 </body>
 </html>
-<!--© Big Room Ventures Ltd. 2008-->
+<!--© Big Room Ventures Ltd. 2009-->

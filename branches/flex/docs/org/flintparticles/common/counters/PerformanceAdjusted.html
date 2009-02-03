@@ -10,13 +10,13 @@
 <body>
 <script type="text/javascript" language="javascript" src="../../../../asdoc.js"></script><script type="text/javascript" language="javascript" src="../../../../cookies.js"></script><script type="text/javascript" language="javascript">
 <!--
-				asdocTitle = 'PerformanceAdjusted - Flint Particle System documentation';
+				asdocTitle = 'PerformanceAdjusted - Flint Particles documentation';
 				var baseRef = '../../../../';
 				window.onload = configPage;
 			--></script>
 <table style="display:none" id="titleTable" cellspacing="0" cellpadding="0" class="titleTable">
 <tr>
-<td align="left" class="titleTableTitle">Flint Particle System documentation v2.0</td><td align="right" class="titleTableTopNav"><a onclick="loadClassListFrame('../../../../all-classes.html')" href="../../../../package-summary.html">All&nbsp;Packages</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../../../all-classes.html')" href="../../../../class-summary.html">All&nbsp;Classes</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../../../index-list.html')" href="../../../../all-index-A.html">Index</a>&nbsp;|&nbsp;<a href="../../../../index.html?org/flintparticles/common/counters/PerformanceAdjusted.html&amp;org/flintparticles/common/counters/class-list.html" id="framesLink1">Frames</a><a onclick="parent.location=document.location" href="" style="display:none" id="noFramesLink1">No&nbsp;Frames</a></td><td rowspan="3" align="right" class="titleTableLogo"><img alt="Adobe Logo" title="Adobe Logo" class="logoImage" src="../../../../images/logo.jpg"></td>
+<td align="left" class="titleTableTitle">Flint Particles documentation v2.0.1</td><td align="right" class="titleTableTopNav"><a onclick="loadClassListFrame('../../../../all-classes.html')" href="../../../../package-summary.html">All&nbsp;Packages</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../../../all-classes.html')" href="../../../../class-summary.html">All&nbsp;Classes</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../../../index-list.html')" href="../../../../all-index-A.html">Index</a>&nbsp;|&nbsp;<a href="../../../../index.html?org/flintparticles/common/counters/PerformanceAdjusted.html&amp;org/flintparticles/common/counters/class-list.html" id="framesLink1">Frames</a><a onclick="parent.location=document.location" href="" style="display:none" id="noFramesLink1">No&nbsp;Frames</a></td>
 </tr>
 <tr class="titleTableRow2">
 <td align="left" id="subTitle" class="titleTableSubTitle">Class&nbsp;PerformanceAdjusted</td><td align="right" id="subNav" class="titleTableSubNav"><a href="#propertySummary">Properties</a>&nbsp;| <a href="#methodSummary">Methods</a></td>
@@ -84,7 +84,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
-<a class="signatureLink" href="#PerformanceAdjusted()">PerformanceAdjusted</a>(rateMin:Number, rateMax:Number, targetFrameRate:Number)</div>
+<a class="signatureLink" href="#PerformanceAdjusted()">PerformanceAdjusted</a>(rateMin:Number = 0, rateMax:Number = 0, targetFrameRate:Number = 24)</div>
 <div class="summaryTableDescription">
    The constructor creates a PerformanceAdjusted counter for use by an 
    emitter.</div>
@@ -198,7 +198,7 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>public function PerformanceAdjusted(rateMin:Number, rateMax:Number, targetFrameRate:Number)</code><p>
+<code>public function PerformanceAdjusted(rateMin:Number = 0, rateMax:Number = 0, targetFrameRate:Number = 24)</code><p>
    The constructor creates a PerformanceAdjusted counter for use by an 
    emitter. To add a PerformanceAdjusted counter to an emitter use the 
    emitter's counter property.
@@ -206,7 +206,7 @@ showHideInherited();
    </p><span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
-<td width="20px"></td><td><code><span class="label">rateMin</span>:Number</code> &mdash; The minimum number of particles to emit per second. 
+<td width="20px"></td><td><code><span class="label">rateMin</span>:Number</code> (default = <code>0</code>)<code></code> &mdash; The minimum number of particles to emit per second. 
    The counter will never drop the rate below this value.
    </td>
 </tr>
@@ -214,7 +214,7 @@ showHideInherited();
 <td class="paramSpacer">&nbsp;</td>
 </tr>
 <tr>
-<td width="20px"></td><td><code><span class="label">rateMax</span>:Number</code> &mdash; The maximum number of particles to emit per second. 
+<td width="20px"></td><td><code><span class="label">rateMax</span>:Number</code> (default = <code>0</code>)<code></code> &mdash; The maximum number of particles to emit per second. 
    The counter will start at this rate and adjust downwards if the frame 
    rate is below the target.
    </td>
@@ -223,7 +223,7 @@ showHideInherited();
 <td class="paramSpacer">&nbsp;</td>
 </tr>
 <tr>
-<td width="20px"></td><td><code><span class="label">targetFrameRate</span>:Number</code> &mdash; The frame rate that the counter should aim for. 
+<td width="20px"></td><td><code><span class="label">targetFrameRate</span>:Number</code> (default = <code>24</code>)<code></code> &mdash; The frame rate that the counter should aim for. 
    Always set this slightly below your actual frame rate since flash will 
    drop frames occasionally even when performance is fine. So, for example, 
    if your movie's frame rate is 30fps and you want to target this rate, 
@@ -341,8 +341,8 @@ showHideInherited();
 <hr>
 <br>
 <p></p>
-<center class="copyright">&copy; Big Room Ventures Ltd. 2008</center>
+<center class="copyright">&copy; Big Room Ventures Ltd. 2009</center>
 </div>
 </body>
 </html>
-<!--© Big Room Ventures Ltd. 2008-->
+<!--© Big Room Ventures Ltd. 2009-->

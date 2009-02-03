@@ -159,5 +159,52 @@ package org.flintparticles.common.particles
 		{
 			return ( ( color & 0xFF000000 ) >>> 24 ) / 255;
 		}
+
+		/**
+		 * @private
+		 */
+		protected function cloneInto( p:Particle ):Particle
+		{
+			p.color = color;
+			p.scale = scale;
+			p.mass = mass;
+			p.collisionRadius = collisionRadius;
+			p.lifetime = lifetime;
+			p.age = age;
+			p.energy = energy;
+			p.isDead = isDead;
+			p.image = image;
+			if( _dictionary )
+			{
+				p._dictionary = new Dictionary( true );
+				for( var key:Object in _dictionary )
+				{
+					p._dictionary[ key ] = _dictionary[ key ];
+				}
+			}
+			return p;
+		}
+		
+		/**
+		 * Creates a new particle with all the same properties as this one.
+		 * 
+		 * <p>Note that the new particle will use the same image object as the one you're cloning.
+		 * This is fine if the particles are used with a Bitmaprenderer, but if they are used with a 
+		 * DisplayObjectRenderer you will need to replace teh image property with a new image, otherwise
+		 * only one of the particles (original or clone) will be displayed.</p>
+		 */
+		public function clone( factory:ParticleFactory = null ):Particle
+		{
+			var p:Particle;
+			if( factory )
+			{
+				p = factory.createParticle();
+			}
+			else
+			{
+				p = new Particle();
+			}
+			return cloneInto( p );
+		}
 	}
 }

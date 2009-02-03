@@ -10,13 +10,13 @@
 <body>
 <script type="text/javascript" language="javascript" src="../../../../asdoc.js"></script><script type="text/javascript" language="javascript" src="../../../../cookies.js"></script><script type="text/javascript" language="javascript">
 <!--
-				asdocTitle = 'AntiGravity - Flint Particle System documentation';
+				asdocTitle = 'AntiGravity - Flint Particles documentation';
 				var baseRef = '../../../../';
 				window.onload = configPage;
 			--></script>
 <table style="display:none" id="titleTable" cellspacing="0" cellpadding="0" class="titleTable">
 <tr>
-<td align="left" class="titleTableTitle">Flint Particle System documentation v2.0</td><td align="right" class="titleTableTopNav"><a onclick="loadClassListFrame('../../../../all-classes.html')" href="../../../../package-summary.html">All&nbsp;Packages</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../../../all-classes.html')" href="../../../../class-summary.html">All&nbsp;Classes</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../../../index-list.html')" href="../../../../all-index-A.html">Index</a>&nbsp;|&nbsp;<a href="../../../../index.html?org/flintparticles/threeD/actions/AntiGravity.html&amp;org/flintparticles/threeD/actions/class-list.html" id="framesLink1">Frames</a><a onclick="parent.location=document.location" href="" style="display:none" id="noFramesLink1">No&nbsp;Frames</a></td><td rowspan="3" align="right" class="titleTableLogo"><img alt="Adobe Logo" title="Adobe Logo" class="logoImage" src="../../../../images/logo.jpg"></td>
+<td align="left" class="titleTableTitle">Flint Particles documentation v2.0.1</td><td align="right" class="titleTableTopNav"><a onclick="loadClassListFrame('../../../../all-classes.html')" href="../../../../package-summary.html">All&nbsp;Packages</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../../../all-classes.html')" href="../../../../class-summary.html">All&nbsp;Classes</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../../../index-list.html')" href="../../../../all-index-A.html">Index</a>&nbsp;|&nbsp;<a href="../../../../index.html?org/flintparticles/threeD/actions/AntiGravity.html&amp;org/flintparticles/threeD/actions/class-list.html" id="framesLink1">Frames</a><a onclick="parent.location=document.location" href="" style="display:none" id="noFramesLink1">No&nbsp;Frames</a></td>
 </tr>
 <tr class="titleTableRow2">
 <td align="left" id="subTitle" class="titleTableSubTitle">Class&nbsp;AntiGravity</td><td align="right" id="subNav" class="titleTableSubNav"><a href="#propertySummary">Properties</a>&nbsp;| <a href="#methodSummary">Methods</a></td>
@@ -101,7 +101,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
-<a class="signatureLink" href="#AntiGravity()">AntiGravity</a>(power:Number, position:<a href="../geom/Vector3D.html">Vector3D</a>, epsilon:Number = 1)</div>
+<a class="signatureLink" href="#AntiGravity()">AntiGravity</a>(power:Number = 0, position:<a href="../geom/Vector3D.html">Vector3D</a> = null, epsilon:Number = 1)</div>
 <div class="summaryTableDescription">
    The constructor creates an AntiGravity action for use by an emitter.</div>
 </td><td class="summaryTableOwnerCol">AntiGravity</td>
@@ -174,7 +174,7 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>public function AntiGravity(power:Number, position:<a href="../geom/Vector3D.html">Vector3D</a>, epsilon:Number = 1)</code><p>
+<code>public function AntiGravity(power:Number = 0, position:<a href="../geom/Vector3D.html">Vector3D</a> = null, epsilon:Number = 1)</code><p>
    The constructor creates an AntiGravity action for use by an emitter. 
    To add an AntiGravity to all particles created by an emitter, use the
    emitter's addAction method.
@@ -182,7 +182,7 @@ showHideInherited();
    </p><span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
-<td width="20px"></td><td><code><span class="label">power</span>:Number</code> &mdash; The strength of the force - larger numbers produce a 
+<td width="20px"></td><td><code><span class="label">power</span>:Number</code> (default = <code>0</code>)<code></code> &mdash; The strength of the force - larger numbers produce a 
    stronger force.
    </td>
 </tr>
@@ -190,7 +190,7 @@ showHideInherited();
 <td class="paramSpacer">&nbsp;</td>
 </tr>
 <tr>
-<td width="20px"></td><td><code><span class="label">position</span>:<a href="../geom/Vector3D.html">Vector3D</a></code> &mdash; The point in 3D space that the force pushes the 
+<td width="20px"></td><td><code><span class="label">position</span>:<a href="../geom/Vector3D.html">Vector3D</a></code> (default = <code>null</code>)<code></code> &mdash; The point in 3D space that the force pushes the 
    particles away from.
    </td>
 </tr>
@@ -217,8 +217,8 @@ showHideInherited();
 <hr>
 <br>
 <p></p>
-<center class="copyright">&copy; Big Room Ventures Ltd. 2008</center>
+<center class="copyright">&copy; Big Room Ventures Ltd. 2009</center>
 </div>
 </body>
 </html>
-<!--© Big Room Ventures Ltd. 2008-->
+<!--© Big Room Ventures Ltd. 2009-->

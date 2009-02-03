@@ -34,6 +34,7 @@ package org.flintparticles.threeD.actions
 	import org.flintparticles.common.activities.FrameUpdatable;
 	import org.flintparticles.common.activities.UpdateOnFrame;
 	import org.flintparticles.common.emitters.Emitter;
+	import org.flintparticles.common.events.ParticleEvent;
 	import org.flintparticles.common.particles.Particle;
 	import org.flintparticles.threeD.emitters.Emitter3D;
 	import org.flintparticles.threeD.geom.Vector3D;
@@ -222,6 +223,9 @@ package org.flintparticles.threeD.actions
 						f2 = -factor * m1;
 						p.velocity.decrementBy( d.multiply( f1, _temp ) );
 						other.velocity.decrementBy( d.multiply( f2, _temp ) );
+						var ev:ParticleEvent = new ParticleEvent( ParticleEvent.PARTICLES_COLLISION, p );
+						ev.otherObject = other;
+						emitter.dispatchEvent( ev );
 					}
 				} 
 			}

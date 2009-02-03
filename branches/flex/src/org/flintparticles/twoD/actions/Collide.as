@@ -34,6 +34,7 @@ package org.flintparticles.twoD.actions
 	import org.flintparticles.common.activities.FrameUpdatable;
 	import org.flintparticles.common.activities.UpdateOnFrame;
 	import org.flintparticles.common.emitters.Emitter;
+	import org.flintparticles.common.events.ParticleEvent;
 	import org.flintparticles.common.particles.Particle;
 	import org.flintparticles.twoD.emitters.Emitter2D;
 	import org.flintparticles.twoD.particles.Particle2D;	
@@ -230,6 +231,9 @@ package org.flintparticles.twoD.actions
 						p.velY -= f1 * dy;
 						other.velX -= f2 * dx;
 						other.velY -= f2 * dy;
+						var ev:ParticleEvent = new ParticleEvent( ParticleEvent.PARTICLES_COLLISION, p );
+						ev.otherObject = other;
+						emitter.dispatchEvent( ev );
 					}
 				} 
 			}
