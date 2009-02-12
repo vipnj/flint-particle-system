@@ -30,11 +30,11 @@
 
 package org.flintparticles.threeD.zones 
 {
-	import flash.geom.Rectangle;
+	import org.flintparticles.threeD.geom.Point3D;
 	
-	import org.flintparticles.threeD.geom.Matrix3D;
-	import org.flintparticles.threeD.geom.Vector3D;
-	import org.flintparticles.threeD.renderers.Camera;	
+	import org.flintparticles.threeD.renderers.Camera;
+	
+	import flash.geom.Rectangle;	
 
 	/**
 	 * The FrustrumZone zone defines a zone in the shape of a camera frustrum. The
@@ -110,9 +110,9 @@ package org.flintparticles.threeD.zones
 		 * @param y The y coordinate of the location to test for.
 		 * @return true if point is inside the zone, false if it is outside.
 		 */
-		public function contains( p:Vector3D ):Boolean
+		public function contains( p:Point3D ):Boolean
 		{
-			var pos:Vector3D = _camera.transform.transformVector( p );
+			var pos:Point3D = _camera.transform.transform( p ) as Point3D;
 			if( pos.z < _camera.nearPlaneDistance || pos.z > _camera.farPlaneDistance )
 			{
 				return false;
@@ -133,14 +133,14 @@ package org.flintparticles.threeD.zones
 		 * 
 		 * @return a random point inside the zone.
 		 */
-		public function getLocation():Vector3D
+		public function getLocation():Point3D
 		{
 			var z:Number = ( Math.random() * ( _camera.farPlaneDistance - _camera.nearPlaneDistance ) ) + _camera.nearPlaneDistance;
 			var scale:Number = z / _camera.projectionDistance;
 			var x:Number = ( ( Math.random() * _viewRect.width ) + _viewRect.left ) * scale;
 			var y:Number = ( ( Math.random() * _viewRect.height ) + _viewRect.top ) * scale;
-			var p:Vector3D = new Vector3D( x, y, z, 1 );
-			_camera.spaceTransform.inverse.transformVectorSelf( p );
+			var p:Point3D = new Point3D( x, y, z );
+			_camera.spaceTransform.inverse.transformSelf( p );
 			return p;
 		}
 		

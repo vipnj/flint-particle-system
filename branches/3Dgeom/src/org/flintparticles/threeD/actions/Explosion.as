@@ -30,12 +30,14 @@
 
 package org.flintparticles.threeD.actions 
 {
+	import org.flintparticles.threeD.geom.Point3D;
+	import org.flintparticles.threeD.geom.Vector3D;
+	
 	import org.flintparticles.common.actions.ActionBase;
 	import org.flintparticles.common.activities.FrameUpdatable;
 	import org.flintparticles.common.activities.UpdateOnFrame;
 	import org.flintparticles.common.emitters.Emitter;
 	import org.flintparticles.common.particles.Particle;
-	import org.flintparticles.threeD.geom.Vector3D;
 	import org.flintparticles.threeD.particles.Particle3D;	
 
 	/**
@@ -49,7 +51,7 @@ package org.flintparticles.threeD.actions
 		private static const POWER_FACTOR:Number = 100000;
 		
 		private var _updateActivity:UpdateOnFrame;
-		private var _center:Vector3D;
+		private var _center:Point3D;
 		private var _power:Number;
 		private var _depth:Number;
 		private var _invDepth:Number;
@@ -77,7 +79,7 @@ package org.flintparticles.threeD.actions
 		 * this distance away. This stops the explosion effect blowing up as distances get 
 		 * small.
 		 */
-		public function Explosion( power:Number, center:Vector3D, expansionRate:Number = 300, depth:Number = 10, epsilon:Number = 1 )
+		public function Explosion( power:Number, center:Point3D, expansionRate:Number = 300, depth:Number = 10, epsilon:Number = 1 )
 		{
 			this.power = power;
 			this.center = center;
@@ -126,14 +128,13 @@ package org.flintparticles.threeD.actions
 		/**
 		 * The center of the explosion.
 		 */
-		public function get center():Vector3D
+		public function get center():Point3D
 		{
 			return _center.clone();
 		}
-		public function set center( value:Vector3D ):void
+		public function set center( value:Point3D ):void
 		{
 			_center = value.clone();
-			_center.w = 1;
 		}
 		
 		/**
@@ -188,7 +189,7 @@ package org.flintparticles.threeD.actions
 		override public function update( emitter:Emitter, particle:Particle, time:Number ):void
 		{
 			var p:Particle3D = Particle3D( particle );
-			var dist:Vector3D = p.position.subtract( center );
+			var dist:Vector3D = _center.vectorTo( p.position );
 			var dSq:Number = dist.lengthSquared;
 			if( dSq == 0 )
 			{

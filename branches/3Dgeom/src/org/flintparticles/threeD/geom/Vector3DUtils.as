@@ -1,6 +1,7 @@
 package org.flintparticles.threeD.geom 
 {
-
+	import org.flintparticles.threeD.geom.Vector3D;	
+	
 	/**
 	 * @author user
 	 */

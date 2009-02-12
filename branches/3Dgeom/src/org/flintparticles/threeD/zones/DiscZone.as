@@ -30,8 +30,10 @@
 
 package org.flintparticles.threeD.zones 
 {
+	import org.flintparticles.threeD.geom.Point3D;
 	import org.flintparticles.threeD.geom.Vector3D;
-	import org.flintparticles.threeD.geom.Vector3DUtils;
+	
+	import org.flintparticles.threeD.geom.Vector3DUtils;	
 
 	/**
 	 * The DiscZone zone defines a zone that contains all the points on a disc.
@@ -41,7 +43,7 @@ package org.flintparticles.threeD.zones
 
 	public class DiscZone implements Zone3D 
 	{
-		private var _center:Vector3D;
+		private var _center:Point3D;
 		private var _normal:Vector3D;
 		private var _innerRadius:Number;
 		private var _innerRadiusSq:Number;
@@ -63,12 +65,10 @@ package org.flintparticles.threeD.zones
 		 * @param innerRadius The inner radius of the disc. This defines the hole 
 		 * in the center of the disc. If set to zero, there is no hole. 
 		 */
-		public function DiscZone( center:Vector3D, normal:Vector3D, outerRadius:Number, innerRadius:Number = 0 )
+		public function DiscZone( center:Point3D, normal:Vector3D, outerRadius:Number, innerRadius:Number = 0 )
 		{
 			_center = center.clone();
-			_center.w = 1;
 			_normal = normal.unit();
-			_normal.w = 0;
 			_innerRadius = innerRadius;
 			_innerRadiusSq = _innerRadius * _innerRadius;
 			_outerRadius = outerRadius;
@@ -78,7 +78,7 @@ package org.flintparticles.threeD.zones
 		
 		private function init():void
 		{
-			_distToOrigin = _normal.dotProduct( center );
+			_distToOrigin = _normal.dotProduct( center.toVector3D() );
 			var axes:Array = Vector3DUtils.getPerpendiculars( normal );
 			_planeAxis1 = axes[0];
 			_planeAxis2 = axes[1];
@@ -88,14 +88,13 @@ package org.flintparticles.threeD.zones
 		/**
 		 * The point at the center of the disc.
 		 */
-		public function get center() : Vector3D
+		public function get center() : Point3D
 		{
 			return _center.clone();
 		}
-		public function set center( value : Vector3D ) : void
+		public function set center( value : Point3D ) : void
 		{
 			_center = value.clone();
-			_center.w = 1;
 			_dirty = true;
 		}
 
@@ -111,7 +110,6 @@ package org.flintparticles.threeD.zones
 		public function set normal( value : Vector3D ) : void
 		{
 			_normal = value.unit();
-			_normal.w = 0;
 			_dirty = true;
 		}
 
@@ -149,20 +147,20 @@ package org.flintparticles.threeD.zones
 		 * @param p The location to test.
 		 * @return true if the location is inside the zone, false if it is outside.
 		 */
-		public function contains( p:Vector3D ):Boolean
+		public function contains( p:Point3D ):Boolean
 		{
 			if( _dirty )
 			{
 				init();
 			}
 			// is not in plane if dist to origin along normal is different
-			var dist:Number = _normal.dotProduct( p );
+			var dist:Number = _normal.dotProduct( p.toVector3D() );
 			if( Math.abs( dist - _distToOrigin ) > 0.1 ) // test for close, not exact
 			{
 				return false;
 			}
 			// test distance to center
-			var distToCenter:Number = Vector3D.distanceSquared( center, p );
+			var distToCenter:Number = center.distance( p );
 			if( distToCenter <= _outerRadiusSq && distToCenter >= _innerRadiusSq )
 			{
 				return true;
@@ -177,7 +175,7 @@ package org.flintparticles.threeD.zones
 		 * 
 		 * @return a random point inside the zone.
 		 */
-		public function getLocation():Vector3D
+		public function getLocation():Point3D
 		{
 			if( _dirty )
 			{

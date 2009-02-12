@@ -30,10 +30,12 @@
 
 package org.flintparticles.threeD.actions 
 {
+	import org.flintparticles.threeD.geom.Point3D;
+	import org.flintparticles.threeD.geom.Vector3D;
+	
 	import org.flintparticles.common.actions.ActionBase;
 	import org.flintparticles.common.emitters.Emitter;
 	import org.flintparticles.common.particles.Particle;
-	import org.flintparticles.threeD.geom.Vector3D;
 	import org.flintparticles.threeD.particles.Particle3D;	
 
 	/**
@@ -44,7 +46,7 @@ package org.flintparticles.threeD.actions
 
 	public class GravityWell extends ActionBase
 	{
-		private var _position:Vector3D;
+		private var _position:Point3D;
 		private var _power:Number;
 		private var _epsilonSq:Number;
 		private var _gravityConst:Number = 10000; // just scales the power to a more reasonable number
@@ -65,7 +67,7 @@ package org.flintparticles.threeD.actions
 		 * effects you will want a small epsilon ( ~1 ), but for stable visual effects a larger
 		 * epsilon (~100) is often better.
 		 */
-		public function GravityWell( power:Number, position:Vector3D, epsilon:Number = 100 )
+		public function GravityWell( power:Number, position:Point3D, epsilon:Number = 100 )
 		{
 			this.power = power;
 			this.position = position;
@@ -87,14 +89,13 @@ package org.flintparticles.threeD.actions
 		/**
 		 * The x coordinate of the center of the gravity force.
 		 */
-		public function get position():Vector3D
+		public function get position():Point3D
 		{
 			return _position;
 		}
-		public function set position( value:Vector3D ):void
+		public function set position( value:Point3D ):void
 		{
 			_position = value.clone();
-			_position.w = 1;
 		}
 		
 		/**
@@ -122,7 +123,7 @@ package org.flintparticles.threeD.actions
 				return;
 			}
 			var p:Particle3D = Particle3D( particle );
-			var offset:Vector3D = _position.subtract( p.position );
+			var offset:Vector3D = p.position.vectorTo( _position );
 			var dSq:Number = offset.lengthSquared;
 			if( dSq == 0 )
 			{

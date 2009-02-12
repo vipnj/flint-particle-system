@@ -30,10 +30,11 @@
 
 package org.flintparticles.threeD.actions 
 {
+	import org.flintparticles.threeD.geom.Vector3D;
+	
 	import org.flintparticles.common.actions.ActionBase;
 	import org.flintparticles.common.emitters.Emitter;
 	import org.flintparticles.common.particles.Particle;
-	import org.flintparticles.threeD.geom.Vector3D;
 	import org.flintparticles.threeD.particles.Particle3D;	
 
 	/**
@@ -85,7 +86,7 @@ package org.flintparticles.threeD.actions
 			var scale:Number = 1 - _drag * time * p.angVelocity.length / p.inertia;
 			if( scale < 0 )
 			{
-				p.angVelocity.reset( 0, 0, 0, 0 );
+				p.angVelocity.reset( 0, 0, 0 );
 			}
 			else
 			{

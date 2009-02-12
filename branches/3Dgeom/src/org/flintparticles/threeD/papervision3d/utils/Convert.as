@@ -30,12 +30,12 @@
 
 package org.flintparticles.threeD.papervision3d.utils 
 {
-	import org.flintparticles.threeD.geom.Vector3D;
 	import org.flintparticles.threeD.geom.Matrix3D;
+	import org.flintparticles.threeD.geom.Point3D;
 	import org.flintparticles.threeD.geom.Quaternion;
-	
+	import org.flintparticles.threeD.geom.Vector3D;
 	import org.papervision3d.core.math.Matrix3D;
-	import org.papervision3d.core.math.Number3D;	
+	import org.papervision3d.core.math.Number3D;
 	import org.papervision3d.core.math.Quaternion;	
 
 	/**
@@ -58,6 +58,22 @@ package org.flintparticles.threeD.papervision3d.utils
 		public static function Vector3DFromPV3D( v:Number3D ):Vector3D
 		{
 			return new Vector3D( v.x, v.y, v.z );
+		}
+
+		/**
+		 * Convert a Flint Vector3D object to an Papervision3D Number3D object.
+		 */
+		public static function Point3DToPV3D( v:Point3D ):Number3D
+		{
+			return new Number3D( v.x, v.y, v.z );
+		}
+
+		/**
+		 * Convert an Papervision3D Number3D object to a Flint Vector3D object.
+		 */
+		public static function Point3DFromPV3D( v:Number3D ):Point3D
+		{
+			return new Point3D( v.x, v.y, v.z );
 		}
 
 		/**

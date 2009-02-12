@@ -30,12 +30,13 @@
 
 package org.flintparticles.threeD.actions 
 {
+	import org.flintparticles.threeD.geom.Vector3D;
+	
 	import org.flintparticles.common.actions.ActionBase;
 	import org.flintparticles.common.emitters.Emitter;
 	import org.flintparticles.common.particles.Particle;
 	import org.flintparticles.threeD.emitters.Emitter3D;
-	import org.flintparticles.threeD.geom.Vector3D;
-	import org.flintparticles.threeD.particles.Particle3D;
+	import org.flintparticles.threeD.particles.Particle3D;	
 
 	/**
 	 * The MatchRotateVelocity action applies an angular acceleration to the particle to match
@@ -134,7 +135,7 @@ package org.flintparticles.threeD.actions
 			var i:int;
 			var len:int = particles.length;
 			var distanceSq:Number;
-			vel.reset( 0, 0, 0, 0 );
+			vel.reset( 0, 0, 0 );
 			var count:int = 0;
 			var factor:Number;
 			for( i = p.sortID - 1; i >= 0; --i )

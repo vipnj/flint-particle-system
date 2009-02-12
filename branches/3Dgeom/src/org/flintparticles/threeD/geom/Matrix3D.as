@@ -2,10 +2,9 @@
  * FLINT PARTICLE SYSTEM
  * .....................
  * 
- * Author: Richard Lord (Big Room)
+ * Author: Richard Lord
  * Copyright (c) Big Room Ventures Ltd. 2008
- * http://flintparticles.org
- * 
+ * http://flintparticles.org/
  * 
  * Licence Agreement
  * 
@@ -84,7 +83,7 @@ package org.flintparticles.threeD.geom
 		 * 
 		 * @return The new matrix
 		 */
-		public static function newRotate( angle:Number, axis:Vector3D, pivotPoint:Vector3D = null ):Matrix3D
+		public static function newRotate( angle:Number, axis:Vector3D, pivotPoint:Point3D = null ):Matrix3D
 		{
 			if ( angle == 0 )
 			{
@@ -505,7 +504,7 @@ package org.flintparticles.threeD.geom
 		 * 
 		 * @return A reference to this matrix
 		 */
-		public function appendRotate( angle:Number, axis:Vector3D, pivotPoint:Vector3D = null ):Matrix3D
+		public function appendRotate( angle:Number, axis:Vector3D, pivotPoint:Point3D = null ):Matrix3D
 		{
 			if ( angle == 0 )
 			{
@@ -618,7 +617,7 @@ package org.flintparticles.threeD.geom
 		 * 
 		 * @return A reference to this matrix
 		 */
-		public function prependRotate( angle:Number, axis:Vector3D, pivotPoint:Vector3D = null ):Matrix3D
+		public function prependRotate( angle:Number, axis:Vector3D, pivotPoint:Point3D = null ):Matrix3D
 		{
 			if ( angle == 0 )
 			{
@@ -717,88 +716,77 @@ package org.flintparticles.threeD.geom
 		}
 	
 		/**
-		 * Transform a Vector3D using this matrix, returning a new, transformed vector.
+		 * Transform a Vector3D or Point3D using this matrix, returning a new, transformed vector.
 		 * 
 		 * @param v The vector to transform.
 		 * 
 		 * @return The result of the transformation.
 		 */
-		public function transformVector( v:Vector3D ):Vector3D
+		public function transform( v:Transformable3D, result:Transformable3D = null ):Transformable3D
 		{
-			return new Vector3D(
-				n11 * v.x + n12 * v.y + n13 * v.z + n14 * v.w,
-				n21 * v.x + n22 * v.y + n23 * v.z + n24 * v.w,
-				n31 * v.x + n32 * v.y + n33 * v.z + n34 * v.w,
-				n41 * v.x + n42 * v.y + n43 * v.z + n44 * v.w
-			);
+			if( result == null )
+			{
+				result = new (v.classType)();
+			}
+			result.x = n11 * v.x + n12 * v.y + n13 * v.z + n14 * v.w;
+			result.y = n21 * v.x + n22 * v.y + n23 * v.z + n24 * v.w;
+			result.z = n31 * v.x + n32 * v.y + n33 * v.z + n34 * v.w;
+			result.w = n41 * v.x + n42 * v.y + n43 * v.z + n44 * v.w;
+			return result;
 		}
 
 		/**
-		 * Transform a Vector3D using this matrix, storing the result in a second vector.
-		 * 
-		 * @param v The vector to transform.
-		 * @param u The vector for the result.
-		 * 
-		 * @return The result of the transformation.
-		 */
-		public function transformVectorOther( v:Vector3D, u:Vector3D ):Vector3D
-		{
-			u.x = n11 * v.x + n12 * v.y + n13 * v.z + n14 * v.w;
-			u.y = n21 * v.x + n22 * v.y + n23 * v.z + n24 * v.w;
-			u.z = n31 * v.x + n32 * v.y + n33 * v.z + n34 * v.w;
-			u.w = n41 * v.x + n42 * v.y + n43 * v.z + n44 * v.w;
-			return u;
-		}
-
-		/**
-		 * Transform a Vector3D using this matrix, storing the result in the original 
+		 * Transform a Vector3D or Point3D using this matrix, storing the result in the original 
 		 * vector.
 		 * 
 		 * @param v The vector to transform.
 		 * 
 		 * @return A reference to the original (now transformed) vector.
 		 */
-		public function transformVectorSelf( v:Vector3D ):Vector3D
+		public function transformSelf( v:Transformable3D ):Transformable3D
 		{
-			return v.reset( 
-				n11 * v.x + n12 * v.y + n13 * v.z + n14 * v.w,
-				n21 * v.x + n22 * v.y + n23 * v.z + n24 * v.w,
-				n31 * v.x + n32 * v.y + n33 * v.z + n34 * v.w,
-				n41 * v.x + n42 * v.y + n43 * v.z + n44 * v.w
-			);
+			var x:Number = v.x;
+			var y:Number = v.y;
+			var z:Number = v.z;
+			var w:Number = v.w;
+			v.x = n11 * x + n12 * y + n13 * z + n14 * w;
+			v.y = n21 * x + n22 * y + n23 * z + n24 * w;
+			v.z = n31 * x + n32 * y + n33 * z + n34 * w;
+			v.w = n41 * x + n42 * y + n43 * z + n44 * w;
+			return v;
 		}
 
 		/**
-		 * Transform an array of Vector3D objects using this matrix. The 
+		 * Transform an array of Vector3D or Point3D objects using this matrix. The 
 		 * results are returned in a new array.
 		 * 
-		 * @param v the array of Vector3D objects to transform.
+		 * @param v the array of Vector3D or Point3D objects to transform.
 		 * 
 		 * @return An array containing the new transformed vectors.
 		 */
-		public function transformArrayVectors( vectors:Array ):Array
+		public function transformArray( vectors:Array ):Array
 		{
 			var transformedVectors:Array = new Array();
-			for each( var vector:Vector3D in vectors )
+			for each( var vector:Transformable3D in vectors )
 			{
-				transformedVectors.push( transformVector( vector ) );
+				transformedVectors.push( transform( vector ) );
 			}
 			return transformedVectors;
 		}
 		
 		/**
-		 * Transform an array of Vector3D objects using this matrix. The 
+		 * Transform an array of Vector3D or Point3D objects using this matrix. The 
 		 * original vectors are modified to contain the new, transformed values.
 		 * 
-		 * @param v the array of Vector3D objects to transform.
+		 * @param v the array of Vector3D or Point3D objects to transform.
 		 * 
 		 * @return The original array, which now contains the transformed vectors.
 		 */
-		public function transformArrayVectorsSelf( vectors:Array ):Array
+		public function transformArraySelf( vectors:Array ):Array
 		{
-			for each( var vector:Vector3D in vectors )
+			for each( var vector:Transformable3D in vectors )
 			{
-				transformVectorSelf( vector );
+				transformSelf( vector );
 			}
 			return vectors;
 		}
@@ -807,19 +795,18 @@ package org.flintparticles.threeD.geom
 		 * The positionelements of the matrix. This is the last column of the
 		 * matrix, containing values n14, n24, n34, n44.
 		 */
-		public function get position():Vector3D
+		public function get position():Point3D
 		{
-			return new Vector3D( n14, n24, n34, n44 );
+			var p:Point3D = new Point3D( n14, n24, n34 );
+			p.w = n44;
+			return p;
 		}
-		public function set position( value:Vector3D ):void
+		public function set position( value:Point3D ):void
 		{
 			n14 = value.x;
 			n24 = value.y;
 			n34 = value.z;
-			if( value.w != 0 )
-			{
-				n44 = value.w;
-			}
+			n44 = value.w;
 		}
 		
 		/**

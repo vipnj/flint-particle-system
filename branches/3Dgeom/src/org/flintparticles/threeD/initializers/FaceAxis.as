@@ -30,10 +30,11 @@
 
 package org.flintparticles.threeD.initializers 
 {
+	import org.flintparticles.threeD.geom.Vector3D;
+	
 	import org.flintparticles.common.emitters.Emitter;
 	import org.flintparticles.common.initializers.InitializerBase;
 	import org.flintparticles.common.particles.Particle;
-	import org.flintparticles.threeD.geom.Vector3D;
 	import org.flintparticles.threeD.particles.Particle3D;	
 
 	/**

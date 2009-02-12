@@ -30,10 +30,12 @@
 
 package org.flintparticles.threeD.actions 
 {
+	import org.flintparticles.threeD.geom.Point3D;
+	import org.flintparticles.threeD.geom.Vector3D;
+	
 	import org.flintparticles.common.actions.ActionBase;
 	import org.flintparticles.common.emitters.Emitter;
 	import org.flintparticles.common.particles.Particle;
-	import org.flintparticles.threeD.geom.Vector3D;
 	import org.flintparticles.threeD.particles.Particle3D;	
 
 	/**
@@ -43,7 +45,7 @@ package org.flintparticles.threeD.actions
 
 	public class TurnTowardsPoint extends ActionBase
 	{
-		private var _point:Vector3D;
+		private var _point:Point3D;
 		private var _power:Number;
 		private var _velDirection:Vector3D;
 		private var _toTarget:Vector3D;
@@ -59,7 +61,7 @@ package org.flintparticles.threeD.actions
 		 * @param power The strength of the turn action. Higher values produce a sharper turn.
 		 * @param point The point towards which the particle turns.
 		 */
-		public function TurnTowardsPoint( point:Vector3D, power:Number )
+		public function TurnTowardsPoint( point:Point3D, power:Number )
 		{
 			_power = power;
 			_point = point.clone();
@@ -83,11 +85,11 @@ package org.flintparticles.threeD.actions
 		/**
 		 * The x coordinate of the point that the particle turns towards.
 		 */
-		public function get point():Vector3D
+		public function get point():Point3D
 		{
 			return _point;
 		}
-		public function set point( value:Vector3D ):void
+		public function set point( value:Point3D ):void
 		{
 			_point = value.clone();
 		}
@@ -101,7 +103,7 @@ package org.flintparticles.threeD.actions
 			p.velocity.unit( _velDirection );
 			var velLength:Number = p.velocity.length;
 			var acc:Number = power * time;
-			_point.subtract( p.position, _toTarget );
+			p.position.vectorTo( _point, _toTarget );
 			var len:Number = _toTarget.length;
 			if( len == 0 )
 			{
