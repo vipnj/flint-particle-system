@@ -38,6 +38,8 @@ package org.flintparticles.twoD.initializers
 	import org.flintparticles.twoD.particles.Particle2D;
 	import org.flintparticles.twoD.zones.Zone2D;	
 
+	[DefaultProperty("zone")]
+	
 	/**
 	 * The Position Initializer sets the initial location of the particle.
 	 * 
@@ -48,7 +50,6 @@ package org.flintparticles.twoD.initializers
 	 * Zones interface for use when implementing custom zones) are defined
 	 * in the org.flintparticles.twoD.zones package.</p>
 	 */
-
 	public class Position extends InitializerBase
 	{
 		private var _zone : Zone2D;

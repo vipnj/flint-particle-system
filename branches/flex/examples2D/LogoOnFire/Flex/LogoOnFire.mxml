@@ -25,14 +25,10 @@
 			</f:counter>
 			<f:initializers>
 				<f:Position>
-					<f:zone>
-						<f:BitmapDataZone bitmapData="{(new Logo()).bitmapData}"/>
-					</f:zone>
+					<f:BitmapDataZone bitmapData="{(new Logo()).bitmapData}"/>
 				</f:Position>
 				<f:Velocity>
-					<f:zone>
-						<f:DiscSectorZone center="{new Point( 0, 0 )}" innerRadius="5" outerRadius="10" minAngle="{-Math.PI * 0.75}" maxAngle="{-Math.PI * 0.25}"/>
-					</f:zone>
+					<f:DiscSectorZone centerX="0" centerY="0" innerRadius="5" outerRadius="10" minAngle="{-Math.PI * 0.75}" maxAngle="{-Math.PI * 0.25}"/>
 				</f:Velocity>
 				<f:ImageClass imageClass="{FireBlob}"/>
 				<f:Lifetime lifetime="0.8"/>
@@ -42,7 +38,7 @@
 				<f:Age easing="{TwoWay.quadratic}"/>
 				<f:LinearDrag drag="1"/>
 				<f:Accelerate x="0" y="-20"/>
-				<f:ColorChange startColor="{0xFFFF9900}" endColor="{0x00FFDD66}"/>
+				<f:ColorChange startColor="0xFFFF9900" endColor="0x00FFDD66"/>
 				<f:ScaleImage startScale="1.4" endScale="2"/>
 				<f:RotateToDirection/>
 			</f:actions>

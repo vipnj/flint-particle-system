@@ -63,7 +63,14 @@ package org.flintparticles.twoD.zones
 			{
 				throw new Error( "The outerRadius (" + outerRadius + ") can't be smaller than the innerRadius (" + innerRadius + ") in your DiscZone. N.B. the outerRadius is the second argument in the constructor and the innerRadius is the third argument." );
 			}
-			_center = center;
+			if( center == null )
+			{
+				_center = new Point( 0, 0 );
+			}
+			else
+			{
+				_center = center;
+			}
 			_innerRadius = innerRadius;
 			_outerRadius = outerRadius;
 			_innerSq = _innerRadius * _innerRadius;
@@ -81,6 +88,32 @@ package org.flintparticles.twoD.zones
 		public function set center( value : Point ) : void
 		{
 			_center = value;
+		}
+
+		/**
+		 * The x coordinate of the point that is the center of the disc.
+		 */
+		public function get centerX() : Number
+		{
+			return _center.x;
+		}
+
+		public function set centerX( value : Number ) : void
+		{
+			_center.x = value;
+		}
+
+		/**
+		 * The y coordinate of the point that is the center of the disc.
+		 */
+		public function get centerY() : Number
+		{
+			return _center.y;
+		}
+
+		public function set centerY( value : Number ) : void
+		{
+			_center.y = value;
 		}
 
 		/**

@@ -38,6 +38,8 @@ package org.flintparticles.twoD.initializers
 	import org.flintparticles.twoD.particles.Particle2D;
 	import org.flintparticles.twoD.zones.Zone2D;	
 
+	[DefaultProperty("zone")]
+	
 	/**
 	 * The ColorInit Initializer sets the velocity of the particle. It is
 	 * usually combined with the Move action to move the particle

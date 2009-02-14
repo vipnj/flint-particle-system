@@ -8,7 +8,6 @@
 	<mx:Script>
 		<![CDATA[
 			import org.flintparticles.common.displayObjects.*;
-			import flash.geom.Point;
 		]]>
 	</mx:Script>
 
@@ -20,25 +19,18 @@
 			</f:counter>
 			<f:initializers>
 				<f:Position>
-					<f:zone>
-						<f:RectangleZone left="0" right="500" top="0" bottom="500"/>
-					</f:zone>
+					<f:RectangleZone left="0" right="500" top="0" bottom="500"/>
 				</f:Position>
 				<f:Velocity>
-					<f:zone>
-						<f:DiscZone center="{new Point( 0, 0 )}" innerRadius="100" outerRadius="150"/>
-					</f:zone>
+					<f:DiscZone centerX="0" centerY="0" innerRadius="100" outerRadius="150"/>
 				</f:Velocity>
-				
 				<f:ImageClass imageClass="{Line}" parameters="{[8]}"/>
 				<f:AlphaInit minAlpha="0.25" maxAlpha="0.5"/>
 			</f:initializers>
 			<f:actions>
 				<f:Move/>
 				<f:DeathZone zoneIsSafe="true">
-					<f:zone>
-						<f:RectangleZone left="-10" right="510" top="-10" bottom="410"/>
-					</f:zone>
+					<f:RectangleZone left="-10" right="510" top="-10" bottom="410"/>
 				</f:DeathZone>
 				<f:RotateToDirection/>
 			</f:actions>

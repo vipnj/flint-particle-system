@@ -8,7 +8,6 @@
 	
 	<mx:Script>
 		<![CDATA[
-			import flash.geom.Point;
 			import org.flintparticles.common.energyEasing.Quadratic;
 
 			[Embed(source="assets/flint.png")]
@@ -27,16 +26,12 @@
 			</f:counter>
 			<f:initializers>
 				<f:Position>
-					<f:zone>
-						<f:DiscZone center="{new Point( 0, 0 )}" outerRadius="10"/>
-					</f:zone>
+					<f:DiscZone centerX="0" centerY="0" outerRadius="10"/>
 				</f:Position>
-				<f:ColorInit minColor="{0xFFFF3300}" maxColor="{0xFFFFFF00}"/>
+				<f:ColorInit minColor="0xFFFF3300" maxColor="0xFFFFFF00"/>
 				<f:Lifetime lifetime="6"/>
 				<f:Velocity>
-					<f:zone>
-						<f:BitmapDataZone bitmapData="{(new Logo()).bitmapData}" offsetX="-132" offsetY="-300"/>
-					</f:zone>
+					<f:BitmapDataZone bitmapData="{(new Logo()).bitmapData}" offsetX="-132" offsetY="-300"/>
 				</f:Velocity>
 			</f:initializers>
 			<f:actions>

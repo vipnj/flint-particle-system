@@ -36,6 +36,8 @@ package org.flintparticles.twoD.actions
 	import org.flintparticles.twoD.particles.Particle2D;
 	import org.flintparticles.twoD.zones.Zone2D;	
 
+	[DefaultProperty("zone")]
+
 	/**
 	 * The DeathZone action marks the particle as dead if it is inside
 	 * a specific zone.

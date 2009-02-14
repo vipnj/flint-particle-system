@@ -23,12 +23,10 @@
 			</f:counter>
 			<f:initializers>
 				<f:Position>
-					<f:zone>
-						<f:RectangleZone left="10" right="390" top="10" bottom="390"/>
-					</f:zone>
+					<f:RectangleZone left="10" right="390" top="10" bottom="390"/>
 				</f:Position>
 				<f:SharedImage image="{new Dot( 2 )}"/>
-				<f:ColorInit minColor="{0xFFFF00FF}" maxColor="{0xFF00FFFF}"/>
+				<f:ColorInit minColor="0xFFFF00FF" maxColor="0xFF00FFFF"/>
 			</f:initializers>
 			<f:actions>
 				<f:Move/>

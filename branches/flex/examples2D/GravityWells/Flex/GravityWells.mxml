@@ -6,12 +6,6 @@
 	layout="absolute" width="400" height="400"
 	backgroundColor="#000000">
 	
-	<mx:Script>
-		<![CDATA[
-			import flash.geom.Point;
-		]]>
-	</mx:Script>
-	
 <f:PixelRenderer id="renderer" width="400" height="400">
 	<f:preFilters>
 		<filters:BlurFilter blurX="2" blurY="2" quality="1"/>
@@ -24,11 +18,9 @@
 			</f:counter>
 			<f:initializers>
 				<f:Position>
-					<f:zone>
-						<f:DiscZone center="{new Point( 200, 200 )}" outerRadius="200"/>
-					</f:zone>
+					<f:DiscZone centerX="200" centerY="200" outerRadius="200"/>
 				</f:Position>
-				<f:ColorInit minColor="{0xFFFF00FF}" maxColor="{0xFF00FFFF}"/>
+				<f:ColorInit minColor="0xFFFF00FF" maxColor="0xFF00FFFF"/>
 			</f:initializers>
 			<f:actions>
 				<f:Move/>
