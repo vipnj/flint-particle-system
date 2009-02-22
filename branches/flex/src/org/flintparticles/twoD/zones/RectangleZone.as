@@ -80,7 +80,7 @@ package org.flintparticles.twoD.zones
 		public function set left( value : Number ) : void
 		{
 			_left = value;
-			if( _right && _left )
+			if( !isNaN( _right ) && !isNaN( _left ) )
 			{
 				_width = right - left;
 			}
@@ -97,7 +97,7 @@ package org.flintparticles.twoD.zones
 		public function set right( value : Number ) : void
 		{
 			_right = value;
-			if( _right && _left )
+			if( !isNaN( _right ) && !isNaN( _left ) )
 			{
 				_width = right - left;
 			}
@@ -114,7 +114,7 @@ package org.flintparticles.twoD.zones
 		public function set top( value : Number ) : void
 		{
 			_top = value;
-			if( _top && _bottom )
+			if( !isNaN( _top ) && !isNaN( _bottom ) )
 			{
 				_height = bottom - top;
 			}
@@ -131,7 +131,7 @@ package org.flintparticles.twoD.zones
 		public function set bottom( value : Number ) : void
 		{
 			_bottom = value;
-			if( _top && _bottom )
+			if( !isNaN( _top ) && !isNaN( _bottom ) )
 			{
 				_height = bottom - top;
 			}

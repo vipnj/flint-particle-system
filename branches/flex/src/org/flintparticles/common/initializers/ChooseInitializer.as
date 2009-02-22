@@ -46,6 +46,8 @@ package org.flintparticles.common.initializers
 	public class ChooseInitializer extends InitializerBase
 	{
 		private var _initializers:WeightedArray;
+		private var _mxmlInitializers:Array;
+		private var _mxmlWeights:Array;
 		
 		/**
 		 * The constructor creates a ChooseInitializer initializer for use by 
@@ -65,6 +67,11 @@ package org.flintparticles.common.initializers
 			{
 				return;
 			}
+			init( initializers, weights );
+		}
+		
+		private function init( initializers:Array = null, weights:Array = null ):void
+		{
 			var len:int = initializers.length;
 			var i:int;
 			if( weights != null && weights.length == len )
@@ -91,6 +98,24 @@ package org.flintparticles.common.initializers
 		public function removeInitializer( initializer:Number ):void
 		{
 			_initializers.remove( initializer );
+		}
+		
+		public function set initializers( value:Array ):void
+		{
+			_mxmlInitializers = value;
+			checkStartValues();
+		}
+		public function set weights( value:Array ):void
+		{
+			_mxmlWeights = value;
+			checkStartValues();
+		}
+		private function checkStartValues():void
+		{
+			if( _mxmlInitializers && _mxmlWeights )
+			{
+				init( _mxmlInitializers, _mxmlWeights );
+			}
 		}
 		
 		/**
