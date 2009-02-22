@@ -35,6 +35,8 @@ package org.flintparticles.common.initializers
 	import org.flintparticles.common.emitters.Emitter;
 	import org.flintparticles.common.particles.Particle;	
 
+	[DefaultProperty("image")]
+	
 	/**
 	 * The SharedImage Initializer sets the DisplayObject to use to draw
 	 * the particle. It is used with the BitmapRenderer. When using the

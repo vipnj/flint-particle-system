@@ -45,6 +45,8 @@ package org.flintparticles.common.initializers
 	public class ImageClasses extends InitializerBase
 	{
 		private var _images:WeightedArray;
+		private var _mxmlImages:Array;
+		private var _mxmlWeights:Array;
 		
 		/**
 		 * The constructor creates a ImageClasses initializer for use by 
@@ -65,6 +67,22 @@ package org.flintparticles.common.initializers
 			{
 				return;
 			}
+			init( images, weights );
+		}
+		
+		override public function addedToEmitter( emitter:Emitter ):void
+		{
+			if( _mxmlImages )
+			{
+				init( _mxmlImages, _mxmlWeights );
+				_mxmlImages = null;
+				_mxmlWeights = null;
+			}
+		}
+		
+		private function init( images:Array = null, weights:Array = null ):void
+		{
+			_images.clear();
 			var len:int = images.length;
 			var i:int;
 			if( weights != null && weights.length == len )
@@ -100,6 +118,35 @@ package org.flintparticles.common.initializers
 		public function removeImage( image:* ):void
 		{
 			_images.remove( image );
+		}
+
+		public function set images( value:Array ):void
+		{
+			_mxmlImages = value;
+			checkStartValues();
+		}
+		
+		public function set weights( value:Array ):void
+		{
+			if( value.length == 1 && value[0] is String )
+			{
+				_mxmlWeights = value[0].split( "," );
+			}
+			else
+			{
+				_mxmlWeights = value;
+			}
+			checkStartValues();
+		}
+		
+		private function checkStartValues():void
+		{
+			if( _mxmlImages && _mxmlWeights )
+			{
+				init( _mxmlImages, _mxmlWeights );
+				_mxmlImages = null;
+				_mxmlWeights = null;
+			}
 		}
 
 		/**

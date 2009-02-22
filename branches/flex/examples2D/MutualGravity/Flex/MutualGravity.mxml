@@ -6,12 +6,6 @@
 	layout="absolute" width="400" height="400"
 	backgroundColor="#000000">
 	
-	<mx:Script>
-		<![CDATA[
-			import org.flintparticles.common.displayObjects.*;
-		]]>
-	</mx:Script>
-
 <f:BitmapRenderer id="renderer" width="400" height="400">
 	<f:preFilters>
 		<filters:BlurFilter blurX="2" blurY="2" quality="1"/>
@@ -25,7 +19,9 @@
 				<f:Position>
 					<f:RectangleZone left="10" right="390" top="10" bottom="390"/>
 				</f:Position>
-				<f:SharedImage image="{new Dot( 2 )}"/>
+				<f:SharedImage>
+					<f:Dot radius="2"/>
+				</f:SharedImage>
 				<f:ColorInit minColor="0xFFFF00FF" maxColor="0xFF00FFFF"/>
 			</f:initializers>
 			<f:actions>

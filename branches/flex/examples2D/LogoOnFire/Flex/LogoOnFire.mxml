@@ -7,7 +7,6 @@
 	
 	<mx:Script>
 		<![CDATA[
-			import org.flintparticles.common.displayObjects.*;
 			import org.flintparticles.common.energyEasing.TwoWay;
 			
 			[Embed(source="assets/flint.png")]

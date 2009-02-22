@@ -6,12 +6,6 @@
 	layout="absolute" width="400" height="400"
 	backgroundColor="#000000">
 	
-	<mx:Script>
-		<![CDATA[
-			import org.flintparticles.common.displayObjects.*;
-		]]>
-	</mx:Script>
-
 <f:BitmapRenderer id="renderer" width="400" height="400">
 	<f:preFilters>
 		<filters:BlurFilter blurX="2" blurY="2" quality="1"/>
@@ -26,7 +20,9 @@
 				<f:Velocity>
 					<f:DiscZone centerX="0" centerY="0" innerRadius="200" outerRadius="350"/>
 				</f:Velocity>
-				<f:SharedImage image="{new Line( 8 )}"/>
+				<f:SharedImage>
+					<f:Line length="8"/>
+				</f:SharedImage>
 				<f:ColorInit minColor="0xFFFFCC00" maxColor="0xFFFFCC00"/>
 				<f:Lifetime minLifetime="0.2" maxLifetime="0.4"/>
 			</f:initializers>

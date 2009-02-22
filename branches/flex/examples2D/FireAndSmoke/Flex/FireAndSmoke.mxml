@@ -7,12 +7,11 @@
 	
 	<mx:Script>
 		<![CDATA[
-			import org.flintparticles.common.displayObjects.RadialDot;
-			
 			[Embed(source='assets/fireblob.swf', symbol='FireBlob')]
 			public var FireBlob:Class;
 		]]>
 	</mx:Script>
+	
 <f:BitmapRenderer id="renderer" width="300" height="400">
 	<f:emitters>
 		<f:Emitter id="smoke" autoStart="true" x="150" y="380">
@@ -24,7 +23,9 @@
 				<f:Velocity>
 					<f:DiscSectorZone centerX="0" centerY="0" innerRadius="30" outerRadius="40" minAngle="{-4 * Math.PI / 7}" maxAngle="{-3 * Math.PI / 7}"/>
 				</f:Velocity>
-				<f:SharedImage image="{new RadialDot(6)}"/>
+				<f:SharedImage>
+					<f:RadialDot radius="6"/>
+				</f:SharedImage>
 			</f:initializers>
 			<f:actions>
 				<f:Move/>

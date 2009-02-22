@@ -109,4 +109,11 @@
     <component class="org.flintparticles.twoD.zones.PointZone"/>
     <component class="org.flintparticles.twoD.zones.RectangleZone"/>
     
+    <!-- DISPLAY OBJECTS -->
+    <component class="org.flintparticles.common.displayObjects.Dot"/>
+    <component class="org.flintparticles.common.displayObjects.Line"/>
+    <component class="org.flintparticles.common.displayObjects.RadialDot"/>
+    <component class="org.flintparticles.common.displayObjects.Rect"/>
+    <component class="org.flintparticles.common.displayObjects.Star"/>
+    
 </componentPackage>

@@ -108,4 +108,11 @@
     <component class="org.flintparticles.threeD.zones.PointZone"/>
     <component class="org.flintparticles.threeD.zones.SphereZone"/>
     
+    <!-- DISPLAY OBJECTS -->
+    <component class="org.flintparticles.common.displayObjects.Dot"/>
+    <component class="org.flintparticles.common.displayObjects.Line"/>
+    <component class="org.flintparticles.common.displayObjects.RadialDot"/>
+    <component class="org.flintparticles.common.displayObjects.Rect"/>
+    <component class="org.flintparticles.common.displayObjects.Star"/>
+    
 </componentPackage>

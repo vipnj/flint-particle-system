@@ -57,13 +57,15 @@ package
 		public function Main()
 		{
 			var txt:TextField = new TextField();
-			txt.text = "Click on the image";
+			txt.text = "Click on the image.";
 			txt.textColor = 0xFFFFFF;
 			addChild( txt );
 
 			bitmap = new Image1();
 			
 			emitter = new Emitter2D();
+			emitter.addAction( new DeathZone( new RectangleZone( -5, -5, 505, 355 ), true ) );
+			emitter.addAction( new Move() );
 			var particles:Array = Particle2DUtils.createRectangleParticlesFromBitmapData( bitmap.bitmapData, 10, emitter.particleFactory, 56, 47 );
 			emitter.addExistingParticles( particles, false );
 			
@@ -72,15 +74,13 @@ package
 			renderer.addEmitter( emitter );
 			emitter.start();
 			
-			stage.addEventListener( MouseEvent.CLICK, explode, false, 0, true );
+			addEventListener( MouseEvent.CLICK, explode, false, 0, true );
 		}
 		
 		private function explode( ev:MouseEvent ):void
 		{
 			var p:Point = renderer.globalToLocal( new Point( ev.stageX, ev.stageY ) );
 			emitter.addAction( new Explosion( 8, p.x, p.y, 500 ) );
-			emitter.addAction( new Move() );
-			emitter.addAction( new DeathZone( new RectangleZone( -5, -5, 505, 355 ), true ) );
 		}
 	}
 }

@@ -30,7 +30,8 @@
 
 package
 {
-	import flash.display.Stage;
+	import flash.display.DisplayObject;
+	import flash.events.Event;
 	import flash.events.KeyboardEvent;
 	import flash.ui.Keyboard;
 	
@@ -69,7 +70,23 @@ package
 		
 		public function initialized( document:Object, id:String ):void
 		{
-			var stage:Stage = displayObject( document ).root.stage;
+			if( document.stage )
+			{
+				setStage( document.stage );
+			}
+			else
+			{
+				DisplayObject( document ).addEventListener( Event.ADDED_TO_STAGE, addedToStage );
+			}
+		}
+			
+		private function addedToStage( ev:Event ):void
+		{
+			setStage( ev.target.stage );
+		}	
+		
+		private function setStage( stage:DisplayObject ):void
+		{
 			stage.addEventListener( KeyboardEvent.KEY_DOWN, keyDownListener, false, 0, true );
 			stage.addEventListener( KeyboardEvent.KEY_UP, keyUpListener, false, 0, true );
 		}

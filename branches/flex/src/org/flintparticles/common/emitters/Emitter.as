@@ -610,6 +610,11 @@ package org.flintparticles.common.emitters
 		{
 			return _particles;
 		}
+		public function set particles( value:Array ):void
+		{
+			killAllParticles();
+			addExistingParticles( value, false );
+		}
 
 		/*
 		 * Used internally to create a particle.

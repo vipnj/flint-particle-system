@@ -43,6 +43,8 @@ package org.flintparticles.common.initializers
 	public class ColorsInit extends InitializerBase
 	{
 		private var _colors:WeightedArray;
+		private var _mxmlColors:Array;
+		private var _mxmlWeights:Array;
 		
 		/**
 		 * The constructor creates a ColorsInit initializer for use by 
@@ -63,6 +65,22 @@ package org.flintparticles.common.initializers
 			{
 				return;
 			}
+			init( colors, weights );
+		}
+		
+		override public function addedToEmitter( emitter:Emitter ):void
+		{
+			if( _mxmlColors )
+			{
+				init( _mxmlColors, _mxmlWeights );
+				_mxmlColors = null;
+				_mxmlWeights = null;
+			}
+		}
+		
+		private function init( colors:Array = null, weights:Array = null ):void
+		{
+			_colors.clear();
 			var len:int = colors.length;
 			var i:int;
 			if( weights != null && weights.length == len )
@@ -89,6 +107,42 @@ package org.flintparticles.common.initializers
 		public function removeColor( color:uint ):void
 		{
 			_colors.remove( color );
+		}
+		
+		public function set colors( value:Array ):void
+		{
+			if( value.length == 1 && value[0] is String )
+			{
+				_mxmlColors = value[0].split( "," );
+			}
+			else
+			{
+				_mxmlColors = value;
+			}
+			checkStartValues();
+		}
+		
+		public function set weights( value:Array ):void
+		{
+			if( value.length == 1 && value[0] is String )
+			{
+				_mxmlWeights = value[0].split( "," );
+			}
+			else
+			{
+				_mxmlWeights = value;
+			}
+			checkStartValues();
+		}
+		
+		private function checkStartValues():void
+		{
+			if( _mxmlColors && _mxmlWeights )
+			{
+				init( _mxmlColors, _mxmlWeights );
+				_mxmlColors = null;
+				_mxmlWeights = null;
+			}
 		}
 		
 		/**

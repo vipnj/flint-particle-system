@@ -34,6 +34,8 @@ package org.flintparticles.common.initializers
 	import org.flintparticles.common.particles.Particle;
 	import org.flintparticles.common.utils.PriorityArray;	
 
+	[DefaultProperty("initializers")]
+	
 	/**
 	 * The InitializerGroup initializer collects a number of initializers into a single 
 	 * larger initializer that applies all the grouped initializers to a particle. It is

@@ -40,6 +40,9 @@ package org.flintparticles.common.displayObjects
 
 	public class Star extends Shape 
 	{
+		private var _radius:Number;
+		private var _color:uint;
+		
 		/**
 		 * The constructor creates a Star with the specified radius.
 		 * 
@@ -49,35 +52,62 @@ package org.flintparticles.common.displayObjects
 		 */
 		public function Star( radius:Number, color:uint = 0xFFFFFF, bm:String = "normal" )
 		{
+			_radius = radius;
+			_color = color;
+			draw();
+			blendMode = bm;
+		}
+		
+		private function draw():void
+		{
+			graphics.clear();
 			var point:Point;
 			var rotStep:Number = Math.PI / 5;
-			var innerRadius:Number = radius * Math.cos( rotStep * 2 );
+			var innerRadius:Number = _radius * Math.cos( rotStep * 2 );
 			var halfPi:Number = Math.PI * 0.5;
 			
-			graphics.beginFill( color );
-			graphics.moveTo( 0, -radius );
+			graphics.beginFill( _color );
+			graphics.moveTo( 0, -_radius );
 			point = Point.polar( innerRadius, rotStep - halfPi );
 			graphics.lineTo( point.x, point.y );
-			point = Point.polar( radius, 2 * rotStep - halfPi );
+			point = Point.polar( _radius, 2 * rotStep - halfPi );
 			graphics.lineTo( point.x, point.y );
 			point = Point.polar( innerRadius, 3 * rotStep - halfPi );
 			graphics.lineTo( point.x, point.y );
-			point = Point.polar( radius, 4 * rotStep - halfPi );
+			point = Point.polar( _radius, 4 * rotStep - halfPi );
 			graphics.lineTo( point.x, point.y );
 			point = Point.polar( innerRadius, 5 * rotStep - halfPi );
 			graphics.lineTo( point.x, point.y );
-			point = Point.polar( radius, 6 * rotStep - halfPi );
+			point = Point.polar( _radius, 6 * rotStep - halfPi );
 			graphics.lineTo( point.x, point.y );
 			point = Point.polar( innerRadius, 7 * rotStep - halfPi );
 			graphics.lineTo( point.x, point.y );
-			point = Point.polar( radius, 8 * rotStep - halfPi );
+			point = Point.polar( _radius, 8 * rotStep - halfPi );
 			graphics.lineTo( point.x, point.y );
 			point = Point.polar( innerRadius, 9 * rotStep - halfPi );
 			graphics.lineTo( point.x, point.y );
-			graphics.lineTo( 0, -radius );
+			graphics.lineTo( 0, -_radius );
 			graphics.endFill();
-			
-			blendMode = bm;
+		}
+		
+		public function get radius():Number
+		{
+			return _radius;
+		}
+		public function set radius( value:Number ):void
+		{
+			_radius = value;
+			draw();
+		}
+		
+		public function get color():uint
+		{
+			return _color;
+		}
+		public function set color( value:uint ):void
+		{
+			_color = value;
+			draw();
 		}
 	}
 }

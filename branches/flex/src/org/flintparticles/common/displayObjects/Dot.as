@@ -39,18 +39,49 @@ package org.flintparticles.common.displayObjects
 
 	public class Dot extends Shape 
 	{
+		private var _radius:Number;
+		private var _color:uint;
+		
 		/**
 		 * The constructor creates a Dot with a specified radius.
 		 * @param radius The radius, in pixels, of the Dot.
 		 * @param color The color of the Dot.
 		 * @param bm The blendMode for the Dot.
 		 */
-		public function Dot( radius:Number, color:uint = 0xFFFFFF, bm:String = "normal" )
+		public function Dot( radius:Number = 1, color:uint = 0xFFFFFF, bm:String = "normal" )
 		{
-			graphics.beginFill( color );
-			graphics.drawCircle( 0, 0, radius );
-			graphics.endFill();
+			_radius = radius;
+			_color = color;
+			draw();
 			blendMode = bm;
+		}
+		
+		private function draw():void
+		{
+			graphics.clear();
+			graphics.beginFill( _color );
+			graphics.drawCircle( 0, 0, _radius );
+			graphics.endFill();
+		}
+		
+		public function get radius():Number
+		{
+			return _radius;
+		}
+		public function set radius( value:Number ):void
+		{
+			_radius = value;
+			draw();
+		}
+		
+		public function get color():uint
+		{
+			return _color;
+		}
+		public function set color( value:uint ):void
+		{
+			_color = value;
+			draw();
 		}
 	}
 }

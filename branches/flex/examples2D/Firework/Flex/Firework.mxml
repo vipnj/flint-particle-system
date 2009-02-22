@@ -8,7 +8,6 @@
 	
 	<mx:Script>
 		<![CDATA[
-			import org.flintparticles.common.displayObjects.Dot;
 			import org.flintparticles.common.energyEasing.Quadratic;
 		]]>
 	</mx:Script>
@@ -28,7 +27,9 @@
 				<f:Velocity>
 					<f:DiscZone centerX="0" centerY="0" innerRadius="120" outerRadius="200"/>
 				</f:Velocity>
-				<f:SharedImage image="{new Dot(2)}"/>
+				<f:SharedImage>
+					<f:Dot radius="2"/>
+				</f:SharedImage>
 				<f:Lifetime lifetime="5"/>
 			</f:initializers>
 			<f:actions>

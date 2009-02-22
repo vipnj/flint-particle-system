@@ -34,6 +34,8 @@ package org.flintparticles.common.initializers
 	import org.flintparticles.common.particles.Particle;
 	import org.flintparticles.common.utils.WeightedArray;	
 
+	[DefaultProperty("initializers")]
+	
 	/**
 	 * The ChooseInitializer initializer selects one of multiple initializers, using 
 	 * optional weighting values to produce an uneven distribution for the choice, 
@@ -70,8 +72,19 @@ package org.flintparticles.common.initializers
 			init( initializers, weights );
 		}
 		
+		override public function addedToEmitter( emitter:Emitter ):void
+		{
+			if( _mxmlInitializers )
+			{
+				init( _mxmlInitializers, _mxmlWeights );
+				_mxmlInitializers = null;
+				_mxmlWeights = null;
+			}
+		}
+		
 		private function init( initializers:Array = null, weights:Array = null ):void
 		{
+			_initializers.clear();
 			var len:int = initializers.length;
 			var i:int;
 			if( weights != null && weights.length == len )
@@ -105,16 +118,27 @@ package org.flintparticles.common.initializers
 			_mxmlInitializers = value;
 			checkStartValues();
 		}
+		
 		public function set weights( value:Array ):void
 		{
-			_mxmlWeights = value;
+			if( value.length == 1 && value[0] is String )
+			{
+				_mxmlWeights = value[0].split( "," );
+			}
+			else
+			{
+				_mxmlWeights = value;
+			}
 			checkStartValues();
 		}
+		
 		private function checkStartValues():void
 		{
 			if( _mxmlInitializers && _mxmlWeights )
 			{
 				init( _mxmlInitializers, _mxmlWeights );
+				_mxmlInitializers = null;
+				_mxmlWeights = null;
 			}
 		}
 		

@@ -273,7 +273,7 @@
 	</target>
 
 	<target name="flex2D" description="Build Flex 2D examples">
-<!--				
+				
 		<exec executable="${flexsdk.dir}/bin/mxmlc.exe" failonerror="false">
 			<arg line='-source-path ../src'/>
 			<arg line='-debug=false'/>
@@ -363,7 +363,7 @@
 			<arg line='-output ../examples2D/Flocking/Flex/Flocking.swf'/>
 			<arg line='../examples2D/Flocking/Flex/Flocking.mxml'/>
 		</exec>
--->
+
 		<exec executable="${flexsdk.dir}/bin/mxmlc.exe" failonerror="false">
 			<arg line='-source-path ../src'/>
 			<arg line='-debug=false'/>
