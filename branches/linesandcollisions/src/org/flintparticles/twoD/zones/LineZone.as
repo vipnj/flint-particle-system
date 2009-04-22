@@ -55,7 +55,12 @@ package org.flintparticles.twoD.zones
 		{
 			_point1 = point1;
 			_point2 = point2;
-			_length = point2.subtract( point1 );
+			setLengthAndNormal();
+		}
+		
+		private function setLengthAndNormal():void
+		{
+			_length = _point2.subtract( _point1 );
 			var len:Number = _length.length;
 			_normal = new Point( _length.y / len, -_length.x / len );
 		}
@@ -71,7 +76,7 @@ package org.flintparticles.twoD.zones
 		public function set point1( value : Point ) : void
 		{
 			_point1 = value;
-			_length = point2.subtract( point1 );
+			setLengthAndNormal();
 		}
 
 		/**
@@ -85,7 +90,7 @@ package org.flintparticles.twoD.zones
 		public function set point2( value : Point ) : void
 		{
 			_point2 = value;
-			_length = point2.subtract( point1 );
+			setLengthAndNormal();
 		}
 
 		/**
@@ -100,11 +105,11 @@ package org.flintparticles.twoD.zones
 		public function contains( x:Number, y:Number ):Boolean
 		{
 			// not on line if dot product with perpendicular is not zero
-			if ( ( x - _point1.x ) * _normal.x + ( y - _point1.y ) * _normal.y != 0 )
+			if ( Math.abs( ( x - _point1.x ) * _normal.x + ( y - _point1.y ) * _normal.y ) > 0.01 )
 			{
 				return false;
 			}
-			// is it between the points, dot product of the vectors towards each point is negative
+			// is it between the points? dot product of the vectors towards each point is negative
 			return ( x - _point1.x ) * ( x - _point2.x ) + ( y - _point1.y ) * ( y - _point2.y ) <= 0;
 		}
 		

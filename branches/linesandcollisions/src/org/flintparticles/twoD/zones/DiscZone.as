@@ -32,12 +32,14 @@ package org.flintparticles.twoD.zones
 {
 	import flash.geom.Point;
 
+	import org.flintparticles.twoD.particles.Particle2D;	
+	
 	/**
 	 * The DiscZone zone defines a circular zone. The zone may
 	 * have a hole in the middle, like a doughnut.
 	 */
 
-	public class DiscZone implements Zone2D 
+	public class DiscZone implements Zone2D, InteractiveZone2D
 	{
 		private var _center:Point;
 		private var _innerRadius:Number;
@@ -154,6 +156,33 @@ package org.flintparticles.twoD.zones
 		public function getArea():Number
 		{
 			return Math.PI * ( _outerSq - _innerSq );
+		}
+		
+		public function collideParticle(particle:Particle2D, bounce:Number = 1):Boolean
+		{
+			var dx:Number = particle.x - _center.x;
+			if( Math.abs( dx ) > _outerRadius + particle.collisionRadius ) return false;
+			if( Math.abs( dx ) < _innerRadius - particle.collisionRadius ) return false;
+			var dy:Number = particle.y - _center.y;
+			if( Math.abs( dy ) > _outerRadius + particle.collisionRadius ) return false;
+			if( Math.abs( dy ) < _innerRadius - particle.collisionRadius ) return false;
+			var distanceSq:Number = dx * dx + dy * dy;
+			if( distanceSq > particle.collisionRadius * particle.collisionRadius )
+			{
+				return false;
+			}
+			var factor:Number = 1 / Math.sqrt( distanceSq );
+			dx *= factor;
+			dy *= factor;
+			var normalSpeed:Number = dx * particle.velX + dy * particle.velY;
+			if( normalSpeed < 0 ) // colliding, not separating
+			{
+				factor = ( 1 + bounce ) * normalSpeed;
+				particle.velX -= factor * dx;
+				particle.velY -= factor * dy;
+				return true;
+			}
+			return false;
 		}
 	}
 }

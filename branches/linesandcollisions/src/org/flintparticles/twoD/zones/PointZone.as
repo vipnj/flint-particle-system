@@ -106,10 +106,10 @@ package org.flintparticles.twoD.zones
 
 		public function collideParticle( particle:Particle2D, bounce:Number = 1 ):Boolean
 		{
-			var dx:Number = particle.x - point.x;
-			if( dx > particle.collisionRadius ) return false;
-			var dy:Number = particle.y - point.y;
-			if( dy > particle.collisionRadius ) return false;
+			var dx:Number = particle.x - _point.x;
+			if( Math.abs( dx ) > particle.collisionRadius ) return false;
+			var dy:Number = particle.y - _point.y;
+			if( Math.abs( dy ) > particle.collisionRadius ) return false;
 			var distanceSq:Number = dx * dx + dy * dy;
 			if( distanceSq > particle.collisionRadius * particle.collisionRadius )
 			{
