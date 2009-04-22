@@ -51,21 +51,21 @@ package org.flintparticles.common.emitters
 	 * time of the event it still exists so its properties (e.g. its location) can be
 	 * read from it.
 	 * 
-	 * @eventType org.flintparticles.common.events.FlintEvent.PARTICLE_DEAD
+	 * @eventType org.flintparticles.common.events.ParticleEvent.PARTICLE_DEAD
 	 */
 	[Event(name="particleDead", type="org.flintparticles.common.events.ParticleEvent")]
 
 	/**
 	 * Dispatched when a particle is created and has just been added to the emitter.
 	 * 
-	 * @eventType org.flintparticles.common.events.FlintEvent.PARTICLE_CREATED
+	 * @eventType org.flintparticles.common.events.ParticleEvent.PARTICLE_CREATED
 	 */
 	[Event(name="particleCreated", type="org.flintparticles.common.events.ParticleEvent")]
 
 	/**
 	 * Dispatched when a pre-existing particle is added to the emitter.
 	 * 
-	 * @eventType org.flintparticles.common.events.FlintEvent.PARTICLE_ADDED
+	 * @eventType org.flintparticles.common.events.ParticleEvent.PARTICLE_ADDED
 	 */
 	[Event(name="particleAdded", type="org.flintparticles.common.events.ParticleEvent")]
 
@@ -83,7 +83,7 @@ package org.flintparticles.common.emitters
 	 * @see pause();
 	 * @see stop();
 	 * 
-	 * @eventType org.flintparticles.common.events.FlintEvent.EMITTER_EMPTY
+	 * @eventType org.flintparticles.common.events.EmitterEvent.EMITTER_EMPTY
 	 */
 	[Event(name="emitterEmpty", type="org.flintparticles.common.events.EmitterEvent")]
 
@@ -91,9 +91,17 @@ package org.flintparticles.common.emitters
 	 * Dispatched when the particle system has updated and the state of the particles
 	 * has changed.
 	 * 
-	 * @eventType org.flintparticles.common.events.FlintEvent.EMITTER_UPDATED
+	 * @eventType org.flintparticles.common.events.EmitterEvent.EMITTER_UPDATED
 	 */
 	[Event(name="emitterUpdated", type="org.flintparticles.common.events.EmitterEvent")]
+
+	/**
+	 * Dispatched when the counter for the particle system has finished its cycle and so
+	 * the system will not emit any more particles unless the counter is changed or restarted.
+	 * 
+	 * @eventType org.flintparticles.common.events.EmitterEvent.COUNTER_COMPLETE
+	 */
+	[Event(name="counterComplete", type="org.flintparticles.common.events.EmitterEvent")]
 
 	/**
 	 * The Emitter class is the base class for the Emitter2D and Emitter3D classes.
@@ -173,6 +181,11 @@ package org.flintparticles.common.emitters
 		 * @private
 		 */
 		protected var _maximumFrameTime:Number = 0.1;
+		/**
+		 * Indicates if the emitter should dispatch a counterComplete event at the
+		 * end of teh next update cycle.
+		 */
+		protected var _dispatchCounterComplete:Boolean = false;
 
 		/**
 		 * The constructor creates an emitter.
@@ -451,6 +464,14 @@ package org.flintparticles.common.emitters
 		}
 		
 		/**
+		 * Used by counters to tell the emitter to dispatch a counter complete event.
+		 */
+		public function dispatchCounterComplete():void
+		{
+			_dispatchCounterComplete = true;
+		}
+		
+		/**
 		 * Indicates whether the emitter should manage its own internal update
 		 * tick. The internal update tick is tied to the frame rate and updates
 		 * the particle system every frame.
@@ -720,6 +741,11 @@ package org.flintparticles.common.emitters
 				dispatchEvent( new EmitterEvent( EmitterEvent.EMITTER_EMPTY ) );
 			}
 			dispatchEvent( new EmitterEvent( EmitterEvent.EMITTER_UPDATED ) );
+			if( _dispatchCounterComplete )
+			{
+				_dispatchCounterComplete = false;
+				dispatchEvent( new EmitterEvent( EmitterEvent.COUNTER_COMPLETE ) );
+			}
 		}
 		
 		/**

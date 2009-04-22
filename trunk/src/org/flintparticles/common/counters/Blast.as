@@ -31,7 +31,7 @@
 package org.flintparticles.common.counters
 {
 	import org.flintparticles.common.emitters.Emitter;	
-	
+
 	/**
 	 * The Blast counter causes the emitter to create a single burst of
 	 * particles when it starts and then emit no further particles.
@@ -40,6 +40,7 @@ package org.flintparticles.common.counters
 	public class Blast implements Counter
 	{
 		private var _startCount:uint;
+		private var _done:Boolean = false;
 		
 		/**
 		 * The constructor creates a Blast counter for use by an emitter. To
@@ -97,6 +98,7 @@ package org.flintparticles.common.counters
 		 */
 		public function startEmitter( emitter:Emitter ):uint
 		{
+			emitter.dispatchCounterComplete();
 			return _startCount;
 		}
 		
@@ -116,6 +118,14 @@ package org.flintparticles.common.counters
 		public function updateEmitter( emitter:Emitter, time:Number ):uint
 		{
 			return 0;
+		}
+		
+		/**
+		 * Indicates if the counter has emitted all its particles.
+		 */
+		public function get complete():Boolean
+		{
+			return _done;
 		}
 	}
 }

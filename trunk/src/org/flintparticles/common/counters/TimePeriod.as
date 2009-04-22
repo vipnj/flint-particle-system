@@ -163,6 +163,7 @@ package org.flintparticles.common.counters
 			
 			if( _timePassed >= _duration )
 			{
+				emitter.dispatchCounterComplete();
 				var newParticles:uint = _particles - _particlesPassed;
 				_particlesPassed = _particles;
 				return newParticles;
@@ -187,6 +188,14 @@ package org.flintparticles.common.counters
 		public function resume():void
 		{
 			_stop = false;
+		}
+
+		/**
+		 * Indicates if the counter has emitted all its particles.
+		 */
+		public function get complete():Boolean
+		{
+			return _particlesPassed == _particles;
 		}
 	}
 }

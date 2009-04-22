@@ -134,5 +134,14 @@ package org.flintparticles.common.counters
 			}
 			return count;
 		}
+
+		/**
+		 * Indicates if the counter has emitted all its particles. For this counter
+		 * this will always be false.
+		 */
+		public function get complete():Boolean
+		{
+			return false;
+		}
 	}
 }

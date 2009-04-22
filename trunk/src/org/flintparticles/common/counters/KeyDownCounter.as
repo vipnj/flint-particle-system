@@ -145,5 +145,13 @@ package org.flintparticles.common.counters
 			_stop = false;
 		}
 		
+
+		/**
+		 * Indicates if the counter has emitted all its particles.
+		 */
+		public function get complete():Boolean
+		{
+			return _counter.complete;
+		}
 	}
 }

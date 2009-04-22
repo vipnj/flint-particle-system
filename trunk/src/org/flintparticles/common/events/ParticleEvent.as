@@ -80,5 +80,17 @@ package org.flintparticles.common.events
 			super(type, bubbles, cancelable);
 			this.particle = particle;
 		}
+
+		/**
+		 * Creates a copy of this event.
+		 * 
+		 * @return The copy of this event.
+		 */
+		override public function clone():Event
+		{
+			var e:ParticleEvent = new ParticleEvent( type, particle, bubbles, cancelable );
+			e.otherObject = otherObject;
+			return e;
+		}
 	}
 }

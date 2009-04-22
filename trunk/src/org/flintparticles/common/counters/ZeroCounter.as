@@ -96,5 +96,14 @@ package org.flintparticles.common.counters
 		public function resume():void
 		{
 		}
+
+		/**
+		 * Indicates if the counter has emitted all its particles. For the ZeroCounter
+		 * this will always be true.
+		 */
+		public function get complete():Boolean
+		{
+			return true;
+		}
 	}
 }
