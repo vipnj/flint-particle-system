@@ -72,14 +72,18 @@ package org.flintparticles.common.counters
 		function updateEmitter( emitter:Emitter, time:Number ):uint;
 
 		/**
-		 * Stops the emitter from emitting particles
+		 * Stops the counter instructing the emitter to emit particles
 		 */
 		function stop():void;
 		
 		/**
-		 * Resumes the emitter after a stop
+		 * Resumes the counter after a stop
 		 */
 		function resume():void;
 		
+		/**
+		 * Indicates if the counter has emitted all its particles
+		 */
+		function get complete():Boolean;
 	}
 }

@@ -49,6 +49,12 @@ package org.flintparticles.common.events
 		 * this event to know when to redraw the particles.
 		 */
 		public static var EMITTER_UPDATED:String = "emitterUpdated";
+
+		/**
+		 * The event dispatched by an emitter when it's counter has completed it's full 
+		 * lifecycle and will not emit any further particles.
+		 */
+		public static var COUNTER_COMPLETE:String = "counterComplete";
 		
 		/**
 		 * The constructor creates a EmitterEvent object.

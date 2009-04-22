@@ -50,6 +50,7 @@ package org.flintparticles.common.utils
 	public class FrameUpdater extends EventDispatcher
 	{
 		private static var _instance:FrameUpdater;
+		
 		/**
 		 * This is a singleton instance. There's no requirement to use this singleton -
 		 * the constructor isn't private (or in any other way restricted) and nothing
@@ -69,6 +70,7 @@ package org.flintparticles.common.utils
 		
 		private var _shape:Shape;
 		private var _time:Number;
+		private var _running:Boolean = false;
 		
 		/**
 		 * The constructor creates an EmitterUpdater object.
@@ -76,8 +78,19 @@ package org.flintparticles.common.utils
 		public function FrameUpdater()
 		{
 			_shape = new Shape();
+		}
+		
+		private function startTimer():void
+		{
 			_shape.addEventListener( Event.ENTER_FRAME, frameUpdate, false, 0, true );
 			_time = getTimer();
+			_running = true;
+		}
+		
+		private function stopTimer():void
+		{
+			_shape.removeEventListener( Event.ENTER_FRAME, frameUpdate );
+			_running = false;
 		}
 
 		private function frameUpdate( ev:Event ):void
@@ -86,6 +99,25 @@ package org.flintparticles.common.utils
 			_time = getTimer();
 			var frameTime:Number = ( _time - oldTime ) * 0.001;
 			dispatchEvent( new UpdateEvent( UpdateEvent.UPDATE, frameTime ) );
+		}
+		
+		override public function addEventListener( type:String, listener:Function,
+			useCapture:Boolean = false, priority:int = 0, weakReference:Boolean = false ):void
+		{
+			super.addEventListener( type, listener, useCapture, priority, weakReference );
+			if( ! _running && hasEventListener( UpdateEvent.UPDATE ) )
+			{
+				startTimer();
+			}
+		}
+		
+		override public function removeEventListener( type:String, listener:Function, useCapture:Boolean = false ):void
+		{
+			super.removeEventListener( type, listener, useCapture );
+			if( _running && ! hasEventListener( UpdateEvent.UPDATE ) )
+			{
+				stopTimer();
+			}
 		}
 	}
 }

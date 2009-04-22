@@ -62,5 +62,15 @@ package org.flintparticles.common.events
 			super(type, bubbles, cancelable);
 			this.time = time;
 		}
+		
+		/**
+		 * Creates a copy of this event.
+		 * 
+		 * @return The copy of this event.
+		 */
+		override public function clone():Event
+		{
+			return new UpdateEvent( type, time, bubbles, cancelable );
+		}
 	}
 }
