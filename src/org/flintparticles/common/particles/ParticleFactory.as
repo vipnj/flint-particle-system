@@ -58,5 +58,10 @@ package org.flintparticles.common.particles
 		 * @param particle The particle to return for reuse.
 		 */
 		function disposeParticle( particle:Particle ):void;
+
+		/**
+		 * Clear all cached particles from the factory
+		 */
+		function clearAllParticles():void;
 	}
 }
