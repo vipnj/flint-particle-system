@@ -177,7 +177,7 @@ package org.flintparticles.threeD.renderers
 			{
 				var realUp:Vector3D = _direction.crossProduct( _track );
 				_spaceTransform = Matrix3D.newBasisTransform( _track.unit(), realUp.unit(), _direction.unit() );
-				_spaceTransform.prependTranslation( -_position.x, -_position.y, -_position.z );
+				_spaceTransform.prependTranslate( -_position.x, -_position.y, -_position.z );
 			}
 			return _spaceTransform;
 		}

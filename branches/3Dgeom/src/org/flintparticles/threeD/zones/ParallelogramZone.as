@@ -113,7 +113,7 @@ package org.flintparticles.threeD.zones
 			_normal = _side1.crossProduct( _side2 );
 			_distToOrigin = _normal.dotProduct( _corner.toVector3D() );
 			_basis = Matrix3D.newBasisTransform( _side1, _side2, _side1.crossProduct( _side2 ).normalize() );
-			_basis.prependTranslation( -_corner.x, -_corner.y, -_corner.z );
+			_basis.prependTranslate( -_corner.x, -_corner.y, -_corner.z );
 			_dirty = false;
 		}
 

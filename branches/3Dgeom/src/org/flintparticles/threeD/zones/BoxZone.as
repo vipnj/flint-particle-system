@@ -76,8 +76,8 @@ package org.flintparticles.threeD.zones
 		private function init():void
 		{
 			_transformFrom = Matrix3D.newBasisTransform( _upAxis.crossProduct( _depthAxis ), _upAxis, _depthAxis );
-			_transformFrom.appendTranslation( _center.x, _center.y, _center.z );
-			_transformFrom.prependTranslation( -_width/2, -_height/2, -_depth/2 );
+			_transformFrom.appendTranslate( _center.x, _center.y, _center.z );
+			_transformFrom.prependTranslate( -_width/2, -_height/2, -_depth/2 );
 			_transformTo = _transformFrom.inverse;
 			_dirty = false;
 		}

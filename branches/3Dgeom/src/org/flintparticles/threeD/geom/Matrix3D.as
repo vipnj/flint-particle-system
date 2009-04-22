@@ -69,7 +69,7 @@ package org.flintparticles.threeD.geom
 		 * 
 		 * @return The new matrix
 		 */
-		public static function newTranslation( x:Number, y:Number, z:Number ):Matrix3D
+		public static function newTranslate( x:Number, y:Number, z:Number ):Matrix3D
 		{
 			return new Matrix3D( [1,0,0,x,0,1,0,y,0,0,1,z,0,0,0,1] );
 		}
@@ -100,8 +100,8 @@ package org.flintparticles.threeD.geom
 			
 			if( pivotPoint )
 			{
-				rotate.prependTranslation( -pivotPoint.x, -pivotPoint.y, -pivotPoint.z );
-				rotate.appendTranslation( pivotPoint.x, pivotPoint.y, pivotPoint.z );
+				rotate.prependTranslate( -pivotPoint.x, -pivotPoint.y, -pivotPoint.z );
+				rotate.appendTranslate( pivotPoint.x, pivotPoint.y, pivotPoint.z );
 			}
 			return rotate;
 		}
@@ -488,9 +488,9 @@ package org.flintparticles.threeD.geom
 		 * 
 		 * @return A reference to this matrix
 		 */
-		public function appendTranslation( x:Number, y:Number, z:Number ):Matrix3D
+		public function appendTranslate( x:Number, y:Number, z:Number ):Matrix3D
 		{
-			return append( newTranslation( x, y, z ) );
+			return append( newTranslate( x, y, z ) );
 		}
 	
 		/**
@@ -601,9 +601,9 @@ package org.flintparticles.threeD.geom
 		 * 
 		 * @return A reference to this matrix
 		 */
-		public function prependTranslation( x:Number, y:Number, z:Number ):Matrix3D
+		public function prependTranslate( x:Number, y:Number, z:Number ):Matrix3D
 		{
-			return prepend( newTranslation( x, y, z ) );
+			return prepend( newTranslate( x, y, z ) );
 		}
 	
 		/**

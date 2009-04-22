@@ -172,7 +172,7 @@ package org.flintparticles.threeD.zones
 			_scaledWidth = _top.multiply( 1 / _bitmapData.width );
 			_scaledHeight = _left.multiply( 1 / _bitmapData.height );
 			_basis = Matrix3D.newBasisTransform( _scaledWidth, _scaledHeight, _top.crossProduct( _left ).normalize() );
-			_basis.prependTranslation( -_corner.x, -_corner.y, -_corner.z );
+			_basis.prependTranslate( -_corner.x, -_corner.y, -_corner.z );
 			_dirty = false;
 		}
 
