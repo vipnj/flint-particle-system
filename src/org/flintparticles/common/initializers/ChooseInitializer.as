@@ -79,12 +79,12 @@ package org.flintparticles.common.initializers
 			}
 		}
 		
-		public function addInitializer( initializer:Number, weight:Number = 1 ):void
+		public function addInitializer( initializer:Initializer, weight:Number = 1 ):void
 		{
 			_initializers.add( initializer, weight );
 		}
 		
-		public function removeInitializer( initializer:Number ):void
+		public function removeInitializer( initializer:Initializer ):void
 		{
 			_initializers.remove( initializer );
 		}
