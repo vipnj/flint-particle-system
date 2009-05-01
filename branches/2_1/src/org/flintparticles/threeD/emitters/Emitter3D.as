@@ -30,12 +30,13 @@
 
 package org.flintparticles.threeD.emitters
 {
+	import org.flintparticles.threeD.geom.Matrix3D;
+	import org.flintparticles.threeD.geom.Point3D;
+	import org.flintparticles.threeD.geom.Quaternion;
+	
 	import org.flintparticles.common.emitters.Emitter;
 	import org.flintparticles.common.particles.Particle;
 	import org.flintparticles.common.particles.ParticleFactory;
-	import org.flintparticles.threeD.geom.Matrix3D;
-	import org.flintparticles.threeD.geom.Quaternion;
-	import org.flintparticles.threeD.geom.Vector3D;
 	import org.flintparticles.threeD.particles.Particle3D;
 	import org.flintparticles.threeD.particles.ParticleCreator3D;	
 
@@ -72,7 +73,7 @@ package org.flintparticles.threeD.emitters
 		/**
 		 * @private
 		 */
-		protected var _position:Vector3D;
+		protected var _position:Point3D;
 		/**
 		 * @private
 		 */
@@ -105,7 +106,7 @@ package org.flintparticles.threeD.emitters
 		{
 			super();
 			_particleFactory = _creator;
-			_position = new Vector3D( 0, 0, 0, 1 );
+			_position = new Point3D( 0, 0, 0 );
 			_rotation = Quaternion.IDENTITY.clone();
 			_rotationTransform = Matrix3D.IDENTITY.clone();
 			_rotTransformRotation = Quaternion.IDENTITY.clone();
@@ -115,14 +116,13 @@ package org.flintparticles.threeD.emitters
 		 * Indicates the position of the Emitter instance relative to 
 		 * the local coordinate system of the Renderer.
 		 */
-		public function get position():Vector3D
+		public function get position():Point3D
 		{
 			return _position;
 		}
-		public function set position( value:Vector3D ):void
+		public function set position( value:Point3D ):void
 		{
 			_position = value;
-			_position.w = 1;
 		}
 		/**
 		 * Indicates the rotation of the Emitter instance relative to 

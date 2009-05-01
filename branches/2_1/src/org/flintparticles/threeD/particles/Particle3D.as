@@ -30,10 +30,12 @@
 
 package org.flintparticles.threeD.particles
 {
-	import org.flintparticles.common.particles.Particle;
-	import org.flintparticles.common.particles.ParticleFactory;
+	import org.flintparticles.threeD.geom.Point3D;
 	import org.flintparticles.threeD.geom.Quaternion;
-	import org.flintparticles.threeD.geom.Vector3D;	
+	import org.flintparticles.threeD.geom.Vector3D;
+	
+	import org.flintparticles.common.particles.Particle;
+	import org.flintparticles.common.particles.ParticleFactory;	
 
 	/**
 	 * The Particle3D class extends the Particle class to include state properties 
@@ -44,7 +46,7 @@ package org.flintparticles.threeD.particles
 		/**
 		 * The position of the particle (in the renderer's units).
 		 */
-		public var position:Vector3D;
+		public var position:Point3D;
 		/**
 		 * The velocity of the particle (in the renderer's units per second).
 		 */
@@ -93,7 +95,7 @@ package org.flintparticles.threeD.particles
 		/**
 		 * Position vector projected into screen space. Used by renderers.
 		 */
-		public var projectedPosition:Vector3D;
+		public var projectedPosition:Point3D;
 		
 		/**
 		 * z depth of particle in renderer's camera space
@@ -109,12 +111,12 @@ package org.flintparticles.threeD.particles
 		public function Particle3D()
 		{
 			super();
-			position = new Vector3D( 0, 0, 0, 1 );
-			projectedPosition = new Vector3D( 0, 0, 0, 1 );
-			faceAxis = new Vector3D( 1, 0, 0, 0 );
-			velocity = new Vector3D( 0, 0, 0, 0 );
+			position = new Point3D( 0, 0, 0 );
+			projectedPosition = new Point3D( 0, 0, 0 );
+			faceAxis = new Vector3D( 1, 0, 0 );
+			velocity = new Vector3D( 0, 0, 0 );
 			rotation = new Quaternion( 1, 0, 0, 0 );
-			angVelocity = new Vector3D( 0, 0, 0, 0 );
+			angVelocity = new Vector3D( 0, 0, 0 );
 		}
 		
 		/**
@@ -123,12 +125,12 @@ package org.flintparticles.threeD.particles
 		override public function initialize():void
 		{
 			super.initialize();
-			position.reset( 0, 0, 0, 1 );
-			projectedPosition.reset( 0, 0, 0, 1 );
-			faceAxis.reset( 1, 0, 0, 0 );
-			velocity.reset( 0, 0, 0, 0 );
-			rotation.reset( 1, 0, 0, 0 );
-			angVelocity.reset( 0, 0, 0, 0 );
+			position.reset( 0, 0, 0 );
+			projectedPosition.reset( 0, 0, 0 );
+			faceAxis.reset( 1, 0, 0 );
+			velocity.reset( 0, 0, 0 );
+			rotation.reset( 1, 0, 0 );
+			angVelocity.reset( 0, 0, 0 );
 			sortID = -1;
 			zDepth = 0;
 		}

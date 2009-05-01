@@ -30,11 +30,12 @@
 
 package org.flintparticles.threeD.actions 
 {
+	import org.flintparticles.threeD.geom.Vector3D;
+	
 	import org.flintparticles.common.actions.ActionBase;
 	import org.flintparticles.common.emitters.Emitter;
 	import org.flintparticles.common.particles.Particle;
 	import org.flintparticles.threeD.emitters.Emitter3D;
-	import org.flintparticles.threeD.geom.Vector3D;
 	import org.flintparticles.threeD.particles.Particle3D;	
 
 	/**
@@ -132,7 +133,7 @@ package org.flintparticles.threeD.actions
 			var distanceInv:Number;
 			var distanceSq:Number;
 			var factor:Number;
-			move.reset( 0, 0, 0, 0 );
+			move.reset( 0, 0, 0 );
 			for( i = p.sortID - 1; i >= 0; --i )
 			{
 				other = particles[sortedX[i]];

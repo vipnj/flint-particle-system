@@ -30,10 +30,11 @@
 
 package org.flintparticles.threeD.activities
 {
+	import org.flintparticles.threeD.geom.Vector3D;
+	
 	import org.flintparticles.common.activities.ActivityBase;
 	import org.flintparticles.common.emitters.Emitter;
-	import org.flintparticles.threeD.emitters.Emitter3D;
-	import org.flintparticles.threeD.geom.Vector3D;	
+	import org.flintparticles.threeD.emitters.Emitter3D;	
 
 	/**
 	 * The MoveEmitter activity moves the emitter at a constant velocity.
@@ -71,7 +72,6 @@ package org.flintparticles.threeD.activities
 		public function set velocity( value:Vector3D ):void
 		{
 			_vel = value.clone();
-			_vel.w = 0;
 		}
 		
 		/**
@@ -79,7 +79,8 @@ package org.flintparticles.threeD.activities
 		 */
 		override public function update( emitter : Emitter, time : Number ) : void
 		{
-			Emitter3D( emitter ).position.incrementBy( _temp.assign( _vel ).scaleBy( time ) );
+			_vel.multiply( time, _temp );
+			Emitter3D( emitter ).position.incrementBy( _temp );
 		}
 	}
 }

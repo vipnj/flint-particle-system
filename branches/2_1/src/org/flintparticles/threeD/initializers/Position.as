@@ -30,12 +30,13 @@
 
 package org.flintparticles.threeD.initializers 
 {
+	import org.flintparticles.threeD.geom.Point3D;
+	import org.flintparticles.threeD.geom.Quaternion;
+	
 	import org.flintparticles.common.emitters.Emitter;
 	import org.flintparticles.common.initializers.InitializerBase;
 	import org.flintparticles.common.particles.Particle;
 	import org.flintparticles.threeD.emitters.Emitter3D;
-	import org.flintparticles.threeD.geom.Quaternion;
-	import org.flintparticles.threeD.geom.Vector3D;
 	import org.flintparticles.threeD.particles.Particle3D;
 	import org.flintparticles.threeD.zones.Zone3D;	
 
@@ -87,13 +88,12 @@ package org.flintparticles.threeD.initializers
 		{
 			var p:Particle3D = Particle3D( particle );
 			var e:Emitter3D = Emitter3D( emitter );
-			var position:Vector3D = zone.getLocation();
-			position.w = 0;
+			var position:Point3D = zone.getLocation();
 			if( !e.rotation.equals( Quaternion.IDENTITY ) )
 			{
-				e.rotationTransform.transformVectorSelf( position );
+				e.rotationTransform.transformSelf( position );
 			}
-			p.position.incrementBy( position );
+			p.position.incrementBy( position.toVector3D() );
 		}
 	}
 }

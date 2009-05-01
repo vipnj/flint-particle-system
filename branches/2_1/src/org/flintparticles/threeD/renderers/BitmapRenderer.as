@@ -30,19 +30,21 @@
 
 package org.flintparticles.threeD.renderers
 {
+	import org.flintparticles.threeD.geom.Matrix3D;
+	import org.flintparticles.threeD.geom.Point3D;
+	import org.flintparticles.threeD.geom.Quaternion;
+	import org.flintparticles.threeD.geom.Vector3D;
+	
+	import org.flintparticles.common.renderers.SpriteRendererBase;
+	import org.flintparticles.threeD.particles.Particle3D;
+	
 	import flash.display.Bitmap;
 	import flash.display.BitmapData;
 	import flash.display.DisplayObject;
 	import flash.filters.BitmapFilter;
 	import flash.geom.Matrix;
 	import flash.geom.Point;
-	import flash.geom.Rectangle;
-	
-	import org.flintparticles.common.renderers.SpriteRendererBase;
-	import org.flintparticles.threeD.geom.Matrix3D;	
-	import org.flintparticles.threeD.geom.Quaternion;
-	import org.flintparticles.threeD.geom.Vector3D;
-	import org.flintparticles.threeD.particles.Particle3D;	
+	import flash.geom.Rectangle;	
 
 	/**
 	 * The BitmapRenderer is a native Flint 3D renderer that draws particles
@@ -313,7 +315,7 @@ package org.flintparticles.threeD.renderers
 			for( i = 0; i < len; ++i )
 			{
 				particle = particles[i];
-				particle.projectedPosition = transform.transformVector( particle.position );
+				particle.projectedPosition = transform.transform( particle.position ) as Point3D;
 				particle.zDepth = particle.projectedPosition.z;
 			}
 			if( _zSort )
@@ -355,7 +357,7 @@ package org.flintparticles.threeD.renderers
 		 */
 		protected function drawParticle( particle:Particle3D ):void
 		{
-			var pos:Vector3D = particle.projectedPosition;
+			var pos:Point3D = particle.projectedPosition;
 			if( pos.z < _camera.nearPlaneDistance || pos.z > _camera.farPlaneDistance )
 			{
 				return;
@@ -373,9 +375,9 @@ package org.flintparticles.threeD.renderers
 			else
 			{
 				var m:Matrix3D = particle.rotation.toMatrixTransformation();
-				facing = m.transformVector( particle.faceAxis );
+				facing = m.transform( particle.faceAxis ) as Vector3D;
 			}
-			transform.transformVectorSelf( facing );
+			transform.transformSelf( facing );
 			if( facing.x != 0 || facing.y != 0 )
 			{
 				rot = Math.atan2( -facing.y, facing.x );

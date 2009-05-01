@@ -30,12 +30,16 @@
 
 package org.flintparticles.threeD.renderers
 {
-	import flash.display.DisplayObject;
+	import org.flintparticles.threeD.geom.Matrix3D;
+	import org.flintparticles.threeD.geom.Point3D;
+	import org.flintparticles.threeD.geom.Quaternion;
+	import org.flintparticles.threeD.geom.Vector3D;
 	
 	import org.flintparticles.common.particles.Particle;
 	import org.flintparticles.common.renderers.SpriteRendererBase;
-	import org.flintparticles.threeD.geom.*;
-	import org.flintparticles.threeD.particles.Particle3D;	
+	import org.flintparticles.threeD.particles.Particle3D;
+	
+	import flash.display.DisplayObject;	
 
 	/**
 	 * The DisplayObjectRenderer is a native Flint 3D renderer that draws particles
@@ -123,7 +127,7 @@ package org.flintparticles.threeD.renderers
 		 */
 		override protected function renderParticles( particles:Array ):void
 		{
-			var pos:Vector3D = new Vector3D();
+			var pos:Point3D = new Point3D();
 			var transform:Matrix3D = _camera.transform;
 			var particle:Particle3D;
 			var img:DisplayObject;
@@ -133,7 +137,7 @@ package org.flintparticles.threeD.renderers
 			{
 				particle = particles[i];
 				img = particle.image;
-				transform.transformVectorOther( particle.position, pos );
+				transform.transform( particle.position, pos );
 				particle.zDepth = pos.z;
 				if( pos.z < _camera.nearPlaneDistance || pos.z > _camera.farPlaneDistance )
 				{
@@ -156,9 +160,9 @@ package org.flintparticles.threeD.renderers
 					else
 					{
 						var m:Matrix3D = particle.rotation.toMatrixTransformation();
-						facing = m.transformVector( particle.faceAxis );
+						facing = m.transform( particle.faceAxis ) as Vector3D;
 					}
-					transform.transformVectorSelf( facing );
+					transform.transformSelf( facing );
 					if( facing.x != 0 || facing.y != 0 )
 					{
 						var angle:Number = Math.atan2( -facing.y, facing.x );

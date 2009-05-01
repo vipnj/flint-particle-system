@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application
+	xmlns:mx="http://www.adobe.com/2006/mxml"
+	xmlns:fu="flexunit.flexui.*"
+	creationComplete="startTest()"
+	layout="absolute">
+
+	<mx:Script>
+		<![CDATA[
+			import org.flintparticles.threeD.geom.Point3DTest;
+			import org.flintparticles.threeD.geom.Vector3DTest;
+			import org.flintparticles.threeD.geom.Matrix3DTest;
+			
+			import flexunit.framework.TestSuite;
+			
+			// Create the test suite and run the tests
+			private function startTest():void
+			{
+				testRunner.test = createSuite();
+				testRunner.startTest();
+			}
+			
+			// Creates the test suite to run
+			private function createSuite():TestSuite
+			{
+				var testSuite:TestSuite = new TestSuite();
+
+				testSuite.addTestSuite( Point3DTest );
+				testSuite.addTestSuite( Vector3DTest );
+				testSuite.addTestSuite( Matrix3DTest );
+
+				return testSuite;
+			}	
+		]]>
+	</mx:Script>
+	
+	<fu:TestRunnerBase id="testRunner" width="100%" height="100%" />
+</mx:Application>

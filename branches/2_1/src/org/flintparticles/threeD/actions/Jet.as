@@ -30,10 +30,11 @@
 
 package org.flintparticles.threeD.actions 
 {
+	import org.flintparticles.threeD.geom.Vector3D;
+	
 	import org.flintparticles.common.actions.ActionBase;
 	import org.flintparticles.common.emitters.Emitter;
 	import org.flintparticles.common.particles.Particle;
-	import org.flintparticles.threeD.geom.Vector3D;
 	import org.flintparticles.threeD.particles.Particle3D;
 	import org.flintparticles.threeD.zones.Zone3D;	
 
@@ -81,7 +82,6 @@ package org.flintparticles.threeD.actions
 		public function set acceleration( value:Vector3D ):void
 		{
 			_acc = value.clone();
-			_acc.w = 0;
 		}
 		
 		/**

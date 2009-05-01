@@ -30,7 +30,8 @@
 
 package org.flintparticles.threeD.zones 
 {
-	import org.flintparticles.threeD.geom.Vector3D;		
+	import org.flintparticles.threeD.geom.Point3D;
+	import org.flintparticles.threeD.geom.Vector3D;			
 
 	/**
 	 * The LineZone zone defines a zone that contains all the points on a line.
@@ -38,8 +39,8 @@ package org.flintparticles.threeD.zones
 
 	public class LineZone implements Zone3D 
 	{
-		private var _point1:Vector3D;
-		private var _point2:Vector3D;
+		private var _point1:Point3D;
+		private var _point2:Point3D;
 		private var _length:Vector3D;
 		
 		/**
@@ -48,41 +49,37 @@ package org.flintparticles.threeD.zones
 		 * @param point1 The point at one end of the line.
 		 * @param point2 The point at the other end of the line.
 		 */
-		public function LineZone( point1:Vector3D, point2:Vector3D )
+		public function LineZone( point1:Point3D, point2:Point3D )
 		{
 			_point1 = point1;
-			_point1.w = 1;
 			_point2 = point2;
-			_point2.w = 1;
-			_length = point2.subtract( point1 );
+			_length = point1.vectorTo( point2 );
 		}
 		
 		/**
 		 * The point at one end of the line.
 		 */
-		public function get point1() : Vector3D
+		public function get point1() : Point3D
 		{
 			return _point1;
 		}
-		public function set point1( value : Vector3D ) : void
+		public function set point1( value : Point3D ) : void
 		{
 			_point1 = value;
-			_point1.w = 1;
-			_length = point2.subtract( point1 );
+			_length = _point1.vectorTo( _point2 );
 		}
 
 		/**
 		 * The point at the other end of the line.
 		 */
-		public function get point2() : Vector3D
+		public function get point2() : Point3D
 		{
 			return _point2;
 		}
-		public function set point2( value : Vector3D ) : void
+		public function set point2( value : Point3D ) : void
 		{
 			_point2 = value;
-			_point2.w = 1;
-			_length = point2.subtract( point1 );
+			_length = point1.vectorTo( point2 );
 		}
 
 		/**
@@ -94,15 +91,15 @@ package org.flintparticles.threeD.zones
 		 * @param y The y coordinate of the location to test for.
 		 * @return true if point is inside the zone, false if it is outside.
 		 */
-		public function contains( p:Vector3D ):Boolean
+		public function contains( p:Point3D ):Boolean
 		{
 			// is not on line through points if cross product is not zero
-			if( ! p.subtract( _point1 ).crossProduct( _length ).equals( Vector3D.ZERO ) )
+			if( ! _point1.vectorTo( p ).crossProduct( _length ).equals( Vector3D.ZERO ) )
 			{
 				return false;
 			}
 			// is not between points if dot product of line to each point is the same sign
-			return p.subtract( _point1 ).dotProduct( p.subtract( _point2 ) ) <= 0;
+			return _point1.vectorTo( p ).dotProduct( _point2.vectorTo( p ) ) <= 0;
 		}
 		
 		/**
@@ -112,7 +109,7 @@ package org.flintparticles.threeD.zones
 		 * 
 		 * @return a random point inside the zone.
 		 */
-		public function getLocation():Vector3D
+		public function getLocation():Point3D
 		{
 			return _point1.add( _length.multiply( Math.random() ) );
 		}

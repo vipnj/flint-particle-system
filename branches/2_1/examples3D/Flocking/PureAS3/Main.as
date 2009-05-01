@@ -32,7 +32,7 @@ package
 	import flash.display.Sprite;
 	
 	import org.flintparticles.threeD.emitters.Emitter3D;
-	import org.flintparticles.threeD.geom.Vector3D;
+	import org.flintparticles.threeD.geom.Point3D;
 	import org.flintparticles.threeD.renderers.*;
 	import org.flintparticles.threeD.renderers.controllers.OrbitCamera;	
 
@@ -53,8 +53,8 @@ package
 			renderer.addEmitter( emitter );
 			addChild( renderer );
 			
-			renderer.camera.position = new Vector3D( 0, 0, -400 );
-			renderer.camera.target = new Vector3D( 0, 0, 0 );
+			renderer.camera.position = new Point3D( 0, 0, -400 );
+			renderer.camera.target = new Point3D( 0, 0, 0 );
 			renderer.camera.projectionDistance = 400;
 			orbitter = new OrbitCamera( stage, renderer.camera );
 			orbitter.start();
