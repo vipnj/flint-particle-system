@@ -55,7 +55,7 @@ package org.flintparticles.threeD.actions
 		 * 
 		 * @param drag The amount of drag. A higher number produces a stronger drag force.
 		 */
-		public function LinearDrag( drag:Number )
+		public function LinearDrag( drag:Number = 0 )
 		{
 			this.drag = drag;
 		}

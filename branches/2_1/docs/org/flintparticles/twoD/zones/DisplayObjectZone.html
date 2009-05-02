@@ -79,7 +79,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
-<a class="signatureLink" href="#DisplayObjectZone()">DisplayObjectZone</a>(displayObject:DisplayObject, renderer:DisplayObject)</div>
+<a class="signatureLink" href="#DisplayObjectZone()">DisplayObjectZone</a>(displayObject:DisplayObject = null, renderer:DisplayObject = null)</div>
 <div class="summaryTableDescription">
    The constructor creates a DisplayObjectZone object.</div>
 </td><td class="summaryTableOwnerCol">DisplayObjectZone</td>
@@ -160,20 +160,20 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>public function DisplayObjectZone(displayObject:DisplayObject, renderer:DisplayObject)</code><p>
+<code>public function DisplayObjectZone(displayObject:DisplayObject = null, renderer:DisplayObject = null)</code><p>
    The constructor creates a DisplayObjectZone object.
    
    </p><span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
-<td width="20px"></td><td><code><span class="label">displayObject</span>:DisplayObject</code> &mdash; The DisplayObject that defines the zone.
+<td width="20px"></td><td><code><span class="label">displayObject</span>:DisplayObject</code> (default = <code>null</code>)<code></code> &mdash; The DisplayObject that defines the zone.
    </td>
 </tr>
 <tr>
 <td class="paramSpacer">&nbsp;</td>
 </tr>
 <tr>
-<td width="20px"></td><td><code><span class="label">renderer</span>:DisplayObject</code> &mdash; The renderer that you plan to use the zone with. The 
+<td width="20px"></td><td><code><span class="label">renderer</span>:DisplayObject</code> (default = <code>null</code>)<code></code> &mdash; The renderer that you plan to use the zone with. The 
    coordinates of the DisplayObject are translated to the local coordinate 
    space of the renderer.
    </td>
@@ -259,8 +259,8 @@ showHideInherited();
 <hr>
 <br>
 <p></p>
-<center class="copyright">&copy; Big Room Ventures Ltd. 2009</center>
+<center class="copyright">&copy; Richard Lord 2009</center>
 </div>
 </body>
 </html>
-<!--© Big Room Ventures Ltd. 2009-->
+<!--© Richard Lord 2009-->

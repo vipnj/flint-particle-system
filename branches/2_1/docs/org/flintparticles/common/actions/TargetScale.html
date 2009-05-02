@@ -87,7 +87,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
-<a class="signatureLink" href="#TargetScale()">TargetScale</a>(targetScale:Number, rate:Number = 0.1)</div>
+<a class="signatureLink" href="#TargetScale()">TargetScale</a>(targetScale:Number = 1, rate:Number = 0.1)</div>
 <div class="summaryTableDescription">
    The constructor creates a TargetScale action for use by an emitter.</div>
 </td><td class="summaryTableOwnerCol">TargetScale</td>
@@ -176,7 +176,7 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>public function TargetScale(targetScale:Number, rate:Number = 0.1)</code><p>
+<code>public function TargetScale(targetScale:Number = 1, rate:Number = 0.1)</code><p>
    The constructor creates a TargetScale action for use by an emitter. 
    To add a TargetScale to all particles created by an emitter, use the
    emitter's addAction method.
@@ -184,7 +184,7 @@ showHideInherited();
    </p><span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
-<td width="20px"></td><td><code><span class="label">targetScale</span>:Number</code> &mdash; The target scale for the particle. 1 is normal size.
+<td width="20px"></td><td><code><span class="label">targetScale</span>:Number</code> (default = <code>1</code>)<code></code> &mdash; The target scale for the particle. 1 is normal size.
    </td>
 </tr>
 <tr>
@@ -253,8 +253,8 @@ showHideInherited();
 <hr>
 <br>
 <p></p>
-<center class="copyright">&copy; Big Room Ventures Ltd. 2009</center>
+<center class="copyright">&copy; Richard Lord 2009</center>
 </div>
 </body>
 </html>
-<!--© Big Room Ventures Ltd. 2009-->
+<!--© Richard Lord 2009-->

@@ -56,7 +56,7 @@ package org.flintparticles.threeD.actions
 		 * @param driftX The maximum amount of horizontal drift in pixels per second.
 		 * @param driftY The maximum amount of vertical drift in pixels per second.
 		 */
-		public function RandomDrift( driftX:Number, driftY:Number, driftZ:Number )
+		public function RandomDrift( driftX:Number = 0, driftY:Number = 0, driftZ:Number = 0 )
 		{
 			this.driftX = driftX;
 			this.driftY = driftY;

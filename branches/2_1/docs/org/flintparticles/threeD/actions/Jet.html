@@ -92,7 +92,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
-<a class="signatureLink" href="#Jet()">Jet</a>(acceleration:<a href="../geom/Vector3D.html">Vector3D</a>, accelerationY:Number, zone:<a href="../zones/Zone3D.html">Zone3D</a>, invertZone:Boolean = false)</div>
+<a class="signatureLink" href="#Jet()">Jet</a>(acceleration:<a href="../geom/Vector3D.html">Vector3D</a> = null, accelerationY:Number = 0, zone:<a href="../zones/Zone3D.html">Zone3D</a> = null, invertZone:Boolean = false)</div>
 <div class="summaryTableDescription">
    The constructor creates a Jet action for use by 
    an emitter.</div>
@@ -199,7 +199,7 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>public function Jet(acceleration:<a href="../geom/Vector3D.html">Vector3D</a>, accelerationY:Number, zone:<a href="../zones/Zone3D.html">Zone3D</a>, invertZone:Boolean = false)</code><p>
+<code>public function Jet(acceleration:<a href="../geom/Vector3D.html">Vector3D</a> = null, accelerationY:Number = 0, zone:<a href="../zones/Zone3D.html">Zone3D</a> = null, invertZone:Boolean = false)</code><p>
    The constructor creates a Jet action for use by 
    an emitter. To add a Jet to all particles created by an emitter, use the
    emitter's addAction method.
@@ -207,7 +207,7 @@ showHideInherited();
    </p><span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
-<td width="20px"></td><td><code><span class="label">acceleration</span>:<a href="../geom/Vector3D.html">Vector3D</a></code> &mdash; The x coordinate of the acceleration to apply, in pixels 
+<td width="20px"></td><td><code><span class="label">acceleration</span>:<a href="../geom/Vector3D.html">Vector3D</a></code> (default = <code>null</code>)<code></code> &mdash; The x coordinate of the acceleration to apply, in pixels 
    per second per second.
    </td>
 </tr>
@@ -215,7 +215,7 @@ showHideInherited();
 <td class="paramSpacer">&nbsp;</td>
 </tr>
 <tr>
-<td width="20px"></td><td><code><span class="label">accelerationY</span>:Number</code> &mdash; The y coordinate of the acceleration to apply, in pixels 
+<td width="20px"></td><td><code><span class="label">accelerationY</span>:Number</code> (default = <code>0</code>)<code></code> &mdash; The y coordinate of the acceleration to apply, in pixels 
    per second per second.
    </td>
 </tr>
@@ -223,7 +223,7 @@ showHideInherited();
 <td class="paramSpacer">&nbsp;</td>
 </tr>
 <tr>
-<td width="20px"></td><td><code><span class="label">zone</span>:<a href="../zones/Zone3D.html">Zone3D</a></code> &mdash; The zone in which to apply the acceleration.
+<td width="20px"></td><td><code><span class="label">zone</span>:<a href="../zones/Zone3D.html">Zone3D</a></code> (default = <code>null</code>)<code></code> &mdash; The zone in which to apply the acceleration.
    </td>
 </tr>
 <tr>
@@ -284,8 +284,8 @@ showHideInherited();
 <hr>
 <br>
 <p></p>
-<center class="copyright">&copy; Big Room Ventures Ltd. 2009</center>
+<center class="copyright">&copy; Richard Lord 2009</center>
 </div>
 </body>
 </html>
-<!--© Big Room Ventures Ltd. 2009-->
+<!--© Richard Lord 2009-->

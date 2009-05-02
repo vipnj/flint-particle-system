@@ -66,7 +66,7 @@ package org.flintparticles.threeD.initializers
 		 * 
 		 * @see org.flintparticles.common.emitters.Emitter#addInitializer()
 		 */
-		public function RotateVelocity( axis : Vector3D, minAngVelocity:Number, maxAngVelocity:Number = NaN )
+		public function RotateVelocity( axis:Vector3D = null, minAngVelocity:Number = 0, maxAngVelocity:Number = NaN )
 		{
 			_axis = axis.unit();
 			_min = minAngVelocity;

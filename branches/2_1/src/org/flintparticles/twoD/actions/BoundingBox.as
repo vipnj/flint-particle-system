@@ -67,7 +67,7 @@ package org.flintparticles.twoD.actions
 		 * A value between 0 and 1 causes the particle to loose enegy in the collision. A value 
 		 * greater than 1 causes the particle to gain energy in the collision.
 		 */
-		public function BoundingBox( left:Number, top:Number, right:Number, bottom:Number, bounce:Number = 1 )
+		public function BoundingBox( left:Number = 0, top:Number = 0, right:Number = 0, bottom:Number = 0, bounce:Number = 1 )
 		{
 			_left = left;
 			_top = top;

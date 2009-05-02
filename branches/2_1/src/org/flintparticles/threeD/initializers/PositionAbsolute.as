@@ -61,7 +61,7 @@ package org.flintparticles.threeD.initializers
 		 * 
 		 * @see org.flintparticles.common.emitters.Emitter#addInitializer()
 		 */
-		public function PositionAbsolute( zone : Zone3D )
+		public function PositionAbsolute( zone : Zone3D = null )
 		{
 			_zone = zone;
 		}

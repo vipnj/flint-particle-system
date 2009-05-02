@@ -69,7 +69,7 @@ package org.flintparticles.threeD.initializers
 		 * 
 		 * @see org.flintparticles.common.emitters.Emitter#addInitializer()
 		 */
-		public function Velocity( zone:Zone3D )
+		public function Velocity( zone:Zone3D = null )
 		{
 			_zone = zone;
 		}

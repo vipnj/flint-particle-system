@@ -71,7 +71,7 @@ package org.flintparticles.twoD.actions
 		 * collision. A value greater than 1 causes the particle to gain energy 
 		 * in the collision.
 		 */
-		public function Collide( bounce:Number= 1 )
+		public function Collide( bounce:Number = 1 )
 		{
 			_bounce = bounce;
 			_maxDistance = 0;

@@ -102,7 +102,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
-<a class="signatureLink" href="#ApproachNeighbours()">ApproachNeighbours</a>(maxDistance:Number, acceleration:Number)</div>
+<a class="signatureLink" href="#ApproachNeighbours()">ApproachNeighbours</a>(maxDistance:Number = 0, acceleration:Number = 0)</div>
 <div class="summaryTableDescription">
    The constructor creates an ApproachNeighbours action for use by an emitter.</div>
 </td><td class="summaryTableOwnerCol">ApproachNeighbours</td>
@@ -194,7 +194,7 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>public function ApproachNeighbours(maxDistance:Number, acceleration:Number)</code><p>
+<code>public function ApproachNeighbours(maxDistance:Number = 0, acceleration:Number = 0)</code><p>
    The constructor creates an ApproachNeighbours action for use by an emitter. 
    To add an ApproachNeighbours to all particles created by an emitter, 
    use the emitter's addAction method.
@@ -202,7 +202,7 @@ showHideInherited();
    </p><span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
-<td width="20px"></td><td><code><span class="label">maxDistance</span>:Number</code> &mdash; The maximum distance, in pixels, over which this action 
+<td width="20px"></td><td><code><span class="label">maxDistance</span>:Number</code> (default = <code>0</code>)<code></code> &mdash; The maximum distance, in pixels, over which this action 
    operates. Particles further apart than this distance ignore each other.
    </td>
 </tr>
@@ -210,7 +210,7 @@ showHideInherited();
 <td class="paramSpacer">&nbsp;</td>
 </tr>
 <tr>
-<td width="20px"></td><td><code><span class="label">acceleration</span>:Number</code> &mdash; The size of the acceleration applied to approach the 
+<td width="20px"></td><td><code><span class="label">acceleration</span>:Number</code> (default = <code>0</code>)<code></code> &mdash; The size of the acceleration applied to approach the 
    other particles.
    </td>
 </tr>
@@ -324,8 +324,8 @@ showHideInherited();
 <hr>
 <br>
 <p></p>
-<center class="copyright">&copy; Big Room Ventures Ltd. 2009</center>
+<center class="copyright">&copy; Richard Lord 2009</center>
 </div>
 </body>
 </html>
-<!--© Big Room Ventures Ltd. 2009-->
+<!--© Richard Lord 2009-->

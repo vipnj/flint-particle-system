@@ -58,7 +58,7 @@ package org.flintparticles.threeD.actions
 		 * @param rate Adjusts how quickly the particle reaches the target velocity.
 		 * Larger numbers cause it to approach the target velocity more quickly.
 		 */
-		public function TargetVelocity( targetVelocity:Vector3D, rate:Number = 0.1 )
+		public function TargetVelocity( targetVelocity:Vector3D = null, rate:Number = 0.1 )
 		{
 			this.targetVelocity = targetVelocity;
 			this.rate = rate;

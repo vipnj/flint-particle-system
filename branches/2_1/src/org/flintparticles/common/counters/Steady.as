@@ -52,7 +52,7 @@ package org.flintparticles.common.counters
 		 * 
 		 * @see org.flintparticles.common.emitter.Emitter.counter
 		 */
-		public function Steady( rate:Number )
+		public function Steady( rate:Number = 0 )
 		{
 			_stop = false;
 			_rate = rate;

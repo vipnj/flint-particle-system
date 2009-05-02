@@ -53,7 +53,7 @@ package org.flintparticles.common.initializers
 		 * 
 		 * @see org.flintparticles.common.emitters.Emitter#addInitializer().
 		 */
-		public function CollisionRadiusInit( radius:Number )
+		public function CollisionRadiusInit( radius:Number= 1 )
 		{
 			_radius = radius;
 		}

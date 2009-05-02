@@ -62,7 +62,7 @@ package org.flintparticles.twoD.actions
 		 * they were this distance away. This stops the gravity effect blowing up 
 		 * as distances get small.
 		 */
-		public function MouseAntiGravity( power:Number, renderer:DisplayObject, epsilon:Number = 1 )
+		public function MouseAntiGravity( power:Number = 0, renderer:DisplayObject = null, epsilon:Number = 1 )
 		{
 			super( -power, renderer, epsilon );
 		}

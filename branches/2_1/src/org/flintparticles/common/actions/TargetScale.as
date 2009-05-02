@@ -56,7 +56,7 @@ package org.flintparticles.common.actions
 		 * @param rate Adjusts how quickly the particle reaches the target scale.
 		 * Larger numbers cause it to approach the target scale more quickly.
 		 */
-		public function TargetScale( targetScale:Number, rate:Number = 0.1 )
+		public function TargetScale( targetScale:Number= 1, rate:Number = 0.1 )
 		{
 			_scale = targetScale;
 			_rate = rate;

@@ -80,7 +80,7 @@ package org.flintparticles.twoD.actions
 		 * as if they were this distance away. This stops the explosion effect 
 		 * blowing up as distances get small.
 		 */
-		public function Explosion( power:Number, x:Number, y:Number, expansionRate:Number = 300, depth:Number = 10, epsilon:Number = 1 )
+		public function Explosion( power:Number = 0, x:Number = 0, y:Number = 0, expansionRate:Number = 300, depth:Number = 10, epsilon:Number = 1 )
 		{
 			_power = power * POWER_FACTOR;
 			_x = x;

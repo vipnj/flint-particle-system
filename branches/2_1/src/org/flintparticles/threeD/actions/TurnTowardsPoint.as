@@ -61,7 +61,7 @@ package org.flintparticles.threeD.actions
 		 * @param power The strength of the turn action. Higher values produce a sharper turn.
 		 * @param point The point towards which the particle turns.
 		 */
-		public function TurnTowardsPoint( point:Point3D, power:Number )
+		public function TurnTowardsPoint( point:Point3D = null, power:Number = 0 )
 		{
 			_power = power;
 			_point = point.clone();

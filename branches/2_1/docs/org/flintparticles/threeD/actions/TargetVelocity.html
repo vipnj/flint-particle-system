@@ -86,7 +86,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
-<a class="signatureLink" href="#TargetVelocity()">TargetVelocity</a>(targetVelocity:<a href="../geom/Vector3D.html">Vector3D</a>, rate:Number = 0.1)</div>
+<a class="signatureLink" href="#TargetVelocity()">TargetVelocity</a>(targetVelocity:<a href="../geom/Vector3D.html">Vector3D</a> = null, rate:Number = 0.1)</div>
 <div class="summaryTableDescription">
    The constructor creates a TargetVelocity action for use by 
    an emitter.</div>
@@ -176,7 +176,7 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>public function TargetVelocity(targetVelocity:<a href="../geom/Vector3D.html">Vector3D</a>, rate:Number = 0.1)</code><p>
+<code>public function TargetVelocity(targetVelocity:<a href="../geom/Vector3D.html">Vector3D</a> = null, rate:Number = 0.1)</code><p>
    The constructor creates a TargetVelocity action for use by 
    an emitter. To add a TargetVelocity to all particles created by an emitter, use the
    emitter's addAction method.
@@ -184,7 +184,7 @@ showHideInherited();
    </p><span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
-<td width="20px"></td><td><code><span class="label">targetVelocity</span>:<a href="../geom/Vector3D.html">Vector3D</a></code> &mdash; The x coordinate of the target velocity, in pixels per second.
+<td width="20px"></td><td><code><span class="label">targetVelocity</span>:<a href="../geom/Vector3D.html">Vector3D</a></code> (default = <code>null</code>)<code></code> &mdash; The x coordinate of the target velocity, in pixels per second.
    </td>
 </tr>
 <tr>
@@ -244,8 +244,8 @@ showHideInherited();
 <hr>
 <br>
 <p></p>
-<center class="copyright">&copy; Big Room Ventures Ltd. 2009</center>
+<center class="copyright">&copy; Richard Lord 2009</center>
 </div>
 </body>
 </html>
-<!--© Big Room Ventures Ltd. 2009-->
+<!--© Richard Lord 2009-->

@@ -84,7 +84,7 @@ package org.flintparticles.twoD.actions
 		 * a small epsilon ( ~1 ), but for stable visual effects a larger
 		 * epsilon (~100) is often better.
 		 */
-		public function GravityWell( power:Number, x:Number, y:Number, epsilon:Number = 100 )
+		public function GravityWell( power:Number = 0, x:Number = 0, y:Number = 0, epsilon:Number = 100 )
 		{
 			_power = power * _gravityConst;
 			_x = x;

@@ -132,5 +132,25 @@ package org.flintparticles.common.renderers
 		protected function renderParticles( particles:Array ):void
 		{
 		}
+
+		/**
+		 * The array of all emitters being rendered by this renderer.
+		 */
+		public function get emitters():Array
+		{
+			return _emitters;
+		}
+		public function set emitters( value:Array ):void
+		{
+			var e:Emitter;
+			for each( e in _emitters )
+			{
+				removeEmitter( e );
+			}
+			for each( e in value )
+			{
+				addEmitter( e );
+			}
+		}
 	}
 }

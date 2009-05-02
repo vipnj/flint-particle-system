@@ -68,19 +68,28 @@ package org.flintparticles.twoD.zones
 		 * direction (towards the graphical y axis). Angles are converted to a value between 0 
 		 * and two times PI.
 		 */
-		public function DiscSectorZone( center:Point, outerRadius:Number, innerRadius:Number, minAngle:Number, maxAngle:Number )
+		public function DiscSectorZone( center:Point = null, outerRadius:Number = 0, innerRadius:Number = 0, minAngle:Number = 0, maxAngle:Number = 0 )
 		{
 			if( outerRadius < innerRadius )
 			{
 				throw new Error( "The outerRadius (" + outerRadius + ") can't be smaller than the innerRadius (" + innerRadius + ") in your DiscSectorZone. N.B. the outerRadius is the second argument in the constructor and the innerRadius is the third argument." );
 			}
-			_center = center;
+			if( center == null )
+			{
+				_center = new Point( 0, 0 );
+			}
+			else
+			{
+				_center = center;
+			}
 			_innerRadius = innerRadius;
 			_outerRadius = outerRadius;
 			_innerSq = _innerRadius * _innerRadius;
 			_outerSq = _outerRadius * _outerRadius;
 			_minAngle = minAngle;
 			_maxAngle = maxAngle;
+			if( _maxAngle )
+			{
 			while ( _maxAngle > TWOPI )
 			{
 				_maxAngle -= TWOPI;
@@ -90,6 +99,8 @@ package org.flintparticles.twoD.zones
 				_maxAngle += TWOPI;
 			}
 			_minAllowed = _maxAngle - TWOPI;
+				if( _minAngle )
+				{
 			if ( minAngle == maxAngle )
 			{
 				_minAngle = _maxAngle;
@@ -99,9 +110,13 @@ package org.flintparticles.twoD.zones
 				_minAngle = clamp( _minAngle );
 			}
 		}
+			}
+		}
 		
 		private function clamp( angle:Number ):Number
 		{
+			if( _maxAngle )
+			{
 			while ( angle > _maxAngle )
 			{
 				angle -= TWOPI;
@@ -109,6 +124,7 @@ package org.flintparticles.twoD.zones
 			while ( angle < _minAllowed )
 			{
 				angle += TWOPI;
+			}
 			}
 			return angle;
 		}
@@ -124,6 +140,32 @@ package org.flintparticles.twoD.zones
 		public function set center( value : Point ) : void
 		{
 			_center = value;
+		}
+
+		/**
+		 * The x coordinate of the point that is the center of the disc.
+		 */
+		public function get centerX() : Number
+		{
+			return _center.x;
+		}
+
+		public function set centerX( value : Number ) : void
+		{
+			_center.x = value;
+		}
+
+		/**
+		 * The y coordinate of the point that is the center of the disc.
+		 */
+		public function get centerY() : Number
+		{
+			return _center.y;
+		}
+
+		public function set centerY( value : Number ) : void
+		{
+			_center.y = value;
 		}
 
 		/**
@@ -193,6 +235,7 @@ package org.flintparticles.twoD.zones
 				_maxAngle += TWOPI;
 			}
 			_minAllowed = _maxAngle - TWOPI;
+			_minAngle = clamp( _minAngle );
 		}
 
 		/**

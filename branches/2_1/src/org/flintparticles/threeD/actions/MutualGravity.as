@@ -67,7 +67,7 @@ package org.flintparticles.threeD.actions
 		 * since often only the closest other particles have a significant effect on the 
 		 * motion of a particle.
 		 */
-		public function MutualGravity( power:Number, maxDistance:Number, epsilon:Number = 1 )
+		public function MutualGravity( power:Number = 0, maxDistance:Number = 0, epsilon:Number = 1 )
 		{
 			this.power = power;
 			this.maxDistance = maxDistance;

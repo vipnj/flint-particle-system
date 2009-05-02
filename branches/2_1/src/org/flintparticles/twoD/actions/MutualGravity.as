@@ -70,7 +70,7 @@ package org.flintparticles.twoD.actions
 		 * they were this distance away. This stops the gravity effect blowing 
 		 * up as distances get small.
 		 */
-		public function MutualGravity( power:Number, maxDistance:Number, epsilon:Number = 1 )
+		public function MutualGravity( power:Number = 0, maxDistance:Number = 0, epsilon:Number = 1 )
 		{
 			_power = power * _gravityConst;
 			_maxDistance = maxDistance;

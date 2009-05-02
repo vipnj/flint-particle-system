@@ -34,6 +34,8 @@ package org.flintparticles.common.initializers
 	import org.flintparticles.common.particles.Particle;
 	import org.flintparticles.common.utils.WeightedArray;	
 
+	[DefaultProperty("initializers")]
+	
 	/**
 	 * The ChooseInitializer initializer selects one of multiple initializers, using 
 	 * optional weighting values to produce an uneven distribution for the choice, 
@@ -46,6 +48,8 @@ package org.flintparticles.common.initializers
 	public class ChooseInitializer extends InitializerBase
 	{
 		private var _initializers:WeightedArray;
+		private var _mxmlInitializers:Array;
+		private var _mxmlWeights:Array;
 		
 		/**
 		 * The constructor creates a ChooseInitializer initializer for use by 
@@ -58,9 +62,29 @@ package org.flintparticles.common.initializers
 		 * 
 		 * @see org.flintparticles.common.emitters.Emitter#addInitializer()
 		 */
-		public function ChooseInitializer( initializers:Array, weights:Array = null )
+		public function ChooseInitializer( initializers:Array = null, weights:Array = null )
 		{
-			_initializers = new WeightedArray;
+			_initializers = new WeightedArray();
+			if( initializers == null )
+			{
+				return;
+			}
+			init( initializers, weights );
+		}
+		
+		override public function addedToEmitter( emitter:Emitter ):void
+		{
+			if( _mxmlInitializers )
+			{
+				init( _mxmlInitializers, _mxmlWeights );
+				_mxmlInitializers = null;
+				_mxmlWeights = null;
+			}
+		}
+		
+		private function init( initializers:Array = null, weights:Array = null ):void
+		{
+			_initializers.clear();
 			var len:int = initializers.length;
 			var i:int;
 			if( weights != null && weights.length == len )
@@ -87,6 +111,35 @@ package org.flintparticles.common.initializers
 		public function removeInitializer( initializer:Initializer ):void
 		{
 			_initializers.remove( initializer );
+		}
+		
+		public function set initializers( value:Array ):void
+		{
+			_mxmlInitializers = value;
+			checkStartValues();
+		}
+		
+		public function set weights( value:Array ):void
+		{
+			if( value.length == 1 && value[0] is String )
+			{
+				_mxmlWeights = value[0].split( "," );
+			}
+			else
+			{
+				_mxmlWeights = value;
+			}
+			checkStartValues();
+		}
+		
+		private function checkStartValues():void
+		{
+			if( _mxmlInitializers && _mxmlWeights )
+			{
+				init( _mxmlInitializers, _mxmlWeights );
+				_mxmlInitializers = null;
+				_mxmlWeights = null;
+			}
 		}
 		
 		/**

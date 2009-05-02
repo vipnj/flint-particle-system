@@ -34,6 +34,8 @@ package org.flintparticles.common.initializers
 	import org.flintparticles.common.particles.Particle;
 	import org.flintparticles.common.utils.PriorityArray;	
 
+	[DefaultProperty("initializers")]
+	
 	/**
 	 * The InitializerGroup initializer collects a number of initializers into a single 
 	 * larger initializer that applies all the grouped initializers to a particle. It is
@@ -65,6 +67,28 @@ package org.flintparticles.common.initializers
 			_initializers = new PriorityArray();
 		}
 		
+		public function get initializers():Array
+		{
+			var a:Array;
+			for each( var initializer:Initializer in _initializers )
+			{
+				a.push( initializer );
+			}
+			return a;
+		}
+		public function set initializers( value:Array ):void
+		{
+			var initializer:Initializer;
+			for each( initializer in _initializers )
+			{
+				removeInitializer( initializer );
+			}
+			for each( initializer in value )
+			{
+				addInitializer( initializer );
+			}
+		}
+
 		public function addInitializer( initializer:Initializer, priority:Number = NaN ):void
 		{
 			if( isNaN( priority ) )
@@ -75,6 +99,14 @@ package org.flintparticles.common.initializers
 			if( _emitter )
 			{
 				initializer.addedToEmitter( _emitter );
+			}
+		}
+		
+		public function removeInitializer( initializer:Initializer ):void
+		{
+			if( _initializers.remove( initializer ) )
+			{
+				initializer.removedFromEmitter( _emitter );
 			}
 		}
 		

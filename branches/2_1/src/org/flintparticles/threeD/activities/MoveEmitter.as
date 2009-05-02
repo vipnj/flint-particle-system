@@ -56,7 +56,7 @@ package org.flintparticles.threeD.activities
 		 * @param y The y coordinate of the velocity to move the emitter, 
 		 * in pixels per second.
 		 */
-		public function MoveEmitter( velocity:Vector3D )
+		public function MoveEmitter( velocity:Vector3D = null )
 		{
 			this.velocity = velocity.clone();
 		}

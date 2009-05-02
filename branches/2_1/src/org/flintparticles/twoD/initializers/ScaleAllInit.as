@@ -66,7 +66,7 @@ package org.flintparticles.twoD.initializers
 		 * 
 		 * @see org.flintparticles.common.emitters.Emitter#addInitializer().
 		 */
-		public function ScaleAllInit( minScale:Number, maxScale:Number = NaN )
+		public function ScaleAllInit( minScale:Number = 1, maxScale:Number = NaN )
 		{
 			_min = minScale;
 			if( isNaN( maxScale ) )

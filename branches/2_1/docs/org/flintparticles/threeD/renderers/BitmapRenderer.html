@@ -4,7 +4,7 @@
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="../../../../style.css" type="text/css" media="screen">
 <link rel="stylesheet" href="../../../../print.css" type="text/css" media="print">
-<meta content="BitmapRenderer,org.flintparticles.threeD.renderers.BitmapRenderer,ZERO_POINT,toDegrees,camera,canvas,zSort,addFilter,clearPaletteMap,createBitmap,drawParticle,removeFilter,renderParticles,setPaletteMap" name="keywords">
+<meta content="BitmapRenderer,org.flintparticles.threeD.renderers.BitmapRenderer,ZERO_POINT,toDegrees,camera,canvas,smoothing,zSort,addFilter,clearPaletteMap,createBitmap,drawParticle,removeFilter,renderParticles,setPaletteMap" name="keywords">
 <title>org.flintparticles.threeD.renderers.BitmapRenderer</title>
 </head>
 <body>
@@ -103,8 +103,13 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 </td><td class="summaryTableOwnerCol">BitmapRenderer</td>
 </tr>
 <tr class="hideInheritedProperty">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol"><a class="signatureLink" href="../../common/renderers/SpriteRendererBase.html#emitters">emitters</a> : Array<div class="summaryTableDescription"></div>
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol"><a class="signatureLink" href="../../common/renderers/SpriteRendererBase.html#emitters">emitters</a> : Array<div class="summaryTableDescription">
+   The array of all emitters being rendered by this renderer.</div>
 </td><td class="summaryTableOwnerCol"><a href="../../common/renderers/SpriteRendererBase.html">SpriteRendererBase</a></td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#smoothing">smoothing</a> : Boolean<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">BitmapRenderer</td>
 </tr>
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#zSort">zSort</a> : Boolean<div class="summaryTableDescription">
@@ -303,6 +308,20 @@ showHideInherited();
 <code>&nbsp;&nbsp;&nbsp;&nbsp;public function get canvas():Rectangle</code>
 <br>
 <code>&nbsp;&nbsp;&nbsp;&nbsp;public function set canvas(value:Rectangle):void</code>
+<br>
+</div>
+<a name="smoothing"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">smoothing</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>smoothing:Boolean</code>&nbsp;&nbsp;[read-write]<span class="label">Implementation</span>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function get smoothing():Boolean</code>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function set smoothing(value:Boolean):void</code>
 <br>
 </div>
 <a name="toDegrees"></a>
@@ -550,8 +569,8 @@ showHideInherited();
 <hr>
 <br>
 <p></p>
-<center class="copyright">&copy; Big Room Ventures Ltd. 2009</center>
+<center class="copyright">&copy; Richard Lord 2009</center>
 </div>
 </body>
 </html>
-<!--© Big Room Ventures Ltd. 2009-->
+<!--© Richard Lord 2009-->

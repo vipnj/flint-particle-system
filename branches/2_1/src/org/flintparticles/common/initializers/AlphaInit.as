@@ -59,7 +59,7 @@ package org.flintparticles.common.initializers
 		 * 
 		 * @see org.flintparticles.common.emitters.Emitter#addInitializer().
 		 */
-		public function AlphaInit( minAlpha:Number, maxAlpha:Number = NaN )
+		public function AlphaInit( minAlpha:Number= 1, maxAlpha:Number = NaN )
 		{
 			_min = minAlpha;
 			if( isNaN( maxAlpha ) )

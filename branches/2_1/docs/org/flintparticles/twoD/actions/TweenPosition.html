@@ -97,7 +97,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
-<a class="signatureLink" href="#TweenPosition()">TweenPosition</a>(startX:Number, startY:Number, endX:Number, endY:Number)</div>
+<a class="signatureLink" href="#TweenPosition()">TweenPosition</a>(startX:Number = 0, startY:Number = 0, endX:Number = 0, endY:Number = 0)</div>
 <div class="summaryTableDescription">
    The constructor creates a TweenPosition action for use by an emitter.</div>
 </td><td class="summaryTableOwnerCol">TweenPosition</td>
@@ -216,7 +216,7 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>public function TweenPosition(startX:Number, startY:Number, endX:Number, endY:Number)</code><p>
+<code>public function TweenPosition(startX:Number = 0, startY:Number = 0, endX:Number = 0, endY:Number = 0)</code><p>
    The constructor creates a TweenPosition action for use by an emitter. 
    To add a TweenPosition to all particles created by an emitter, use the
    emitter's addAction method.
@@ -224,28 +224,28 @@ showHideInherited();
    </p><span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
-<td width="20px"></td><td><code><span class="label">startX</span>:Number</code> &mdash; The x value for the particle's position when its energy is 1.
+<td width="20px"></td><td><code><span class="label">startX</span>:Number</code> (default = <code>0</code>)<code></code> &mdash; The x value for the particle's position when its energy is 1.
    </td>
 </tr>
 <tr>
 <td class="paramSpacer">&nbsp;</td>
 </tr>
 <tr>
-<td width="20px"></td><td><code><span class="label">startY</span>:Number</code> &mdash; The y value for the particle's position when its energy is 1.
+<td width="20px"></td><td><code><span class="label">startY</span>:Number</code> (default = <code>0</code>)<code></code> &mdash; The y value for the particle's position when its energy is 1.
    </td>
 </tr>
 <tr>
 <td class="paramSpacer">&nbsp;</td>
 </tr>
 <tr>
-<td width="20px"></td><td><code><span class="label">endX</span>:Number</code> &mdash; The x value of the particle's position when its energy is 0.
+<td width="20px"></td><td><code><span class="label">endX</span>:Number</code> (default = <code>0</code>)<code></code> &mdash; The x value of the particle's position when its energy is 0.
    </td>
 </tr>
 <tr>
 <td class="paramSpacer">&nbsp;</td>
 </tr>
 <tr>
-<td width="20px"></td><td><code><span class="label">endY</span>:Number</code> &mdash; The y value of the particle's position when its energy is 0.
+<td width="20px"></td><td><code><span class="label">endY</span>:Number</code> (default = <code>0</code>)<code></code> &mdash; The y value of the particle's position when its energy is 0.
    </td>
 </tr>
 </table>
@@ -305,8 +305,8 @@ showHideInherited();
 <hr>
 <br>
 <p></p>
-<center class="copyright">&copy; Big Room Ventures Ltd. 2009</center>
+<center class="copyright">&copy; Richard Lord 2009</center>
 </div>
 </body>
 </html>
-<!--© Big Room Ventures Ltd. 2009-->
+<!--© Richard Lord 2009-->

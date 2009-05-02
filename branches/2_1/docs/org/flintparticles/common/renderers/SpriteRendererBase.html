@@ -68,7 +68,8 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <th>&nbsp;</th><th colspan="2">Property</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
 </tr>
 <tr class="">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#emitters">emitters</a> : Array<div class="summaryTableDescription">[read-only]</div>
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#emitters">emitters</a> : Array<div class="summaryTableDescription">
+   The array of all emitters being rendered by this renderer.</div>
 </td><td class="summaryTableOwnerCol">SpriteRendererBase</td>
 </tr>
 </table>
@@ -157,9 +158,13 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>emitters:Array</code>&nbsp;&nbsp;[read-only]<span class="label">Implementation</span>
+<code>emitters:Array</code>&nbsp;&nbsp;[read-write]<p>
+   The array of all emitters being rendered by this renderer.
+   </p><span class="label">Implementation</span>
 <br>
 <code>&nbsp;&nbsp;&nbsp;&nbsp;public function get emitters():Array</code>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function set emitters(value:Array):void</code>
 <br>
 </div>
 <a name="constructorDetail"></a>
@@ -280,8 +285,8 @@ showHideInherited();
 <hr>
 <br>
 <p></p>
-<center class="copyright">&copy; Big Room Ventures Ltd. 2009</center>
+<center class="copyright">&copy; Richard Lord 2009</center>
 </div>
 </body>
 </html>
-<!--© Big Room Ventures Ltd. 2009-->
+<!--© Richard Lord 2009-->

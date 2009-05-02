@@ -56,7 +56,7 @@ package org.flintparticles.twoD.zones
 		 * coordinates of the DisplayObject are translated to the local coordinate 
 		 * space of the renderer.
 		 */
-		public function DisplayObjectZone( displayObject : DisplayObject, renderer : DisplayObject )
+		public function DisplayObjectZone( displayObject : DisplayObject = null, renderer : DisplayObject = null )
 		{
 			_displayObject = displayObject;
 			_renderer = renderer;
@@ -65,6 +65,11 @@ package org.flintparticles.twoD.zones
 			
 		private function calculateArea():void
 		{
+			if( ! _displayObject )
+			{
+				return;
+			}
+			
 			var bounds:Rectangle = _displayObject.getBounds( _displayObject.stage );
 			
 			_area = 0;

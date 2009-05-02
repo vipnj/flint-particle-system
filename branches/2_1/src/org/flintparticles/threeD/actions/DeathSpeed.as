@@ -59,7 +59,7 @@ package org.flintparticles.threeD.actions
 		 * are killed, otherwise particles travelling faster than the speed limit are
 		 * killed.
 		 */
-		public function DeathSpeed( speed:Number, isMinimum:Boolean = false )
+		public function DeathSpeed( speed:Number = Number.MAX_VALUE, isMinimum:Boolean = false )
 		{
 			this.speed = speed;
 			this.isMinimum = isMinimum;

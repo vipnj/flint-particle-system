@@ -60,7 +60,7 @@ package org.flintparticles.common.initializers
 		 * 
 		 * @see Emitter.addInitializer.
 		 */
-		public function Lifetime( minLifetime:Number, maxLifetime:Number = NaN )
+		public function Lifetime( minLifetime:Number = Number.MAX_VALUE, maxLifetime:Number = NaN )
 		{
 			_max = maxLifetime;
 			_min = minLifetime;

@@ -66,7 +66,7 @@ package org.flintparticles.threeD.actions
 		 * @param endY The y value of the particle at the end of its
 		 * life.
 		 */
-		public function TweenPosition( start:Point3D, end:Point3D )
+		public function TweenPosition( start:Point3D = null, end:Point3D = null )
 		{
 			_diff = end.vectorTo( start );
 			_end = end.clone();

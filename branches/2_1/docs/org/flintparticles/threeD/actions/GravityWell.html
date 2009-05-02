@@ -65,7 +65,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 </td><td class="summaryTableOwnerCol">GravityWell</td>
 </tr>
 <tr class="">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#position">position</a> : <a href="../geom/Vector3D.html">Vector3D</a>
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#position">position</a> : <a href="../geom/Point3D.html">Point3D</a>
 <div class="summaryTableDescription">
    The x coordinate of the center of the gravity force.</div>
 </td><td class="summaryTableOwnerCol">GravityWell</td>
@@ -95,7 +95,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
-<a class="signatureLink" href="#GravityWell()">GravityWell</a>(power:Number, position:<a href="../geom/Vector3D.html">Vector3D</a>, epsilon:Number = 100)</div>
+<a class="signatureLink" href="#GravityWell()">GravityWell</a>(power:Number = 0, position:<a href="../geom/Point3D.html">Point3D</a> = null, epsilon:Number = 100)</div>
 <div class="summaryTableDescription">
    The constructor creates a GravityWell action for use by 
    an emitter.</div>
@@ -169,13 +169,13 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>position:<a href="../geom/Vector3D.html">Vector3D</a></code>&nbsp;&nbsp;[read-write]<p>
+<code>position:<a href="../geom/Point3D.html">Point3D</a></code>&nbsp;&nbsp;[read-write]<p>
    The x coordinate of the center of the gravity force.
    </p><span class="label">Implementation</span>
 <br>
-<code>&nbsp;&nbsp;&nbsp;&nbsp;public function get position():<a href="../geom/Vector3D.html">Vector3D</a></code>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function get position():<a href="../geom/Point3D.html">Point3D</a></code>
 <br>
-<code>&nbsp;&nbsp;&nbsp;&nbsp;public function set position(value:<a href="../geom/Vector3D.html">Vector3D</a>):void</code>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function set position(value:<a href="../geom/Point3D.html">Point3D</a>):void</code>
 <br>
 </div>
 <a name="power"></a>
@@ -203,7 +203,7 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>public function GravityWell(power:Number, position:<a href="../geom/Vector3D.html">Vector3D</a>, epsilon:Number = 100)</code><p>
+<code>public function GravityWell(power:Number = 0, position:<a href="../geom/Point3D.html">Point3D</a> = null, epsilon:Number = 100)</code><p>
    The constructor creates a GravityWell action for use by 
    an emitter. To add a GravityWell to all particles created by an emitter, use the
    emitter's addAction method.
@@ -211,14 +211,14 @@ showHideInherited();
    </p><span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
-<td width="20px"></td><td><code><span class="label">power</span>:Number</code> &mdash; The strength of the force - larger numbers produce a stringer force.
+<td width="20px"></td><td><code><span class="label">power</span>:Number</code> (default = <code>0</code>)<code></code> &mdash; The strength of the force - larger numbers produce a stringer force.
    </td>
 </tr>
 <tr>
 <td class="paramSpacer">&nbsp;</td>
 </tr>
 <tr>
-<td width="20px"></td><td><code><span class="label">position</span>:<a href="../geom/Vector3D.html">Vector3D</a></code> &mdash; The x coordinate of the point towards which the force draws the particles.
+<td width="20px"></td><td><code><span class="label">position</span>:<a href="../geom/Point3D.html">Point3D</a></code> (default = <code>null</code>)<code></code> &mdash; The x coordinate of the point towards which the force draws the particles.
    </td>
 </tr>
 <tr>
@@ -278,8 +278,8 @@ showHideInherited();
 <hr>
 <br>
 <p></p>
-<center class="copyright">&copy; Big Room Ventures Ltd. 2009</center>
+<center class="copyright">&copy; Richard Lord 2009</center>
 </div>
 </body>
 </html>
-<!--© Big Room Ventures Ltd. 2009-->
+<!--© Richard Lord 2009-->

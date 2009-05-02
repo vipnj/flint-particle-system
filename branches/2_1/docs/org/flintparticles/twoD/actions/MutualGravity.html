@@ -94,7 +94,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
-<a class="signatureLink" href="#MutualGravity()">MutualGravity</a>(power:Number, maxDistance:Number, epsilon:Number = 1)</div>
+<a class="signatureLink" href="#MutualGravity()">MutualGravity</a>(power:Number = 0, maxDistance:Number = 0, epsilon:Number = 1)</div>
 <div class="summaryTableDescription">
    The constructor creates a MutualGravity action for use by an emitter.</div>
 </td><td class="summaryTableOwnerCol">MutualGravity</td>
@@ -208,7 +208,7 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>public function MutualGravity(power:Number, maxDistance:Number, epsilon:Number = 1)</code><p>
+<code>public function MutualGravity(power:Number = 0, maxDistance:Number = 0, epsilon:Number = 1)</code><p>
    The constructor creates a MutualGravity action for use by an emitter. 
    To add a MutualGravity to all particles created by an emitter, use the
    emitter's addAction method.
@@ -216,7 +216,7 @@ showHideInherited();
    </p><span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
-<td width="20px"></td><td><code><span class="label">power</span>:Number</code> &mdash; The strength of the gravitational pull between the 
+<td width="20px"></td><td><code><span class="label">power</span>:Number</code> (default = <code>0</code>)<code></code> &mdash; The strength of the gravitational pull between the 
    particles.
    </td>
 </tr>
@@ -224,7 +224,7 @@ showHideInherited();
 <td class="paramSpacer">&nbsp;</td>
 </tr>
 <tr>
-<td width="20px"></td><td><code><span class="label">maxDistance</span>:Number</code> &mdash; The maximum distance between particles for the 
+<td width="20px"></td><td><code><span class="label">maxDistance</span>:Number</code> (default = <code>0</code>)<code></code> &mdash; The maximum distance between particles for the 
    gravitational effect to be calculated. You can sometimes speed up 
    the calculation of this action by 
    reducing the maxDistance since often only the closest other particles 
@@ -351,8 +351,8 @@ showHideInherited();
 <hr>
 <br>
 <p></p>
-<center class="copyright">&copy; Big Room Ventures Ltd. 2009</center>
+<center class="copyright">&copy; Richard Lord 2009</center>
 </div>
 </body>
 </html>
-<!--© Big Room Ventures Ltd. 2009-->
+<!--© Richard Lord 2009-->

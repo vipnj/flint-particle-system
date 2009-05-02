@@ -58,7 +58,7 @@ package org.flintparticles.threeD.actions
 		 * @param rate Adjusts how quickly the particle reaches the target angular velocity.
 		 * Larger numbers cause it to approach the target angular velocity more quickly.
 		 */
-		public function TargetRotateVelocity( axis:Vector3D, angVelocity:Number, rate:Number = 0.1 )
+		public function TargetRotateVelocity( axis:Vector3D = null, angVelocity:Number = 0, rate:Number = 0.1 )
 		{
 			_vel = axis.unit().scaleBy( angVelocity );
 			_rate = rate;

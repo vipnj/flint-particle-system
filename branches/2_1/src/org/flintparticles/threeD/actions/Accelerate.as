@@ -57,7 +57,7 @@ package org.flintparticles.threeD.actions
 		 * @param acceleration The acceleration to apply, in pixels 
 		 * per second per second.
 		 */
-		public function Accelerate( acceleration:Vector3D )
+		public function Accelerate( acceleration:Vector3D = null )
 		{
 			_temp = new Vector3D();
 			this.acceleration = acceleration;

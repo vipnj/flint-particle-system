@@ -55,7 +55,7 @@ package org.flintparticles.twoD.activities
 		 * 
 		 * @see org.flintparticles.common.emitters.Emitter#addActivity()
 		 */
-		public function FollowMouse( renderer:DisplayObject )
+		public function FollowMouse( renderer:DisplayObject = null )
 		{
 			_renderer = renderer;
 		}

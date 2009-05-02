@@ -79,7 +79,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
-<a class="signatureLink" href="#MassInit()">MassInit</a>(mass:Number)</div>
+<a class="signatureLink" href="#MassInit()">MassInit</a>(mass:Number = 1)</div>
 <div class="summaryTableDescription">
    The constructor creates a MassInit initializer for use by 
    an emitter.</div>
@@ -154,7 +154,7 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>public function MassInit(mass:Number)</code><p>
+<code>public function MassInit(mass:Number = 1)</code><p>
    The constructor creates a MassInit initializer for use by 
    an emitter. To add a MassInit to all particles created by an emitter, use the
    emitter's addInitializer method.
@@ -162,7 +162,7 @@ showHideInherited();
    </p><span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
-<td width="20px"></td><td><code><span class="label">mass</span>:Number</code> &mdash; the mass for particles
+<td width="20px"></td><td><code><span class="label">mass</span>:Number</code> (default = <code>1</code>)<code></code> &mdash; the mass for particles
    initialized by the instance.
    
    </td>
@@ -207,8 +207,8 @@ showHideInherited();
 <hr>
 <br>
 <p></p>
-<center class="copyright">&copy; Big Room Ventures Ltd. 2009</center>
+<center class="copyright">&copy; Richard Lord 2009</center>
 </div>
 </body>
 </html>
-<!--© Big Room Ventures Ltd. 2009-->
+<!--© Richard Lord 2009-->

@@ -87,7 +87,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
-<a class="signatureLink" href="#DeathZone()">DeathZone</a>(zone:<a href="../zones/Zone3D.html">Zone3D</a>, zoneIsSafe:Boolean = false)</div>
+<a class="signatureLink" href="#DeathZone()">DeathZone</a>(zone:<a href="../zones/Zone3D.html">Zone3D</a> = null, zoneIsSafe:Boolean = false)</div>
 <div class="summaryTableDescription">
    The constructor creates a DeathZone action for use by an emitter.</div>
 </td><td class="summaryTableOwnerCol">DeathZone</td>
@@ -177,7 +177,7 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>public function DeathZone(zone:<a href="../zones/Zone3D.html">Zone3D</a>, zoneIsSafe:Boolean = false)</code><p>
+<code>public function DeathZone(zone:<a href="../zones/Zone3D.html">Zone3D</a> = null, zoneIsSafe:Boolean = false)</code><p>
    The constructor creates a DeathZone action for use by an emitter. 
    To add a DeathZone to all particles created by an emitter, use the
    emitter's addAction method.
@@ -185,7 +185,7 @@ showHideInherited();
    </p><span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
-<td width="20px"></td><td><code><span class="label">zone</span>:<a href="../zones/Zone3D.html">Zone3D</a></code> &mdash; The zone to use. Any item from the 
+<td width="20px"></td><td><code><span class="label">zone</span>:<a href="../zones/Zone3D.html">Zone3D</a></code> (default = <code>null</code>)<code></code> &mdash; The zone to use. Any item from the 
    org.flintparticles.threeD.zones package can be used.
    </td>
 </tr>
@@ -283,8 +283,8 @@ showHideInherited();
 <hr>
 <br>
 <p></p>
-<center class="copyright">&copy; Big Room Ventures Ltd. 2009</center>
+<center class="copyright">&copy; Richard Lord 2009</center>
 </div>
 </body>
 </html>
-<!--© Big Room Ventures Ltd. 2009-->
+<!--© Richard Lord 2009-->

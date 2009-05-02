@@ -57,7 +57,7 @@ package org.flintparticles.common.initializers
 		 * 
 		 * @see org.flintparticles.common.emitters.Emitter#addInitializer()
 		 */
-		public function ImageClass( imageClass:Class, ...parameters )
+		public function ImageClass( imageClass:Class = null, ...parameters )
 		{
 			_imageClass = imageClass;
 			_parameters = parameters;

@@ -60,7 +60,7 @@ package org.flintparticles.twoD.actions
 		 * @param acceleration The acceleration applied to adjust each
 		 * particle's velocity to match that of the other particles near it.
 		 */
-		public function MatchVelocity( maxDistance:Number, acceleration:Number )
+		public function MatchVelocity( maxDistance:Number = 0, acceleration:Number = 0 )
 		{
 			_max = maxDistance;
 			_maxSq = maxDistance * maxDistance;

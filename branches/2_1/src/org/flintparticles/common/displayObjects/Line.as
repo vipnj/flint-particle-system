@@ -40,6 +40,9 @@ package org.flintparticles.common.displayObjects
 
 	public class Line extends Shape
 	{
+		private var _length:Number;
+		private var _color:uint;
+		
 		/**
 		 * The constructor creates a Line with the specified length.
 		 * 
@@ -47,12 +50,40 @@ package org.flintparticles.common.displayObjects
 		 * @param color the color of the Line
 		 * @param bm The blendMode for the Line
 		 */
-		public function Line( lineLength : Number, color:uint = 0xFFFFFF, bm:String = "normal" )
+		public function Line( lineLength : Number = 1, color:uint = 0xFFFFFF, bm:String = "normal" )
 		{
-			graphics.lineStyle( 1, color );
-			graphics.moveTo( -lineLength * 0.5, 0 );
-			graphics.lineTo( lineLength * 0.5, 0 );
+			_length = lineLength;
+			_color = color;
+			draw();
 			blendMode = bm;
+		}
+		
+		private function draw():void
+		{
+			graphics.clear();
+			graphics.lineStyle( 1, _color );
+			graphics.moveTo( -_length * 0.5, 0 );
+			graphics.lineTo( _length * 0.5, 0 );
+		}
+		
+		public function get length():Number
+		{
+			return _length;
+		}
+		public function set length( value:Number ):void
+		{
+			_length = value;
+			draw();
+		}
+		
+		public function get color():uint
+		{
+			return _color;
+		}
+		public function set color( value:uint ):void
+		{
+			_color = value;
+			draw();
 		}
 	}
 }

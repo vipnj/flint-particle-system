@@ -91,7 +91,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
-<a class="signatureLink" href="#ColorInit()">ColorInit</a>(color1:uint, color2:uint)</div>
+<a class="signatureLink" href="#ColorInit()">ColorInit</a>(color1:uint = 0xFFFFFF, color2:uint = 0xFFFFFF)</div>
 <div class="summaryTableDescription">
    The constructor creates a ColorInit initializer for use by 
    an emitter.</div>
@@ -200,7 +200,7 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>public function ColorInit(color1:uint, color2:uint)</code><p>
+<code>public function ColorInit(color1:uint = 0xFFFFFF, color2:uint = 0xFFFFFF)</code><p>
    The constructor creates a ColorInit initializer for use by 
    an emitter. To add a ColorInit to all particles created by an emitter, use the
    emitter's addInitializer method.
@@ -213,14 +213,14 @@ showHideInherited();
    <span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
-<td width="20px"></td><td><code><span class="label">color1</span>:uint</code> &mdash; the 32bit (ARGB) color at one end of the color range to use.
+<td width="20px"></td><td><code><span class="label">color1</span>:uint</code> (default = <code>0xFFFFFF</code>)<code></code> &mdash; the 32bit (ARGB) color at one end of the color range to use.
    </td>
 </tr>
 <tr>
 <td class="paramSpacer">&nbsp;</td>
 </tr>
 <tr>
-<td width="20px"></td><td><code><span class="label">color2</span>:uint</code> &mdash; the 32bit (ARGB) color at the other end of the color range to use.
+<td width="20px"></td><td><code><span class="label">color2</span>:uint</code> (default = <code>0xFFFFFF</code>)<code></code> &mdash; the 32bit (ARGB) color at the other end of the color range to use.
    
    </td>
 </tr>
@@ -264,8 +264,8 @@ showHideInherited();
 <hr>
 <br>
 <p></p>
-<center class="copyright">&copy; Big Room Ventures Ltd. 2009</center>
+<center class="copyright">&copy; Richard Lord 2009</center>
 </div>
 </body>
 </html>
-<!--© Big Room Ventures Ltd. 2009-->
+<!--© Richard Lord 2009-->

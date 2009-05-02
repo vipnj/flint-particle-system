@@ -4,7 +4,7 @@
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="../../../../style.css" type="text/css" media="screen">
 <link rel="stylesheet" href="../../../../print.css" type="text/css" media="print">
-<meta content="Steady,org.flintparticles.common.counters.Steady,rate,resume,startEmitter,stop,updateEmitter" name="keywords">
+<meta content="Steady,org.flintparticles.common.counters.Steady,complete,rate,resume,startEmitter,stop,updateEmitter" name="keywords">
 <title>org.flintparticles.common.counters.Steady</title>
 </head>
 <body>
@@ -57,6 +57,11 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <th>&nbsp;</th><th colspan="2">Property</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
 </tr>
 <tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#complete">complete</a> : Boolean<div class="summaryTableDescription">[read-only]
+   Indicates if the counter has emitted all its particles.</div>
+</td><td class="summaryTableOwnerCol">Steady</td>
+</tr>
+<tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#rate">rate</a> : Number<div class="summaryTableDescription">
    The number of particles to emit per second.</div>
 </td><td class="summaryTableOwnerCol">Steady</td>
@@ -73,7 +78,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
-<a class="signatureLink" href="#Steady()">Steady</a>(rate:Number)</div>
+<a class="signatureLink" href="#Steady()">Steady</a>(rate:Number = 0)</div>
 <div class="summaryTableDescription">
    The constructor creates a Steady counter for use by an emitter.</div>
 </td><td class="summaryTableOwnerCol">Steady</td>
@@ -122,10 +127,25 @@ showHideInherited();
 <div class="MainContent">
 <a name="propertyDetail"></a>
 <div class="detailSectionHeader">Property detail</div>
+<a name="complete"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">complete</td><td class="detailHeaderType">property</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>complete:Boolean</code>&nbsp;&nbsp;[read-only]<p>
+   Indicates if the counter has emitted all its particles. For this counter
+   this will always be false.
+   </p><span class="label">Implementation</span>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function get complete():Boolean</code>
+<br>
+</div>
 <a name="rate"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
 <tr>
-<td class="detailHeaderName">rate</td><td class="detailHeaderType">property</td>
+<td class="detailHeaderName">rate</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
 </tr>
 </table>
 <div class="detailBody">
@@ -147,14 +167,14 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>public function Steady(rate:Number)</code><p>
+<code>public function Steady(rate:Number = 0)</code><p>
    The constructor creates a Steady counter for use by an emitter. To
    add a Steady counter to an emitter use the emitter's counter property.
    
    </p><span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
-<td width="20px"></td><td><code><span class="label">rate</span>:Number</code> &mdash; The number of particles to emit per second.
+<td width="20px"></td><td><code><span class="label">rate</span>:Number</code> (default = <code>0</code>)<code></code> &mdash; The number of particles to emit per second.
    
    </td>
 </tr>
@@ -272,8 +292,8 @@ showHideInherited();
 <hr>
 <br>
 <p></p>
-<center class="copyright">&copy; Big Room Ventures Ltd. 2009</center>
+<center class="copyright">&copy; Richard Lord 2009</center>
 </div>
 </body>
 </html>
-<!--© Big Room Ventures Ltd. 2009-->
+<!--© Richard Lord 2009-->

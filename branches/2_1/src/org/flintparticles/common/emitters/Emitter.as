@@ -183,7 +183,7 @@ package org.flintparticles.common.emitters
 		protected var _maximumFrameTime:Number = 0.1;
 		/**
 		 * Indicates if the emitter should dispatch a counterComplete event at the
-		 * end of teh next update cycle.
+		 * end of the next update cycle.
 		 */
 		protected var _dispatchCounterComplete:Boolean = false;
 
@@ -227,6 +227,31 @@ package org.flintparticles.common.emitters
 			_maximumFrameTime = value;
 		}
 		
+		/**
+		 * The array of all initializers being used by this emitter.
+		 */
+		public function get initializers():Array
+		{
+			var a:Array;
+			for each( var initializer:Initializer in _initializers )
+			{
+				a.push( initializer );
+			}
+			return a;
+		}
+		public function set initializers( value:Array ):void
+		{
+			var initializer:Initializer;
+			for each( initializer in _initializers )
+			{
+				removeInitializer( initializer );
+			}
+			for each( initializer in value )
+			{
+				addInitializer( initializer );
+			}
+		}
+
 		/**
 		 * Adds an Initializer object to the Emitter. Initializers set the
 		 * initial state of particles created by the emitter.
@@ -301,6 +326,31 @@ package org.flintparticles.common.emitters
 		}
 
 		/**
+		 * The array of all actions being used by this emitter.
+		 */
+		public function get actions():Array
+		{
+			var a:Array;
+			for each( var action:Action in _actions )
+			{
+				a.push( action );
+			}
+			return a;
+		}
+		public function set actions( value:Array ):void
+		{
+			var action:Action;
+			for each( action in _actions )
+			{
+				removeAction( action );
+			}
+			for each( action in value )
+			{
+				addAction( action );
+			}
+		}
+
+		/**
 		 * Adds an Action to the Emitter. Actions set the behaviour of particles 
 		 * created by the emitter.
 		 * 
@@ -371,6 +421,31 @@ package org.flintparticles.common.emitters
 				}
 			}
 			return false;
+		}
+
+		/**
+		 * The array of all actions being used by this emitter.
+		 */
+		public function get activities():Array
+		{
+			var a:Array;
+			for each( var activity:Activity in _activities )
+			{
+				a.push( activity );
+			}
+			return a;
+		}
+		public function set activities( value:Array ):void
+		{
+			var activity:Activity;
+			for each( activity in _activities )
+			{
+				removeActivity( activity );
+			}
+			for each( activity in value )
+			{
+				addActivity( activity );
+			}
 		}
 
 		/**
@@ -555,6 +630,11 @@ package org.flintparticles.common.emitters
 		public function get particles():Array
 		{
 			return _particles;
+		}
+		public function set particles( value:Array ):void
+		{
+			killAllParticles();
+			addExistingParticles( value, false );
 		}
 
 		/*

@@ -61,7 +61,7 @@ package org.flintparticles.twoD.zones
 		 * @param scaleX A scale factor to stretch the bitmap horizontally
 		 * @param scaleY A scale factor to stretch the bitmap vertically
 		 */
-		public function BitmapDataZone( bitmapData : BitmapData, offsetX : Number = 0, offsetY : Number = 0, scaleX:Number = 1, scaleY:Number = 1 )
+		public function BitmapDataZone( bitmapData : BitmapData = null, offsetX : Number = 0, offsetY : Number = 0, scaleX:Number = 1, scaleY:Number = 1 )
 		{
 			_bitmapData = bitmapData;
 			_offsetX = offsetX;
@@ -141,6 +141,10 @@ package org.flintparticles.twoD.zones
 		 */
 		public function invalidate():void
 		{
+			if( ! _bitmapData )
+			{
+				return;
+			}
 			_validPoints = new FastWeightedArray();
 			for( var x : int = 0; x < _bitmapData.width ; ++x )
 			{

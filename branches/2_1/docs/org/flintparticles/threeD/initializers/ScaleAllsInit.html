@@ -78,7 +78,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
-<a class="signatureLink" href="#ScaleAllsInit()">ScaleAllsInit</a>(scales:Array, weights:Array = null)</div>
+<a class="signatureLink" href="#ScaleAllsInit()">ScaleAllsInit</a>(scales:Array = null, weights:Array = null)</div>
 <div class="summaryTableDescription">
    The constructor creates a ScaleAllsInit initializer for use by 
    an emitter.</div>
@@ -148,7 +148,7 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>public function ScaleAllsInit(scales:Array, weights:Array = null)</code><p>
+<code>public function ScaleAllsInit(scales:Array = null, weights:Array = null)</code><p>
    The constructor creates a ScaleAllsInit initializer for use by 
    an emitter. To add a ScaleAllsInit to all particles created by 
    an emitter, use the emitter's addInitializer method.
@@ -156,7 +156,7 @@ showHideInherited();
    </p><span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
-<td width="20px"></td><td><code><span class="label">scales</span>:Array</code> &mdash; An array containing the scales to use for 
+<td width="20px"></td><td><code><span class="label">scales</span>:Array</code> (default = <code>null</code>)<code></code> &mdash; An array containing the scales to use for 
    each particle created by the emitter.
    </td>
 </tr>
@@ -263,8 +263,8 @@ showHideInherited();
 <hr>
 <br>
 <p></p>
-<center class="copyright">&copy; Big Room Ventures Ltd. 2009</center>
+<center class="copyright">&copy; Richard Lord 2009</center>
 </div>
 </body>
 </html>
-<!--© Big Room Ventures Ltd. 2009-->
+<!--© Richard Lord 2009-->

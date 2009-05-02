@@ -67,7 +67,7 @@ package org.flintparticles.threeD.actions
 		 * effects you will want a small epsilon ( ~1 ), but for stable visual effects a larger
 		 * epsilon (~100) is often better.
 		 */
-		public function GravityWell( power:Number, position:Point3D, epsilon:Number = 100 )
+		public function GravityWell( power:Number = 0, position:Point3D = null, epsilon:Number = 100 )
 		{
 			this.power = power;
 			this.position = position;
