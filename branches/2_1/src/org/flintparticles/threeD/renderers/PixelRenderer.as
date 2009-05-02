@@ -1,4 +1,4 @@
-﻿/*
+/*
  * FLINT PARTICLE SYSTEM
  * .....................
  * 
@@ -31,11 +31,8 @@
 package org.flintparticles.threeD.renderers
 {
 	import org.flintparticles.threeD.geom.Point3D;
-	
 	import org.flintparticles.threeD.particles.Particle3D;
 	
-	import flash.display.Bitmap;
-	import flash.display.BitmapData;
 	import flash.geom.Rectangle;	
 
 	/**

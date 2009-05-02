@@ -30,7 +30,7 @@
 
 package org.flintparticles.common.displayObjects 
 {
-	import flash.display.Shape;	
+	import flash.display.Shape;		
 
 	/**
 	 * The LineShape class is a DisplayObject with a simple line shape. The line is

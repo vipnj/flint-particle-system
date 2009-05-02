@@ -30,17 +30,17 @@
 
 package org.flintparticles.threeD.away3d 
 {
-	import org.flintparticles.common.particles.Particle;
-	import org.flintparticles.common.renderers.RendererBase;
-	import org.flintparticles.common.utils.Maths;
-	import org.flintparticles.threeD.away3d.utils.Convert;
-	import org.flintparticles.threeD.particles.Particle3D;
-	
 	import away3d.containers.ObjectContainer3D;
 	import away3d.core.base.Mesh;
 	import away3d.core.base.Object3D;
 	import away3d.core.math.Number3D;
-	import away3d.sprites.MovieClipSprite;	
+	import away3d.sprites.MovieClipSprite;
+	
+	import org.flintparticles.common.particles.Particle;
+	import org.flintparticles.common.renderers.RendererBase;
+	import org.flintparticles.common.utils.Maths;
+	import org.flintparticles.threeD.away3d.utils.Convert;
+	import org.flintparticles.threeD.particles.Particle3D;	
 
 	/**
 	 * Renders the particles in an Away3D scene.

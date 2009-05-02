@@ -33,8 +33,8 @@ package org.flintparticles.threeD.papervision3d.initializers
 	import org.flintparticles.common.emitters.Emitter;
 	import org.flintparticles.common.initializers.InitializerBase;
 	import org.flintparticles.common.particles.Particle;
-	import org.flintparticles.common.utils.construct;
-	
+	import org.flintparticles.common.utils.construct;	
+
 	/**
 	 * The ApplyMaterial initializer sets a material to apply to the Papervision3D
 	 * object that is used when rendering the particle. To use this initializer,

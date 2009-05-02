@@ -30,12 +30,11 @@
 
 package org.flintparticles.threeD.particles
 {
+	import org.flintparticles.common.particles.Particle;
+	import org.flintparticles.common.particles.ParticleFactory;
 	import org.flintparticles.threeD.geom.Point3D;
 	import org.flintparticles.threeD.geom.Quaternion;
-	import org.flintparticles.threeD.geom.Vector3D;
-	
-	import org.flintparticles.common.particles.Particle;
-	import org.flintparticles.common.particles.ParticleFactory;	
+	import org.flintparticles.threeD.geom.Vector3D;	
 
 	/**
 	 * The Particle3D class extends the Particle class to include state properties 

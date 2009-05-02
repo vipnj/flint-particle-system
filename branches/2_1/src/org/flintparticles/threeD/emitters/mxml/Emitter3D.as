@@ -2,8 +2,8 @@ package org.flintparticles.threeD.emitters.mxml
 {
 	import org.flintparticles.threeD.emitters.Emitter3D;
 	
-	import mx.core.IMXMLObject;
-	
+	import mx.core.IMXMLObject;	
+
 	/**
 	 * @author Richard
 	 */

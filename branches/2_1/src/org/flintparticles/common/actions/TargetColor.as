@@ -31,7 +31,7 @@
 package org.flintparticles.common.actions 
 {
 	import org.flintparticles.common.emitters.Emitter;
-	import org.flintparticles.common.particles.Particle;
+	import org.flintparticles.common.particles.Particle;	
 
 	/**
 	 * The TargetColor action adjusts the color of the particle towards a 

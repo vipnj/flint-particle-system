@@ -30,7 +30,7 @@
 
 package org.flintparticles.common.displayObjects 
 {
-	import flash.display.Shape;	
+	import flash.display.Shape;		
 
 	/**
 	 * The Dot class is a DisplayObject with a circle shape. The registration point

@@ -30,9 +30,7 @@
 
 package org.flintparticles.twoD.zones 
 {
-	import flash.geom.Point;
-	
-	import org.flintparticles.threeD.geom.Vector3D;
+	import flash.geom.Point;	
 
 	/**
 	 * The LineZone zone defines a zone that contains all the points on a line.

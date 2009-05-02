@@ -1,8 +1,6 @@
 
 package org.flintparticles.common.renderers 
 {
-	import flash.events.Event;
-	
 	import org.flintparticles.common.emitters.Emitter;
 	import org.flintparticles.common.events.EmitterEvent;
 	import org.flintparticles.common.events.ParticleEvent;

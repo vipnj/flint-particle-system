@@ -32,7 +32,6 @@ package org.flintparticles.threeD.zones
 {
 	import org.flintparticles.threeD.geom.Point3D;
 	import org.flintparticles.threeD.geom.Vector3D;
-	
 	import org.flintparticles.threeD.geom.Vector3DUtils;	
 
 	/**

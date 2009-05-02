@@ -1,4 +1,4 @@
-﻿/*
+/*
  * FLINT PARTICLE SYSTEM
  * .....................
  * 
@@ -30,8 +30,8 @@
 
 package org.flintparticles.common.counters
 {
-	import org.flintparticles.common.emitters.Emitter;	
-	
+	import org.flintparticles.common.emitters.Emitter;		
+
 	/**
 	 * The Sine counter causes the emitter to emit particles continuously
 	 * at a rate that varies according to a sine wave.

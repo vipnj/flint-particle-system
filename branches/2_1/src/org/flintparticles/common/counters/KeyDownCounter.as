@@ -1,4 +1,4 @@
-﻿/*
+/*
  * FLINT PARTICLE SYSTEM
  * .....................
  * 
@@ -30,10 +30,10 @@
 
 package org.flintparticles.common.counters
 {
-	import flash.display.Stage;
-	import flash.events.KeyboardEvent;
+	import org.flintparticles.common.emitters.Emitter;
 	
-	import org.flintparticles.common.emitters.Emitter;	
+	import flash.display.Stage;
+	import flash.events.KeyboardEvent;	
 
 	/**
 	 * The KeyDownCounter Counter modifies another counter to only emit particles when a specific key

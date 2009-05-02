@@ -30,13 +30,12 @@
 
 package org.flintparticles.threeD.emitters
 {
-	import org.flintparticles.threeD.geom.Matrix3D;
-	import org.flintparticles.threeD.geom.Point3D;
-	import org.flintparticles.threeD.geom.Quaternion;
-	
 	import org.flintparticles.common.emitters.Emitter;
 	import org.flintparticles.common.particles.Particle;
 	import org.flintparticles.common.particles.ParticleFactory;
+	import org.flintparticles.threeD.geom.Matrix3D;
+	import org.flintparticles.threeD.geom.Point3D;
+	import org.flintparticles.threeD.geom.Quaternion;
 	import org.flintparticles.threeD.particles.Particle3D;
 	import org.flintparticles.threeD.particles.ParticleCreator3D;	
 

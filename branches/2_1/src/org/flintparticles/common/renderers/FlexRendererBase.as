@@ -1,17 +1,16 @@
 
 package org.flintparticles.common.renderers 
 {
-	import flash.display.Stage;
-	import flash.events.Event;
-	
 	import org.flintparticles.common.emitters.Emitter;
 	import org.flintparticles.common.events.EmitterEvent;
 	import org.flintparticles.common.events.ParticleEvent;
 	import org.flintparticles.common.particles.Particle;
-	import org.flintparticles.common.renderers.Renderer;	
-
+	import org.flintparticles.common.renderers.Renderer;
+	
 	import mx.core.UIComponent;
 	
+	import flash.events.Event;	
+
 	/**
 	 * The base class used by all the Flint renderers. This class manages
 	 * various aspects of the rendering process.

@@ -31,7 +31,7 @@
 package org.flintparticles.common.actions 
 {
 	import org.flintparticles.common.emitters.Emitter;
-	import org.flintparticles.common.particles.Particle;			
+	import org.flintparticles.common.particles.Particle;	
 
 	/**
 	 * The ChangeMass action adjusts the mass of the particle as it ages.

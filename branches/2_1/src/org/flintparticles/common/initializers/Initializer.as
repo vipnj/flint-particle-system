@@ -31,7 +31,7 @@
 package org.flintparticles.common.initializers
 {
 	import org.flintparticles.common.emitters.Emitter;
-	import org.flintparticles.common.particles.Particle;		
+	import org.flintparticles.common.particles.Particle;	
 
 	/**
 	 * The Initializer interface must be implemented by all particle initializers.

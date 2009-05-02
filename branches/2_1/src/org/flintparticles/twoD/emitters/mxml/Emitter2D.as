@@ -2,8 +2,8 @@ package org.flintparticles.twoD.emitters.mxml
 {
 	import org.flintparticles.twoD.emitters.Emitter2D;
 	
-	import mx.core.IMXMLObject;
-	
+	import mx.core.IMXMLObject;	
+
 	/**
 	 * @author Richard
 	 */

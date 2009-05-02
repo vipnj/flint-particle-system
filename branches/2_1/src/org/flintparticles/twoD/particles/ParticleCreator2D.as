@@ -31,7 +31,7 @@
 package org.flintparticles.twoD.particles 
 {
 	import org.flintparticles.common.particles.Particle;
-	import org.flintparticles.common.particles.ParticleFactory;		
+	import org.flintparticles.common.particles.ParticleFactory;	
 
 	/**
 	 * The ParticleCreator is used by the Emitter class to manage the creation and reuse of particles.

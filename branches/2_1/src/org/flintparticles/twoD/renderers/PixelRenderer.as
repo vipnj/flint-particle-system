@@ -1,4 +1,4 @@
-﻿/*
+/*
  * FLINT PARTICLE SYSTEM
  * .....................
  * 
@@ -30,10 +30,9 @@
 
 package org.flintparticles.twoD.renderers
 {
-	import flash.display.BitmapData;
-	import flash.geom.Rectangle;
+	import org.flintparticles.twoD.particles.Particle2D;
 	
-	import org.flintparticles.twoD.particles.Particle2D;	
+	import flash.geom.Rectangle;	
 
 	/**
 	 * The PixelRenderer draws particles as single pixels on a Bitmap display object. The

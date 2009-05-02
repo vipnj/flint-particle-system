@@ -30,7 +30,7 @@
 
 package org.flintparticles.twoD.zones 
 {
-	import flash.geom.Point;
+	import flash.geom.Point;	
 
 	/**
 	 * The MutiZone zone defines a zone that combines other zones into one larger zone.

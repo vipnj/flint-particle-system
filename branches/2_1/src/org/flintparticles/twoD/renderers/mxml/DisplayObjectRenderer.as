@@ -1,4 +1,4 @@
-﻿/*
+/*
  * FLINT PARTICLE SYSTEM
  * .....................
  * 
@@ -30,11 +30,11 @@
 
 package org.flintparticles.twoD.renderers.mxml
 {
-	import flash.display.DisplayObject;
-	
 	import org.flintparticles.common.particles.Particle;
 	import org.flintparticles.common.renderers.FlexRendererBase;
-	import org.flintparticles.twoD.particles.Particle2D;	
+	import org.flintparticles.twoD.particles.Particle2D;
+	
+	import flash.display.DisplayObject;	
 
 	/**
 	 * The DisplayObjectRenderer adds particles to its display list 

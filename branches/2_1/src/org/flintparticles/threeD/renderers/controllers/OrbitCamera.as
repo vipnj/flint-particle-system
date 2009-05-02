@@ -30,13 +30,13 @@
 
 package org.flintparticles.threeD.renderers.controllers 
 {
-	import flash.display.DisplayObject;
-	import flash.events.KeyboardEvent;
-	import flash.ui.Keyboard;
-	
 	import org.flintparticles.common.events.UpdateEvent;
 	import org.flintparticles.common.utils.FrameUpdater;
-	import org.flintparticles.threeD.renderers.Camera;	
+	import org.flintparticles.threeD.renderers.Camera;
+	
+	import flash.display.DisplayObject;
+	import flash.events.KeyboardEvent;
+	import flash.ui.Keyboard;	
 
 	/**
 	 * Sets keyboard input to make a renderer's camera orbit around a point in response to 

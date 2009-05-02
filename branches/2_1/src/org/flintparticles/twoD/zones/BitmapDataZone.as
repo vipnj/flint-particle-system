@@ -30,10 +30,10 @@
 
 package org.flintparticles.twoD.zones 
 {
-	import flash.display.BitmapData;
-	import flash.geom.Point;
+	import org.flintparticles.common.utils.FastWeightedArray;
 	
-	import org.flintparticles.common.utils.FastWeightedArray;	
+	import flash.display.BitmapData;
+	import flash.geom.Point;	
 
 	/**
 	 * The BitmapData zone defines a shaped zone based on a BitmapData object.

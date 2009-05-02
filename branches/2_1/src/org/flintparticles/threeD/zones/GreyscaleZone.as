@@ -30,11 +30,10 @@
 
 package org.flintparticles.threeD.zones 
 {
+	import org.flintparticles.common.utils.FastWeightedArray;
 	import org.flintparticles.threeD.geom.Matrix3D;
 	import org.flintparticles.threeD.geom.Point3D;
 	import org.flintparticles.threeD.geom.Vector3D;
-	
-	import org.flintparticles.common.utils.FastWeightedArray;
 	
 	import flash.display.BitmapData;
 	import flash.geom.Point;	

@@ -30,7 +30,7 @@
 
 package org.flintparticles.twoD.zones 
 {
-	import flash.geom.Point;
+	import flash.geom.Point;	
 
 	/**
 	 * The DiscZone zone defines a circular zone. The zone may

@@ -30,12 +30,12 @@
 
 package org.flintparticles.common.utils 
 {
+	import org.flintparticles.common.events.UpdateEvent;
+	
 	import flash.display.Shape;
 	import flash.events.Event;
 	import flash.events.EventDispatcher;
-	import flash.utils.getTimer;
-	
-	import org.flintparticles.common.events.UpdateEvent;	
+	import flash.utils.getTimer;	
 
 	/**
 	 * This class is used to provide a constant tick event to update the emitters

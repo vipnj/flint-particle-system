@@ -1,4 +1,4 @@
-﻿
+
 /*
  * FLINT PARTICLE SYSTEM
  * .....................
@@ -32,7 +32,7 @@
 package org.flintparticles.common.counters
 {
 	import org.flintparticles.common.easing.Linear;
-	import org.flintparticles.common.emitters.Emitter;		
+	import org.flintparticles.common.emitters.Emitter;	
 
 	/**
 	 * The TimePeriod counter causes the emitter to emit particles for a period of 

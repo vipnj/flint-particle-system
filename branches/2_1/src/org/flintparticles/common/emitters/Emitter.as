@@ -1,4 +1,4 @@
-﻿/*
+/*
  * FLINT PARTICLE SYSTEM
  * .....................
  * 
@@ -30,8 +30,6 @@
 
 package org.flintparticles.common.emitters
 {
-	import flash.events.EventDispatcher;
-	
 	import org.flintparticles.common.actions.Action;
 	import org.flintparticles.common.activities.Activity;
 	import org.flintparticles.common.counters.Counter;
@@ -43,7 +41,9 @@ package org.flintparticles.common.emitters
 	import org.flintparticles.common.particles.Particle;
 	import org.flintparticles.common.particles.ParticleFactory;
 	import org.flintparticles.common.utils.FrameUpdater;
-	import org.flintparticles.common.utils.PriorityArray;	
+	import org.flintparticles.common.utils.PriorityArray;
+	
+	import flash.events.EventDispatcher;	
 
 	/**
 	 * Dispatched when a particle dies and is about to be removed from the system.

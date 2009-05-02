@@ -30,11 +30,10 @@
 
 package org.flintparticles.threeD.actions 
 {
-	import org.flintparticles.threeD.geom.Vector3D;
-	
 	import org.flintparticles.common.actions.ActionBase;
 	import org.flintparticles.common.emitters.Emitter;
 	import org.flintparticles.common.particles.Particle;
+	import org.flintparticles.threeD.geom.Vector3D;
 	import org.flintparticles.threeD.particles.Particle3D;	
 
 	/**

@@ -30,9 +30,9 @@
 
 package org.flintparticles.common.events
 {
-	import flash.events.Event;
+	import org.flintparticles.common.particles.Particle;
 	
-	import org.flintparticles.common.particles.Particle;	
+	import flash.events.Event;	
 
 	/**
 	 * The class for particle related events dispatched by classes in the Flint project.

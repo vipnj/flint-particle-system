@@ -30,7 +30,7 @@
 
 package org.flintparticles.common.displayObjects 
 {
-	import flash.display.Shape;	
+	import flash.display.Shape;		
 
 	/**
 	 * The Rect class is a DisplayObject that is a rectangle shape. The 

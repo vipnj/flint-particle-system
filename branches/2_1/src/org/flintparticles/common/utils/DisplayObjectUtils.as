@@ -1,7 +1,7 @@
 package org.flintparticles.common.utils 
 {
-	import flash.display.DisplayObject;	
-	
+	import flash.display.DisplayObject;		
+
 	public class DisplayObjectUtils 
 	{
 		/**

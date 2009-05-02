@@ -30,8 +30,8 @@
 
 package org.flintparticles.common.activities 
 {
-	import org.flintparticles.common.emitters.Emitter;	
-	
+	import org.flintparticles.common.emitters.Emitter;		
+
 	/**
 	 * The FrameUpdatable interface is used by the UpdateOnFrame activity.
 	 * 

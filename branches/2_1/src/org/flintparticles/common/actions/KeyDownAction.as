@@ -30,11 +30,11 @@
 
 package org.flintparticles.common.actions 
 {
-	import flash.display.Stage;
-	import flash.events.KeyboardEvent;
-	
 	import org.flintparticles.common.emitters.Emitter;
-	import org.flintparticles.common.particles.Particle;			
+	import org.flintparticles.common.particles.Particle;
+	
+	import flash.display.Stage;
+	import flash.events.KeyboardEvent;	
 
 	/**
 	 * The KeyDownAction Action uses another action. It applies the other action

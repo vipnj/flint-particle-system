@@ -1,4 +1,4 @@
-﻿/*
+/*
  * FLINT PARTICLE SYSTEM
  * .....................
  * 
@@ -30,8 +30,8 @@
 
 package org.flintparticles.common.counters
 {
-	import org.flintparticles.common.emitters.Emitter;	
-	
+	import org.flintparticles.common.emitters.Emitter;		
+
 	/**
 	 * The Zero counter causes the emitter to emit no particles. Because the emitter
 	 * requires a counter, this counter is used as the default and should be used 

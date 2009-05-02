@@ -30,7 +30,7 @@
 
 package org.flintparticles.common.events
 {
-	import flash.events.Event;
+	import flash.events.Event;	
 
 	/**
 	 * The class for emitter related events dispatched by classes in the Flint project.

@@ -30,7 +30,7 @@
 
 package org.flintparticles.threeD.actions 
 {
-	import org.flintparticles.threeD.geom.Point3D;				
+	import org.flintparticles.threeD.geom.Point3D;					
 
 	/**
 	 * The AntiGravity action applies a force to the particle to push it away from

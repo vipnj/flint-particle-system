@@ -30,12 +30,12 @@
 
 package org.flintparticles.threeD.away3d.initializers
 {
+	import away3d.core.base.Object3D;
+	
 	import org.flintparticles.common.emitters.Emitter;
 	import org.flintparticles.common.initializers.InitializerBase;
 	import org.flintparticles.common.particles.Particle;
-	import org.flintparticles.common.utils.construct;
-	
-	import away3d.core.base.Object3D;	
+	import org.flintparticles.common.utils.construct;	
 
 	/**
 	 * The ApplyMaterial initializer sets a material to apply to the Away3D

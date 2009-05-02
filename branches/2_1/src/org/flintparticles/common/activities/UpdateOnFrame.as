@@ -30,7 +30,7 @@
 
 package org.flintparticles.common.activities
 {
-	import org.flintparticles.common.emitters.Emitter;	
+	import org.flintparticles.common.emitters.Emitter;		
 
 	/**
 	 * The UpdateOnFrame activity is used to call a frameUpdate method of an object 

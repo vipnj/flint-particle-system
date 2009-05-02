@@ -30,7 +30,7 @@
 
 package org.flintparticles.threeD.zones
 {
-	import org.flintparticles.threeD.geom.Point3D;				
+	import org.flintparticles.threeD.geom.Point3D;					
 
 	/**
 	 * The Zones interface must be implemented by all zones.

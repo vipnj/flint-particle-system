@@ -30,7 +30,7 @@
 
 package org.flintparticles.common.renderers 
 {
-	import org.flintparticles.common.emitters.Emitter;				
+	import org.flintparticles.common.emitters.Emitter;					
 
 	/**
 	 * The Renderer interface must be implemented by all renderers. A renderer 

@@ -30,12 +30,12 @@
 
 package org.flintparticles.twoD.actions 
 {
-	import flash.display.DisplayObject;
-	
 	import org.flintparticles.common.actions.ActionBase;
 	import org.flintparticles.common.emitters.Emitter;
 	import org.flintparticles.common.particles.Particle;
-	import org.flintparticles.twoD.particles.Particle2D;	
+	import org.flintparticles.twoD.particles.Particle2D;
+	
+	import flash.display.DisplayObject;	
 
 	/**
 	 * The TurnTowardsMouse action causes the particle to constantly adjust its direction

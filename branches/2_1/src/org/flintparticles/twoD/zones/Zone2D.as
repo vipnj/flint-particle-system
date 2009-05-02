@@ -30,9 +30,8 @@
 
 package org.flintparticles.twoD.zones
 {
-	import flash.geom.Point;
-	
-	/**
+	import flash.geom.Point;	
+	/**
 	 * The Zones interface must be implemented by all zones.
 	 * 
 	 * <p>A zone is a class that defined a region in 2d space. The two required methods 

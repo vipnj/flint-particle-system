@@ -30,8 +30,8 @@
 
 package org.flintparticles.common.counters 
 {
-	import org.flintparticles.common.emitters.Emitter;	
-	
+	import org.flintparticles.common.emitters.Emitter;		
+
 	/**
 	 * The Counter interface must be implemented by all counters.
 	 * 

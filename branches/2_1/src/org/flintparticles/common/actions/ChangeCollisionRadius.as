@@ -31,7 +31,7 @@
 package org.flintparticles.common.actions 
 {
 	import org.flintparticles.common.emitters.Emitter;
-	import org.flintparticles.common.particles.Particle;			
+	import org.flintparticles.common.particles.Particle;	
 
 	/**
 	 * The ChangeCollisionRadius action adjusts the collision radius of the particle as it ages.

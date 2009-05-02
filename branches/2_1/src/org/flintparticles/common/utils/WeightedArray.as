@@ -1,4 +1,4 @@
-﻿/*
+/*
  * FLINT PARTICLE SYSTEM
  * .....................
  * 
@@ -31,7 +31,7 @@
 package org.flintparticles.common.utils
 {
 	import flash.utils.Proxy;
-	import flash.utils.flash_proxy;
+	import flash.utils.flash_proxy;	
 
 	/**
 	 * A WeightedArray is a collection of values that are weighted. When 

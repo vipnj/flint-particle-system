@@ -30,8 +30,8 @@
 
 package org.flintparticles.common.initializers 
 {
-	import org.flintparticles.common.particles.Particle;
-	import org.flintparticles.common.emitters.Emitter;	
+	import org.flintparticles.common.emitters.Emitter;
+	import org.flintparticles.common.particles.Particle;	
 
 	/**
 	 * The AlphaInit Initializer sets the alpha transparency of the particle.

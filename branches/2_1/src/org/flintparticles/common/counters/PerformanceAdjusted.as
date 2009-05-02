@@ -1,4 +1,4 @@
-﻿/*
+/*
  * FLINT PARTICLE SYSTEM
  * .....................
  * 
@@ -30,9 +30,9 @@
 
 package org.flintparticles.common.counters
 {
-	import flash.utils.getTimer;
+	import org.flintparticles.common.emitters.Emitter;
 	
-	import org.flintparticles.common.emitters.Emitter;		
+	import flash.utils.getTimer;	
 
 	/**
 	 * The PerformanceAdjusted counter causes the emitter to emit particles 

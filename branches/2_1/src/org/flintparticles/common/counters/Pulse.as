@@ -1,4 +1,4 @@
-﻿/*
+/*
  * FLINT PARTICLE SYSTEM
  * .....................
  * 
@@ -30,8 +30,8 @@
 
 package org.flintparticles.common.counters
 {
-	import org.flintparticles.common.emitters.Emitter;	
-	
+	import org.flintparticles.common.emitters.Emitter;		
+
 	/**
 	 * The Pulse counter causes the emitter to emit groups of particles at a regular
 	 * interval.

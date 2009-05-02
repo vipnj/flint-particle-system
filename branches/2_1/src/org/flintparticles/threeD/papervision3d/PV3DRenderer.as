@@ -36,7 +36,6 @@ package org.flintparticles.threeD.papervision3d
 	import org.flintparticles.threeD.papervision3d.utils.Convert;
 	import org.flintparticles.threeD.particles.Particle3D;
 	import org.papervision3d.core.math.Number3D;
-	import org.papervision3d.core.math.Quaternion;
 	import org.papervision3d.core.proto.DisplayObjectContainer3D;
 	import org.papervision3d.materials.MovieMaterial;
 	import org.papervision3d.objects.DisplayObject3D;

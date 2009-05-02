@@ -30,8 +30,6 @@
 
 package org.flintparticles.threeD.actions 
 {
-	import org.flintparticles.threeD.geom.Vector3D;
-	
 	import org.flintparticles.common.actions.ActionBase;
 	import org.flintparticles.common.activities.FrameUpdatable;
 	import org.flintparticles.common.activities.UpdateOnFrame;
@@ -39,6 +37,7 @@ package org.flintparticles.threeD.actions
 	import org.flintparticles.common.events.ParticleEvent;
 	import org.flintparticles.common.particles.Particle;
 	import org.flintparticles.threeD.emitters.Emitter3D;
+	import org.flintparticles.threeD.geom.Vector3D;
 	import org.flintparticles.threeD.particles.Particle3D;	
 
 	/**

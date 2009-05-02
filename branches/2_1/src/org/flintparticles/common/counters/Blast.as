@@ -1,4 +1,4 @@
-﻿/*
+/*
  * FLINT PARTICLE SYSTEM
  * .....................
  * 
@@ -30,7 +30,7 @@
 
 package org.flintparticles.common.counters
 {
-	import org.flintparticles.common.emitters.Emitter;	
+	import org.flintparticles.common.emitters.Emitter;		
 
 	/**
 	 * The Blast counter causes the emitter to create a single burst of

@@ -30,7 +30,7 @@
 
 package org.flintparticles.twoD.actions 
 {
-	import flash.display.DisplayObject;	
+	import flash.display.DisplayObject;		
 
 	/**
 	 * The TurnAwayFromMouse action causes the particle to constantly adjust its 

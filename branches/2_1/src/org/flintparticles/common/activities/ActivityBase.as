@@ -30,8 +30,8 @@
 
 package org.flintparticles.common.activities
 {
-	import org.flintparticles.common.emitters.Emitter;
-	
+	import org.flintparticles.common.emitters.Emitter;	
+
 	/**
 	 * The ActivityBase class is the abstract base class for all emitter activities
 	 * in the Flint library. It implements the Activity interface with a default

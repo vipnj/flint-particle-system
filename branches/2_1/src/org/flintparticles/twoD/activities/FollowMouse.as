@@ -30,11 +30,11 @@
 
 package org.flintparticles.twoD.activities
 {
-	import flash.display.DisplayObject;
-	
 	import org.flintparticles.common.activities.ActivityBase;
 	import org.flintparticles.common.emitters.Emitter;
-	import org.flintparticles.twoD.emitters.Emitter2D;	
+	import org.flintparticles.twoD.emitters.Emitter2D;
+	
+	import flash.display.DisplayObject;	
 
 	/**
 	 * The FollowMouse activity causes the emitter to follow
