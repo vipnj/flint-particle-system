@@ -25,8 +25,9 @@
 &lt;ul&gt;
 &lt;li&gt;Emitters create and manage Particles.&lt;/li&gt;
 &lt;li&gt;Emitters use Counters to control how many particles are created.&lt;/li&gt;
-&lt;li&gt;Emitters use Initializers to govern how those particles are initialized.&lt;/li&gt;
+&lt;li&gt;Emitters use Initializers to control how those particles are initialized.&lt;/li&gt;
 &lt;li&gt;Emitters use Actions to control how those particles behave over time.&lt;/li&gt;
+&lt;li&gt;Emitters use Activities to control their own behaviour over time.&lt;/li&gt;
 &lt;li&gt;Renderers draw the Particles created by one or more emitters.&lt;/li&gt;
 &lt;/ul&gt;]]></description>
 	</all-packages>

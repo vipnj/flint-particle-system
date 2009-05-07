@@ -2,8 +2,8 @@
  * FLINT PARTICLE SYSTEM
  * .....................
  * 
- * Author: Richard Lord (Big Room)
- * Copyright (c) Big Room Ventures Ltd. 2008
+ * Author: Richard Lord
+ * Copyright (c) Richard Lord 2008-2009
  * http://flintparticles.org
  * 
  * 
@@ -67,7 +67,7 @@ package org.flintparticles.twoD.initializers
 		 */
 		public function ScaleAllsInit( scales:Array = null, weights:Array = null )
 		{
-			_scales = new WeightedArray;
+			_scales = new WeightedArray();
 			if( scales == null )
 			{
 				return;

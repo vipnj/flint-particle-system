@@ -2,8 +2,8 @@
  * FLINT PARTICLE SYSTEM
  * .....................
  * 
- * Author: Richard Lord (Big Room)
- * Copyright (c) Big Room Ventures Ltd. 2008
+ * Author: Richard Lord
+ * Copyright (c) Richard Lord 2008-2009
  * http://flintparticles.org
  * 
  * 
@@ -60,9 +60,16 @@ package org.flintparticles.threeD.initializers
 		 * 
  		 * @see org.flintparticles.common.emitters.Emitter#addInitializer()
 		 */
-		public function FaceAxis( axis : Vector3D )
+		public function FaceAxis( axis : Vector3D = null )
 		{
-			_axis = axis.unit();
+			if( axis )
+			{
+				_axis = axis.unit();
+			}
+			else
+			{
+				_axis = new Vector3D( 1, 0, 0 );
+			}
 		}
 		
 		/**

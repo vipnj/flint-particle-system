@@ -2,8 +2,8 @@
  * FLINT PARTICLE SYSTEM
  * .....................
  * 
- * Author: Richard Lord (Big Room)
- * Copyright (c) Big Room Ventures Ltd. 2008
+ * Author: Richard Lord
+ * Copyright (c) Richard Lord 2008-2009
  * http://flintparticles.org
  * 
  * 
@@ -74,14 +74,7 @@ package org.flintparticles.twoD.zones
 			{
 				throw new Error( "The outerRadius (" + outerRadius + ") can't be smaller than the innerRadius (" + innerRadius + ") in your DiscSectorZone. N.B. the outerRadius is the second argument in the constructor and the innerRadius is the third argument." );
 			}
-			if( center == null )
-			{
-				_center = new Point( 0, 0 );
-			}
-			else
-			{
-				_center = center;
-			}
+			_center = center ? center.clone() : new Point( 0, 0 );
 			_innerRadius = innerRadius;
 			_outerRadius = outerRadius;
 			_innerSq = _innerRadius * _innerRadius;
@@ -90,26 +83,26 @@ package org.flintparticles.twoD.zones
 			_maxAngle = maxAngle;
 			if( _maxAngle )
 			{
-			while ( _maxAngle > TWOPI )
-			{
-				_maxAngle -= TWOPI;
-			}
-			while ( _maxAngle < 0 )
-			{
-				_maxAngle += TWOPI;
-			}
-			_minAllowed = _maxAngle - TWOPI;
+				while ( _maxAngle > TWOPI )
+				{
+					_maxAngle -= TWOPI;
+				}
+				while ( _maxAngle < 0 )
+				{
+					_maxAngle += TWOPI;
+				}
+				_minAllowed = _maxAngle - TWOPI;
 				if( _minAngle )
 				{
-			if ( minAngle == maxAngle )
-			{
-				_minAngle = _maxAngle;
-			}
-			else
-			{
-				_minAngle = clamp( _minAngle );
-			}
-		}
+					if ( minAngle == maxAngle )
+					{
+						_minAngle = _maxAngle;
+					}
+					else
+					{
+						_minAngle = clamp( _minAngle );
+					}
+				}
 			}
 		}
 		

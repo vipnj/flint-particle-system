@@ -2,8 +2,8 @@
  * FLINT PARTICLE SYSTEM
  * .....................
  * 
- * Author: Richard Lord (Big Room)
- * Copyright (c) Big Room Ventures Ltd. 2008
+ * Author: Richard Lord
+ * Copyright (c) Richard Lord 2008-2009
  * http://flintparticles.org
  * 
  * 
@@ -62,10 +62,10 @@ package org.flintparticles.threeD.zones
 		 * @param truncatedHeight The height at which the top of the cone is removed, leaving 
 		 * just the base from height to truncatedHeight. 
 		 */
-		public function ConeZone( apex:Point3D, axis:Vector3D, angle:Number, height:Number, truncatedHeight:Number = 0 )
+		public function ConeZone( apex:Point3D = null, axis:Vector3D = null, angle:Number = 0, height:Number = 0, truncatedHeight:Number = 0 )
 		{
-			_apex = apex.clone();
-			_axis = axis.unit();
+			_apex = apex ? apex.clone() : null;
+			_axis = axis ? axis.unit() : null;
 			_angle = angle;
 			_minDist = truncatedHeight;
 			_maxDist = height;

@@ -2,8 +2,8 @@
  * FLINT PARTICLE SYSTEM
  * .....................
  * 
- * Author: Richard Lord (Big Room)
- * Copyright (c) Big Room Ventures Ltd. 2008
+ * Author: Richard Lord
+ * Copyright (c) Richard Lord 2008-2009
  * http://flintparticles.org
  * 
  * 
@@ -35,6 +35,8 @@ package org.flintparticles.threeD.actions
 	import org.flintparticles.common.particles.Particle;
 	import org.flintparticles.threeD.particles.Particle3D;
 	import org.flintparticles.threeD.zones.Zone3D;	
+
+	[DefaultProperty("zone")]
 
 	/**
 	 * The DeathZone action marks the particle as dead if it is inside

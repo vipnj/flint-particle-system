@@ -2,8 +2,8 @@
  * FLINT PARTICLE SYSTEM
  * .....................
  * 
- * Author: Richard Lord (Big Room)
- * Copyright (c) Big Room Ventures Ltd. 2008
+ * Author: Richard Lord
+ * Copyright (c) Richard Lord 2008-2009
  * http://flintparticles.org
  * 
  * 
@@ -39,47 +39,55 @@ package org.flintparticles.threeD.zones
 
 	public class LineZone implements Zone3D 
 	{
-		private var _point1:Point3D;
-		private var _point2:Point3D;
+		private var _start:Point3D;
+		private var _end:Point3D;
 		private var _length:Vector3D;
 		
 		/**
 		 * The constructor creates a LineZone 3D zone.
 		 * 
-		 * @param point1 The point at one end of the line.
-		 * @param point2 The point at the other end of the line.
+		 * @param start The point at one end of the line.
+		 * @param end The point at the other end of the line.
 		 */
-		public function LineZone( point1:Point3D, point2:Point3D )
+		public function LineZone( start:Point3D = null, end:Point3D = null )
 		{
-			_point1 = point1;
-			_point2 = point2;
-			_length = point1.vectorTo( point2 );
+			_start = start ? start.clone() : null;
+			_end = end ? end.clone() : null;
+			setLength();
 		}
 		
 		/**
 		 * The point at one end of the line.
 		 */
-		public function get point1() : Point3D
+		public function get start() : Point3D
 		{
-			return _point1;
+			return _start;
 		}
-		public function set point1( value : Point3D ) : void
+		public function set start( value : Point3D ) : void
 		{
-			_point1 = value;
-			_length = _point1.vectorTo( _point2 );
+			_start = value.clone();
+			setLength();
 		}
 
 		/**
 		 * The point at the other end of the line.
 		 */
-		public function get point2() : Point3D
+		public function get end() : Point3D
 		{
-			return _point2;
+			return _end;
 		}
-		public function set point2( value : Point3D ) : void
+		public function set end( value : Point3D ) : void
 		{
-			_point2 = value;
-			_length = point1.vectorTo( point2 );
+			_end = value.clone();
+			setLength();
+		}
+
+		private function setLength():void
+		{
+			if( _start && _end )
+			{
+				_length = _start.vectorTo( _end );
+			}
 		}
 
 		/**
@@ -87,19 +95,18 @@ package org.flintparticles.threeD.zones
 		 * This method is used by the initializers and actions that
 		 * use the zone. Usually, it need not be called directly by the user.
 		 * 
-		 * @param x The x coordinate of the location to test for.
-		 * @param y The y coordinate of the location to test for.
+		 * @param p The location to test for.
 		 * @return true if point is inside the zone, false if it is outside.
 		 */
 		public function contains( p:Point3D ):Boolean
 		{
 			// is not on line through points if cross product is not zero
-			if( ! _point1.vectorTo( p ).crossProduct( _length ).equals( Vector3D.ZERO ) )
+			if( ! _start.vectorTo( p ).crossProduct( _length ).lengthSquared < 0.00001 )
 			{
 				return false;
 			}
 			// is not between points if dot product of line to each point is the same sign
-			return _point1.vectorTo( p ).dotProduct( _point2.vectorTo( p ) ) <= 0;
+			return _start.vectorTo( p ).dotProduct( _end.vectorTo( p ) ) <= 0;
 		}
 		
 		/**
@@ -111,7 +118,7 @@ package org.flintparticles.threeD.zones
 		 */
 		public function getLocation():Point3D
 		{
-			return _point1.add( _length.multiply( Math.random() ) );
+			return _start.add( _length.multiply( Math.random() ) );
 		}
 		
 		/**

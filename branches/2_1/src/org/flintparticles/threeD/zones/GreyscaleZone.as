@@ -2,8 +2,8 @@
  * FLINT PARTICLE SYSTEM
  * .....................
  * 
- * Author: Richard Lord (Big Room)
- * Copyright (c) Big Room Ventures Ltd. 2008
+ * Author: Richard Lord
+ * Copyright (c) Richard Lord 2008-2009
  * http://flintparticles.org
  * 
  * 
@@ -74,14 +74,17 @@ package org.flintparticles.threeD.zones
 		 * @param left The left side of the zone from the corner. The length of the
 		 * vector indicates how long the side is.
 		 */
-		public function GreyscaleZone( bitmapData : BitmapData, corner:Point3D, top:Vector3D, left:Vector3D )
+		public function GreyscaleZone( bitmapData : BitmapData = null, corner:Point3D = null, top:Vector3D = null, left:Vector3D = null )
 		{
 			_bitmapData = bitmapData;
-			_corner = corner.clone();
-			_top = top.clone();
-			_left = left.clone();
-			_dirty = true;
-			invalidate();
+			_corner = corner ? corner.clone() : null;
+			_top = top ? top.clone() : null;
+			_left = left ? left.clone() : null;
+			if( _bitmapData )
+			{
+				_dirty = true;
+				invalidate();
+			}
 		}
 		
 		/**

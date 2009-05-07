@@ -2,8 +2,8 @@
  * FLINT PARTICLE SYSTEM
  * .....................
  * 
- * Author: Richard Lord (Big Room)
- * Copyright (c) Big Room Ventures Ltd. 2008
+ * Author: Richard Lord
+ * Copyright (c) Richard Lord 2008-2009
  * http://flintparticles.org
  * 
  * 
@@ -57,11 +57,11 @@ package org.flintparticles.threeD.zones
 		 * @param side2 The other side of the zone from the corner. The length of the
 		 * vector indicates how long the side is.
 		 */
-		public function ParallelogramZone( corner:Point3D, side1:Vector3D, side2:Vector3D )
+		public function ParallelogramZone( corner:Point3D = null, side1:Vector3D = null, side2:Vector3D = null )
 		{
-			_corner = corner.clone();
-			_side1 = side1.clone();
-			_side2 = side2.clone();
+			_corner = corner ? corner.clone() : null;
+			_side1 = side1 ? side1.clone() : null;
+			_side2 = side2 ? side2.clone() : null;
 			_dirty = true;
 		}
 		

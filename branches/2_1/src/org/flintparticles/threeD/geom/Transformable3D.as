@@ -3,7 +3,7 @@
  * .....................
  * 
  * Author: Richard Lord
- * Copyright (c) Big Room Ventures Ltd. 2008
+ * Copyright (c) Richard Lord 2008-2009
  * http://flintparticles.org/
  * 
  * Licence Agreement
@@ -38,7 +38,7 @@ package org.flintparticles.threeD.geom
 	 * vector in 3D space. The forth coordinate (w) is used to distinguish between
 	 * points and vectors, and to automate the variation under transformations.</p>
 	 */
-	public class Transformable3D
+	internal class Transformable3D
 	{
 		/**
 		 * The x coordinate of the point or vector.
@@ -100,7 +100,7 @@ package org.flintparticles.threeD.geom
 		 * Returns the actual type of the object - Point3D or Vector3D. Used by some 
 		 * matrix operations.
 		 */
-		public function get classType():Class
+		internal function get classType():Class
 		{
 			return Transformable3D;
 		}

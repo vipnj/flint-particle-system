@@ -2,8 +2,8 @@
  * FLINT PARTICLE SYSTEM
  * .....................
  * 
- * Author: Richard Lord (Big Room)
- * Copyright (c) Big Room Ventures Ltd. 2008
+ * Author: Richard Lord
+ * Copyright (c) Richard Lord 2008-2009
  * http://flintparticles.org
  * 
  * 
@@ -50,6 +50,8 @@ package org.flintparticles.threeD.initializers
 	public class ScaleAllsInit extends InitializerBase
 	{
 		private var _scales:WeightedArray;
+		private var _mxmlScales:Array;
+		private var _mxmlWeights:Array;
 		
 		/**
 		 * The constructor creates a ScaleAllsInit initializer for use by 
@@ -70,6 +72,22 @@ package org.flintparticles.threeD.initializers
 			{
 				return;
 			}
+			init( scales, weights );
+		}
+		
+		override public function addedToEmitter( emitter:Emitter ):void
+		{
+			if( _mxmlScales )
+			{
+				init( _mxmlScales, _mxmlWeights );
+				_mxmlScales = null;
+				_mxmlWeights = null;
+			}
+		}
+		
+		private function init( scales:Array, weights:Array ):void
+		{
+			_scales.clear();
 			var len:int = scales.length;
 			var i:int;
 			if( weights != null && weights.length == len )
@@ -98,10 +116,46 @@ package org.flintparticles.threeD.initializers
 			_scales.remove( scale );
 		}
 
+		public function set scales( value:Array ):void
+		{
+			if( value.length == 1 && value[0] is String )
+			{
+				_mxmlScales = value[0].split( "," );
+			}
+			else
+			{
+				_mxmlScales = value;
+			}
+			checkStartValues();
+		}
+		
+		public function set weights( value:Array ):void
+		{
+			if( value.length == 1 && value[0] is String )
+			{
+				_mxmlWeights = value[0].split( "," );
+			}
+			else
+			{
+				_mxmlWeights = value;
+			}
+			checkStartValues();
+		}
+		
+		private function checkStartValues():void
+		{
+			if( _mxmlScales && _mxmlWeights )
+			{
+				init( _mxmlScales, _mxmlWeights );
+				_mxmlScales = null;
+				_mxmlWeights = null;
+			}
+		}
+
 		/**
 		 * @inheritDoc
 		 * 
-		 * returns -10 to ensure it occurs after the mass and radius assignment classes 
+		 * returns -10 to ensure it occurs after the mass and radius assignment 
 		 * classes like CollisionRadiusInit and MassInit.
 		 */
 		override public function getDefaultPriority():Number

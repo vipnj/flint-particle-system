@@ -2,8 +2,8 @@
  * FLINT PARTICLE SYSTEM
  * .....................
  * 
- * Author: Richard Lord (Big Room)
- * Copyright (c) Big Room Ventures Ltd. 2008
+ * Author: Richard Lord
+ * Copyright (c) Richard Lord 2008-2009
  * http://flintparticles.org
  * 
  * 
@@ -55,9 +55,9 @@ package org.flintparticles.threeD.zones
 		 * @param innerRadius The inner radius of the sphere. This defines the hollow 
 		 * center of the sphere. If set to zero, the sphere is solid throughout. 
 		 */
-		public function SphereZone( center:Point3D, outerRadius:Number, innerRadius:Number = 0 )
+		public function SphereZone( center:Point3D = null, outerRadius:Number = 0, innerRadius:Number = 0 )
 		{
-			_center = center.clone();
+			_center = center ? center.clone() : new Point3D( 0, 0, 0 );
 			_innerRadius = innerRadius;
 			_innerRadiusSq = _innerRadius * _innerRadius;
 			_outerRadius = outerRadius;

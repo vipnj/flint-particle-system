@@ -2,8 +2,8 @@
  * FLINT PARTICLE SYSTEM
  * .....................
  * 
- * Author: Richard Lord (Big Room)
- * Copyright (c) Big Room Ventures Ltd. 2008
+ * Author: Richard Lord
+ * Copyright (c) Richard Lord 2008-2009
  * http://flintparticles.org
  * 
  * 
@@ -64,10 +64,10 @@ package org.flintparticles.threeD.zones
 		 * @param innerRadius The inner radius of the disc. This defines the hole 
 		 * in the center of the disc. If set to zero, there is no hole. 
 		 */
-		public function DiscZone( center:Point3D, normal:Vector3D, outerRadius:Number, innerRadius:Number = 0 )
+		public function DiscZone( center:Point3D = null, normal:Vector3D = null, outerRadius:Number = 0, innerRadius:Number = 0 )
 		{
-			_center = center.clone();
-			_normal = normal.unit();
+			_center = center ? center.clone() : null;
+			_normal = normal ? normal.unit() : null;
 			_innerRadius = innerRadius;
 			_innerRadiusSq = _innerRadius * _innerRadius;
 			_outerRadius = outerRadius;

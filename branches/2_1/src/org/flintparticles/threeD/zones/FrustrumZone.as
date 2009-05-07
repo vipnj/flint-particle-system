@@ -2,8 +2,8 @@
  * FLINT PARTICLE SYSTEM
  * .....................
  * 
- * Author: Richard Lord (Big Room)
- * Copyright (c) Big Room Ventures Ltd. 2008
+ * Author: Richard Lord
+ * Copyright (c) Richard Lord 2008-2009
  * http://flintparticles.org
  * 
  * 
@@ -63,7 +63,7 @@ package org.flintparticles.threeD.zones
 		 * may want a slightly larger rectangle if this zone is used for
 		 * removing particles via a DeathZone action.
 		 */
-		public function FrustrumZone( camera:Camera, viewRect:Rectangle )
+		public function FrustrumZone( camera:Camera = null, viewRect:Rectangle = null )
 		{
 			_camera = camera;
 			_viewRect = viewRect;

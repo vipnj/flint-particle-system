@@ -4,7 +4,7 @@
  * .....................
  * 
  * Author: Richard Lord
- * Copyright (c) Big Room Ventures Ltd. 2008
+ * Copyright (c) Richard Lord 2008-2009
  * http://flintparticles.org/
  * 
  * Licence Agreement
@@ -74,7 +74,7 @@ package
 			renderer.addEmitter( emitter );
 			emitter.start();
 			
-			addEventListener( MouseEvent.CLICK, explode, false, 0, true );
+			stage.addEventListener( MouseEvent.CLICK, explode, false, 0, true );
 		}
 		
 		private function explode( ev:MouseEvent ):void

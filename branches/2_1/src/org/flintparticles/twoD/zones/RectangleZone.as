@@ -2,8 +2,8 @@
  * FLINT PARTICLE SYSTEM
  * .....................
  * 
- * Author: Richard Lord (Big Room)
- * Copyright (c) Big Room Ventures Ltd. 2008
+ * Author: Richard Lord
+ * Copyright (c) Richard Lord 2008-2009
  * http://flintparticles.org
  * 
  * 
@@ -59,14 +59,8 @@ package org.flintparticles.twoD.zones
 			_top = top;
 			_right = right;
 			_bottom = bottom;
-			if( _right && _left )
-			{
-				_width = right - left;
-			}
-			if( _top && _bottom )
-			{
-				_height = bottom - top;
-			}
+			_width = right - left;
+			_height = bottom - top;
 		}
 		
 		/**

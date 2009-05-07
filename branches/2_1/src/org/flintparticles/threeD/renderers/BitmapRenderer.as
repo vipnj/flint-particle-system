@@ -2,8 +2,8 @@
  * FLINT PARTICLE SYSTEM
  * .....................
  * 
- * Author: Richard Lord (Big Room)
- * Copyright (c) Big Room Ventures Ltd. 2008
+ * Author: Richard Lord
+ * Copyright (c) Richard Lord 2008-2009
  * http://flintparticles.org
  * 
  * 
@@ -222,6 +222,46 @@ package org.flintparticles.threeD.renderers
 		}
 		
 		/**
+		 * The array of all filters being applied before rendering.
+		 */
+		public function get preFilters():Array
+		{
+			return _preFilters.slice();
+		}
+		public function set preFilters( value:Array ):void
+		{
+			var filter:BitmapFilter;
+			for each( filter in _preFilters )
+			{
+				removeFilter( filter );
+			}
+			for each( filter in value )
+			{
+				addFilter( filter, false );
+			}
+		}
+
+		/**
+		 * The array of all filters being applied before rendering.
+		 */
+		public function get postFilters():Array
+		{
+			return _postFilters.slice();
+		}
+		public function set postFilters( value:Array ):void
+		{
+			var filter:BitmapFilter;
+			for each( filter in _postFilters )
+			{
+				removeFilter( filter );
+			}
+			for each( filter in value )
+			{
+				addFilter( filter, true );
+			}
+		}
+		
+		/**
 		 * Sets a palette map for the renderer. See the paletteMap method in flash's BitmapData object for
 		 * information about how palette maps work. The palette map will be applied to the full canvas of the 
 		 * renderer after all filters have been applied and the particles have been drawn.
@@ -258,9 +298,10 @@ package org.flintparticles.threeD.renderers
 			if( _bitmap )
 			{
 				removeChild( _bitmap );
+				_bitmap = null;
 			}
 			_bitmap = new Bitmap( null, "auto", _smoothing);
-			_bitmap.bitmapData = new BitmapData( _canvas.width, _canvas.height, true, 0 );
+			_bitmap.bitmapData = new BitmapData( Math.ceil( _canvas.width ), Math.ceil( _canvas.height ), true, 0 );
 			addChild( _bitmap );
 			_bitmap.x = _canvas.x;
 			_bitmap.y = _canvas.y;

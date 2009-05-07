@@ -2,8 +2,8 @@
  * FLINT PARTICLE SYSTEM
  * .....................
  * 
- * Author: Richard Lord (Big Room)
- * Copyright (c) Big Room Ventures Ltd. 2008
+ * Author: Richard Lord
+ * Copyright (c) Richard Lord 2008-2009
  * http://flintparticles.org
  * 
  * 
@@ -62,14 +62,14 @@ package org.flintparticles.threeD.zones
 		 * @param depthAxis The axis along which the depth is measured. The box is rotated
 		 * so that the depth is in this direction.
 		 */
-		public function BoxZone( width:Number, height:Number, depth:Number, center:Point3D, upAxis:Vector3D, depthAxis:Vector3D )
+		public function BoxZone( width:Number = 0, height:Number = 0, depth:Number = 0, center:Point3D = null, upAxis:Vector3D = null, depthAxis:Vector3D = null )
 		{
 			_width = width;
 			_height = height;
 			_depth = depth;
-			_center = center.clone();
-			_upAxis = upAxis.unit();
-			_depthAxis = depthAxis.unit();
+			_center = center ? center.clone() : null;
+			_upAxis = upAxis ? upAxis.unit() : null;
+			_depthAxis = depthAxis ? depthAxis.unit() : null;
 			_dirty = true;
 		}
 		

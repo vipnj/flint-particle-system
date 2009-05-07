@@ -2,8 +2,8 @@
  * FLINT PARTICLE SYSTEM
  * .....................
  * 
- * Author: Richard Lord (Big Room)
- * Copyright (c) Big Room Ventures Ltd. 2008
+ * Author: Richard Lord
+ * Copyright (c) Richard Lord 2008-2009
  * http://flintparticles.org
  * 
  * 
@@ -65,10 +65,10 @@ package org.flintparticles.threeD.zones
 		 * hole in the center of the cylinder that runs the length of the cylinder.
 		 * If this is set to zero, there is no hole. 
 		 */
-		public function CylinderZone( center:Point3D, axis:Vector3D, length:Number, outerRadius:Number, innerRadius:Number = 0 )
+		public function CylinderZone( center:Point3D = null, axis:Vector3D = null, length:Number = 0, outerRadius:Number = 0, innerRadius:Number = 0 )
 		{
-			_center = center.clone();
-			_axis = axis.unit();
+			_center = center ? center.clone() : null;
+			_axis = axis ? axis.unit() : null;
 			_innerRadius = innerRadius;
 			_innerRadiusSq = innerRadius * innerRadius;
 			_outerRadius = outerRadius;
