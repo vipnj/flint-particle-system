@@ -110,7 +110,7 @@ package org.flintparticles.threeD.renderers
 		
 		/**
 		 * The direction the camera is pointing. Setting this will invalidate any
-		 * setting for the target, sincethe camera now points in this direction
+		 * setting for the target, since the camera now points in this direction
 		 * rather than pointing towards the target.
 		 * 
 		 * @see #target

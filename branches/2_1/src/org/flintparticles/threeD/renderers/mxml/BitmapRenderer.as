@@ -107,7 +107,7 @@ package org.flintparticles.threeD.renderers.mxml
 		/**
 		 * @private
 		 */
-		protected var _paletteMap:Array;
+		protected var _colorMap:Array;
 		/**
 		 * @private
 		 */
@@ -233,7 +233,47 @@ package org.flintparticles.threeD.renderers.mxml
 				}
 			}
 		}
-		
+
+		/**
+		 * The array of all filters being applied before rendering.
+		 */
+		public function get preFilters():Array
+		{
+			return _preFilters.slice();
+		}
+		public function set preFilters( value:Array ):void
+		{
+			var filter:BitmapFilter;
+			for each( filter in _preFilters )
+			{
+				removeFilter( filter );
+			}
+			for each( filter in value )
+			{
+				addFilter( filter, false );
+			}
+		}
+
+		/**
+		 * The array of all filters being applied before rendering.
+		 */
+		public function get postFilters():Array
+		{
+			return _postFilters.slice();
+		}
+		public function set postFilters( value:Array ):void
+		{
+			var filter:BitmapFilter;
+			for each( filter in _postFilters )
+			{
+				removeFilter( filter );
+			}
+			for each( filter in value )
+			{
+				addFilter( filter, true );
+			}
+		}
+				
 		/**
 		 * Sets a palette map for the renderer. See the paletteMap method in flash's BitmapData object for
 		 * information about how palette maps work. The palette map will be applied to the full canvas of the 
@@ -241,18 +281,18 @@ package org.flintparticles.threeD.renderers.mxml
 		 */
 		public function setPaletteMap( red : Array = null , green : Array = null , blue : Array = null, alpha : Array = null ) : void
 		{
-			_paletteMap = new Array(4);
-			_paletteMap[0] = alpha;
-			_paletteMap[1] = red;
-			_paletteMap[2] = green;
-			_paletteMap[3] = blue;
+			_colorMap = new Array(4);
+			_colorMap[0] = alpha;
+			_colorMap[1] = red;
+			_colorMap[2] = green;
+			_colorMap[3] = blue;
 		}
 		/**
 		 * Clears any palette map that has been set for the renderer.
 		 */
 		public function clearPaletteMap() : void
 		{
-			_paletteMap = null;
+			_colorMap = null;
 		}
 		
 		/**
@@ -394,9 +434,9 @@ package org.flintparticles.threeD.renderers.mxml
 			{
 				_bitmapData.applyFilter( _bitmapData, _bitmapData.rect, BitmapRenderer.ZERO_POINT, _postFilters[i] );
 			}
-			if( _paletteMap )
+			if( _colorMap )
 			{
-				_bitmapData.paletteMap( _bitmapData, _bitmapData.rect, ZERO_POINT, _paletteMap[1] , _paletteMap[2] , _paletteMap[3] , _paletteMap[0] );
+				_bitmapData.paletteMap( _bitmapData, _bitmapData.rect, ZERO_POINT, _colorMap[1] , _colorMap[2] , _colorMap[3] , _colorMap[0] );
 			}
 			_bitmapData.unlock();
 		}
@@ -472,7 +512,7 @@ package org.flintparticles.threeD.renderers.mxml
 		override protected function updateDisplayList( unscaledWidth:Number, unscaledHeight:Number ):void
 		{
 			super.updateDisplayList( unscaledWidth, unscaledHeight );
-			
+
 			if( _canvasChanged )
 			{
 				createBitmap();

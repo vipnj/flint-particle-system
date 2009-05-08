@@ -66,7 +66,7 @@ package org.flintparticles.threeD.zones
 		 */
 		public function DiscZone( center:Point3D = null, normal:Vector3D = null, outerRadius:Number = 0, innerRadius:Number = 0 )
 		{
-			_center = center ? center.clone() : null;
+			_center = center ? center.clone() : new Point3D( 0, 0, 0 );
 			_normal = normal ? normal.unit() : null;
 			_innerRadius = innerRadius;
 			_innerRadiusSq = _innerRadius * _innerRadius;

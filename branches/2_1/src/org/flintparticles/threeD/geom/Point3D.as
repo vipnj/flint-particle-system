@@ -110,7 +110,7 @@ package org.flintparticles.threeD.geom
 		/**
 		 * @inheritDoc
 		 */
-		override public function get classType():Class
+		override internal function get classType():Class
 		{
 			return Point3D;
 		}
