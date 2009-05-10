@@ -30,20 +30,20 @@
 
 package org.flintparticles.threeD.renderers
 {
-	import org.flintparticles.common.renderers.SpriteRendererBase;
-	import org.flintparticles.threeD.geom.Matrix3D;
-	import org.flintparticles.threeD.geom.Point3D;
-	import org.flintparticles.threeD.geom.Quaternion;
-	import org.flintparticles.threeD.geom.Vector3D;
-	import org.flintparticles.threeD.particles.Particle3D;
-	
 	import flash.display.Bitmap;
 	import flash.display.BitmapData;
 	import flash.display.DisplayObject;
 	import flash.filters.BitmapFilter;
 	import flash.geom.Matrix;
 	import flash.geom.Point;
-	import flash.geom.Rectangle;	
+	import flash.geom.Rectangle;
+	
+	import org.flintparticles.common.renderers.SpriteRendererBase;
+	import org.flintparticles.threeD.geom.Matrix3D;
+	import org.flintparticles.threeD.geom.Point3D;
+	import org.flintparticles.threeD.geom.Quaternion;
+	import org.flintparticles.threeD.geom.Vector3D;
+	import org.flintparticles.threeD.particles.Particle3D;	
 
 	/**
 	 * The BitmapRenderer is a native Flint 3D renderer that draws particles
@@ -93,6 +93,9 @@ package org.flintparticles.threeD.renderers
 		 */
 		protected var _bitmap:Bitmap;
 		
+		/**
+		 * @private
+		 */
 		protected var _bitmapData:BitmapData;
 		/**
 		 * @private
@@ -114,6 +117,14 @@ package org.flintparticles.threeD.renderers
 		 * @private
 		 */
 		protected var _canvas:Rectangle;
+		/**
+		 * @private
+		 */
+		protected var _halfWidth:Number;
+		/**
+		 * @private
+		 */
+		protected var _halfHeight:Number;
 
 		/**
 		 * The constructor creates a BitmapRenderer. After creation it should be
@@ -309,6 +320,8 @@ package org.flintparticles.threeD.renderers
 			addChild( _bitmap );
 			_bitmap.x = _canvas.x;
 			_bitmap.y = _canvas.y;
+			_halfWidth = _bitmapData.width * 0.5;
+			_halfHeight = _bitmapData.height * 0.5;
 		}
 		
 		/**
@@ -445,11 +458,11 @@ package org.flintparticles.threeD.renderers
 			{
 				var cos:Number = scale * Math.cos( rot );
 				var sin:Number = scale * Math.sin( rot );
-				matrix = new Matrix( cos, sin, -sin, cos, pos.x - _canvas.x, -pos.y - _canvas.y );
+				matrix = new Matrix( cos, sin, -sin, cos, pos.x + _halfWidth, -pos.y + _halfHeight );
 			}
 			else
 			{
-				matrix = new Matrix( scale, 0, 0, scale, pos.x - _canvas.x, -pos.y - _canvas.y );
+				matrix = new Matrix( scale, 0, 0, scale, pos.x + _halfWidth, -pos.y + _halfHeight );
 			}
 
 			_bitmapData.draw( particle.image, matrix, particle.colorTransform, DisplayObject( particle.image ).blendMode, null, _smoothing );

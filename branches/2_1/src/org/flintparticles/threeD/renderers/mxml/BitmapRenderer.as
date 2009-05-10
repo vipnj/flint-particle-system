@@ -116,6 +116,14 @@ package org.flintparticles.threeD.renderers.mxml
 		 * @private
 		 */
 		protected var _canvas:Rectangle;
+		/**
+		 * @private
+		 */
+		protected var _halfWidth:Number;
+		/**
+		 * @private
+		 */
+		protected var _halfHeight:Number;
 
 		private var _canvasChanged:Boolean = true;
 
@@ -320,6 +328,8 @@ package org.flintparticles.threeD.renderers.mxml
 			addChild( _bitmap );
 			_bitmap.x = _canvas.x;
 			_bitmap.y = _canvas.y;
+			_halfWidth = _bitmapData.width * 0.5;
+			_halfHeight = _bitmapData.height * 0.5;
 		}
 		
 		/**
@@ -491,11 +501,11 @@ package org.flintparticles.threeD.renderers.mxml
 			{
 				var cos:Number = scale * Math.cos( rot );
 				var sin:Number = scale * Math.sin( rot );
-				matrix = new Matrix( cos, sin, -sin, cos, pos.x - _canvas.x, -pos.y - _canvas.y );
+				matrix = new Matrix( cos, sin, -sin, cos, pos.x + _halfWidth, -pos.y + _halfHeight );
 			}
 			else
 			{
-				matrix = new Matrix( scale, 0, 0, scale, pos.x - _canvas.x, -pos.y - _canvas.y );
+				matrix = new Matrix( scale, 0, 0, scale, pos.x + _halfWidth, -pos.y + _halfHeight );
 			}
 
 			_bitmapData.draw( particle.image, matrix, particle.colorTransform, DisplayObject( particle.image ).blendMode, null, _smoothing );
