@@ -68,10 +68,10 @@ package org.flintparticles.threeD.actions
 		 */
 		public function MatchVelocity( maxDistance:Number = 0, acceleration:Number = 0 )
 		{
-			this.maxDistance = maxDistance;
-			this.acceleration = acceleration;
 			d = new Vector3D();
 			vel = new Vector3D();
+			this.maxDistance = maxDistance;
+			this.acceleration = acceleration;
 		}
 		
 		/**

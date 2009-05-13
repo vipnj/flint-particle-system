@@ -41,7 +41,9 @@ package org.flintparticles.threeD.actions
 	 */
 	public class TargetRotateVelocity extends ActionBase
 	{
-		private var _vel:Vector3D;
+		private var _rotateSpeed:Number = 0;
+		private var _axis:Vector3D;
+		private var _angVel:Vector3D;
 		private var _rate:Number;
 		private var _temp:Vector3D;
 		
@@ -57,19 +59,15 @@ package org.flintparticles.threeD.actions
 		 * @param rate Adjusts how quickly the particle reaches the target angular velocity.
 		 * Larger numbers cause it to approach the target angular velocity more quickly.
 		 */
-		public function TargetRotateVelocity( axis:Vector3D = null, angVelocity:Number = 0, rate:Number = 0.1 )
+		public function TargetRotateVelocity( axis:Vector3D = null, rotateSpeed:Number = 0, rate:Number = 0.1 )
 		{
-			_vel = axis.unit().scaleBy( angVelocity );
-			_rate = rate;
 			_temp = new Vector3D();
-		}
-		
-		/**
-		 * The target angular velocity, in radians per second.
-		 */
-		public function setTargetVelocity( axis:Vector3D, angVelocity:Number ):void
-		{
-			_vel = axis.unit().scaleBy( angVelocity );
+			this.rotateSpeed = rotateSpeed;
+			if( axis )
+			{
+				this.axis = axis;
+			}
+			this.rate = rate;
 		}
 		
 		/**
@@ -86,12 +84,41 @@ package org.flintparticles.threeD.actions
 		}
 		
 		/**
+		 * The axis for the target angular velocity.
+		 */
+		public function get axis():Vector3D
+		{
+			return _axis;
+		}
+		public function set axis( value:Vector3D ):void
+		{
+			_axis = value.unit();
+			_angVel = _axis.multiply( _rotateSpeed );
+		}
+		
+		/**
+		 * The size of the target angular velocity.
+		 */
+		public function get rotateSpeed():Number
+		{
+			return _rotateSpeed;
+		}
+		public function set rotateSpeed( value:Number ):void
+		{
+			_rotateSpeed = value;
+			if( _axis )
+			{
+				_angVel = _axis.multiply( _rotateSpeed );
+			}
+		}
+
+		/**
 		 * @inheritDoc
 		 */
 		override public function update( emitter:Emitter, particle:Particle, time:Number ):void
 		{
 			var p:Particle3D = Particle3D( particle );
-			p.angVelocity.incrementBy( _vel.subtract( p.angVelocity, _temp ).scaleBy( _rate * time ) );
+			p.angVelocity.incrementBy( _angVel.subtract( p.angVelocity, _temp ).scaleBy( _rate * time ) );
 		}
 	}
 }

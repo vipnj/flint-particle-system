@@ -72,9 +72,8 @@ package org.flintparticles.twoD.actions
 		 */
 		public function ApproachNeighbours( maxDistance:Number = 0, acceleration:Number = 0 )
 		{
-			_max = maxDistance;
-			_maxSq = maxDistance * maxDistance;
-			_acc = acceleration;
+			this.maxDistance = maxDistance;
+			this.acceleration = acceleration;
 		}
 		
 		/**

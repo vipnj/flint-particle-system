@@ -69,11 +69,11 @@ package org.flintparticles.twoD.actions
 		 */
 		public function BoundingBox( left:Number = 0, top:Number = 0, right:Number = 0, bottom:Number = 0, bounce:Number = 1 )
 		{
-			_left = left;
-			_top = top;
-			_right = right;
-			_bottom = bottom;
-			_bounce = bounce;
+			this.left = left;
+			this.top = top;
+			this.right = right;
+			this.bottom = bottom;
+			this.bounce = bounce;
 		}
 
 		/**

@@ -62,8 +62,8 @@ package org.flintparticles.twoD.initializers
 		 */
 		public function RotationAbsolute( minAngle : Number = 0, maxAngle : Number = NaN )
 		{
-			_min = minAngle;
-			_max = maxAngle;
+			this.minAngle = minAngle;
+			this.maxAngle = maxAngle;
 		}
 		
 		/**

@@ -67,7 +67,7 @@ package org.flintparticles.threeD.initializers
 		 */
 		public function Position( zone : Zone3D = null )
 		{
-			_zone = zone;
+			this.zone = zone;
 		}
 		
 		/**

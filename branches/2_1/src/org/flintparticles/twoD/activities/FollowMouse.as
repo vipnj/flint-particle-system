@@ -57,7 +57,7 @@ package org.flintparticles.twoD.activities
 		 */
 		public function FollowMouse( renderer:DisplayObject = null )
 		{
-			_renderer = renderer;
+			this.renderer = renderer;
 		}
 		
 		/**

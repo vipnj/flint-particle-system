@@ -86,10 +86,10 @@ package org.flintparticles.twoD.actions
 		 */
 		public function GravityWell( power:Number = 0, x:Number = 0, y:Number = 0, epsilon:Number = 100 )
 		{
-			_power = power * _gravityConst;
-			_x = x;
-			_y = y;
-			_epsilonSq = epsilon * epsilon;
+			this.power = power;
+			this.x = x;
+			this.y = y;
+			this.epsilon = epsilon;
 		}
 		
 		/**

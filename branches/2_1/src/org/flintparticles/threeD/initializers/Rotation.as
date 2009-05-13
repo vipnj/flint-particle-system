@@ -67,10 +67,13 @@ package org.flintparticles.threeD.initializers
 		 */
 		public function Rotation( axis:Vector3D = null, minAngle:Number = 0, maxAngle:Number = NaN )
 		{
-			_axis = axis.unit();
-			_min = minAngle;
-			_max = maxAngle;
 			_rot = new Quaternion();
+			if( axis )
+			{
+				this.axis = axis;
+			}
+			this.minAngle = minAngle;
+			this.maxAngle = maxAngle;
 		}
 		
 		/**
@@ -82,7 +85,7 @@ package org.flintparticles.threeD.initializers
 		}
 		public function set axis( value:Vector3D ):void
 		{
-			_axis = value;
+			_axis = value.unit();
 		}
 		
 		/**

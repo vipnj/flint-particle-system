@@ -53,7 +53,7 @@ package org.flintparticles.twoD.activities
 		 */
 		public function RotateEmitter( angularVelocity:Number = 0 )
 		{
-			_angularVelocity = angularVelocity;
+			this.angularVelocity = angularVelocity;
 		}
 		
 		/**

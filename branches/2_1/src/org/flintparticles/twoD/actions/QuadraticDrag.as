@@ -60,7 +60,7 @@ package org.flintparticles.twoD.actions
 		 */
 		public function QuadraticDrag( drag:Number = 0 )
 		{
-			_drag = drag;
+			this.drag = drag;
 		}
 		
 		/**

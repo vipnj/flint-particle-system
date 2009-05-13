@@ -59,9 +59,9 @@ package org.flintparticles.threeD.actions
 		 */
 		public function TargetVelocity( targetVelocity:Vector3D = null, rate:Number = 0.1 )
 		{
-			this.targetVelocity = targetVelocity;
-			this.rate = rate;
 			_temp = new Vector3D();
+			this.targetVelocity = targetVelocity ? targetVelocity : Vector3D.ZERO;
+			this.rate = rate;
 		}
 		
 		/**
@@ -69,7 +69,7 @@ package org.flintparticles.threeD.actions
 		 */
 		public function get targetVelocity():Vector3D
 		{
-			return _vel.clone();
+			return _vel;
 		}
 		public function set targetVelocity( value:Vector3D ):void
 		{
@@ -89,6 +89,42 @@ package org.flintparticles.threeD.actions
 			_rate = value;
 		}
 		
+		/**
+		 * The x coordinate of the target velocity.
+		 */
+		public function get x():Number
+		{
+			return _vel.x;
+		}
+		public function set x( value:Number ):void
+		{
+			_vel.x = value;
+		}
+		
+		/**
+		 * The y coordinate of  the target velocity.
+		 */
+		public function get y():Number
+		{
+			return _vel.y;
+		}
+		public function set y( value:Number ):void
+		{
+			_vel.y = value;
+		}
+		
+		/**
+		 * The z coordinate of the target velocity.
+		 */
+		public function get z():Number
+		{
+			return _vel.z;
+		}
+		public function set z( value:Number ):void
+		{
+			_vel.z = value;
+		}
+
 		/**
 		 * @inheritDoc
 		 */

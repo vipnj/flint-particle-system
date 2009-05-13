@@ -71,7 +71,7 @@ package org.flintparticles.twoD.initializers
 		 */
 		public function Velocity( zone:Zone2D = null )
 		{
-			_zone = zone;
+			this.zone = zone;
 		}
 		
 		/**

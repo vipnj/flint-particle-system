@@ -41,8 +41,9 @@ package org.flintparticles.threeD.activities
 	 */
 	public class RotateEmitter extends ActivityBase
 	{
-		private var _angularVelocity:Vector3D;
-		private var q:Quaternion;
+		private var _rotateSpeed:Number = 0;
+		private var _axis:Vector3D;
+		private var _angVel:Quaternion;
 		private var temp:Quaternion;
 		
 		/**
@@ -55,28 +56,53 @@ package org.flintparticles.threeD.activities
 		 * @para angularVelocity The angular velocity for the emitter in 
 		 * radians per second.
 		 */
-		public function RotateEmitter( angularVelocity:Vector3D = null )
+		public function RotateEmitter( axis:Vector3D = null, rotateSpeed:Number = 0 )
 		{
-			_angularVelocity = angularVelocity.clone();
 			temp = new Quaternion();
-			q = new Quaternion( 0, angularVelocity.x * 0.5, angularVelocity.y * 0.5, angularVelocity.z * 0.5 );
+			_angVel = new Quaternion();
+			this.rotateSpeed = rotateSpeed;
+			if( axis )
+			{
+				this.axis = axis;
+			}
+		}
+		
+		
+		/**
+		 * The axis for the target angular velocity.
+		 */
+		public function get axis():Vector3D
+		{
+			return _axis;
+		}
+		public function set axis( value:Vector3D ):void
+		{
+			_axis = value.unit();
+			setAngularVelocity( _axis.multiply( _rotateSpeed ) );
 		}
 		
 		/**
-		 * The angular velocity for the emitter in 
-		 * radians per second.
+		 * The size of the target angular velocity.
 		 */
-		public function get angularVelocity():Vector3D
+		public function get rotateSpeed():Number
 		{
-			return _angularVelocity;
+			return _rotateSpeed;
 		}
-		public function set angularVelocity( value:Vector3D ):void
+		public function set rotateSpeed( value:Number ):void
 		{
-			_angularVelocity = value.clone();
-			q.w = 0;
-			q.x = _angularVelocity.x * 0.5;
-			q.y = _angularVelocity.y * 0.5;
-			q.z = _angularVelocity.z * 0.5;
+			_rotateSpeed = value;
+			if( _axis )
+			{
+				setAngularVelocity( _axis.multiply( _rotateSpeed ) );
+			}
+		}
+
+		private function setAngularVelocity( value:Vector3D ):void
+		{
+			_angVel.w = 0;
+			_angVel.x = value.x * 0.5;
+			_angVel.y = value.y * 0.5;
+			_angVel.z = value.z * 0.5;
 		}
 		
 		/**
@@ -85,7 +111,7 @@ package org.flintparticles.threeD.activities
 		override public function update( emitter : Emitter, time : Number ) : void
 		{
 			var e:Emitter3D = Emitter3D( emitter );
-			temp.assign( q );
+			temp.assign( _angVel );
 			temp.postMultiplyBy( e.rotation );
 			e.rotation.incrementBy( temp.scaleBy( time ) ).normalize();
 		}

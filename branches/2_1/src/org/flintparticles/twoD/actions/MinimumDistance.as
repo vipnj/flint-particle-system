@@ -60,9 +60,8 @@ package org.flintparticles.twoD.actions
 		 */
 		public function MinimumDistance( minimum:Number = 0, acceleration:Number = 0 )
 		{
-			_min = minimum;
-			_minSq = minimum * minimum;
-			_acc = acceleration;
+			this.minimum = minimum;
+			this.acceleration = acceleration;
 		}
 		
 		/**

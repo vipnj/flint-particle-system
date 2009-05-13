@@ -77,10 +77,10 @@ package org.flintparticles.threeD.actions
 		 */
 		public function Collide( bounce:Number= 1 )
 		{
-			_bounce = bounce;
 			_maxDistance = 0;
 			d = new Vector3D();
 			_temp = new Vector3D();
+			this.bounce = bounce;
 		}
 		
 		/**

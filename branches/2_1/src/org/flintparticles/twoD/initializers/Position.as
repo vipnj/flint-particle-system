@@ -65,7 +65,7 @@ package org.flintparticles.twoD.initializers
 		 */
 		public function Position( zone : Zone2D = null )
 		{
-			_zone = zone;
+			this.zone = zone;
 		}
 		
 		/**

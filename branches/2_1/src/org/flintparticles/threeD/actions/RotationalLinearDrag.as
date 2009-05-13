@@ -57,7 +57,7 @@ package org.flintparticles.threeD.actions
 		 */
 		public function RotationalLinearDrag( drag:Number = 0 )
 		{
-			_drag = drag;
+			this.drag = drag;
 		}
 		
 		/**

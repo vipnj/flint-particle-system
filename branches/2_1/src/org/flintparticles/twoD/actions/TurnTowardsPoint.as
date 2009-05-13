@@ -59,9 +59,9 @@ package org.flintparticles.twoD.actions
 		 */
 		public function TurnTowardsPoint( x:Number = 0, y:Number = 0, power:Number = 0 )
 		{
-			_power = power;
-			_x = x;
-			_y = y;
+			this.power = power;
+			this.x = x;
+			this.y = y;
 		}
 		
 		/**

@@ -79,7 +79,7 @@ package org.flintparticles.threeD.actions
 			this.maxY = maxY;
 			this.minZ = minZ;
 			this.maxZ = maxZ;
-			_bounce = bounce;
+			this.bounce = bounce;
 		}
 		
 		/**

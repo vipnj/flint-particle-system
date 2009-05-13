@@ -59,8 +59,8 @@ package org.flintparticles.twoD.actions
 		 */
 		public function Accelerate( accelerationX:Number = 0, accelerationY:Number = 0 )
 		{
-			_x = accelerationX;
-			_y = accelerationY;
+			this.x = accelerationX;
+			this.y = accelerationY;
 		}
 		
 		/**

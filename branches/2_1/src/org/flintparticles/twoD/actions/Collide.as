@@ -73,7 +73,7 @@ package org.flintparticles.twoD.actions
 		 */
 		public function Collide( bounce:Number = 1 )
 		{
-			_bounce = bounce;
+			this.bounce = bounce;
 			_maxDistance = 0;
 		}
 		

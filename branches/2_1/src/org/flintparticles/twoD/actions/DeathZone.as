@@ -68,8 +68,8 @@ package org.flintparticles.twoD.actions
 		 */
 		public function DeathZone( zone:Zone2D = null, zoneIsSafe:Boolean = false )
 		{
-			_zone = zone;
-			_invertZone = zoneIsSafe;
+			this.zone = zone;
+			this.zoneIsSafe = zoneIsSafe;
 		}
 		
 		/**

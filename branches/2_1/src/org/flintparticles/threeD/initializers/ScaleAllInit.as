@@ -68,15 +68,8 @@ package org.flintparticles.threeD.initializers
 		 */
 		public function ScaleAllInit( minScale:Number = 1, maxScale:Number = NaN )
 		{
-			_min = minScale;
-			if( isNaN( maxScale ) )
-			{
-				_max = _min;
-			}
-			else
-			{
-				_max = maxScale;
-			}
+			this.minScale = minScale;
+			this.maxScale = isNaN( maxScale ) ? minScale : maxScale;
 		}
 		
 		/**

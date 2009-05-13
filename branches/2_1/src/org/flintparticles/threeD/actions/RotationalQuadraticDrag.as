@@ -57,7 +57,7 @@ package org.flintparticles.threeD.actions
 		 */
 		public function RotationalQuadraticDrag( drag:Number = 0 )
 		{
-			_drag = drag;
+			this.drag = drag;
 		}
 		
 		/**

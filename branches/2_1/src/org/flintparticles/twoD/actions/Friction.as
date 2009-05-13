@@ -61,7 +61,7 @@ package org.flintparticles.twoD.actions
 		 */
 		public function Friction( friction:Number = 0 )
 		{
-			_friction = friction;
+			this.friction = friction;
 		}
 		
 		/**

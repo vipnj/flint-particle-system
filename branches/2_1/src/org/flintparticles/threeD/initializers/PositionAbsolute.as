@@ -65,7 +65,7 @@ package org.flintparticles.threeD.initializers
 		 */
 		public function PositionAbsolute( zone : Zone3D = null )
 		{
-			_zone = zone;
+			this.zone = zone;
 		}
 		
 		/**

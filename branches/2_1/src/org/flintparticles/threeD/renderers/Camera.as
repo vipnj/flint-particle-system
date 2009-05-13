@@ -32,7 +32,8 @@ package org.flintparticles.threeD.renderers
 {
 	import org.flintparticles.threeD.geom.Matrix3D;
 	import org.flintparticles.threeD.geom.Point3D;
-	import org.flintparticles.threeD.geom.Vector3D;	
+	import org.flintparticles.threeD.geom.Vector3D;
+	import org.flintparticles.threeD.renderers.controllers.CameraController;	
 
 	/**
 	 * The camera class is used by Flint's internal 3D renderers to manage the view on the 3D
@@ -51,6 +52,9 @@ package org.flintparticles.threeD.renderers
 		private var _position:Point3D;
 		private var _up:Vector3D;
 		private var _target:Point3D;
+		
+		private var _controller:CameraController;
+		
 		/*
 		 * These properties have private getters because they can be
 		 * invalidated when other properties are set - the getter
@@ -357,6 +361,20 @@ package org.flintparticles.threeD.renderers
 				_pDirection = _position.vectorTo( _target ).normalize();
 			}
 			return _pDirection;
+		}
+		
+		public function get controller():CameraController
+		{
+			return _controller;
+		}
+		public function set controller( value:CameraController ):void
+		{
+			if( _controller )
+			{
+				_controller.camera = null;
+			}
+			_controller = value;
+			_controller.camera = this;
 		}
 	}
 }

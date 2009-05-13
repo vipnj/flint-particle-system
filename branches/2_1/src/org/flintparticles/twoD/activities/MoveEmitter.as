@@ -56,8 +56,8 @@ package org.flintparticles.twoD.activities
 		 */
 		public function MoveEmitter( x:Number = 0, y:Number = 0 )
 		{
-			_velX = x;
-			_velY = y;
+			this.x = x;
+			this.y = y;
 		}
 		
 		/**

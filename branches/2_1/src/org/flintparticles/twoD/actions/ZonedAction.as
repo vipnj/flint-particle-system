@@ -63,9 +63,9 @@ package org.flintparticles.twoD.actions
 		 */
 		public function ZonedAction( action:Action = null, zone:Zone2D = null, invertZone:Boolean = false )
 		{
-			_action = action;
-			_zone = zone;
-			_invert = invertZone;
+			this.action = action;
+			this.zone = zone;
+			this.invertZone = invertZone;
 		}
 		
 		/**

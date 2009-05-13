@@ -52,13 +52,13 @@ package org.flintparticles.twoD.actions
 		 * 
 		 * @see org.flintparticles.common.emitters.Emitter#addAction()
 		 * 
-		 * @param sizeX The maximum amount of horizontal drift in pixels per second.
-		 * @param sizeY The maximum amount of vertical drift in pixels per second.
+		 * @param driftX The maximum amount of horizontal drift in pixels per second.
+		 * @param driftY The maximum amount of vertical drift in pixels per second.
 		 */
-		public function RandomDrift( sizeX:Number = 0, sizeY:Number = 0 )
+		public function RandomDrift( driftX:Number = 0, driftY:Number = 0 )
 		{
-			_sizeX = sizeX * 2;
-			_sizeY = sizeY * 2;
+			this.driftX = driftX;
+			this.driftY = driftY;
 			
 		}
 		

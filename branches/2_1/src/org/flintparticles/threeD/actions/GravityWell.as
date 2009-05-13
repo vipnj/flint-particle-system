@@ -58,8 +58,7 @@ package org.flintparticles.threeD.actions
 		 * @see org.flintparticles.common.emitters.Emitter#addAction()
 		 * 
 		 * @param power The strength of the force - larger numbers produce a stringer force.
-		 * @param x The x coordinate of the point towards which the force draws the particles.
-		 * @param y The y coordinate of the point towards which the force draws the particles.
+		 * @param position The point towards which the force draws the particles.
 		 * @param epsilon The minimum distance for which gravity is calculated. Particles closer
 		 * than this distance experience a gravity force as it they were this distance away.
 		 * This stops the gravity effect blowing up as distances get small. For realistic gravity 
@@ -69,7 +68,7 @@ package org.flintparticles.threeD.actions
 		public function GravityWell( power:Number = 0, position:Point3D = null, epsilon:Number = 100 )
 		{
 			this.power = power;
-			this.position = position;
+			this.position = position ? position : Point3D.ZERO;
 			this.epsilon = epsilon;
 		}
 		
@@ -95,6 +94,42 @@ package org.flintparticles.threeD.actions
 		public function set position( value:Point3D ):void
 		{
 			_position = value.clone();
+		}
+		
+		/**
+		 * The x coordinate of the point that the force pulls the particles towards.
+		 */
+		public function get x():Number
+		{
+			return _position.x;
+		}
+		public function set x( value:Number ):void
+		{
+			_position.x = value;
+		}
+		
+		/**
+		 * The y coordinate of the point that the force pulls the particles towards.
+		 */
+		public function get y():Number
+		{
+			return _position.y;
+		}
+		public function set y( value:Number ):void
+		{
+			_position.y = value;
+		}
+		
+		/**
+		 * The z coordinate of the point that the force pulls the particles towards.
+		 */
+		public function get z():Number
+		{
+			return _position.z;
+		}
+		public function set z( value:Number ):void
+		{
+			_position.z = value;
 		}
 		
 		/**

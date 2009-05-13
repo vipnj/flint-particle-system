@@ -72,9 +72,9 @@ package org.flintparticles.twoD.actions
 		 */
 		public function MouseGravity( power:Number = 0, renderer:DisplayObject = null, epsilon:Number = 100 )
 		{
-			_power = power * _gravityConst;
-			_epsilonSq = epsilon * epsilon;
-			_renderer = renderer;
+			this.power = power;
+			this.epsilon = epsilon;
+			this.renderer = renderer;
 		}
 		
 		/**

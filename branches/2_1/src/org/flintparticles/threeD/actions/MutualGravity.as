@@ -68,10 +68,10 @@ package org.flintparticles.threeD.actions
 		 */
 		public function MutualGravity( power:Number = 0, maxDistance:Number = 0, epsilon:Number = 1 )
 		{
+			d = new Vector3D();
 			this.power = power;
 			this.maxDistance = maxDistance;
 			this.epsilon = epsilon;
-			d = new Vector3D();
 		}
 		
 		/**

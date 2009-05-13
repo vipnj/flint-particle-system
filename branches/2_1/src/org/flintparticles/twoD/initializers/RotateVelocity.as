@@ -65,8 +65,8 @@ package org.flintparticles.twoD.initializers
 		 */
 		public function RotateVelocity( minAngVelocity:Number = 0, maxAngVelocity:Number = NaN )
 		{
-			_min = minAngVelocity;
-			_max = maxAngVelocity;
+			this.minAngVelocity = minAngVelocity;
+			this.maxAngVelocity = maxAngVelocity;
 		}
 		
 		/**

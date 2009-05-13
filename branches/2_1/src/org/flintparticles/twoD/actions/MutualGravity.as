@@ -72,10 +72,9 @@ package org.flintparticles.twoD.actions
 		 */
 		public function MutualGravity( power:Number = 0, maxDistance:Number = 0, epsilon:Number = 1 )
 		{
-			_power = power * _gravityConst;
-			_maxDistance = maxDistance;
-			_maxDistanceSq = maxDistance * maxDistance;
-			_epsilonSq = epsilon * epsilon;
+			this.power = power;
+			this.maxDistance = maxDistance;
+			this.epsilon = epsilon;
 		}
 		
 		/**

@@ -82,13 +82,12 @@ package org.flintparticles.twoD.actions
 		 */
 		public function Explosion( power:Number = 0, x:Number = 0, y:Number = 0, expansionRate:Number = 300, depth:Number = 10, epsilon:Number = 1 )
 		{
-			_power = power * POWER_FACTOR;
-			_x = x;
-			_y = y;
-			_expansionRate = expansionRate;
-			_depth = depth * 0.5;
-			_invDepth = 1 / _depth;
-			_epsilonSq = epsilon * epsilon;
+			this.power = power;
+			this.x = x;
+			this.y = y;
+			this.expansionRate = expansionRate;
+			this.depth = depth;
+			this.epsilon = epsilon;
 		}
 		
 		/**

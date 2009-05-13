@@ -67,10 +67,10 @@ package org.flintparticles.threeD.actions
 		 */
 		public function MinimumDistance( minimum:Number = 0, acceleration:Number = 0 )
 		{
-			this.minimum = minimum;
-			this.acceleration = acceleration;
 			d = new Vector3D();
 			move = new Vector3D();
+			this.minimum = minimum;
+			this.acceleration = acceleration;
 		}
 		
 		/**

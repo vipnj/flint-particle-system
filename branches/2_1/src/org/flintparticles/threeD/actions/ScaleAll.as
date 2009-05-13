@@ -54,8 +54,8 @@ package org.flintparticles.threeD.actions
 
 	public class ScaleAll extends ActionBase
 	{
-		private var _diffScale:Number;
-		private var _endScale:Number;
+		private var _diffScale:Number = 0;
+		private var _endScale:Number = 1;
 		
 		/**
 		 * The constructor creates a ScaleImage action for use by an emitter. 
@@ -71,8 +71,8 @@ package org.flintparticles.threeD.actions
 		 */
 		public function ScaleAll( startScale:Number = 1, endScale:Number = 1 )
 		{
-			_diffScale = startScale - endScale;
-			_endScale = endScale;
+			this.endScale = endScale;
+			this.startScale = startScale;
 		}
 		
 		/**

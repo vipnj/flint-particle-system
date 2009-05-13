@@ -59,9 +59,9 @@ package org.flintparticles.twoD.actions
 		 */
 		public function TargetVelocity( targetVelocityX:Number = 0, targetVelocityY:Number = 0, rate:Number = 0.1 )
 		{
-			_velX = targetVelocityX;
-			_velY = targetVelocityY;
-			_rate = rate;
+			this.targetVelocityX = targetVelocityX;
+			this.targetVelocityY = targetVelocityY;
+			this.rate = rate;
 		}
 		
 		/**

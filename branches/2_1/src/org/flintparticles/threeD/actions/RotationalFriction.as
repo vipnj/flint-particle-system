@@ -59,7 +59,7 @@ package org.flintparticles.threeD.actions
 		 */
 		public function RotationalFriction( friction:Number = 0 )
 		{
-			_friction = friction;
+			this.friction = friction;
 		}
 		
 		/**

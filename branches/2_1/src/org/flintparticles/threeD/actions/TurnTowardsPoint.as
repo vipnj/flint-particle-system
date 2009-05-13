@@ -62,11 +62,11 @@ package org.flintparticles.threeD.actions
 		 */
 		public function TurnTowardsPoint( point:Point3D = null, power:Number = 0 )
 		{
-			_power = power;
-			_point = point.clone();
 			_velDirection = new Vector3D();
 			_toTarget = new Vector3D();
 			_targetPerp = new Vector3D();
+			this.power = power;
+			this.point = point ? point : Point3D.ZERO;
 		}
 		
 		/**
@@ -82,7 +82,7 @@ package org.flintparticles.threeD.actions
 		}
 		
 		/**
-		 * The x coordinate of the point that the particle turns towards.
+		 * The point that the particle turns towards.
 		 */
 		public function get point():Point3D
 		{
@@ -91,6 +91,42 @@ package org.flintparticles.threeD.actions
 		public function set point( value:Point3D ):void
 		{
 			_point = value.clone();
+		}
+		
+		/**
+		 * The x coordinate of the point that the particle turns towards.
+		 */
+		public function get x():Number
+		{
+			return _point.x;
+		}
+		public function set x( value:Number ):void
+		{
+			_point.x = value;
+		}
+		
+		/**
+		 * The y coordinate of  the point that the particle turns towards.
+		 */
+		public function get y():Number
+		{
+			return _point.y;
+		}
+		public function set y( value:Number ):void
+		{
+			_point.y = value;
+		}
+		
+		/**
+		 * The z coordinate of the point that the particle turns towards.
+		 */
+		public function get z():Number
+		{
+			return _point.z;
+		}
+		public function set z( value:Number ):void
+		{
+			_point.z = value;
 		}
 		
 		/**

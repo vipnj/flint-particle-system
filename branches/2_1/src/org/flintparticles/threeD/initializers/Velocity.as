@@ -72,7 +72,7 @@ package org.flintparticles.threeD.initializers
 		 */
 		public function Velocity( zone:Zone3D = null )
 		{
-			_zone = zone;
+			this.zone = zone;
 		}
 		
 		/**

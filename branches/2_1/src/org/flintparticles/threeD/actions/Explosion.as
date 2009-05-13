@@ -81,7 +81,7 @@ package org.flintparticles.threeD.actions
 		public function Explosion( power:Number = 0, center:Point3D = null, expansionRate:Number = 300, depth:Number = 10, epsilon:Number = 1 )
 		{
 			this.power = power;
-			this.center = center;
+			this.center = center ? center : Point3D.ZERO;
 			this.expansionRate = expansionRate;
 			this.depth = depth;
 			this.epsilon = epsilon;
@@ -129,13 +129,49 @@ package org.flintparticles.threeD.actions
 		 */
 		public function get center():Point3D
 		{
-			return _center.clone();
+			return _center;
 		}
 		public function set center( value:Point3D ):void
 		{
 			_center = value.clone();
 		}
 		
+		/**
+		 * The x coordinate of the center of the explosion.
+		 */
+		public function get x():Number
+		{
+			return _center.x;
+		}
+		public function set x( value:Number ):void
+		{
+			_center.x = value;
+		}
+		
+		/**
+		 * The y coordinate of  the center of the explosion.
+		 */
+		public function get y():Number
+		{
+			return _center.y;
+		}
+		public function set y( value:Number ):void
+		{
+			_center.y = value;
+		}
+		
+		/**
+		 * The z coordinate of the center of the explosion.
+		 */
+		public function get z():Number
+		{
+			return _center.z;
+		}
+		public function set z( value:Number ):void
+		{
+			_center.z = value;
+		}
+
 		/**
 		 * The minimum distance for which the explosion force is calculated. 
 		 * Particles closer than this distance experience the explosion as it they were 

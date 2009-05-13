@@ -60,8 +60,8 @@ package org.flintparticles.twoD.actions
 		 */
 		public function TurnTowardsMouse( power:Number = 0, renderer:DisplayObject = null )
 		{
-			_power = power;
-			_renderer = renderer;
+			this.power = power;
+			this.renderer = renderer;
 		}
 		
 		/**

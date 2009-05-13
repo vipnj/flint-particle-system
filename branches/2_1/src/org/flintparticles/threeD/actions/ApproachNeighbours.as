@@ -69,10 +69,10 @@ package org.flintparticles.threeD.actions
 		 */
 		public function ApproachNeighbours( maxDistance:Number = 0, acceleration:Number = 0 )
 		{
-			this.maxDistance = maxDistance;
-			this.acceleration = acceleration;
 			d = new Vector3D();
 			move = new Vector3D();
+			this.maxDistance = maxDistance;
+			this.acceleration = acceleration;
 		}
 		
 		/**

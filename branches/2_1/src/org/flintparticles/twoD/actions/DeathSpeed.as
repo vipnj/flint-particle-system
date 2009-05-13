@@ -61,9 +61,8 @@ package org.flintparticles.twoD.actions
 		 */
 		public function DeathSpeed( speed:Number = Number.MAX_VALUE, isMinimum:Boolean = false )
 		{
-			_limit = speed;
-			_limitSq = speed * speed;
-			_isMinimum = isMinimum;
+			this.limit = speed;
+			this.isMinimum = isMinimum;
 		}
 		
 		/**

@@ -45,8 +45,9 @@ package org.flintparticles.threeD.actions
 
 	public class TweenPosition extends ActionBase
 	{
-		private var _diff:Vector3D;
+		private var _start:Point3D;
 		private var _end:Point3D;
+		private var _diff:Vector3D;
 		private var _temp:Vector3D;
 		
 		/**
@@ -67,9 +68,9 @@ package org.flintparticles.threeD.actions
 		 */
 		public function TweenPosition( start:Point3D = null, end:Point3D = null )
 		{
-			_diff = end.vectorTo( start );
-			_end = end.clone();
 			_temp = new Vector3D();
+			this.start = start ? start : Point3D.ZERO;
+			this.end = end ? end : Point3D.ZERO;
 		}
 		
 		/**
@@ -77,11 +78,15 @@ package org.flintparticles.threeD.actions
 		 */
 		public function get start():Point3D
 		{
-			return _end.add( _diff );
+			return _start;
 		}
 		public function set start( value:Point3D ):void
 		{
-			_diff = _end.vectorTo( value );
+			_start = value.clone();
+			if( _end )
+			{
+				_diff = _end.vectorTo( _start );
+			}
 		}
 		
 		/**
@@ -93,8 +98,11 @@ package org.flintparticles.threeD.actions
 		}
 		public function set end( value:Point3D ):void
 		{
-			_diff = value.vectorTo( _end.add( _diff ) );
 			_end = value.clone();
+			if( _start )
+			{
+				_diff = _end.vectorTo( _start );
+			}
 		}
 		
 		/**

@@ -59,7 +59,7 @@ package org.flintparticles.threeD.actions
 		public function Accelerate( acceleration:Vector3D = null )
 		{
 			_temp = new Vector3D();
-			this.acceleration = acceleration ? acceleration.clone() : new Vector3D();
+			this.acceleration = acceleration ? acceleration : Vector3D.ZERO;
 		}
 		
 		/**

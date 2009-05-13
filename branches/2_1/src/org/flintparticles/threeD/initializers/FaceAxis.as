@@ -62,14 +62,7 @@ package org.flintparticles.threeD.initializers
 		 */
 		public function FaceAxis( axis : Vector3D = null )
 		{
-			if( axis )
-			{
-				_axis = axis.unit();
-			}
-			else
-			{
-				_axis = new Vector3D( 1, 0, 0 );
-			}
+			this.axis = axis ? axis : Vector3D.AXISX;
 		}
 		
 		/**
@@ -81,7 +74,7 @@ package org.flintparticles.threeD.initializers
 		}
 		public function set axis( value:Vector3D ):void
 		{
-			_axis = value;
+			_axis = value.unit();
 		}
 		
 		/**

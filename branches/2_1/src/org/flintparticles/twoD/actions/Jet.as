@@ -66,10 +66,10 @@ package org.flintparticles.twoD.actions
 		 */
 		public function Jet( accelerationX:Number = 0, accelerationY:Number = 0, zone:Zone2D = null, invertZone:Boolean = false )
 		{
-			_x = accelerationX;
-			_y = accelerationY;
-			_zone = zone;
-			_invert = invertZone;
+			this.x = accelerationX;
+			this.y = accelerationY;
+			this.zone = zone;
+			this.invertZone = invertZone;
 		}
 		
 		/**

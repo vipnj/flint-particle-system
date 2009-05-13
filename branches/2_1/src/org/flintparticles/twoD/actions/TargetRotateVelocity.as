@@ -58,8 +58,8 @@ package org.flintparticles.twoD.actions
 		 */
 		public function TargetRotateVelocity( targetVelocity:Number = 0, rate:Number = 0.1 )
 		{
-			_vel = targetVelocity;
-			_rate = rate;
+			this.targetVelocity = targetVelocity;
+			this.rate = rate;
 		}
 		
 		/**
