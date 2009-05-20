@@ -40,6 +40,9 @@ package org.flintparticles.threeD.papervision3d.initializers
 	 * object that is used when rendering the particle. To use this initializer,
 	 * the particle's image object must be an Papervision3D object with a material
 	 * property.
+	 * 
+	 * <p>This initializer has a priority of -10 to ensure that it is applied after 
+	 * the ImageInit classes which define the image object.</p>
 	 */
 	public class ApplyMaterial extends InitializerBase
 	{
@@ -60,17 +63,9 @@ package org.flintparticles.threeD.papervision3d.initializers
 		 */
 		public function ApplyMaterial( materialClass:Class, ...parameters )
 		{
+			priority = -10;
 			_materialClass = materialClass;
 			_parameters = parameters;
-		}
-		
-		/**
-		 * Returns -10 to ensure that the ApplyMaterial is applied after the
-		 * ImageInit classes which define the image object.
-		 */
-		override public function getDefaultPriority():Number
-		{
-			return -10;
 		}
 		
 		/**

@@ -41,6 +41,9 @@ package org.flintparticles.twoD.initializers
 	 * <p>If you want to adjust only the image size use
 	 * the ScaleImageInit initializer.</p>
 	 * 
+	 * <p>This initializer has a priority of -10 to ensure it occurs after 
+	 * mass and radius assignment classes like CollisionRadiusInit and MassInit.</p>
+	 * 
 	 * @see org.flintparticles.common.initializers.ScaleImageInit
 	 */
 
@@ -68,6 +71,7 @@ package org.flintparticles.twoD.initializers
 		 */
 		public function ScaleAllInit( minScale:Number = 1, maxScale:Number = NaN )
 		{
+			priority = -10;
 			this.minScale = minScale;
 			this.maxScale = isNaN( maxScale ) ? minScale : maxScale;
 		}
@@ -110,17 +114,6 @@ package org.flintparticles.twoD.initializers
 		public function set scale( value:Number ):void
 		{
 			_max = _min = value;
-		}
-		
-		/**
-		 * @inheritDoc
-		 * 
-		 * returns -10 to ensure it occurs after the mass and radius assignment classes 
-		 * classes like CollisionRadiusInit and MassInit.
-		 */
-		override public function getDefaultPriority():Number
-		{
-			return -10;
 		}
 		
 		/**

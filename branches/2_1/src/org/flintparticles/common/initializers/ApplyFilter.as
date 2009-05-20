@@ -49,14 +49,19 @@ package org.flintparticles.common.initializers
 		 * an emitter. To add an ApplyFilter to all particles created by an emitter, use the
 		 * emitter's addInitializer method.
 		 * 
+		 * <p>This initializer has a priority of -10 to ensure it occurs after the 
+		 * image assignment initializers like ImageClass.
+		 * 
 		 * @param filter The filter to apply.
 		 * 
 		 * @see org.flintparticles.common.emitters.Emitter#addInitializer()
 		 */
 		public function ApplyFilter( filter:BitmapFilter = null )
 		{
+			priority = -10;
 			_filter = filter;
 		}
+
 		
 		/**
 		 * The filter to apply to each particle's image when it is created.
@@ -68,17 +73,6 @@ package org.flintparticles.common.initializers
 		public function set filter( value:BitmapFilter ):void
 		{
 			_filter = value;
-		}
-		
-		/**
-		 * @inheritDoc
-		 * 
-		 * returns -10 to ensure it occurs after the image assignment 
-		 * classes like ImageClass.
-		 */
-		override public function getDefaultPriority():Number
-		{
-			return -10;
 		}
 		
 		/**

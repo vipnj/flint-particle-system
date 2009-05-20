@@ -39,6 +39,9 @@ package org.flintparticles.twoD.actions
 	/**
 	 * The MinimumDistance action applies an acceleration to the particle to 
 	 * maintain a minimum distance between it and its neighbours.
+	 * 
+	 * <p>This action has a priority of 10, so that it executes 
+	 * before other actions.</p>
 	 */
 	public class MinimumDistance extends ActionBase
 	{
@@ -60,6 +63,7 @@ package org.flintparticles.twoD.actions
 		 */
 		public function MinimumDistance( minimum:Number = 0, acceleration:Number = 0 )
 		{
+			priority = 10;
 			this.minimum = minimum;
 			this.acceleration = acceleration;
 		}
@@ -88,18 +92,6 @@ package org.flintparticles.twoD.actions
 		public function set acceleration( value:Number ):void
 		{
 			_acc = value;
-		}
-
-		/**
-		 * Returns a value of 10, so that the MinimumDistance action executes 
-		 * before accelerating actions that act on particles independently of
-		 * other particles, like Acceleration and GravityWell.
-		 * 
-		 * @see org.flintparticles.common.actions.Action#getDefaultPriority()
-		 */
-		override public function getDefaultPriority():Number
-		{
-			return 10;
 		}
 
 		/**

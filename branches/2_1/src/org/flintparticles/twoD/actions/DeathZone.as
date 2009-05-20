@@ -41,6 +41,9 @@ package org.flintparticles.twoD.actions
 	/**
 	 * The DeathZone action marks the particle as dead if it is inside
 	 * a specific zone.
+	 * 
+	 * This action has a priority of -20, so that it executes after 
+	 * all movement has occured.
 	 */
 
 	public class DeathZone extends ActionBase
@@ -68,6 +71,7 @@ package org.flintparticles.twoD.actions
 		 */
 		public function DeathZone( zone:Zone2D = null, zoneIsSafe:Boolean = false )
 		{
+			priority = -20;
 			this.zone = zone;
 			this.zoneIsSafe = zoneIsSafe;
 		}
@@ -95,17 +99,6 @@ package org.flintparticles.twoD.actions
 		public function set zoneIsSafe( value:Boolean ):void
 		{
 			_invertZone = value;
-		}
-		
-		/**
-		 * Returns a value of -20, so that the DeathZone executes after all 
-		 * movement has occured.
-		 * 
-		 * @see org.flintparticles.common.actions.Action#getDefaultPriority()
-		 */
-		override public function getDefaultPriority():Number
-		{
-			return -20;
 		}
 
 		/**

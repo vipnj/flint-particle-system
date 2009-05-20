@@ -32,7 +32,7 @@ package org.flintparticles.common.initializers
 {
 	import org.flintparticles.common.emitters.Emitter;
 	import org.flintparticles.common.particles.Particle;
-	import org.flintparticles.common.utils.PriorityArray;	
+	import org.flintparticles.common.utils.BehaviourArrayUtils;		
 
 	[DefaultProperty("initializers")]
 	
@@ -47,7 +47,7 @@ package org.flintparticles.common.initializers
 
 	public class InitializerGroup extends InitializerBase
 	{
-		private var _initializers:PriorityArray;
+		private var _initializers:Array;
 		private var _emitter:Emitter;
 		
 		/**
@@ -64,38 +64,37 @@ package org.flintparticles.common.initializers
 		 */
 		public function InitializerGroup( ...initializers )
 		{
-			_initializers = new PriorityArray();
+			_initializers = new Array();
 		}
 		
 		public function get initializers():Array
 		{
-			var a:Array;
-			for each( var initializer:Initializer in _initializers )
-			{
-				a.push( initializer );
-			}
-			return a;
+			return _initializers;
 		}
 		public function set initializers( value:Array ):void
 		{
 			var initializer:Initializer;
-			for each( initializer in _initializers )
+			if( _emitter )
 			{
-				removeInitializer( initializer );
+				for each( initializer in _initializers )
+				{
+					initializer.removedFromEmitter( _emitter );
+				}
 			}
-			for each( initializer in value )
+			_initializers = value.splice( );
+			BehaviourArrayUtils.sortArray( _initializers );
+			if( _emitter )
 			{
-				addInitializer( initializer );
+				for each( initializer in _initializers )
+				{
+					initializer.addedToEmitter( _emitter );
+				}
 			}
 		}
 
-		public function addInitializer( initializer:Initializer, priority:Number = NaN ):void
+		public function addInitializer( initializer:Initializer ):void
 		{
-			if( isNaN( priority ) )
-			{
-				priority = initializer.getDefaultPriority();
-			}
-			_initializers.add( initializer, priority );
+			BehaviourArrayUtils.add( _initializers, initializer );
 			if( _emitter )
 			{
 				initializer.addedToEmitter( _emitter );
@@ -104,20 +103,9 @@ package org.flintparticles.common.initializers
 		
 		public function removeInitializer( initializer:Initializer ):void
 		{
-			if( _initializers.remove( initializer ) )
+			if( BehaviourArrayUtils.remove( _initializers, initializer ) && _emitter )
 			{
 				initializer.removedFromEmitter( _emitter );
-			}
-		}
-		
-		public function removeScale( initializer:Initializer ):void
-		{
-			if( _initializers.remove( initializer ) )
-			{
-				if( _emitter )
-				{
-					initializer.removedFromEmitter( _emitter );
-				}
 			}
 		}
 		

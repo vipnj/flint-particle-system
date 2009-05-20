@@ -38,6 +38,9 @@ package org.flintparticles.twoD.actions
 	/**
 	 * The SpeedLimit action limits each particle's maximum or minimum speed to the 
 	 * specified speed.
+	 * 
+	 * <p>This action has aa priority of -5, so that it executes after all accelerations 
+	 * have occured.</p>
 	 */
 
 	public class SpeedLimit extends ActionBase
@@ -60,6 +63,7 @@ package org.flintparticles.twoD.actions
 		 */
 		public function SpeedLimit( speed:Number = Number.MAX_VALUE, isMinimum:Boolean = false )
 		{
+			priority = -5;
 			this.limit = speed;
 			this.isMinimum = isMinimum;
 		}
@@ -87,18 +91,6 @@ package org.flintparticles.twoD.actions
 		public function set isMinimum( value:Boolean ):void
 		{
 			_isMinimum = value;
-		}
-		
-		/**
-		 * Returns a value of -5, so that the SpeedLimit action executes 
-		 * after actions that modify the particle's speed but before the 
-		 * Move action moves the particle.
-		 * 
-		 * @see org.flintparticles.common.actions.Action#getDefaultPriority()
-		 */
-		override public function getDefaultPriority():Number
-		{
-			return -5;
 		}
 
 		/**

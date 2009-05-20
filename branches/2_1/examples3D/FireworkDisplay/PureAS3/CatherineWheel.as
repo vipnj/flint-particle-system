@@ -49,7 +49,7 @@ package
 			
 			this.position = position;
 			
-			addActivity( new RotateEmitter( new Vector3D( 0, 0, 20 ) ) );
+			addActivity( new RotateEmitter( new Vector3D( 0, 0, 1 ), 10 ) );
 			
 			addInitializer( new SharedImage( new Dot( 1 ) ) );
 			addInitializer( new ColorInit( 0xFFFFFF00, 0xFFFF6600 ) );

@@ -30,6 +30,7 @@
 
 package org.flintparticles.common.initializers
 {
+	import org.flintparticles.common.emitters.Behaviour;	
 	import org.flintparticles.common.emitters.Emitter;
 	import org.flintparticles.common.particles.Particle;	
 
@@ -53,56 +54,8 @@ package org.flintparticles.common.initializers
 	 * @see org.flintparticles.common.emitters.Emitter#addInitializer()
 	 * @see org.flintparticles.common.emitters.Emitter#removeInitializer()
 	 */
-	public interface Initializer
+	public interface Initializer extends Behaviour
 	{
-		/**
-		 * The getDefaultPriority method is used to order the execution of 
-		 * initializers. It should return a number indicating the priority 
-		 * for the execution of the initializer. Initializers with a higher 
-		 * priority are run before initializers with a lower priority.
-		 * 
-		 * <p>The initializers within the Flint library use 0 as the default 
-		 * priority. Initializers that need to be called early may have 
-		 * priorities of 10 or 20. Initializers that need to be called late 
-		 * would have priorities of -10 or -20.</p>
-		 * 
-		 * <p>The default priority can be overridden when adding an initializer to
-		 * an emitter by setting a new priority in the second parameter of the
-		 * addInitalizer method of the emitter.</p>
-		 * 
-		 * <p>The method is called internally by the emitter and need not be called 
-		 * directly by the user.</p>
-	 	 * 
-		 * @see org.flintparticles.common.emitters.Emitter#addInitalizer()
-		 */
-		function getDefaultPriority():Number;
-		
-		/**
-		 * The addedToEmitter method is called by the emitter when the Initializer 
-		 * is added to it. It is an opportunity for the initializer to do any
-		 * initializing that is relative to the emitter. Only a few initializers
-		 * make use of this method. It is called within the emitter's addInitializer 
-		 * method and need not be called by the user.
-		 * 
-		 * @param emitter The Emitter that the Initializer was added to.
-		 * 
-		 * @see org.flintparticles.common.emitters.Emitter#addInitializer()
-		 */
-		function addedToEmitter( emitter:Emitter ):void;
-		
-		/**
-		 * The removedFromEmitter method is called by the emitter when the Initializer 
-		 * is removed from it. It is an opportunity for an initializer to do any
-		 * finalizing that is relative to the emitter. Only a few initializers make 
-		 * use of this method. It is called within the  emitter's removeInitializer 
-		 * method and need not be called by the user.
-		 * 
-		 * @param emitter The Emitter that the Initializer was removed from.
-		 * 
-		 * @see org.flintparticles.common.emitters.Emitter#removeInitializer()
-		 */
-		function removedFromEmitter( emitter:Emitter ):void;
-		
 		/**
 		 * The initialize method is used by the emitter to apply the initialization
 		 * to every particle. It is the key feature of the initializers and is

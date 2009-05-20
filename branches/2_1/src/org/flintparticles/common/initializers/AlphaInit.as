@@ -52,6 +52,9 @@ package org.flintparticles.common.initializers
 		 * values set. If no maximum value is set, the minimum value
 		 * is used with no variation.</p>
 		 * 
+		 * <p>This initializer has a priority of -10 so that it occurs after 
+		 * the color assignment.</p>
+		 * 
 		 * @param minAlpha the minimum alpha for particles
 		 * initialized by the instance. The value should be between 1 and 0.
 		 * @param maxAlpha the maximum alpha for particles
@@ -61,6 +64,7 @@ package org.flintparticles.common.initializers
 		 */
 		public function AlphaInit( minAlpha:Number= 1, maxAlpha:Number = NaN )
 		{
+			priority = -10;
 			_min = minAlpha;
 			if( isNaN( maxAlpha ) )
 			{
@@ -110,17 +114,6 @@ package org.flintparticles.common.initializers
 		public function set alpha( value:Number ):void
 		{
 			_max = _min = value;
-		}
-		
-		/**
-		 * @inheritDoc
-		 * 
-		 * returns -10 to ensure it occurs after the color assignment 
-		 * classes like ColorInit.
-		 */
-		override public function getDefaultPriority():Number
-		{
-			return -10;
 		}
 		
 		/**

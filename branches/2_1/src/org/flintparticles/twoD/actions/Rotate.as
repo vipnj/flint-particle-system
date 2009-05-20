@@ -40,6 +40,8 @@ package org.flintparticles.twoD.actions
 	 * velocity. It uses a Euler integrator to calculate the new rotation. If you 
 	 * want an emitter's particles to rotate then you must add a Rotate action, or 
 	 * a similar custom action, to the emitter
+	 * 
+	 * <p>This action has a priority of -10, so that it executes after other actions.</p>
 	 */
 
 	public class Rotate extends ActionBase
@@ -53,18 +55,7 @@ package org.flintparticles.twoD.actions
 		 */
 		public function Rotate()
 		{
-		}
-
-		/**
-		 * Returns a value of -10, so that the Rotate action executes 
-		 * after most other actions, particularly after actions that change the
-		 * particle's angular velocity.
-		 * 
-		 * @see org.flintparticles.common.actions.Action#getDefaultPriority()
-		 */
-		override public function getDefaultPriority():Number
-		{
-			return -10;
+			priority = -10;
 		}
 
 		/**

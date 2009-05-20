@@ -30,6 +30,7 @@
 
 package org.flintparticles.common.emitters
 {
+	import org.flintparticles.common.utils.BehaviourArrayUtils;	
 	import org.flintparticles.common.actions.Action;
 	import org.flintparticles.common.activities.Activity;
 	import org.flintparticles.common.counters.Counter;
@@ -41,7 +42,6 @@ package org.flintparticles.common.emitters
 	import org.flintparticles.common.particles.Particle;
 	import org.flintparticles.common.particles.ParticleFactory;
 	import org.flintparticles.common.utils.FrameUpdater;
-	import org.flintparticles.common.utils.PriorityArray;
 	
 	import flash.events.EventDispatcher;	
 
@@ -143,15 +143,15 @@ package org.flintparticles.common.emitters
 		/**
 		 * @private
 		 */
-		protected var _initializers:PriorityArray;
+		protected var _initializers:Array;
 		/**
 		 * @private
 		 */
-		protected var _actions:PriorityArray;
+		protected var _actions:Array;
 		/**
 		 * @private
 		 */
-		protected var _activities:PriorityArray;
+		protected var _activities:Array;
 		/**
 		 * @private
 		 */
@@ -197,9 +197,9 @@ package org.flintparticles.common.emitters
 		public function Emitter()
 		{
 			_particles = new Array();
-			_actions = new PriorityArray();
-			_initializers = new PriorityArray();
-			_activities = new PriorityArray();
+			_actions = new Array();
+			_initializers = new Array();
+			_activities = new Array();
 			_counter = new ZeroCounter();
 		}
 
@@ -232,23 +232,20 @@ package org.flintparticles.common.emitters
 		 */
 		public function get initializers():Array
 		{
-			var a:Array;
-			for each( var initializer:Initializer in _initializers )
-			{
-				a.push( initializer );
-			}
-			return a;
+			return _initializers;
 		}
 		public function set initializers( value:Array ):void
 		{
 			var initializer:Initializer;
 			for each( initializer in _initializers )
 			{
-				removeInitializer( initializer );
+				initializer.removedFromEmitter( this );
 			}
+			_initializers = value.splice();
+			BehaviourArrayUtils.sortArray( _initializers );
 			for each( initializer in value )
 			{
-				addInitializer( initializer );
+				initializer.addedToEmitter( this );
 			}
 		}
 
@@ -257,22 +254,13 @@ package org.flintparticles.common.emitters
 		 * initial state of particles created by the emitter.
 		 * 
 		 * @param initializer The Initializer to add
-		 * @param priority Indicates the sequencing of the initializers. Higher 
-		 * numbers cause an initializer to be run before other initialzers. All 
-		 * initializers have a default priority which is used if no value is passed in this 
-		 * parameter. The default priority is usually the one you want so this 
-		 * parameter is only used when you need to override the default.
 		 * 
 		 * @see removeInitializer()
 		 * @see org.flintParticles.common.initializers.Initializer.getDefaultPriority()
 		 */
-		public function addInitializer( initializer:Initializer, priority:Number = NaN ):void
+		public function addInitializer( initializer:Initializer ):void
 		{
-			if( isNaN( priority ) )
-			{
-				priority = initializer.getDefaultPriority();
-			}
-			_initializers.add( initializer, priority );
+			BehaviourArrayUtils.add( _initializers, initializer );
 			initializer.addedToEmitter( this );
 		}
 		
@@ -285,7 +273,7 @@ package org.flintparticles.common.emitters
 		 */
 		public function removeInitializer( initializer:Initializer ):void
 		{
-			if( _initializers.remove( initializer ) )
+			if( BehaviourArrayUtils.remove( _initializers, initializer ) )
 			{
 				initializer.removedFromEmitter( this );
 			}
@@ -301,7 +289,7 @@ package org.flintparticles.common.emitters
 		 */
 		public function hasInitializer( initializer:Initializer ):Boolean
 		{
-			return _initializers.contains( initializer );
+			return BehaviourArrayUtils.contains( _initializers, initializer );
 		}
 		
 		/**
@@ -330,23 +318,20 @@ package org.flintparticles.common.emitters
 		 */
 		public function get actions():Array
 		{
-			var a:Array;
-			for each( var action:Action in _actions )
-			{
-				a.push( action );
-			}
-			return a;
+			return _actions;
 		}
 		public function set actions( value:Array ):void
 		{
 			var action:Action;
 			for each( action in _actions )
 			{
-				removeAction( action );
+				action.removedFromEmitter( this );
 			}
+			_actions = value.splice();
+			BehaviourArrayUtils.sortArray( _actions );
 			for each( action in value )
 			{
-				addAction( action );
+				action.removedFromEmitter( this );
 			}
 		}
 
@@ -355,22 +340,13 @@ package org.flintparticles.common.emitters
 		 * created by the emitter.
 		 * 
 		 * @param action The Action to add
-		 * @param priority Indicates the sequencing of the actions. Higher numbers 
-		 * cause an action to be run before other actions. All actions have a default 
-		 * priority which is used if no value is passed in this parameter. The 
-		 * default priority is usually the one you want so this parameter is only 
-		 * used when you need to override the default.
 		 * 
 		 * @see removeAction();
 		 * @see org.flintParticles.common.actions.Action.getDefaultPriority()
 		 */
-		public function addAction( action:Action, priority:Number = NaN ):void
+		public function addAction( action:Action ):void
 		{
-			if( isNaN( priority ) )
-			{
-				priority = action.getDefaultPriority();
-			}
-			_actions.add( action, priority );
+			BehaviourArrayUtils.add( _actions, action );
 			action.addedToEmitter( this );
 		}
 		
@@ -383,7 +359,7 @@ package org.flintparticles.common.emitters
 		 */
 		public function removeAction( action:Action ):void
 		{
-			if( _actions.remove( action ) )
+			if( BehaviourArrayUtils.remove( _actions, action ) )
 			{
 				action.removedFromEmitter( this );
 			}
@@ -399,7 +375,7 @@ package org.flintparticles.common.emitters
 		 */
 		public function hasAction( action:Action ):Boolean
 		{
-			return _actions.contains( action );
+			return BehaviourArrayUtils.contains( _actions, action );
 		}
 		
 		/**
@@ -428,23 +404,20 @@ package org.flintparticles.common.emitters
 		 */
 		public function get activities():Array
 		{
-			var a:Array;
-			for each( var activity:Activity in _activities )
-			{
-				a.push( activity );
-			}
-			return a;
+			return _activities;
 		}
 		public function set activities( value:Array ):void
 		{
 			var activity:Activity;
 			for each( activity in _activities )
 			{
-				removeActivity( activity );
+				activity.removedFromEmitter( this );
 			}
-			for each( activity in value )
+			_activities = value.splice();
+			BehaviourArrayUtils.sortArray( _activities );
+			for each( activity in _activities )
 			{
-				addActivity( activity );
+				activity.addedToEmitter( this );
 			}
 		}
 
@@ -453,22 +426,13 @@ package org.flintparticles.common.emitters
 		 * of the Emitter.
 		 * 
 		 * @param activity The activity to add
-		 * @param priority Indicates the sequencing of the activities. Higher 
-		 * numbers cause an activity to be run before other activities. All 
-		 * activities have a default priority which is used if no value is passed 
-		 * in this parameter. The default priority is usually the one you want so 
-		 * this parameter is only used when you need to override the default.
 		 * 
 		 * @see removeActivity()
 		 * @see org.flintParticles.common.activities.Activity.getDefaultPriority()
 		 */
-		public function addActivity( activity:Activity, priority:Number = NaN ):void
+		public function addActivity( activity:Activity ):void
 		{
-			if( isNaN( priority ) )
-			{
-				priority = activity.getDefaultPriority();
-			}
-			_activities.add( activity, priority );
+			BehaviourArrayUtils.add( _activities, activity );
 			activity.addedToEmitter( this );
 		}
 		
@@ -481,7 +445,7 @@ package org.flintparticles.common.emitters
 		 */
 		public function removeActivity( activity:Activity ):void
 		{
-			if( _activities.remove( activity ) )
+			if( BehaviourArrayUtils.remove( _activities, activity ) )
 			{
 				activity.removedFromEmitter( this );
 			}
@@ -497,7 +461,7 @@ package org.flintparticles.common.emitters
 		 */
 		public function hasActivity( activity:Activity ):Boolean
 		{
-			return _activities.contains( activity );
+			return BehaviourArrayUtils.contains( _activities, activity );
 		}
 		
 		/**

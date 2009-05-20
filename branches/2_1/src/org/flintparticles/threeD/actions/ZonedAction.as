@@ -104,11 +104,17 @@ package org.flintparticles.threeD.actions
 		}
 		
 		/**
+		 * Provides access to the priority of the action being used.
+		 * 
 		 * @inheritDoc
 		 */
-		override public function getDefaultPriority():Number
+		override public function get priority():int
 		{
-			return _action.getDefaultPriority();
+			return _action.priority;
+		}
+		override public function set priority( value:int ):void
+		{
+			_action.priority = value;
 		}
 		
 		/**

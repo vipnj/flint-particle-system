@@ -56,6 +56,9 @@ package org.flintparticles.common.actions
 		 * an emitter. To add a Fade to all particles created by an emitter, use the
 		 * emitter's addAction method.
 		 * 
+		 * <p>This action has a priority of -5, so that the Fade executes after 
+		 * color changes.</p>
+		 * 
 		 * @see org.flintparticles.common.emitters.Emitter#addAction()
 		 * 
 		 * @param startAlpha The alpha value for the particle when its energy
@@ -67,6 +70,7 @@ package org.flintparticles.common.actions
 		 */
 		public function Fade( startAlpha:Number = 1, endAlpha:Number = 0 )
 		{
+			priority = -5;
 			_diffAlpha = startAlpha - endAlpha;
 			_endAlpha = endAlpha;
 		}
@@ -96,16 +100,6 @@ package org.flintparticles.common.actions
 		{
 			_diffAlpha = _endAlpha + _diffAlpha - value;
 			_endAlpha = value;
-		}
-		
-		/**
-		 * Returns a value of -5, so that the Fade executes after color changes.
-		 * 
-		 * @see org.flintparticles.common.actions.Action#getDefaultPriority()
-		 */
-		override public function getDefaultPriority():Number
-		{
-			return -5;
 		}
 		
 		/**

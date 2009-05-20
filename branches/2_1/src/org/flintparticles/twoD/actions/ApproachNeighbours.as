@@ -48,7 +48,10 @@ package org.flintparticles.twoD.actions
 	 * to draw particles together, MinimumDistance to stop them getting too close
 	 * and MatchVelocity to make them match speed and direction of motion.</p>
 	 * 
-	 * @see org.flintparticles.twoD.actions.MinimumDistance
+	 * <p>This action has a priority of 10, so that it executes 
+	 * before other actions.</p>
+	 * 
+ * 	 * @see org.flintparticles.twoD.actions.MinimumDistance
 	 * @see org.flintparticles.twoD.actions.MatchVelocity
 	 */
 
@@ -72,6 +75,7 @@ package org.flintparticles.twoD.actions
 		 */
 		public function ApproachNeighbours( maxDistance:Number = 0, acceleration:Number = 0 )
 		{
+			priority = 10;
 			this.maxDistance = maxDistance;
 			this.acceleration = acceleration;
 		}
@@ -100,18 +104,6 @@ package org.flintparticles.twoD.actions
 		public function set acceleration( value:Number ):void
 		{
 			_acc = value;
-		}
-
-		/**
-		 * Returns a value of 10, so that the ApproachNeighbours action executes 
-		 * before accelerating actions that act on particles independently of
-		 * other particles, like Acceleration and GravityWell.
-		 * 
-		 * @see org.flintparticles.common.actions.Action#getDefaultPriority()
-		 */
-		override public function getDefaultPriority():Number
-		{
-			return 10;
 		}
 
 		/**

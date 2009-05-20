@@ -40,6 +40,9 @@ package org.flintparticles.threeD.actions
 	/**
 	 * The MatchRotateVelocity action applies an angular acceleration to the particle to match
 	 * its angular velocity to that of its nearest neighbours.
+	 * 
+	 * <p>This action has a priority of 10, so that it executes 
+	 * before other actions.</p>
 	 */
 
 	public class MatchRotateVelocity extends ActionBase
@@ -69,6 +72,7 @@ package org.flintparticles.threeD.actions
 		 */
 		public function MatchRotateVelocity( maxDistance:Number = 0, acceleration:Number = 0 )
 		{
+			priority = 10;
 			d = new Vector3D();
 			vel = new Vector3D();
 			this.maxDistance = maxDistance;
@@ -101,16 +105,6 @@ package org.flintparticles.threeD.actions
 		public function set acceleration( value:Number ):void
 		{
 			_acc = value;
-		}
-
-		/**
-		 * @inheritDoc
-		 * 
-		 * <p>Returns a value of 10, so that the MutualGravity action executes before other actions.</p>
-		 */
-		override public function getDefaultPriority():Number
-		{
-			return 10;
 		}
 
 		/**

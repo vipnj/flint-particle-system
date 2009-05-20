@@ -41,6 +41,9 @@ package org.flintparticles.threeD.actions
 	 * particle bounces back off the side of the box when it reaches 
 	 * the edge. The bounce treats the particle as a circular body
 	 * and displays no loss of energy in the collision.
+	 * 
+	 * This action has a priority of -20, so that it executes after 
+	 * all movement has occured.
 	 */
 
 	public class BoundingBox extends ActionBase
@@ -73,6 +76,7 @@ package org.flintparticles.threeD.actions
 		 */
 		public function BoundingBox( minX:Number = 0, maxX:Number = 0, minY:Number = 0, maxY:Number = 0, minZ:Number = 0, maxZ:Number = 0, bounce:Number = 1 )
 		{
+			priority = -20;
 			this.minX = minX;
 			this.maxX = maxX;
 			this.minY = minY;
@@ -167,16 +171,6 @@ package org.flintparticles.threeD.actions
 		public function set bounce( value:Number ):void
 		{
 			_bounce = value;
-		}
-
-		/**
-		 * Returns a value of -20, so that the BoundingBox executes after all movement has occured.
-		 * 
-		 * @see org.flintparticles.common.actions.Action#getDefaultPriority()
-		 */
-		override public function getDefaultPriority():Number
-		{
-			return -20;
 		}
 
 		/**

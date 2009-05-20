@@ -39,6 +39,8 @@ package org.flintparticles.threeD.actions
 	/**
 	 * The Rotate action updates the rotation of the particle based on its angular velocity.
 	 * It uses a Euler integrator to calculate the new rotation, hence the name.
+	 * 
+	 * <p>This action has a priority of -10, so that it executes after other actions.</p>
 	 */
 
 	public class Rotate extends ActionBase
@@ -57,17 +59,8 @@ package org.flintparticles.threeD.actions
 		 */
 		public function Rotate()
 		{
+			priority = -10;
 			q = new Quaternion();
-		}
-
-		/**
-		 * @inheritDoc
-		 * 
-		 * <p>Returns a value of -10, so that the Rotate action executes after other actions.</p>
-		 */
-		override public function getDefaultPriority():Number
-		{
-			return -10;
 		}
 
 		/**

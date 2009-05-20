@@ -41,6 +41,9 @@ package org.flintparticles.threeD.away3d.initializers
 	 * The ApplyMaterial initializer sets a material to apply to the Away3D
 	 * object that is used when rendering the particle. To use this initializer,
 	 * the particle's image object must be an Away3D Object3D.
+	 * 
+	 * <p>This initializer has a priority of -10 to ensure that it is applied after 
+	 * the ImageInit classes which define the image object.</p>
 	 */
 	public class ApplyMaterial extends InitializerBase
 	{
@@ -61,17 +64,9 @@ package org.flintparticles.threeD.away3d.initializers
 		 */
 		public function ApplyMaterial( materialClass:Class, ...parameters )
 		{
+			priority = -10;
 			_materialClass = materialClass;
 			_parameters = parameters;
-		}
-		
-		/**
-		 * Returns -10 to ensure that the ApplyMaterial is applied after the
-		 * ImageInit classes which define the image object.
-		 */
-		override public function getDefaultPriority():Number
-		{
-			return -10;
 		}
 		
 		/**

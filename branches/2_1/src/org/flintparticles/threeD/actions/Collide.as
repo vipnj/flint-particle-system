@@ -49,6 +49,9 @@ package org.flintparticles.threeD.actions
 	 * force (e.g. gravity) then they will fall through each other. This is due to the nature
 	 * of the alogorithm used, which is designed for speed of execution and sufficient accuracy 
 	 * when the particles are in motion, not for absolute precision.</p>
+	 * 
+	 * <p>This action has a priority of 10, so that it executes 
+	 * before other actions.</p>
 	 */
 
 	public class Collide extends ActionBase implements FrameUpdatable
@@ -77,6 +80,7 @@ package org.flintparticles.threeD.actions
 		 */
 		public function Collide( bounce:Number= 1 )
 		{
+			priority = 10;
 			_maxDistance = 0;
 			d = new Vector3D();
 			_temp = new Vector3D();
@@ -96,16 +100,6 @@ package org.flintparticles.threeD.actions
 		public function set bounce( value:Number ):void
 		{
 			_bounce = value;
-		}
-
-		/**
-		 * @inheritDoc
-		 * 
-		 * <p>Returns a value of 10, so that the MutualGravity action executes before other actions.</p>
-		 */
-		override public function getDefaultPriority():Number
-		{
-			return 10;
 		}
 
 		/**

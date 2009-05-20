@@ -39,6 +39,9 @@ package org.flintparticles.twoD.actions
 	/**
 	 * The MatchVelocity action applies an acceleration to each particle to match
 	 * its velocity to that of its nearest neighbours.
+	 * 
+	 * <p>This action has a priority of 10, so that it executes 
+	 * before other actions.</p>
 	 */
 
 	public class MatchVelocity extends ActionBase
@@ -62,6 +65,7 @@ package org.flintparticles.twoD.actions
 		 */
 		public function MatchVelocity( maxDistance:Number = 0, acceleration:Number = 0 )
 		{
+			priority = 10;
 			this.maxDistance = maxDistance;
 			this.acceleration = acceleration;
 		}
@@ -91,18 +95,6 @@ package org.flintparticles.twoD.actions
 		public function set acceleration( value:Number ):void
 		{
 			_acc = value;
-		}
-
-		/**
-		 * Returns a value of 10, so that the MatchVelocity action executes 
-		 * before accelerating actions that act on particles independently of
-		 * other particles, like Acceleration and GravityWell.
-		 * 
-		 * @see org.flintparticles.common.actions.Action#getDefaultPriority()
-		 */
-		override public function getDefaultPriority():Number
-		{
-			return 10;
 		}
 
 		/**

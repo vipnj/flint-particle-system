@@ -39,6 +39,9 @@ package org.flintparticles.threeD.actions
 	 * The SpeedLimit action limits the particle's maximum speed to the specified
 	 * speed. The behaviour can be switched to instead limit the minimum speed to
 	 * the specified speed.
+	 * 
+	 * <p>This action has aa priority of -5, so that it executes after all accelerations 
+	 * have occured.</p>
 	 */
 
 	public class SpeedLimit extends ActionBase
@@ -61,6 +64,7 @@ package org.flintparticles.threeD.actions
 		 */
 		public function SpeedLimit( speed:Number = Number.MAX_VALUE, isMinimum:Boolean = false )
 		{
+			priority = -5;
 			this.limit = speed;
 			this.isMinimum = isMinimum;
 		}
@@ -88,16 +92,6 @@ package org.flintparticles.threeD.actions
 		public function set isMinimum( value:Boolean ):void
 		{
 			_isMinimum = value;
-		}
-		
-		/**
-		 * @inheritDoc
-		 * 
-		 * <p>Returns a value of -5, so that the SpeedLimit executes after all accelerations have occured.</p>
-		 */
-		override public function getDefaultPriority():Number
-		{
-			return -5;
 		}
 
 		/**

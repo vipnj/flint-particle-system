@@ -41,6 +41,9 @@ package org.flintparticles.threeD.actions
 	 * The ApproachNeighbours action applies an acceleration to the particle to 
 	 * draw it towards other nearby particles. The size of the acceleration 
 	 * is constant, only the direction varies.
+	 * 
+	 * <p>This action has a priority of 10, so that it executes 
+	 * before other actions.</p>
 	 */
 
 	public class ApproachNeighbours extends ActionBase
@@ -69,6 +72,7 @@ package org.flintparticles.threeD.actions
 		 */
 		public function ApproachNeighbours( maxDistance:Number = 0, acceleration:Number = 0 )
 		{
+			priority = 10;
 			d = new Vector3D();
 			move = new Vector3D();
 			this.maxDistance = maxDistance;
@@ -99,17 +103,6 @@ package org.flintparticles.threeD.actions
 		public function set acceleration( value:Number ):void
 		{
 			_acc = value;
-		}
-
-		/**
-		 * Returns a value of 10, so that the ApproachNeighbours action executes 
-		 * before other actions.
-		 * 
-		 * @see org.flintparticles.common.actions.Action#getDefaultPriority()
-		 */
-		override public function getDefaultPriority():Number
-		{
-			return 10;
 		}
 
 		/**

@@ -53,6 +53,8 @@ package org.flintparticles.common.initializers
 	 */
 	public class InitializerBase implements Initializer
 	{
+		protected var _priority:int = 0;
+
 		/**
 		 * The constructor creates an Initializer object. But you shouldn't use 
 		 * it directly because the InitializerBase class is abstract.
@@ -67,9 +69,13 @@ package org.flintparticles.common.initializers
 		 * 
 		 * @see org.flintparticles.common.initializers.Initializer#getDefaultPriority()
 		 */
-		public function getDefaultPriority():Number
+		public function get priority():int
 		{
-			return 0;
+			return _priority;
+		}
+		public function set priority( value:int ):void
+		{
+			_priority = value;
 		}
 		
 		/**

@@ -40,6 +40,9 @@ package org.flintparticles.threeD.actions
 	/**
 	 * The MinimumDistance action applies an acceleration to the particle to maintain a minimum
 	 * distance between it and its neighbours.
+	 * 
+	 * <p>This action has a priority of 10, so that it executes 
+	 * before other actions.</p>
 	 */
 
 	public class MinimumDistance extends ActionBase
@@ -67,6 +70,7 @@ package org.flintparticles.threeD.actions
 		 */
 		public function MinimumDistance( minimum:Number = 0, acceleration:Number = 0 )
 		{
+			priority = 10;
 			d = new Vector3D();
 			move = new Vector3D();
 			this.minimum = minimum;
@@ -97,16 +101,6 @@ package org.flintparticles.threeD.actions
 		public function set acceleration( value:Number ):void
 		{
 			_acc = value;
-		}
-
-		/**
-		 * @inheritDoc
-		 * 
-		 * <p>Returns a value of 10, so that the MutualGravity action executes before other actions.</p>
-		 */
-		override public function getDefaultPriority():Number
-		{
-			return 10;
 		}
 
 		/**
