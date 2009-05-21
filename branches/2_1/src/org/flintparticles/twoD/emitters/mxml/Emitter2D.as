@@ -50,7 +50,7 @@ package org.flintparticles.twoD.emitters.mxml
 		public var runAheadFrameRate:Number = 10;
 		
 		[Inspeactable]
-		public var autoStart:Boolean = false;
+		public var autoStart:Boolean = true;
 		
 		public function initialized(document:Object, id:String):void
 		{

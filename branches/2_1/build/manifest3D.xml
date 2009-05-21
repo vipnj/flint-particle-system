@@ -9,7 +9,11 @@
     <component class="org.flintparticles.threeD.renderers.mxml.BitmapRenderer"/>
     <component class="org.flintparticles.threeD.renderers.mxml.DisplayObjectRenderer"/>
     <component class="org.flintparticles.threeD.renderers.mxml.PixelRenderer"/>
+    
+    <!-- CAMERA -->
     <component class="org.flintparticles.threeD.renderers.Camera"/>
+    <component class="org.flintparticles.threeD.renderers.controllers.OrbitCamera"/>
+    <component class="org.flintparticles.threeD.renderers.controllers.FirstPersonCamera"/>
 
     <!-- EMITTER -->
     <component id="Emitter" class="org.flintparticles.threeD.emitters.mxml.Emitter3D"/>

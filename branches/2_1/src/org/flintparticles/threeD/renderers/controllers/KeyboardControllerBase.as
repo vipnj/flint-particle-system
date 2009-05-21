@@ -31,8 +31,11 @@
 package org.flintparticles.threeD.renderers.controllers 
 {
 	import flash.display.DisplayObject;
+	import flash.events.Event;
 	import flash.events.KeyboardEvent;
 	import flash.ui.Keyboard;
+	
+	import mx.core.IMXMLObject;
 	
 	import org.flintparticles.common.events.UpdateEvent;
 	import org.flintparticles.common.utils.FrameUpdater;
@@ -52,7 +55,7 @@ package org.flintparticles.threeD.renderers.controllers
 	 * <li>D or Right arrow keys - orbit right around the target.</li>
 	 * </ul>
 	 */
-	public class KeyboardControllerBase implements CameraController 
+	public class KeyboardControllerBase implements CameraController, IMXMLObject
 	{
 		protected var _stage:DisplayObject;
 		protected var _camera:Camera;
@@ -72,6 +75,9 @@ package org.flintparticles.threeD.renderers.controllers
 		protected var pgUpDown:Boolean = false;
 		protected var pgDownDown:Boolean = false;
 		
+		[Inspectable]
+		public var autoStart:Boolean = true;
+
 		/**
 		 * The constructor creates an OrbitCamera controller.
 		 * 
@@ -204,6 +210,7 @@ package org.flintparticles.threeD.renderers.controllers
 			switch( ev.keyCode )
 			{
 				case Keyboard.UP:
+					trace( "up down true" );
 					upDown = true;
 					break;
 				case Keyboard.DOWN:
@@ -241,6 +248,7 @@ package org.flintparticles.threeD.renderers.controllers
 			switch( ev.keyCode )
 			{
 				case Keyboard.UP:
+					trace( "up down false" );
 					upDown = false;
 					break;
 				case Keyboard.DOWN:
@@ -292,6 +300,7 @@ package org.flintparticles.threeD.renderers.controllers
 		{
 			if( !_running || time > _maximumFrameTime )
 			{
+				trace( "don't update" );
 				return;
 			}
 			updateCamera( time );
@@ -314,6 +323,8 @@ package org.flintparticles.threeD.renderers.controllers
 			_running = true;
 		}
 		
+
+		
 		/**
 		 * Stops the controller.
 		 */
@@ -324,6 +335,31 @@ package org.flintparticles.threeD.renderers.controllers
 				FrameUpdater.instance.removeEventListener( UpdateEvent.UPDATE, updateEventListener );
 			}
 			_running = false;
+		}
+		
+		public function initialized( document:Object, id:String ):void
+		{
+			var displayObj:DisplayObject = document as DisplayObject;
+			if( displayObj )
+			{
+				if( document.stage )
+				{
+					this.stage = document.stage;
+				}
+				else
+				{
+					DisplayObject( document ).addEventListener( Event.ADDED_TO_STAGE, addedToStage );
+				}
+			}
+			if( autoStart )
+			{
+				start();
+			}
+		}
+		
+		private function addedToStage( ev:Event ):void
+		{
+			this.stage = DisplayObject( ev.target ).stage;
 		}
 	}
 }

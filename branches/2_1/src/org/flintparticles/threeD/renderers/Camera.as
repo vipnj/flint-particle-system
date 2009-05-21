@@ -71,8 +71,9 @@ package org.flintparticles.threeD.renderers
 		public function Camera()
 		{
 			_position = new Point3D( 0, 0, 0 );
-			_up = Vector3D.AXISY.clone();
-			_pDirection = Vector3D.AXISZ.clone();
+			_target = new Point3D( 0, 0, 0 );
+			_up = new Vector3D( 0, 1 , 0 );
+			_pDirection = new Vector3D( 0, 0, 1 );
 		}
 
 		/**
@@ -194,6 +195,7 @@ package org.flintparticles.threeD.renderers
 		 */
 		public function dolly( distance:Number ):void
 		{
+			trace( "dolly " + distance );
 			_position.incrementBy( _direction.multiply( distance ) );
 			_spaceTransform = null;
 		}

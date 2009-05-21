@@ -73,13 +73,19 @@ package org.flintparticles.threeD.renderers.controllers
 		 * own tick event to update its state. The internal tick process is tied
 		 * to the framerate and updates the camera every frame.
 		 */
-		public function FirstPersonCamera( stage:DisplayObject, camera:Camera, rotationRate:Number = 1, trackRate:Number = 200, useInternalTick:Boolean = true )
+		public function FirstPersonCamera( stage:DisplayObject = null, camera:Camera = null, rotationRate:Number = 1, trackRate:Number = 200, useInternalTick:Boolean = true )
 		{
-			_camera = camera;
-			this.stage = stage;
-			_rotationRate = rotationRate;
-			_trackRate = trackRate;
-			_useInternalTick = useInternalTick;
+			if( camera )
+			{
+				this.camera = camera;
+			}
+			if( stage )
+			{
+				this.stage = stage;
+			}
+			this.rotationRate = rotationRate;
+			this.trackRate = trackRate;
+			this.useInternalTick = useInternalTick;
 		}
 		
 		/**

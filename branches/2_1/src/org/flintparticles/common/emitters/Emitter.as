@@ -241,7 +241,7 @@ package org.flintparticles.common.emitters
 			{
 				initializer.removedFromEmitter( this );
 			}
-			_initializers = value.splice();
+			_initializers = value.slice();
 			BehaviourArrayUtils.sortArray( _initializers );
 			for each( initializer in value )
 			{
@@ -327,7 +327,7 @@ package org.flintparticles.common.emitters
 			{
 				action.removedFromEmitter( this );
 			}
-			_actions = value.splice();
+			_actions = value.slice();
 			BehaviourArrayUtils.sortArray( _actions );
 			for each( action in value )
 			{
@@ -413,7 +413,7 @@ package org.flintparticles.common.emitters
 			{
 				activity.removedFromEmitter( this );
 			}
-			_activities = value.splice();
+			_activities = value.slice();
 			BehaviourArrayUtils.sortArray( _activities );
 			for each( activity in _activities )
 			{

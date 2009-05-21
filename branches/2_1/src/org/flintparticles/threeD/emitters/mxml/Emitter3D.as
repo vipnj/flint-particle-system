@@ -49,8 +49,8 @@ package org.flintparticles.threeD.emitters.mxml
 		[Inspectable]
 		public var runAheadFrameRate:Number = 10;
 		
-		[Inspeactable]
-		public var autoStart:Boolean = false;
+		[Inspectable]
+		public var autoStart:Boolean = true;
 		
 		public function initialized(document:Object, id:String):void
 		{
