@@ -51,8 +51,8 @@ package org.flintparticles.threeD.zones
 		 */
 		public function LineZone( start:Point3D = null, end:Point3D = null )
 		{
-			_start = start ? start.clone() : null;
-			_end = end ? end.clone() : null;
+			_start = start ? start.clone() : new Point3D( 0, 0, 0 );
+			_end = end ? end.clone() : new Point3D( 0, 0, 0 );
 			setLength();
 		}
 		

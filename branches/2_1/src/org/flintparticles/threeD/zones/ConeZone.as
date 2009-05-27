@@ -64,8 +64,8 @@ package org.flintparticles.threeD.zones
 		 */
 		public function ConeZone( apex:Point3D = null, axis:Vector3D = null, angle:Number = 0, height:Number = 0, truncatedHeight:Number = 0 )
 		{
-			_apex = apex ? apex.clone() : null;
-			_axis = axis ? axis.unit() : null;
+			_apex = apex ? apex.clone() : new Point3D( 0, 0, 0 );
+			_axis = axis ? axis.unit() : new Vector3D( 0, 1, 0 );
 			_angle = angle;
 			_minDist = truncatedHeight;
 			_maxDist = height;

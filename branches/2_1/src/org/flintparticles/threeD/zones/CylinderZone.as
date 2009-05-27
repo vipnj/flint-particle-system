@@ -67,8 +67,8 @@ package org.flintparticles.threeD.zones
 		 */
 		public function CylinderZone( center:Point3D = null, axis:Vector3D = null, length:Number = 0, outerRadius:Number = 0, innerRadius:Number = 0 )
 		{
-			_center = center ? center.clone() : null;
-			_axis = axis ? axis.unit() : null;
+			_center = center ? center.clone() : new Point3D( 0, 0, 0 );
+			_axis = axis ? axis.unit() : new Vector3D( 0, 1, 0 );
 			_innerRadius = innerRadius;
 			_innerRadiusSq = innerRadius * innerRadius;
 			_outerRadius = outerRadius;

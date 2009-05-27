@@ -59,9 +59,9 @@ package org.flintparticles.threeD.zones
 		 */
 		public function ParallelogramZone( corner:Point3D = null, side1:Vector3D = null, side2:Vector3D = null )
 		{
-			_corner = corner ? corner.clone() : null;
-			_side1 = side1 ? side1.clone() : null;
-			_side2 = side2 ? side2.clone() : null;
+			_corner = corner ? corner.clone() : new Point3D( 0, 0, 0 );
+			_side1 = side1 ? side1.clone() : new Vector3D( 1, 0, 0 );
+			_side2 = side2 ? side2.clone() : new Vector3D( 0, -1, 0 );
 			_dirty = true;
 		}
 		

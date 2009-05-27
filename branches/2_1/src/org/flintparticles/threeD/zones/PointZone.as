@@ -47,7 +47,7 @@ package org.flintparticles.threeD.zones
 		 */
 		public function PointZone( point:Point3D = null )
 		{
-			_point = point ? point.clone() : null;
+			_point = point ? point.clone() : new Point3D( 0, 0, 0 );
 		}
 		
 		/**

@@ -331,7 +331,7 @@ package org.flintparticles.common.emitters
 			BehaviourArrayUtils.sortArray( _actions );
 			for each( action in value )
 			{
-				action.removedFromEmitter( this );
+				action.addedToEmitter( this );
 			}
 		}
 

@@ -67,9 +67,9 @@ package org.flintparticles.threeD.zones
 			_width = width;
 			_height = height;
 			_depth = depth;
-			_center = center ? center.clone() : null;
-			_upAxis = upAxis ? upAxis.unit() : null;
-			_depthAxis = depthAxis ? depthAxis.unit() : null;
+			_center = center ? center.clone() : new Point3D( 0, 0, 0 );
+			_upAxis = upAxis ? upAxis.unit() : new Vector3D( 0, 1, 0 );
+			_depthAxis = depthAxis ? depthAxis.unit() : new Vector3D( 0, 0, 1 );
 			_dirty = true;
 		}
 		

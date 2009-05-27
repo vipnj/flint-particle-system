@@ -77,10 +77,10 @@ package org.flintparticles.threeD.zones
 		public function BitmapDataZone( bitmapData : BitmapData = null, corner:Point3D = null, top:Vector3D = null, left:Vector3D = null )
 		{
 			_bitmapData = bitmapData;
-			_corner = corner ? corner.clone() : null;
-			_cornerVector = _corner ? _corner.toVector3D() : null;
-			_top = top ? top.clone() : null;
-			_left = left ? left.clone() : null;
+			_corner = corner ? corner.clone() : new Point3D( 0, 0, 0 );
+			_cornerVector = _corner.toVector3D();
+			_top = top ? top.clone() : new Vector3D( 1, 0, 0 );
+			_left = left ? left.clone() : new Vector3D( 0, -1, 0 );
 			if( _bitmapData )
 			{
 				_dirty = true;

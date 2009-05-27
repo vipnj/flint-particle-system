@@ -4,7 +4,7 @@
 	xmlns:f="http://flintparticles.org/2009/flint3d"
 	xmlns:filters="flash.filters.*"
 	layout="absolute" width="500" height="500"
-	backgroundColor="#000000" addedToStage="init()">
+	backgroundColor="#000000">
 	
 <mx:Label text="Use arrow keys to track in/out and orbit around the fountain." color="#FFFFFF"/>
 <f:PixelRenderer id="renderer" width="500" height="500">
