@@ -81,7 +81,7 @@ package org.flintparticles.common.initializers
 					initializer.removedFromEmitter( _emitter );
 				}
 			}
-			_initializers = value.splice( );
+			_initializers = value.slice( );
 			BehaviourArrayUtils.sortArray( _initializers );
 			if( _emitter )
 			{

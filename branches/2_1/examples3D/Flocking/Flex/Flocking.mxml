@@ -2,7 +2,6 @@
 <mx:Application
 	xmlns:mx="http://www.adobe.com/2006/mxml"
 	xmlns:f="http://flintparticles.org/2009/flint3d"
-	xmlns:filters="flash.filters.*"
 	layout="absolute" width="700" height="500"
 	backgroundColor="#999999">
 
@@ -12,8 +11,8 @@
 			public var Bird:Class;
 		]]>
 	</mx:Script>
-		
-<f:DisplayObjectRenderer id="renderer" x="350" y="250">
+
+<f:DisplayObjectRenderer id="renderer" width="700" height="500">
 	<f:camera>
 		<f:Camera projectionDistance="400">
 			<f:position>

@@ -68,6 +68,15 @@ package org.flintparticles.threeD.renderers.mxml
 		 * @private
 		 */
 		protected var _camera:Camera;
+		/**
+		 * @private
+		 */
+		protected var _halfWidth:Number = 0;
+		/**
+		 * @private
+		 */
+		protected var _halfHeight:Number = 0;
+
 		
 		private var toDegrees:Number = 180 / Math.PI;
 
@@ -112,6 +121,17 @@ package org.flintparticles.threeD.renderers.mxml
 		{
 			_camera = value;
 		}
+
+		override public function set width( value:Number ):void
+		{
+			super.width = value;
+			_halfWidth = value * 0.5;
+		}
+		override public function set height( value:Number ):void
+		{
+			super.height = value;
+			_halfHeight = value * 0.5;
+		}
 		
 		/**
 		 * This method positions and scales the particles according to the
@@ -146,8 +166,8 @@ package org.flintparticles.threeD.renderers.mxml
 					pos.project();
 					img.scaleX = scale;
 					img.scaleY = scale;
-					img.x = pos.x;
-					img.y = -pos.y;
+					img.x = pos.x + _halfWidth;
+					img.y = -pos.y + _halfHeight;
 					img.transform.colorTransform = particle.colorTransform;
 					img.visible = true;
 					if( particle.rotation.equals( Quaternion.IDENTITY ) )

@@ -128,7 +128,7 @@ package org.flintparticles.threeD.particles
 					for( x = 0; x < width; ++x )
 					{
 						p = new Particle3D();
-						p.position = new Point3D( x + offset.x, y + offset.y, offset.z );
+						p.position = new Point3D( x + offset.x, -y + offset.y, offset.z );
 						b = new BitmapData( size, size, true, 0 );
 						b.copyPixels( bitmapData, new Rectangle( x, y, size, size ), zero );
 						m = new Bitmap( b );
