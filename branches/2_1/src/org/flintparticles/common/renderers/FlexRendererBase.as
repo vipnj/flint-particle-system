@@ -40,11 +40,11 @@ package org.flintparticles.common.renderers
 	import flash.events.Event;	
 
 	/**
-	 * The base class used by all the Flint renderers. This class manages
+	 * The base class used by all the Flex compatible renderers. This class manages
 	 * various aspects of the rendering process.
 	 * 
 	 * <p>The class will add every emitter it should renderer to it's internal
-	 * array of emitters. It will listen for the appropriate events on the 
+	 * collection of emitters. It will listen for the appropriate events on the 
 	 * emitter and will then call the protected methods addParticle, removeParticle
 	 * and renderParticles at the appropriate times. Many derived classes need 
 	 * only implement these three methods to manage the rendering of the particles.</p>
@@ -62,7 +62,7 @@ package org.flintparticles.common.renderers
 		protected var _emitters:Array;
 		
 		/**
-		 * The constructor creates a RendererBase class.
+		 * The constructor creates a FlexRendererBase class.
 		 */
 		public function FlexRendererBase()
 		{
@@ -196,6 +196,7 @@ package org.flintparticles.common.renderers
 		/**
 		 * The removeParticle method is called when a particle is removed from one
 		 * of the emitters that is being rendered by this renderer.
+		 * 
 		 * @param particle The particle.
 		 */
 		protected function removeParticle( particle:Particle ):void
@@ -204,7 +205,7 @@ package org.flintparticles.common.renderers
 		
 		/**
 		 * The renderParticles method is called during the render phase of 
-		 * every frame if the state of one of the emitters being rendered
+		 * each frame if the state of one of the emitters being rendered
 		 * by this renderer has changed.
 		 * 
 		 * @param particles The particles being managed by all the emitters
@@ -216,7 +217,9 @@ package org.flintparticles.common.renderers
 		}
 
 		/**
-		 * The array of all emitters being rendered by this renderer.
+		 * The array of all emitters being rendered by this renderer. This is exposed
+		 * to enable setting of the emitters in mxml files. It is not intended to be used
+		 * from Actionscript code.
 		 */
 		public function get emitters():Array
 		{
@@ -235,7 +238,9 @@ package org.flintparticles.common.renderers
 			}
 		}
 		
-		
+		/**
+		 * private
+		 */
 		override protected function measure():void
 		{
 			super.measure();

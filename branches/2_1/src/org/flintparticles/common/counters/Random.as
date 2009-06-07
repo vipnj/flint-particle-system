@@ -33,9 +33,8 @@ package org.flintparticles.common.counters
 	import org.flintparticles.common.emitters.Emitter;		
 
 	/**
-	 * The Steady counter causes the emitter to emit particles continuously
-	 * at a steady rate. It can be used to simulate any continuous particle
-	 * stream.
+	 * The Random counter causes the emitter to emit particles continuously
+	 * at a variable random rate between two limits.
 	 */
 	public class Random implements Counter
 	{
@@ -45,8 +44,8 @@ package org.flintparticles.common.counters
 		private var _stop:Boolean;
 		
 		/**
-		 * The constructor creates a Steady counter for use by an emitter. To
-		 * add a Steady counter to an emitter use the emitter's counter property.
+		 * The constructor creates a Random counter for use by an emitter. To
+		 * add a Random counter to an emitter use the emitter's counter property.
 		 * 
 		 * @param minRate The minimum number of particles to emit per second.
 		 * @param maxRate The maximum number of particles to emit per second.
@@ -89,7 +88,7 @@ package org.flintparticles.common.counters
 		}
 		
 		/**
-		 * The minimum number of particles to emit per second.
+		 * The maximum number of particles to emit per second.
 		 */
 		public function get maxRate():Number
 		{

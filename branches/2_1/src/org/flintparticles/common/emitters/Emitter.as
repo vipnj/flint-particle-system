@@ -30,9 +30,9 @@
 
 package org.flintparticles.common.emitters
 {
-	import org.flintparticles.common.utils.BehaviourArrayUtils;	
 	import org.flintparticles.common.actions.Action;
 	import org.flintparticles.common.activities.Activity;
+	import org.flintparticles.common.behaviours.BehaviourArrayUtils;
 	import org.flintparticles.common.counters.Counter;
 	import org.flintparticles.common.counters.ZeroCounter;
 	import org.flintparticles.common.events.EmitterEvent;
@@ -302,15 +302,7 @@ package org.flintparticles.common.emitters
 		 */
 		public function hasInitializerOfType( initializerClass:Class ):Boolean
 		{
-			var len:uint = _initializers.length;
-			for( var i:uint = 0; i < len; ++i )
-			{
-				if( _initializers[i] is initializerClass )
-				{
-					return true;
-				}
-			}
-			return false;
+			return BehaviourArrayUtils.containsType( _initializers, initializerClass );
 		}
 
 		/**
@@ -388,15 +380,7 @@ package org.flintparticles.common.emitters
 		 */
 		public function hasActionOfType( actionClass:Class ):Boolean
 		{
-			var len:uint = _actions.length;
-			for( var i:uint = 0; i < len; ++i )
-			{
-				if( _actions[i] is actionClass )
-				{
-					return true;
-				}
-			}
-			return false;
+			return BehaviourArrayUtils.containsType( _actions, actionClass );
 		}
 
 		/**
@@ -474,15 +458,7 @@ package org.flintparticles.common.emitters
 		 */
 		public function hasActivityOfType( activityClass:Class ):Boolean
 		{
-			var len:uint = _activities.length;
-			for( var i:uint = 0; i < len; ++i )
-			{
-				if( _activities[i] is activityClass )
-				{
-					return true;
-				}
-			}
-			return false;
+			return BehaviourArrayUtils.containsType( _activities, activityClass );
 		}
 
 		/**

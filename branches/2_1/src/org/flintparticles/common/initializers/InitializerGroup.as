@@ -30,9 +30,9 @@
 
 package org.flintparticles.common.initializers 
 {
+	import org.flintparticles.common.behaviours.BehaviourArrayUtils;
 	import org.flintparticles.common.emitters.Emitter;
-	import org.flintparticles.common.particles.Particle;
-	import org.flintparticles.common.utils.BehaviourArrayUtils;		
+	import org.flintparticles.common.particles.Particle;	
 
 	[DefaultProperty("initializers")]
 	

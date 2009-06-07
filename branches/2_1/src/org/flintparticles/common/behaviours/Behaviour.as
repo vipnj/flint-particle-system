@@ -28,9 +28,10 @@
  * THE SOFTWARE.
  */
 
-package org.flintparticles.common.emitters
+package org.flintparticles.common.behaviours
 {
-
+	import org.flintparticles.common.emitters.Emitter;	
+	
 	/**
 	 * The Behaviour interface is the base for the Action, Initializer and 
 	 * Activity interfaces.

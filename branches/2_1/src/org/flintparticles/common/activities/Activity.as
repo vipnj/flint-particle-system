@@ -30,8 +30,8 @@
 
 package org.flintparticles.common.activities
 {
-	import org.flintparticles.common.emitters.Behaviour;	
-	import org.flintparticles.common.emitters.Emitter;	
+	import org.flintparticles.common.behaviours.Behaviour;
+	import org.flintparticles.common.emitters.Emitter;		
 
 	/**
 	 * The Activity interface must be implemented by all emitter activities.

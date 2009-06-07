@@ -34,7 +34,10 @@ package org.flintparticles.threeD.emitters.mxml
 	import mx.core.IMXMLObject;	
 
 	/**
-	 * @author Richard
+	 * @inheritDoc
+	 * 
+	 * <p>This version of the emitter exposes additional properties to MXML and is intended for use 
+	 * in MXML documents.</p>
 	 */
 	public class Emitter3D extends org.flintparticles.threeD.emitters.Emitter3D implements IMXMLObject 
 	{
@@ -43,15 +46,30 @@ package org.flintparticles.threeD.emitters.mxml
 			super( );
 		}
 		
+		/**
+		 * Makes the emitter skip forwards a period of time at teh start. Use this property
+		 * when you want the emitter to look like it's been running for a while.
+		 */
 		[Inspectable]
 		public var runAheadTime:Number = 0;
 		
+		/**
+		 * The frame=-rate to use when running the emitter ahead at the start.
+		 * 
+		 * @see #runAheadTime
+		 */
 		[Inspectable]
 		public var runAheadFrameRate:Number = 10;
 		
+		/**
+		 * Indicates if the emitter should start automatically or wait for the start methood to be called.
+		 */
 		[Inspectable]
 		public var autoStart:Boolean = true;
-		
+
+		/**
+		 * @private
+		 */		
 		public function initialized(document:Object, id:String):void
 		{
 			if( autoStart )

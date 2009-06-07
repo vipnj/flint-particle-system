@@ -30,7 +30,7 @@
 
 package org.flintparticles.common.actions
 {
-	import org.flintparticles.common.emitters.Behaviour;
+	import org.flintparticles.common.behaviours.Behaviour;
 	import org.flintparticles.common.emitters.Emitter;
 	import org.flintparticles.common.particles.Particle;	
 

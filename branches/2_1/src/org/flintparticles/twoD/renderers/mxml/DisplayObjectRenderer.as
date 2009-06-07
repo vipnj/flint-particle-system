@@ -53,7 +53,10 @@ package org.flintparticles.twoD.renderers.mxml
 	 * 
 	 * <p>Because the DisplayObject3DRenderer directly uses the particle's image,
 	 * it is not suitable in situations where the same particle will be simultaneously
-	 * displayed by two different renderers.</p> 
+	 * displayed by two different renderers.</p>
+	 * 
+	 * <p>This version of the DisplayObjectRenderer is a UIComponent and is 
+	 * intended for use in MXML documents.</p>
 	 */
 	public class DisplayObjectRenderer extends FlexRendererBase
 	{

@@ -36,9 +36,8 @@ package org.flintparticles.twoD.renderers.mxml
 
 	/**
 	 * The PixelRenderer draws particles as single pixels on a Bitmap display object. The
-	 * region of the particle system covered by this bitmap object must be defined
-	 * in the canvas property of the PixelRenderer. Particles outside this region
-	 * are not drawn.
+	 * region of the particle system covered by this bitmap object is defined by the width
+	 * and height of the renderer. Particles outside this region are not drawn.
 	 * 
 	 * <p>The PixelRenderer allows the use of BitmapFilters to modify the appearance
 	 * of the bitmap. Every frame, under normal circumstances, the Bitmap used to
@@ -51,16 +50,8 @@ package org.flintparticles.twoD.renderers.mxml
 	 * display objects in its display list. To enable mouse events for the renderer
 	 * or its children set the mouseEnabled or mouseChildren properties to true.</p>
 	 * 
-	 * <p><i>This class has been modified in version 1.0.1 of Flint to fix various
-	 * limitations in the previous version. Specifically, the canvas for drawing
-	 * the particles on must now be specified by the developer (it previously 
-	 * defaulted to the size and position of the stage).</i></p>
-	 * 
-	 * <p><i>The previous behaviour, while still flawed, has been improved
-	 * and given its own renderer, the FullStagePixelRenderer. To retain the previous
-	 * behaviour, please use the FullStagePixelRenderer.</i></p>
-	 * 
-	 * @see org.flintparticles.twoD.renderers.FullStagePixelRenderer
+	 * <p>This version of the PixelRenderer is a UIComponent and is intended for
+	 * use in MXML documents.</p>
 	 */
 	public class PixelRenderer extends BitmapRenderer
 	{
