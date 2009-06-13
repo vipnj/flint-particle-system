@@ -3,7 +3,7 @@
 	
 	<property file="build.config"/>
 		
-	<target name="all" depends="swc,asdocs,examples2D,flex2D,examples3D,papervision3D,away3D" description="Full build of swc library and asdocs"/>
+	<target name="all" depends="swc,asdocs,examples2D,flex2D,examples3D,flex3D,papervision3D,away3D" description="Full build of swc library and asdocs"/>
 		
 	<target name="swc" description="Clean and build swc library">
 		
@@ -467,6 +467,85 @@
 
 			<arg line='-output ../examples2D/Sparkler/Flex/Sparkler.swf'/>
 			<arg line='../examples2D/Sparkler/Flex/Sparkler.mxml'/>
+		</exec>
+
+	</target>
+
+	<target name="flex3D" description="Build Flex 3D examples">
+				
+		<exec executable="${mxmlc}" failonerror="false">
+			<arg line='-source-path ../src'/>
+			<arg line='-debug=false'/>
+			<arg line='-optimize=true'/>
+
+			<arg line='-title "Brownian Motion 3D"'/>
+			<arg line='-description "An example for the Flint particle system showing a Brownian Motion effect in 3D."'/>
+			<arg line='-creator "Richard Lord - flintparticles.org"'/>
+
+			<arg line='-namespace http://flintparticles.org/2009/flint3d manifest3D.xml'/>
+
+			<arg line='-output ../examples3D/BrownianMotion/Flex/BrownianMotion.swf'/>
+			<arg line='../examples3D/BrownianMotion/Flex/BrownianMotion.mxml'/>
+		</exec>
+
+		<exec executable="${mxmlc}" failonerror="false">
+			<arg line='-source-path ../src'/>
+			<arg line='-debug=false'/>
+			<arg line='-optimize=true'/>
+
+			<arg line='-title "Explode Image 3D"'/>
+			<arg line='-description "An example for the Flint particle system showing an Explode Image effect in 3D."'/>
+			<arg line='-creator "Richard Lord - flintparticles.org"'/>
+
+			<arg line='-namespace http://flintparticles.org/2009/flint3d manifest3D.xml'/>
+
+			<arg line='-output ../examples3D/ExplodeImage/Flex/ExplodeImage.swf'/>
+			<arg line='../examples3D/ExplodeImage/Flex/ExplodeImage.mxml'/>
+		</exec>
+
+		<exec executable="${mxmlc}" failonerror="false">
+			<arg line='-source-path ../src'/>
+			<arg line='-debug=false'/>
+			<arg line='-optimize=true'/>
+
+			<arg line='-title "Fire and Smoke 3D"'/>
+			<arg line='-description "An example for the Flint particle system showing Fire and Smoke effects in 3D."'/>
+			<arg line='-creator "Richard Lord - flintparticles.org"'/>
+
+			<arg line='-namespace http://flintparticles.org/2009/flint3d manifest3D.xml'/>
+
+			<arg line='-output ../examples3D/FireAndSmoke/Flex/FireAndSmoke.swf'/>
+			<arg line='../examples3D/FireAndSmoke/Flex/FireAndSmoke.mxml'/>
+		</exec>
+
+		<exec executable="${mxmlc}" failonerror="false">
+			<arg line='-source-path ../src'/>
+			<arg line='-debug=false'/>
+			<arg line='-optimize=true'/>
+
+			<arg line='-title "Firework Display 3D"'/>
+			<arg line='-description "An example for the Flint particle system showing a Firework Display in 3D."'/>
+			<arg line='-creator "Richard Lord - flintparticles.org"'/>
+
+			<arg line='-namespace http://flintparticles.org/2009/flint3d manifest3D.xml'/>
+
+			<arg line='-output ../examples3D/FireworkDisplay/Flex/FireworkDisplay.swf'/>
+			<arg line='../examples3D/FireworkDisplay/Flex/FireworkDisplay.mxml'/>
+		</exec>
+
+		<exec executable="${mxmlc}" failonerror="false">
+			<arg line='-source-path ../src'/>
+			<arg line='-debug=false'/>
+			<arg line='-optimize=true'/>
+
+			<arg line='-title "Flocking 3D"'/>
+			<arg line='-description "An example for the Flint particle system showing a Flocking effect in 3D."'/>
+			<arg line='-creator "Richard Lord - flintparticles.org"'/>
+
+			<arg line='-namespace http://flintparticles.org/2009/flint3d manifest3D.xml'/>
+
+			<arg line='-output ../examples3D/Flocking/Flex/Flocking.swf'/>
+			<arg line='../examples3D/Flocking/Flex/Flocking.mxml'/>
 		</exec>
 
 	</target>

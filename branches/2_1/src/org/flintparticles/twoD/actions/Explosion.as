@@ -33,6 +33,7 @@ package org.flintparticles.twoD.actions
 	import org.flintparticles.common.actions.ActionBase;
 	import org.flintparticles.common.activities.FrameUpdatable;
 	import org.flintparticles.common.activities.UpdateOnFrame;
+	import org.flintparticles.common.behaviours.Resetable;
 	import org.flintparticles.common.emitters.Emitter;
 	import org.flintparticles.common.particles.Particle;
 	import org.flintparticles.twoD.particles.Particle2D;	
@@ -44,7 +45,7 @@ package org.flintparticles.twoD.actions
 	 * out in a shock wave.
 	 */
 
-	public class Explosion extends ActionBase implements FrameUpdatable
+	public class Explosion extends ActionBase implements Resetable, FrameUpdatable
 	{
 		private static const POWER_FACTOR:Number = 100000;
 		
@@ -199,6 +200,16 @@ package org.flintparticles.twoD.actions
 			{
 				emitter.removeActivity( _updateActivity );
 			}
+		}
+		
+		/**
+		 * Resets the explosion to its initial state, so it can start again.
+		 */
+		public function reset():void
+		{
+			_radius = 0;
+			_oldRadius = 0;
+			_radiusChange = 0;
 		}
 		
 		/**

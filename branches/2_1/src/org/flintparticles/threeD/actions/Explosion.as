@@ -33,6 +33,7 @@ package org.flintparticles.threeD.actions
 	import org.flintparticles.common.actions.ActionBase;
 	import org.flintparticles.common.activities.FrameUpdatable;
 	import org.flintparticles.common.activities.UpdateOnFrame;
+	import org.flintparticles.common.behaviours.Resetable;
 	import org.flintparticles.common.emitters.Emitter;
 	import org.flintparticles.common.particles.Particle;
 	import org.flintparticles.threeD.geom.Point3D;
@@ -45,7 +46,7 @@ package org.flintparticles.threeD.actions
 	 * of the explosion and then ripples out in a shock wave.
 	 */
 
-	public class Explosion extends ActionBase implements FrameUpdatable
+	public class Explosion extends ActionBase implements Resetable, FrameUpdatable
 	{
 		private static const POWER_FACTOR:Number = 100000;
 		
@@ -188,7 +189,14 @@ package org.flintparticles.threeD.actions
 		}
 		
 		/**
-		 * @inheritDoc
+		 * Adds an UpdateOnFrame activity to the emitter to call this objects
+		 * frameUpdate method once per frame.
+		 * 
+		 * @param emitter The emitter this action has been added to.
+		 * 
+		 * @see frameUpdate()
+		 * @see org.flintparticles.common.activities.UpdateOnFrame
+		 * @see org.flintparticles.common.actions.Action#addedToEmitter()
 		 */
 		override public function addedToEmitter( emitter:Emitter ):void
 		{
@@ -197,7 +205,14 @@ package org.flintparticles.threeD.actions
 		}
 		
 		/**
-		 * @inheritDoc
+		 * Removes the UpdateOnFrame activity that was added to the emitter in the
+		 * addedToEmitter method.
+		 * 
+		 * @param emitter The emitter this action has been added to.
+		 * 
+		 * @see addedToEmitter()
+		 * @see org.flintparticles.common.activities.UpdateOnFrame
+		 * @see org.flintparticles.common.actions.Action#removedFromEmitter()
 		 */
 		override public function removedFromEmitter( emitter:Emitter ):void
 		{
@@ -205,6 +220,16 @@ package org.flintparticles.threeD.actions
 			{
 				emitter.removeActivity( _updateActivity );
 			}
+		}
+		
+		/**
+		 * Resets the explosion to its initial state, so it can start again.
+		 */
+		public function reset():void
+		{
+			_radius = 0;
+			_oldRadius = 0;
+			_radiusChange = 0;
 		}
 		
 		/**
@@ -219,7 +244,17 @@ package org.flintparticles.threeD.actions
 		}
 		
 		/**
-		 * @inheritDoc
+		 * Calculates the effect of the blast and shockwave on the particle at this
+		 * time.
+		 * 
+		 * <p>This method is called by the emitter and need not be called by the 
+		 * user.</p>
+		 * 
+		 * @param emitter The Emitter that created the particle.
+		 * @param particle The particle to be updated.
+		 * @param time The duration of the frame - used for time based updates.
+		 * 
+		 * @see org.flintparticles.common.actions.Action#update()
 		 */
 		override public function update( emitter:Emitter, particle:Particle, time:Number ):void
 		{
