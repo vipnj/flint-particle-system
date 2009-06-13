@@ -58,7 +58,10 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
   
   <p>Because the DisplayObject3DRenderer directly uses the particle's image,
   it is not suitable in situations where the same particle will be simultaneously
-  displayed by two different renderers.</p> 
+  displayed by two different renderers.</p>
+  
+  <p>This version of the DisplayObjectRenderer is a UIComponent and is 
+  intended for use in MXML documents.</p>
   <p></p>
 <br>
 <hr>
@@ -155,7 +158,9 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
 <a class="signatureLink" href="../../../common/renderers/FlexRendererBase.html#measure()">measure</a>():void</div>
-<div class="summaryTableDescription"></div>
+<div class="summaryTableDescription">
+   private
+   </div>
 </td><td class="summaryTableOwnerCol"><a href="../../../common/renderers/FlexRendererBase.html">FlexRendererBase</a></td>
 </tr>
 <tr class="">
@@ -175,7 +180,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <div class="summaryTableDescription">
    
    The renderParticles method is called during the render phase of 
-   every frame if the state of one of the emitters being rendered
+   each frame if the state of one of the emitters being rendered
    by this renderer has changed.</div>
 </td><td class="summaryTableOwnerCol">DisplayObjectRenderer</td>
 </tr>
@@ -239,6 +244,7 @@ showHideInherited();
    
    The removeParticle method is called when a particle is removed from one
    of the emitters that is being rendered by this renderer.
+   
    </p><span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
@@ -257,7 +263,7 @@ showHideInherited();
 <code>protected override function renderParticles(particles:Array):void</code><p>
    
    The renderParticles method is called during the render phase of 
-   every frame if the state of one of the emitters being rendered
+   each frame if the state of one of the emitters being rendered
    by this renderer has changed.
    
    </p><span class="label">Parameters</span>

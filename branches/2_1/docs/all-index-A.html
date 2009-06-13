@@ -283,7 +283,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("AÂ
    The constructor creates an ActivityBase object.</td>
 </tr>
 <tr>
-<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('org/flintparticles/common/utils/class-list.html');" href="org/flintparticles/common/utils/BehaviourArrayUtils.html#add()">add</a>(array, item:<a href="org/flintparticles/common/emitters/Behaviour.html" onclick="javascript:loadClassListFrame('org/flintparticles/common/emitters./class-list.html');">org.flintparticles.common.emitters:Behaviour</a>) &mdash; Static method in class org.flintparticles.common.utils.<a onclick="javascript:loadClassListFrame('org/flintparticles/common/utils/class-list.html');" href="org/flintparticles/common/utils/BehaviourArrayUtils.html">BehaviourArrayUtils</a></td>
+<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('org/flintparticles/common/behaviours/class-list.html');" href="org/flintparticles/common/behaviours/BehaviourArrayUtils.html#add()">add</a>(array, item:<a href="org/flintparticles/common/behaviours/Behaviour.html" onclick="javascript:loadClassListFrame('org/flintparticles/common/behaviours./class-list.html');">org.flintparticles.common.behaviours:Behaviour</a>) &mdash; Static method in class org.flintparticles.common.behaviours.<a onclick="javascript:loadClassListFrame('org/flintparticles/common/behaviours/class-list.html');" href="org/flintparticles/common/behaviours/BehaviourArrayUtils.html">BehaviourArrayUtils</a></td>
 </tr>
 <tr>
 <td width="20"></td><td></td>
@@ -368,11 +368,11 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("AÂ
    This method does nothing.</td>
 </tr>
 <tr>
-<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('org/flintparticles/common/emitters/class-list.html');" href="org/flintparticles/common/emitters/Behaviour.html#addedToEmitter()">addedToEmitter</a>(emitter:<a href="org/flintparticles/common/emitters/Emitter.html" onclick="javascript:loadClassListFrame('org/flintparticles/common/emitters./class-list.html');">org.flintparticles.common.emitters:Emitter</a>) &mdash; Method in interface org.flintparticles.common.emitters.<a onclick="javascript:loadClassListFrame('org/flintparticles/common/emitters/class-list.html');" href="org/flintparticles/common/emitters/Behaviour.html">Behaviour</a></td>
+<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('org/flintparticles/common/behaviours/class-list.html');" href="org/flintparticles/common/behaviours/Behaviour.html#addedToEmitter()">addedToEmitter</a>(emitter:<a href="org/flintparticles/common/emitters/Emitter.html" onclick="javascript:loadClassListFrame('org/flintparticles/common/emitters./class-list.html');">org.flintparticles.common.emitters:Emitter</a>) &mdash; Method in interface org.flintparticles.common.behaviours.<a onclick="javascript:loadClassListFrame('org/flintparticles/common/behaviours/class-list.html');" href="org/flintparticles/common/behaviours/Behaviour.html">Behaviour</a></td>
 </tr>
 <tr>
 <td width="20"></td><td>
-   The addedToEmitter method is called by the emitter when the Action is 
+   The addedToEmitter method is called by the emitter when the Behaviour is 
    added to it.</td>
 </tr>
 <tr>
@@ -441,8 +441,8 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("AÂ
 </tr>
 <tr>
 <td width="20"></td><td>
-   
-   This method does nothing.</td>
+   Adds an UpdateOnFrame activity to the emitter to call this objects
+   frameUpdate method once per frame.</td>
 </tr>
 <tr>
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/actions/class-list.html');" href="org/flintparticles/threeD/actions/MatchRotateVelocity.html#addedToEmitter()">addedToEmitter</a>(emitter:<a href="org/flintparticles/common/emitters/Emitter.html" onclick="javascript:loadClassListFrame('org/flintparticles/common/emitters./class-list.html');">org.flintparticles.common.emitters:Emitter</a>) &mdash; Method in class org.flintparticles.threeD.actions.<a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/actions/class-list.html');" href="org/flintparticles/threeD/actions/MatchRotateVelocity.html">MatchRotateVelocity</a></td>
@@ -1132,7 +1132,8 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("AÂ
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/emitters/mxml/class-list.html');" href="org/flintparticles/threeD/emitters/mxml/Emitter3D.html#autoStart">autoStart</a> &mdash; Property in class org.flintparticles.threeD.emitters.mxml.<a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/emitters/mxml/class-list.html');" href="org/flintparticles/threeD/emitters/mxml/Emitter3D.html">Emitter3D</a></td>
 </tr>
 <tr>
-<td width="20"></td><td></td>
+<td width="20"></td><td>
+   Indicates if the emitter should start automatically or wait for the start methood to be called.</td>
 </tr>
 <tr>
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/renderers/controllers/class-list.html');" href="org/flintparticles/threeD/renderers/controllers/KeyboardControllerBase.html#autoStart">autoStart</a> &mdash; Property in class org.flintparticles.threeD.renderers.controllers.<a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/renderers/controllers/class-list.html');" href="org/flintparticles/threeD/renderers/controllers/KeyboardControllerBase.html">KeyboardControllerBase</a></td>
@@ -1144,7 +1145,8 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("AÂ
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('org/flintparticles/twoD/emitters/mxml/class-list.html');" href="org/flintparticles/twoD/emitters/mxml/Emitter2D.html#autoStart">autoStart</a> &mdash; Property in class org.flintparticles.twoD.emitters.mxml.<a onclick="javascript:loadClassListFrame('org/flintparticles/twoD/emitters/mxml/class-list.html');" href="org/flintparticles/twoD/emitters/mxml/Emitter2D.html">Emitter2D</a></td>
 </tr>
 <tr>
-<td width="20"></td><td></td>
+<td width="20"></td><td>
+   Indicates if the emitter should start automatically or wait for the start methood to be called.</td>
 </tr>
 <tr>
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/away3d/class-list.html');" href="org/flintparticles/threeD/away3d/Away3DRenderer.html">Away3DRenderer</a> &mdash; Class in package <a onclick="javascript:loadClassListFrame('org/flintparticles/threeD/away3d/class-list.html');" href="org/flintparticles/threeD/away3d/package-detail.html">org.flintparticles.threeD.away3d</a></td>

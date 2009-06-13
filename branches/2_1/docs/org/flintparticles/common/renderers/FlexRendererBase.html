@@ -44,15 +44,15 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <td class="classHeaderTableLabel">Implements</td><td><a href="Renderer.html">Renderer</a></td>
 </tr>
 <tr>
-<td class="classHeaderTableLabel">Subclasses</td><td><a href="../../twoD/renderers/mxml/BitmapRenderer.html">BitmapRenderer</a>, <a href="../../threeD/renderers/mxml/BitmapRenderer.html">BitmapRenderer</a>, <a href="../../threeD/renderers/mxml/DisplayObjectRenderer.html">DisplayObjectRenderer</a>, <a href="../../twoD/renderers/mxml/DisplayObjectRenderer.html">DisplayObjectRenderer</a></td>
+<td class="classHeaderTableLabel">Subclasses</td><td><a href="../../threeD/renderers/mxml/BitmapRenderer.html">BitmapRenderer</a>, <a href="../../twoD/renderers/mxml/BitmapRenderer.html">BitmapRenderer</a>, <a href="../../twoD/renderers/mxml/DisplayObjectRenderer.html">DisplayObjectRenderer</a>, <a href="../../threeD/renderers/mxml/DisplayObjectRenderer.html">DisplayObjectRenderer</a></td>
 </tr>
 </table>
 <p></p>
-  The base class used by all the Flint renderers. This class manages
+  The base class used by all the Flex compatible renderers. This class manages
   various aspects of the rendering process.
   
   <p>The class will add every emitter it should renderer to it's internal
-  array of emitters. It will listen for the appropriate events on the 
+  collection of emitters. It will listen for the appropriate events on the 
   emitter and will then call the protected methods addParticle, removeParticle
   and renderParticles at the appropriate times. Many derived classes need 
   only implement these three methods to manage the rendering of the particles.</p>
@@ -86,7 +86,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <div class="summarySignature">
 <a class="signatureLink" href="#FlexRendererBase()">FlexRendererBase</a>()</div>
 <div class="summaryTableDescription">
-   The constructor creates a RendererBase class.</div>
+   The constructor creates a FlexRendererBase class.</div>
 </td><td class="summaryTableOwnerCol">FlexRendererBase</td>
 </tr>
 <tr class="">
@@ -127,7 +127,9 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
 <a class="signatureLink" href="#measure()">measure</a>():void</div>
-<div class="summaryTableDescription"></div>
+<div class="summaryTableDescription">
+   private
+   </div>
 </td><td class="summaryTableOwnerCol">FlexRendererBase</td>
 </tr>
 <tr class="">
@@ -145,7 +147,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <a class="signatureLink" href="#renderParticles()">renderParticles</a>(particles:Array):void</div>
 <div class="summaryTableDescription">
    The renderParticles method is called during the render phase of 
-   every frame if the state of one of the emitters being rendered
+   each frame if the state of one of the emitters being rendered
    by this renderer has changed.</div>
 </td><td class="summaryTableOwnerCol">FlexRendererBase</td>
 </tr>
@@ -166,7 +168,9 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>emitters:Array</code>&nbsp;&nbsp;[read-write]<p>
-   The array of all emitters being rendered by this renderer.
+   The array of all emitters being rendered by this renderer. This is exposed
+   to enable setting of the emitters in mxml files. It is not intended to be used
+   from Actionscript code.
    </p><span class="label">Implementation</span>
 <br>
 <code>&nbsp;&nbsp;&nbsp;&nbsp;public function get emitters():Array</code>
@@ -184,7 +188,7 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public function FlexRendererBase()</code><p>
-   The constructor creates a RendererBase class.
+   The constructor creates a FlexRendererBase class.
    </p></div>
 <a name="methodDetail"></a>
 <div class="detailSectionHeader">Method detail</div>
@@ -234,8 +238,9 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>protected override function measure():void</code>
-</div>
+<code>protected override function measure():void</code><p>
+   private
+   </p></div>
 <a name="removeEmitter()"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
 <tr>
@@ -266,6 +271,7 @@ showHideInherited();
 <code>protected function removeParticle(particle:<a href="../particles/Particle.html">Particle</a>):void</code><p>
    The removeParticle method is called when a particle is removed from one
    of the emitters that is being rendered by this renderer.
+   
    </p><span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
@@ -283,7 +289,7 @@ showHideInherited();
 <div class="detailBody">
 <code>protected function renderParticles(particles:Array):void</code><p>
    The renderParticles method is called during the render phase of 
-   every frame if the state of one of the emitters being rendered
+   each frame if the state of one of the emitters being rendered
    by this renderer has changed.
    
    </p><span class="label">Parameters</span>

@@ -4,7 +4,7 @@
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="../../../../style.css" type="text/css" media="screen">
 <link rel="stylesheet" href="../../../../print.css" type="text/css" media="print">
-<meta content="Explosion,org.flintparticles.twoD.actions.Explosion,depth,epsilon,expansionRate,power,x,y,addedToEmitter,frameUpdate,removedFromEmitter,update" name="keywords">
+<meta content="Explosion,org.flintparticles.twoD.actions.Explosion,depth,epsilon,expansionRate,power,x,y,addedToEmitter,frameUpdate,removedFromEmitter,reset,update" name="keywords">
 <title>org.flintparticles.twoD.actions.Explosion</title>
 </head>
 <body>
@@ -41,7 +41,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <td class="classHeaderTableLabel">Inheritance</td><td class="inheritanceList">Explosion <img class="inheritArrow" alt="Inheritance" title="Inheritance" src="../../../../images/inherit-arrow.gif"> <a href="../../common/actions/ActionBase.html">ActionBase</a></td>
 </tr>
 <tr>
-<td class="classHeaderTableLabel">Implements</td><td><a href="../../common/activities/FrameUpdatable.html">FrameUpdatable</a></td>
+<td class="classHeaderTableLabel">Implements</td><td><a href="../../common/activities/FrameUpdatable.html">FrameUpdatable</a>, <a href="../../common/behaviours/Resetable.html">Resetable</a></td>
 </tr>
 </table>
 <p></p>
@@ -167,6 +167,14 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <div class="summaryTableDescription">
    Removes the UpdateOnFrame activity that was added to the emitter in the
    addedToEmitter method.</div>
+</td><td class="summaryTableOwnerCol">Explosion</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#reset()">reset</a>():void</div>
+<div class="summaryTableDescription">
+   Resets the explosion to its initial state, so it can start again.</div>
 </td><td class="summaryTableOwnerCol">Explosion</td>
 </tr>
 <tr class="">
@@ -450,6 +458,16 @@ showHideInherited();
 <a href="../../common/actions/Action.html#removedFromEmitter()" target="">org.flintparticles.common.actions.Action.removedFromEmitter()</a>
 </div>
 </div>
+<a name="reset()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">reset</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function reset():void</code><p>
+   Resets the explosion to its initial state, so it can start again.
+   </p></div>
 <a name="update()"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
 <tr>

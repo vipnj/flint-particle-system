@@ -46,8 +46,8 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 </table>
 <p></p>
   The BitmapRenderer draws particles onto a single Bitmap display object. The
-  region of the particle system covered by this bitmap object must be defined
-  in the canvas property of the BitmapRenderer. Particles outside this region
+  region of the particle system covered by this bitmap object must is defined
+  by the width and height of the renderer. Particles outside this region
   are not drawn.
   
   <p>The image to be used for each particle is the particle's image property.
@@ -68,20 +68,9 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
   display objects in its display list. To enable mouse events for the renderer
   or its children set the mouseEnabled or mouseChildren properties to true.</p>
   
-  <p><i>This class has been modified in version 1.0.1 of Flint to fix various
-  limitations in the previous version. Specifically, the canvas for drawing
-  the particles on must now be specified by the developer (it previously 
-  defaulted to the size and position of the stage).</i></p>
-  
-  <p><i>The previous behaviour, while still flawed, has been improved and 
-  given its own renderer, the FullStageBitmapRenderer. To retain the previous
-  behaviour, please use the FullStageBitmapRenderer.</i></p>
-  
+  <p>This version of the BitmapRenderer is a UIComponent and is intended for
+  use in MXML documents.</p>
   <p></p>
-<p>
-<span class="classHeaderTableLabel">See also</span>
-</p>
-<div class="seeAlso">org.flintparticles.twoD.renderers.FullStageBitmapRenderer</div>
 <br>
 <hr>
 </div>
@@ -283,7 +272,9 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
 <a class="signatureLink" href="../../../common/renderers/FlexRendererBase.html#measure()">measure</a>():void</div>
-<div class="summaryTableDescription"></div>
+<div class="summaryTableDescription">
+   private
+   </div>
 </td><td class="summaryTableOwnerCol"><a href="../../../common/renderers/FlexRendererBase.html">FlexRendererBase</a></td>
 </tr>
 <tr class="hideInheritedProtectedMethod">
@@ -302,7 +293,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <div class="summaryTableDescription">
    
    The renderParticles method is called during the render phase of 
-   every frame if the state of one of the emitters being rendered
+   each frame if the state of one of the emitters being rendered
    by this renderer has changed.</div>
 </td><td class="summaryTableOwnerCol">BitmapRenderer</td>
 </tr>
@@ -612,7 +603,7 @@ showHideInherited();
 <code>protected override function renderParticles(particles:Array):void</code><p>
    
    The renderParticles method is called during the render phase of 
-   every frame if the state of one of the emitters being rendered
+   each frame if the state of one of the emitters being rendered
    by this renderer has changed.
    
    </p><span class="label">Parameters</span>
