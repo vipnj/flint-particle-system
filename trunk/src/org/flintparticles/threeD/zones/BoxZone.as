@@ -2,8 +2,8 @@
  * FLINT PARTICLE SYSTEM
  * .....................
  * 
- * Author: Richard Lord (Big Room)
- * Copyright (c) Big Room Ventures Ltd. 2008
+ * Author: Richard Lord
+ * Copyright (c) Richard Lord 2008-2009
  * http://flintparticles.org
  * 
  * 
@@ -31,7 +31,8 @@
 package org.flintparticles.threeD.zones 
 {
 	import org.flintparticles.threeD.geom.Matrix3D;
-	import org.flintparticles.threeD.geom.Vector3D;				
+	import org.flintparticles.threeD.geom.Point3D;
+	import org.flintparticles.threeD.geom.Vector3D;	
 
 	/**
 	 * The BoxZone zone defines a cuboid or box shaped zone.
@@ -42,7 +43,7 @@ package org.flintparticles.threeD.zones
 		private var _width:Number;
 		private var _height:Number;
 		private var _depth:Number;
-		private var _center:Vector3D;
+		private var _center:Point3D;
 		private var _upAxis:Vector3D;
 		private var _depthAxis:Vector3D;
 		private var _transformTo:Matrix3D;
@@ -61,25 +62,22 @@ package org.flintparticles.threeD.zones
 		 * @param depthAxis The axis along which the depth is measured. The box is rotated
 		 * so that the depth is in this direction.
 		 */
-		public function BoxZone( width:Number, height:Number, depth:Number, center:Vector3D, upAxis:Vector3D, depthAxis:Vector3D )
+		public function BoxZone( width:Number = 0, height:Number = 0, depth:Number = 0, center:Point3D = null, upAxis:Vector3D = null, depthAxis:Vector3D = null )
 		{
 			_width = width;
 			_height = height;
 			_depth = depth;
-			_center = center.clone();
-			_center.w = 1;
-			_upAxis = upAxis.unit();
-			_upAxis.w = 0;
-			_depthAxis = depthAxis.unit();
-			_depthAxis.w = 0;
+			_center = center ? center.clone() : new Point3D( 0, 0, 0 );
+			_upAxis = upAxis ? upAxis.unit() : new Vector3D( 0, 1, 0 );
+			_depthAxis = depthAxis ? depthAxis.unit() : new Vector3D( 0, 0, 1 );
 			_dirty = true;
 		}
 		
 		private function init():void
 		{
 			_transformFrom = Matrix3D.newBasisTransform( _upAxis.crossProduct( _depthAxis ), _upAxis, _depthAxis );
-			_transformFrom.appendTranslation( _center.x, _center.y, _center.z );
-			_transformFrom.prependTranslation( -_width/2, -_height/2, -_depth/2 );
+			_transformFrom.appendTranslate( _center.x, _center.y, _center.z );
+			_transformFrom.prependTranslate( -_width/2, -_height/2, -_depth/2 );
 			_transformTo = _transformFrom.inverse;
 			_dirty = false;
 		}
@@ -126,14 +124,13 @@ package org.flintparticles.threeD.zones
 		/**
 		 * The point at the center of the box.
 		 */
-		public function get center() : Vector3D
+		public function get center() : Point3D
 		{
 			return _center.clone();
 		}
-		public function set center( value : Vector3D ) : void
+		public function set center( value : Point3D ) : void
 		{
 			_center = value.clone();
-			_center.w = 1;
 			_dirty = true;
 		}
 
@@ -148,7 +145,6 @@ package org.flintparticles.threeD.zones
 		public function set upAxis( value : Vector3D ) : void
 		{
 			_upAxis = value.unit();
-			_upAxis.w = 0;
 			_dirty = true;
 		}
 
@@ -163,7 +159,6 @@ package org.flintparticles.threeD.zones
 		public function set depthAxis( value : Vector3D ) : void
 		{
 			_depthAxis = value.unit();
-			_depthAxis.w = 0;
 			_dirty = true;
 		}
 
@@ -176,13 +171,13 @@ package org.flintparticles.threeD.zones
 		 * @param y The y coordinate of the location to test for.
 		 * @return true if point is inside the zone, false if it is outside.
 		 */
-		public function contains( p:Vector3D ):Boolean
+		public function contains( p:Point3D ):Boolean
 		{
 			if( _dirty )
 			{
 				init();
 			}
-			var q:Vector3D = _transformTo.transformVector( p );
+			var q:Point3D = _transformTo.transform( p ) as Point3D;
 			return q.x >= 0 && q.x <= _width && q.y >= 0 && q.y <= _height && q.z >= 0 && q.z <= _depth;
 		}
 		
@@ -193,14 +188,14 @@ package org.flintparticles.threeD.zones
 		 * 
 		 * @return a random point inside the zone.
 		 */
-		public function getLocation():Vector3D
+		public function getLocation():Point3D
 		{
 			if( _dirty )
 			{
 				init();
 			}
-			var p:Vector3D = new Vector3D( Math.random() * _width, Math.random() * _height, Math.random() * _depth, 1 );
-			return _transformFrom.transformVectorSelf( p );
+			var p:Point3D = new Point3D( Math.random() * _width, Math.random() * _height, Math.random() * _depth );
+			return _transformFrom.transformSelf( p ) as Point3D;
 		}
 		
 		/**

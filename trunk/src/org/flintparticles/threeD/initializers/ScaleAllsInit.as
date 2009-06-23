@@ -2,8 +2,8 @@
  * FLINT PARTICLE SYSTEM
  * .....................
  * 
- * Author: Richard Lord (Big Room)
- * Copyright (c) Big Room Ventures Ltd. 2008
+ * Author: Richard Lord
+ * Copyright (c) Richard Lord 2008-2009
  * http://flintparticles.org
  * 
  * 
@@ -44,12 +44,17 @@ package org.flintparticles.threeD.initializers
 	 * <p>If you want to adjust only the image size use
 	 * the ScaleImageInit initializer.</p>
 	 * 
+	 * <p>This initializer has a priority of -10 to ensure it occurs after 
+	 * mass and radius assignment classes like CollisionRadiusInit and MassInit.</p>
+	 * 
 	 * @see org.flintparticles.common.initializers.ScaleImagesInit
 	 */
 
 	public class ScaleAllsInit extends InitializerBase
 	{
 		private var _scales:WeightedArray;
+		private var _mxmlScales:Array;
+		private var _mxmlWeights:Array;
 		
 		/**
 		 * The constructor creates a ScaleAllsInit initializer for use by 
@@ -63,9 +68,30 @@ package org.flintparticles.threeD.initializers
 		 * 
 		 * @see org.flintparticles.common.emitters.Emitter#addInitializer()
 		 */
-		public function ScaleAllsInit( scales:Array, weights:Array = null )
+		public function ScaleAllsInit( scales:Array = null, weights:Array = null )
 		{
+			priority = -10;
 			_scales = new WeightedArray;
+			if( scales == null )
+			{
+				return;
+			}
+			init( scales, weights );
+		}
+		
+		override public function addedToEmitter( emitter:Emitter ):void
+		{
+			if( _mxmlScales )
+			{
+				init( _mxmlScales, _mxmlWeights );
+				_mxmlScales = null;
+				_mxmlWeights = null;
+			}
+		}
+		
+		private function init( scales:Array, weights:Array ):void
+		{
+			_scales.clear();
 			var len:int = scales.length;
 			var i:int;
 			if( weights != null && weights.length == len )
@@ -94,15 +120,40 @@ package org.flintparticles.threeD.initializers
 			_scales.remove( scale );
 		}
 
-		/**
-		 * @inheritDoc
-		 * 
-		 * returns -10 to ensure it occurs after the mass and radius assignment classes 
-		 * classes like CollisionRadiusInit and MassInit.
-		 */
-		override public function getDefaultPriority():Number
+		public function set scales( value:Array ):void
 		{
-			return -10;
+			if( value.length == 1 && value[0] is String )
+			{
+				_mxmlScales = value[0].split( "," );
+			}
+			else
+			{
+				_mxmlScales = value;
+			}
+			checkStartValues();
+		}
+		
+		public function set weights( value:Array ):void
+		{
+			if( value.length == 1 && value[0] is String )
+			{
+				_mxmlWeights = value[0].split( "," );
+			}
+			else
+			{
+				_mxmlWeights = value;
+			}
+			checkStartValues();
+		}
+		
+		private function checkStartValues():void
+		{
+			if( _mxmlScales && _mxmlWeights )
+			{
+				init( _mxmlScales, _mxmlWeights );
+				_mxmlScales = null;
+				_mxmlWeights = null;
+			}
 		}
 
 		/**

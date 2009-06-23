@@ -2,8 +2,8 @@
  * FLINT PARTICLE SYSTEM
  * .....................
  * 
- * Author: Richard Lord (Big Room)
- * Copyright (c) Big Room Ventures Ltd. 2008
+ * Author: Richard Lord
+ * Copyright (c) Richard Lord 2008-2009
  * http://flintparticles.org
  * 
  * 
@@ -33,8 +33,10 @@ package org.flintparticles.threeD.actions
 	import org.flintparticles.common.actions.ActionBase;
 	import org.flintparticles.common.activities.FrameUpdatable;
 	import org.flintparticles.common.activities.UpdateOnFrame;
+	import org.flintparticles.common.behaviours.Resetable;
 	import org.flintparticles.common.emitters.Emitter;
 	import org.flintparticles.common.particles.Particle;
+	import org.flintparticles.threeD.geom.Point3D;
 	import org.flintparticles.threeD.geom.Vector3D;
 	import org.flintparticles.threeD.particles.Particle3D;	
 
@@ -44,12 +46,12 @@ package org.flintparticles.threeD.actions
 	 * of the explosion and then ripples out in a shock wave.
 	 */
 
-	public class Explosion extends ActionBase implements FrameUpdatable
+	public class Explosion extends ActionBase implements Resetable, FrameUpdatable
 	{
 		private static const POWER_FACTOR:Number = 100000;
 		
 		private var _updateActivity:UpdateOnFrame;
-		private var _center:Vector3D;
+		private var _center:Point3D;
 		private var _power:Number;
 		private var _depth:Number;
 		private var _invDepth:Number;
@@ -77,10 +79,10 @@ package org.flintparticles.threeD.actions
 		 * this distance away. This stops the explosion effect blowing up as distances get 
 		 * small.
 		 */
-		public function Explosion( power:Number, center:Vector3D, expansionRate:Number = 300, depth:Number = 10, epsilon:Number = 1 )
+		public function Explosion( power:Number = 0, center:Point3D = null, expansionRate:Number = 300, depth:Number = 10, epsilon:Number = 1 )
 		{
 			this.power = power;
-			this.center = center;
+			this.center = center ? center : Point3D.ZERO;
 			this.expansionRate = expansionRate;
 			this.depth = depth;
 			this.epsilon = epsilon;
@@ -126,16 +128,51 @@ package org.flintparticles.threeD.actions
 		/**
 		 * The center of the explosion.
 		 */
-		public function get center():Vector3D
+		public function get center():Point3D
 		{
-			return _center.clone();
+			return _center;
 		}
-		public function set center( value:Vector3D ):void
+		public function set center( value:Point3D ):void
 		{
 			_center = value.clone();
-			_center.w = 1;
 		}
 		
+		/**
+		 * The x coordinate of the center of the explosion.
+		 */
+		public function get x():Number
+		{
+			return _center.x;
+		}
+		public function set x( value:Number ):void
+		{
+			_center.x = value;
+		}
+		
+		/**
+		 * The y coordinate of  the center of the explosion.
+		 */
+		public function get y():Number
+		{
+			return _center.y;
+		}
+		public function set y( value:Number ):void
+		{
+			_center.y = value;
+		}
+		
+		/**
+		 * The z coordinate of the center of the explosion.
+		 */
+		public function get z():Number
+		{
+			return _center.z;
+		}
+		public function set z( value:Number ):void
+		{
+			_center.z = value;
+		}
+
 		/**
 		 * The minimum distance for which the explosion force is calculated. 
 		 * Particles closer than this distance experience the explosion as it they were 
@@ -152,7 +189,14 @@ package org.flintparticles.threeD.actions
 		}
 		
 		/**
-		 * @inheritDoc
+		 * Adds an UpdateOnFrame activity to the emitter to call this objects
+		 * frameUpdate method once per frame.
+		 * 
+		 * @param emitter The emitter this action has been added to.
+		 * 
+		 * @see frameUpdate()
+		 * @see org.flintparticles.common.activities.UpdateOnFrame
+		 * @see org.flintparticles.common.actions.Action#addedToEmitter()
 		 */
 		override public function addedToEmitter( emitter:Emitter ):void
 		{
@@ -161,7 +205,14 @@ package org.flintparticles.threeD.actions
 		}
 		
 		/**
-		 * @inheritDoc
+		 * Removes the UpdateOnFrame activity that was added to the emitter in the
+		 * addedToEmitter method.
+		 * 
+		 * @param emitter The emitter this action has been added to.
+		 * 
+		 * @see addedToEmitter()
+		 * @see org.flintparticles.common.activities.UpdateOnFrame
+		 * @see org.flintparticles.common.actions.Action#removedFromEmitter()
 		 */
 		override public function removedFromEmitter( emitter:Emitter ):void
 		{
@@ -169,6 +220,16 @@ package org.flintparticles.threeD.actions
 			{
 				emitter.removeActivity( _updateActivity );
 			}
+		}
+		
+		/**
+		 * Resets the explosion to its initial state, so it can start again.
+		 */
+		public function reset():void
+		{
+			_radius = 0;
+			_oldRadius = 0;
+			_radiusChange = 0;
 		}
 		
 		/**
@@ -183,12 +244,22 @@ package org.flintparticles.threeD.actions
 		}
 		
 		/**
-		 * @inheritDoc
+		 * Calculates the effect of the blast and shockwave on the particle at this
+		 * time.
+		 * 
+		 * <p>This method is called by the emitter and need not be called by the 
+		 * user.</p>
+		 * 
+		 * @param emitter The Emitter that created the particle.
+		 * @param particle The particle to be updated.
+		 * @param time The duration of the frame - used for time based updates.
+		 * 
+		 * @see org.flintparticles.common.actions.Action#update()
 		 */
 		override public function update( emitter:Emitter, particle:Particle, time:Number ):void
 		{
 			var p:Particle3D = Particle3D( particle );
-			var dist:Vector3D = p.position.subtract( center );
+			var dist:Vector3D = _center.vectorTo( p.position );
 			var dSq:Number = dist.lengthSquared;
 			if( dSq == 0 )
 			{

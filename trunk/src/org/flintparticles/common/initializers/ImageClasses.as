@@ -2,8 +2,8 @@
  * FLINT PARTICLE SYSTEM
  * .....................
  * 
- * Author: Richard Lord (Big Room)
- * Copyright (c) Big Room Ventures Ltd. 2008
+ * Author: Richard Lord
+ * Copyright (c) Richard Lord 2008-2009
  * http://flintparticles.org
  * 
  * 
@@ -45,6 +45,8 @@ package org.flintparticles.common.initializers
 	public class ImageClasses extends InitializerBase
 	{
 		private var _images:WeightedArray;
+		private var _mxmlImages:Array;
+		private var _mxmlWeights:Array;
 		
 		/**
 		 * The constructor creates a ImageClasses initializer for use by 
@@ -58,9 +60,29 @@ package org.flintparticles.common.initializers
 		 * 
 		 * @see org.flintparticles.common.emitters.Emitter#addInitializer()
 		 */
-		public function ImageClasses( images:Array, weights:Array = null )
+		public function ImageClasses( images:Array = null, weights:Array = null )
 		{
-			_images = new WeightedArray;
+			_images = new WeightedArray();
+			if( images == null )
+			{
+				return;
+			}
+			init( images, weights );
+		}
+		
+		override public function addedToEmitter( emitter:Emitter ):void
+		{
+			if( _mxmlImages )
+			{
+				init( _mxmlImages, _mxmlWeights );
+				_mxmlImages = null;
+				_mxmlWeights = null;
+			}
+		}
+		
+		private function init( images:Array = null, weights:Array = null ):void
+		{
+			_images.clear();
 			var len:int = images.length;
 			var i:int;
 			if( weights != null && weights.length == len )
@@ -96,6 +118,35 @@ package org.flintparticles.common.initializers
 		public function removeImage( image:* ):void
 		{
 			_images.remove( image );
+		}
+
+		public function set images( value:Array ):void
+		{
+			_mxmlImages = value;
+			checkStartValues();
+		}
+		
+		public function set weights( value:Array ):void
+		{
+			if( value.length == 1 && value[0] is String )
+			{
+				_mxmlWeights = value[0].split( "," );
+			}
+			else
+			{
+				_mxmlWeights = value;
+			}
+			checkStartValues();
+		}
+		
+		private function checkStartValues():void
+		{
+			if( _mxmlImages && _mxmlWeights )
+			{
+				init( _mxmlImages, _mxmlWeights );
+				_mxmlImages = null;
+				_mxmlWeights = null;
+			}
 		}
 
 		/**

@@ -2,8 +2,8 @@
  * FLINT PARTICLE SYSTEM
  * .....................
  * 
- * Author: Richard Lord (Big Room)
- * Copyright (c) Big Room Ventures Ltd. 2008
+ * Author: Richard Lord
+ * Copyright (c) Richard Lord 2008-2009
  * http://flintparticles.org
  * 
  * 
@@ -31,7 +31,7 @@
 package org.flintparticles.twoD.particles 
 {
 	import org.flintparticles.common.particles.Particle;
-	import org.flintparticles.common.particles.ParticleFactory;		
+	import org.flintparticles.common.particles.ParticleFactory;	
 
 	/**
 	 * The ParticleCreator is used by the Emitter class to manage the creation and reuse of particles.

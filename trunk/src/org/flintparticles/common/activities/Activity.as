@@ -2,8 +2,8 @@
  * FLINT PARTICLE SYSTEM
  * .....................
  * 
- * Author: Richard Lord (Big Room)
- * Copyright (c) Big Room Ventures Ltd. 2008
+ * Author: Richard Lord
+ * Copyright (c) Richard Lord 2008-2009
  * http://flintparticles.org
  * 
  * 
@@ -30,8 +30,9 @@
 
 package org.flintparticles.common.activities
 {
-	import org.flintparticles.common.emitters.Emitter;
-	
+	import org.flintparticles.common.behaviours.Behaviour;
+	import org.flintparticles.common.emitters.Emitter;		
+
 	/**
 	 * The Activity interface must be implemented by all emitter activities.
 	 * 
@@ -46,55 +47,8 @@ package org.flintparticles.common.activities
 	 * @see org.flintparticles.common.emitters.Emitter#addActivity()
 	 * @see org.flintparticles.common.emitters.Emitter#removeActivity()
 	 */
-	public interface Activity
+	public interface Activity extends Behaviour
 	{
-		/**
-		 * The getDefaultPriority method is used to order the execution of activities.
-		 * It should return a number indicating the priority for the execution of
-		 * the activity. Activities with a higher priority are run before activities 
-		 * with a lower priority.
-		 * 
-		 * <p>The activities within the Flint library use 0 as the default priority. 
-		 * Activities that need to be called early would have priorities of 10 or 20. 
-		 * Activities that need to be called late would have priorities of -10 or -20.</p>
-		 * 
-		 * <p>The default priority can be overridden when adding an activity to
-		 * an emitter by setting a new priority in the second parameter of the
-		 * addActivity method of the emitter.</p>
-		 * 
-		 * <p>The getDefaultPriority method is called internally by the emitter 
-		 * and need not be called directly by the user.</p>
-	 	 * 
-		 * @see org.flintparticles.common.emitters.Emitter#addActivity()
-		 */
-		function getDefaultPriority():Number;
-		
-		/**
-		 * The addedToEmitter method is called by the emitter when the Activity is 
-		 * added to it. It is an opportunity for an activity to do any initializing
-		 * that is relative to the emitter. Only a few activities make use of this
-		 * method. It is called within the emitter's addActivity method and need not 
-		 * be called by the user.
-		 * 
-		 * @param emitter The Emitter that the Activity was added to.
-		 * 
-		 * @see org.flintparticles.common.emitters.Emitter#addActivity()
-		 */
-		function addedToEmitter( emitter:Emitter ):void;
-		
-		/**
-		 * The removedFromEmitter method is called by the emitter when the Activity 
-		 * is removed from it. It is an opportunity for an activity to do any
-		 * finalizing that is relative to the emitter. Only a few activities make 
-		 * use of this method. It is called within the emitter's removeActivity 
-		 * method and need not be called by the user.
-		 * 
-		 * @param emitter The Emitter that the Activity was removed from.
-		 * 
-		 * @see org.flintparticles.common.emitters.Emitter#removeActivity()
-		 */
-		function removedFromEmitter( emitter:Emitter ):void;
-		
 		/**
 		 * The initialize method is used by the emitter to start the activity.
 		 * It is called within the emitter's start method and need not

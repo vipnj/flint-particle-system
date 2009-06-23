@@ -2,8 +2,8 @@
  * FLINT PARTICLE SYSTEM
  * .....................
  * 
- * Author: Richard Lord (Big Room)
- * Copyright (c) Big Room Ventures Ltd. 2008
+ * Author: Richard Lord
+ * Copyright (c) Richard Lord 2008-2009
  * http://flintparticles.org
  * 
  * 
@@ -33,13 +33,16 @@ package org.flintparticles.threeD.papervision3d.initializers
 	import org.flintparticles.common.emitters.Emitter;
 	import org.flintparticles.common.initializers.InitializerBase;
 	import org.flintparticles.common.particles.Particle;
-	import org.flintparticles.common.utils.construct;
-	
+	import org.flintparticles.common.utils.construct;	
+
 	/**
 	 * The ApplyMaterial initializer sets a material to apply to the Papervision3D
 	 * object that is used when rendering the particle. To use this initializer,
 	 * the particle's image object must be an Papervision3D object with a material
 	 * property.
+	 * 
+	 * <p>This initializer has a priority of -10 to ensure that it is applied after 
+	 * the ImageInit classes which define the image object.</p>
 	 */
 	public class ApplyMaterial extends InitializerBase
 	{
@@ -60,17 +63,9 @@ package org.flintparticles.threeD.papervision3d.initializers
 		 */
 		public function ApplyMaterial( materialClass:Class, ...parameters )
 		{
+			priority = -10;
 			_materialClass = materialClass;
 			_parameters = parameters;
-		}
-		
-		/**
-		 * Returns -10 to ensure that the ApplyMaterial is applied after the
-		 * ImageInit classes which define the image object.
-		 */
-		override public function getDefaultPriority():Number
-		{
-			return -10;
 		}
 		
 		/**

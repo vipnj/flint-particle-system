@@ -2,8 +2,8 @@
  * FLINT PARTICLE SYSTEM
  * .....................
  * 
- * Author: Richard Lord (Big Room)
- * Copyright (c) Big Room Ventures Ltd. 2008
+ * Author: Richard Lord
+ * Copyright (c) Richard Lord 2008-2009
  * http://flintparticles.org
  * 
  * 
@@ -63,16 +63,16 @@ package org.flintparticles.threeD.actions
 		 * @param invertZone If false (the default) the acceleration is applied only to particles inside 
 		 * the zone. If true the acceleration is applied only to particles outside the zone.
 		 */
-		public function Jet( acceleration:Vector3D, accelerationY:Number, zone:Zone3D, invertZone:Boolean = false )
+		public function Jet( acceleration:Vector3D = null, zone:Zone3D = null, invertZone:Boolean = false )
 		{
-			this.acceleration = acceleration;
+			_temp = new Vector3D();
+			this.acceleration = acceleration ? acceleration : Vector3D.ZERO;
 			this.zone = zone;
 			this.invertZone = invertZone;
-			_temp = new Vector3D();
 		}
 		
 		/**
-		 * The x coordinate of the acceleration.
+		 * The acceleration, in coordinate units per second per second.
 		 */
 		public function get acceleration():Vector3D
 		{
@@ -81,7 +81,6 @@ package org.flintparticles.threeD.actions
 		public function set acceleration( value:Vector3D ):void
 		{
 			_acc = value.clone();
-			_acc.w = 0;
 		}
 		
 		/**
@@ -108,6 +107,42 @@ package org.flintparticles.threeD.actions
 		public function set invertZone( value:Boolean ):void
 		{
 			_invert = value;
+		}
+		
+		/**
+		 * The x coordinate of the acceleration, in coordinate units per second per second.
+		 */
+		public function get x():Number
+		{
+			return _acc.x;
+		}
+		public function set x( value:Number ):void
+		{
+			_acc.x = value;
+		}
+		
+		/**
+		 * The y coordinate of the acceleration, in coordinate units per second per second.
+		 */
+		public function get y():Number
+		{
+			return _acc.y;
+		}
+		public function set y( value:Number ):void
+		{
+			_acc.y = value;
+		}
+		
+		/**
+		 * The z coordinate of the acceleration, in coordinate units per second per second.
+		 */
+		public function get z():Number
+		{
+			return _acc.z;
+		}
+		public function set z( value:Number ):void
+		{
+			_acc.z = value;
 		}
 		
 		/**

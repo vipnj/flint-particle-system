@@ -1,9 +1,9 @@
-﻿/*
+/*
  * FLINT PARTICLE SYSTEM
  * .....................
  * 
- * Author: Richard Lord (Big Room)
- * Copyright (c) Big Room Ventures Ltd. 2008
+ * Author: Richard Lord
+ * Copyright (c) Richard Lord 2008-2009
  * http://flintparticles.org
  * 
  * 
@@ -39,7 +39,8 @@ package org.flintparticles.threeD.renderers
 	import flash.geom.Rectangle;
 	
 	import org.flintparticles.common.renderers.SpriteRendererBase;
-	import org.flintparticles.threeD.geom.Matrix3D;	
+	import org.flintparticles.threeD.geom.Matrix3D;
+	import org.flintparticles.threeD.geom.Point3D;
 	import org.flintparticles.threeD.geom.Quaternion;
 	import org.flintparticles.threeD.geom.Vector3D;
 	import org.flintparticles.threeD.particles.Particle3D;	
@@ -91,6 +92,11 @@ package org.flintparticles.threeD.renderers
 		 * @private
 		 */
 		protected var _bitmap:Bitmap;
+		
+		/**
+		 * @private
+		 */
+		protected var _bitmapData:BitmapData;
 		/**
 		 * @private
 		 */
@@ -102,7 +108,7 @@ package org.flintparticles.threeD.renderers
 		/**
 		 * @private
 		 */
-		protected var _paletteMap:Array;
+		protected var _colorMap:Array;
 		/**
 		 * @private
 		 */
@@ -111,6 +117,14 @@ package org.flintparticles.threeD.renderers
 		 * @private
 		 */
 		protected var _canvas:Rectangle;
+		/**
+		 * @private
+		 */
+		protected var _halfWidth:Number;
+		/**
+		 * @private
+		 */
+		protected var _halfHeight:Number;
 
 		/**
 		 * The constructor creates a BitmapRenderer. After creation it should be
@@ -134,11 +148,11 @@ package org.flintparticles.threeD.renderers
 		 */
 		public function BitmapRenderer( canvas:Rectangle, zSort:Boolean = true, smoothing:Boolean = false )
 		{
+			super();
 			_zSort = zSort;
 			_camera = new Camera();
 			mouseEnabled = false;
 			mouseChildren = false;
-			_zSort = zSort;
 			_smoothing = smoothing;
 			_preFilters = new Array();
 			_postFilters = new Array();
@@ -221,24 +235,64 @@ package org.flintparticles.threeD.renderers
 		}
 		
 		/**
+		 * The array of all filters being applied before rendering.
+		 */
+		public function get preFilters():Array
+		{
+			return _preFilters.slice();
+		}
+		public function set preFilters( value:Array ):void
+		{
+			var filter:BitmapFilter;
+			for each( filter in _preFilters )
+			{
+				removeFilter( filter );
+			}
+			for each( filter in value )
+			{
+				addFilter( filter, false );
+			}
+		}
+
+		/**
+		 * The array of all filters being applied before rendering.
+		 */
+		public function get postFilters():Array
+		{
+			return _postFilters.slice();
+		}
+		public function set postFilters( value:Array ):void
+		{
+			var filter:BitmapFilter;
+			for each( filter in _postFilters )
+			{
+				removeFilter( filter );
+			}
+			for each( filter in value )
+			{
+				addFilter( filter, true );
+			}
+		}
+		
+		/**
 		 * Sets a palette map for the renderer. See the paletteMap method in flash's BitmapData object for
 		 * information about how palette maps work. The palette map will be applied to the full canvas of the 
 		 * renderer after all filters have been applied and the particles have been drawn.
 		 */
 		public function setPaletteMap( red : Array = null , green : Array = null , blue : Array = null, alpha : Array = null ) : void
 		{
-			_paletteMap = new Array(4);
-			_paletteMap[0] = alpha;
-			_paletteMap[1] = red;
-			_paletteMap[2] = green;
-			_paletteMap[3] = blue;
+			_colorMap = new Array(4);
+			_colorMap[0] = alpha;
+			_colorMap[1] = red;
+			_colorMap[2] = green;
+			_colorMap[3] = blue;
 		}
 		/**
 		 * Clears any palette map that has been set for the renderer.
 		 */
 		public function clearPaletteMap() : void
 		{
-			_paletteMap = null;
+			_colorMap = null;
 		}
 		
 		/**
@@ -250,19 +304,24 @@ package org.flintparticles.threeD.renderers
 			{
 				return;
 			}
-			if( _bitmap && _bitmap.bitmapData )
+			if( _bitmap && _bitmapData )
 			{
-				_bitmap.bitmapData.dispose();
+				_bitmapData.dispose();
+				_bitmapData = null;
 			}
 			if( _bitmap )
 			{
 				removeChild( _bitmap );
+				_bitmap = null;
 			}
 			_bitmap = new Bitmap( null, "auto", _smoothing);
-			_bitmap.bitmapData = new BitmapData( _canvas.width, _canvas.height, true, 0 );
+			_bitmapData = new BitmapData( Math.ceil( _canvas.width ), Math.ceil( _canvas.height ), true, 0 );
+			_bitmap.bitmapData = _bitmapData;
 			addChild( _bitmap );
 			_bitmap.x = _canvas.x;
 			_bitmap.y = _canvas.y;
+			_halfWidth = _bitmapData.width * 0.5;
+			_halfHeight = _bitmapData.height * 0.5;
 		}
 		
 		/**
@@ -277,6 +336,19 @@ package org.flintparticles.threeD.renderers
 		{
 			_canvas = value;
 			createBitmap();
+		}
+
+		public function get smoothing():Boolean
+		{
+			return _smoothing;
+		}
+		public function set smoothing( value:Boolean ):void
+		{
+			_smoothing = value;
+			if( _bitmap )
+			{
+				_bitmap.smoothing = value;
+			}
 		}
 
 		/**
@@ -299,21 +371,21 @@ package org.flintparticles.threeD.renderers
 			var i:int;
 			var len:int;
 			var particle:Particle3D;
-			_bitmap.bitmapData.lock();
+			_bitmapData.lock();
 			len = _preFilters.length;
 			for( i = 0; i < len; ++i )
 			{
-				_bitmap.bitmapData.applyFilter( _bitmap.bitmapData, _bitmap.bitmapData.rect, BitmapRenderer.ZERO_POINT, _preFilters[i] );
+				_bitmapData.applyFilter( _bitmapData, _bitmapData.rect, BitmapRenderer.ZERO_POINT, _preFilters[i] );
 			}
 			if( len == 0 && _postFilters.length == 0 )
 			{
-				_bitmap.bitmapData.fillRect( _bitmap.bitmapData.rect, 0 );
+				_bitmapData.fillRect( _bitmapData.rect, 0 );
 			}
 			len = particles.length;
 			for( i = 0; i < len; ++i )
 			{
 				particle = particles[i];
-				particle.projectedPosition = transform.transformVector( particle.position );
+				particle.projectedPosition = transform.transform( particle.position ) as Point3D;
 				particle.zDepth = particle.projectedPosition.z;
 			}
 			if( _zSort )
@@ -327,13 +399,13 @@ package org.flintparticles.threeD.renderers
 			len = _postFilters.length;
 			for( i = 0; i < len; ++i )
 			{
-				_bitmap.bitmapData.applyFilter( _bitmap.bitmapData, _bitmap.bitmapData.rect, BitmapRenderer.ZERO_POINT, _postFilters[i] );
+				_bitmapData.applyFilter( _bitmapData, _bitmapData.rect, BitmapRenderer.ZERO_POINT, _postFilters[i] );
 			}
-			if( _paletteMap )
+			if( _colorMap )
 			{
-				_bitmap.bitmapData.paletteMap( _bitmap.bitmapData, _bitmap.bitmapData.rect, ZERO_POINT, _paletteMap[1] , _paletteMap[2] , _paletteMap[3] , _paletteMap[0] );
+				_bitmapData.paletteMap( _bitmapData, _bitmapData.rect, ZERO_POINT, _colorMap[1] , _colorMap[2] , _colorMap[3] , _colorMap[0] );
 			}
-			_bitmap.bitmapData.unlock();
+			_bitmapData.unlock();
 		}
 		
 		/**
@@ -355,7 +427,7 @@ package org.flintparticles.threeD.renderers
 		 */
 		protected function drawParticle( particle:Particle3D ):void
 		{
-			var pos:Vector3D = particle.projectedPosition;
+			var pos:Point3D = particle.projectedPosition;
 			if( pos.z < _camera.nearPlaneDistance || pos.z > _camera.farPlaneDistance )
 			{
 				return;
@@ -373,9 +445,9 @@ package org.flintparticles.threeD.renderers
 			else
 			{
 				var m:Matrix3D = particle.rotation.toMatrixTransformation();
-				facing = m.transformVector( particle.faceAxis );
+				facing = m.transform( particle.faceAxis ) as Vector3D;
 			}
-			transform.transformVectorSelf( facing );
+			transform.transformSelf( facing );
 			if( facing.x != 0 || facing.y != 0 )
 			{
 				rot = Math.atan2( -facing.y, facing.x );
@@ -386,14 +458,22 @@ package org.flintparticles.threeD.renderers
 			{
 				var cos:Number = scale * Math.cos( rot );
 				var sin:Number = scale * Math.sin( rot );
-				matrix = new Matrix( cos, sin, -sin, cos, pos.x - _canvas.x, -pos.y - _canvas.y );
+				matrix = new Matrix( cos, sin, -sin, cos, pos.x + _halfWidth, -pos.y + _halfHeight );
 			}
 			else
 			{
-				matrix = new Matrix( scale, 0, 0, scale, pos.x - _canvas.x, -pos.y - _canvas.y );
+				matrix = new Matrix( scale, 0, 0, scale, pos.x + _halfWidth, -pos.y + _halfHeight );
 			}
 
-			_bitmap.bitmapData.draw( particle.image, matrix, particle.colorTransform, DisplayObject( particle.image ).blendMode, null, _smoothing );
+			_bitmapData.draw( particle.image, matrix, particle.colorTransform, DisplayObject( particle.image ).blendMode, null, _smoothing );
+		}
+		
+		/**
+		 * The bitmap data of the renderer.
+		 */
+		public function get bitmapData() : BitmapData
+		{
+			return _bitmapData;
 		}
 	}
 }

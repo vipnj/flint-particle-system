@@ -2,8 +2,8 @@
  * FLINT PARTICLE SYSTEM
  * .....................
  * 
- * Author: Richard Lord (Big Room)
- * Copyright (c) Big Room Ventures Ltd. 2008
+ * Author: Richard Lord
+ * Copyright (c) Richard Lord 2008-2009
  * http://flintparticles.org
  * 
  * 
@@ -39,6 +39,8 @@ package org.flintparticles.threeD.actions
 	/**
 	 * The Move action updates the position of the particle based on its velocity.
 	 * It uses a Euler integrator to calculate the new position, hence the name.
+	 * 
+	 * <p>This action has a priority of -10, so that it executes after other actions.</p>
 	 */
 	public class Move extends ActionBase
 	{
@@ -53,17 +55,8 @@ package org.flintparticles.threeD.actions
 		 */
 		public function Move()
 		{
+			priority = -10;
 			_temp = new Vector3D();
-		}
-		
-		/**
-		 * @inheritDoc
-		 * 
-		 * <p>Returns a value of -10, so that the Move action executes after other actions.</p>
-		 */
-		override public function getDefaultPriority():Number
-		{
-			return -10;
 		}
 
 		/**

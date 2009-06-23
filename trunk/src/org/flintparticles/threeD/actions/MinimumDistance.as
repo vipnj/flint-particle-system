@@ -2,8 +2,8 @@
  * FLINT PARTICLE SYSTEM
  * .....................
  * 
- * Author: Richard Lord (Big Room)
- * Copyright (c) Big Room Ventures Ltd. 2008
+ * Author: Richard Lord
+ * Copyright (c) Richard Lord 2008-2009
  * http://flintparticles.org
  * 
  * 
@@ -40,6 +40,9 @@ package org.flintparticles.threeD.actions
 	/**
 	 * The MinimumDistance action applies an acceleration to the particle to maintain a minimum
 	 * distance between it and its neighbours.
+	 * 
+	 * <p>This action has a priority of 10, so that it executes 
+	 * before other actions.</p>
 	 */
 
 	public class MinimumDistance extends ActionBase
@@ -65,12 +68,13 @@ package org.flintparticles.threeD.actions
 		 * particles.
 		 * @param acceleration The acceleration force applied to avoid the other particles.
 		 */
-		public function MinimumDistance( minimum:Number, acceleration:Number )
+		public function MinimumDistance( minimum:Number = 0, acceleration:Number = 0 )
 		{
-			this.minimum = minimum;
-			this.acceleration = acceleration;
+			priority = 10;
 			d = new Vector3D();
 			move = new Vector3D();
+			this.minimum = minimum;
+			this.acceleration = acceleration;
 		}
 		
 		/**
@@ -101,16 +105,6 @@ package org.flintparticles.threeD.actions
 
 		/**
 		 * @inheritDoc
-		 * 
-		 * <p>Returns a value of 10, so that the MutualGravity action executes before other actions.</p>
-		 */
-		override public function getDefaultPriority():Number
-		{
-			return 10;
-		}
-
-		/**
-		 * @inheritDoc
 		 */
 		override public function addedToEmitter( emitter:Emitter ) : void
 		{
@@ -132,7 +126,7 @@ package org.flintparticles.threeD.actions
 			var distanceInv:Number;
 			var distanceSq:Number;
 			var factor:Number;
-			move.reset( 0, 0, 0, 0 );
+			move.reset( 0, 0, 0 );
 			for( i = p.sortID - 1; i >= 0; --i )
 			{
 				other = particles[sortedX[i]];

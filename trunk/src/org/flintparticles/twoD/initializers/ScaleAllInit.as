@@ -2,8 +2,8 @@
  * FLINT PARTICLE SYSTEM
  * .....................
  * 
- * Author: Richard Lord (Big Room)
- * Copyright (c) Big Room Ventures Ltd. 2008
+ * Author: Richard Lord
+ * Copyright (c) Richard Lord 2008-2009
  * http://flintparticles.org
  * 
  * 
@@ -41,6 +41,9 @@ package org.flintparticles.twoD.initializers
 	 * <p>If you want to adjust only the image size use
 	 * the ScaleImageInit initializer.</p>
 	 * 
+	 * <p>This initializer has a priority of -10 to ensure it occurs after 
+	 * mass and radius assignment classes like CollisionRadiusInit and MassInit.</p>
+	 * 
 	 * @see org.flintparticles.common.initializers.ScaleImageInit
 	 */
 
@@ -66,17 +69,11 @@ package org.flintparticles.twoD.initializers
 		 * 
 		 * @see org.flintparticles.common.emitters.Emitter#addInitializer().
 		 */
-		public function ScaleAllInit( minScale:Number, maxScale:Number = NaN )
+		public function ScaleAllInit( minScale:Number = 1, maxScale:Number = NaN )
 		{
-			_min = minScale;
-			if( isNaN( maxScale ) )
-			{
-				_max = _min;
-			}
-			else
-			{
-				_max = maxScale;
-			}
+			priority = -10;
+			this.minScale = minScale;
+			this.maxScale = isNaN( maxScale ) ? minScale : maxScale;
 		}
 		
 		/**
@@ -117,17 +114,6 @@ package org.flintparticles.twoD.initializers
 		public function set scale( value:Number ):void
 		{
 			_max = _min = value;
-		}
-		
-		/**
-		 * @inheritDoc
-		 * 
-		 * returns -10 to ensure it occurs after the mass and radius assignment classes 
-		 * classes like CollisionRadiusInit and MassInit.
-		 */
-		override public function getDefaultPriority():Number
-		{
-			return -10;
 		}
 		
 		/**

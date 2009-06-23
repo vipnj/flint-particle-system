@@ -1,9 +1,9 @@
-﻿/*
+/*
  * FLINT PARTICLE SYSTEM
  * .....................
  * 
- * Author: Richard Lord (Big Room)
- * Copyright (c) Big Room Ventures Ltd. 2008
+ * Author: Richard Lord
+ * Copyright (c) Richard Lord 2008-2009
  * http://flintparticles.org
  * 
  * 
@@ -30,9 +30,9 @@
 
 package org.flintparticles.common.counters
 {
-	import flash.utils.getTimer;
+	import org.flintparticles.common.emitters.Emitter;
 	
-	import org.flintparticles.common.emitters.Emitter;		
+	import flash.utils.getTimer;	
 
 	/**
 	 * The PerformanceAdjusted counter causes the emitter to emit particles 
@@ -67,7 +67,7 @@ package org.flintparticles.common.counters
 		 * if your movie's frame rate is 30fps and you want to target this rate, 
 		 * set the target rate to 26fps.
 		 */
-		public function PerformanceAdjusted( rateMin:Number, rateMax:Number, targetFrameRate:Number )
+		public function PerformanceAdjusted( rateMin:Number = 0, rateMax:Number = 0, targetFrameRate:Number = 24 )
 		{
 			_stop = false;
 			_rateMin = rateMin;

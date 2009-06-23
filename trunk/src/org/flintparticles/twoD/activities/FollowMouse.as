@@ -2,8 +2,8 @@
  * FLINT PARTICLE SYSTEM
  * .....................
  * 
- * Author: Richard Lord (Big Room)
- * Copyright (c) Big Room Ventures Ltd. 2008
+ * Author: Richard Lord
+ * Copyright (c) Richard Lord 2008-2009
  * http://flintparticles.org
  * 
  * 
@@ -30,11 +30,11 @@
 
 package org.flintparticles.twoD.activities
 {
-	import flash.display.DisplayObject;
-	
 	import org.flintparticles.common.activities.ActivityBase;
 	import org.flintparticles.common.emitters.Emitter;
-	import org.flintparticles.twoD.emitters.Emitter2D;	
+	import org.flintparticles.twoD.emitters.Emitter2D;
+	
+	import flash.display.DisplayObject;	
 
 	/**
 	 * The FollowMouse activity causes the emitter to follow
@@ -55,9 +55,9 @@ package org.flintparticles.twoD.activities
 		 * 
 		 * @see org.flintparticles.common.emitters.Emitter#addActivity()
 		 */
-		public function FollowMouse( renderer:DisplayObject )
+		public function FollowMouse( renderer:DisplayObject = null )
 		{
-			_renderer = renderer;
+			this.renderer = renderer;
 		}
 		
 		/**

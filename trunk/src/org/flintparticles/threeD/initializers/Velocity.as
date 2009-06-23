@@ -2,8 +2,8 @@
  * FLINT PARTICLE SYSTEM
  * .....................
  * 
- * Author: Richard Lord (Big Room)
- * Copyright (c) Big Room Ventures Ltd. 2008
+ * Author: Richard Lord
+ * Copyright (c) Richard Lord 2008-2009
  * http://flintparticles.org
  * 
  * 
@@ -39,6 +39,8 @@ package org.flintparticles.threeD.initializers
 	import org.flintparticles.threeD.particles.Particle3D;
 	import org.flintparticles.threeD.zones.Zone3D;	
 
+	[DefaultProperty("zone")]
+	
 	/**
 	 * The ColorInit Initializer sets the velocity of the particle. It is
 	 * usually combined with the Move action to move the particle
@@ -68,9 +70,9 @@ package org.flintparticles.threeD.initializers
 		 * 
 		 * @see org.flintparticles.common.emitters.Emitter#addInitializer()
 		 */
-		public function Velocity( zone:Zone3D )
+		public function Velocity( zone:Zone3D = null )
 		{
-			_zone = zone;
+			this.zone = zone;
 		}
 		
 		/**
@@ -92,11 +94,10 @@ package org.flintparticles.threeD.initializers
 		{
 			var p:Particle3D = Particle3D( particle );
 			var e:Emitter3D = Emitter3D( emitter );
-			var v:Vector3D = zone.getLocation();
-			v.w = 0;
+			var v:Vector3D = zone.getLocation().toVector3D();
 			if( !e.rotation.equals( Quaternion.IDENTITY ) )
 			{
-				e.rotationTransform.transformVectorSelf( v );
+				e.rotationTransform.transformSelf( v );
 			}
 			p.velocity = v;
 		}

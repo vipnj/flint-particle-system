@@ -2,8 +2,8 @@
  * FLINT PARTICLE SYSTEM
  * .....................
  * 
- * Author: Richard Lord (Big Room)
- * Copyright (c) Big Room Ventures Ltd. 2008
+ * Author: Richard Lord
+ * Copyright (c) Richard Lord 2008-2009
  * http://flintparticles.org
  * 
  * 
@@ -48,7 +48,10 @@ package org.flintparticles.twoD.actions
 	 * to draw particles together, MinimumDistance to stop them getting too close
 	 * and MatchVelocity to make them match speed and direction of motion.</p>
 	 * 
-	 * @see org.flintparticles.twoD.actions.MinimumDistance
+	 * <p>This action has a priority of 10, so that it executes 
+	 * before other actions.</p>
+	 * 
+ * 	 * @see org.flintparticles.twoD.actions.MinimumDistance
 	 * @see org.flintparticles.twoD.actions.MatchVelocity
 	 */
 
@@ -70,11 +73,11 @@ package org.flintparticles.twoD.actions
 		 * @param acceleration The size of the acceleration applied to approach the 
 		 * other particles.
 		 */
-		public function ApproachNeighbours( maxDistance:Number, acceleration:Number )
+		public function ApproachNeighbours( maxDistance:Number = 0, acceleration:Number = 0 )
 		{
-			_max = maxDistance;
-			_maxSq = maxDistance * maxDistance;
-			_acc = acceleration;
+			priority = 10;
+			this.maxDistance = maxDistance;
+			this.acceleration = acceleration;
 		}
 		
 		/**
@@ -101,18 +104,6 @@ package org.flintparticles.twoD.actions
 		public function set acceleration( value:Number ):void
 		{
 			_acc = value;
-		}
-
-		/**
-		 * Returns a value of 10, so that the ApproachNeighbours action executes 
-		 * before accelerating actions that act on particles independently of
-		 * other particles, like Acceleration and GravityWell.
-		 * 
-		 * @see org.flintparticles.common.actions.Action#getDefaultPriority()
-		 */
-		override public function getDefaultPriority():Number
-		{
-			return 10;
 		}
 
 		/**

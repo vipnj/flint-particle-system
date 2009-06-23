@@ -2,8 +2,8 @@
  * FLINT PARTICLE SYSTEM
  * .....................
  * 
- * Author: Richard Lord (Big Room)
- * Copyright (c) Big Room Ventures Ltd. 2008
+ * Author: Richard Lord
+ * Copyright (c) Richard Lord 2008-2009
  * http://flintparticles.org
  * 
  * 
@@ -30,13 +30,14 @@
 
 package org.flintparticles.threeD.away3d.utils 
 {
-	import org.flintparticles.threeD.geom.Vector3D;
-	import org.flintparticles.threeD.geom.Matrix3D;
-	import org.flintparticles.threeD.geom.Quaternion;
-	
 	import away3d.core.math.Matrix3D;
-	import away3d.core.math.Number3D;	
-	import away3d.core.math.Quaternion;	
+	import away3d.core.math.Number3D;
+	import away3d.core.math.Quaternion;
+	
+	import org.flintparticles.threeD.geom.Matrix3D;
+	import org.flintparticles.threeD.geom.Point3D;
+	import org.flintparticles.threeD.geom.Quaternion;
+	import org.flintparticles.threeD.geom.Vector3D;	
 
 	/**
 	 * This class contains static methods to convert between Away3D geometry 
@@ -58,6 +59,22 @@ package org.flintparticles.threeD.away3d.utils
 		public static function Vector3DFromA3D( v:Number3D ):Vector3D
 		{
 			return new Vector3D( v.x, v.y, v.z );
+		}
+
+		/**
+		 * Convert a Flint Point3D object to an Away3D Number3D object.
+		 */
+		public static function Point3DToA3D( v:Point3D ):Number3D
+		{
+			return new Number3D( v.x, v.y, v.z );
+		}
+
+		/**
+		 * Convert an Away3D Number3D object to a Flint Point3D object.
+		 */
+		public static function Point3DFromA3D( v:Number3D ):Point3D
+		{
+			return new Point3D( v.x, v.y, v.z );
 		}
 
 		/**

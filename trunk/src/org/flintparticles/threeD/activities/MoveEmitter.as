@@ -2,8 +2,8 @@
  * FLINT PARTICLE SYSTEM
  * .....................
  * 
- * Author: Richard Lord (Big Room)
- * Copyright (c) Big Room Ventures Ltd. 2008
+ * Author: Richard Lord
+ * Copyright (c) Richard Lord 2008-2009
  * http://flintparticles.org
  * 
  * 
@@ -55,14 +55,13 @@ package org.flintparticles.threeD.activities
 		 * @param y The y coordinate of the velocity to move the emitter, 
 		 * in pixels per second.
 		 */
-		public function MoveEmitter( velocity:Vector3D )
+		public function MoveEmitter( velocity:Vector3D = null )
 		{
-			this.velocity = velocity.clone();
+			this.velocity = velocity ? velocity : Vector3D.ZERO;
 		}
 		
 		/**
-		 * The x coordinate of the velocity to move the emitter, 
-		 * in pixels per second
+		 * The velocity to move the emitter, in pixels per second.
 		 */
 		public function get velocity():Vector3D
 		{
@@ -71,7 +70,42 @@ package org.flintparticles.threeD.activities
 		public function set velocity( value:Vector3D ):void
 		{
 			_vel = value.clone();
-			_vel.w = 0;
+		}
+		
+		/**
+		 * The x coordinate of the velocity to move the emitter, in pixels per second.
+		 */
+		public function get x():Number
+		{
+			return _vel.x;
+		}
+		public function set x( value:Number ):void
+		{
+			_vel.x = value;
+		}
+		
+		/**
+		 * The y coordinate of  the velocity to move the emitter, in pixels per second.
+		 */
+		public function get y():Number
+		{
+			return _vel.y;
+		}
+		public function set y( value:Number ):void
+		{
+			_vel.y = value;
+		}
+		
+		/**
+		 * The z coordinate of the velocity to move the emitter, in pixels per second.
+		 */
+		public function get z():Number
+		{
+			return _vel.z;
+		}
+		public function set z( value:Number ):void
+		{
+			_vel.z = value;
 		}
 		
 		/**
@@ -79,7 +113,8 @@ package org.flintparticles.threeD.activities
 		 */
 		override public function update( emitter : Emitter, time : Number ) : void
 		{
-			Emitter3D( emitter ).position.incrementBy( _temp.assign( _vel ).scaleBy( time ) );
+			_vel.multiply( time, _temp );
+			Emitter3D( emitter ).position.incrementBy( _temp );
 		}
 	}
 }

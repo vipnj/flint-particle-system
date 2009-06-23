@@ -2,8 +2,8 @@
  * FLINT PARTICLE SYSTEM
  * .....................
  * 
- * Author: Richard Lord (Big Room)
- * Copyright (c) Big Room Ventures Ltd. 2008
+ * Author: Richard Lord
+ * Copyright (c) Richard Lord 2008-2009
  * http://flintparticles.org
  * 
  * 
@@ -30,11 +30,13 @@
 
 package org.flintparticles.common.initializers 
 {
-	import flash.display.DisplayObject;
-	
 	import org.flintparticles.common.emitters.Emitter;
-	import org.flintparticles.common.particles.Particle;	
+	import org.flintparticles.common.particles.Particle;
+	
+	import flash.display.DisplayObject;	
 
+	[DefaultProperty("image")]
+	
 	/**
 	 * The SharedImage Initializer sets the DisplayObject to use to draw
 	 * the particle. It is used with the BitmapRenderer. When using the
@@ -59,7 +61,7 @@ package org.flintparticles.common.initializers
 		 * 
 		 * @see org.flintparticles.common.emitters.Emitter#addInitializer()
 		 */
-		public function SharedImage( image:DisplayObject )
+		public function SharedImage( image:DisplayObject = null )
 		{
 			_image = image;
 		}

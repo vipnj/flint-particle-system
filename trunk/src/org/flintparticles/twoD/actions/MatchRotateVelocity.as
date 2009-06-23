@@ -2,8 +2,8 @@
  * FLINT PARTICLE SYSTEM
  * .....................
  * 
- * Author: Richard Lord (Big Room)
- * Copyright (c) Big Room Ventures Ltd. 2008
+ * Author: Richard Lord
+ * Copyright (c) Richard Lord 2008-2009
  * http://flintparticles.org
  * 
  * 
@@ -39,6 +39,9 @@ package org.flintparticles.twoD.actions
 	/**
 	 * The MatchRotateVelocity action applies an angular acceleration to each 
 	 * particle to match its angular velocity to that of its nearest neighbours.
+	 * 
+	 * <p>This action has a priority of 10, so that it executes 
+	 * before other actions.</p>
 	 */
 
 	public class MatchRotateVelocity extends ActionBase
@@ -60,11 +63,11 @@ package org.flintparticles.twoD.actions
 		 * @param acceleration The angular acceleration applied to adjust the
 		 * angular velocity to match that of the other particles.
 		 */
-		public function MatchRotateVelocity( maxDistance:Number, acceleration:Number )
+		public function MatchRotateVelocity( maxDistance:Number = 0, acceleration:Number = 0 )
 		{
-			_max = maxDistance;
-			_maxSq = maxDistance * maxDistance;
-			_acc = acceleration;
+			priority = 10;
+			this.maxDistance = maxDistance;
+			this.acceleration = acceleration;
 		}
 		
 		/**
@@ -93,18 +96,6 @@ package org.flintparticles.twoD.actions
 		public function set acceleration( value:Number ):void
 		{
 			_acc = value;
-		}
-
-		/**
-		 * Returns a value of 10, so that the MatchRotateVelocity action executes 
-		 * before rotating actions that act on particles independently of
-		 * other particles.
-		 * 
-		 * @see org.flintparticles.common.actions.Action#getDefaultPriority()
-		 */
-		override public function getDefaultPriority():Number
-		{
-			return 10;
 		}
 
 		/**

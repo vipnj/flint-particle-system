@@ -2,8 +2,8 @@
  * FLINT PARTICLE SYSTEM
  * .....................
  * 
- * Author: Richard Lord (Big Room)
- * Copyright (c) Big Room Ventures Ltd. 2008
+ * Author: Richard Lord
+ * Copyright (c) Richard Lord 2008-2009
  * http://flintparticles.org
  * 
  * 
@@ -35,11 +35,14 @@ package org.flintparticles.threeD.actions
 	import org.flintparticles.common.particles.Particle;
 	import org.flintparticles.threeD.emitters.Emitter3D;
 	import org.flintparticles.threeD.geom.Vector3D;
-	import org.flintparticles.threeD.particles.Particle3D;
+	import org.flintparticles.threeD.particles.Particle3D;	
 
 	/**
 	 * The MatchRotateVelocity action applies an angular acceleration to the particle to match
 	 * its angular velocity to that of its nearest neighbours.
+	 * 
+	 * <p>This action has a priority of 10, so that it executes 
+	 * before other actions.</p>
 	 */
 
 	public class MatchRotateVelocity extends ActionBase
@@ -67,12 +70,13 @@ package org.flintparticles.threeD.actions
 		 * @param acceleration The angular acceleration applied to adjust velocity to match that
 		 * of the other particles.
 		 */
-		public function MatchRotateVelocity( maxDistance:Number, acceleration:Number )
+		public function MatchRotateVelocity( maxDistance:Number = 0, acceleration:Number = 0 )
 		{
-			this.maxDistance = maxDistance;
-			this.acceleration = acceleration;
+			priority = 10;
 			d = new Vector3D();
 			vel = new Vector3D();
+			this.maxDistance = maxDistance;
+			this.acceleration = acceleration;
 		}
 		
 		/**
@@ -105,16 +109,6 @@ package org.flintparticles.threeD.actions
 
 		/**
 		 * @inheritDoc
-		 * 
-		 * <p>Returns a value of 10, so that the MutualGravity action executes before other actions.</p>
-		 */
-		override public function getDefaultPriority():Number
-		{
-			return 10;
-		}
-
-		/**
-		 * @inheritDoc
 		 */
 		override public function addedToEmitter( emitter:Emitter ) : void
 		{
@@ -134,7 +128,7 @@ package org.flintparticles.threeD.actions
 			var i:int;
 			var len:int = particles.length;
 			var distanceSq:Number;
-			vel.reset( 0, 0, 0, 0 );
+			vel.reset( 0, 0, 0 );
 			var count:int = 0;
 			var factor:Number;
 			for( i = p.sortID - 1; i >= 0; --i )

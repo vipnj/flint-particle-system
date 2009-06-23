@@ -2,8 +2,8 @@
  * FLINT PARTICLE SYSTEM
  * .....................
  * 
- * Author: Richard Lord (Big Room)
- * Copyright (c) Big Room Ventures Ltd. 2008
+ * Author: Richard Lord
+ * Copyright (c) Richard Lord 2008-2009
  * http://flintparticles.org
  * 
  * 
@@ -30,7 +30,7 @@
 
 package org.flintparticles.twoD.actions 
 {
-	import flash.display.DisplayObject;	
+	import flash.display.DisplayObject;		
 
 	/**
 	 * The MouseAntiGravity action applies a force on the particle to push it 
@@ -62,7 +62,7 @@ package org.flintparticles.twoD.actions
 		 * they were this distance away. This stops the gravity effect blowing up 
 		 * as distances get small.
 		 */
-		public function MouseAntiGravity( power:Number, renderer:DisplayObject, epsilon:Number = 1 )
+		public function MouseAntiGravity( power:Number = 0, renderer:DisplayObject = null, epsilon:Number = 1 )
 		{
 			super( -power, renderer, epsilon );
 		}

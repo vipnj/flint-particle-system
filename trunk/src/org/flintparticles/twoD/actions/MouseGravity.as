@@ -2,8 +2,8 @@
  * FLINT PARTICLE SYSTEM
  * .....................
  * 
- * Author: Richard Lord (Big Room)
- * Copyright (c) Big Room Ventures Ltd. 2008
+ * Author: Richard Lord
+ * Copyright (c) Richard Lord 2008-2009
  * http://flintparticles.org
  * 
  * 
@@ -30,12 +30,12 @@
 
 package org.flintparticles.twoD.actions 
 {
-	import flash.display.DisplayObject;
-	
 	import org.flintparticles.common.actions.ActionBase;
 	import org.flintparticles.common.emitters.Emitter;
 	import org.flintparticles.common.particles.Particle;
-	import org.flintparticles.twoD.particles.Particle2D;	
+	import org.flintparticles.twoD.particles.Particle2D;
+	
+	import flash.display.DisplayObject;	
 
 	/**
 	 * The MouseGravity action applies a force on the particle to draw it towards
@@ -70,11 +70,11 @@ package org.flintparticles.twoD.actions
 		 * small epsilon ( ~1 ), but for stable visual effects a larger epsilon 
 		 * (~100) is often better.
 		 */
-		public function MouseGravity( power:Number, renderer:DisplayObject, epsilon:Number = 100 )
+		public function MouseGravity( power:Number = 0, renderer:DisplayObject = null, epsilon:Number = 100 )
 		{
-			_power = power * _gravityConst;
-			_epsilonSq = epsilon * epsilon;
-			_renderer = renderer;
+			this.power = power;
+			this.epsilon = epsilon;
+			this.renderer = renderer;
 		}
 		
 		/**

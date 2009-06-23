@@ -2,8 +2,8 @@
  * FLINT PARTICLE SYSTEM
  * .....................
  * 
- * Author: Richard Lord (Big Room)
- * Copyright (c) Big Room Ventures Ltd. 2008
+ * Author: Richard Lord
+ * Copyright (c) Richard Lord 2008-2009
  * http://flintparticles.org
  * 
  * 
@@ -30,7 +30,7 @@
 
 package org.flintparticles.threeD.zones
 {
-	import org.flintparticles.threeD.geom.Vector3D;			
+	import org.flintparticles.threeD.geom.Point3D;					
 
 	/**
 	 * The Zones interface must be implemented by all zones.
@@ -50,14 +50,14 @@ package org.flintparticles.threeD.zones
 		 * @param y The y coordinate of the location to test for.
 		 * @return true if point is inside the zone, false if it is outside.
 		 */
-		function contains( p:Vector3D ):Boolean;
+		function contains( p:Point3D ):Boolean;
 
 		/**
 		 * The getLocation method returns a random point inside the zone.
 		 * 
 		 * @return a random point inside the zone.
 		 */
-		function getLocation():Vector3D;
+		function getLocation():Point3D;
 		
 
 		/**

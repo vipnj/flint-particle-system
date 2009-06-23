@@ -2,8 +2,8 @@
  * FLINT PARTICLE SYSTEM
  * .....................
  * 
- * Author: Richard Lord (Big Room)
- * Copyright (c) Big Room Ventures Ltd. 2008
+ * Author: Richard Lord
+ * Copyright (c) Richard Lord 2008-2009
  * http://flintparticles.org
  * 
  * 
@@ -41,6 +41,9 @@ package org.flintparticles.twoD.actions
 	 * the edge. The bounce treats the particle as a circular body. By default,
 	 * no energy is lost in the collision. This can be modified by setting the
 	 * bounce property to a value other than 1, its default value.
+	 * 
+	 * This action has a priority of -20, so that it executes after 
+	 * all movement has occured.
 	 */
 
 	public class BoundingBox extends ActionBase
@@ -67,13 +70,14 @@ package org.flintparticles.twoD.actions
 		 * A value between 0 and 1 causes the particle to loose enegy in the collision. A value 
 		 * greater than 1 causes the particle to gain energy in the collision.
 		 */
-		public function BoundingBox( left:Number, top:Number, right:Number, bottom:Number, bounce:Number = 1 )
+		public function BoundingBox( left:Number = 0, top:Number = 0, right:Number = 0, bottom:Number = 0, bounce:Number = 1 )
 		{
-			_left = left;
-			_top = top;
-			_right = right;
-			_bottom = bottom;
-			_bounce = bounce;
+			priority = -20;
+			this.left = left;
+			this.top = top;
+			this.right = right;
+			this.bottom = bottom;
+			this.bounce = bounce;
 		}
 
 		/**
@@ -137,16 +141,6 @@ package org.flintparticles.twoD.actions
 		public function set bounce( value:Number ):void
 		{
 			_bounce = value;
-		}
-
-		/**
-		 * Returns a value of -20, so that the BoundingBox executes after all movement has occured.
-		 * 
-		 * @see org.flintparticles.common.actions.Action#getDefaultPriority()
-		 */
-		override public function getDefaultPriority():Number
-		{
-			return -20;
 		}
 
 		/**

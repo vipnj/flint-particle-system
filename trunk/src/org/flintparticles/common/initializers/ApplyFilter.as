@@ -2,8 +2,8 @@
  * FLINT PARTICLE SYSTEM
  * .....................
  * 
- * Author: Richard Lord (Big Room)
- * Copyright (c) Big Room Ventures Ltd. 2008
+ * Author: Richard Lord
+ * Copyright (c) Richard Lord 2008-2009
  * http://flintparticles.org
  * 
  * 
@@ -30,11 +30,11 @@
 
 package org.flintparticles.common.initializers
 {
-	import flash.display.DisplayObject;
-	import flash.filters.BitmapFilter;
-	
+	import org.flintparticles.common.emitters.Emitter;
 	import org.flintparticles.common.particles.Particle;
-	import org.flintparticles.common.emitters.Emitter;	
+	
+	import flash.display.DisplayObject;
+	import flash.filters.BitmapFilter;	
 
 	/**
 	 * The ApplyFilter Initializer applies a filter to the particle's image.
@@ -49,14 +49,19 @@ package org.flintparticles.common.initializers
 		 * an emitter. To add an ApplyFilter to all particles created by an emitter, use the
 		 * emitter's addInitializer method.
 		 * 
+		 * <p>This initializer has a priority of -10 to ensure it occurs after the 
+		 * image assignment initializers like ImageClass.
+		 * 
 		 * @param filter The filter to apply.
 		 * 
 		 * @see org.flintparticles.common.emitters.Emitter#addInitializer()
 		 */
-		public function ApplyFilter( filter:BitmapFilter )
+		public function ApplyFilter( filter:BitmapFilter = null )
 		{
+			priority = -10;
 			_filter = filter;
 		}
+
 		
 		/**
 		 * The filter to apply to each particle's image when it is created.
@@ -68,17 +73,6 @@ package org.flintparticles.common.initializers
 		public function set filter( value:BitmapFilter ):void
 		{
 			_filter = value;
-		}
-		
-		/**
-		 * @inheritDoc
-		 * 
-		 * returns -10 to ensure it occurs after the image assignment 
-		 * classes like ImageClass.
-		 */
-		override public function getDefaultPriority():Number
-		{
-			return -10;
 		}
 		
 		/**

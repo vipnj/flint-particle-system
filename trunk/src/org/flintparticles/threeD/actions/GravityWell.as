@@ -2,8 +2,8 @@
  * FLINT PARTICLE SYSTEM
  * .....................
  * 
- * Author: Richard Lord (Big Room)
- * Copyright (c) Big Room Ventures Ltd. 2008
+ * Author: Richard Lord
+ * Copyright (c) Richard Lord 2008-2009
  * http://flintparticles.org
  * 
  * 
@@ -33,6 +33,7 @@ package org.flintparticles.threeD.actions
 	import org.flintparticles.common.actions.ActionBase;
 	import org.flintparticles.common.emitters.Emitter;
 	import org.flintparticles.common.particles.Particle;
+	import org.flintparticles.threeD.geom.Point3D;
 	import org.flintparticles.threeD.geom.Vector3D;
 	import org.flintparticles.threeD.particles.Particle3D;	
 
@@ -44,7 +45,7 @@ package org.flintparticles.threeD.actions
 
 	public class GravityWell extends ActionBase
 	{
-		private var _position:Vector3D;
+		private var _position:Point3D;
 		private var _power:Number;
 		private var _epsilonSq:Number;
 		private var _gravityConst:Number = 10000; // just scales the power to a more reasonable number
@@ -57,18 +58,17 @@ package org.flintparticles.threeD.actions
 		 * @see org.flintparticles.common.emitters.Emitter#addAction()
 		 * 
 		 * @param power The strength of the force - larger numbers produce a stringer force.
-		 * @param x The x coordinate of the point towards which the force draws the particles.
-		 * @param y The y coordinate of the point towards which the force draws the particles.
+		 * @param position The point towards which the force draws the particles.
 		 * @param epsilon The minimum distance for which gravity is calculated. Particles closer
 		 * than this distance experience a gravity force as it they were this distance away.
 		 * This stops the gravity effect blowing up as distances get small. For realistic gravity 
 		 * effects you will want a small epsilon ( ~1 ), but for stable visual effects a larger
 		 * epsilon (~100) is often better.
 		 */
-		public function GravityWell( power:Number, position:Vector3D, epsilon:Number = 100 )
+		public function GravityWell( power:Number = 0, position:Point3D = null, epsilon:Number = 100 )
 		{
 			this.power = power;
-			this.position = position;
+			this.position = position ? position : Point3D.ZERO;
 			this.epsilon = epsilon;
 		}
 		
@@ -87,14 +87,49 @@ package org.flintparticles.threeD.actions
 		/**
 		 * The x coordinate of the center of the gravity force.
 		 */
-		public function get position():Vector3D
+		public function get position():Point3D
 		{
 			return _position;
 		}
-		public function set position( value:Vector3D ):void
+		public function set position( value:Point3D ):void
 		{
 			_position = value.clone();
-			_position.w = 1;
+		}
+		
+		/**
+		 * The x coordinate of the point that the force pulls the particles towards.
+		 */
+		public function get x():Number
+		{
+			return _position.x;
+		}
+		public function set x( value:Number ):void
+		{
+			_position.x = value;
+		}
+		
+		/**
+		 * The y coordinate of the point that the force pulls the particles towards.
+		 */
+		public function get y():Number
+		{
+			return _position.y;
+		}
+		public function set y( value:Number ):void
+		{
+			_position.y = value;
+		}
+		
+		/**
+		 * The z coordinate of the point that the force pulls the particles towards.
+		 */
+		public function get z():Number
+		{
+			return _position.z;
+		}
+		public function set z( value:Number ):void
+		{
+			_position.z = value;
 		}
 		
 		/**
@@ -122,7 +157,7 @@ package org.flintparticles.threeD.actions
 				return;
 			}
 			var p:Particle3D = Particle3D( particle );
-			var offset:Vector3D = _position.subtract( p.position );
+			var offset:Vector3D = p.position.vectorTo( _position );
 			var dSq:Number = offset.lengthSquared;
 			if( dSq == 0 )
 			{

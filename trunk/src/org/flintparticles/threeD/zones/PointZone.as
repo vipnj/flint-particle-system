@@ -2,8 +2,8 @@
  * FLINT PARTICLE SYSTEM
  * .....................
  * 
- * Author: Richard Lord (Big Room)
- * Copyright (c) Big Room Ventures Ltd. 2008
+ * Author: Richard Lord
+ * Copyright (c) Richard Lord 2008-2009
  * http://flintparticles.org
  * 
  * 
@@ -30,7 +30,7 @@
 
 package org.flintparticles.threeD.zones 
 {
-	import org.flintparticles.threeD.geom.Vector3D;				
+	import org.flintparticles.threeD.geom.Point3D;		
 
 	/**
 	 * The PointZone zone defines a zone that contains a single point.
@@ -38,29 +38,28 @@ package org.flintparticles.threeD.zones
 
 	public class PointZone implements Zone3D 
 	{
-		private var _point:Vector3D;
+		private var _point:Point3D;
 		
 		/**
 		 * The constructor defines a PointZone zone.
 		 * 
 		 * @param point The point that is the zone.
 		 */
-		public function PointZone( point:Vector3D )
+		public function PointZone( point:Point3D = null )
 		{
-			this.point = point;
+			_point = point ? point.clone() : new Point3D( 0, 0, 0 );
 		}
 		
 		/**
 		 * The point that is the zone.
 		 */
-		public function get point() : Vector3D
+		public function get point() : Point3D
 		{
 			return _point;
 		}
-		public function set point( value : Vector3D ) : void
+		public function set point( value : Point3D ) : void
 		{
 			_point = value;
-			_point.w = 1;
 		}
 
 		/**
@@ -72,9 +71,9 @@ package org.flintparticles.threeD.zones
 		 * @param y The y coordinate of the location to test for.
 		 * @return true if point is inside the zone, false if it is outside.
 		 */
-		public function contains( p:Vector3D ):Boolean
+		public function contains( p:Point3D ):Boolean
 		{
-			return _point.x == p.x && _point.y == p.y && _point.z == p.z;
+			return _point.equals( p );
 		}
 		
 		/**
@@ -84,7 +83,7 @@ package org.flintparticles.threeD.zones
 		 * 
 		 * @return a random point inside the zone.
 		 */
-		public function getLocation():Vector3D
+		public function getLocation():Point3D
 		{
 			return _point.clone();
 		}

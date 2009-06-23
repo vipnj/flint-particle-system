@@ -2,8 +2,8 @@
  * FLINT PARTICLE SYSTEM
  * .....................
  * 
- * Author: Richard Lord (Big Room)
- * Copyright (c) Big Room Ventures Ltd. 2008
+ * Author: Richard Lord
+ * Copyright (c) Richard Lord 2008-2009
  * http://flintparticles.org
  * 
  * 
@@ -52,6 +52,8 @@ package org.flintparticles.common.actions
 	 */
 	public class ActionBase implements Action
 	{
+		protected var _priority:int = 0;
+		
 		/**
 		 * The constructor creates an ActionBase object. But you shouldn't use it 
 		 * directly because the ActionBase class is abstract.
@@ -66,9 +68,13 @@ package org.flintparticles.common.actions
 		 * 
 		 * @see org.flintparticles.common.actions.Action#getDefaultPriority()
 		 */
-		public function getDefaultPriority():Number
+		public function get priority():int
 		{
-			return 0;
+			return _priority;
+		}
+		public function set priority( value:int ):void
+		{
+			_priority = value;
 		}
 		
 		/**

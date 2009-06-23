@@ -2,8 +2,8 @@
  * FLINT PARTICLE SYSTEM
  * .....................
  * 
- * Author: Richard Lord (Big Room)
- * Copyright (c) Big Room Ventures Ltd. 2008
+ * Author: Richard Lord
+ * Copyright (c) Richard Lord 2008-2009
  * http://flintparticles.org
  * 
  * 
@@ -33,7 +33,6 @@ package org.flintparticles.threeD.initializers
 	import org.flintparticles.common.emitters.Emitter;
 	import org.flintparticles.common.initializers.InitializerBase;
 	import org.flintparticles.common.particles.Particle;
-	import org.flintparticles.threeD.geom.Quaternion;
 	import org.flintparticles.threeD.geom.Vector3D;
 	import org.flintparticles.threeD.particles.Particle3D;	
 
@@ -64,11 +63,14 @@ package org.flintparticles.threeD.initializers
 		 * 
  		 * @see org.flintparticles.common.emitters.Emitter#addInitializer()
 		 */
-		public function RotationAbsolute( axis : Vector3D, minAngle : Number, maxAngle : Number = NaN )
+		public function RotationAbsolute( axis:Vector3D = null, minAngle:Number = 0, maxAngle:Number = NaN )
 		{
-			_axis = axis.unit();
-			_min = minAngle;
-			_max = maxAngle;
+			if( axis )
+			{
+				this.axis = axis;
+			}
+			this.minAngle = minAngle;
+			this.maxAngle = maxAngle;
 		}
 		
 		/**
@@ -80,7 +82,7 @@ package org.flintparticles.threeD.initializers
 		}
 		public function set axis( value:Vector3D ):void
 		{
-			_axis = value;
+			_axis = value.unit();
 		}
 		
 		/**

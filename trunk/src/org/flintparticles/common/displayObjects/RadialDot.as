@@ -2,8 +2,8 @@
  * FLINT PARTICLE SYSTEM
  * .....................
  * 
- * Author: Richard Lord (Big Room)
- * Copyright (c) Big Room Ventures Ltd. 2008
+ * Author: Richard Lord
+ * Copyright (c) Richard Lord 2008-2009
  * http://flintparticles.org
  * 
  * 
@@ -42,6 +42,9 @@ package org.flintparticles.common.displayObjects
 
 	public class RadialDot extends Shape 
 	{
+		private var _radius:Number;
+		private var _color:uint;
+		
 		/**
 		 * The constructor creates a RadialDot with the  specified radius.
 		 * 
@@ -49,14 +52,42 @@ package org.flintparticles.common.displayObjects
 		 * @param color The color of the RadialDot
 		 * @param bm The blendMode of the RadialDot
 		 */
-		public function RadialDot( radius:Number, color:uint = 0xFFFFFF, bm:String = "normal" )
+		public function RadialDot( radius:Number = 1, color:uint = 0xFFFFFF, bm:String = "normal" )
 		{
-			var matrix:Matrix = new Matrix();
-			matrix.createGradientBox( radius * 2, radius * 2, 0, -radius, -radius );
-			graphics.beginGradientFill( GradientType.RADIAL, [color,color], [1,0], [0,255], matrix );
-			graphics.drawCircle( 0, 0, radius );
-			graphics.endFill();
+			_radius = radius;
+			_color = color;
+			draw();
 			blendMode = bm;
+		}
+		
+		private function draw():void
+		{
+			graphics.clear();
+			var matrix:Matrix = new Matrix();
+			matrix.createGradientBox( _radius * 2, _radius * 2, 0, -_radius, -_radius );
+			graphics.beginGradientFill( GradientType.RADIAL, [_color,_color], [1,0], [0,255], matrix );
+			graphics.drawCircle( 0, 0, _radius );
+			graphics.endFill();
+		}
+		
+		public function get radius():Number
+		{
+			return _radius;
+		}
+		public function set radius( value:Number ):void
+		{
+			_radius = value;
+			draw();
+		}
+		
+		public function get color():uint
+		{
+			return _color;
+		}
+		public function set color( value:uint ):void
+		{
+			_color = value;
+			draw();
 		}
 	}
 }

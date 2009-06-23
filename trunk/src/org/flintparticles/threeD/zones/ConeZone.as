@@ -2,8 +2,8 @@
  * FLINT PARTICLE SYSTEM
  * .....................
  * 
- * Author: Richard Lord (Big Room)
- * Copyright (c) Big Room Ventures Ltd. 2008
+ * Author: Richard Lord
+ * Copyright (c) Richard Lord 2008-2009
  * http://flintparticles.org
  * 
  * 
@@ -30,8 +30,9 @@
 
 package org.flintparticles.threeD.zones 
 {
+	import org.flintparticles.threeD.geom.Point3D;
 	import org.flintparticles.threeD.geom.Vector3D;
-	import org.flintparticles.threeD.geom.Vector3DUtils;			
+	import org.flintparticles.threeD.geom.Vector3DUtils;	
 
 	/**
 	 * The ConeZone zone defines a zone that contains all the points inside a cone.
@@ -41,7 +42,7 @@ package org.flintparticles.threeD.zones
 
 	public class ConeZone implements Zone3D 
 	{
-		private var _apex:Vector3D;
+		private var _apex:Point3D;
 		private var _axis:Vector3D;
 		private var _angle:Number;
 		private var _minDist:Number;
@@ -61,12 +62,10 @@ package org.flintparticles.threeD.zones
 		 * @param truncatedHeight The height at which the top of the cone is removed, leaving 
 		 * just the base from height to truncatedHeight. 
 		 */
-		public function ConeZone( apex:Vector3D, axis:Vector3D, angle:Number, height:Number, truncatedHeight:Number = 0 )
+		public function ConeZone( apex:Point3D = null, axis:Vector3D = null, angle:Number = 0, height:Number = 0, truncatedHeight:Number = 0 )
 		{
-			_apex = apex.clone();
-			_apex.w = 1;
-			_axis = axis.unit();
-			_axis.w = 0;
+			_apex = apex ? apex.clone() : new Point3D( 0, 0, 0 );
+			_axis = axis ? axis.unit() : new Vector3D( 0, 1, 0 );
 			_angle = angle;
 			_minDist = truncatedHeight;
 			_maxDist = height;
@@ -89,14 +88,13 @@ package org.flintparticles.threeD.zones
 		/**
 		 * The point at the apex of the cone.
 		 */
-		public function get apex() : Vector3D
+		public function get apex() : Point3D
 		{
 			return _apex.clone();
 		}
-		public function set apex( value : Vector3D ) : void
+		public function set apex( value : Point3D ) : void
 		{
 			_apex = value.clone();
-			_apex.w = 1;
 		}
 
 		/**
@@ -109,7 +107,6 @@ package org.flintparticles.threeD.zones
 		public function set axis( value : Vector3D ) : void
 		{
 			_axis = value.clone();
-			_axis.w = 0;
 			_dirty = true;
 		}
 		
@@ -158,14 +155,14 @@ package org.flintparticles.threeD.zones
 		 * @param p The location to test.
 		 * @return true if the location is inside the zone, false if it is outside.
 		 */
-		public function contains( p:Vector3D ):Boolean
+		public function contains( p:Point3D ):Boolean
 		{
 			if( _dirty )
 			{
 				init();
 			}
 
-			var q:Vector3D = p.subtract( _apex );
+			var q:Vector3D = _apex.vectorTo( p );
 			var d:Number = q.dotProduct( _axis );
 			if( d < _minDist || d > _maxDist )
 			{
@@ -184,7 +181,7 @@ package org.flintparticles.threeD.zones
 		 * 
 		 * @return a random point inside the zone.
 		 */
-		public function getLocation():Vector3D
+		public function getLocation():Point3D
 		{
 			if( _dirty )
 			{
@@ -198,7 +195,7 @@ package org.flintparticles.threeD.zones
 			r = ( 1 - r * r ) * radiusAtHeight( h );
 			
 			var a:Number = Math.random() * 2 * Math.PI;
-			var p:Vector3D = _perp1.multiply( r * Math.cos( a ) ).incrementBy( _perp2.multiply( r * Math.sin( a ) ) ).incrementBy( _axis.multiply( h ) ).incrementBy( _apex );
+			var p:Point3D = _apex.add( _perp1.multiply( r * Math.cos( a ) ).incrementBy( _perp2.multiply( r * Math.sin( a ) ) ).incrementBy( _axis.multiply( h ) ) );
 			return p;
 		}
 		
