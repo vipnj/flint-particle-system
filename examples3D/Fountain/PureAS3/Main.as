@@ -3,7 +3,7 @@
  * .....................
  * 
  * Author: Richard Lord
- * Copyright (c) Big Room Ventures Ltd. 2008
+ * Copyright (c) Richard Lord 2008-2009
  * http://flintparticles.org/
  * 
  * Licence Agreement
@@ -36,7 +36,7 @@ package
 	import flash.text.TextField;
 	
 	import org.flintparticles.threeD.emitters.Emitter3D;
-	import org.flintparticles.threeD.geom.Vector3D;
+	import org.flintparticles.threeD.geom.Point3D;
 	import org.flintparticles.threeD.renderers.*;
 	import org.flintparticles.threeD.renderers.controllers.*;	
 
@@ -61,7 +61,7 @@ package
 			renderer = new PixelRenderer( new Rectangle( -250, -250, 500, 500 ), false );
 			renderer.camera.dolly( -300 );
 			renderer.camera.lift( 100 );
-			renderer.camera.target = new Vector3D( 0, 100, 0 );
+			renderer.camera.target = new Point3D( 0, 100, 0 );
 			renderer.addFilter( new BlurFilter( 2, 2, 1 ) );
 			renderer.addFilter( new ColorMatrixFilter( [ 1,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0.99,0 ] ) );
 			renderer.addEmitter( emitter );
@@ -69,7 +69,6 @@ package
 			renderer.y = 250;
 			addChild( renderer );
 			
-			emitter.position = new Vector3D( 0, 0, 0, 1 );
 			emitter.start( );
 			
 			orbitter = new OrbitCamera( stage, renderer.camera );

@@ -3,7 +3,7 @@
  * .....................
  * 
  * Author: Richard Lord
- * Copyright (c) Big Room Ventures Ltd. 2008
+ * Copyright (c) Richard Lord 2008-2009
  * http://flintparticles.org/
  * 
  * Licence Agreement
@@ -29,16 +29,17 @@
 
 package
 {
-	import flash.display.DisplayObject;
-	
 	import org.flintparticles.common.counters.*;
 	import org.flintparticles.common.displayObjects.Dot;
 	import org.flintparticles.common.initializers.*;
 	import org.flintparticles.threeD.actions.*;
 	import org.flintparticles.threeD.emitters.Emitter3D;
+	import org.flintparticles.threeD.geom.Point3D;
 	import org.flintparticles.threeD.geom.Vector3D;
 	import org.flintparticles.threeD.initializers.*;
-	import org.flintparticles.threeD.zones.*;	
+	import org.flintparticles.threeD.zones.*;
+	
+	import flash.display.DisplayObject;	
 
 	public class BrownianMotion extends Emitter3D
 	{
@@ -58,8 +59,8 @@ package
 			smoke.addInitializer( new MassInit( 5 ) );
 			smoke.addInitializer( new CollisionRadiusInit( 10 ) );
 			
-			addInitializer( new Position( new BoxZone( 280, 280, 280, new Vector3D( 0, 0, 0 ), new Vector3D( 0, 1, 0 ), new Vector3D( 0, 0, 1 ) ) ) );
-			addInitializer( new Velocity( new SphereZone( new Vector3D( 0, 0, 0 ), 150, 100 ) ) );
+			addInitializer( new Position( new BoxZone( 280, 280, 280, new Point3D( 0, 0, 0 ), new Vector3D( 0, 1, 0 ), new Vector3D( 0, 0, 1 ) ) ) );
+			addInitializer( new Velocity( new SphereZone( new Point3D( 0, 0, 0 ), 150, 100 ) ) );
 			
 			addInitializer( new ChooseInitializer( [ air, smoke ], [ 19, 1 ] ) );
 			

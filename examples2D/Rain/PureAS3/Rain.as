@@ -3,7 +3,7 @@
  * .....................
  * 
  * Author: Richard Lord
- * Copyright (c) Big Room Ventures Ltd. 2008
+ * Copyright (c) Richard Lord 2008-2009
  * http://flintparticles.org/
  * 
  * Licence Agreement
@@ -48,10 +48,10 @@ package
 			addInitializer( new ImageClass( Line, 8 ) );
 			addInitializer( new Position( new LineZone( new Point( 5, 5 ), new Point( 505, 5 ) ) ) );
 			addInitializer( new Velocity( new PointZone( new Point( -60, 300 ) ) ) );
-			addInitializer( new ColorInit( 0x66FFFFFF, 0x66FFFFFF ) );
+			addInitializer( new AlphaInit( 0.25, 0.5 ) );
 			
 			addAction( new Move() );
-			addAction( new DeathZone( new RectangleZone( -10, -10, 510, 610 ), true ) );
+			addAction( new DeathZone( new RectangleZone( -10, -10, 510, 410 ), true ) );
 			addAction( new RotateToDirection() );
 		}
 	}
