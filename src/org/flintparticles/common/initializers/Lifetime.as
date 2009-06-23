@@ -2,8 +2,8 @@
  * FLINT PARTICLE SYSTEM
  * .....................
  * 
- * Author: Richard Lord (Big Room)
- * Copyright (c) Big Room Ventures Ltd. 2008
+ * Author: Richard Lord
+ * Copyright (c) Richard Lord 2008-2009
  * http://flintparticles.org
  * 
  * 
@@ -60,7 +60,7 @@ package org.flintparticles.common.initializers
 		 * 
 		 * @see Emitter.addInitializer.
 		 */
-		public function Lifetime( minLifetime:Number, maxLifetime:Number = NaN )
+		public function Lifetime( minLifetime:Number = Number.MAX_VALUE, maxLifetime:Number = NaN )
 		{
 			_max = maxLifetime;
 			_min = minLifetime;

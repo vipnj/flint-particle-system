@@ -2,8 +2,8 @@
  * FLINT PARTICLE SYSTEM
  * .....................
  * 
- * Author: Richard Lord (Big Room)
- * Copyright (c) Big Room Ventures Ltd. 2008
+ * Author: Richard Lord
+ * Copyright (c) Richard Lord 2008-2009
  * http://flintparticles.org
  * 
  * 
@@ -38,7 +38,11 @@ package org.flintparticles.threeD.actions
 	import org.flintparticles.threeD.particles.Particle3D;	
 
 	/**
-	 * The MutualGravity Action applies forces to attract each particle towards the other particles.
+	 * The MutualGravity Action applies forces to attract each particle towards 
+	 * the other particles.
+	 * 
+	 * <p>This action has a priority of 10, so that it executes 
+	 * before other actions.</p>
 	 */
 	public class MutualGravity extends ActionBase
 	{
@@ -66,12 +70,13 @@ package org.flintparticles.threeD.actions
 		 * since often only the closest other particles have a significant effect on the 
 		 * motion of a particle.
 		 */
-		public function MutualGravity( power:Number, maxDistance:Number, epsilon:Number = 1 )
+		public function MutualGravity( power:Number = 0, maxDistance:Number = 0, epsilon:Number = 1 )
 		{
+			priority = 10;
+			d = new Vector3D();
 			this.power = power;
 			this.maxDistance = maxDistance;
 			this.epsilon = epsilon;
-			d = new Vector3D();
 		}
 		
 		/**
@@ -115,16 +120,6 @@ package org.flintparticles.threeD.actions
 		public function set epsilon( value:Number ):void
 		{
 			_epsilonSq = value * value;
-		}
-
-		/**
-		 * @inheritDoc
-		 * 
-		 * <p>Returns a value of 10, so that the MutualGravity action executes before other actions.</p>
-		 */
-		override public function getDefaultPriority():Number
-		{
-			return 10;
 		}
 
 		/**

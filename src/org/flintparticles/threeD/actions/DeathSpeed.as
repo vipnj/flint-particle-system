@@ -2,8 +2,8 @@
  * FLINT PARTICLE SYSTEM
  * .....................
  * 
- * Author: Richard Lord (Big Room)
- * Copyright (c) Big Room Ventures Ltd. 2008
+ * Author: Richard Lord
+ * Copyright (c) Richard Lord 2008-2009
  * http://flintparticles.org
  * 
  * 
@@ -59,7 +59,7 @@ package org.flintparticles.threeD.actions
 		 * are killed, otherwise particles travelling faster than the speed limit are
 		 * killed.
 		 */
-		public function DeathSpeed( speed:Number, isMinimum:Boolean = false )
+		public function DeathSpeed( speed:Number = Number.MAX_VALUE, isMinimum:Boolean = false )
 		{
 			this.speed = speed;
 			this.isMinimum = isMinimum;

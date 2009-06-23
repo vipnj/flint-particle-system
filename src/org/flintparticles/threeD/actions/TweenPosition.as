@@ -2,8 +2,8 @@
  * FLINT PARTICLE SYSTEM
  * .....................
  * 
- * Author: Richard Lord (Big Room)
- * Copyright (c) Big Room Ventures Ltd. 2008
+ * Author: Richard Lord
+ * Copyright (c) Richard Lord 2008-2009
  * http://flintparticles.org
  * 
  * 
@@ -33,6 +33,7 @@ package org.flintparticles.threeD.actions
 	import org.flintparticles.common.actions.ActionBase;
 	import org.flintparticles.common.emitters.Emitter;
 	import org.flintparticles.common.particles.Particle;
+	import org.flintparticles.threeD.geom.Point3D;
 	import org.flintparticles.threeD.geom.Vector3D;
 	import org.flintparticles.threeD.particles.Particle3D;	
 
@@ -44,8 +45,9 @@ package org.flintparticles.threeD.actions
 
 	public class TweenPosition extends ActionBase
 	{
+		private var _start:Point3D;
+		private var _end:Point3D;
 		private var _diff:Vector3D;
-		private var _end:Vector3D;
 		private var _temp:Vector3D;
 		
 		/**
@@ -64,41 +66,43 @@ package org.flintparticles.threeD.actions
 		 * @param endY The y value of the particle at the end of its
 		 * life.
 		 */
-		public function TweenPosition( start:Vector3D, end:Vector3D )
+		public function TweenPosition( start:Point3D = null, end:Point3D = null )
 		{
-			_diff = start.subtract( end );
-			_end = end.clone();
-			_diff.w = 0;
-			_end.w = 1;
 			_temp = new Vector3D();
+			this.start = start ? start : Point3D.ZERO;
+			this.end = end ? end : Point3D.ZERO;
 		}
 		
 		/**
 		 * The x position for the particle at the start of its life.
 		 */
-		public function get start():Vector3D
+		public function get start():Point3D
 		{
-			return _end.add( _diff );
+			return _start;
 		}
-		public function set start( value:Vector3D ):void
+		public function set start( value:Point3D ):void
 		{
-			_diff = value.subtract( _end );
-			_diff.w = 0;
+			_start = value.clone();
+			if( _end )
+			{
+				_diff = _end.vectorTo( _start );
+			}
 		}
 		
 		/**
 		 * The X value for the particle at the end of its life.
 		 */
-		public function get end():Vector3D
+		public function get end():Point3D
 		{
 			return _end;
 		}
-		public function set end( value:Vector3D ):void
+		public function set end( value:Point3D ):void
 		{
-			_diff = _end.add( _diff ).decrementBy( value );
 			_end = value.clone();
-			_diff.w = 0;
-			_end.w = 1;
+			if( _start )
+			{
+				_diff = _end.vectorTo( _start );
+			}
 		}
 		
 		/**
@@ -106,7 +110,7 @@ package org.flintparticles.threeD.actions
 		 */
 		override public function update( emitter:Emitter, particle:Particle, time:Number ):void
 		{
-			Particle3D( particle ).position = _diff.multiply( particle.energy, _temp ).incrementBy( _end );
+			_end.add( _diff.multiply( particle.energy, _temp ), Particle3D( particle ).position );
 		}
 	}
 }

@@ -2,8 +2,8 @@
  * FLINT PARTICLE SYSTEM
  * .....................
  * 
- * Author: Richard Lord (Big Room)
- * Copyright (c) Big Room Ventures Ltd. 2008
+ * Author: Richard Lord
+ * Copyright (c) Richard Lord 2008-2009
  * http://flintparticles.org
  * 
  * 
@@ -44,10 +44,10 @@ package org.flintparticles.twoD.actions
 
 	public class TweenPosition extends ActionBase
 	{
-		private var _diffX:Number;
-		private var _endX:Number;
-		private var _diffY:Number;
-		private var _endY:Number;
+		private var _diffX:Number = 0;
+		private var _endX:Number = 0;
+		private var _diffY:Number = 0;
+		private var _endY:Number = 0;
 		
 		/**
 		 * The constructor creates a TweenPosition action for use by an emitter. 
@@ -61,12 +61,12 @@ package org.flintparticles.twoD.actions
 		 * @param endX The x value of the particle's position when its energy is 0.
 		 * @param endY The y value of the particle's position when its energy is 0.
 		 */
-		public function TweenPosition( startX:Number, startY:Number, endX:Number, endY:Number )
+		public function TweenPosition( startX:Number = 0, startY:Number = 0, endX:Number = 0, endY:Number = 0 )
 		{
-			_diffX = startX - endX;
-			_endX = endX;
-			_diffY = startY - endY;
-			_endY = endY;
+			this.startX = startX;
+			this.endX = endX;
+			this.startY = startY;
+			this.endY = endY;
 		}
 		
 		/**

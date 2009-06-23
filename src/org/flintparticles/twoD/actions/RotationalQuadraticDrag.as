@@ -2,8 +2,8 @@
  * FLINT PARTICLE SYSTEM
  * .....................
  * 
- * Author: Richard Lord (Big Room)
- * Copyright (c) Big Room Ventures Ltd. 2008
+ * Author: Richard Lord
+ * Copyright (c) Richard Lord 2008-2009
  * http://flintparticles.org
  * 
  * 
@@ -59,9 +59,9 @@ package org.flintparticles.twoD.actions
 		 * @param drag The amount of drag. A higher number produces a stronger drag 
 		 * force.
 		 */
-		public function RotationalQuadraticDrag( drag:Number )
+		public function RotationalQuadraticDrag( drag:Number = 0 )
 		{
-			_drag = drag;
+			this.drag = drag;
 		}
 		
 		/**

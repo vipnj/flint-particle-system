@@ -2,8 +2,8 @@
  * FLINT PARTICLE SYSTEM
  * .....................
  * 
- * Author: Richard Lord (Big Room)
- * Copyright (c) Big Room Ventures Ltd. 2008
+ * Author: Richard Lord
+ * Copyright (c) Richard Lord 2008-2009
  * http://flintparticles.org
  * 
  * 
@@ -42,6 +42,9 @@ package org.flintparticles.twoD.actions
 	 * square of the distance between the particles, in accordance with Newton's
 	 * law of gravity. This simulates the effect of gravity over large distances 
 	 * (as between planets, for example).
+	 * 
+	 * <p>This action has a priority of 10, so that it executes 
+	 * before other actions.</p>
 	 */
 	public class MutualGravity extends ActionBase
 	{
@@ -70,12 +73,12 @@ package org.flintparticles.twoD.actions
 		 * they were this distance away. This stops the gravity effect blowing 
 		 * up as distances get small.
 		 */
-		public function MutualGravity( power:Number, maxDistance:Number, epsilon:Number = 1 )
+		public function MutualGravity( power:Number = 0, maxDistance:Number = 0, epsilon:Number = 1 )
 		{
-			_power = power * _gravityConst;
-			_maxDistance = maxDistance;
-			_maxDistanceSq = maxDistance * maxDistance;
-			_epsilonSq = epsilon * epsilon;
+			priority = 10;
+			this.power = power;
+			this.maxDistance = maxDistance;
+			this.epsilon = epsilon;
 		}
 		
 		/**
@@ -120,18 +123,6 @@ package org.flintparticles.twoD.actions
 		public function set epsilon( value:Number ):void
 		{
 			_epsilonSq = value * value;
-		}
-
-		/**
-		 * Returns a value of 10, so that the MatchVelocity action executes 
-		 * before accelerating actions that act on particles independently of
-		 * other particles, like Acceleration and GravityWell.
-		 * 
-		 * @see org.flintparticles.common.actions.Action#getDefaultPriority()
-		 */
-		override public function getDefaultPriority():Number
-		{
-			return 10;
 		}
 
 		/**

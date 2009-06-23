@@ -2,8 +2,8 @@
  * FLINT PARTICLE SYSTEM
  * .....................
  * 
- * Author: Richard Lord (Big Room)
- * Copyright (c) Big Room Ventures Ltd. 2008
+ * Author: Richard Lord
+ * Copyright (c) Richard Lord 2008-2009
  * http://flintparticles.org
  * 
  * 
@@ -39,8 +39,10 @@ package org.flintparticles.twoD.actions
 	/**
 	 * The MinimumDistance action applies an acceleration to the particle to 
 	 * maintain a minimum distance between it and its neighbours.
+	 * 
+	 * <p>This action has a priority of 10, so that it executes 
+	 * before other actions.</p>
 	 */
-
 	public class MinimumDistance extends ActionBase
 	{
 		private var _min:Number;
@@ -48,8 +50,8 @@ package org.flintparticles.twoD.actions
 		private var _minSq:Number;
 		
 		/**
-		 * The constructor creates a ApproachNeighbours action for use by an emitter. 
-		 * To add a ApproachNeighbours to all particles created by an emitter, use 
+		 * The constructor creates a MinimumDistance action for use by an emitter. 
+		 * To add a MinimumDistance to all particles created by an emitter, use 
 		 * the emitter's addAction method.
 		 * 
 		 * @see org.flintparticles.common.emitters.Emitter#addAction()
@@ -59,11 +61,11 @@ package org.flintparticles.twoD.actions
 		 * @param acceleration The acceleration force applied to avoid the 
 		 * other particles.
 		 */
-		public function MinimumDistance( minimum:Number, acceleration:Number )
+		public function MinimumDistance( minimum:Number = 0, acceleration:Number = 0 )
 		{
-			_min = minimum;
-			_minSq = minimum * minimum;
-			_acc = acceleration;
+			priority = 10;
+			this.minimum = minimum;
+			this.acceleration = acceleration;
 		}
 		
 		/**
@@ -90,18 +92,6 @@ package org.flintparticles.twoD.actions
 		public function set acceleration( value:Number ):void
 		{
 			_acc = value;
-		}
-
-		/**
-		 * Returns a value of 10, so that the MinimumDistance action executes 
-		 * before accelerating actions that act on particles independently of
-		 * other particles, like Acceleration and GravityWell.
-		 * 
-		 * @see org.flintparticles.common.actions.Action#getDefaultPriority()
-		 */
-		override public function getDefaultPriority():Number
-		{
-			return 10;
 		}
 
 		/**

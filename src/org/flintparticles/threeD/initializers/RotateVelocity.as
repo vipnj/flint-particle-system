@@ -2,8 +2,8 @@
  * FLINT PARTICLE SYSTEM
  * .....................
  * 
- * Author: Richard Lord (Big Room)
- * Copyright (c) Big Room Ventures Ltd. 2008
+ * Author: Richard Lord
+ * Copyright (c) Richard Lord 2008-2009
  * http://flintparticles.org
  * 
  * 
@@ -65,11 +65,11 @@ package org.flintparticles.threeD.initializers
 		 * 
 		 * @see org.flintparticles.common.emitters.Emitter#addInitializer()
 		 */
-		public function RotateVelocity( axis : Vector3D, minAngVelocity:Number, maxAngVelocity:Number = NaN )
+		public function RotateVelocity( axis:Vector3D = null, minAngVelocity:Number = 0, maxAngVelocity:Number = NaN )
 		{
-			_axis = axis.unit();
-			_min = minAngVelocity;
-			_max = maxAngVelocity;
+			this.axis = axis;
+			this.maxAngVelocity = minAngVelocity;
+			this.maxAngVelocity = maxAngVelocity;
 		}
 		
 		/**

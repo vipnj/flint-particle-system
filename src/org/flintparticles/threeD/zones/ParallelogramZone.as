@@ -2,8 +2,8 @@
  * FLINT PARTICLE SYSTEM
  * .....................
  * 
- * Author: Richard Lord (Big Room)
- * Copyright (c) Big Room Ventures Ltd. 2008
+ * Author: Richard Lord
+ * Copyright (c) Richard Lord 2008-2009
  * http://flintparticles.org
  * 
  * 
@@ -31,6 +31,7 @@
 package org.flintparticles.threeD.zones 
 {
 	import org.flintparticles.threeD.geom.Matrix3D;
+	import org.flintparticles.threeD.geom.Point3D;
 	import org.flintparticles.threeD.geom.Vector3D;	
 
 	/**
@@ -39,7 +40,7 @@ package org.flintparticles.threeD.zones
 	 */
 	public class ParallelogramZone implements Zone3D 
 	{
-		private var _corner : Vector3D;
+		private var _corner : Point3D;
 		private var _side1 : Vector3D;
 		private var _side2 : Vector3D;
 		private var _normal : Vector3D;
@@ -56,27 +57,25 @@ package org.flintparticles.threeD.zones
 		 * @param side2 The other side of the zone from the corner. The length of the
 		 * vector indicates how long the side is.
 		 */
-		public function ParallelogramZone( corner:Vector3D, side1:Vector3D, side2:Vector3D )
+		public function ParallelogramZone( corner:Point3D = null, side1:Vector3D = null, side2:Vector3D = null )
 		{
-			_corner = corner.clone();
-			_corner.w = 1;
-			_side1 = side1.clone();
-			_side2 = side2.clone();
+			_corner = corner ? corner.clone() : new Point3D( 0, 0, 0 );
+			_side1 = side1 ? side1.clone() : new Vector3D( 1, 0, 0 );
+			_side2 = side2 ? side2.clone() : new Vector3D( 0, -1, 0 );
 			_dirty = true;
 		}
 		
 		/**
 		 * A corner of the zone.
 		 */
-		public function get corner() : Vector3D
+		public function get corner() : Point3D
 		{
 			return _corner.clone();
 		}
 
-		public function set corner( value : Vector3D ) : void
+		public function set corner( value : Point3D ) : void
 		{
 			_corner = value.clone();
-			_corner.w = 1;
 		}
 
 		/**
@@ -112,9 +111,9 @@ package org.flintparticles.threeD.zones
 		private function init():void
 		{
 			_normal = _side1.crossProduct( _side2 );
-			_distToOrigin = _normal.dotProduct( _corner );
+			_distToOrigin = _normal.dotProduct( _corner.toVector3D() );
 			_basis = Matrix3D.newBasisTransform( _side1, _side2, _side1.crossProduct( _side2 ).normalize() );
-			_basis.prependTranslation( -_corner.x, -_corner.y, -_corner.z );
+			_basis.prependTranslate( -_corner.x, -_corner.y, -_corner.z );
 			_dirty = false;
 		}
 
@@ -127,20 +126,19 @@ package org.flintparticles.threeD.zones
 		 * @param y The y coordinate of the location to test for.
 		 * @return true if point is inside the zone, false if it is outside.
 		 */
-		public function contains( p:Vector3D ):Boolean
+		public function contains( p:Point3D ):Boolean
 		{
 			if( _dirty )
 			{
 				init();
 			}
-			var dist:Number = _normal.dotProduct( p );
+			var dist:Number = _normal.dotProduct( p.toVector3D() );
 			if( Math.abs( dist - _distToOrigin ) > 0.1 ) // test for close, not exact
 			{
 				return false;
 			}
-			var q:Vector3D = p.clone();
-			q.w = 1;
-			_basis.transformVectorSelf( q );
+			var q:Point3D = p.clone();
+			_basis.transformSelf( q );
 			return q.x >= 0 && q.x <= 1 && q.y >= 0 && q.y <= 1;
 		}
 		
@@ -151,9 +149,9 @@ package org.flintparticles.threeD.zones
 		 * 
 		 * @return a random point inside the zone.
 		 */
-		public function getLocation():Vector3D
+		public function getLocation():Point3D
 		{
-			return _side1.multiply( Math.random() ).incrementBy( _side2.multiply( Math.random() ) ).incrementBy( _corner );
+			return _corner.add( _side1.multiply( Math.random() ).incrementBy( _side2.multiply( Math.random() ) ) );
 		}
 		
 		/**

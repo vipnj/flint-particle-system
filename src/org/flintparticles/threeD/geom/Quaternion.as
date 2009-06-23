@@ -2,10 +2,9 @@
  * FLINT PARTICLE SYSTEM
  * .....................
  * 
- * Author: Richard Lord (Big Room)
- * Copyright (c) Big Room Ventures Ltd. 2008
- * http://flintparticles.org
- * 
+ * Author: Richard Lord
+ * Copyright (c) Richard Lord 2008-2009
+ * http://flintparticles.org/
  * 
  * Licence Agreement
  * 
@@ -28,7 +27,7 @@
  * THE SOFTWARE.
  */
 
-package org.flintparticles.threeD.geom 
+package org.flintparticles.threeD.geom
 {
 	/**
 	 * 
@@ -369,7 +368,7 @@ package org.flintparticles.threeD.geom
 		/**
 		 * Convert this quaternion to have magnitude 1.
 		 * 
-		 * @return A reference to this Vector3D object.
+		 * @return A reference to this quaternion.
 		 */
 		public function normalize():Quaternion
 		{
@@ -430,7 +429,7 @@ package org.flintparticles.threeD.geom
 		{
 			if( isNaN( angle ) )
 			{
-				angle = axis.w * 0.5;
+				angle = axis.length * 0.5;
 			}
 			else
 			{
@@ -459,7 +458,7 @@ package org.flintparticles.threeD.geom
 			var angle:Number = 2 * Math.acos( w );
 			var axis:Vector3D = new Vector3D( x, y, z );
 			axis.normalize();
-			axis.w = angle;
+			axis.scaleBy( angle );
 			return axis;
 		}
 		

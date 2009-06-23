@@ -2,8 +2,8 @@
  * FLINT PARTICLE SYSTEM
  * .....................
  * 
- * Author: Richard Lord (Big Room)
- * Copyright (c) Big Room Ventures Ltd. 2008
+ * Author: Richard Lord
+ * Copyright (c) Richard Lord 2008-2009
  * http://flintparticles.org
  * 
  * 
@@ -30,7 +30,7 @@
 
 package org.flintparticles.twoD.zones 
 {
-	import flash.geom.Point;
+	import flash.geom.Point;	
 
 	/**
 	 * The PointZone zone defines a zone that contains a single point.
@@ -45,9 +45,16 @@ package org.flintparticles.twoD.zones
 		 * 
 		 * @param point The point that is the zone.
 		 */
-		public function PointZone( point:Point )
+		public function PointZone( point:Point = null )
 		{
+			if( point == null )
+			{
+				_point = new Point( 0, 0 );
+			}
+			else
+			{
 			_point = point;
+		}
 		}
 		
 		/**
@@ -61,6 +68,32 @@ package org.flintparticles.twoD.zones
 		public function set point( value : Point ) : void
 		{
 			_point = value;
+		}
+
+		/**
+		 * The x coordinate of the point that is the zone.
+		 */
+		public function get x() : Number
+		{
+			return _point.x;
+		}
+
+		public function set x( value : Number ) : void
+		{
+			_point.x = value;
+		}
+
+		/**
+		 * The y coordinate of the point that is the zone.
+		 */
+		public function get y() : Number
+		{
+			return _point.y;
+		}
+
+		public function set y( value : Number ) : void
+		{
+			_point.y = value;
 		}
 
 		/**

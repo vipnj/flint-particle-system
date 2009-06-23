@@ -2,8 +2,8 @@
  * FLINT PARTICLE SYSTEM
  * .....................
  * 
- * Author: Richard Lord (Big Room)
- * Copyright (c) Big Room Ventures Ltd. 2008
+ * Author: Richard Lord
+ * Copyright (c) Richard Lord 2008-2009
  * http://flintparticles.org
  * 
  * 
@@ -36,9 +36,14 @@ package org.flintparticles.twoD.actions
 	import org.flintparticles.twoD.particles.Particle2D;
 	import org.flintparticles.twoD.zones.Zone2D;	
 
+	[DefaultProperty("zone")]
+
 	/**
 	 * The DeathZone action marks the particle as dead if it is inside
 	 * a specific zone.
+	 * 
+	 * This action has a priority of -20, so that it executes after 
+	 * all movement has occured.
 	 */
 
 	public class DeathZone extends ActionBase
@@ -64,10 +69,11 @@ package org.flintparticles.twoD.actions
 		 * and particles outside the zone are killed. If false, particles
 		 * inside the zone are killed.
 		 */
-		public function DeathZone( zone:Zone2D, zoneIsSafe:Boolean = false )
+		public function DeathZone( zone:Zone2D = null, zoneIsSafe:Boolean = false )
 		{
-			_zone = zone;
-			_invertZone = zoneIsSafe;
+			priority = -20;
+			this.zone = zone;
+			this.zoneIsSafe = zoneIsSafe;
 		}
 		
 		/**
@@ -93,17 +99,6 @@ package org.flintparticles.twoD.actions
 		public function set zoneIsSafe( value:Boolean ):void
 		{
 			_invertZone = value;
-		}
-		
-		/**
-		 * Returns a value of -20, so that the DeathZone executes after all 
-		 * movement has occured.
-		 * 
-		 * @see org.flintparticles.common.actions.Action#getDefaultPriority()
-		 */
-		override public function getDefaultPriority():Number
-		{
-			return -20;
 		}
 
 		/**

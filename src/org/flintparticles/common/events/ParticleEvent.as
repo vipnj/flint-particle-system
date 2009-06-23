@@ -2,8 +2,8 @@
  * FLINT PARTICLE SYSTEM
  * .....................
  * 
- * Author: Richard Lord (Big Room)
- * Copyright (c) Big Room Ventures Ltd. 2008
+ * Author: Richard Lord
+ * Copyright (c) Richard Lord 2008-2009
  * http://flintparticles.org
  * 
  * 
@@ -30,9 +30,9 @@
 
 package org.flintparticles.common.events
 {
-	import flash.events.Event;
+	import org.flintparticles.common.particles.Particle;
 	
-	import org.flintparticles.common.particles.Particle;	
+	import flash.events.Event;	
 
 	/**
 	 * The class for particle related events dispatched by classes in the Flint project.

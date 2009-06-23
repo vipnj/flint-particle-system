@@ -1,9 +1,9 @@
-﻿/*
+/*
  * FLINT PARTICLE SYSTEM
  * .....................
  * 
- * Author: Richard Lord (Big Room)
- * Copyright (c) Big Room Ventures Ltd. 2008
+ * Author: Richard Lord
+ * Copyright (c) Richard Lord 2008-2009
  * http://flintparticles.org
  * 
  * 
@@ -30,16 +30,16 @@
 
 package org.flintparticles.twoD.renderers
 {
+	import org.flintparticles.common.renderers.SpriteRendererBase;
+	import org.flintparticles.twoD.particles.Particle2D;
+	
 	import flash.display.Bitmap;
 	import flash.display.BitmapData;
 	import flash.display.DisplayObject;
 	import flash.filters.BitmapFilter;
 	import flash.geom.Matrix;
 	import flash.geom.Point;
-	import flash.geom.Rectangle;
-	
-	import org.flintparticles.common.renderers.SpriteRendererBase;
-	import org.flintparticles.twoD.particles.Particle2D;	
+	import flash.geom.Rectangle;	
 
 	/**
 	 * The BitmapRenderer draws particles onto a single Bitmap display object. The
@@ -64,17 +64,6 @@ package org.flintparticles.twoD.renderers
 	 * <p>The BitmapRenderer has mouse events disabled for itself and any 
 	 * display objects in its display list. To enable mouse events for the renderer
 	 * or its children set the mouseEnabled or mouseChildren properties to true.</p>
-	 * 
-	 * <p><i>This class has been modified in version 1.0.1 of Flint to fix various
-	 * limitations in the previous version. Specifically, the canvas for drawing
-	 * the particles on must now be specified by the developer (it previously 
-	 * defaulted to the size and position of the stage).</i></p>
-	 * 
-	 * <p><i>The previous behaviour, while still flawed, has been improved and 
-	 * given its own renderer, the FullStageBitmapRenderer. To retain the previous
-	 * behaviour, please use the FullStageBitmapRenderer.</i></p>
-	 * 
-	 * @see org.flintparticles.twoD.renderers.FullStageBitmapRenderer
 	 */
 	public class BitmapRenderer extends SpriteRendererBase
 	{
@@ -185,6 +174,46 @@ package org.flintparticles.twoD.renderers
 		}
 		
 		/**
+		 * The array of all filters being applied before rendering.
+		 */
+		public function get preFilters():Array
+		{
+			return _preFilters.slice();
+		}
+		public function set preFilters( value:Array ):void
+		{
+			var filter:BitmapFilter;
+			for each( filter in _preFilters )
+			{
+				removeFilter( filter );
+			}
+			for each( filter in value )
+			{
+				addFilter( filter, false );
+			}
+		}
+
+		/**
+		 * The array of all filters being applied before rendering.
+		 */
+		public function get postFilters():Array
+		{
+			return _postFilters.slice();
+		}
+		public function set postFilters( value:Array ):void
+		{
+			var filter:BitmapFilter;
+			for each( filter in _postFilters )
+			{
+				removeFilter( filter );
+			}
+			for each( filter in value )
+			{
+				addFilter( filter, true );
+			}
+		}
+
+		/**
 		 * Sets a palette map for the renderer. See the paletteMap method in flash's BitmapData object for
 		 * information about how palette maps work. The palette map will be applied to the full canvas of the 
 		 * renderer after all filters have been applied and the particles have been drawn.
@@ -222,9 +251,10 @@ package org.flintparticles.twoD.renderers
 			if( _bitmap )
 			{
 				removeChild( _bitmap );
+				_bitmap = null;
 			}
 			_bitmap = new Bitmap( null, "auto", _smoothing);
-			_bitmapData = new BitmapData( _canvas.width, _canvas.height, true, 0 );
+			_bitmapData = new BitmapData( Math.ceil( _canvas.width ), Math.ceil( _canvas.height ), true, 0 );
 			_bitmap.bitmapData = _bitmapData;
 			addChild( _bitmap );
 			_bitmap.x = _canvas.x;
@@ -243,6 +273,19 @@ package org.flintparticles.twoD.renderers
 		{
 			_canvas = value;
 			createBitmap();
+		}
+		
+		public function get smoothing():Boolean
+		{
+			return _smoothing;
+		}
+		public function set smoothing( value:Boolean ):void
+		{
+			_smoothing = value;
+			if( _bitmap )
+			{
+				_bitmap.smoothing = value;
+			}
 		}
 		
 		/**

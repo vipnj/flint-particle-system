@@ -1,9 +1,9 @@
-﻿/*
+/*
  * FLINT PARTICLE SYSTEM
  * .....................
  * 
- * Author: Richard Lord (Big Room)
- * Copyright (c) Big Room Ventures Ltd. 2008
+ * Author: Richard Lord
+ * Copyright (c) Richard Lord 2008-2009
  * http://flintparticles.org
  * 
  * 
@@ -30,10 +30,9 @@
 
 package org.flintparticles.twoD.renderers
 {
-	import flash.display.BitmapData;
-	import flash.geom.Rectangle;
+	import org.flintparticles.twoD.particles.Particle2D;
 	
-	import org.flintparticles.twoD.particles.Particle2D;	
+	import flash.geom.Rectangle;	
 
 	/**
 	 * The PixelRenderer draws particles as single pixels on a Bitmap display object. The
@@ -51,17 +50,6 @@ package org.flintparticles.twoD.renderers
 	 * <p>The PixelRenderer has mouse events disabled for itself and any 
 	 * display objects in its display list. To enable mouse events for the renderer
 	 * or its children set the mouseEnabled or mouseChildren properties to true.</p>
-	 * 
-	 * <p><i>This class has been modified in version 1.0.1 of Flint to fix various
-	 * limitations in the previous version. Specifically, the canvas for drawing
-	 * the particles on must now be specified by the developer (it previously 
-	 * defaulted to the size and position of the stage).</i></p>
-	 * 
-	 * <p><i>The previous behaviour, while still flawed, has been improved
-	 * and given its own renderer, the FullStagePixelRenderer. To retain the previous
-	 * behaviour, please use the FullStagePixelRenderer.</i></p>
-	 * 
-	 * @see org.flintparticles.twoD.renderers.FullStagePixelRenderer
 	 */
 	public class PixelRenderer extends BitmapRenderer
 	{

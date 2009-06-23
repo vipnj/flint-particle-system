@@ -2,8 +2,8 @@
  * FLINT PARTICLE SYSTEM
  * .....................
  * 
- * Author: Richard Lord (Big Room)
- * Copyright (c) Big Room Ventures Ltd. 2008
+ * Author: Richard Lord
+ * Copyright (c) Richard Lord 2008-2009
  * http://flintparticles.org
  * 
  * 
@@ -30,12 +30,13 @@
 
 package org.flintparticles.threeD.zones 
 {
-	import flash.display.BitmapData;
-	import flash.geom.Point;
-	
 	import org.flintparticles.common.utils.FastWeightedArray;
 	import org.flintparticles.threeD.geom.Matrix3D;
-	import org.flintparticles.threeD.geom.Vector3D;	
+	import org.flintparticles.threeD.geom.Point3D;
+	import org.flintparticles.threeD.geom.Vector3D;
+	
+	import flash.display.BitmapData;
+	import flash.geom.Point;	
 
 	/**
 	 * The BitmapData zone defines a shaped zone based on a BitmapData object.
@@ -46,7 +47,8 @@ package org.flintparticles.threeD.zones
 	public class BitmapDataZone implements Zone3D 
 	{
 		private var _bitmapData : BitmapData;
-		private var _corner : Vector3D;
+		private var _corner : Point3D;
+		private var _cornerVector : Vector3D;
 		private var _top : Vector3D;
 		private var _scaledWidth : Vector3D;
 		private var _left : Vector3D;
@@ -72,15 +74,18 @@ package org.flintparticles.threeD.zones
 		 * @param left The left side of the zone from the corner. The length of the
 		 * vector indicates how long the side is.
 		 */
-		public function BitmapDataZone( bitmapData : BitmapData, corner:Vector3D, top:Vector3D, left:Vector3D )
+		public function BitmapDataZone( bitmapData : BitmapData = null, corner:Point3D = null, top:Vector3D = null, left:Vector3D = null )
 		{
 			_bitmapData = bitmapData;
-			_corner = corner.clone();
-			_corner.w = 1;
-			_top = top.clone();
-			_left = left.clone();
-			_dirty = true;
-			invalidate();
+			_corner = corner ? corner.clone() : new Point3D( 0, 0, 0 );
+			_cornerVector = _corner.toVector3D();
+			_top = top ? top.clone() : new Vector3D( 1, 0, 0 );
+			_left = left ? left.clone() : new Vector3D( 0, -1, 0 );
+			if( _bitmapData )
+			{
+				_dirty = true;
+				invalidate();
+			}
 		}
 		
 		/**
@@ -99,15 +104,15 @@ package org.flintparticles.threeD.zones
 		/**
 		 * The position for the top left corner of the bitmap data for the zone.
 		 */
-		public function get corner() : Vector3D
+		public function get corner() : Point3D
 		{
 			return _corner.clone();
 		}
 
-		public function set corner( value : Vector3D ) : void
+		public function set corner( value : Point3D ) : void
 		{
 			_corner = value.clone();
-			_corner.w = 1;
+			_cornerVector = value.toVector3D();
 		}
 
 		/**
@@ -168,11 +173,11 @@ package org.flintparticles.threeD.zones
 		private function init():void
 		{
 			_normal = _top.crossProduct( _left );
-			_distToOrigin = _normal.dotProduct( _corner );
+			_distToOrigin = _normal.dotProduct( _cornerVector );
 			_scaledWidth = _top.multiply( 1 / _bitmapData.width );
 			_scaledHeight = _left.multiply( 1 / _bitmapData.height );
 			_basis = Matrix3D.newBasisTransform( _scaledWidth, _scaledHeight, _top.crossProduct( _left ).normalize() );
-			_basis.prependTranslation( -_corner.x, -_corner.y, -_corner.z );
+			_basis.prependTranslate( -_corner.x, -_corner.y, -_corner.z );
 			_dirty = false;
 		}
 
@@ -185,20 +190,19 @@ package org.flintparticles.threeD.zones
 		 * @param y The y coordinate of the location to test for.
 		 * @return true if point is inside the zone, false if it is outside.
 		 */
-		public function contains( p:Vector3D ):Boolean
+		public function contains( p:Point3D ):Boolean
 		{
 			if( _dirty )
 			{
 				init();
 			}
-			var dist:Number = _normal.dotProduct( p );
+			var dist:Number = _normal.dotProduct( p.toVector3D() );
 			if( Math.abs( dist - _distToOrigin ) > 0.1 ) // test for close, not exact
 			{
 				return false;
 			}
-			var q:Vector3D = p.clone();
-			q.w = 1;
-			_basis.transformVectorSelf( q );
+			var q:Point3D = p.clone();
+			_basis.transformSelf( q );
 			
 			var pixel : uint = _bitmapData.getPixel32( Math.round( q.x ), Math.round( _bitmapData.height-q.y ) );
 			return ( pixel >> 24 & 0xFF ) != 0;
@@ -211,14 +215,14 @@ package org.flintparticles.threeD.zones
 		 * 
 		 * @return a random point inside the zone.
 		 */
-		public function getLocation():Vector3D
+		public function getLocation():Point3D
 		{
 			if( _dirty )
 			{
 				init();
 			}
 			var point:Point =  _validPoints.getRandomValue().clone();
-			return _scaledWidth.multiply( point.x ).incrementBy( _scaledHeight.multiply( point.y ) ).incrementBy( _corner );
+			return _corner.add( _scaledWidth.multiply( point.x ).incrementBy( _scaledHeight.multiply( point.y ) ) );
 		}
 		
 		/**

@@ -2,8 +2,8 @@
  * FLINT PARTICLE SYSTEM
  * .....................
  * 
- * Author: Richard Lord (Big Room)
- * Copyright (c) Big Room Ventures Ltd. 2008
+ * Author: Richard Lord
+ * Copyright (c) Richard Lord 2008-2009
  * http://flintparticles.org
  * 
  * 
@@ -42,8 +42,8 @@ package org.flintparticles.threeD.initializers
 	 * "forward" direction for the particle.
 	 * 
 	 * <p>The face axis is used when rotating the particle to the direction of
-	 * motion and when using a display object to represent the paticle - the display
-	 * object is rotated so that its x axis points in teh direction of the facing axis
+	 * motion and when using a display object to represent the particle - the display
+	 * object is rotated so that its x axis points in the direction of the facing axis
 	 * of the particle.</p>
 	 */
 
@@ -60,9 +60,9 @@ package org.flintparticles.threeD.initializers
 		 * 
  		 * @see org.flintparticles.common.emitters.Emitter#addInitializer()
 		 */
-		public function FaceAxis( axis : Vector3D )
+		public function FaceAxis( axis : Vector3D = null )
 		{
-			_axis = axis.unit();
+			this.axis = axis ? axis : Vector3D.AXISX;
 		}
 		
 		/**
@@ -74,7 +74,7 @@ package org.flintparticles.threeD.initializers
 		}
 		public function set axis( value:Vector3D ):void
 		{
-			_axis = value;
+			_axis = value.unit();
 		}
 		
 		/**

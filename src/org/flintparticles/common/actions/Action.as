@@ -2,8 +2,8 @@
  * FLINT PARTICLE SYSTEM
  * .....................
  * 
- * Author: Richard Lord (Big Room)
- * Copyright (c) Big Room Ventures Ltd. 2008
+ * Author: Richard Lord
+ * Copyright (c) Richard Lord 2008-2009
  * http://flintparticles.org
  * 
  * 
@@ -30,6 +30,7 @@
 
 package org.flintparticles.common.actions
 {
+	import org.flintparticles.common.behaviours.Behaviour;
 	import org.flintparticles.common.emitters.Emitter;
 	import org.flintparticles.common.particles.Particle;	
 
@@ -53,59 +54,8 @@ package org.flintparticles.common.actions
 	 * @see org.flintparticles.common.emitters.Emitter#addAction()
 	 * @see org.flintparticles.common.emitters.Emitter#removeAction()
 	 */
-	public interface Action
+	public interface Action extends Behaviour
 	{
-		/**
-		 * The getDefaultPriority method is used to order the execution of actions.
-		 * It should return a number indicating the priority for the execution of
-		 * the action. Actions with a higher priority are run before actions with
-		 * a lower priority.
-		 * 
-		 * <p>The actions within the Flint library use 0 as the default priority. Some
-		 * actions that need to be called early have priorities of 10 or 20. Actions
-		 * that need to be called late have priorities of -10 or -20.</p>
-		 * 
-		 * <p>For example, the move action has a priority of -20 because the movement
-		 * should be performed last, after other actions have made any changes
-		 * to the particle's velocity.</p>
-		 * 
-		 * <p>The default priority can be overridden when adding an action to
-		 * an emitter by setting a new priority in the second parameter of the
-		 * addAction method of the emitter.</p>
-		 * 
-		 * <p>The method is called internally by the emitter and need not be called 
-		 * directly by the user.</p>
-	 	 * 
-		 * @see org.flintparticles.common.emitters.Emitter#addAction()
-		 */
-		function getDefaultPriority():Number;
-		
-		/**
-		 * The addedToEmitter method is called by the emitter when the Action is 
-		 * added to it. It is an opportunity for an action to do any initializing
-		 * that is relative to the emitter. Only a few actions make use of this
-		 * method. It is called within the emitter's addAction method and need not 
-		 * be called by the user.
-		 * 
-		 * @param emitter The Emitter that the Action was added to.
-		 * 
-		 * @see org.flintparticles.common.emitters.Emitter#addAction()
-		 */
-		function addedToEmitter( emitter:Emitter ):void;
-		
-		/**
-		 * The removedFromEmitter method is called by the emitter when the Action 
-		 * is removed from it. It is an opportunity for an action to do any
-		 * finalizing that is relative to the emitter. Only a few actions make 
-		 * use of this method. It is called within the  emitter's removeAction 
-		 * method and need not be called by the user.
-		 * 
-		 * @param emitter The Emitter that the Action was removed from.
-		 * 
-		 * @see org.flintparticles.common.emitters.Emitter#removeAction()
-		 */
-		function removedFromEmitter( emitter:Emitter ):void;
-		
 		/**
 		 * The update method is used by the emitter to apply the action
 		 * to every particle. It is the key feature of the actions and is

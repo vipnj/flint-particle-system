@@ -1,9 +1,9 @@
-﻿/*
+/*
  * FLINT PARTICLE SYSTEM
  * .....................
  * 
- * Author: Richard Lord (Big Room)
- * Copyright (c) Big Room Ventures Ltd. 2008
+ * Author: Richard Lord
+ * Copyright (c) Richard Lord 2008-2009
  * http://flintparticles.org
  * 
  * 
@@ -30,11 +30,11 @@
 
 package org.flintparticles.twoD.renderers
 {
-	import flash.display.DisplayObject;
-	
 	import org.flintparticles.common.particles.Particle;
 	import org.flintparticles.common.renderers.SpriteRendererBase;
-	import org.flintparticles.twoD.particles.Particle2D;	
+	import org.flintparticles.twoD.particles.Particle2D;
+	
+	import flash.display.DisplayObject;	
 
 	/**
 	 * The DisplayObjectRenderer adds particles to its display list 
@@ -52,8 +52,8 @@ package org.flintparticles.twoD.renderers
 	 * or its children set the mouseEnabled or mouseChildren properties to true.</p>
 	 * 
 	 * <p>Because the DisplayObject3DRenderer directly uses the particle's image,
-	 * it is not suitable in situations where the same particle will be displayed 
-	 * by two different renderers.</p> 
+	 * it is not suitable in situations where the same particle will be simultaneously
+	 * displayed by two different renderers.</p> 
 	 */
 	public class DisplayObjectRenderer extends SpriteRendererBase
 	{

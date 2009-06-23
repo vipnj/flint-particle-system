@@ -2,8 +2,8 @@
  * FLINT PARTICLE SYSTEM
  * .....................
  * 
- * Author: Richard Lord (Big Room)
- * Copyright (c) Big Room Ventures Ltd. 2008
+ * Author: Richard Lord
+ * Copyright (c) Richard Lord 2008-2009
  * http://flintparticles.org
  * 
  * 
@@ -30,11 +30,11 @@
 
 package org.flintparticles.common.actions 
 {
-	import flash.display.Stage;
-	import flash.events.KeyboardEvent;
-	
 	import org.flintparticles.common.emitters.Emitter;
-	import org.flintparticles.common.particles.Particle;			
+	import org.flintparticles.common.particles.Particle;
+	
+	import flash.display.Stage;
+	import flash.events.KeyboardEvent;	
 
 	/**
 	 * The KeyDownAction Action uses another action. It applies the other action
@@ -48,7 +48,8 @@ package org.flintparticles.common.actions
 		private var _action:Action;
 		private var _keyCode:uint;
 		private var _isDown:Boolean;
-		
+		private var _stage:Stage;
+
 		/**
 		 * The constructor creates a KeyDownAction action for use by 
 		 * an emitter. To add a KeyDownAction to all particles created by an emitter, use the
@@ -60,13 +61,22 @@ package org.flintparticles.common.actions
 		 * @param keyCode The key code of the key that controls the action.
 		 * @param stage A reference to the stage.
 		 */
-		public function KeyDownAction( action:Action, keyCode:uint, stage:Stage )
+		public function KeyDownAction( action:Action= null, keyCode:uint = 0, stage:Stage = null )
 		{
 			_action = action;
 			_keyCode = keyCode;
 			_isDown = false;
-			stage.addEventListener( KeyboardEvent.KEY_DOWN, keyDownListener, false, 0, true );
-			stage.addEventListener( KeyboardEvent.KEY_UP, keyUpListener, false, 0, true );
+			_stage = stage;
+			createListeners();
+		}
+		
+		private function createListeners():void
+		{
+			if( _stage )
+			{
+				_stage.addEventListener( KeyboardEvent.KEY_DOWN, keyDownListener, false, 0, true );
+				_stage.addEventListener( KeyboardEvent.KEY_UP, keyUpListener, false, 0, true );
+			}
 		}
 		
 		private function keyDownListener( ev:KeyboardEvent ):void
@@ -84,6 +94,19 @@ package org.flintparticles.common.actions
 			}
 		}
 
+		/**
+		 * A reference to the stage
+		 */
+		public function get stage():Stage
+		{
+			return _stage;
+		}
+		public function set stage( value:Stage ):void
+		{
+			_stage = value;
+			createListeners();
+		}
+		
 		/**
 		 * The action to apply when the key is down.
 		 */
@@ -113,9 +136,13 @@ package org.flintparticles.common.actions
 		 * 
 		 * @see org.flintparticles.common.actions.Action#getDefaultPriority()
 		 */
-		override public function getDefaultPriority():Number
+		override public function get priority():int
 		{
-			return _action.getDefaultPriority();
+			return _action.priority;
+		}
+		override public function set priority( value:int ):void
+		{
+			_action.priority = value;
 		}
 		
 		/**

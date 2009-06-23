@@ -2,8 +2,8 @@
  * FLINT PARTICLE SYSTEM
  * .....................
  * 
- * Author: Richard Lord (Big Room)
- * Copyright (c) Big Room Ventures Ltd. 2008
+ * Author: Richard Lord
+ * Copyright (c) Richard Lord 2008-2009
  * http://flintparticles.org
  * 
  * 
@@ -30,7 +30,7 @@
 
 package org.flintparticles.twoD.zones 
 {
-	import flash.geom.Point;
+	import flash.geom.Point;	
 
 	/**
 	 * The LineZone zone defines a zone that contains all the points on a line.
@@ -38,49 +38,119 @@ package org.flintparticles.twoD.zones
 
 	public class LineZone implements Zone2D 
 	{
-		private var _point1:Point;
-		private var _point2:Point;
+		private var _start:Point;
+		private var _end:Point;
 		private var _length:Point;
 		
 		/**
 		 * The constructor creates a LineZone zone.
 		 * 
-		 * @param point1 The point at one end of the line.
-		 * @param point2 The point at the other end of the line.
+		 * @param start The point at one end of the line.
+		 * @param end The point at the other end of the line.
 		 */
-		public function LineZone( point1:Point, point2:Point )
+		public function LineZone( start:Point = null, end:Point = null )
 		{
-			_point1 = point1;
-			_point2 = point2;
-			_length = point2.subtract( point1 );
+			if( start == null )
+			{
+				_start = new Point( 0, 0 );
+			}
+			else
+			{
+				_start = start;
+			}
+			if( end == null )
+			{
+				_end = new Point( 0, 0 );
+			}
+			else
+			{
+				_end = end;
+			}
+			_length = _end.subtract( _start );
 		}
 		
 		/**
 		 * The point at one end of the line.
 		 */
-		public function get point1() : Point
+		public function get start() : Point
 		{
-			return _point1;
+			return _start;
 		}
 
-		public function set point1( value : Point ) : void
+		public function set start( value : Point ) : void
 		{
-			_point1 = value;
-			_length = point2.subtract( point1 );
+			_start = value;
+			_length = _end.subtract( _start );
 		}
 
 		/**
 		 * The point at the other end of the line.
 		 */
-		public function get point2() : Point
+		public function get end() : Point
 		{
-			return _point2;
+			return _end;
 		}
 
-		public function set point2( value : Point ) : void
+		public function set end( value : Point ) : void
 		{
-			_point2 = value;
-			_length = point2.subtract( point1 );
+			_end = value;
+			_length = _end.subtract( _start );
+		}
+
+		/**
+		 * The x coordinate of the point at the start of the line.
+		 */
+		public function get startX() : Number
+		{
+			return _start.x;
+		}
+
+		public function set startX( value : Number ) : void
+		{
+			_start.x = value;
+			_length = _end.subtract( _start );
+		}
+
+		/**
+		 * The y coordinate of the point at the start of the line.
+		 */
+		public function get startY() : Number
+		{
+			return _start.y;
+		}
+
+		public function set startY( value : Number ) : void
+		{
+			_start.y = value;
+			_length = _end.subtract( _start );
+		}
+
+		/**
+		 * The x coordinate of the point at the end of the line.
+		 */
+		public function get endX() : Number
+		{
+			return _end.x;
+		}
+
+		public function set endX( value : Number ) : void
+		{
+			_end.x = value;
+			_length = _end.subtract( _start );
+		}
+
+		/**
+		 * The y coordinate of the point at the end of the line.
+		 */
+		public function get endY() : Number
+		{
+			return _end.y;
+		}
+
+		public function set endY( value : Number ) : void
+		{
+			_end.y = value;
+			_length = _end.subtract( _start );
 		}
 
 		/**
@@ -95,12 +165,12 @@ package org.flintparticles.twoD.zones
 		public function contains( x:Number, y:Number ):Boolean
 		{
 			// not on line if dot product with perpendicular is not zero
-			if ( ( x - _point1.x ) * _length.y - ( y - _point1.y ) * _length.x != 0 )
+			if ( ( x - _start.x ) * _length.y - ( y - _start.y ) * _length.x != 0 )
 			{
 				return false;
 			}
 			// is it between the points, dot product of the vectors towards each point is negative
-			return ( x - _point1.x ) * ( x - _point2.x ) + ( y - _point1.y ) * ( y - _point2.y ) <= 0;
+			return ( x - _start.x ) * ( x - _end.x ) + ( y - _start.y ) * ( y - _end.y ) <= 0;
 		}
 		
 		/**
@@ -112,7 +182,7 @@ package org.flintparticles.twoD.zones
 		 */
 		public function getLocation():Point
 		{
-			var ret:Point = _point1.clone();
+			var ret:Point = _start.clone();
 			var scale:Number = Math.random();
 			ret.x += _length.x * scale;
 			ret.y += _length.y * scale;

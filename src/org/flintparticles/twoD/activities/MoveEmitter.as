@@ -2,8 +2,8 @@
  * FLINT PARTICLE SYSTEM
  * .....................
  * 
- * Author: Richard Lord (Big Room)
- * Copyright (c) Big Room Ventures Ltd. 2008
+ * Author: Richard Lord
+ * Copyright (c) Richard Lord 2008-2009
  * http://flintparticles.org
  * 
  * 
@@ -54,10 +54,10 @@ package org.flintparticles.twoD.activities
 		 * @param y The y coordinate of the velocity to move the emitter, 
 		 * in pixels per second.
 		 */
-		public function MoveEmitter( x:Number, y:Number )
+		public function MoveEmitter( x:Number = 0, y:Number = 0 )
 		{
-			_velX = x;
-			_velY = y;
+			this.x = x;
+			this.y = y;
 		}
 		
 		/**

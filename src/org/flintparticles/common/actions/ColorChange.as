@@ -2,8 +2,8 @@
  * FLINT PARTICLE SYSTEM
  * .....................
  * 
- * Author: Richard Lord (Big Room)
- * Copyright (c) Big Room Ventures Ltd. 2008
+ * Author: Richard Lord
+ * Copyright (c) Richard Lord 2008-2009
  * http://flintparticles.org
  * 
  * 
@@ -64,7 +64,7 @@ package org.flintparticles.common.actions
 		 * @param endColor The 32bit (ARGB) color of the particle when its 
 		 * energy is 0 - usually at the end of its life.
 		 */
-		public function ColorChange( startColor:uint, endColor:uint )
+		public function ColorChange( startColor:uint = 0xFFFFFF, endColor:uint = 0xFFFFFF )
 		{
 			_startColor = startColor;
 			_endColor = endColor;

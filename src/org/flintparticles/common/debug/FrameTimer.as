@@ -2,8 +2,8 @@
  * FLINT PARTICLE SYSTEM
  * .....................
  * 
- * Author: Richard Lord (Big Room)
- * Copyright (c) Big Room Ventures Ltd. 2008
+ * Author: Richard Lord
+ * Copyright (c) Richard Lord 2008-2009
  * http://flintparticles.org
  * 
  * 
@@ -30,10 +30,10 @@
 
 package org.flintparticles.common.debug 
 {
-	import flash.text.TextField;
 	import flash.events.Event;
-	import flash.utils.getTimer;
-	
+	import flash.text.TextField;
+	import flash.utils.getTimer;	
+
 	/**
 	 * Displays the current framerate. The framerate displayed is an average of 
 	 * the last ten frames. Simply create an instance of this class and place it 

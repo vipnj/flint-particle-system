@@ -2,8 +2,8 @@
  * FLINT PARTICLE SYSTEM
  * .....................
  * 
- * Author: Richard Lord (Big Room)
- * Copyright (c) Big Room Ventures Ltd. 2008
+ * Author: Richard Lord
+ * Copyright (c) Richard Lord 2008-2009
  * http://flintparticles.org
  * 
  * 
@@ -56,10 +56,10 @@ package org.flintparticles.twoD.actions
 		 * velocity. Larger numbers cause it to approach the target angular velocity 
 		 * more quickly.
 		 */
-		public function TargetRotateVelocity( targetVelocity:Number, rate:Number = 0.1 )
+		public function TargetRotateVelocity( targetVelocity:Number = 0, rate:Number = 0.1 )
 		{
-			_vel = targetVelocity;
-			_rate = rate;
+			this.targetVelocity = targetVelocity;
+			this.rate = rate;
 		}
 		
 		/**

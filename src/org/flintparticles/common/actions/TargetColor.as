@@ -2,8 +2,8 @@
  * FLINT PARTICLE SYSTEM
  * .....................
  * 
- * Author: Richard Lord (Big Room)
- * Copyright (c) Big Room Ventures Ltd. 2008
+ * Author: Richard Lord
+ * Copyright (c) Richard Lord 2008-2009
  * http://flintparticles.org
  * 
  * 
@@ -31,7 +31,7 @@
 package org.flintparticles.common.actions 
 {
 	import org.flintparticles.common.emitters.Emitter;
-	import org.flintparticles.common.particles.Particle;
+	import org.flintparticles.common.particles.Particle;	
 
 	/**
 	 * The TargetColor action adjusts the color of the particle towards a 
@@ -59,7 +59,7 @@ package org.flintparticles.common.actions
 		 * @param rate Adjusts how quickly the particle reaches the target color.
 		 * Larger numbers cause it to approach the target color more quickly.
 		 */
-		public function TargetColor( targetColor:uint, rate:Number = 0.1 )
+		public function TargetColor( targetColor:uint= 0xFFFFFF, rate:Number = 0.1 )
 		{
 			_red = ( targetColor >>> 16 ) & 255;
 			_green = ( targetColor >>> 8 ) & 255;

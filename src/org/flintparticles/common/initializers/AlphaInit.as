@@ -2,8 +2,8 @@
  * FLINT PARTICLE SYSTEM
  * .....................
  * 
- * Author: Richard Lord (Big Room)
- * Copyright (c) Big Room Ventures Ltd. 2008
+ * Author: Richard Lord
+ * Copyright (c) Richard Lord 2008-2009
  * http://flintparticles.org
  * 
  * 
@@ -30,8 +30,8 @@
 
 package org.flintparticles.common.initializers 
 {
-	import org.flintparticles.common.particles.Particle;
-	import org.flintparticles.common.emitters.Emitter;	
+	import org.flintparticles.common.emitters.Emitter;
+	import org.flintparticles.common.particles.Particle;	
 
 	/**
 	 * The AlphaInit Initializer sets the alpha transparency of the particle.
@@ -52,6 +52,9 @@ package org.flintparticles.common.initializers
 		 * values set. If no maximum value is set, the minimum value
 		 * is used with no variation.</p>
 		 * 
+		 * <p>This initializer has a priority of -10 so that it occurs after 
+		 * the color assignment.</p>
+		 * 
 		 * @param minAlpha the minimum alpha for particles
 		 * initialized by the instance. The value should be between 1 and 0.
 		 * @param maxAlpha the maximum alpha for particles
@@ -59,8 +62,9 @@ package org.flintparticles.common.initializers
 		 * 
 		 * @see org.flintparticles.common.emitters.Emitter#addInitializer().
 		 */
-		public function AlphaInit( minAlpha:Number, maxAlpha:Number = NaN )
+		public function AlphaInit( minAlpha:Number= 1, maxAlpha:Number = NaN )
 		{
+			priority = -10;
 			_min = minAlpha;
 			if( isNaN( maxAlpha ) )
 			{
@@ -110,17 +114,6 @@ package org.flintparticles.common.initializers
 		public function set alpha( value:Number ):void
 		{
 			_max = _min = value;
-		}
-		
-		/**
-		 * @inheritDoc
-		 * 
-		 * returns -10 to ensure it occurs after the color assignment 
-		 * classes like ColorInit.
-		 */
-		override public function getDefaultPriority():Number
-		{
-			return -10;
 		}
 		
 		/**

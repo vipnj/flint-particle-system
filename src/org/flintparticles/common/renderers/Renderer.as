@@ -2,8 +2,8 @@
  * FLINT PARTICLE SYSTEM
  * .....................
  * 
- * Author: Richard Lord (Big Room)
- * Copyright (c) Big Room Ventures Ltd. 2008
+ * Author: Richard Lord
+ * Copyright (c) Richard Lord 2008-2009
  * http://flintparticles.org
  * 
  * 
@@ -30,7 +30,7 @@
 
 package org.flintparticles.common.renderers 
 {
-	import org.flintparticles.common.emitters.Emitter;				
+	import org.flintparticles.common.emitters.Emitter;					
 
 	/**
 	 * The Renderer interface must be implemented by all renderers. A renderer 

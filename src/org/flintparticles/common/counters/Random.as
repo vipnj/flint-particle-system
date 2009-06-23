@@ -1,9 +1,9 @@
-﻿/*
+/*
  * FLINT PARTICLE SYSTEM
  * .....................
  * 
- * Author: Richard Lord (Big Room)
- * Copyright (c) Big Room Ventures Ltd. 2008
+ * Author: Richard Lord
+ * Copyright (c) Richard Lord 2008-2009
  * http://flintparticles.org
  * 
  * 
@@ -30,12 +30,11 @@
 
 package org.flintparticles.common.counters
 {
-	import org.flintparticles.common.emitters.Emitter;	
-	
+	import org.flintparticles.common.emitters.Emitter;		
+
 	/**
-	 * The Steady counter causes the emitter to emit particles continuously
-	 * at a steady rate. It can be used to simulate any continuous particle
-	 * stream.
+	 * The Random counter causes the emitter to emit particles continuously
+	 * at a variable random rate between two limits.
 	 */
 	public class Random implements Counter
 	{
@@ -45,15 +44,15 @@ package org.flintparticles.common.counters
 		private var _stop:Boolean;
 		
 		/**
-		 * The constructor creates a Steady counter for use by an emitter. To
-		 * add a Steady counter to an emitter use the emitter's counter property.
+		 * The constructor creates a Random counter for use by an emitter. To
+		 * add a Random counter to an emitter use the emitter's counter property.
 		 * 
 		 * @param minRate The minimum number of particles to emit per second.
 		 * @param maxRate The maximum number of particles to emit per second.
 		 * 
 		 * @see org.flintparticles.common.emitter.Emitter.counter
 		 */
-		public function Random( minRate:Number, maxRate:Number )
+		public function Random( minRate:Number = 0, maxRate:Number = 0 )
 		{
 			_stop = false;
 			_minRate = minRate;
@@ -89,7 +88,7 @@ package org.flintparticles.common.counters
 		}
 		
 		/**
-		 * The minimum number of particles to emit per second.
+		 * The maximum number of particles to emit per second.
 		 */
 		public function get maxRate():Number
 		{

@@ -1,10 +1,10 @@
-﻿
+
 /*
  * FLINT PARTICLE SYSTEM
  * .....................
  * 
- * Author: Richard Lord (Big Room)
- * Copyright (c) Big Room Ventures Ltd. 2008
+ * Author: Richard Lord
+ * Copyright (c) Richard Lord 2008-2009
  * http://flintparticles.org
  * 
  * 
@@ -32,7 +32,7 @@
 package org.flintparticles.common.counters
 {
 	import org.flintparticles.common.easing.Linear;
-	import org.flintparticles.common.emitters.Emitter;		
+	import org.flintparticles.common.emitters.Emitter;	
 
 	/**
 	 * The TimePeriod counter causes the emitter to emit particles for a period of 
@@ -67,7 +67,7 @@ package org.flintparticles.common.counters
 		 * 
 		 * @see org.flintparticles.common.emitter.Emitter.counter
 		 */
-		public function TimePeriod( numParticles : uint, duration : Number, easing : Function = null )
+		public function TimePeriod( numParticles : uint = 0, duration : Number = 0, easing : Function = null )
 		{
 			_particles = numParticles;
 			_duration = duration;

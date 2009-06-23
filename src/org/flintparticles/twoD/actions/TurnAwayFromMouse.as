@@ -2,8 +2,8 @@
  * FLINT PARTICLE SYSTEM
  * .....................
  * 
- * Author: Richard Lord (Big Room)
- * Copyright (c) Big Room Ventures Ltd. 2008
+ * Author: Richard Lord
+ * Copyright (c) Richard Lord 2008-2009
  * http://flintparticles.org
  * 
  * 
@@ -30,7 +30,7 @@
 
 package org.flintparticles.twoD.actions 
 {
-	import flash.display.DisplayObject;	
+	import flash.display.DisplayObject;		
 
 	/**
 	 * The TurnAwayFromMouse action causes the particle to constantly adjust its 
@@ -50,7 +50,7 @@ package org.flintparticles.twoD.actions
 		 * @param renderer The display object whose coordinate system the mouse position is 
 		 * converted to. This is usually the renderer for the particle system created by the emitter.
 		 */
-		public function TurnAwayFromMouse( power:Number, renderer:DisplayObject )
+		public function TurnAwayFromMouse( power:Number = 0, renderer:DisplayObject = null )
 		{
 			super( -power, renderer );
 		}

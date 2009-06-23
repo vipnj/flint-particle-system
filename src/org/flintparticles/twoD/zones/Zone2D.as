@@ -2,8 +2,8 @@
  * FLINT PARTICLE SYSTEM
  * .....................
  * 
- * Author: Richard Lord (Big Room)
- * Copyright (c) Big Room Ventures Ltd. 2008
+ * Author: Richard Lord
+ * Copyright (c) Richard Lord 2008-2009
  * http://flintparticles.org
  * 
  * 
@@ -30,9 +30,8 @@
 
 package org.flintparticles.twoD.zones
 {
-	import flash.geom.Point;
-	
-	/**
+	import flash.geom.Point;	
+	/**
 	 * The Zones interface must be implemented by all zones.
 	 * 
 	 * <p>A zone is a class that defined a region in 2d space. The two required methods 

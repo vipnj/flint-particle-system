@@ -1,9 +1,9 @@
-﻿/*
+/*
  * FLINT PARTICLE SYSTEM
  * .....................
  * 
- * Author: Richard Lord (Big Room)
- * Copyright (c) Big Room Ventures Ltd. 2008
+ * Author: Richard Lord
+ * Copyright (c) Richard Lord 2008-2009
  * http://flintparticles.org
  * 
  * 
@@ -30,12 +30,10 @@
 
 package org.flintparticles.threeD.renderers
 {
-	import flash.display.Bitmap;
-	import flash.display.BitmapData;
-	import flash.geom.Rectangle;
+	import org.flintparticles.threeD.geom.Point3D;
+	import org.flintparticles.threeD.particles.Particle3D;
 	
-	import org.flintparticles.threeD.geom.Vector3D;
-	import org.flintparticles.threeD.particles.Particle3D;	
+	import flash.geom.Rectangle;	
 
 	/**
 	 * The PixelRenderer is a native Flint 3D renderer that draws particles
@@ -88,13 +86,13 @@ package org.flintparticles.threeD.renderers
 		 */
 		override protected function drawParticle( particle:Particle3D ):void
 		{
-			var pos:Vector3D = particle.projectedPosition;
+			var pos:Point3D = particle.projectedPosition;
 			if( pos.z < _camera.nearPlaneDistance || pos.z > _camera.farPlaneDistance )
 			{
 				return;
 			}
 			pos.project();
-			_bitmap.bitmapData.setPixel32( Math.round( pos.x - _canvas.x ), Math.round( -pos.y - _canvas.y ), particle.color );
+			_bitmap.bitmapData.setPixel32( Math.round( pos.x + _halfWidth ), Math.round( -pos.y + _halfHeight ), particle.color );
 		}
 	}
 }

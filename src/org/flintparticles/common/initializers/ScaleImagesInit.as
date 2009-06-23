@@ -2,8 +2,8 @@
  * FLINT PARTICLE SYSTEM
  * .....................
  * 
- * Author: Richard Lord (Big Room)
- * Copyright (c) Big Room Ventures Ltd. 2008
+ * Author: Richard Lord
+ * Copyright (c) Richard Lord 2008-2009
  * http://flintparticles.org
  * 
  * 
@@ -49,22 +49,44 @@ package org.flintparticles.common.initializers
 	public class ScaleImagesInit extends InitializerBase
 	{
 		private var _scales:WeightedArray;
+		private var _mxmlScales:Array;
+		private var _mxmlWeights:Array;
 		
 		/**
 		 * The constructor creates a ScaleImagesInit initializer for use by 
 		 * an emitter. To add a ScaleImagesInit to all particles created by 
 		 * an emitter, use the emitter's addInitializer method.
 		 * 
-		 * @param colors An array containing the scales to use for 
+		 * @param scales An array containing the scales to use for 
 		 * each particle created by the emitter.
 		 * @param weights The weighting to apply to each scale. If no weighting
 		 * values are passed, the scales are all assigned a weighting of 1.
 		 * 
 		 * @see org.flintparticles.common.emitters.Emitter#addInitializer()
 		 */
-		public function ScaleImagesInit( scales:Array, weights:Array = null )
+		public function ScaleImagesInit( scales:Array = null, weights:Array = null )
 		{
-			_scales = new WeightedArray;
+			_scales = new WeightedArray();
+			if( scales == null )
+			{
+				return;
+			}
+			init( scales, weights );
+		}
+		
+		override public function addedToEmitter( emitter:Emitter ):void
+		{
+			if( _mxmlScales )
+			{
+				init( _mxmlScales, _mxmlWeights );
+				_mxmlScales = null;
+				_mxmlWeights = null;
+			}
+		}
+		
+		private function init( scales:Array = null, weights:Array = null ):void
+		{
+			_scales.clear();
 			var len:int = scales.length;
 			var i:int;
 			if( weights != null && weights.length == len )
@@ -91,6 +113,42 @@ package org.flintparticles.common.initializers
 		public function removeScale( scale:Number ):void
 		{
 			_scales.remove( scale );
+		}
+		
+		public function set scales( value:Array ):void
+		{
+			if( value.length == 1 && value[0] is String )
+			{
+				_mxmlScales = value[0].split( "," );
+			}
+			else
+			{
+				_mxmlScales = value;
+			}
+			checkStartValues();
+		}
+		
+		public function set weights( value:Array ):void
+		{
+			if( value.length == 1 && value[0] is String )
+			{
+				_mxmlWeights = value[0].split( "," );
+			}
+			else
+			{
+				_mxmlWeights = value;
+			}
+			checkStartValues();
+		}
+		
+		private function checkStartValues():void
+		{
+			if( _mxmlScales && _mxmlWeights )
+			{
+				init( _mxmlScales, _mxmlWeights );
+				_mxmlScales = null;
+				_mxmlWeights = null;
+			}
 		}
 		
 		/**

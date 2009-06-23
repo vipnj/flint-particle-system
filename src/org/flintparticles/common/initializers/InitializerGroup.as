@@ -2,8 +2,8 @@
  * FLINT PARTICLE SYSTEM
  * .....................
  * 
- * Author: Richard Lord (Big Room)
- * Copyright (c) Big Room Ventures Ltd. 2008
+ * Author: Richard Lord
+ * Copyright (c) Richard Lord 2008-2009
  * http://flintparticles.org
  * 
  * 
@@ -30,10 +30,12 @@
 
 package org.flintparticles.common.initializers 
 {
+	import org.flintparticles.common.behaviours.BehaviourArrayUtils;
 	import org.flintparticles.common.emitters.Emitter;
-	import org.flintparticles.common.particles.Particle;
-	import org.flintparticles.common.utils.PriorityArray;	
+	import org.flintparticles.common.particles.Particle;	
 
+	[DefaultProperty("initializers")]
+	
 	/**
 	 * The InitializerGroup initializer collects a number of initializers into a single 
 	 * larger initializer that applies all the grouped initializers to a particle. It is
@@ -45,7 +47,7 @@ package org.flintparticles.common.initializers
 
 	public class InitializerGroup extends InitializerBase
 	{
-		private var _initializers:PriorityArray;
+		private var _initializers:Array;
 		private var _emitter:Emitter;
 		
 		/**
@@ -62,30 +64,48 @@ package org.flintparticles.common.initializers
 		 */
 		public function InitializerGroup( ...initializers )
 		{
-			_initializers = new PriorityArray();
+			_initializers = new Array();
 		}
 		
-		public function addInitializer( initializer:Initializer, priority:Number = NaN ):void
+		public function get initializers():Array
 		{
-			if( isNaN( priority ) )
+			return _initializers;
+		}
+		public function set initializers( value:Array ):void
+		{
+			var initializer:Initializer;
+			if( _emitter )
 			{
-				priority = initializer.getDefaultPriority();
+				for each( initializer in _initializers )
+				{
+					initializer.removedFromEmitter( _emitter );
+				}
 			}
-			_initializers.add( initializer, priority );
+			_initializers = value.slice( );
+			BehaviourArrayUtils.sortArray( _initializers );
+			if( _emitter )
+			{
+				for each( initializer in _initializers )
+				{
+					initializer.addedToEmitter( _emitter );
+				}
+			}
+		}
+
+		public function addInitializer( initializer:Initializer ):void
+		{
+			BehaviourArrayUtils.add( _initializers, initializer );
 			if( _emitter )
 			{
 				initializer.addedToEmitter( _emitter );
 			}
 		}
 		
-		public function removeScale( initializer:Initializer ):void
+		public function removeInitializer( initializer:Initializer ):void
 		{
-			if( _initializers.remove( initializer ) )
+			if( BehaviourArrayUtils.remove( _initializers, initializer ) && _emitter )
 			{
-				if( _emitter )
-				{
-					initializer.removedFromEmitter( _emitter );
-				}
+				initializer.removedFromEmitter( _emitter );
 			}
 		}
 		

@@ -2,8 +2,8 @@
  * FLINT PARTICLE SYSTEM
  * .....................
  * 
- * Author: Richard Lord (Big Room)
- * Copyright (c) Big Room Ventures Ltd. 2008
+ * Author: Richard Lord
+ * Copyright (c) Richard Lord 2008-2009
  * http://flintparticles.org
  * 
  * 
@@ -61,11 +61,11 @@ package org.flintparticles.twoD.actions
 		 * particles inside the zone. If true the action is applied only to 
 		 * particles outside the zone.
 		 */
-		public function ZonedAction( action:Action, zone:Zone2D, invertZone:Boolean = false )
+		public function ZonedAction( action:Action = null, zone:Zone2D = null, invertZone:Boolean = false )
 		{
-			_action = action;
-			_zone = zone;
-			_invert = invertZone;
+			this.action = action;
+			this.zone = zone;
+			this.invertZone = invertZone;
 		}
 		
 		/**
@@ -106,13 +106,17 @@ package org.flintparticles.twoD.actions
 		}
 		
 		/**
-		 * Returns the default priority of the action being used.
+		 * Provides acces to the priority of the action being used.
 		 * 
 		 * @see org.flintparticles.common.actions.Action#getDefaultPriority()
 		 */
-		override public function getDefaultPriority():Number
+		override public function get priority():int
 		{
-			return _action.getDefaultPriority();
+			return _action.priority;
+		}
+		override public function set priority( value:int ):void
+		{
+			_action.priority = value;
 		}
 		
 		/**

@@ -2,8 +2,8 @@
  * FLINT PARTICLE SYSTEM
  * .....................
  * 
- * Author: Richard Lord (Big Room)
- * Copyright (c) Big Room Ventures Ltd. 2008
+ * Author: Richard Lord
+ * Copyright (c) Richard Lord 2008-2009
  * http://flintparticles.org
  * 
  * 
@@ -40,6 +40,9 @@ package org.flintparticles.threeD.actions
 	/**
 	 * The MatchVelocity action applies an acceleration to the particle to match
 	 * its velocity to that of its nearest neighbours.
+	 * 
+	 * <p>This action has a priority of 10, so that it executes 
+	 * before other actions.</p>
 	 */
 
 	public class MatchVelocity extends ActionBase
@@ -66,12 +69,13 @@ package org.flintparticles.threeD.actions
 		 * @param acceleration The acceleration force applied to adjust velocity to match that
 		 * of the other particles.
 		 */
-		public function MatchVelocity( maxDistance:Number, acceleration:Number )
+		public function MatchVelocity( maxDistance:Number = 0, acceleration:Number = 0 )
 		{
-			this.maxDistance = maxDistance;
-			this.acceleration = acceleration;
+			priority = 10;
 			d = new Vector3D();
 			vel = new Vector3D();
+			this.maxDistance = maxDistance;
+			this.acceleration = acceleration;
 		}
 		
 		/**
@@ -103,16 +107,6 @@ package org.flintparticles.threeD.actions
 
 		/**
 		 * @inheritDoc
-		 * 
-		 * <p>Returns a value of 10, so that the MutualGravity action executes before other actions.</p>
-		 */
-		override public function getDefaultPriority():Number
-		{
-			return 10;
-		}
-
-		/**
-		 * @inheritDoc
 		 */
 		override public function addedToEmitter( emitter:Emitter ) : void
 		{
@@ -134,7 +128,7 @@ package org.flintparticles.threeD.actions
 			var distanceSq:Number;
 			var count:int = 0;
 			var factor:Number;
-			vel.reset( 0, 0, 0, 0 );
+			vel.reset( 0, 0, 0 );
 			for( i = p.sortID - 1; i >= 0; --i )
 			{
 				other = particles[sortedX[i]];

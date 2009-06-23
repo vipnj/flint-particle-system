@@ -1,9 +1,9 @@
-﻿/*
+/*
  * FLINT PARTICLE SYSTEM
  * .....................
  * 
- * Author: Richard Lord (Big Room)
- * Copyright (c) Big Room Ventures Ltd. 2008
+ * Author: Richard Lord
+ * Copyright (c) Richard Lord 2008-2009
  * http://flintparticles.org
  * 
  * 
@@ -30,7 +30,7 @@
 
 package org.flintparticles.common.counters
 {
-	import org.flintparticles.common.emitters.Emitter;	
+	import org.flintparticles.common.emitters.Emitter;		
 
 	/**
 	 * The Blast counter causes the emitter to create a single burst of
@@ -51,7 +51,7 @@ package org.flintparticles.common.counters
 		 * 
 		 * @see org.flintparticles.common.emitter.Emitter.counter
 		 */
-		public function Blast( startCount:uint )
+		public function Blast( startCount:uint = 0 )
 		{
 			_startCount = startCount;
 		}

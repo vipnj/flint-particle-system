@@ -2,8 +2,8 @@
  * FLINT PARTICLE SYSTEM
  * .....................
  * 
- * Author: Richard Lord (Big Room)
- * Copyright (c) Big Room Ventures Ltd. 2008
+ * Author: Richard Lord
+ * Copyright (c) Richard Lord 2008-2009
  * http://flintparticles.org
  * 
  * 
@@ -30,7 +30,7 @@
 
 package org.flintparticles.twoD.zones 
 {
-	import flash.geom.Point;
+	import flash.geom.Point;	
 
 	/**
 	 * The RectangleZone zone defines a rectangular shaped zone.
@@ -53,7 +53,7 @@ package org.flintparticles.twoD.zones
 		 * @param right The right coordinate of the rectangle defining the region of the zone.
 		 * @param bottom The bottom coordinate of the rectangle defining the region of the zone.
 		 */
-		public function RectangleZone( left:Number, top:Number, right:Number, bottom:Number )
+		public function RectangleZone( left:Number = 0, top:Number = 0, right:Number = 0, bottom:Number = 0 )
 		{
 			_left = left;
 			_top = top;
@@ -74,7 +74,10 @@ package org.flintparticles.twoD.zones
 		public function set left( value : Number ) : void
 		{
 			_left = value;
-			_width = right - left;
+			if( !isNaN( _right ) && !isNaN( _left ) )
+			{
+				_width = right - left;
+			}
 		}
 
 		/**
@@ -88,7 +91,10 @@ package org.flintparticles.twoD.zones
 		public function set right( value : Number ) : void
 		{
 			_right = value;
-			_width = right - left;
+			if( !isNaN( _right ) && !isNaN( _left ) )
+			{
+				_width = right - left;
+			}
 		}
 
 		/**
@@ -102,7 +108,10 @@ package org.flintparticles.twoD.zones
 		public function set top( value : Number ) : void
 		{
 			_top = value;
-			_height = bottom - top;
+			if( !isNaN( _top ) && !isNaN( _bottom ) )
+			{
+				_height = bottom - top;
+			}
 		}
 
 		/**
@@ -116,7 +125,10 @@ package org.flintparticles.twoD.zones
 		public function set bottom( value : Number ) : void
 		{
 			_bottom = value;
-			_height = bottom - top;
+			if( !isNaN( _top ) && !isNaN( _bottom ) )
+			{
+				_height = bottom - top;
+			}
 		}
 
 		/**

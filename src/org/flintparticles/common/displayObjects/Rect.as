@@ -2,8 +2,8 @@
  * FLINT PARTICLE SYSTEM
  * .....................
  * 
- * Author: Richard Lord (Big Room)
- * Copyright (c) Big Room Ventures Ltd. 2008
+ * Author: Richard Lord
+ * Copyright (c) Richard Lord 2008-2009
  * http://flintparticles.org
  * 
  * 
@@ -30,7 +30,7 @@
 
 package org.flintparticles.common.displayObjects 
 {
-	import flash.display.Shape;	
+	import flash.display.Shape;		
 
 	/**
 	 * The Rect class is a DisplayObject that is a rectangle shape. The 
@@ -40,6 +40,10 @@ package org.flintparticles.common.displayObjects
 
 	public class Rect extends Shape 
 	{
+		private var _width:Number;
+		private var _height:Number;
+		private var _color:uint;
+
 		/**
 		 * The constructor creates a Rect with the specified width and height.
 		 * 
@@ -48,12 +52,51 @@ package org.flintparticles.common.displayObjects
 		 * @param color the color of the rectangle
 		 * @param bm The blendMode for the rectangle
 		 */
-		public function Rect( width:Number, height:Number, color:uint = 0xFFFFFF, bm:String = "normal" )
+		public function Rect( width:Number = 1, height:Number = 1, color:uint = 0xFFFFFF, bm:String = "normal" )
 		{
-			graphics.beginFill( color );
-			graphics.drawRect( - width * 0.5, - height * 0.5, width, height );
-			graphics.endFill();
+			_width = width;
+			_height = height;
+			_color = color;
+			draw();
 			blendMode = bm;
+		}
+		
+		private function draw():void
+		{
+			graphics.clear();
+			graphics.beginFill( _color );
+			graphics.drawRect( - _width * 0.5, - _height * 0.5, _width, _height );
+			graphics.endFill();
+		}
+		
+		override public function get width():Number
+		{
+			return _width;
+		}
+		override public function set width( value:Number ):void
+		{
+			_width = value;
+			draw();
+		}
+		
+		override public function get height():Number
+		{
+			return _height;
+		}
+		override public function set height( value:Number ):void
+		{
+			_height = value;
+			draw();
+		}
+
+		public function get color():uint
+		{
+			return _color;
+		}
+		public function set color( value:uint ):void
+		{
+			_color = value;
+			draw();
 		}
 	}
 }

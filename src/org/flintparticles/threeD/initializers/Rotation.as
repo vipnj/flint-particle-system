@@ -2,8 +2,8 @@
  * FLINT PARTICLE SYSTEM
  * .....................
  * 
- * Author: Richard Lord (Big Room)
- * Copyright (c) Big Room Ventures Ltd. 2008
+ * Author: Richard Lord
+ * Copyright (c) Richard Lord 2008-2009
  * http://flintparticles.org
  * 
  * 
@@ -65,12 +65,15 @@ package org.flintparticles.threeD.initializers
 		 * 
  		 * @see org.flintparticles.common.emitters.Emitter#addInitializer()
 		 */
-		public function Rotation( axis : Vector3D, minAngle : Number, maxAngle : Number = NaN )
+		public function Rotation( axis:Vector3D = null, minAngle:Number = 0, maxAngle:Number = NaN )
 		{
-			_axis = axis.unit();
-			_min = minAngle;
-			_max = maxAngle;
 			_rot = new Quaternion();
+			if( axis )
+			{
+				this.axis = axis;
+			}
+			this.minAngle = minAngle;
+			this.maxAngle = maxAngle;
 		}
 		
 		/**
@@ -82,7 +85,7 @@ package org.flintparticles.threeD.initializers
 		}
 		public function set axis( value:Vector3D ):void
 		{
-			_axis = value;
+			_axis = value.unit();
 		}
 		
 		/**

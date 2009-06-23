@@ -2,8 +2,8 @@
  * FLINT PARTICLE SYSTEM
  * .....................
  * 
- * Author: Richard Lord (Big Room)
- * Copyright (c) Big Room Ventures Ltd. 2008
+ * Author: Richard Lord
+ * Copyright (c) Richard Lord 2008-2009
  * http://flintparticles.org
  * 
  * 
@@ -33,6 +33,7 @@ package org.flintparticles.twoD.actions
 	import org.flintparticles.common.actions.ActionBase;
 	import org.flintparticles.common.activities.FrameUpdatable;
 	import org.flintparticles.common.activities.UpdateOnFrame;
+	import org.flintparticles.common.behaviours.Resetable;
 	import org.flintparticles.common.emitters.Emitter;
 	import org.flintparticles.common.particles.Particle;
 	import org.flintparticles.twoD.particles.Particle2D;	
@@ -44,7 +45,7 @@ package org.flintparticles.twoD.actions
 	 * out in a shock wave.
 	 */
 
-	public class Explosion extends ActionBase implements FrameUpdatable
+	public class Explosion extends ActionBase implements Resetable, FrameUpdatable
 	{
 		private static const POWER_FACTOR:Number = 100000;
 		
@@ -80,15 +81,14 @@ package org.flintparticles.twoD.actions
 		 * as if they were this distance away. This stops the explosion effect 
 		 * blowing up as distances get small.
 		 */
-		public function Explosion( power:Number, x:Number, y:Number, expansionRate:Number = 300, depth:Number = 10, epsilon:Number = 1 )
+		public function Explosion( power:Number = 0, x:Number = 0, y:Number = 0, expansionRate:Number = 300, depth:Number = 10, epsilon:Number = 1 )
 		{
-			_power = power * POWER_FACTOR;
-			_x = x;
-			_y = y;
-			_expansionRate = expansionRate;
-			_depth = depth * 0.5;
-			_invDepth = 1 / _depth;
-			_epsilonSq = epsilon * epsilon;
+			this.power = power;
+			this.x = x;
+			this.y = y;
+			this.expansionRate = expansionRate;
+			this.depth = depth;
+			this.epsilon = epsilon;
 		}
 		
 		/**
@@ -200,6 +200,16 @@ package org.flintparticles.twoD.actions
 			{
 				emitter.removeActivity( _updateActivity );
 			}
+		}
+		
+		/**
+		 * Resets the explosion to its initial state, so it can start again.
+		 */
+		public function reset():void
+		{
+			_radius = 0;
+			_oldRadius = 0;
+			_radiusChange = 0;
 		}
 		
 		/**

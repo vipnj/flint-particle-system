@@ -2,8 +2,8 @@
  * FLINT PARTICLE SYSTEM
  * .....................
  * 
- * Author: Richard Lord (Big Room)
- * Copyright (c) Big Room Ventures Ltd. 2008
+ * Author: Richard Lord
+ * Copyright (c) Richard Lord 2008-2009
  * http://flintparticles.org
  * 
  * 
@@ -51,9 +51,9 @@ package org.flintparticles.twoD.activities
 		 * @para angularVelocity The angular velocity for the emitter in 
 		 * radians per second.
 		 */
-		public function RotateEmitter( angularVelocity:Number )
+		public function RotateEmitter( angularVelocity:Number = 0 )
 		{
-			_angularVelocity = angularVelocity;
+			this.angularVelocity = angularVelocity;
 		}
 		
 		/**

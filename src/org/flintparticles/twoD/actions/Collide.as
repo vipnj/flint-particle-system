@@ -2,8 +2,8 @@
  * FLINT PARTICLE SYSTEM
  * .....................
  * 
- * Author: Richard Lord (Big Room)
- * Copyright (c) Big Room Ventures Ltd. 2008
+ * Author: Richard Lord
+ * Copyright (c) Richard Lord 2008-2009
  * http://flintparticles.org
  * 
  * 
@@ -50,6 +50,9 @@ package org.flintparticles.twoD.actions
 	 * This is due to the nature of the alogorithm used, which is designed for 
 	 * speed of execution and sufficient accuracy when the particles are in motion, 
 	 * not for absolute precision.</p>
+	 * 
+	 * <p>This action has a priority of 10, so that it executes 
+	 * before other actions.</p>
 	 */
 
 	public class Collide extends ActionBase implements FrameUpdatable
@@ -71,9 +74,10 @@ package org.flintparticles.twoD.actions
 		 * collision. A value greater than 1 causes the particle to gain energy 
 		 * in the collision.
 		 */
-		public function Collide( bounce:Number= 1 )
+		public function Collide( bounce:Number = 1 )
 		{
-			_bounce = bounce;
+			priority = 10;
+			this.bounce = bounce;
 			_maxDistance = 0;
 		}
 		
@@ -90,17 +94,6 @@ package org.flintparticles.twoD.actions
 		public function set bounce( value:Number ):void
 		{
 			_bounce = value;
-		}
-
-		/**
-		 * Returns a value of 10, so that the collide action executes before
-		 * other actions that move teh particles independently of each other.
-		 * 
-		 * @see org.flintparticles.common.actions.Action#getDefaultPriority()
-		 */
-		override public function getDefaultPriority():Number
-		{
-			return 10;
 		}
 
 		/**

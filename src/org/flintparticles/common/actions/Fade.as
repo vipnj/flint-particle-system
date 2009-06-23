@@ -2,8 +2,8 @@
  * FLINT PARTICLE SYSTEM
  * .....................
  * 
- * Author: Richard Lord (Big Room)
- * Copyright (c) Big Room Ventures Ltd. 2008
+ * Author: Richard Lord
+ * Copyright (c) Richard Lord 2008-2009
  * http://flintparticles.org
  * 
  * 
@@ -31,7 +31,7 @@
 package org.flintparticles.common.actions 
 {
 	import org.flintparticles.common.emitters.Emitter;
-	import org.flintparticles.common.particles.Particle;			
+	import org.flintparticles.common.particles.Particle;	
 
 	/**
 	 * The Fade action adjusts the particle's alpha as it ages.
@@ -56,6 +56,9 @@ package org.flintparticles.common.actions
 		 * an emitter. To add a Fade to all particles created by an emitter, use the
 		 * emitter's addAction method.
 		 * 
+		 * <p>This action has a priority of -5, so that the Fade executes after 
+		 * color changes.</p>
+		 * 
 		 * @see org.flintparticles.common.emitters.Emitter#addAction()
 		 * 
 		 * @param startAlpha The alpha value for the particle when its energy
@@ -67,6 +70,7 @@ package org.flintparticles.common.actions
 		 */
 		public function Fade( startAlpha:Number = 1, endAlpha:Number = 0 )
 		{
+			priority = -5;
 			_diffAlpha = startAlpha - endAlpha;
 			_endAlpha = endAlpha;
 		}
@@ -96,16 +100,6 @@ package org.flintparticles.common.actions
 		{
 			_diffAlpha = _endAlpha + _diffAlpha - value;
 			_endAlpha = value;
-		}
-		
-		/**
-		 * Returns a value of -5, so that the Fade executes after color changes.
-		 * 
-		 * @see org.flintparticles.common.actions.Action#getDefaultPriority()
-		 */
-		override public function getDefaultPriority():Number
-		{
-			return -5;
 		}
 		
 		/**
