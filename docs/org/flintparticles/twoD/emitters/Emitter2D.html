@@ -16,7 +16,7 @@
 			--></script>
 <table style="display:none" id="titleTable" cellspacing="0" cellpadding="0" class="titleTable">
 <tr>
-<td align="left" class="titleTableTitle">Flint Particles documentation v2.0.1</td><td align="right" class="titleTableTopNav"><a onclick="loadClassListFrame('../../../../all-classes.html')" href="../../../../package-summary.html">All&nbsp;Packages</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../../../all-classes.html')" href="../../../../class-summary.html">All&nbsp;Classes</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../../../index-list.html')" href="../../../../all-index-A.html">Index</a>&nbsp;|&nbsp;<a href="../../../../index.html?org/flintparticles/twoD/emitters/Emitter2D.html&amp;org/flintparticles/twoD/emitters/class-list.html" id="framesLink1">Frames</a><a onclick="parent.location=document.location" href="" style="display:none" id="noFramesLink1">No&nbsp;Frames</a></td>
+<td align="left" class="titleTableTitle">Flint Particles documentation v2.1</td><td align="right" class="titleTableTopNav"><a onclick="loadClassListFrame('../../../../all-classes.html')" href="../../../../package-summary.html">All&nbsp;Packages</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../../../all-classes.html')" href="../../../../class-summary.html">All&nbsp;Classes</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../../../index-list.html')" href="../../../../all-index-A.html">Index</a>&nbsp;|&nbsp;<a href="../../../../index.html?org/flintparticles/twoD/emitters/Emitter2D.html&amp;org/flintparticles/twoD/emitters/class-list.html" id="framesLink1">Frames</a><a onclick="parent.location=document.location" href="" style="display:none" id="noFramesLink1">No&nbsp;Frames</a></td>
 </tr>
 <tr class="titleTableRow2">
 <td align="left" id="subTitle" class="titleTableSubTitle">Class&nbsp;Emitter2D</td><td align="right" id="subNav" class="titleTableSubNav"><a href="#propertySummary">Properties</a>&nbsp;| <a href="#methodSummary">Methods</a>&nbsp;| <a href="#eventSummary">Events</a></td>
@@ -39,6 +39,9 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 </tr>
 <tr>
 <td class="classHeaderTableLabel">Inheritance</td><td class="inheritanceList">Emitter2D <img class="inheritArrow" alt="Inheritance" title="Inheritance" src="../../../../images/inherit-arrow.gif"> <a href="../../common/emitters/Emitter.html">Emitter</a> <img class="inheritArrow" alt="Inheritance" title="Inheritance" src="../../../../images/inherit-arrow.gif"> flash.events.EventDispatcher</td>
+</tr>
+<tr>
+<td class="classHeaderTableLabel">Subclasses</td><td><a href="mxml/Emitter2D.html">Emitter2D</a></td>
 </tr>
 </table>
 <p></p>
@@ -89,6 +92,16 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <th>&nbsp;</th><th colspan="2">Property</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
 </tr>
 <tr class="hideInheritedProperty">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol"><a class="signatureLink" href="../../common/emitters/Emitter.html#actions">actions</a> : Array<div class="summaryTableDescription">
+   The array of all actions being used by this emitter.</div>
+</td><td class="summaryTableOwnerCol"><a href="../../common/emitters/Emitter.html">Emitter</a></td>
+</tr>
+<tr class="hideInheritedProperty">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol"><a class="signatureLink" href="../../common/emitters/Emitter.html#activities">activities</a> : Array<div class="summaryTableDescription">
+   The array of all actions being used by this emitter.</div>
+</td><td class="summaryTableOwnerCol"><a href="../../common/emitters/Emitter.html">Emitter</a></td>
+</tr>
+<tr class="hideInheritedProperty">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol"><a class="signatureLink" href="../../common/emitters/Emitter.html#counter">counter</a> : <a href="../../common/counters/Counter.html">Counter</a>
 <div class="summaryTableDescription">
    The Counter for the Emitter.</div>
@@ -103,6 +116,11 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <tr class="hideInheritedProperty">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol"><a class="signatureLink" href="../../common/emitters/Emitter.html#fixedFrameTime">fixedFrameTime</a> : Number<div class="summaryTableDescription">
    Indicates a fixed time (in seconds) to use for every frame.</div>
+</td><td class="summaryTableOwnerCol"><a href="../../common/emitters/Emitter.html">Emitter</a></td>
+</tr>
+<tr class="hideInheritedProperty">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol"><a class="signatureLink" href="../../common/emitters/Emitter.html#initializers">initializers</a> : Array<div class="summaryTableDescription">
+   The array of all initializers being used by this emitter.</div>
 </td><td class="summaryTableOwnerCol"><a href="../../common/emitters/Emitter.html">Emitter</a></td>
 </tr>
 <tr class="hideInheritedProperty">
@@ -167,6 +185,29 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 </tr>
 </table>
 </div>
+<a name="protectedPropertySummary"></a>
+<div class="summarySection">
+<div class="summaryTableTitle">Protected Properties</div>
+<div class="showHideLinks">
+<div class="hideInheritedProtectedProperty" id="hideInheritedProtectedProperty">
+<a onclick="javascript:setInheritedVisible(false,'ProtectedProperty');" href="#protectedPropertySummary" class="showHideLink"><img src="../../../../images/expanded.gif" class="showHideLinkImage"> Hide Inherited Protected Properties</a>
+</div>
+<div class="showInheritedProtectedProperty" id="showInheritedProtectedProperty">
+<a onclick="javascript:setInheritedVisible(true,'ProtectedProperty');" href="#protectedPropertySummary" class="showHideLink"><img src="../../../../images/collapsed.gif" class="showHideLinkImage"> Show Inherited Protected Properties</a>
+</div>
+</div>
+<table id="summaryTableProtectedProperty" class="summaryTable hideInheritedProtectedProperty" cellpadding="3" cellspacing="0">
+<tr>
+<th>&nbsp;</th><th colspan="2">Property</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
+</tr>
+<tr class="hideInheritedProtectedProperty">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol"><a class="signatureLink" href="../../common/emitters/Emitter.html#_dispatchCounterComplete">_dispatchCounterComplete</a> : Boolean = false<div class="summaryTableDescription">
+   Indicates if the emitter should dispatch a counterComplete event at the
+   end of the next update cycle.</div>
+</td><td class="summaryTableOwnerCol"><a href="../../common/emitters/Emitter.html">Emitter</a></td>
+</tr>
+</table>
+</div>
 <a name="methodSummary"></a>
 <div class="summarySection">
 <div class="summaryTableTitle">Public Methods</div>
@@ -193,7 +234,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <tr class="hideInheritedMethod">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
-<a class="signatureLink" href="../../common/emitters/Emitter.html#addAction()">addAction</a>(action:<a href="../../common/actions/Action.html">Action</a>, priority:Number):void</div>
+<a class="signatureLink" href="../../common/emitters/Emitter.html#addAction()">addAction</a>(action:<a href="../../common/actions/Action.html">Action</a>):void</div>
 <div class="summaryTableDescription">
    Adds an Action to the Emitter.</div>
 </td><td class="summaryTableOwnerCol"><a href="../../common/emitters/Emitter.html">Emitter</a></td>
@@ -201,7 +242,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <tr class="hideInheritedMethod">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
-<a class="signatureLink" href="../../common/emitters/Emitter.html#addActivity()">addActivity</a>(activity:<a href="../../common/activities/Activity.html">Activity</a>, priority:Number):void</div>
+<a class="signatureLink" href="../../common/emitters/Emitter.html#addActivity()">addActivity</a>(activity:<a href="../../common/activities/Activity.html">Activity</a>):void</div>
 <div class="summaryTableDescription">
    Adds an Activity to the Emitter.</div>
 </td><td class="summaryTableOwnerCol"><a href="../../common/emitters/Emitter.html">Emitter</a></td>
@@ -217,9 +258,17 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <tr class="hideInheritedMethod">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
-<a class="signatureLink" href="../../common/emitters/Emitter.html#addInitializer()">addInitializer</a>(initializer:<a href="../../common/initializers/Initializer.html">Initializer</a>, priority:Number):void</div>
+<a class="signatureLink" href="../../common/emitters/Emitter.html#addInitializer()">addInitializer</a>(initializer:<a href="../../common/initializers/Initializer.html">Initializer</a>):void</div>
 <div class="summaryTableDescription">
    Adds an Initializer object to the Emitter.</div>
+</td><td class="summaryTableOwnerCol"><a href="../../common/emitters/Emitter.html">Emitter</a></td>
+</tr>
+<tr class="hideInheritedMethod">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="../../common/emitters/Emitter.html#dispatchCounterComplete()">dispatchCounterComplete</a>():void</div>
+<div class="summaryTableDescription">
+   Used by counters to tell the emitter to dispatch a counter complete event.</div>
 </td><td class="summaryTableOwnerCol"><a href="../../common/emitters/Emitter.html">Emitter</a></td>
 </tr>
 <tr class="hideInheritedMethod">
@@ -407,6 +456,15 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <table id="summaryTableEvent" class="summaryTable hideInheritedEvent" cellpadding="3" cellspacing="0">
 <tr>
 <th>&nbsp;</th><th colspan="2">Event</th><th>Summary</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
+</tr>
+<tr class="hideInheritedEvent">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="../../common/emitters/Emitter.html#event:counterComplete">counterComplete</a>
+</div>
+</td><td class="summaryTableDescription summaryTableCol">
+  Dispatched when the counter for the particle system has finished its cycle and so
+  the system will not emit any more particles unless the counter is changed or restarted.</td><td class="summaryTableOwnerCol"><a href="../../common/emitters/Emitter.html">Emitter</a></td>
 </tr>
 <tr class="hideInheritedEvent">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol">
@@ -607,8 +665,8 @@ showHideInherited();
 <hr>
 <br>
 <p></p>
-<center class="copyright">&copy; Big Room Ventures Ltd. 2009</center>
+<center class="copyright">&copy; Richard Lord 2009</center>
 </div>
 </body>
 </html>
-<!--© Big Room Ventures Ltd. 2009-->
+<!--© Richard Lord 2009-->

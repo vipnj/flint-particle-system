@@ -4,7 +4,7 @@
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="../../../../style.css" type="text/css" media="screen">
 <link rel="stylesheet" href="../../../../print.css" type="text/css" media="print">
-<meta content="Accelerate,org.flintparticles.threeD.actions.Accelerate,acceleration,update" name="keywords">
+<meta content="Accelerate,org.flintparticles.threeD.actions.Accelerate,acceleration,x,y,z,update" name="keywords">
 <title>org.flintparticles.threeD.actions.Accelerate</title>
 </head>
 <body>
@@ -16,7 +16,7 @@
 			--></script>
 <table style="display:none" id="titleTable" cellspacing="0" cellpadding="0" class="titleTable">
 <tr>
-<td align="left" class="titleTableTitle">Flint Particles documentation v2.0.1</td><td align="right" class="titleTableTopNav"><a onclick="loadClassListFrame('../../../../all-classes.html')" href="../../../../package-summary.html">All&nbsp;Packages</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../../../all-classes.html')" href="../../../../class-summary.html">All&nbsp;Classes</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../../../index-list.html')" href="../../../../all-index-A.html">Index</a>&nbsp;|&nbsp;<a href="../../../../index.html?org/flintparticles/threeD/actions/Accelerate.html&amp;org/flintparticles/threeD/actions/class-list.html" id="framesLink1">Frames</a><a onclick="parent.location=document.location" href="" style="display:none" id="noFramesLink1">No&nbsp;Frames</a></td>
+<td align="left" class="titleTableTitle">Flint Particles documentation v2.1</td><td align="right" class="titleTableTopNav"><a onclick="loadClassListFrame('../../../../all-classes.html')" href="../../../../package-summary.html">All&nbsp;Packages</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../../../all-classes.html')" href="../../../../class-summary.html">All&nbsp;Classes</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../../../index-list.html')" href="../../../../all-index-A.html">Index</a>&nbsp;|&nbsp;<a href="../../../../index.html?org/flintparticles/threeD/actions/Accelerate.html&amp;org/flintparticles/threeD/actions/class-list.html" id="framesLink1">Frames</a><a onclick="parent.location=document.location" href="" style="display:none" id="noFramesLink1">No&nbsp;Frames</a></td>
 </tr>
 <tr class="titleTableRow2">
 <td align="left" id="subTitle" class="titleTableSubTitle">Class&nbsp;Accelerate</td><td align="right" id="subNav" class="titleTableSubNav"><a href="#propertySummary">Properties</a>&nbsp;| <a href="#methodSummary">Methods</a></td>
@@ -52,6 +52,14 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <a name="propertySummary"></a>
 <div class="summarySection">
 <div class="summaryTableTitle">Public Properties</div>
+<div class="showHideLinks">
+<div class="hideInheritedProperty" id="hideInheritedProperty">
+<a onclick="javascript:setInheritedVisible(false,'Property');" href="#propertySummary" class="showHideLink"><img src="../../../../images/expanded.gif" class="showHideLinkImage"> Hide Inherited Public Properties</a>
+</div>
+<div class="showInheritedProperty" id="showInheritedProperty">
+<a onclick="javascript:setInheritedVisible(true,'Property');" href="#propertySummary" class="showHideLink"><img src="../../../../images/collapsed.gif" class="showHideLinkImage"> Show Inherited Public Properties</a>
+</div>
+</div>
 <table id="summaryTableProperty" class="summaryTable " cellpadding="3" cellspacing="0">
 <tr>
 <th>&nbsp;</th><th colspan="2">Property</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
@@ -59,8 +67,52 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#acceleration">acceleration</a> : <a href="../geom/Vector3D.html">Vector3D</a>
 <div class="summaryTableDescription">
-   The acceleration, in pixels per second per second.</div>
+   The acceleration, in coordinate units per second per second.</div>
 </td><td class="summaryTableOwnerCol">Accelerate</td>
+</tr>
+<tr class="hideInheritedProperty">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol"><a class="signatureLink" href="../../common/actions/ActionBase.html#priority">priority</a> : int<div class="summaryTableDescription">
+   Returns a default priority of 0 for this action.</div>
+</td><td class="summaryTableOwnerCol"><a href="../../common/actions/ActionBase.html">ActionBase</a></td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#x">x</a> : Number<div class="summaryTableDescription">
+   The x coordinate of the acceleration, in
+   coordinate units per second per second.</div>
+</td><td class="summaryTableOwnerCol">Accelerate</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#y">y</a> : Number<div class="summaryTableDescription">
+   The y coordinate of the acceleration, in
+   coordinate units per second per second.</div>
+</td><td class="summaryTableOwnerCol">Accelerate</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#z">z</a> : Number<div class="summaryTableDescription">
+   The z coordinate of the acceleration, in
+   coordinate units per second per second.</div>
+</td><td class="summaryTableOwnerCol">Accelerate</td>
+</tr>
+</table>
+</div>
+<a name="protectedPropertySummary"></a>
+<div class="summarySection">
+<div class="summaryTableTitle">Protected Properties</div>
+<div class="showHideLinks">
+<div class="hideInheritedProtectedProperty" id="hideInheritedProtectedProperty">
+<a onclick="javascript:setInheritedVisible(false,'ProtectedProperty');" href="#protectedPropertySummary" class="showHideLink"><img src="../../../../images/expanded.gif" class="showHideLinkImage"> Hide Inherited Protected Properties</a>
+</div>
+<div class="showInheritedProtectedProperty" id="showInheritedProtectedProperty">
+<a onclick="javascript:setInheritedVisible(true,'ProtectedProperty');" href="#protectedPropertySummary" class="showHideLink"><img src="../../../../images/collapsed.gif" class="showHideLinkImage"> Show Inherited Protected Properties</a>
+</div>
+</div>
+<table id="summaryTableProtectedProperty" class="summaryTable hideInheritedProtectedProperty" cellpadding="3" cellspacing="0">
+<tr>
+<th>&nbsp;</th><th colspan="2">Property</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
+</tr>
+<tr class="hideInheritedProtectedProperty">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol"><a class="signatureLink" href="../../common/actions/ActionBase.html#_priority">_priority</a> : int = 0<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol"><a href="../../common/actions/ActionBase.html">ActionBase</a></td>
 </tr>
 </table>
 </div>
@@ -82,7 +134,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
-<a class="signatureLink" href="#Accelerate()">Accelerate</a>(acceleration:<a href="../geom/Vector3D.html">Vector3D</a>)</div>
+<a class="signatureLink" href="#Accelerate()">Accelerate</a>(acceleration:<a href="../geom/Vector3D.html">Vector3D</a> = null)</div>
 <div class="summaryTableDescription">
    The constructor creates an Acceleration action for use by an emitter.</div>
 </td><td class="summaryTableOwnerCol">Accelerate</td>
@@ -93,14 +145,6 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <a class="signatureLink" href="../../common/actions/ActionBase.html#addedToEmitter()">addedToEmitter</a>(emitter:<a href="../../common/emitters/Emitter.html">Emitter</a>):void</div>
 <div class="summaryTableDescription">
    This method does nothing.</div>
-</td><td class="summaryTableOwnerCol"><a href="../../common/actions/ActionBase.html">ActionBase</a></td>
-</tr>
-<tr class="hideInheritedMethod">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol">
-<div class="summarySignature">
-<a class="signatureLink" href="../../common/actions/ActionBase.html#getDefaultPriority()">getDefaultPriority</a>():Number</div>
-<div class="summaryTableDescription">
-   Returns a default priority of 0 for this action.</div>
 </td><td class="summaryTableOwnerCol"><a href="../../common/actions/ActionBase.html">ActionBase</a></td>
 </tr>
 <tr class="hideInheritedMethod">
@@ -136,12 +180,63 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>acceleration:<a href="../geom/Vector3D.html">Vector3D</a></code>&nbsp;&nbsp;[read-write]<p>
-   The acceleration, in pixels per second per second.
+   The acceleration, in coordinate units per second per second.
    </p><span class="label">Implementation</span>
 <br>
 <code>&nbsp;&nbsp;&nbsp;&nbsp;public function get acceleration():<a href="../geom/Vector3D.html">Vector3D</a></code>
 <br>
 <code>&nbsp;&nbsp;&nbsp;&nbsp;public function set acceleration(value:<a href="../geom/Vector3D.html">Vector3D</a>):void</code>
+<br>
+</div>
+<a name="x"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">x</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>x:Number</code>&nbsp;&nbsp;[read-write]<p>
+   The x coordinate of the acceleration, in
+   coordinate units per second per second.
+   </p><span class="label">Implementation</span>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function get x():Number</code>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function set x(value:Number):void</code>
+<br>
+</div>
+<a name="y"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">y</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>y:Number</code>&nbsp;&nbsp;[read-write]<p>
+   The y coordinate of the acceleration, in
+   coordinate units per second per second.
+   </p><span class="label">Implementation</span>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function get y():Number</code>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function set y(value:Number):void</code>
+<br>
+</div>
+<a name="z"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">z</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>z:Number</code>&nbsp;&nbsp;[read-write]<p>
+   The z coordinate of the acceleration, in
+   coordinate units per second per second.
+   </p><span class="label">Implementation</span>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function get z():Number</code>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function set z(value:Number):void</code>
 <br>
 </div>
 <a name="constructorDetail"></a>
@@ -153,7 +248,7 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>public function Accelerate(acceleration:<a href="../geom/Vector3D.html">Vector3D</a>)</code><p>
+<code>public function Accelerate(acceleration:<a href="../geom/Vector3D.html">Vector3D</a> = null)</code><p>
    The constructor creates an Acceleration action for use by an emitter. 
    To add an Accelerator to all particles created by an emitter, use the
    emitter's addAction method.
@@ -161,7 +256,7 @@ showHideInherited();
    </p><span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
-<td width="20px"></td><td><code><span class="label">acceleration</span>:<a href="../geom/Vector3D.html">Vector3D</a></code> &mdash; The acceleration to apply, in pixels 
+<td width="20px"></td><td><code><span class="label">acceleration</span>:<a href="../geom/Vector3D.html">Vector3D</a></code> (default = <code>null</code>)<code></code> &mdash; The acceleration to apply, in coordinate units 
    per second per second.
    </td>
 </tr>
@@ -222,8 +317,8 @@ showHideInherited();
 <hr>
 <br>
 <p></p>
-<center class="copyright">&copy; Big Room Ventures Ltd. 2009</center>
+<center class="copyright">&copy; Richard Lord 2009</center>
 </div>
 </body>
 </html>
-<!--© Big Room Ventures Ltd. 2009-->
+<!--© Richard Lord 2009-->

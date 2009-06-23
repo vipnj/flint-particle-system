@@ -16,7 +16,7 @@
 			--></script>
 <table style="display:none" id="titleTable" cellspacing="0" cellpadding="0" class="titleTable">
 <tr>
-<td align="left" class="titleTableTitle">Flint Particles documentation v2.0.1</td><td align="right" class="titleTableTopNav"><a onclick="loadClassListFrame('../../../../all-classes.html')" href="../../../../package-summary.html">All&nbsp;Packages</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../../../all-classes.html')" href="../../../../class-summary.html">All&nbsp;Classes</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../../../index-list.html')" href="../../../../all-index-A.html">Index</a>&nbsp;|&nbsp;<a href="../../../../index.html?org/flintparticles/threeD/zones/FrustrumZone.html&amp;org/flintparticles/threeD/zones/class-list.html" id="framesLink1">Frames</a><a onclick="parent.location=document.location" href="" style="display:none" id="noFramesLink1">No&nbsp;Frames</a></td>
+<td align="left" class="titleTableTitle">Flint Particles documentation v2.1</td><td align="right" class="titleTableTopNav"><a onclick="loadClassListFrame('../../../../all-classes.html')" href="../../../../package-summary.html">All&nbsp;Packages</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../../../all-classes.html')" href="../../../../class-summary.html">All&nbsp;Classes</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../../../index-list.html')" href="../../../../all-index-A.html">Index</a>&nbsp;|&nbsp;<a href="../../../../index.html?org/flintparticles/threeD/zones/FrustrumZone.html&amp;org/flintparticles/threeD/zones/class-list.html" id="framesLink1">Frames</a><a onclick="parent.location=document.location" href="" style="display:none" id="noFramesLink1">No&nbsp;Frames</a></td>
 </tr>
 <tr class="titleTableRow2">
 <td align="left" id="subTitle" class="titleTableSubTitle">Class&nbsp;FrustrumZone</td><td align="right" id="subNav" class="titleTableSubNav"><a href="#propertySummary">Properties</a>&nbsp;| <a href="#methodSummary">Methods</a></td>
@@ -85,7 +85,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
-<a class="signatureLink" href="#FrustrumZone()">FrustrumZone</a>(camera:<a href="../renderers/Camera.html">Camera</a>, viewRect:Rectangle)</div>
+<a class="signatureLink" href="#FrustrumZone()">FrustrumZone</a>(camera:<a href="../renderers/Camera.html">Camera</a> = null, viewRect:Rectangle = null)</div>
 <div class="summaryTableDescription">
    The constructor creates a FrustrumZone zone.</div>
 </td><td class="summaryTableOwnerCol">FrustrumZone</td>
@@ -93,7 +93,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
-<a class="signatureLink" href="#contains()">contains</a>(p:<a href="../geom/Vector3D.html">Vector3D</a>):Boolean</div>
+<a class="signatureLink" href="#contains()">contains</a>(p:<a href="../geom/Point3D.html">Point3D</a>):Boolean</div>
 <div class="summaryTableDescription">
    The contains method determines whether a point is inside the box.</div>
 </td><td class="summaryTableOwnerCol">FrustrumZone</td>
@@ -101,7 +101,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
-<a class="signatureLink" href="#getLocation()">getLocation</a>():<a href="../geom/Vector3D.html">Vector3D</a>
+<a class="signatureLink" href="#getLocation()">getLocation</a>():<a href="../geom/Point3D.html">Point3D</a>
 </div>
 <div class="summaryTableDescription">
    The getLocation method returns a random point inside the box.</div>
@@ -172,20 +172,20 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>public function FrustrumZone(camera:<a href="../renderers/Camera.html">Camera</a>, viewRect:Rectangle)</code><p>
+<code>public function FrustrumZone(camera:<a href="../renderers/Camera.html">Camera</a> = null, viewRect:Rectangle = null)</code><p>
    The constructor creates a FrustrumZone zone.
    
    </p><span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
-<td width="20px"></td><td><code><span class="label">camera</span>:<a href="../renderers/Camera.html">Camera</a></code> &mdash; The flint camera whose frustrum should be used.
+<td width="20px"></td><td><code><span class="label">camera</span>:<a href="../renderers/Camera.html">Camera</a></code> (default = <code>null</code>)<code></code> &mdash; The flint camera whose frustrum should be used.
    </td>
 </tr>
 <tr>
 <td class="paramSpacer">&nbsp;</td>
 </tr>
 <tr>
-<td width="20px"></td><td><code><span class="label">viewRect</span>:Rectangle</code> &mdash; The rectangle describing the size and position
+<td width="20px"></td><td><code><span class="label">viewRect</span>:Rectangle</code> (default = <code>null</code>)<code></code> &mdash; The rectangle describing the size and position
    of the viewing window. The camera points at position 0,0 in
    this rectangle, so a normal frustrum would have the form
    new Rectangle( -w/2, -h/2, w, h ). If using a BitmapRenderer,
@@ -205,7 +205,7 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>public function contains(p:<a href="../geom/Vector3D.html">Vector3D</a>):Boolean</code><p>
+<code>public function contains(p:<a href="../geom/Point3D.html">Point3D</a>):Boolean</code><p>
    The contains method determines whether a point is inside the box.
    This method is used by the initializers and actions that
    use the zone. Usually, it need not be called directly by the user.
@@ -213,7 +213,7 @@ showHideInherited();
    </p><span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
-<td width="20px"></td><td><code><span class="label">p</span>:<a href="../geom/Vector3D.html">Vector3D</a></code> &mdash; The x coordinate of the location to test for.
+<td width="20px"></td><td><code><span class="label">p</span>:<a href="../geom/Point3D.html">Point3D</a></code> &mdash; The x coordinate of the location to test for.
    </td>
 </tr>
 </table>
@@ -233,7 +233,7 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>public function getLocation():<a href="../geom/Vector3D.html">Vector3D</a></code><p>
+<code>public function getLocation():<a href="../geom/Point3D.html">Point3D</a></code><p>
    The getLocation method returns a random point inside the box.
    This method is used by the initializers and actions that
    use the zone. Usually, it need not be called directly by the user.
@@ -242,7 +242,7 @@ showHideInherited();
 <span class="label">Returns</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
-<td width="20"></td><td><code><a href="../geom/Vector3D.html">Vector3D</a></code> &mdash; 
+<td width="20"></td><td><code><a href="../geom/Point3D.html">Point3D</a></code> &mdash; 
                         a random point inside the zone.
    
                         
@@ -276,8 +276,8 @@ showHideInherited();
 <hr>
 <br>
 <p></p>
-<center class="copyright">&copy; Big Room Ventures Ltd. 2009</center>
+<center class="copyright">&copy; Richard Lord 2009</center>
 </div>
 </body>
 </html>
-<!--© Big Room Ventures Ltd. 2009-->
+<!--© Richard Lord 2009-->
