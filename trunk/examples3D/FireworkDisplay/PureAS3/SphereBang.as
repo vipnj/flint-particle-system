@@ -3,7 +3,7 @@
  * .....................
  * 
  * Author: Richard Lord
- * Copyright (c) Big Room Ventures Ltd. 2008
+ * Copyright (c) Richard Lord 2008-2009
  * http://flintparticles.org/
  * 
  * Licence Agreement
@@ -36,20 +36,21 @@ package
 	import org.flintparticles.common.initializers.*;
 	import org.flintparticles.threeD.actions.*;
 	import org.flintparticles.threeD.emitters.Emitter3D;
+	import org.flintparticles.threeD.geom.Point3D;
 	import org.flintparticles.threeD.geom.Vector3D;
 	import org.flintparticles.threeD.initializers.*;
 	import org.flintparticles.threeD.zones.*;	
 
 	public class SphereBang extends Emitter3D
 	{
-		public function SphereBang( position:Vector3D )
+		public function SphereBang( position:Point3D )
 		{
 			counter = new Blast( 200 );
 			
 			addInitializer( new SharedImage( new Dot( 1 ) ) );
 			addInitializer( new ColorInit( 0xFFFFFF00, 0xFFFF6600 ) );
 			addInitializer( new Position( new PointZone( position ) ) );
-			addInitializer( new Velocity( new SphereZone( Vector3D.ZERO, 100 ) ) );
+			addInitializer( new Velocity( new SphereZone( Point3D.ZERO, 100 ) ) );
 			addInitializer( new Lifetime( 3 ) );
 			
 			addAction( new Age( Quadratic.easeIn ) );

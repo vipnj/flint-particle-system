@@ -3,7 +3,7 @@
  * .....................
  * 
  * Author: Richard Lord
- * Copyright (c) Big Room Ventures Ltd. 2008
+ * Copyright (c) Richard Lord 2008-2009
  * http://flintparticles.org/
  * 
  * Licence Agreement
@@ -36,6 +36,7 @@ package
 	import org.flintparticles.threeD.actions.*;
 	import org.flintparticles.threeD.away3d.initializers.A3DDisplayObjectClass;
 	import org.flintparticles.threeD.emitters.Emitter3D;
+	import org.flintparticles.threeD.geom.Point3D;
 	import org.flintparticles.threeD.geom.Vector3D;
 	import org.flintparticles.threeD.initializers.*;
 	import org.flintparticles.threeD.zones.*;	
@@ -47,7 +48,7 @@ package
 			counter = new Steady( 9 );
       
 			addInitializer( new Lifetime( 11, 12 ) );
-			addInitializer( new Velocity( new ConeZone( new Vector3D( 0, 0, 0 ), new Vector3D( 0, 1, 0 ), 0.5, 40, 30 ) ) );
+			addInitializer( new Velocity( new ConeZone( new Point3D( 0, 0, 0 ), new Vector3D( 0, 1, 0 ), 0.5, 40, 30 ) ) );
 			addInitializer( new A3DDisplayObjectClass( RadialDot, 6 ) );
       
 			addAction( new Age( ) );

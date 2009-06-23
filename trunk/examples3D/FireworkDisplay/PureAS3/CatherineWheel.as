@@ -3,7 +3,7 @@
  * .....................
  * 
  * Author: Richard Lord
- * Copyright (c) Big Room Ventures Ltd. 2008
+ * Copyright (c) Richard Lord 2008-2009
  * http://flintparticles.org/
  * 
  * Licence Agreement
@@ -36,23 +36,24 @@ package
 	import org.flintparticles.threeD.actions.*;
 	import org.flintparticles.threeD.activities.RotateEmitter;
 	import org.flintparticles.threeD.emitters.Emitter3D;
+	import org.flintparticles.threeD.geom.Point3D;
 	import org.flintparticles.threeD.geom.Vector3D;
 	import org.flintparticles.threeD.initializers.*;
 	import org.flintparticles.threeD.zones.*;	
 
 	public class CatherineWheel extends Emitter3D
 	{
-		public function CatherineWheel( position:Vector3D )
+		public function CatherineWheel( position:Point3D )
 		{
 			counter = new Steady( 80 );
 			
 			this.position = position;
 			
-			addActivity( new RotateEmitter( new Vector3D( 0, 0, 20 ) ) );
+			addActivity( new RotateEmitter( new Vector3D( 0, 0, 1 ), 10 ) );
 			
 			addInitializer( new SharedImage( new Dot( 1 ) ) );
 			addInitializer( new ColorInit( 0xFFFFFF00, 0xFFFF6600 ) );
-			addInitializer( new Velocity( new ConeZone( new Vector3D( 0, 0, 0 ), new Vector3D( 1, 0, 0 ), 0.5, 100, 80 ) ) );
+			addInitializer( new Velocity( new ConeZone( Point3D.ZERO, new Vector3D( 1, 0, 0 ), 0.5, 100, 80 ) ) );
 			addInitializer( new Lifetime( 0.5 ) );
 			
 			addAction( new Move() );
