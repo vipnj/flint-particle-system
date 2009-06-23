@@ -16,7 +16,7 @@
 			--></script>
 <table style="display:none" id="titleTable" cellspacing="0" cellpadding="0" class="titleTable">
 <tr>
-<td align="left" class="titleTableTitle">Flint Particles documentation v2.0.1</td><td align="right" class="titleTableTopNav"><a onclick="loadClassListFrame('../../../../all-classes.html')" href="../../../../package-summary.html">All&nbsp;Packages</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../../../all-classes.html')" href="../../../../class-summary.html">All&nbsp;Classes</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../../../index-list.html')" href="../../../../all-index-A.html">Index</a>&nbsp;|&nbsp;<a href="../../../../index.html?org/flintparticles/twoD/renderers/PixelRenderer.html&amp;org/flintparticles/twoD/renderers/class-list.html" id="framesLink1">Frames</a><a onclick="parent.location=document.location" href="" style="display:none" id="noFramesLink1">No&nbsp;Frames</a></td>
+<td align="left" class="titleTableTitle">Flint Particles documentation v2.1</td><td align="right" class="titleTableTopNav"><a onclick="loadClassListFrame('../../../../all-classes.html')" href="../../../../package-summary.html">All&nbsp;Packages</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../../../all-classes.html')" href="../../../../class-summary.html">All&nbsp;Classes</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../../../index-list.html')" href="../../../../all-index-A.html">Index</a>&nbsp;|&nbsp;<a href="../../../../index.html?org/flintparticles/twoD/renderers/PixelRenderer.html&amp;org/flintparticles/twoD/renderers/class-list.html" id="framesLink1">Frames</a><a onclick="parent.location=document.location" href="" style="display:none" id="noFramesLink1">No&nbsp;Frames</a></td>
 </tr>
 <tr class="titleTableRow2">
 <td align="left" id="subTitle" class="titleTableSubTitle">Class&nbsp;PixelRenderer</td><td align="right" id="subNav" class="titleTableSubNav"><a href="#propertySummary">Properties</a>&nbsp;| <a href="#methodSummary">Methods</a></td>
@@ -57,21 +57,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
   <p>The PixelRenderer has mouse events disabled for itself and any 
   display objects in its display list. To enable mouse events for the renderer
   or its children set the mouseEnabled or mouseChildren properties to true.</p>
-  
-  <p><i>This class has been modified in version 1.0.1 of Flint to fix various
-  limitations in the previous version. Specifically, the canvas for drawing
-  the particles on must now be specified by the developer (it previously 
-  defaulted to the size and position of the stage).</i></p>
-  
-  <p><i>The previous behaviour, while still flawed, has been improved
-  and given its own renderer, the FullStagePixelRenderer. To retain the previous
-  behaviour, please use the FullStagePixelRenderer.</i></p>
-  
   <p></p>
-<p>
-<span class="classHeaderTableLabel">See also</span>
-</p>
-<div class="seeAlso">org.flintparticles.twoD.renderers.FullStagePixelRenderer</div>
 <br>
 <hr>
 </div>
@@ -101,8 +87,23 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 </td><td class="summaryTableOwnerCol"><a href="BitmapRenderer.html">BitmapRenderer</a></td>
 </tr>
 <tr class="hideInheritedProperty">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol"><a class="signatureLink" href="../../common/renderers/SpriteRendererBase.html#emitters">emitters</a> : Array<div class="summaryTableDescription"></div>
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol"><a class="signatureLink" href="../../common/renderers/SpriteRendererBase.html#emitters">emitters</a> : Array<div class="summaryTableDescription">
+   The array of all emitters being rendered by this renderer.</div>
 </td><td class="summaryTableOwnerCol"><a href="../../common/renderers/SpriteRendererBase.html">SpriteRendererBase</a></td>
+</tr>
+<tr class="hideInheritedProperty">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol"><a class="signatureLink" href="BitmapRenderer.html#postFilters">postFilters</a> : Array<div class="summaryTableDescription">
+   The array of all filters being applied before rendering.</div>
+</td><td class="summaryTableOwnerCol"><a href="BitmapRenderer.html">BitmapRenderer</a></td>
+</tr>
+<tr class="hideInheritedProperty">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol"><a class="signatureLink" href="BitmapRenderer.html#preFilters">preFilters</a> : Array<div class="summaryTableDescription">
+   The array of all filters being applied before rendering.</div>
+</td><td class="summaryTableOwnerCol"><a href="BitmapRenderer.html">BitmapRenderer</a></td>
+</tr>
+<tr class="hideInheritedProperty">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol"><a class="signatureLink" href="BitmapRenderer.html#smoothing">smoothing</a> : Boolean<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol"><a href="BitmapRenderer.html">BitmapRenderer</a></td>
 </tr>
 </table>
 </div>
@@ -316,8 +317,8 @@ showHideInherited();
 <hr>
 <br>
 <p></p>
-<center class="copyright">&copy; Big Room Ventures Ltd. 2009</center>
+<center class="copyright">&copy; Richard Lord 2009</center>
 </div>
 </body>
 </html>
-<!--© Big Room Ventures Ltd. 2009-->
+<!--© Richard Lord 2009-->
