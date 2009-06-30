@@ -128,7 +128,7 @@ package org.flintparticles.common.renderers
 						removeEventListener( Event.RENDER, updateParticles );
 						renderParticles( [] );
 					}
-					else
+					else if( stage )
 					{
 						stage.invalidate();
 					}
