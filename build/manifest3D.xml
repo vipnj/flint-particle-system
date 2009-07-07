@@ -12,8 +12,8 @@
     
     <!-- CAMERA -->
     <component class="org.flintparticles.threeD.renderers.Camera"/>
-    <component class="org.flintparticles.threeD.renderers.controllers.OrbitCamera"/>
-    <component class="org.flintparticles.threeD.renderers.controllers.FirstPersonCamera"/>
+    <component class="org.flintparticles.threeD.renderers.controllers.mxml.OrbitCamera"/>
+    <component class="org.flintparticles.threeD.renderers.controllers.mxml.FirstPersonCamera"/>
 
     <!-- EMITTER -->
     <component id="Emitter" class="org.flintparticles.threeD.emitters.mxml.Emitter3D"/>
