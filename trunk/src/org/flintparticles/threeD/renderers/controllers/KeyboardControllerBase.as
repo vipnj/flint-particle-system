@@ -30,16 +30,13 @@
 
 package org.flintparticles.threeD.renderers.controllers 
 {
-	import flash.display.DisplayObject;
-	import flash.events.Event;
-	import flash.events.KeyboardEvent;
-	import flash.ui.Keyboard;
-	
-	import mx.core.IMXMLObject;
-	
 	import org.flintparticles.common.events.UpdateEvent;
 	import org.flintparticles.common.utils.FrameUpdater;
-	import org.flintparticles.threeD.renderers.Camera;	
+	import org.flintparticles.threeD.renderers.Camera;
+
+	import flash.display.DisplayObject;
+	import flash.events.KeyboardEvent;
+	import flash.ui.Keyboard;
 
 	/**
 	 * Sets keyboard input to make a renderer's camera orbit around a point in response to 
@@ -55,7 +52,7 @@ package org.flintparticles.threeD.renderers.controllers
 	 * <li>D or Right arrow keys - orbit right around the target.</li>
 	 * </ul>
 	 */
-	public class KeyboardControllerBase implements CameraController, IMXMLObject
+	public class KeyboardControllerBase implements CameraController
 	{
 		protected var _stage:DisplayObject;
 		protected var _camera:Camera;
@@ -335,31 +332,6 @@ package org.flintparticles.threeD.renderers.controllers
 				FrameUpdater.instance.removeEventListener( UpdateEvent.UPDATE, updateEventListener );
 			}
 			_running = false;
-		}
-		
-		public function initialized( document:Object, id:String ):void
-		{
-			var displayObj:DisplayObject = document as DisplayObject;
-			if( displayObj )
-			{
-				if( document.stage )
-				{
-					this.stage = document.stage;
-				}
-				else
-				{
-					DisplayObject( document ).addEventListener( Event.ADDED_TO_STAGE, addedToStage );
-				}
-			}
-			if( autoStart )
-			{
-				start();
-			}
-		}
-		
-		private function addedToStage( ev:Event ):void
-		{
-			this.stage = DisplayObject( ev.target ).stage;
 		}
 	}
 }
