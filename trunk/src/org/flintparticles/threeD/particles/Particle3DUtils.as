@@ -94,7 +94,7 @@ package org.flintparticles.threeD.particles
 			var x:int;
 			var halfSize:Number = size * 0.5;
 			offset.x += halfSize;
-			offset.y += halfSize;
+			offset.y -= halfSize;
 			var p:Particle3D;
 			var b:BitmapData;
 			var m:Bitmap;
@@ -112,7 +112,7 @@ package org.flintparticles.threeD.particles
 						b.copyPixels( bitmapData, new Rectangle( x, y, size, size ), zero );
 						m = new Bitmap( b );
 						m.x = -halfSize;
-						m.y = halfSize;
+						m.y = -halfSize;
 						s = new Sprite();
 						s.addChild( m );
 						p.image = s;
@@ -133,7 +133,7 @@ package org.flintparticles.threeD.particles
 						b.copyPixels( bitmapData, new Rectangle( x, y, size, size ), zero );
 						m = new Bitmap( b );
 						m.x = -halfSize;
-						m.y = halfSize;
+						m.y = -halfSize;
 						s = new Sprite();
 						s.addChild( m );
 						p.image = s;
