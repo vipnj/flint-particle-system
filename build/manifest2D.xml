@@ -2,9 +2,11 @@
 <componentPackage>
 
 	<!--  RENDERERS -->
+    <component class="org.flintparticles.twoD.renderers.mxml.BitmapLineRenderer"/>
     <component class="org.flintparticles.twoD.renderers.mxml.BitmapRenderer"/>
     <component class="org.flintparticles.twoD.renderers.mxml.DisplayObjectRenderer"/>
     <component class="org.flintparticles.twoD.renderers.mxml.PixelRenderer"/>
+    <component class="org.flintparticles.twoD.renderers.mxml.VectorLineRenderer"/>
 
     <!-- EMITTER -->
     <component id="Emitter" class="org.flintparticles.twoD.emitters.mxml.Emitter2D"/>
