@@ -99,6 +99,8 @@ package org.flintparticles.twoD.initializers
 				p.x += cos * loc.x - sin * loc.y;
 				p.y += cos * loc.y + sin * loc.x;
 			}
+			p.previousX = p.x;
+			p.previousY = p.y;
 		}
 	}
 }

@@ -91,6 +91,8 @@ package org.flintparticles.twoD.initializers
 			var loc:Point = _zone.getLocation();
 			p.x = loc.x;
 			p.y = loc.y;
+			p.previousX = p.x;
+			p.previousY = p.y;
 		}
 	}
 }

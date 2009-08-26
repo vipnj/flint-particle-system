@@ -59,7 +59,8 @@ package org.flintparticles.twoD.renderers
 	 * display the particles is wiped clean before all the particles are redrawn.
 	 * However, if one or more filters are added to the renderer, the filters are
 	 * applied to the bitmap instead of wiping it clean. This enables various trail
-	 * effects by using blur and other filters.</p>
+	 * effects by using blur and other filters. You can also disable the clearing
+	 * of the particles by setting the clearBetweenFrames property to false.</p>
 	 * 
 	 * <p>The BitmapRenderer has mouse events disabled for itself and any 
 	 * display objects in its display list. To enable mouse events for the renderer
@@ -95,6 +96,10 @@ package org.flintparticles.twoD.renderers
 		 * @private
 		 */
 		protected var _canvas:Rectangle;
+		/**
+		 * @private
+		 */
+		protected var _clearBetweenFrames:Boolean;
 
 		/**
 		 * The constructor creates a BitmapRenderer. After creation it should be
@@ -121,6 +126,7 @@ package org.flintparticles.twoD.renderers
 			_postFilters = new Array();
 			_canvas = canvas;
 			createBitmap();
+			_clearBetweenFrames = true;
 		}
 		
 		/**
@@ -275,6 +281,24 @@ package org.flintparticles.twoD.renderers
 			createBitmap();
 		}
 		
+		/**
+		 * Controls whether the display is cleared between each render frame.
+		 * If you use pre-render filters, this value is ignored and the display is
+		 * not cleared. If you use no filters or only post-render filters, this value 
+		 * governs whether the screen is cleared.
+		 * 
+		 * <p>For BitmapRenderer and PixelRenderer, this value defaults to true.
+		 * For BitmapLineRenderer it defaults to false.</p>
+		 */
+		public function get clearBetweenFrames():Boolean
+		{
+			return _clearBetweenFrames;
+		}
+		public function set clearBetweenFrames( value:Boolean ):void
+		{
+			_clearBetweenFrames = value;
+		}
+		
 		public function get smoothing():Boolean
 		{
 			return _smoothing;
@@ -305,7 +329,7 @@ package org.flintparticles.twoD.renderers
 			{
 				_bitmapData.applyFilter( _bitmapData, _bitmapData.rect, BitmapRenderer.ZERO_POINT, _preFilters[i] );
 			}
-			if( len == 0 && _postFilters.length == 0 )
+			if( _clearBetweenFrames && len == 0 )
 			{
 				_bitmapData.fillRect( _bitmap.bitmapData.rect, 0 );
 			}

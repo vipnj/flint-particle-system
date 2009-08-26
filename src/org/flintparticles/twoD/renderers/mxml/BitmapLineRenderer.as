@@ -1,4 +1,4 @@
-/*
+﻿/*
  * FLINT PARTICLE SYSTEM
  * .....................
  * 
@@ -28,41 +28,44 @@
  * THE SOFTWARE.
  */
 
-package org.flintparticles.twoD.renderers
+package org.flintparticles.twoD.renderers.mxml
 {
 	import org.flintparticles.twoD.particles.Particle2D;
 	
+	import flash.display.Shape;
 	import flash.geom.Rectangle;	
 
 	/**
-	 * The PixelRenderer draws particles as single pixels on a Bitmap display object. The
+	 * The BitmapLineRenderer draws particles as lines on a Bitmap display object. The
 	 * region of the particle system covered by this bitmap object must be defined
-	 * in the canvas property of the PixelRenderer. Particles outside this region
+	 * in the canvas property of the BitmapLineRenderer. Particles outside this region
 	 * are not drawn.
 	 * 
-	 * <p>The PixelRenderer allows the use of BitmapFilters to modify the appearance
-	 * of the bitmap. Every frame, under normal circumstances, the Bitmap used to
-	 * display the particles is wiped clean before all the particles are redrawn.
-	 * However, if one or more filters are added to the renderer, the filters are
-	 * applied to the bitmap instead of wiping it clean. This enables various trail
-	 * effects by using blur and other filters. You can also disable the clearing
-	 * of the particles by setting the clearBetweenFrames property to false.</p>
+	 * <p>The BitmapLineRenderer </p>
+	 * 
+	 * <p>The BitmapLineRenderer allows the use of BitmapFilters to modify the appearance
+	 * of the bitmap.</p>
 	 * 
 	 * <p>The PixelRenderer has mouse events disabled for itself and any 
 	 * display objects in its display list. To enable mouse events for the renderer
 	 * or its children set the mouseEnabled or mouseChildren properties to true.</p>
+	 * 
+	 * @see org.flintparticles.twoD.renderers.FullStagePixelRenderer
 	 */
-	public class PixelRenderer extends BitmapRenderer
+	public class BitmapLineRenderer extends BitmapRenderer
 	{
+		private var _shape:Shape;
 		/**
 		 * The constructor creates a PixelRenderer. After creation it should be
 		 * added to the display list of a DisplayObjectContainer to place it on 
 		 * the stage and should be applied to an Emitter using the Emitter's
 		 * renderer property.
 		 */
-		public function PixelRenderer( canvas:Rectangle )
+		public function BitmapLineRenderer( canvas:Rectangle= null, smoothing:Boolean = false )
 		{
-			super( canvas );
+			super( canvas, smoothing );
+			_clearBetweenFrames = false;
+			_shape = new Shape();
 		}
 		
 		/**
@@ -70,7 +73,11 @@ package org.flintparticles.twoD.renderers
 		 */
 		override protected function drawParticle( particle:Particle2D ):void
 		{
-			_bitmapData.setPixel32( Math.round( particle.x - _canvas.x ), Math.round( particle.y - _canvas.y ), particle.color );
+			_shape.graphics.clear();
+			_shape.graphics.lineStyle( particle.scale, particle.color & 0xFFFFFF, particle.color >>> 24 );
+			_shape.graphics.moveTo( particle.previousX, particle.previousY );
+			_shape.graphics.lineTo( particle.x, particle.y );
+			_bitmapData.draw( _shape );
 		}
 	}
 }
