@@ -174,6 +174,8 @@ package org.flintparticles.twoD.emitters
 			var p:Particle2D = Particle2D( particle );
 			p.x = _x;
 			p.y = _y;
+			p.previousX = _x;
+			p.previousY = _y;
 			p.rotation = _rotation;
 		}
 		

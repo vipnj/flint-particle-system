@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application
+	xmlns:mx="http://www.adobe.com/2006/mxml"
+	xmlns:f="http://flintparticles.org/2009/flint2d"
+	layout="absolute" width="500" height="500"
+	backgroundColor="#000000">
+
+<f:BitmapLineRenderer>
+
+
+</f:BitmapLineRenderer>
+</mx:Application>
