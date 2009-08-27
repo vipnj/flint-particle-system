@@ -4,7 +4,7 @@
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="../../../../style.css" type="text/css" media="screen">
 <link rel="stylesheet" href="../../../../print.css" type="text/css" media="print">
-<meta content="Particle2D,org.flintparticles.twoD.particles.Particle2D,angVelocity,rotation,sortID,velX,velY,x,y,inertia,matrixTransform,clone,initialize" name="keywords">
+<meta content="Particle2D,org.flintparticles.twoD.particles.Particle2D,angVelocity,previousX,previousY,rotation,sortID,velX,velY,x,y,inertia,matrixTransform,clone,initialize" name="keywords">
 <title>org.flintparticles.twoD.particles.Particle2D</title>
 </head>
 <body>
@@ -142,6 +142,16 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 </td><td class="summaryTableOwnerCol">Particle2D</td>
 </tr>
 <tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#previousX">previousX</a> : Number = 0<div class="summaryTableDescription">
+   The x coordinate of the particle prior to the latest update.</div>
+</td><td class="summaryTableOwnerCol">Particle2D</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#previousY">previousY</a> : Number = 0<div class="summaryTableDescription">
+   The y coordinate of the particle prior to the latest update.</div>
+</td><td class="summaryTableOwnerCol">Particle2D</td>
+</tr>
+<tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#rotation">rotation</a> : Number = 0<div class="summaryTableDescription">
    The rotation of the particle in radians.</div>
 </td><td class="summaryTableOwnerCol">Particle2D</td>
@@ -259,6 +269,26 @@ showHideInherited();
 <code>&nbsp;&nbsp;&nbsp;&nbsp;public function get matrixTransform():Matrix</code>
 <br>
 </div>
+<a name="previousX"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">previousX</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public var previousX:Number = 0</code><p>
+   The x coordinate of the particle prior to the latest update.
+   </p></div>
+<a name="previousY"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">previousY</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public var previousY:Number = 0</code><p>
+   The y coordinate of the particle prior to the latest update.
+   </p></div>
 <a name="rotation"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
 <tr>
