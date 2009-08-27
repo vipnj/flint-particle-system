@@ -52,7 +52,8 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
   display the particles is wiped clean before all the particles are redrawn.
   However, if one or more filters are added to the renderer, the filters are
   applied to the bitmap instead of wiping it clean. This enables various trail
-  effects by using blur and other filters.</p>
+  effects by using blur and other filters. You can also disable the clearing
+  of the particles by setting the clearBetweenFrames property to false.</p>
   
   <p>The PixelRenderer has mouse events disabled for itself and any 
   display objects in its display list. To enable mouse events for the renderer
@@ -84,6 +85,11 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <tr class="hideInheritedProperty">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol"><a class="signatureLink" href="BitmapRenderer.html#canvas">canvas</a> : Rectangle<div class="summaryTableDescription">
    The canvas is the area within the renderer on which particles can be drawn.</div>
+</td><td class="summaryTableOwnerCol"><a href="BitmapRenderer.html">BitmapRenderer</a></td>
+</tr>
+<tr class="hideInheritedProperty">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol"><a class="signatureLink" href="BitmapRenderer.html#clearBetweenFrames">clearBetweenFrames</a> : Boolean<div class="summaryTableDescription">
+   Controls whether the display is cleared between each render frame.</div>
 </td><td class="summaryTableOwnerCol"><a href="BitmapRenderer.html">BitmapRenderer</a></td>
 </tr>
 <tr class="hideInheritedProperty">

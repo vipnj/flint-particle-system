@@ -5,32 +5,7 @@
 		
 	<target name="all" depends="swc2d,swc3d,asdocs,examples2D,flex2D,examples3D,flex3D,papervision3D,away3D" description="Full build of swc library and asdocs"/>
 		
-	<target name="swc" description="Clean and build swc library">
-		
-		<fileset dir="../src" casesensitive="yes" includes="**/*.as" id="classfiles"/>
-		<pathconvert property="classlist" refid="classfiles" pathsep=" " dirsep=".">
-			<regexpmapper from=".*src.(.*)\.as" to="\1"/>
-		</pathconvert>
-		
-		<exec executable="${compc}" failonerror="true">
-
-			<arg line='-source-path ../src'/>
-			<arg line='-output ../lib/Flint.swc'/>
-
-			<arg line='-namespace http://flintparticles.org/2009/flint2d manifest2D.xml'/>
-			<arg line='-namespace http://flintparticles.org/2009/flint3d manifest3D.xml'/>
-			<arg line='-include-namespaces http://flintparticles.org/2009/flint2d http://flintparticles.org/2009/flint3d'/>
-
-			<arg line='-external-library-path+="${flexsdk.dir}/frameworks/libs/flex.swc"'/>
-			<arg line='-external-library-path+="${flexsdk.dir}/frameworks/libs/framework.swc"'/>
-			<arg line='-external-library-path+="${away3d.swc}"'/>
-			<arg line='-external-library-path+="${papervision3d.swc}"'/>
-			
-			<arg line='-include-classes ${classlist}'/>
-		</exec>
-	</target>
-				
-	<target name="swc2d" description="Clean and build swc library">
+	<target name="swc2d" description="Clean and build 2D swc library">
 		
 		<fileset dir="../src" casesensitive="yes" includes="org/flintparticles/common/**/*.as org/flintparticles/twoD/**/*.as" id="classfiles2d"/>
 		<pathconvert property="classlist2d" refid="classfiles2d" pathsep=" " dirsep=".">
@@ -52,7 +27,7 @@
 		</exec>
 	</target>
 				
-	<target name="swc3d" description="Clean and build swc library">
+	<target name="swc3d" description="Clean and build 3D swc library">
 		
 		<fileset dir="../src" casesensitive="yes" includes="org/flintparticles/common/**/*.as org/flintparticles/threeD/**/*.as" id="classfiles3d"/>
 		<pathconvert property="classlist3d" refid="classfiles3d" pathsep=" " dirsep=".">
@@ -154,6 +129,19 @@
 
 			<arg line='-output ../examples2D/Flocking/PureAS3/Flocking.swf'/>
 			<arg line='../examples2D/Flocking/PureAS3/Main.as'/>
+		</exec>
+
+		<exec executable="${mxmlc}" failonerror="false">
+			<arg line='-source-path ../src'/>
+			<arg line='-debug=false'/>
+			<arg line='-optimize=true'/>
+
+			<arg line='-title "Grass 2D"'/>
+			<arg line='-description "An example for the Flint particle system."'/>
+			<arg line='-creator "Richard Lord - flintparticles.org"'/>
+
+			<arg line='-output ../examples2D/Grass/PureAS3/Grass.swf'/>
+			<arg line='../examples2D/Grass/PureAS3/Main.as'/>
 		</exec>
 
 		<exec executable="${mxmlc}" failonerror="false">
@@ -421,6 +409,21 @@
 
 			<arg line='-output ../examples2D/Flocking/Flex/Flocking.swf'/>
 			<arg line='../examples2D/Flocking/Flex/Flocking.mxml'/>
+		</exec>
+
+		<exec executable="${mxmlc}" failonerror="false">
+			<arg line='-source-path ../src'/>
+			<arg line='-debug=false'/>
+			<arg line='-optimize=true'/>
+
+			<arg line='-title "Grass 2D"'/>
+			<arg line='-description "An example for the Flint particle system."'/>
+			<arg line='-creator "Richard Lord - flintparticles.org"'/>
+
+			<arg line='-namespace http://flintparticles.org/2009/flint2d manifest2D.xml'/>
+
+			<arg line='-output ../examples2D/Grass/Flex/Grass.swf'/>
+			<arg line='../examples2D/Grass/Flex/Grass.mxml'/>
 		</exec>
 
 		<exec executable="${mxmlc}" failonerror="false">
