@@ -184,7 +184,7 @@ package org.flintparticles.twoD.zones
 		 */
 		public function getLocation() : Point
 		{
-			var p:Point = _validPoints.getRandomValue().clone();
+			var p:Point = Point( _validPoints.getRandomValue() ).clone();
 			p.x = p.x * _scaleX + _offsetX;
 			p.y = p.y * _scaleY + _offsetY;
 			return p; 

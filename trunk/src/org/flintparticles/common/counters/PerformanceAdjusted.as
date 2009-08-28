@@ -30,6 +30,7 @@
 
 package org.flintparticles.common.counters
 {
+	import org.flintparticles.common.particles.Particle;
 	import org.flintparticles.common.emitters.Emitter;
 	
 	import flash.utils.getTimer;	
@@ -194,7 +195,7 @@ package org.flintparticles.common.counters
 						_rate = Math.floor( ( _rate + _rateMin ) * 0.5 );
 						_times.length = 0;
 						
-						if( !( _timeToRateCheck = emitter.particles[0].lifetime ) )
+						if( !( _timeToRateCheck = Particle( emitter.particles[0] ).lifetime ) )
 						{
 							_timeToRateCheck = 2;
 						}

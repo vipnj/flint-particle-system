@@ -176,7 +176,7 @@ package org.flintparticles.common.renderers
 			var particles:Array = new Array();
 			for( var i:int = 0; i < _emitters.length; ++i )
 			{
-				particles = particles.concat( _emitters[i].particles );
+				particles = particles.concat( Emitter( _emitters[i] ).particles );
 			}
 			renderParticles( particles );
 		}

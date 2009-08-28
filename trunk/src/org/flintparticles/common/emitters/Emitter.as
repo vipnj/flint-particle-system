@@ -587,7 +587,7 @@ package org.flintparticles.common.emitters
 			initParticle( particle );
 			for ( var i:int = 0; i < len; ++i )
 			{
-				_initializers[i].initialize( this, particle );
+				Initializer( _initializers[i] ).initialize( this, particle );
 			}
 			_particles.push( particle );
 			dispatchEvent( new ParticleEvent( ParticleEvent.PARTICLE_CREATED, particle ) );
@@ -627,7 +627,7 @@ package org.flintparticles.common.emitters
 				{
 					for ( i = 0; i < len; ++i )
 					{
-						_initializers[j].initialize( this, particles[i] );
+						Initializer( _initializers[j] ).initialize( this, particles[i] );
 					}
 				}
 			}
@@ -664,7 +664,7 @@ package org.flintparticles.common.emitters
 			var len:int = _activities.length;
 			for ( var i:int = 0; i < len; ++i )
 			{
-				_activities[i].initialize( this );
+				Activity( _activities[i] ).initialize( this );
 			}
 			len = _counter.startEmitter( this );
 			for ( i = 0; i < len; ++i )
@@ -725,7 +725,7 @@ package org.flintparticles.common.emitters
 			len = _activities.length;
 			for ( i = 0; i < len; ++i )
 			{
-				_activities[i].update( this, time );
+				Activity( _activities[i] ).update( this, time );
 			}
 			if ( _particles.length > 0 )
 			{

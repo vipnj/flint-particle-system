@@ -58,13 +58,13 @@ package org.flintparticles.threeD.renderers.controllers.mxml
 			var displayObj:DisplayObject = document as DisplayObject;
 			if( displayObj )
 			{
-				if( document.stage )
+				if( displayObj.stage )
 				{
-					this.stage = document.stage;
+					this.stage = displayObj.stage;
 				}
 				else
 				{
-					DisplayObject( document ).addEventListener( Event.ADDED_TO_STAGE, addedToStage );
+					displayObj.addEventListener( Event.ADDED_TO_STAGE, addedToStage );
 				}
 			}
 			if( autoStart )

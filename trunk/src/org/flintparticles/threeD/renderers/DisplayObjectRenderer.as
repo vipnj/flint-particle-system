@@ -174,7 +174,7 @@ package org.flintparticles.threeD.renderers
 				particles.sort( sortOnZ );
 				for( i = 0; i < len; ++i )
 				{
-					swapChildrenAt( i, getChildIndex( particles[i].image ) );
+					swapChildrenAt( i, getChildIndex( Particle( particles[i] ).image ) );
 				}
 			}
 		}

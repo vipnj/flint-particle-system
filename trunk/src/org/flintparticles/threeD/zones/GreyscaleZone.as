@@ -218,8 +218,7 @@ package org.flintparticles.threeD.zones
 			{
 				init();
 			}
-			var point:Point =  _validPoints.getRandomValue().clone();
-			
+			var point:Point =  Point( _validPoints.getRandomValue() ).clone();
 			return _corner.add( _scaledWidth.multiply( point.x ).incrementBy( _scaledHeight.multiply( point.y ) ) );
 		}
 		

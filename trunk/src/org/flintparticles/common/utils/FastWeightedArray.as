@@ -124,7 +124,7 @@ package org.flintparticles.common.utils
 					high = mid;
 				}
 			}
-			return _values[low].value;
+			return Pair( _values[low] ).value;
 		}
 	}
 }
