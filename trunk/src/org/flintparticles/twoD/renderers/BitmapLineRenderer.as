@@ -36,21 +36,22 @@ package org.flintparticles.twoD.renderers
 	import flash.geom.Rectangle;	
 
 	/**
-	 * The BitmapLineRenderer draws particles as lines on a Bitmap display object. The
-	 * region of the particle system covered by this bitmap object must be defined
+	 * The BitmapLineRenderer draws particles as continuous lines on a Bitmap display object.
+	 * This is useful for effects like hair and grass.
+	 * 
+	 * <p>The BitmapLineRenderer uses the color and alpha of the particle
+	 * for the color of the current line segment, and uses the scale of
+	 * the particle for the line width.</p>
+	 * 
+	 * <b>The region of the particle system covered by this bitmap object must be defined
 	 * in the canvas property of the BitmapLineRenderer. Particles outside this region
 	 * are not drawn.
-	 * 
-	 * <p>The BitmapLineRenderer </p>
 	 * 
 	 * <p>The BitmapLineRenderer allows the use of BitmapFilters to modify the appearance
 	 * of the bitmap.</p>
 	 * 
-	 * <p>The PixelRenderer has mouse events disabled for itself and any 
-	 * display objects in its display list. To enable mouse events for the renderer
-	 * or its children set the mouseEnabled or mouseChildren properties to true.</p>
-	 * 
 	 * @see org.flintparticles.twoD.renderers.FullStagePixelRenderer
+	 * @see org.flintparticles.common.emitters.Emitter#runAhead()
 	 */
 	public class BitmapLineRenderer extends BitmapRenderer
 	{
