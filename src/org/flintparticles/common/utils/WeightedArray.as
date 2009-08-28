@@ -68,7 +68,7 @@ package org.flintparticles.common.utils
 			var index:int = int( name );
 			if ( index == name && index < _values.length && _values[ index ] )
 			{
-				return _values[ index ].value;
+				return Pair( _values[ index ] ).value;
 			}
 			else
 			{
@@ -86,7 +86,7 @@ package org.flintparticles.common.utils
 			var index:uint = uint( name );
 			if ( index == name && index < _values.length )
 			{
-				_values[index].value = value;
+				Pair( _values[index] ).value = value;
 			}
 		}
 
@@ -118,7 +118,7 @@ package org.flintparticles.common.utils
 		 */
 		override flash_proxy function nextValue( index:int ):*
 		{
-			return _values[ index - 1 ].value;
+			return Pair( _values[ index - 1 ] ).value;
 		}
 
 		/**
@@ -145,9 +145,9 @@ package org.flintparticles.common.utils
 		{
 			for( var i:uint = _values.length; i--; )
 			{
-				if( _values[i].value == value )
+				if( Pair( _values[i] ).value == value )
 				{
-					_totalWeights -= _values[i].weight;
+					_totalWeights -= Pair( _values[i] ).weight;
 					_values.splice( i, 1 );
 					return true;
 				}
@@ -164,7 +164,7 @@ package org.flintparticles.common.utils
 		{
 			for( var i:uint = _values.length; i--; )
 			{
-				if( _values[i].value == value )
+				if( Pair( _values[i] ).value == value )
 				{
 					return true;
 				}
@@ -180,8 +180,8 @@ package org.flintparticles.common.utils
 		 */
 		public function removeAt( index:uint ):*
 		{
-			var temp:* = _values[index].value;
-			_totalWeights -= _values[index].weight;
+			var temp:* = Pair( _values[index] ).value;
+			_totalWeights -= Pair( _values[index] ).weight;
 			_values.splice( index, 1 );
 			return temp;
 		}
@@ -226,13 +226,13 @@ package org.flintparticles.common.utils
 			var len:int = _values.length;
 			for( var i:int = 0; i < len; ++i )
 			{
-				current += _values[i].weight;
+				current += Pair( _values[i] ).weight;
 				if( current >= position )
 				{
-					return _values[i].value;
+					return Pair( _values[i] ).value;
 				}
 			}
-			return _values[len-1].value;
+			return Pair( _values[len-1] ).value;
 		}
 	}
 }

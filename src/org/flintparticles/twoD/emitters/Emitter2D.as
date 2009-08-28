@@ -191,7 +191,7 @@ package org.flintparticles.twoD.emitters
 				var len:int = _particles.length;
 				for( var i:int = 0; i < len; ++i )
 				{
-					_particles[ spaceSortedX[i] ].sortID = i;
+					Particle2D( _particles[ spaceSortedX[i] ] ).sortID = i;
 				}
 			}
 		}

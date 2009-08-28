@@ -99,7 +99,7 @@ package org.flintparticles.threeD.zones
 			var len:int = _zones.length;
 			for( var i:int = 0; i < len; ++i )
 			{
-				if( _zones[i].contains( p ) )
+				if( Zone3D( _zones[i] ).contains( p ) )
 				{
 					return true;
 				}
@@ -122,7 +122,7 @@ package org.flintparticles.threeD.zones
 			{
 				if( ( selectZone -= _volumes[i] ) <= 0 )
 				{
-					return _zones[i].getLocation();
+					return Zone3D( _zones[i] ).getLocation();
 				}
 			}
 			if( _zones.length == 0 )
@@ -131,7 +131,7 @@ package org.flintparticles.threeD.zones
 			}
 			else
 			{
-				return _zones[0].getLocation();
+				return Zone3D( _zones[0] ).getLocation();
 			}
 			return null;
 		}

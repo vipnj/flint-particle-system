@@ -30,7 +30,6 @@
 
 package org.flintparticles.twoD.renderers.mxml
 {
-	import org.flintparticles.common.particles.Particle;
 	import org.flintparticles.common.renderers.FlexRendererBase;
 	import org.flintparticles.twoD.particles.Particle2D;	
 

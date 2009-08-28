@@ -30,7 +30,6 @@
 
 package org.flintparticles.twoD.renderers
 {
-	import org.flintparticles.common.particles.Particle;
 	import org.flintparticles.common.renderers.SpriteRendererBase;
 	import org.flintparticles.twoD.particles.Particle2D;	
 

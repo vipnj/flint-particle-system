@@ -113,7 +113,7 @@ package org.flintparticles.common.initializers
 		{
 			if( value.length == 1 && value[0] is String )
 			{
-				_mxmlColors = value[0].split( "," );
+				_mxmlColors = String( value[0] ).split( "," );
 			}
 			else
 			{
@@ -126,7 +126,7 @@ package org.flintparticles.common.initializers
 		{
 			if( value.length == 1 && value[0] is String )
 			{
-				_mxmlWeights = value[0].split( "," );
+				_mxmlWeights = String( value[0] ).split( "," );
 			}
 			else
 			{

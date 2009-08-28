@@ -99,7 +99,7 @@ package org.flintparticles.twoD.zones
 			var len:int = _zones.length;
 			for( var i:int = 0; i < len; ++i )
 			{
-				if( _zones[i].contains( x, y ) )
+				if( Zone2D( _zones[i] ).contains( x, y ) )
 				{
 					return true;
 				}
@@ -122,7 +122,7 @@ package org.flintparticles.twoD.zones
 			{
 				if( ( selectZone -= _areas[i] ) <= 0 )
 				{
-					return _zones[i].getLocation();
+					return Zone2D( _zones[i] ).getLocation();
 				}
 			}
 			if( _zones.length == 0 )
@@ -131,7 +131,7 @@ package org.flintparticles.twoD.zones
 			}
 			else
 			{
-				return _zones[0].getLocation();
+				return Zone2D( _zones[0] ).getLocation();
 			}
 			return null;
 		}

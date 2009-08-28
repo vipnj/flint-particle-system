@@ -180,7 +180,7 @@ package org.flintparticles.threeD.emitters
 				var len:int = _particles.length;
 				for( var i:int = 0; i < len; ++i )
 				{
-					_particles[ spaceSortedX[i] ].sortID = i;
+					Particle3D( _particles[ spaceSortedX[i] ] ).sortID = i;
 				}
 			}
 		}

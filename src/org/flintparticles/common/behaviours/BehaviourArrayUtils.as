@@ -74,7 +74,7 @@ package org.flintparticles.common.behaviours
 			var len:uint = array.length;
 			for( var i:uint = 0; i < len; ++i )
 			{
-				if( array[i].priority < item.priority )
+				if( Behaviour( array[i] ).priority < item.priority )
 				{
 					break;
 				}
