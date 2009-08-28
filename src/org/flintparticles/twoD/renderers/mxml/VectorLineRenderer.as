@@ -40,7 +40,12 @@ package org.flintparticles.twoD.renderers.mxml
 	 * 
 	 * <p>The VectorLineRenderer uses the color and alpha of the particle
 	 * for the color of the current line segment, and uses the scale of
-	 * the particle for the line width.</p> 
+	 * the particle for the line width.</p>
+	 * 
+	 * <p>If you don't want users to see the lines growing, the runAhead 
+	 * method of the emitter can be used to jump straight to the final image.</p>
+	 * 
+	 * @see org.flintparticles.common.emitters.Emitter#runAhead()
 	 */
 	public class VectorLineRenderer extends FlexRendererBase
 	{
