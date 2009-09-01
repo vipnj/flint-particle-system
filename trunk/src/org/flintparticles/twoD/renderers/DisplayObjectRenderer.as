@@ -92,7 +92,11 @@ package org.flintparticles.twoD.renderers
 		 */
 		override protected function addParticle( particle:Particle ):void
 		{
-			addChildAt( particle.image, 0 );
+			var p:Particle2D = particle as Particle2D;
+			addChildAt( p.image, 0 );
+			var img:DisplayObject = p.image;
+			img.transform.colorTransform = p.colorTransform;
+			img.transform.matrix = p.matrixTransform;
 		}
 		
 		/**
