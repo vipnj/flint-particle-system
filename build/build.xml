@@ -719,7 +719,7 @@
 			<arg line='-library-path "${away3d.swc}"'/>
 			<arg line='-library-path "${papervision3d.swc}"'/>
 			
-			<arg line='-main-title "Flint Particles documentation v2.1.1"'/>
+			<arg line='-main-title "Flint Particles documentation v2.1.2"'/>
 			<arg line='-window-title "Flint Particles documentation"'/>
 			<arg line='-footer "© Richard Lord 2009"'/>
 			

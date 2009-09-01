@@ -197,7 +197,9 @@ package org.flintparticles.threeD.renderers
 		 */
 		override protected function addParticle( particle:Particle ):void
 		{
-			addChildAt( particle.image, 0 );
+			var img:DisplayObject = particle.image as DisplayObject;
+			addChildAt( img, 0 );
+			img.visible = false;
 		}
 		
 		/**
