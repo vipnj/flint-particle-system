@@ -73,29 +73,9 @@ package org.flintparticles.threeD.papervision3d
 		 */
 		override protected function renderParticles( particles:Array ):void
 		{
-			var o:org.papervision3d.core.geom.renderables.Particle;
 			for each( var p:Particle3D in particles )
 			{
-				o = p.image;
-				o.x = p.position.x;
-				o.y = p.position.y;
-				o.z = p.position.z;
-				if( p.dictionary["pv3dBaseSize"] )
-				{
-					o.size = p.scale * p.dictionary["pv3dBaseSize"];
-				}
-				else
-				{
-					o.size = p.scale;
-				}
-				// TODO: rotation
-				
-				if( o.material )
-				{
-					// this only works for some materials
-					o.material.fillColor = p.color & 0xFFFFFF;
-					o.material.fillAlpha = p.alpha;
-				}
+				renderParticle( p );
 			}
 		}
 		
@@ -110,6 +90,31 @@ package org.flintparticles.threeD.papervision3d
 		override protected function addParticle( particle:org.flintparticles.common.particles.Particle ):void
 		{
 			_container.addParticle( org.papervision3d.core.geom.renderables.Particle( particle.image ) );
+			renderParticle( particle as Particle3D );
+		}
+		
+		protected function renderParticle( particle:Particle3D ):void
+		{
+			var o:org.papervision3d.core.geom.renderables.Particle = particle.image;
+			o.x = particle.position.x;
+			o.y = particle.position.y;
+			o.z = particle.position.z;
+			if( particle.dictionary["pv3dBaseSize"] )
+			{
+				o.size = particle.scale * particle.dictionary["pv3dBaseSize"];
+			}
+			else
+			{
+				o.size = particle.scale;
+			}
+			// TODO: rotation
+			
+			if( o.material )
+			{
+				// this only works for some materials
+				o.material.fillColor = particle.color & 0xFFFFFF;
+				o.material.fillAlpha = particle.alpha;
+			}
 		}
 		
 		/**
