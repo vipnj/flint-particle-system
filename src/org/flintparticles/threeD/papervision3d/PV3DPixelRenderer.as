@@ -58,14 +58,9 @@ package org.flintparticles.threeD.papervision3d
 		 */
 		override protected function renderParticles( particles:Array ):void
 		{
-			var o:Pixel3D;
 			for each( var p:Particle3D in particles )
 			{
-				o = p.image;
-				o.x = p.position.x;
-				o.y = p.position.y;
-				o.z = p.position.z;
-				o.color = p.color;
+				renderParticle( p );
 			}
 		}
 		
@@ -81,6 +76,16 @@ package org.flintparticles.threeD.papervision3d
 		{
 			particle.image = new Pixel3D( 0 );
 			_container.addPixel3D( Pixel3D( particle.image ) );
+			renderParticle( particle as Particle3D );
+		}
+		
+		protected function renderParticle( particle:Particle3D ):void
+		{
+			var o:Pixel3D = particle.image;
+			o.x = particle.position.x;
+			o.y = particle.position.y;
+			o.z = particle.position.z;
+			o.color = particle.color;
 		}
 		
 		/**

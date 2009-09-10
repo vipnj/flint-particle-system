@@ -79,29 +79,9 @@ package org.flintparticles.threeD.papervision3d
 		 */
 		override protected function renderParticles( particles:Array ):void
 		{
-			var o:DisplayObject3D;
 			for each( var p:Particle3D in particles )
 			{
-				o = p.image;
-				o.x = p.position.x;
-				o.y = p.position.y;
-				o.z = p.position.z;
-				o.scaleX = o.scaleY = o.scaleZ = p.scale;
-				if( o is Plane && o.material is MovieMaterial )
-				{
-					MovieMaterial( o.material ).movie.transform.colorTransform = p.colorTransform;
-				}
-				else
-				{
-					// this only works for some materials
-					o.material.fillColor = p.color & 0xFFFFFF;
-					o.material.fillAlpha = p.alpha;
-					// rotation
-					var r:Number3D = Convert.QuaternionToPV3D( p.rotation ).toEuler();
-					o.rotationX = Maths.asDegrees( r.x );
-					o.rotationY = Maths.asDegrees( r.y );
-					o.rotationZ = Maths.asDegrees( r.z );
-				}
+				renderParticle( p );
 			}
 		}
 		
@@ -116,6 +96,31 @@ package org.flintparticles.threeD.papervision3d
 		override protected function addParticle( particle:Particle ):void
 		{
 			_container.addChild( DisplayObject3D( particle.image ) );
+			renderParticle( particle as Particle3D );
+		}
+		
+		protected function renderParticle( particle:Particle3D ):void
+		{
+			var o:DisplayObject3D = particle.image;
+			o.x = particle.position.x;
+			o.y = particle.position.y;
+			o.z = particle.position.z;
+			o.scaleX = o.scaleY = o.scaleZ = particle.scale;
+			if( o is Plane && o.material is MovieMaterial )
+			{
+				MovieMaterial( o.material ).movie.transform.colorTransform = particle.colorTransform;
+			}
+			else
+			{
+				// this only works for some materials
+				o.material.fillColor = particle.color & 0xFFFFFF;
+				o.material.fillAlpha = particle.alpha;
+				// rotation
+				var r:Number3D = Convert.QuaternionToPV3D( particle.rotation ).toEuler();
+				o.rotationX = Maths.asDegrees( r.x );
+				o.rotationY = Maths.asDegrees( r.y );
+				o.rotationZ = Maths.asDegrees( r.z );
+			}
 		}
 		
 		/**
