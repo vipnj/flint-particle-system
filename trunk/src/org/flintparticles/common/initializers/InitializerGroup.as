@@ -51,20 +51,17 @@ package org.flintparticles.common.initializers
 		private var _emitter:Emitter;
 		
 		/**
-		 * The constructor creates a MassesInit initializer for use by 
-		 * an emitter. To add a MassesInit to all particles created by 
-		 * an emitter, use the emitter's addInitializer method.
+		 * The constructor creates an InitializerGroup.
 		 * 
-		 * @param colors An array containing the Colors to use for 
-		 * each particle created by the emitter, as 32bit ARGB values.
-		 * @param weights The weighting to apply to each color. If no weighting
-		 * values are passed, the colors are all assigned a weighting of 1.
-		 * 
-		 * @see org.flintparticles.common.emitters.Emitter#addInitializer()
+		 * @param initializers Initializers that should be added to the group.
 		 */
 		public function InitializerGroup( ...initializers )
 		{
 			_initializers = new Array();
+			for each( var i:Initializer in initializers )
+			{
+				addInitializer( i );
+			}
 		}
 		
 		public function get initializers():Array
