@@ -30,6 +30,10 @@
 
 package org.flintparticles.twoD.renderers
 {
+	import flash.events.Event;	
+	
+	import org.flintparticles.common.emitters.Emitter;	
+	import org.flintparticles.common.events.EmitterEvent;	
 	import org.flintparticles.twoD.particles.Particle2D;
 	
 	import flash.display.Shape;
@@ -55,6 +59,7 @@ package org.flintparticles.twoD.renderers
 	 */
 	public class BitmapLineRenderer extends BitmapRenderer
 	{
+		private var count:int;
 		private var _shape:Shape;
 		/**
 		 * The constructor creates a PixelRenderer. After creation it should be
@@ -74,11 +79,20 @@ package org.flintparticles.twoD.renderers
 		 */
 		override protected function drawParticle( particle:Particle2D ):void
 		{
+			trace( "draw " + (count++) );
 			_shape.graphics.clear();
 			_shape.graphics.lineStyle( particle.scale, particle.color & 0xFFFFFF, particle.color >>> 24 );
 			_shape.graphics.moveTo( particle.previousX, particle.previousY );
 			_shape.graphics.lineTo( particle.x, particle.y );
 			_bitmapData.draw( _shape );
+		}
+		
+		override protected function emitterUpdated( ev:EmitterEvent ):void
+		{
+			renderParticles( Emitter( ev.target ).particles );
+		}
+		override protected function updateParticles( ev:Event ):void
+		{
 		}
 	}
 }
