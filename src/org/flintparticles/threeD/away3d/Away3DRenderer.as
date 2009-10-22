@@ -80,52 +80,56 @@ package org.flintparticles.threeD.away3d
 		 */
 		override protected function renderParticles( particles:Array ):void
 		{
-			var o:Object3D;
 			for each( var p:Particle3D in particles )
 			{
-				o = p.image;
-				o.x = p.position.x;
-				o.y = p.position.y;
-				o.z = p.position.z;
-				o.scaleX = o.scaleY = o.scaleZ = p.scale;
-				
-				// rotation
-				var r:Number3D = new Number3D();
-				r.quaternion2euler( Convert.QuaternionToA3D( p.rotation ) );
-				o.rotationX = Maths.asDegrees( r.x );
-				o.rotationY = Maths.asDegrees( r.y );
-				o.rotationZ = Maths.asDegrees( r.z );
-				
-				// mesh rendering
-				if( o is Mesh )
-				{
-					if( Mesh( o ).material["hasOwnProperty"]( "color" ) )
-					{
-						Mesh( o ).material["color"] = p.color & 0xFFFFFF;
-					}
-					if( Mesh( o ).material["hasOwnProperty"]( "alpha" ) )
-					{
-						Mesh( o ).material["alpha"] = p.alpha;
-					}
-				}
-				
-				// display object rendering
-				else if( o is MovieClipSprite )
-				{
-					MovieClipSprite( o ).movieclip.transform.colorTransform = p.colorTransform;
-					MovieClipSprite( o ).scaling = p.scale;
-				}
-				
-				// others
-				else
-				{
-					// can't do color transform
-					// will try alpha - only works if objects have own canvas
-					o.alpha = p.alpha;
-				}
+				renderParticle( p );
 			}
 		}
-		
+
+		protected function renderParticle( particle:Particle3D ):void
+		{
+			var o:Object3D = particle.image;
+			o.x = particle.position.x;
+			o.y = particle.position.y;
+			o.z = particle.position.z;
+			o.scaleX = o.scaleY = o.scaleZ = particle.scale;
+			
+			// rotation
+			var r:Number3D = new Number3D();
+			r.quaternion2euler( Convert.QuaternionToA3D( particle.rotation ) );
+			o.rotationX = Maths.asDegrees( r.x );
+			o.rotationY = Maths.asDegrees( r.y );
+			o.rotationZ = Maths.asDegrees( r.z );
+			
+			// mesh rendering
+			if( o is Mesh )
+			{
+				if( Mesh( o ).material["hasOwnProperty"]( "color" ) )
+				{
+					Mesh( o ).material["color"] = particle.color & 0xFFFFFF;
+				}
+				if( Mesh( o ).material["hasOwnProperty"]( "alpha" ) )
+				{
+					Mesh( o ).material["alpha"] = particle.alpha;
+				}
+			}
+			
+			// display object rendering
+			else if( o is MovieClipSprite )
+			{
+				MovieClipSprite( o ).movieclip.transform.colorTransform = particle.colorTransform;
+				MovieClipSprite( o ).scaling = particle.scale;
+			}
+			
+			// others
+			else
+			{
+				// can't do color transform
+				// will try alpha - only works if objects have own canvas
+				o.alpha = particle.alpha;
+			}
+		}
+				
 		/**
 		 * This method is called when a particle is added to an emitter -
 		 * usually because the emitter has just created the particle. The
@@ -137,6 +141,7 @@ package org.flintparticles.threeD.away3d
 		override protected function addParticle( particle:Particle ):void
 		{
 			_container.addChild( Object3D( particle.image ) );
+			renderParticle( Particle3D( particle ) );
 		}
 		
 		/**

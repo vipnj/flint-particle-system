@@ -30,9 +30,12 @@
 
 package org.flintparticles.twoD.renderers.mxml
 {
+	import org.flintparticles.common.emitters.Emitter;
+	import org.flintparticles.common.events.EmitterEvent;
 	import org.flintparticles.twoD.particles.Particle2D;
 	
 	import flash.display.Shape;
+	import flash.events.Event;
 	import flash.geom.Rectangle;	
 
 	/**
@@ -79,6 +82,14 @@ package org.flintparticles.twoD.renderers.mxml
 			_shape.graphics.moveTo( particle.previousX, particle.previousY );
 			_shape.graphics.lineTo( particle.x, particle.y );
 			_bitmapData.draw( _shape );
+		}
+
+		override protected function emitterUpdated( ev:EmitterEvent ):void
+		{
+			renderParticles( Emitter( ev.target ).particles );
+		}
+		override protected function updateParticles( ev:Event ):void
+		{
 		}
 	}
 }

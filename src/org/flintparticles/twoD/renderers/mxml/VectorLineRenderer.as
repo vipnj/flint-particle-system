@@ -30,8 +30,12 @@
 
 package org.flintparticles.twoD.renderers.mxml
 {
+	import org.flintparticles.common.emitters.Emitter;
+	import org.flintparticles.common.events.EmitterEvent;
 	import org.flintparticles.common.renderers.FlexRendererBase;
-	import org.flintparticles.twoD.particles.Particle2D;	
+	import org.flintparticles.twoD.particles.Particle2D;
+	
+	import flash.events.Event;	
 
 	/**
 	 * The VectorLineRenderer draws particles as continuous lines mapping the 
@@ -76,6 +80,14 @@ package org.flintparticles.twoD.renderers.mxml
 				graphics.moveTo( particle.previousX, particle.previousY );
 				graphics.lineTo( particle.x, particle.y );
 			}
+		}
+		
+		override protected function emitterUpdated( ev:EmitterEvent ):void
+		{
+			renderParticles( Emitter( ev.target ).particles );
+		}
+		override protected function updateParticles( ev:Event ):void
+		{
 		}
 	}
 }

@@ -161,7 +161,7 @@ package org.flintparticles.common.renderers
 			}
 		}
 
-		private function emitterUpdated( ev:EmitterEvent ):void
+		protected function emitterUpdated( ev:EmitterEvent ):void
 		{
 			if( stage )
 			{
@@ -169,7 +169,7 @@ package org.flintparticles.common.renderers
 			}
 		}
 		
-		private function updateParticles( ev:Event ) : void
+		protected function updateParticles( ev:Event ) : void
 		{
 			var particles:Array = new Array();
 			for( var i:int = 0; i < _emitters.length; ++i )
