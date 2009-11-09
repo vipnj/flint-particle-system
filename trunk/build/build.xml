@@ -188,6 +188,19 @@
 			<arg line='-debug=false'/>
 			<arg line='-optimize=true'/>
 
+			<arg line='-title "Logo Tween"'/>
+			<arg line='-description "An example for the Flint particle system showing a shape tween between two 2D shapes."'/>
+			<arg line='-creator "Richard Lord - flintparticles.org"'/>
+
+			<arg line='-output ../examples2D/LogoTween/PureAS3/LogoOnFire.swf'/>
+			<arg line='../examples2D/LogoTween/PureAS3/Main.as'/>
+		</exec>
+
+		<exec executable="${mxmlc}" failonerror="false">
+			<arg line='-source-path ../src'/>
+			<arg line='-debug=false'/>
+			<arg line='-optimize=true'/>
+
 			<arg line='-title "Mutual Gravity"'/>
 			<arg line='-description "An example for the Flint particle system showing particles in 2D subject to gravity from each other."'/>
 			<arg line='-creator "Richard Lord - flintparticles.org"'/>
