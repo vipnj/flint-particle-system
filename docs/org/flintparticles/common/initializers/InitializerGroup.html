@@ -119,8 +119,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <div class="summarySignature">
 <a class="signatureLink" href="#InitializerGroup()">InitializerGroup</a>(... initializers)</div>
 <div class="summaryTableDescription">
-   The constructor creates a MassesInit initializer for use by 
-   an emitter.</div>
+   The constructor creates an InitializerGroup.</div>
 </td><td class="summaryTableOwnerCol">InitializerGroup</td>
 </tr>
 <tr class="">
@@ -193,24 +192,15 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public function InitializerGroup(... initializers)</code><p>
-   The constructor creates a MassesInit initializer for use by 
-   an emitter. To add a MassesInit to all particles created by 
-   an emitter, use the emitter's addInitializer method.
+   The constructor creates an InitializerGroup.
    
    </p><span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
-<td width="20px"></td><td><code>... <span class="label">initializers</span></code> &mdash; An array containing the Colors to use for 
-   each particle created by the emitter, as 32bit ARGB values.
+<td width="20px"></td><td><code>... <span class="label">initializers</span></code> &mdash; Initializers that should be added to the group.
    </td>
 </tr>
 </table>
-<p>
-<span class="label">See also</span>
-</p>
-<div class="seeAlso">
-<a href="../emitters/Emitter.html#addInitializer()" target="">org.flintparticles.common.emitters.Emitter.addInitializer()</a>
-</div>
 </div>
 <a name="methodDetail"></a>
 <div class="detailSectionHeader">Method detail</div>
