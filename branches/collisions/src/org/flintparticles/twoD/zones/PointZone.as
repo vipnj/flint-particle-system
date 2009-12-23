@@ -30,13 +30,15 @@
 
 package org.flintparticles.twoD.zones 
 {
-	import flash.geom.Point;	
+	import org.flintparticles.twoD.particles.Particle2D;
+
+	import flash.geom.Point;
 
 	/**
 	 * The PointZone zone defines a zone that contains a single point.
 	 */
 
-	public class PointZone implements Zone2D 
+	public class PointZone implements Zone2D, InteractiveZone2D
 	{
 		private var _point:Point;
 		
@@ -134,5 +136,31 @@ package org.flintparticles.twoD.zones
 			// treat as one pixel square
 			return 1;
 		}
+
+		public function collideParticle( particle:Particle2D, bounce:Number = 1 ):Boolean
+		{
+			var dx:Number = particle.x - _point.x;
+			if( Math.abs( dx ) > particle.collisionRadius ) return false;
+			var dy:Number = particle.y - _point.y;
+			if( Math.abs( dy ) > particle.collisionRadius ) return false;
+			var distanceSq:Number = dx * dx + dy * dy;
+			if( distanceSq > particle.collisionRadius * particle.collisionRadius )
+			{
+				return false;
+			}
+			var factor:Number = 1 / Math.sqrt( distanceSq );
+			dx *= factor;
+			dy *= factor;
+			var normalSpeed:Number = dx * particle.velX + dy * particle.velY;
+			if( normalSpeed < 0 ) // colliding, not separating
+			{
+				factor = ( 1 + bounce ) * normalSpeed;
+				particle.velX -= factor * dx;
+				particle.velY -= factor * dy;
+				return true;
+			}
+			return false;
+		}
+
 	}
 }

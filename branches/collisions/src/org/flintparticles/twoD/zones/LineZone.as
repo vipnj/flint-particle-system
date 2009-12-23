@@ -30,17 +30,20 @@
 
 package org.flintparticles.twoD.zones 
 {
-	import flash.geom.Point;	
+	import org.flintparticles.twoD.particles.Particle2D;
+
+	import flash.geom.Point;
 
 	/**
 	 * The LineZone zone defines a zone that contains all the points on a line.
 	 */
 
-	public class LineZone implements Zone2D 
+	public class LineZone implements Zone2D, InteractiveZone2D
 	{
 		private var _start:Point;
 		private var _end:Point;
 		private var _length:Point;
+		private var _normal:Point;
 		
 		/**
 		 * The constructor creates a LineZone zone.
@@ -66,7 +69,14 @@ package org.flintparticles.twoD.zones
 			{
 				_end = end;
 			}
+			setLengthAndNormal();
+		}
+		
+		private function setLengthAndNormal():void
+		{
 			_length = _end.subtract( _start );
+			var len:Number = _length.length;
+			_normal = new Point( _length.y / len, -_length.x / len );
 		}
 		
 		/**
@@ -80,7 +90,7 @@ package org.flintparticles.twoD.zones
 		public function set start( value : Point ) : void
 		{
 			_start = value;
-			_length = _end.subtract( _start );
+			setLengthAndNormal();
 		}
 
 		/**
@@ -94,7 +104,7 @@ package org.flintparticles.twoD.zones
 		public function set end( value : Point ) : void
 		{
 			_end = value;
-			_length = _end.subtract( _start );
+			setLengthAndNormal();
 		}
 
 		/**
@@ -201,5 +211,29 @@ package org.flintparticles.twoD.zones
 			// treat as one pixel tall rectangle
 			return _length.length;
 		}
+
+		public function collideParticle( particle:Particle2D, bounce:Number = 1 ):Boolean
+		{
+			// not colliding if dot product with perpendicular is greater than collision radius
+			var distance:Number = ( particle.x - _start.x ) * _normal.x + ( particle.y - _start.y ) * _normal.y;
+			if ( distance > particle.collisionRadius || distance < -particle.collisionRadius )
+			{
+				return false;
+			}
+			var intersectX:Number = particle.x - distance * _normal.x;
+			var intersectY:Number = particle.y - distance * _normal.y;
+			// is it between the points, dot product of the vectors towards each point is negative
+			if( ( intersectX - _start.x ) * ( intersectX - _end.x ) + ( intersectY - _start.y ) * ( intersectY - _end.y ) > 0 )
+			{
+				return false;
+			}
+			
+			var normalSpeed:Number = _normal.x * particle.velX + _normal.y * particle.velY;
+			var factor:Number = ( 1 + bounce ) * normalSpeed;
+			particle.velX -= factor * _normal.x;
+			particle.velY -= factor * _normal.y;
+			return true;
+		}
+
 	}
 }
