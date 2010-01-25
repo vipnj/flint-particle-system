@@ -63,7 +63,7 @@ package org.flintparticles.twoD.actions
 		 */
 		public function AntiGravity( power:Number = 0, x:Number = 0, y:Number = 0, epsilon:Number = 1 )
 		{
-			super( -power, x, y, epsilon );
+			super( power, x, y, epsilon );
 		}
 		
 		/**
