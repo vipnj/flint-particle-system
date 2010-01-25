@@ -58,7 +58,7 @@ package org.flintparticles.threeD.actions
 		 */
 		public function AntiGravity( power:Number = 0, position:Point3D = null, epsilon:Number = 1 )
 		{
-			super( -power, position, epsilon );
+			super( power, position, epsilon );
 		}
 		
 		/**

@@ -64,7 +64,7 @@ package org.flintparticles.twoD.actions
 		 */
 		public function MouseAntiGravity( power:Number = 0, renderer:DisplayObject = null, epsilon:Number = 1 )
 		{
-			super( -power, renderer, epsilon );
+			super( power, renderer, epsilon );
 		}
 		
 		/**
