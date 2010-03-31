@@ -30,6 +30,7 @@
 
 package org.flintparticles.twoD.zones 
 {
+	import org.flintparticles.twoD.particles.Particle2D;
 	import flash.display.DisplayObject;
 	import flash.geom.Point;
 	import flash.geom.Rectangle;	
@@ -41,7 +42,7 @@ package org.flintparticles.twoD.zones
 	 * position of the zone.
 	 */
 
-	public class DisplayObjectZone  implements Zone2D 
+	public class DisplayObjectZone implements Zone2D, InteractiveZone2D
 	{
 		private var _displayObject : DisplayObject;
 		private var _renderer : DisplayObject;
@@ -146,7 +147,6 @@ package org.flintparticles.twoD.zones
 			return point;
 		}
 
-		
 		/**
 		 * The getArea method returns the size of the zone.
 		 * It's used by the MultiZone class to manage the balancing between the
@@ -157,6 +157,22 @@ package org.flintparticles.twoD.zones
 		public function getArea() : Number
 		{
 			return _area;
+		}
+
+		public function collideParticle(particle:Particle2D, bounce:Number = 1):Boolean
+		{
+			if( contains( particle.x, particle.y ) != contains( particle.previousX, particle.previousY ) )
+			{
+				particle.x = particle.previousX;
+				particle.y = particle.previousY;
+				particle.velX = - particle.velX;
+				particle.velY = - particle.velY;
+				return true;
+			}
+			else
+			{
+				return false;
+			}
 		}
 	}
 }

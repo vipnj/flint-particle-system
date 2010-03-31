@@ -30,6 +30,7 @@
 
 package org.flintparticles.twoD.zones 
 {
+	import org.flintparticles.twoD.particles.Particle2D;
 	import org.flintparticles.common.utils.FastWeightedArray;
 	
 	import flash.display.BitmapData;
@@ -42,7 +43,7 @@ package org.flintparticles.twoD.zones
 	 * when creating particles inside the zone.
 	 */
 
-	public class GreyscaleZone implements Zone2D 
+	public class GreyscaleZone implements Zone2D, InteractiveZone2D
 	{
 		private var _bitmapData : BitmapData;
 		private var _offsetX : Number;
@@ -199,6 +200,22 @@ package org.flintparticles.twoD.zones
 		public function getArea() : Number
 		{
 			return _validPoints.totalRatios * _scaleX * _scaleY;
+		}
+
+		public function collideParticle(particle:Particle2D, bounce:Number = 1):Boolean
+		{
+			if( contains( particle.x, particle.y ) != contains( particle.previousX, particle.previousY ) )
+			{
+				particle.x = particle.previousX;
+				particle.y = particle.previousY;
+				particle.velX = - particle.velX;
+				particle.velY = - particle.velY;
+				return true;
+			}
+			else
+			{
+				return false;
+			}
 		}
 	}
 }

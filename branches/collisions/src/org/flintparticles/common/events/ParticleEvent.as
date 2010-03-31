@@ -55,14 +55,23 @@ package org.flintparticles.common.events
 		public static var PARTICLE_ADDED:String = "particleAdded";
 
 		/**
-		 * The event dispatched by an emitter when a particle collides with another object.
+		 * The event dispatched by an emitter when a particle collides with another particle.
 		 */
 		public static var PARTICLES_COLLISION:String = "particlesCollision";
+		
+		/**
+		 * The event dispatched by an emitter when a particle collides with a zone.
+		 */
+		public static var ZONE_COLLISION:String = "zoneCollision";
 		
 		/**
 		 * The particle to which the event relates.
 		 */
 		public var particle:Particle;
+		
+		/**
+		 * The other object involved in an event. Usually the other element in a collision.
+		 */
 		public var otherObject:*;
 		
 		/**

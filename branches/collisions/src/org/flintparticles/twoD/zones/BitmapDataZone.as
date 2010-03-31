@@ -30,6 +30,7 @@
 
 package org.flintparticles.twoD.zones 
 {
+	import org.flintparticles.twoD.particles.Particle2D;
 	import org.flintparticles.common.utils.FastWeightedArray;
 	
 	import flash.display.BitmapData;
@@ -41,7 +42,7 @@ package org.flintparticles.twoD.zones
 	 * i.e. they have an alpha value greater than zero.
 	 */
 
-	public class BitmapDataZone implements Zone2D 
+	public class BitmapDataZone implements Zone2D, InteractiveZone2D 
 	{
 		private var _bitmapData : BitmapData;
 		private var _offsetX : Number;
@@ -189,7 +190,6 @@ package org.flintparticles.twoD.zones
 			p.y = p.y * _scaleY + _offsetY;
 			return p; 
 		}
-
 		
 		/**
 		 * The getArea method returns the size of the zone.
@@ -201,6 +201,22 @@ package org.flintparticles.twoD.zones
 		public function getArea() : Number
 		{
 			return _validPoints.totalRatios * _scaleX * _scaleY;
+		}
+
+		public function collideParticle(particle:Particle2D, bounce:Number = 1):Boolean
+		{
+			if( contains( particle.x, particle.y ) != contains( particle.previousX, particle.previousY ) )
+			{
+				particle.x = particle.previousX;
+				particle.y = particle.previousY;
+				particle.velX = - particle.velX;
+				particle.velY = - particle.velY;
+				return true;
+			}
+			else
+			{
+				return false;
+			}
 		}
 	}
 }

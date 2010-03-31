@@ -137,30 +137,87 @@ package org.flintparticles.twoD.zones
 			return 1;
 		}
 
-		public function collideParticle( particle:Particle2D, bounce:Number = 1 ):Boolean
+		public function collideParticle(particle:Particle2D, bounce:Number = 1):Boolean
 		{
-			var dx:Number = particle.x - _point.x;
-			if( Math.abs( dx ) > particle.collisionRadius ) return false;
-			var dy:Number = particle.y - _point.y;
-			if( Math.abs( dy ) > particle.collisionRadius ) return false;
-			var distanceSq:Number = dx * dx + dy * dy;
-			if( distanceSq > particle.collisionRadius * particle.collisionRadius )
+			var relativePreviousX:Number = particle.previousX - _point.x;
+			var relativePreviousY:Number = particle.previousY - _point.y;
+			var dot:Number = relativePreviousX * particle.velX + relativePreviousY * particle.velY;
+			if( dot >= 0 )
 			{
 				return false;
 			}
-			var factor:Number = 1 / Math.sqrt( distanceSq );
-			dx *= factor;
-			dy *= factor;
-			var normalSpeed:Number = dx * particle.velX + dy * particle.velY;
-			if( normalSpeed < 0 ) // colliding, not separating
+			var relativeX:Number = particle.x - _point.x;
+			var relativeY:Number = particle.y - _point.y;
+			var radius:Number = particle.collisionRadius;
+			dot = relativeX * particle.velX + relativeY * particle.velY;
+			if( dot <= 0 )
 			{
-				factor = ( 1 + bounce ) * normalSpeed;
-				particle.velX -= factor * dx;
-				particle.velY -= factor * dy;
-				return true;
+				if( relativeX > radius || relativeX < -radius )
+				{
+					return false;
+				}
+				if( relativeY > radius || relativeY < -radius )
+				{
+					return false;
+				}
+				if( relativeX * relativeX + relativeY * relativeY > radius * radius )
+				{
+					return false;
+				}
 			}
-			return false;
+			
+			var frameVelX:Number = relativeX - relativePreviousX;
+			var frameVelY:Number = relativeY - relativePreviousY;
+			var a:Number = frameVelX * frameVelX + frameVelY * frameVelY;
+			var b:Number = 2 * ( relativePreviousX * frameVelX + relativePreviousY * frameVelY );
+			var c:Number = relativePreviousX * relativePreviousX + relativePreviousY * relativePreviousY - radius * radius;
+			var sq:Number = b * b - 4 * a * c;
+			if( sq < 0 )
+			{
+				return false;
+			}
+			var srt:Number = Math.sqrt( sq );
+			var t1:Number = ( -b + srt ) / ( 2 * a );
+			var t2:Number = ( -b - srt ) / ( 2 * a );
+			var t:Array = new Array();
+			
+			if( t1 > 0 && t1 <= 1 )
+			{
+				t.push( t1 );
+			}
+			if( t2 > 0 && t2 <= 1 )
+			{
+				t.push( t2 );
+			}
+			var time:Number;
+			if( t.length == 0 )
+			{
+				return false;
+			}
+			if( t.length == 1 )
+			{
+				time = t[0];
+			}
+			else
+			{
+				time = Math.min( t1, t2 );
+			}
+			var cx:Number = relativePreviousX + time * frameVelX + _point.x;
+			var cy:Number = relativePreviousY + time * frameVelY + _point.y;
+			var nx:Number = cx - _point.x;
+			var ny:Number = cy - _point.y;
+			var d:Number = Math.sqrt( nx * nx + ny * ny );
+			nx /= d;
+			ny /= d;
+			var n:Number = frameVelX * nx + frameVelY * ny;
+			frameVelX -= 2 * nx * n;
+			frameVelY -= 2 * ny * n;
+			particle.x = cx + ( 1 - time ) * frameVelX;
+			particle.y = cy + ( 1 - time ) * frameVelY;
+			var normalVel:Number = particle.velX * nx + particle.velY * ny;
+			particle.velX -= 2 * nx * normalVel;
+			particle.velY -= 2 * ny * normalVel;
+			return true;
 		}
-
 	}
 }

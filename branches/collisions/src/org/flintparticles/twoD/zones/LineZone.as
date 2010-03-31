@@ -220,10 +220,18 @@ package org.flintparticles.twoD.zones
 			{
 				return false;
 			}
-			var intersectX:Number = particle.x - distance * _normal.x;
-			var intersectY:Number = particle.y - distance * _normal.y;
+			var toIntersectX:Number = - distance * _normal.x;
+			var toIntersectY:Number = - distance * _normal.y;
+			var intersectX:Number = particle.x + toIntersectX;
+			var intersectY:Number = particle.y + toIntersectY;
 			// is it between the points, dot product of the vectors towards each point is negative
 			if( ( intersectX - _start.x ) * ( intersectX - _end.x ) + ( intersectY - _start.y ) * ( intersectY - _end.y ) > 0 )
+			{
+				return false;
+			}
+			
+			// is it moving away from the line
+			if( ( toIntersectX * particle.velX ) + ( toIntersectY * particle.velY ) < 0 )
 			{
 				return false;
 			}

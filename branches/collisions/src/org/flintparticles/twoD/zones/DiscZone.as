@@ -229,8 +229,8 @@ package org.flintparticles.twoD.zones
 					particle.velY -= adjustSpeed * dy;
 					distance = Math.sqrt( distanceSq );
 					positionRatio = ( 2 * outerLimit - distance ) / distance + epsilon;
-					particle.x = center.x + dx * positionRatio;
-					particle.y = center.y + dy * positionRatio;
+					particle.x = _center.x + dx * positionRatio;
+					particle.y = _center.y + dy * positionRatio;
 					return true;
 				}
 				
@@ -251,8 +251,8 @@ package org.flintparticles.twoD.zones
 						particle.velY -= adjustSpeed * dy;
 						distance = Math.sqrt( distanceSq );
 						positionRatio = ( 2 * innerLimit - distance ) / distance + epsilon;
-						particle.x = center.x + dx * positionRatio;
-						particle.y = center.y + dy * positionRatio;
+						particle.x = _center.x + dx * positionRatio;
+						particle.y = _center.y + dy * positionRatio;
 						return true;
 					}
 				}
@@ -284,8 +284,8 @@ package org.flintparticles.twoD.zones
 						particle.velY -= adjustSpeed * dy;
 						distance = Math.sqrt( distanceSq );
 						positionRatio = ( 2 * innerLimit - distance ) / distance - epsilon;
-						particle.x = center.x + dx * positionRatio;
-						particle.y = center.y + dy * positionRatio;
+						particle.x = _center.x + dx * positionRatio;
+						particle.y = _center.y + dy * positionRatio;
 						return true;
 					}
 				}
@@ -298,8 +298,8 @@ package org.flintparticles.twoD.zones
 					particle.velY -= adjustSpeed * dy;
 					distance = Math.sqrt( distanceSq );
 					positionRatio = ( 2 * outerLimit - distance ) / distance - epsilon;
-					particle.x = center.x + dx * positionRatio;
-					particle.y = center.y + dy * positionRatio;
+					particle.x = _center.x + dx * positionRatio;
+					particle.y = _center.y + dy * positionRatio;
 					return true;
 				}
 				return false;

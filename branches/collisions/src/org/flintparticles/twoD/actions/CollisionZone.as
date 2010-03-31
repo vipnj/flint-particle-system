@@ -30,6 +30,7 @@
 
 package org.flintparticles.twoD.actions 
 {
+	import org.flintparticles.common.events.ParticleEvent;
 	import org.flintparticles.common.actions.ActionBase;
 	import org.flintparticles.common.emitters.Emitter;
 	import org.flintparticles.common.particles.Particle;
@@ -118,7 +119,13 @@ package org.flintparticles.twoD.actions
 		 */
 		override public function update( emitter:Emitter, particle:Particle, time:Number ):void
 		{
-			_zone.collideParticle( Particle2D( particle ), _bounce );
+			var collide:Boolean = _zone.collideParticle( Particle2D( particle ), _bounce );
+			if( collide )
+			{
+				var ev:ParticleEvent = new ParticleEvent( ParticleEvent.ZONE_COLLISION, particle );
+				ev.otherObject = _zone;
+				emitter.dispatchEvent( ev );
+			}
 		}
 	}
 }
