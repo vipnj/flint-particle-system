@@ -73,22 +73,14 @@ package
 
 		private function moveToTween1( event:ParticleEvent ):void
 		{
-			var dyingParticle:Particle2D = event.particle as Particle2D;
-			var newParticle:Particle2D = tween1Emitter.particleFactory.createParticle() as Particle2D;
-			newParticle.x = dyingParticle.x;
-			newParticle.y = dyingParticle.y;
-			newParticle.color = dyingParticle.color;			
-			tween1Emitter.addExistingParticles( [ newParticle ], true );
+			event.particle.revive();
+			tween1Emitter.addExistingParticles( [ event.particle ], true );
 		}
 		
 		private function moveToTween2( event:ParticleEvent ):void
 		{
-			var dyingParticle:Particle2D = event.particle as Particle2D;
-			var newParticle:Particle2D = tween2Emitter.particleFactory.createParticle() as Particle2D;
-			newParticle.x = dyingParticle.x;
-			newParticle.y = dyingParticle.y;
-			newParticle.color = dyingParticle.color;			
-			tween2Emitter.addExistingParticles( [ newParticle ], true );
+			event.particle.revive();
+			tween2Emitter.addExistingParticles( [ event.particle ], true );
 		}
 	}
 }

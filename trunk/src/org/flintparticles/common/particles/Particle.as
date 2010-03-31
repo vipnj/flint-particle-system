@@ -206,5 +206,13 @@ package org.flintparticles.common.particles
 			}
 			return cloneInto( p );
 		}
+		
+		public function revive():void
+		{
+			lifetime = 0;
+			age = 0;
+			energy = 1;
+			isDead = false;
+		}
 	}
 }

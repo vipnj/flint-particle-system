@@ -750,9 +750,12 @@ package org.flintparticles.common.emitters
 					particle = _particles[i];
 					if ( particle.isDead )
 					{
-						dispatchEvent( new ParticleEvent( ParticleEvent.PARTICLE_DEAD, particle ) );
-						_particleFactory.disposeParticle( particle );
 						_particles.splice( i, 1 );
+						dispatchEvent( new ParticleEvent( ParticleEvent.PARTICLE_DEAD, particle ) );
+						if( particle.isDead )
+						{
+							_particleFactory.disposeParticle( particle );
+						}
 					}
 				}
 			}
