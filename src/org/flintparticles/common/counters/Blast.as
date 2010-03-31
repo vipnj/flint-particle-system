@@ -98,6 +98,7 @@ package org.flintparticles.common.counters
 		 */
 		public function startEmitter( emitter:Emitter ):uint
 		{
+			_done = true;
 			emitter.dispatchCounterComplete();
 			return _startCount;
 		}

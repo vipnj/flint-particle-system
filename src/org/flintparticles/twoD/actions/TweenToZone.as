@@ -38,6 +38,8 @@ package org.flintparticles.twoD.actions
 
 	import flash.geom.Point;
 
+	[DefaultProperty("zone")]
+
 	/**
 	 * The TweenToZone action adjusts the particle's position between two
 	 * locations as it ages. The start location is wherever the particle starts
