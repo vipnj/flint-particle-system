@@ -65,12 +65,17 @@ package org.flintparticles.common.events
 		public static var ZONE_COLLISION:String = "zoneCollision";
 		
 		/**
+		 * The event dispatched by an emitter when a particle collides with another particle.
+		 */
+		public static var BOUNDING_BOX_COLLISION:String = "boundingBoxCollision";
+		
+		/**
 		 * The particle to which the event relates.
 		 */
 		public var particle:Particle;
 		
 		/**
-		 * The other object involved in an event. Usually the other element in a collision.
+		 * The other object involved in the event. This may be null.
 		 */
 		public var otherObject:*;
 		

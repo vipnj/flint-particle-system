@@ -30,6 +30,7 @@
 
 package org.flintparticles.threeD.actions 
 {
+	import org.flintparticles.common.events.ParticleEvent;	
 	import org.flintparticles.common.actions.ActionBase;
 	import org.flintparticles.common.emitters.Emitter;
 	import org.flintparticles.common.particles.Particle;
@@ -196,31 +197,37 @@ package org.flintparticles.threeD.actions
 			{
 				p.velocity.x = -p.velocity.x * _bounce;
 				p.position.x += 2 * ( _maxX - position );
+				emitter.dispatchEvent( new ParticleEvent( ParticleEvent.BOUNDING_BOX_COLLISION, p ) );
 			}
 			else if ( p.velocity.x < 0 && ( position = p.position.x - radius ) <= _minX )
 			{
 				p.velocity.x = -p.velocity.x * _bounce;
 				p.position.x += 2 * ( _minX - position );
+				emitter.dispatchEvent( new ParticleEvent( ParticleEvent.BOUNDING_BOX_COLLISION, p ) );
 			}
 			if ( p.velocity.y > 0 && ( position = p.position.y + radius ) >= _maxY )
 			{
 				p.velocity.y = -p.velocity.y * _bounce;
 				p.position.y += 2 * ( _maxY - position );
+				emitter.dispatchEvent( new ParticleEvent( ParticleEvent.BOUNDING_BOX_COLLISION, p ) );
 			}
 			else if ( p.velocity.y < 0 && ( position = p.position.y - radius ) <= _minY )
 			{
 				p.velocity.y = -p.velocity.y * _bounce;
 				p.position.y += 2 * ( _minY - position );
+				emitter.dispatchEvent( new ParticleEvent( ParticleEvent.BOUNDING_BOX_COLLISION, p ) );
 			}
 			if ( p.velocity.z > 0 && ( position = p.position.z + radius ) >= _maxZ )
 			{
 				p.velocity.z = -p.velocity.z * _bounce;
 				p.position.z += 2 * ( _maxZ - position );
+				emitter.dispatchEvent( new ParticleEvent( ParticleEvent.BOUNDING_BOX_COLLISION, p ) );
 			}
 			else if ( p.velocity.z < 0 && ( position = p.position.z - radius ) <= _minZ )
 			{
 				p.velocity.z = -p.velocity.z * _bounce;
 				p.position.z += 2 * ( _minZ - position );
+				emitter.dispatchEvent( new ParticleEvent( ParticleEvent.BOUNDING_BOX_COLLISION, p ) );
 			}
 		}
 	}

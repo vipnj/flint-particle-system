@@ -38,6 +38,8 @@ package org.flintparticles.threeD.actions
 	import org.flintparticles.threeD.particles.Particle3D;
 	import org.flintparticles.threeD.zones.Zone3D;
 
+	[DefaultProperty("zone")]
+
 	/**
 	 * The TweenToZone action adjusts the particle's position between two
 	 * locations as it ages. The start location is wherever the particle starts

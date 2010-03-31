@@ -98,6 +98,7 @@
 
     <!-- ACTIVITIES -->
     <component class="org.flintparticles.twoD.activities.FollowMouse"/>
+    <component class="org.flintparticles.twoD.activities.FollowDisplayObject"/>
     <component class="org.flintparticles.twoD.activities.MoveEmitter"/>
     <component class="org.flintparticles.twoD.activities.RotateEmitter"/>
     

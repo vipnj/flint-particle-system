@@ -98,7 +98,7 @@ package org.flintparticles.twoD.actions
 			{
 				return;
 			}
-			var scale:Number = 1 - ( _friction * time ) / ( p.angVelocity * p.inertia );
+			var scale:Number = 1 - ( _friction * time ) / ( Math.abs( p.angVelocity ) * p.inertia );
 			if( scale < 0 )
 			{
 				p.angVelocity = 0;

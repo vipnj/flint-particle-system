@@ -135,7 +135,7 @@ package org.flintparticles.twoD.zones
 		 */
 		public function getLocation() : Point
 		{
-			var bounds:Rectangle = _displayObject.getBounds( _displayObject.stage );
+			var bounds:Rectangle = _displayObject.getBounds( _displayObject.root );
 			do
 			{
 				var x : Number = bounds.left + Math.random( ) * bounds.width;
@@ -143,7 +143,7 @@ package org.flintparticles.twoD.zones
 			}
 			while( !_displayObject.hitTestPoint( x, y, true ) );
 			var point:Point = new Point( x, y );
-			point = _renderer.globalToLocal( point );
+			point = _renderer.globalToLocal( displayObject.root.localToGlobal( point ) );
 			return point;
 		}
 
