@@ -79,7 +79,6 @@ package org.flintparticles.twoD.renderers
 		 */
 		override protected function drawParticle( particle:Particle2D ):void
 		{
-			trace( "draw " + (count++) );
 			_shape.graphics.clear();
 			_shape.graphics.lineStyle( particle.scale, particle.color & 0xFFFFFF, particle.color >>> 24 );
 			_shape.graphics.moveTo( particle.previousX, particle.previousY );

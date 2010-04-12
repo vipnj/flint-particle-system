@@ -68,7 +68,7 @@ package org.flintparticles.threeD.initializers
 		public function RotateVelocity( axis:Vector3D = null, minAngVelocity:Number = 0, maxAngVelocity:Number = NaN )
 		{
 			this.axis = axis;
-			this.maxAngVelocity = minAngVelocity;
+			this.minAngVelocity = minAngVelocity;
 			this.maxAngVelocity = maxAngVelocity;
 		}
 		

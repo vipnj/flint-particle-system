@@ -110,10 +110,8 @@ package org.flintparticles.threeD.renderers.controllers
 
 		override protected function updateCamera( time:Number ):void
 		{
-			trace( "update " + upDown );
 			if( upDown || wDown )
 			{
-				trace( "zoom in" );
 				camera.dolly( _trackRate * time );
 			}
 			if( downDown || sDown )
