@@ -207,7 +207,6 @@ package org.flintparticles.threeD.renderers.controllers
 			switch( ev.keyCode )
 			{
 				case Keyboard.UP:
-					trace( "up down true" );
 					upDown = true;
 					break;
 				case Keyboard.DOWN:
@@ -245,7 +244,6 @@ package org.flintparticles.threeD.renderers.controllers
 			switch( ev.keyCode )
 			{
 				case Keyboard.UP:
-					trace( "up down false" );
 					upDown = false;
 					break;
 				case Keyboard.DOWN:
@@ -297,7 +295,6 @@ package org.flintparticles.threeD.renderers.controllers
 		{
 			if( !_running || time > _maximumFrameTime )
 			{
-				trace( "don't update" );
 				return;
 			}
 			updateCamera( time );
