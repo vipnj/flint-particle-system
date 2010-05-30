@@ -59,7 +59,6 @@ package org.flintparticles.twoD.renderers
 	 */
 	public class BitmapLineRenderer extends BitmapRenderer
 	{
-		private var count:int;
 		private var _shape:Shape;
 		/**
 		 * The constructor creates a PixelRenderer. After creation it should be
