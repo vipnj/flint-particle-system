@@ -154,7 +154,7 @@ package org.flintparticles.common.counters
 		 */
 		public function updateEmitter( emitter:Emitter, time : Number ) : uint
 		{
-			if( _stop || _particlesPassed == _particles )
+			if( _stop || _timePassed >= _duration )
 			{
 				return 0;
 			}
