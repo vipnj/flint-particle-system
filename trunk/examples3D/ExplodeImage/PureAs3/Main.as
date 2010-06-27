@@ -30,19 +30,21 @@
 
 package
 {
-	import org.flintparticles.threeD.actions.*;
+	import org.flintparticles.threeD.actions.DeathZone;
+	import org.flintparticles.threeD.actions.Explosion;
+	import org.flintparticles.threeD.actions.Move;
 	import org.flintparticles.threeD.emitters.Emitter3D;
 	import org.flintparticles.threeD.geom.Point3D;
 	import org.flintparticles.threeD.particles.Particle3DUtils;
-	import org.flintparticles.threeD.renderers.*;
+	import org.flintparticles.threeD.renderers.DisplayObjectRenderer;
 	import org.flintparticles.threeD.zones.FrustrumZone;
-	
+
 	import flash.display.Bitmap;
 	import flash.display.Sprite;
 	import flash.events.MouseEvent;
 	import flash.geom.Point;
 	import flash.geom.Rectangle;
-	import flash.text.TextField;	
+	import flash.text.TextField;
 
 	[SWF(width='500', height='350', frameRate='61', backgroundColor='#000000')]
 	

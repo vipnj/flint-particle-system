@@ -29,18 +29,24 @@
 
 package
 {
-	import flash.display.Bitmap;
-	import flash.geom.Point;
-	
-	import org.flintparticles.common.actions.*;
-	import org.flintparticles.common.counters.*;
+	import org.flintparticles.common.actions.Age;
+	import org.flintparticles.common.actions.Fade;
+	import org.flintparticles.common.counters.Blast;
 	import org.flintparticles.common.energyEasing.Quadratic;
 	import org.flintparticles.common.events.EmitterEvent;
-	import org.flintparticles.common.initializers.*;
-	import org.flintparticles.twoD.actions.*;
+	import org.flintparticles.common.initializers.ColorInit;
+	import org.flintparticles.common.initializers.Lifetime;
+	import org.flintparticles.twoD.actions.Accelerate;
+	import org.flintparticles.twoD.actions.LinearDrag;
+	import org.flintparticles.twoD.actions.Move;
 	import org.flintparticles.twoD.emitters.Emitter2D;
-	import org.flintparticles.twoD.initializers.*;
-	import org.flintparticles.twoD.zones.*;	
+	import org.flintparticles.twoD.initializers.Position;
+	import org.flintparticles.twoD.initializers.Velocity;
+	import org.flintparticles.twoD.zones.BitmapDataZone;
+	import org.flintparticles.twoD.zones.DiscZone;
+
+	import flash.display.Bitmap;
+	import flash.geom.Point;
 
 	public class LogoFirework extends Emitter2D
 	{

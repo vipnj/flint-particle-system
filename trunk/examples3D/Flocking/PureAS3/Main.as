@@ -29,12 +29,12 @@
 
 package
 {
-	import flash.display.Sprite;
-	
 	import org.flintparticles.threeD.emitters.Emitter3D;
 	import org.flintparticles.threeD.geom.Point3D;
-	import org.flintparticles.threeD.renderers.*;
-	import org.flintparticles.threeD.renderers.controllers.OrbitCamera;	
+	import org.flintparticles.threeD.renderers.DisplayObjectRenderer;
+	import org.flintparticles.threeD.renderers.controllers.OrbitCamera;
+
+	import flash.display.Sprite;
 
 	[SWF(width='700', height='500', frameRate='61', backgroundColor='#CCCCCC')]
 	

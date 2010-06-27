@@ -29,17 +29,21 @@
 
 package
 {
-	import org.flintparticles.common.actions.*;
-	import org.flintparticles.common.counters.*;
+	import org.flintparticles.common.actions.Age;
+	import org.flintparticles.common.actions.Fade;
+	import org.flintparticles.common.actions.ScaleImage;
+	import org.flintparticles.common.counters.Steady;
 	import org.flintparticles.common.displayObjects.RadialDot;
-	import org.flintparticles.common.initializers.*;
-	import org.flintparticles.threeD.actions.*;
+	import org.flintparticles.common.initializers.Lifetime;
+	import org.flintparticles.threeD.actions.LinearDrag;
+	import org.flintparticles.threeD.actions.Move;
+	import org.flintparticles.threeD.actions.RandomDrift;
 	import org.flintparticles.threeD.away3d.initializers.A3DDisplayObjectClass;
 	import org.flintparticles.threeD.emitters.Emitter3D;
 	import org.flintparticles.threeD.geom.Point3D;
 	import org.flintparticles.threeD.geom.Vector3D;
-	import org.flintparticles.threeD.initializers.*;
-	import org.flintparticles.threeD.zones.*;	
+	import org.flintparticles.threeD.initializers.Velocity;
+	import org.flintparticles.threeD.zones.ConeZone;
 
 	public class Smoke extends Emitter3D
 	{

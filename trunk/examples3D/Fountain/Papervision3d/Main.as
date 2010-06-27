@@ -38,11 +38,11 @@ package
 	import org.papervision3d.scenes.Scene3D;
 	import org.papervision3d.view.Viewport3D;
 	import org.papervision3d.view.layer.BitmapEffectLayer;
-	
+
 	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.filters.BlurFilter;
-	import flash.filters.ColorMatrixFilter;	
+	import flash.filters.ColorMatrixFilter;
 
 	[SWF(width='500', height='500', frameRate='61', backgroundColor='#000000')]
 	

@@ -27,17 +27,22 @@
  * THE SOFTWARE.
  */
 
-import org.flintparticles.common.actions.*;
-import org.flintparticles.common.counters.*;
-import org.flintparticles.common.displayObjects.*;
+import org.flintparticles.common.actions.Age;
+import org.flintparticles.common.actions.Fade;
+import org.flintparticles.common.counters.Steady;
+import org.flintparticles.common.displayObjects.Line;
 import org.flintparticles.common.energyEasing.Quadratic;
-import org.flintparticles.common.initializers.*;
-import org.flintparticles.twoD.actions.*;
-import org.flintparticles.twoD.activities.*;
+import org.flintparticles.common.initializers.ColorInit;
+import org.flintparticles.common.initializers.Lifetime;
+import org.flintparticles.common.initializers.SharedImage;
+import org.flintparticles.twoD.actions.Accelerate;
+import org.flintparticles.twoD.actions.LinearDrag;
+import org.flintparticles.twoD.actions.Move;
+import org.flintparticles.twoD.activities.RotateEmitter;
 import org.flintparticles.twoD.emitters.Emitter2D;
-import org.flintparticles.twoD.initializers.*;
-import org.flintparticles.twoD.renderers.*;
-import org.flintparticles.twoD.zones.*;	
+import org.flintparticles.twoD.initializers.Velocity;
+import org.flintparticles.twoD.renderers.BitmapRenderer;
+import org.flintparticles.twoD.zones.DiscSectorZone;
 
 var emitter:Emitter2D = new Emitter2D();
 

@@ -29,16 +29,21 @@
 
 package
 {
-	import org.flintparticles.common.actions.*;
-	import org.flintparticles.common.counters.*;
+	import org.flintparticles.common.actions.Age;
+	import org.flintparticles.common.counters.Steady;
 	import org.flintparticles.common.displayObjects.Dot;
-	import org.flintparticles.common.initializers.*;
-	import org.flintparticles.threeD.actions.*;
+	import org.flintparticles.common.initializers.ColorInit;
+	import org.flintparticles.common.initializers.Lifetime;
+	import org.flintparticles.common.initializers.SharedImage;
+	import org.flintparticles.threeD.actions.Accelerate;
+	import org.flintparticles.threeD.actions.Move;
 	import org.flintparticles.threeD.emitters.Emitter3D;
 	import org.flintparticles.threeD.geom.Point3D;
 	import org.flintparticles.threeD.geom.Vector3D;
-	import org.flintparticles.threeD.initializers.*;
-	import org.flintparticles.threeD.zones.*;	
+	import org.flintparticles.threeD.initializers.Position;
+	import org.flintparticles.threeD.initializers.Velocity;
+	import org.flintparticles.threeD.zones.DiscZone;
+	import org.flintparticles.threeD.zones.PointZone;
 
 	public class Candle extends Emitter3D
 	{

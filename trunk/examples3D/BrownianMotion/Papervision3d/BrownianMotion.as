@@ -29,20 +29,28 @@
 
 package
 {
-	import org.flintparticles.common.counters.*;
-	import org.flintparticles.common.initializers.*;
-	import org.flintparticles.threeD.actions.*;
+	import org.flintparticles.common.counters.Blast;
+	import org.flintparticles.common.initializers.ChooseInitializer;
+	import org.flintparticles.common.initializers.CollisionRadiusInit;
+	import org.flintparticles.common.initializers.ColorInit;
+	import org.flintparticles.common.initializers.InitializerGroup;
+	import org.flintparticles.common.initializers.MassInit;
+	import org.flintparticles.threeD.actions.BoundingBox;
+	import org.flintparticles.threeD.actions.Collide;
+	import org.flintparticles.threeD.actions.Move;
 	import org.flintparticles.threeD.emitters.Emitter3D;
 	import org.flintparticles.threeD.geom.Point3D;
 	import org.flintparticles.threeD.geom.Vector3D;
-	import org.flintparticles.threeD.initializers.*;
+	import org.flintparticles.threeD.initializers.Position;
+	import org.flintparticles.threeD.initializers.Velocity;
 	import org.flintparticles.threeD.papervision3d.initializers.ApplyMaterial;
 	import org.flintparticles.threeD.papervision3d.initializers.PV3DObjectClass;
-	import org.flintparticles.threeD.zones.*;
+	import org.flintparticles.threeD.zones.BoxZone;
+	import org.flintparticles.threeD.zones.SphereZone;
 	import org.papervision3d.core.geom.renderables.Particle;
 	import org.papervision3d.materials.special.ParticleMaterial;
-	
-	import flash.display.DisplayObject;	
+
+	import flash.display.DisplayObject;
 
 	public class BrownianMotion extends Emitter3D
 	{
