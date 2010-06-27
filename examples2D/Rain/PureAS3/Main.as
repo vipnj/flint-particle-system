@@ -32,7 +32,7 @@ package
 	import flash.display.Sprite;
 	
 	import org.flintparticles.twoD.emitters.Emitter2D;
-	import org.flintparticles.twoD.renderers.*;	
+	import org.flintparticles.twoD.renderers.DisplayObjectRenderer;	
 
 	[SWF(width='400', height='400', frameRate='61', backgroundColor='#000000')]
 	

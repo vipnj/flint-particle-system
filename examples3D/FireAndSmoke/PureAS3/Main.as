@@ -33,10 +33,10 @@ package
 	import org.flintparticles.threeD.geom.Point3D;
 	import org.flintparticles.threeD.renderers.BitmapRenderer;
 	import org.flintparticles.threeD.renderers.controllers.OrbitCamera;
-	
+
 	import flash.display.Sprite;
 	import flash.geom.Rectangle;
-	import flash.text.TextField;	
+	import flash.text.TextField;
 
 	[SWF(width='400', height='400', frameRate='61', backgroundColor='#000000')]
 	

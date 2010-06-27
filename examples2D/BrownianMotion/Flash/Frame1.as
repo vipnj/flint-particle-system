@@ -27,15 +27,25 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
- 
-import org.flintparticles.common.counters.*;
+
+import org.flintparticles.common.counters.Blast;
 import org.flintparticles.common.displayObjects.Dot;
-import org.flintparticles.common.initializers.*;
-import org.flintparticles.twoD.actions.*;
+import org.flintparticles.common.initializers.ChooseInitializer;
+import org.flintparticles.common.initializers.CollisionRadiusInit;
+import org.flintparticles.common.initializers.ColorInit;
+import org.flintparticles.common.initializers.ImageClass;
+import org.flintparticles.common.initializers.InitializerGroup;
+import org.flintparticles.common.initializers.MassInit;
+import org.flintparticles.twoD.actions.BoundingBox;
+import org.flintparticles.twoD.actions.Collide;
+import org.flintparticles.twoD.actions.Move;
 import org.flintparticles.twoD.emitters.Emitter2D;
-import org.flintparticles.twoD.initializers.*;
-import org.flintparticles.twoD.renderers.*;
-import org.flintparticles.twoD.zones.*;	
+import org.flintparticles.twoD.initializers.Position;
+import org.flintparticles.twoD.initializers.Velocity;
+import org.flintparticles.twoD.renderers.DisplayObjectRenderer;
+import org.flintparticles.twoD.zones.DiscZone;
+import org.flintparticles.twoD.zones.RectangleZone;
+
 
 var txt:TextField = new TextField();
 txt.text = "Hold down the shift key to hide the air particles.";

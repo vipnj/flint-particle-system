@@ -29,16 +29,21 @@
 
 package
 {
-	import flash.geom.Point;
-	
-	import org.flintparticles.common.actions.*;
-	import org.flintparticles.common.counters.*;
+	import org.flintparticles.common.actions.Age;
+	import org.flintparticles.common.actions.Fade;
+	import org.flintparticles.common.actions.ScaleImage;
+	import org.flintparticles.common.counters.Steady;
 	import org.flintparticles.common.displayObjects.RadialDot;
-	import org.flintparticles.common.initializers.*;
-	import org.flintparticles.twoD.actions.*;
+	import org.flintparticles.common.initializers.Lifetime;
+	import org.flintparticles.common.initializers.SharedImage;
+	import org.flintparticles.twoD.actions.LinearDrag;
+	import org.flintparticles.twoD.actions.Move;
+	import org.flintparticles.twoD.actions.RandomDrift;
 	import org.flintparticles.twoD.emitters.Emitter2D;
-	import org.flintparticles.twoD.initializers.*;
-	import org.flintparticles.twoD.zones.*;	
+	import org.flintparticles.twoD.initializers.Velocity;
+	import org.flintparticles.twoD.zones.DiscSectorZone;
+
+	import flash.geom.Point;
 
 	public class Smoke extends Emitter2D
 	{

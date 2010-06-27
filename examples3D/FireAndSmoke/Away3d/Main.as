@@ -31,12 +31,12 @@ package
 {
 	import away3d.containers.View3D;
 	import away3d.core.math.Number3D;
-	
+
 	import org.flintparticles.threeD.away3d.Away3DRenderer;
 	import org.flintparticles.threeD.emitters.Emitter3D;
-	
+
 	import flash.display.Sprite;
-	import flash.events.Event;	
+	import flash.events.Event;
 
 	[SWF(width='400', height='400', frameRate='61', backgroundColor='#000000')]
 	

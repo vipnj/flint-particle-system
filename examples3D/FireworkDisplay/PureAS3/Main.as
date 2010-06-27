@@ -35,15 +35,15 @@ package
 	import org.flintparticles.threeD.emitters.Emitter3D;
 	import org.flintparticles.threeD.geom.Point3D;
 	import org.flintparticles.threeD.particles.Particle3D;
-	import org.flintparticles.threeD.renderers.*;
+	import org.flintparticles.threeD.renderers.BitmapRenderer;
 	import org.flintparticles.threeD.renderers.controllers.FirstPersonCamera;
 	import org.flintparticles.threeD.zones.LineZone;
-	
+
 	import flash.display.Sprite;
 	import flash.filters.BlurFilter;
 	import flash.filters.ColorMatrixFilter;
 	import flash.geom.Rectangle;
-	import flash.text.TextField;	
+	import flash.text.TextField;
 
 	[SWF(width='800', height='600', frameRate='61', backgroundColor='#000000')]
 	

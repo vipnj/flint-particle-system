@@ -29,16 +29,25 @@
 
 package
 {
+	import org.flintparticles.common.counters.Blast;
+	import org.flintparticles.common.displayObjects.Dot;
+	import org.flintparticles.common.initializers.ChooseInitializer;
+	import org.flintparticles.common.initializers.CollisionRadiusInit;
+	import org.flintparticles.common.initializers.ColorInit;
+	import org.flintparticles.common.initializers.ImageClass;
+	import org.flintparticles.common.initializers.InitializerGroup;
+	import org.flintparticles.common.initializers.MassInit;
+	import org.flintparticles.twoD.actions.BoundingBox;
+	import org.flintparticles.twoD.actions.Collide;
+	import org.flintparticles.twoD.actions.Move;
+	import org.flintparticles.twoD.emitters.Emitter2D;
+	import org.flintparticles.twoD.initializers.Position;
+	import org.flintparticles.twoD.initializers.Velocity;
+	import org.flintparticles.twoD.zones.DiscZone;
+	import org.flintparticles.twoD.zones.RectangleZone;
+
 	import flash.display.DisplayObject;
 	import flash.geom.Point;
-	
-	import org.flintparticles.common.counters.*;
-	import org.flintparticles.common.displayObjects.Dot;
-	import org.flintparticles.common.initializers.*;
-	import org.flintparticles.twoD.actions.*;
-	import org.flintparticles.twoD.emitters.Emitter2D;
-	import org.flintparticles.twoD.initializers.*;
-	import org.flintparticles.twoD.zones.*;	
 
 	public class BrownianMotion extends Emitter2D
 	{

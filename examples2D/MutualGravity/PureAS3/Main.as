@@ -29,12 +29,12 @@
 
 package
 {
+	import org.flintparticles.twoD.emitters.Emitter2D;
+	import org.flintparticles.twoD.renderers.BitmapRenderer;
+
 	import flash.display.Sprite;
 	import flash.filters.BlurFilter;
 	import flash.geom.Rectangle;
-	
-	import org.flintparticles.twoD.emitters.Emitter2D;
-	import org.flintparticles.twoD.renderers.*;	
 
 	[SWF(width='400', height='400', frameRate='61', backgroundColor='#000000')]
 	

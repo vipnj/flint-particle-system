@@ -31,14 +31,12 @@ package
 {
 	import org.flintparticles.common.events.ParticleEvent;
 	import org.flintparticles.twoD.emitters.Emitter2D;
-	import org.flintparticles.twoD.particles.Particle2D;
-	import org.flintparticles.twoD.renderers.PixelRenderer;	
+	import org.flintparticles.twoD.renderers.PixelRenderer;
 
 	import flash.display.Sprite;
 	import flash.filters.BlurFilter;
 	import flash.filters.ColorMatrixFilter;
 	import flash.geom.Rectangle;
-	
 
 	[SWF(width='400', height='200', frameRate='61', backgroundColor='#000000')]
 	

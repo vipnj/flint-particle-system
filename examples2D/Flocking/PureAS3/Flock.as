@@ -29,14 +29,22 @@
 
 package
 {
-	import flash.geom.Point;
-	
-	import org.flintparticles.common.counters.*;
-	import org.flintparticles.common.initializers.*;
-	import org.flintparticles.twoD.actions.*;
+	import org.flintparticles.common.counters.Blast;
+	import org.flintparticles.common.initializers.ImageClass;
+	import org.flintparticles.twoD.actions.ApproachNeighbours;
+	import org.flintparticles.twoD.actions.BoundingBox;
+	import org.flintparticles.twoD.actions.MatchVelocity;
+	import org.flintparticles.twoD.actions.MinimumDistance;
+	import org.flintparticles.twoD.actions.Move;
+	import org.flintparticles.twoD.actions.RotateToDirection;
+	import org.flintparticles.twoD.actions.SpeedLimit;
 	import org.flintparticles.twoD.emitters.Emitter2D;
-	import org.flintparticles.twoD.initializers.*;
-	import org.flintparticles.twoD.zones.*;	
+	import org.flintparticles.twoD.initializers.Position;
+	import org.flintparticles.twoD.initializers.Velocity;
+	import org.flintparticles.twoD.zones.DiscZone;
+	import org.flintparticles.twoD.zones.RectangleZone;
+
+	import flash.geom.Point;
 
 	public class Flock extends Emitter2D
 	{
