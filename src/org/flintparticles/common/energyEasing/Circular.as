@@ -38,7 +38,7 @@
  * Modifications:
  * 
  * Author: Richard Lord
- * Copyright (c) Richard Lord 2008-2009
+ * Copyright (c) Richard Lord 2008-2010
  * http://flintparticles.org
  * 
  * 
