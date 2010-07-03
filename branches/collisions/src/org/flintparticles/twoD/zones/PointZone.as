@@ -38,7 +38,7 @@ package org.flintparticles.twoD.zones
 	 * The PointZone zone defines a zone that contains a single point.
 	 */
 
-	public class PointZone implements Zone2D, InteractiveZone2D
+	public class PointZone implements Zone2D
 	{
 		private var _point:Point;
 		

@@ -30,12 +30,12 @@
 
 package org.flintparticles.twoD.actions 
 {
-	import org.flintparticles.common.events.ParticleEvent;
 	import org.flintparticles.common.actions.ActionBase;
 	import org.flintparticles.common.emitters.Emitter;
+	import org.flintparticles.common.events.ParticleEvent;
 	import org.flintparticles.common.particles.Particle;
 	import org.flintparticles.twoD.particles.Particle2D;
-	import org.flintparticles.twoD.zones.InteractiveZone2D;
+	import org.flintparticles.twoD.zones.Zone2D;
 
 	/**
 	 * The Collide action detects collisions between particles and modifies their 
@@ -56,7 +56,7 @@ package org.flintparticles.twoD.actions
 	public class CollisionZone extends ActionBase
 	{
 		private var _bounce:Number;
-		private var _zone:InteractiveZone2D;
+		private var _zone:Zone2D;
 		
 		/**
 		 * The constructor creates a Collide action for use by  an emitter.
@@ -71,7 +71,7 @@ package org.flintparticles.twoD.actions
 		 * collision. A value greater than 1 causes the particle to gain energy 
 		 * in the collision.
 		 */
-		public function CollisionZone( zone:InteractiveZone2D = null, bounce:Number = 1 )
+		public function CollisionZone( zone:Zone2D = null, bounce:Number = 1 )
 		{
 			priority = -30;
 			this.bounce = bounce;
@@ -81,11 +81,11 @@ package org.flintparticles.twoD.actions
 		/**
 		 * The zone.
 		 */
-		public function get zone():InteractiveZone2D
+		public function get zone():Zone2D
 		{
 			return _zone;
 		}
-		public function set zone( value:InteractiveZone2D ):void
+		public function set zone( value:Zone2D ):void
 		{
 			_zone = value;
 		}

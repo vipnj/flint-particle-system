@@ -42,7 +42,7 @@ package org.flintparticles.twoD.zones
 	 * position of the zone.
 	 */
 
-	public class DisplayObjectZone implements Zone2D, InteractiveZone2D
+	public class DisplayObjectZone implements Zone2D
 	{
 		private var _displayObject : DisplayObject;
 		private var _renderer : DisplayObject;

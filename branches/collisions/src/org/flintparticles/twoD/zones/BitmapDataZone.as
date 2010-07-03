@@ -42,7 +42,7 @@ package org.flintparticles.twoD.zones
 	 * i.e. they have an alpha value greater than zero.
 	 */
 
-	public class BitmapDataZone implements Zone2D, InteractiveZone2D 
+	public class BitmapDataZone implements Zone2D 
 	{
 		private var _bitmapData : BitmapData;
 		private var _offsetX : Number;

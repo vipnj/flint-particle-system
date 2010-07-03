@@ -30,7 +30,9 @@
 
 package org.flintparticles.twoD.zones 
 {
-	import flash.geom.Point;	
+	import org.flintparticles.twoD.particles.Particle2D;
+
+	import flash.geom.Point;
 
 	/**
 	 * The DiscSectorZone zone defines a section of a Disc zone. The disc
@@ -110,14 +112,14 @@ package org.flintparticles.twoD.zones
 		{
 			if( _maxAngle )
 			{
-			while ( angle > _maxAngle )
-			{
-				angle -= TWOPI;
-			}
-			while ( angle < _minAllowed )
-			{
-				angle += TWOPI;
-			}
+				while ( angle > _maxAngle )
+				{
+					angle -= TWOPI;
+				}
+				while ( angle < _minAllowed )
+				{
+					angle += TWOPI;
+				}
 			}
 			return angle;
 		}
@@ -280,6 +282,56 @@ package org.flintparticles.twoD.zones
 		public function getArea():Number
 		{
 			return ( Math.PI * _outerSq - Math.PI * _innerSq );
+		}
+
+		public function collideParticle(particle:Particle2D, bounce:Number = 1):Boolean
+		{
+			var xNow:Number = particle.x - _center.x;
+			var yNow:Number = particle.y - _center.y;
+			var xThen:Number = particle.previousX - _center.x;
+			var yThen:Number = particle.previousY - _center.y;
+			var insideNow:Boolean = true;
+			var insideThen:Boolean = true;
+			
+			var distNowSq:Number = xNow * xNow + yNow * yNow;
+			var distThenSq:Number = xThen * xThen + yThen * yThen;
+			if ( distNowSq > _outerSq || distNowSq < _innerSq )
+			{
+				insideNow = false;
+			}
+			if ( distThenSq > _outerSq || distThenSq < _innerSq )
+			{
+				insideThen = false;
+			}
+			if ( (! insideNow) && (! insideThen) )
+			{
+				return false;
+			}
+			
+			var angleNow:Number = clamp( Math.atan2( yNow, xNow ) );
+			var angleThen:Number = clamp( Math.atan2( yThen, xThen ) );
+			insideNow = insideNow && angleNow >= _minAngle;
+			insideThen = insideThen && angleThen >= minAngle;
+			if ( insideNow == insideThen )
+			{
+				return false;
+			}
+			
+			if( insideNow )
+			{
+				if( distThenSq > _outerSq )
+				{
+					
+				}
+			}
+			else
+			{
+				//blah
+			}
+
+
+
+			return true;
 		}
 	}
 }

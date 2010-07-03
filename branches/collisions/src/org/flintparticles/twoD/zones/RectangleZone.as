@@ -38,7 +38,7 @@ package org.flintparticles.twoD.zones
 	 * The RectangleZone zone defines a rectangular shaped zone.
 	 */
 
-	public class RectangleZone implements Zone2D, InteractiveZone2D
+	public class RectangleZone implements Zone2D
 	{
 		private var _left : Number;
 		private var _top : Number;

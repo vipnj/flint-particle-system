@@ -39,7 +39,7 @@ package org.flintparticles.twoD.zones
 	 * have a hole in the middle, like a doughnut.
 	 */
 
-	public class DiscZone implements Zone2D, InteractiveZone2D
+	public class DiscZone implements Zone2D
 	{
 		private var _center:Point;
 		private var _innerRadius:Number;
