@@ -3,7 +3,7 @@
  * .....................
  * 
  * Author: Richard Lord
- * Copyright (c) Richard Lord 2008-2009
+ * Copyright (c) Richard Lord 2008-2010
  * http://flintparticles.org/
  * 
  * Licence Agreement
@@ -29,17 +29,20 @@
 
 package
 {
-	import org.flintparticles.common.actions.*;
-	import org.flintparticles.common.counters.*;
+	import org.flintparticles.common.actions.Age;
+	import org.flintparticles.common.counters.Steady;
 	import org.flintparticles.common.displayObjects.Dot;
-	import org.flintparticles.common.initializers.*;
-	import org.flintparticles.threeD.actions.*;
+	import org.flintparticles.common.initializers.ColorInit;
+	import org.flintparticles.common.initializers.Lifetime;
+	import org.flintparticles.common.initializers.SharedImage;
+	import org.flintparticles.threeD.actions.Accelerate;
+	import org.flintparticles.threeD.actions.Move;
 	import org.flintparticles.threeD.activities.RotateEmitter;
 	import org.flintparticles.threeD.emitters.Emitter3D;
 	import org.flintparticles.threeD.geom.Point3D;
 	import org.flintparticles.threeD.geom.Vector3D;
-	import org.flintparticles.threeD.initializers.*;
-	import org.flintparticles.threeD.zones.*;	
+	import org.flintparticles.threeD.initializers.Velocity;
+	import org.flintparticles.threeD.zones.ConeZone;
 
 	public class CatherineWheel extends Emitter3D
 	{

@@ -3,7 +3,7 @@
  * .....................
  * 
  * Author: Richard Lord
- * Copyright (c) Richard Lord 2008-2009
+ * Copyright (c) Richard Lord 2008-2010
  * http://flintparticles.org
  * 
  * 
@@ -30,16 +30,16 @@
 
 package
 {
+	import org.flintparticles.common.actions.ActionBase;
+	import org.flintparticles.common.emitters.Emitter;
+	import org.flintparticles.common.particles.Particle;
+
+	import mx.core.IMXMLObject;
+
 	import flash.display.DisplayObject;
 	import flash.events.Event;
 	import flash.events.KeyboardEvent;
 	import flash.ui.Keyboard;
-	
-	import mx.core.IMXMLObject;
-	
-	import org.flintparticles.common.actions.ActionBase;
-	import org.flintparticles.common.emitters.Emitter;
-	import org.flintparticles.common.particles.Particle;	
 
 	/**
 	 * The KeyDownAction Action uses another action. It applies the other action

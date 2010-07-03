@@ -4,7 +4,7 @@
  * .....................
  * 
  * Author: Richard Lord
- * Copyright (c) Richard Lord 2008-2009
+ * Copyright (c) Richard Lord 2008-2010
  * http://flintparticles.org/
  * 
  * Licence Agreement
@@ -30,17 +30,19 @@
 
 package
 {
+	import org.flintparticles.twoD.actions.DeathZone;
+	import org.flintparticles.twoD.actions.Explosion;
+	import org.flintparticles.twoD.actions.Move;
+	import org.flintparticles.twoD.emitters.Emitter2D;
+	import org.flintparticles.twoD.particles.Particle2DUtils;
+	import org.flintparticles.twoD.renderers.DisplayObjectRenderer;
+	import org.flintparticles.twoD.zones.RectangleZone;
+
 	import flash.display.Bitmap;
 	import flash.display.Sprite;
 	import flash.events.MouseEvent;
 	import flash.geom.Point;
 	import flash.text.TextField;
-	
-	import org.flintparticles.twoD.actions.*;
-	import org.flintparticles.twoD.emitters.Emitter2D;
-	import org.flintparticles.twoD.particles.Particle2DUtils;
-	import org.flintparticles.twoD.renderers.*;
-	import org.flintparticles.twoD.zones.RectangleZone;	
 
 	[SWF(width='500', height='350', frameRate='61', backgroundColor='#000000')]
 	

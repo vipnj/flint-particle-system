@@ -3,7 +3,7 @@
  * .....................
  * 
  * Author: Richard Lord
- * Copyright (c) Richard Lord 2008-2009
+ * Copyright (c) Richard Lord 2008-2010
  * http://flintparticles.org/
  * 
  * Licence Agreement
@@ -29,15 +29,23 @@
 
 package
 {
-	import flash.geom.Point;
-	
-	import org.flintparticles.common.actions.*;
-	import org.flintparticles.common.counters.*;
-	import org.flintparticles.common.initializers.*;
-	import org.flintparticles.twoD.actions.*;
+	import org.flintparticles.common.actions.Age;
+	import org.flintparticles.common.actions.ColorChange;
+	import org.flintparticles.common.actions.ScaleImage;
+	import org.flintparticles.common.counters.Steady;
+	import org.flintparticles.common.initializers.Lifetime;
+	import org.flintparticles.common.initializers.SharedImage;
+	import org.flintparticles.twoD.actions.Accelerate;
+	import org.flintparticles.twoD.actions.LinearDrag;
+	import org.flintparticles.twoD.actions.Move;
+	import org.flintparticles.twoD.actions.RotateToDirection;
 	import org.flintparticles.twoD.emitters.Emitter2D;
-	import org.flintparticles.twoD.initializers.*;
-	import org.flintparticles.twoD.zones.*;	
+	import org.flintparticles.twoD.initializers.Position;
+	import org.flintparticles.twoD.initializers.Velocity;
+	import org.flintparticles.twoD.zones.DiscSectorZone;
+	import org.flintparticles.twoD.zones.DiscZone;
+
+	import flash.geom.Point;
 
 	public class Fire extends Emitter2D
 	{

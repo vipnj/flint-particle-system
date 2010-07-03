@@ -3,7 +3,7 @@
  * .....................
  * 
  * Author: Richard Lord
- * Copyright (c) Richard Lord 2008-2009
+ * Copyright (c) Richard Lord 2008-2010
  * http://flintparticles.org/
  * 
  * Licence Agreement
@@ -29,14 +29,22 @@
 
 package
 {
-	import org.flintparticles.common.counters.*;
-	import org.flintparticles.common.initializers.*;
-	import org.flintparticles.threeD.actions.*;
+	import org.flintparticles.common.counters.Blast;
+	import org.flintparticles.common.initializers.ImageClass;
+	import org.flintparticles.threeD.actions.ApproachNeighbours;
+	import org.flintparticles.threeD.actions.BoundingBox;
+	import org.flintparticles.threeD.actions.MatchVelocity;
+	import org.flintparticles.threeD.actions.MinimumDistance;
+	import org.flintparticles.threeD.actions.Move;
+	import org.flintparticles.threeD.actions.RotateToDirection;
+	import org.flintparticles.threeD.actions.SpeedLimit;
 	import org.flintparticles.threeD.emitters.Emitter3D;
 	import org.flintparticles.threeD.geom.Point3D;
 	import org.flintparticles.threeD.geom.Vector3D;
-	import org.flintparticles.threeD.initializers.*;
-	import org.flintparticles.threeD.zones.*;	
+	import org.flintparticles.threeD.initializers.Position;
+	import org.flintparticles.threeD.initializers.Velocity;
+	import org.flintparticles.threeD.zones.BoxZone;
+	import org.flintparticles.threeD.zones.SphereZone;
 
 	public class Flock extends Emitter3D
 	{

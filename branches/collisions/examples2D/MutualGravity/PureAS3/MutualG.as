@@ -3,7 +3,7 @@
  * .....................
  * 
  * Author: Richard Lord
- * Copyright (c) Richard Lord 2008-2009
+ * Copyright (c) Richard Lord 2008-2010
  * http://flintparticles.org/
  * 
  * Licence Agreement
@@ -29,13 +29,17 @@
 
 package
 {
-	import org.flintparticles.common.counters.*;
+	import org.flintparticles.common.counters.Blast;
 	import org.flintparticles.common.displayObjects.Dot;
-	import org.flintparticles.common.initializers.*;
-	import org.flintparticles.twoD.actions.*;
+	import org.flintparticles.common.initializers.ColorInit;
+	import org.flintparticles.common.initializers.SharedImage;
+	import org.flintparticles.twoD.actions.BoundingBox;
+	import org.flintparticles.twoD.actions.Move;
+	import org.flintparticles.twoD.actions.MutualGravity;
+	import org.flintparticles.twoD.actions.SpeedLimit;
 	import org.flintparticles.twoD.emitters.Emitter2D;
-	import org.flintparticles.twoD.initializers.*;
-	import org.flintparticles.twoD.zones.*;	
+	import org.flintparticles.twoD.initializers.Position;
+	import org.flintparticles.twoD.zones.RectangleZone;
 
 	public class MutualG extends Emitter2D
 	{

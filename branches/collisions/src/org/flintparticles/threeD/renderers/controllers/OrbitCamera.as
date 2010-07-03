@@ -3,7 +3,7 @@
  * .....................
  * 
  * Author: Richard Lord
- * Copyright (c) Richard Lord 2008-2009
+ * Copyright (c) Richard Lord 2008-2010
  * http://flintparticles.org
  * 
  * 
@@ -110,10 +110,8 @@ package org.flintparticles.threeD.renderers.controllers
 
 		override protected function updateCamera( time:Number ):void
 		{
-			trace( "update " + upDown );
 			if( upDown || wDown )
 			{
-				trace( "zoom in" );
 				camera.dolly( _trackRate * time );
 			}
 			if( downDown || sDown )

@@ -4,7 +4,7 @@
  * .....................
  * 
  * Author: Richard Lord
- * Copyright (c) Richard Lord 2008-2009
+ * Copyright (c) Richard Lord 2008-2010
  * http://flintparticles.org
  * 
  * 
@@ -154,7 +154,7 @@ package org.flintparticles.common.counters
 		 */
 		public function updateEmitter( emitter:Emitter, time : Number ) : uint
 		{
-			if( _stop || _particlesPassed == _particles )
+			if( _stop || _timePassed >= _duration )
 			{
 				return 0;
 			}

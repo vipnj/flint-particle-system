@@ -3,7 +3,7 @@
  * .....................
  * 
  * Author: Richard Lord
- * Copyright (c) Richard Lord 2008-2009
+ * Copyright (c) Richard Lord 2008-2010
  * http://flintparticles.org/
  * 
  * Licence Agreement
@@ -29,23 +29,23 @@
 
 package
 {
+	import org.flintparticles.threeD.emitters.Emitter3D;
+	import org.flintparticles.threeD.geom.Point3D;
+	import org.flintparticles.threeD.renderers.PixelRenderer;
+	import org.flintparticles.threeD.renderers.controllers.OrbitCamera;
+
 	import flash.display.Sprite;
 	import flash.filters.BlurFilter;
 	import flash.filters.ColorMatrixFilter;
 	import flash.geom.Rectangle;
 	import flash.text.TextField;
-	
-	import org.flintparticles.threeD.emitters.Emitter3D;
-	import org.flintparticles.threeD.geom.Point3D;
-	import org.flintparticles.threeD.renderers.*;
-	import org.flintparticles.threeD.renderers.controllers.*;	
 
 	[SWF(width='500', height='500', frameRate='61', backgroundColor='#000000')]
 	
 	public class Main extends Sprite
 	{
 		private var emitter:Emitter3D;
-		private var renderer:BitmapRenderer;
+		private var renderer:PixelRenderer;
 		private var orbitter:OrbitCamera;
 		
 		public function Main()

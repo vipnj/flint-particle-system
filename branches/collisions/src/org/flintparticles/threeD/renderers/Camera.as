@@ -3,7 +3,7 @@
  * .....................
  * 
  * Author: Richard Lord
- * Copyright (c) Richard Lord 2008-2009
+ * Copyright (c) Richard Lord 2008-2010
  * http://flintparticles.org
  * 
  * 
@@ -195,7 +195,6 @@ package org.flintparticles.threeD.renderers
 		 */
 		public function dolly( distance:Number ):void
 		{
-			trace( "dolly " + distance );
 			_position.incrementBy( _direction.multiply( distance ) );
 			_spaceTransform = null;
 		}

@@ -3,7 +3,7 @@
  * .....................
  * 
  * Author: Richard Lord
- * Copyright (c) Richard Lord 2008-2009
+ * Copyright (c) Richard Lord 2008-2010
  * http://flintparticles.org/
  * 
  * Licence Agreement
@@ -36,9 +36,9 @@ package
 	import org.papervision3d.render.BasicRenderEngine;
 	import org.papervision3d.scenes.Scene3D;
 	import org.papervision3d.view.Viewport3D;
-	
+
 	import flash.display.Sprite;
-	import flash.events.Event;	
+	import flash.events.Event;
 
 	[SWF(width='400', height='400', frameRate='61', backgroundColor='#000000')]
 	

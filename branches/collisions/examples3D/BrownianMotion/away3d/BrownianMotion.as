@@ -3,7 +3,7 @@
  * .....................
  * 
  * Author: Richard Lord
- * Copyright (c) Richard Lord 2008-2009
+ * Copyright (c) Richard Lord 2008-2010
  * http://flintparticles.org/
  * 
  * Licence Agreement
@@ -29,18 +29,26 @@
 
 package
 {
-	import org.flintparticles.common.counters.*;
+	import org.flintparticles.common.counters.Blast;
 	import org.flintparticles.common.displayObjects.Dot;
-	import org.flintparticles.common.initializers.*;
-	import org.flintparticles.threeD.actions.*;
+	import org.flintparticles.common.initializers.ChooseInitializer;
+	import org.flintparticles.common.initializers.CollisionRadiusInit;
+	import org.flintparticles.common.initializers.ColorInit;
+	import org.flintparticles.common.initializers.InitializerGroup;
+	import org.flintparticles.common.initializers.MassInit;
+	import org.flintparticles.threeD.actions.BoundingBox;
+	import org.flintparticles.threeD.actions.Collide;
+	import org.flintparticles.threeD.actions.Move;
 	import org.flintparticles.threeD.away3d.initializers.A3DDisplayObjectClass;
 	import org.flintparticles.threeD.emitters.Emitter3D;
 	import org.flintparticles.threeD.geom.Point3D;
 	import org.flintparticles.threeD.geom.Vector3D;
-	import org.flintparticles.threeD.initializers.*;
-	import org.flintparticles.threeD.zones.*;
-	
-	import flash.display.DisplayObject;	
+	import org.flintparticles.threeD.initializers.Position;
+	import org.flintparticles.threeD.initializers.Velocity;
+	import org.flintparticles.threeD.zones.BoxZone;
+	import org.flintparticles.threeD.zones.SphereZone;
+
+	import flash.display.DisplayObject;
 
 	public class BrownianMotion extends Emitter3D
 	{

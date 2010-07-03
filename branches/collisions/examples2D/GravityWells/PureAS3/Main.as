@@ -3,7 +3,7 @@
  * .....................
  * 
  * Author: Richard Lord
- * Copyright (c) Richard Lord 2008-2009
+ * Copyright (c) Richard Lord 2008-2010
  * http://flintparticles.org/
  * 
  * Licence Agreement
@@ -29,13 +29,13 @@
 
 package
 {
+	import org.flintparticles.twoD.emitters.Emitter2D;
+	import org.flintparticles.twoD.renderers.PixelRenderer;
+
 	import flash.display.Sprite;
 	import flash.filters.BlurFilter;
 	import flash.filters.ColorMatrixFilter;
 	import flash.geom.Rectangle;
-	
-	import org.flintparticles.twoD.emitters.Emitter2D;
-	import org.flintparticles.twoD.renderers.*;	
 
 	[SWF(width='400', height='400', frameRate='61', backgroundColor='#000000')]
 

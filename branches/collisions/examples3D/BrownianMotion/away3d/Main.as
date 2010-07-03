@@ -3,7 +3,7 @@
  * .....................
  * 
  * Author: Richard Lord
- * Copyright (c) Richard Lord 2008-2009
+ * Copyright (c) Richard Lord 2008-2010
  * http://flintparticles.org/
  * 
  * Licence Agreement
@@ -29,13 +29,13 @@
 
 package
 {
-	import flash.display.Sprite;
-	import flash.events.Event;
-	
+	import away3d.containers.View3D;
+
 	import org.flintparticles.threeD.away3d.Away3DRenderer;
 	import org.flintparticles.threeD.emitters.Emitter3D;
-	
-	import away3d.containers.View3D;	
+
+	import flash.display.Sprite;
+	import flash.events.Event;
 
 	[SWF(width='400', height='400', frameRate='61', backgroundColor='#000000')]
 	

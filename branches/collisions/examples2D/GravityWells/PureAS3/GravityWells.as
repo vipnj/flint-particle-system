@@ -3,7 +3,7 @@
  * .....................
  * 
  * Author: Richard Lord
- * Copyright (c) Richard Lord 2008-2009
+ * Copyright (c) Richard Lord 2008-2010
  * http://flintparticles.org/
  * 
  * Licence Agreement
@@ -29,14 +29,15 @@
 
 package
 {
-	import flash.geom.Point;
-	
-	import org.flintparticles.common.counters.*;
-	import org.flintparticles.common.initializers.*;
-	import org.flintparticles.twoD.actions.*;
+	import org.flintparticles.common.counters.Blast;
+	import org.flintparticles.common.initializers.ColorInit;
+	import org.flintparticles.twoD.actions.GravityWell;
+	import org.flintparticles.twoD.actions.Move;
 	import org.flintparticles.twoD.emitters.Emitter2D;
-	import org.flintparticles.twoD.initializers.*;
-	import org.flintparticles.twoD.zones.*;	
+	import org.flintparticles.twoD.initializers.Position;
+	import org.flintparticles.twoD.zones.DiscZone;
+
+	import flash.geom.Point;
 
 	public class GravityWells extends Emitter2D
 	{

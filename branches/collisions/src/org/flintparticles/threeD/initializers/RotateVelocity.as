@@ -3,7 +3,7 @@
  * .....................
  * 
  * Author: Richard Lord
- * Copyright (c) Richard Lord 2008-2009
+ * Copyright (c) Richard Lord 2008-2010
  * http://flintparticles.org
  * 
  * 
@@ -68,7 +68,7 @@ package org.flintparticles.threeD.initializers
 		public function RotateVelocity( axis:Vector3D = null, minAngVelocity:Number = 0, maxAngVelocity:Number = NaN )
 		{
 			this.axis = axis;
-			this.maxAngVelocity = minAngVelocity;
+			this.minAngVelocity = minAngVelocity;
 			this.maxAngVelocity = maxAngVelocity;
 		}
 		

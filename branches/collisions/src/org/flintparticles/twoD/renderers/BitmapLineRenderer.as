@@ -3,7 +3,7 @@
  * .....................
  * 
  * Author: Richard Lord
- * Copyright (c) Richard Lord 2008-2009
+ * Copyright (c) Richard Lord 2008-2010
  * http://flintparticles.org
  * 
  * 
@@ -59,7 +59,6 @@ package org.flintparticles.twoD.renderers
 	 */
 	public class BitmapLineRenderer extends BitmapRenderer
 	{
-		private var count:int;
 		private var _shape:Shape;
 		/**
 		 * The constructor creates a PixelRenderer. After creation it should be
@@ -79,7 +78,6 @@ package org.flintparticles.twoD.renderers
 		 */
 		override protected function drawParticle( particle:Particle2D ):void
 		{
-			trace( "draw " + (count++) );
 			_shape.graphics.clear();
 			_shape.graphics.lineStyle( particle.scale, particle.color & 0xFFFFFF, particle.color >>> 24 );
 			_shape.graphics.moveTo( particle.previousX, particle.previousY );
