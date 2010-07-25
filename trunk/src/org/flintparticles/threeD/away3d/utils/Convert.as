@@ -30,14 +30,14 @@
 
 package org.flintparticles.threeD.away3d.utils 
 {
-	import away3d.core.math.Matrix3D;
+	import away3d.core.math.MatrixAway3D;
 	import away3d.core.math.Number3D;
 	import away3d.core.math.Quaternion;
 	
 	import org.flintparticles.threeD.geom.Matrix3D;
 	import org.flintparticles.threeD.geom.Point3D;
 	import org.flintparticles.threeD.geom.Quaternion;
-	import org.flintparticles.threeD.geom.Vector3D;	
+	import org.flintparticles.threeD.geom.Vector3D;
 
 	/**
 	 * This class contains static methods to convert between Away3D geometry 
@@ -80,9 +80,9 @@ package org.flintparticles.threeD.away3d.utils
 		/**
 		 * Convert a Flint Matrix3D object to an Away3D Matrix3D object.
 		 */
-		public static function Matrix3DToA3D( m:org.flintparticles.threeD.geom.Matrix3D ):away3d.core.math.Matrix3D
+		public static function Matrix3DToA3D( m:Matrix3D ):MatrixAway3D
 		{
-			var n:away3d.core.math.Matrix3D = new away3d.core.math.Matrix3D();
+			var n:MatrixAway3D = new MatrixAway3D();
 			n.array2matrix( m.rawData, false, 1 );
 			return n;
 		}
@@ -90,9 +90,9 @@ package org.flintparticles.threeD.away3d.utils
 		/**
 		 * Convert an Away3D Matrix3D object to a Flint Matrix3D object.
 		 */
-		public static function Matrix3DFromA3D( m:away3d.core.math.Matrix3D ):org.flintparticles.threeD.geom.Matrix3D
+		public static function Matrix3DFromA3D( m:MatrixAway3D ):Matrix3D
 		{
-			return new org.flintparticles.threeD.geom.Matrix3D(
+			return new Matrix3D(
 				[ m.sxx, m.sxy, m.sxz, m.tx, m.syx, m.syy, m.syz, m.ty, m.szx, m.szy, m.szz, m.tz, m.swx, m.swy, m.swz, m.tw ]
 			);
 		}

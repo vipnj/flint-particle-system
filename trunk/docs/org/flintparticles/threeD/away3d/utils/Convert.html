@@ -16,7 +16,7 @@
 			--></script>
 <table style="display:none" id="titleTable" cellspacing="0" cellpadding="0" class="titleTable">
 <tr>
-<td align="left" class="titleTableTitle">Flint Particles documentation v2.1.4</td><td align="right" class="titleTableTopNav"><a onclick="loadClassListFrame('../../../../../all-classes.html')" href="../../../../../package-summary.html">All&nbsp;Packages</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../../../../all-classes.html')" href="../../../../../class-summary.html">All&nbsp;Classes</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../../../../index-list.html')" href="../../../../../all-index-A.html">Index</a>&nbsp;|&nbsp;<a href="../../../../../index.html?org/flintparticles/threeD/away3d/utils/Convert.html&amp;org/flintparticles/threeD/away3d/utils/class-list.html" id="framesLink1">Frames</a><a onclick="parent.location=document.location" href="" style="display:none" id="noFramesLink1">No&nbsp;Frames</a></td>
+<td align="left" class="titleTableTitle">Flint Particles documentation v2.1.5</td><td align="right" class="titleTableTopNav"><a onclick="loadClassListFrame('../../../../../all-classes.html')" href="../../../../../package-summary.html">All&nbsp;Packages</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../../../../all-classes.html')" href="../../../../../class-summary.html">All&nbsp;Classes</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../../../../index-list.html')" href="../../../../../all-index-A.html">Index</a>&nbsp;|&nbsp;<a href="../../../../../index.html?org/flintparticles/threeD/away3d/utils/Convert.html&amp;org/flintparticles/threeD/away3d/utils/class-list.html" id="framesLink1">Frames</a><a onclick="parent.location=document.location" href="" style="display:none" id="noFramesLink1">No&nbsp;Frames</a></td>
 </tr>
 <tr class="titleTableRow2">
 <td align="left" id="subTitle" class="titleTableSubTitle">Class&nbsp;Convert</td><td align="right" id="subNav" class="titleTableSubNav"><a href="#methodSummary">Methods</a></td>
@@ -55,7 +55,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
-<a class="signatureLink" href="#Matrix3DFromA3D()">Matrix3DFromA3D</a>(m:Matrix3D):<a href="../../geom/Matrix3D.html">Matrix3D</a>
+<a class="signatureLink" href="#Matrix3DFromA3D()">Matrix3DFromA3D</a>(m:MatrixAway3D):<a href="../../geom/Matrix3D.html">Matrix3D</a>
 </div>
 <div class="summaryTableDescription">[static]
    Convert an Away3D Matrix3D object to a Flint Matrix3D object.</div>
@@ -64,7 +64,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
-<a class="signatureLink" href="#Matrix3DToA3D()">Matrix3DToA3D</a>(m:<a href="../../geom/Matrix3D.html">Matrix3D</a>):Matrix3D</div>
+<a class="signatureLink" href="#Matrix3DToA3D()">Matrix3DToA3D</a>(m:<a href="../../geom/Matrix3D.html">Matrix3D</a>):MatrixAway3D</div>
 <div class="summaryTableDescription">[static]
    Convert a Flint Matrix3D object to an Away3D Matrix3D object.</div>
 </td><td class="summaryTableOwnerCol">Convert</td>
@@ -136,12 +136,12 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>public static function Matrix3DFromA3D(m:Matrix3D):<a href="../../geom/Matrix3D.html">Matrix3D</a></code><p>
+<code>public static function Matrix3DFromA3D(m:MatrixAway3D):<a href="../../geom/Matrix3D.html">Matrix3D</a></code><p>
    Convert an Away3D Matrix3D object to a Flint Matrix3D object.
    </p><span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
-<td width="20px"></td><td><code><span class="label">m</span>:Matrix3D</code></td>
+<td width="20px"></td><td><code><span class="label">m</span>:MatrixAway3D</code></td>
 </tr>
 </table>
 <p></p>
@@ -159,7 +159,7 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>public static function Matrix3DToA3D(m:<a href="../../geom/Matrix3D.html">Matrix3D</a>):Matrix3D</code><p>
+<code>public static function Matrix3DToA3D(m:<a href="../../geom/Matrix3D.html">Matrix3D</a>):MatrixAway3D</code><p>
    Convert a Flint Matrix3D object to an Away3D Matrix3D object.
    </p><span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
@@ -171,7 +171,7 @@ showHideInherited();
 <span class="label">Returns</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
-<td width="20"></td><td><code>Matrix3D</code></td>
+<td width="20"></td><td><code>MatrixAway3D</code></td>
 </tr>
 </table>
 </div>
