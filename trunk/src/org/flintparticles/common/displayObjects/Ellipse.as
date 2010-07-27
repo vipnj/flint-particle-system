@@ -2,7 +2,7 @@
  * FLINT PARTICLE SYSTEM
  * .....................
  *
- * Author: Xor
+ * Author: Xor (Adrian Stutz) for Nothing GmbH
  * Copyright (c) Richard Lord 2008-2010
  * http://flintparticles.org
  *
