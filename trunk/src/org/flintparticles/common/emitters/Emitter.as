@@ -806,6 +806,7 @@ package org.flintparticles.common.emitters
 				FrameUpdater.instance.removeEventListener( UpdateEvent.UPDATE, updateEventListener );
 			}
 			_started = false;
+			_running = false;
 			killAllParticles();
 		}
 		
