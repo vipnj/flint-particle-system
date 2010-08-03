@@ -49,6 +49,8 @@ package org.flintparticles.twoD.zones
 		private var _minAngle:Number;
 		private var _maxAngle:Number;
 		private var _minAllowed:Number;
+		private var _minNormal:Point;
+		private var _maxNormal:Point;
 		
 		private static var TWOPI:Number = Math.PI * 2;
 		
@@ -83,7 +85,7 @@ package org.flintparticles.twoD.zones
 			_outerSq = _outerRadius * _outerRadius;
 			_minAngle = minAngle;
 			_maxAngle = maxAngle;
-			if( _maxAngle )
+			if( ! isNaN( _maxAngle ) )
 			{
 				while ( _maxAngle > TWOPI )
 				{
@@ -94,7 +96,7 @@ package org.flintparticles.twoD.zones
 					_maxAngle += TWOPI;
 				}
 				_minAllowed = _maxAngle - TWOPI;
-				if( _minAngle )
+				if( ! isNaN( _minAngle ) )
 				{
 					if ( minAngle == maxAngle )
 					{
@@ -105,12 +107,13 @@ package org.flintparticles.twoD.zones
 						_minAngle = clamp( _minAngle );
 					}
 				}
+				calculateNormals();
 			}
 		}
 		
 		private function clamp( angle:Number ):Number
 		{
-			if( _maxAngle )
+			if( ! isNaN( _maxAngle ) )
 			{
 				while ( angle > _maxAngle )
 				{
@@ -122,6 +125,20 @@ package org.flintparticles.twoD.zones
 				}
 			}
 			return angle;
+		}
+		
+		private function calculateNormals():void
+		{
+			if( ! isNaN( _minAngle ) )
+			{
+				_minNormal = new Point( Math.sin( _minAngle ), - Math.cos( _minAngle ) );
+				_minNormal.normalize( 1 );
+			}
+			if( ! isNaN( _maxAngle ) )
+			{
+				_maxNormal = new Point( - Math.sin( _maxAngle ), Math.cos( _maxAngle ) );
+				_maxNormal.normalize( 1 );
+			}
 		}
 		
 		/**
@@ -205,6 +222,7 @@ package org.flintparticles.twoD.zones
 		public function set minAngle( value : Number ) : void
 		{
 			_minAngle = clamp( value );
+			calculateNormals();
 		}
 
 		/**
@@ -231,6 +249,7 @@ package org.flintparticles.twoD.zones
 			}
 			_minAllowed = _maxAngle - TWOPI;
 			_minAngle = clamp( _minAngle );
+			calculateNormals();
 		}
 
 		/**
@@ -286,6 +305,8 @@ package org.flintparticles.twoD.zones
 
 		public function collideParticle(particle:Particle2D, bounce:Number = 1):Boolean
 		{
+			// This is approximate, since accurate calculations would be quite complex and thus time consuming
+			
 			var xNow:Number = particle.x - _center.x;
 			var yNow:Number = particle.y - _center.y;
 			var xThen:Number = particle.previousX - _center.x;
@@ -293,43 +314,109 @@ package org.flintparticles.twoD.zones
 			var insideNow:Boolean = true;
 			var insideThen:Boolean = true;
 			
-			var distNowSq:Number = xNow * xNow + yNow * yNow;
 			var distThenSq:Number = xThen * xThen + yThen * yThen;
-			if ( distNowSq > _outerSq || distNowSq < _innerSq )
-			{
-				insideNow = false;
-			}
+			var distNowSq:Number = xNow * xNow + yNow * yNow;
 			if ( distThenSq > _outerSq || distThenSq < _innerSq )
 			{
 				insideThen = false;
+			}
+			if ( distNowSq > _outerSq || distNowSq < _innerSq )
+			{
+				insideNow = false;
 			}
 			if ( (! insideNow) && (! insideThen) )
 			{
 				return false;
 			}
 			
-			var angleNow:Number = clamp( Math.atan2( yNow, xNow ) );
 			var angleThen:Number = clamp( Math.atan2( yThen, xThen ) );
-			insideNow = insideNow && angleNow >= _minAngle;
+			var angleNow:Number = clamp( Math.atan2( yNow, xNow ) );
 			insideThen = insideThen && angleThen >= minAngle;
+			insideNow = insideNow && angleNow >= _minAngle;
 			if ( insideNow == insideThen )
 			{
 				return false;
 			}
 			
+			var adjustSpeed:Number;
+			var dotProduct:Number = particle.velX * xNow + particle.velY * yNow;
+			var factor:Number;
+			var normalSpeed:Number;
+			
 			if( insideNow )
 			{
 				if( distThenSq > _outerSq )
 				{
-					
+					// bounce off outer radius
+					adjustSpeed = ( 1 + bounce ) * dotProduct / distNowSq;
+					particle.velX -= adjustSpeed * xNow;
+					particle.velY -= adjustSpeed * yNow;
+				}
+				else if( distThenSq < _innerSq )
+				{
+					// bounce off inner radius
+					adjustSpeed = ( 1 + bounce ) * dotProduct / distNowSq;
+					particle.velX -= adjustSpeed * xNow;
+					particle.velY -= adjustSpeed * yNow;
+				}
+				if( angleThen < _minAngle )
+				{
+					if( angleThen < ( _minAllowed + _minAngle ) / 2 )
+					{
+						// bounce off max radius
+						normalSpeed = _maxNormal.x * particle.velX + _maxNormal.y * particle.velY;
+						factor = ( 1 + bounce ) * normalSpeed;
+						particle.velX -= factor * _maxNormal.x;
+						particle.velY -= factor * _maxNormal.y;
+					}
+					else
+					{
+						// bounce off min radius
+						normalSpeed = _minNormal.x * particle.velX + _minNormal.y * particle.velY;
+						factor = ( 1 + bounce ) * normalSpeed;
+						particle.velX -= factor * _minNormal.x;
+						particle.velY -= factor * _minNormal.y;
+					}
 				}
 			}
-			else
+			else // inside then
 			{
-				//blah
+				if( distNowSq > _outerSq )
+				{
+					// bounce off outer radius
+					adjustSpeed = ( 1 + bounce ) * dotProduct / distNowSq;
+					particle.velX -= adjustSpeed * xNow;
+					particle.velY -= adjustSpeed * yNow;
+				}
+				else if( distNowSq < _innerSq )
+				{
+					// bounce off inner radius
+					adjustSpeed = ( 1 + bounce ) * dotProduct / distNowSq;
+					particle.velX -= adjustSpeed * xNow;
+					particle.velY -= adjustSpeed * yNow;
+				}
+				if( angleNow < _minAngle )
+				{
+					if( angleNow < ( _minAllowed + _minAngle ) / 2 )
+					{
+						// bounce off max radius
+						normalSpeed = _maxNormal.x * particle.velX + _maxNormal.y * particle.velY;
+						factor = ( 1 + bounce ) * normalSpeed;
+						particle.velX -= factor * _maxNormal.x;
+						particle.velY -= factor * _maxNormal.y;
+					}
+					else
+					{
+						// bounce off min radius
+						normalSpeed = _minNormal.x * particle.velX + _minNormal.y * particle.velY;
+						factor = ( 1 + bounce ) * normalSpeed;
+						particle.velX -= factor * _minNormal.x;
+						particle.velY -= factor * _minNormal.y;
+					}
+				}
 			}
-
-
+			particle.x = particle.previousX;
+			particle.y = particle.previousY;
 
 			return true;
 		}
