@@ -39,6 +39,7 @@
 			<arg line='-source-path ../src'/>
 			<arg line='-output ../lib/Flint3d.swc'/>
 
+			<arg line='-target-player 10.0.0.0'/>
 			<arg line='-namespace http://flintparticles.org/2009/flint3d manifest3D.xml'/>
 			<arg line='-include-namespaces http://flintparticles.org/2009/flint3d'/>
 
@@ -693,6 +694,7 @@
 			<arg line='-optimize=true'/>
 			<arg line='-library-path+="${away3d.swc}"'/>
 
+			<arg line='-target-player 10.0.0.0'/>
 			<arg line='-title "Brownian Motion in Away3D"'/>
 			<arg line='-description "An example for the Flint particle system showing a Brownian Motion effect using Away3D."'/>
 			<arg line='-creator "Richard Lord - flintparticles.org"'/>
@@ -707,6 +709,7 @@
 			<arg line='-optimize=true'/>
 			<arg line='-library-path+="${away3d.swc}"'/>
 
+			<arg line='-target-player 10.0.0.0'/>
 			<arg line='-title "Fire and Smoke in Away3D"'/>
 			<arg line='-description "An example for the Flint particle system showing Fire and Smoke effects using Away3D."'/>
 			<arg line='-creator "Richard Lord - flintparticles.org"'/>
@@ -731,6 +734,7 @@
 			<arg line='-library-path "${flexsdk.dir}/frameworks/libs/framework.swc"'/>
 			<arg line='-library-path "${away3d.swc}"'/>
 			<arg line='-library-path "${papervision3d.swc}"'/>
+			<arg line='-target-player 10.0.0.0'/>
 			
 			<arg line='-main-title "Flint Particles documentation v${version}"'/>
 			<arg line='-window-title "Flint Particles documentation"'/>

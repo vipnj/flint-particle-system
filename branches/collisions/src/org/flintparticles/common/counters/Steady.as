@@ -55,8 +55,7 @@ package org.flintparticles.common.counters
 		public function Steady( rate:Number = 0 )
 		{
 			_stop = false;
-			_rate = rate;
-			_rateInv = 1 / _rate;
+			this.rate = rate;
 		}
 		
 		/**
@@ -84,8 +83,26 @@ package org.flintparticles.common.counters
 		}
 		public function set rate( value:Number ):void
 		{
-			_rate = value;
-			_rateInv = 1 / value;
+			if( !value || value < 0 )
+			{
+				value = 0;
+			}
+			if( _rate != value )
+			{
+				if( _rate && value )
+				{
+					var timePassed:Number = _rateInv - _timeToNext;
+					_rate = value;
+					_rateInv = value ? 1 / value : Number.MAX_VALUE;
+					_timeToNext = Math.max( _rateInv - timePassed, 0 );
+				}
+				else
+				{
+					_rate = value;
+					_rateInv = value ? 1 / value : Number.MAX_VALUE;
+					_timeToNext = _rateInv;
+				}
+			}
 		}
 		
 		/**
