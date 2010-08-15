@@ -110,10 +110,7 @@ package org.flintparticles.twoD.actions
 			var speedSq:Number = p.velX * p.velX + p.velY * p.velY;
 			if ( ( _isMinimum && speedSq < _limitSq ) || ( !_isMinimum && speedSq > _limitSq ) )
 			{
-				if( speedSq > _limitSq )
-				{
-					p.isDead = true;
-				}
+				p.isDead = true;
 			}
 		}
 	}
