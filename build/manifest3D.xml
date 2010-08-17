@@ -80,11 +80,13 @@
     <component class="org.flintparticles.common.initializers.CollisionRadiusInit"/>
     <component class="org.flintparticles.common.initializers.ColorInit"/>
     <component class="org.flintparticles.common.initializers.ColorsInit"/>
+    <component class="org.flintparticles.common.initializers.DictionaryInitializer"/>
     <component class="org.flintparticles.common.initializers.ImageClass"/>
     <component class="org.flintparticles.common.initializers.ImageClasses"/>
     <component class="org.flintparticles.common.initializers.InitializerGroup"/>
     <component class="org.flintparticles.common.initializers.Lifetime"/>
     <component class="org.flintparticles.common.initializers.MassInit"/>
+    <component class="org.flintparticles.common.initializers.MouseEventHandlers"/>
     <component class="org.flintparticles.common.initializers.ScaleImageInit"/>
     <component class="org.flintparticles.common.initializers.ScaleImagesInit"/>
     <component class="org.flintparticles.common.initializers.SharedImage"/>
@@ -120,6 +122,7 @@
     
     <!-- DISPLAY OBJECTS -->
     <component class="org.flintparticles.common.displayObjects.Dot"/>
+    <component class="org.flintparticles.common.displayObjects.Ellipse"/>
     <component class="org.flintparticles.common.displayObjects.Line"/>
     <component class="org.flintparticles.common.displayObjects.RadialDot"/>
     <component class="org.flintparticles.common.displayObjects.Rect"/>
