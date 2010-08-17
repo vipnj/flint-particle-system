@@ -17,7 +17,7 @@
 					<f:LineZone startX="-55" startY="-5" endX="605" endY="-5"/>
 				</f:Position>
 				<f:Velocity>
-					<f:DiscZone x="60" y="400" outerRadius="20"/>
+					<f:DiscZone centerX="60" centerY="400" outerRadius="20"/>
 				</f:Velocity>
 				<f:AlphaInit alpha="0.5"/>
 			</f:initializers>
@@ -29,7 +29,7 @@
 				<f:Accelerate x="0" y="500"/>
 				<f:SpeedLimit limit="500"/>
 				<f:CollisionZone bounce="0.3">
-					<f:DiscZone x="245" y="275" outerRadius="150"/>
+					<f:DiscZone centerX="245" centerY="275" outerRadius="150"/>
 				</f:CollisionZone>
 			</f:actions>
 		</f:Emitter>

@@ -110,10 +110,7 @@ package org.flintparticles.threeD.actions
 			var speedSq:Number = p.velocity.lengthSquared;
 			if ( ( _isMinimum && speedSq < _limitSq ) || ( !_isMinimum && speedSq > _limitSq ) )
 			{
-				if( speedSq > _limitSq )
-				{
-					p.isDead = true;
-				}
+				p.isDead = true;
 			}
 		}
 	}

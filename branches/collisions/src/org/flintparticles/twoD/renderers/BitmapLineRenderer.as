@@ -80,8 +80,8 @@ package org.flintparticles.twoD.renderers
 		{
 			_shape.graphics.clear();
 			_shape.graphics.lineStyle( particle.scale, particle.color & 0xFFFFFF, particle.color >>> 24 );
-			_shape.graphics.moveTo( particle.previousX, particle.previousY );
-			_shape.graphics.lineTo( particle.x, particle.y );
+			_shape.graphics.moveTo( particle.previousX -_canvas.x, particle.previousY - _canvas.y );
+			_shape.graphics.lineTo( particle.x -_canvas.x, particle.y - _canvas.y );
 			_bitmapData.draw( _shape );
 		}
 		

@@ -101,7 +101,7 @@ package org.flintparticles.threeD.away3d.initializers
 		 */
 		override public function initialize( emitter:Emitter, particle:Particle ):void
 		{
-			particle.image = new MovieClipSprite( construct( _imageClass, _parameters ), { rescale:true } );
+			particle.image = new MovieClipSprite( construct( _imageClass, _parameters ), { rescale:true, align:"none", ownCanvas:true } );
 		}
 	}
 }

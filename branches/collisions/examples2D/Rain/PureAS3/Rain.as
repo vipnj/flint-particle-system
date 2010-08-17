@@ -35,7 +35,6 @@ package
 	import org.flintparticles.twoD.actions.CollisionZone;
 	import org.flintparticles.twoD.actions.DeathZone;
 	import org.flintparticles.twoD.actions.Move;
-	import org.flintparticles.twoD.actions.RotateToDirection;
 	import org.flintparticles.twoD.actions.SpeedLimit;
 	import org.flintparticles.twoD.emitters.Emitter2D;
 	import org.flintparticles.twoD.initializers.Position;
