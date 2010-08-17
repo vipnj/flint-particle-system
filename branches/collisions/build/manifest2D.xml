@@ -38,6 +38,7 @@
     <component class="org.flintparticles.twoD.actions.ApproachNeighbours"/>
     <component class="org.flintparticles.twoD.actions.BoundingBox"/>
     <component class="org.flintparticles.twoD.actions.Collide"/>
+    <component class="org.flintparticles.twoD.actions.CollisionZone"/>
     <component class="org.flintparticles.twoD.actions.DeathSpeed"/>
     <component class="org.flintparticles.twoD.actions.DeathZone"/>
     <component class="org.flintparticles.twoD.actions.Explosion"/>

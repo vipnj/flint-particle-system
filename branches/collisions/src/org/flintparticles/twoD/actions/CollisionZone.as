@@ -37,6 +37,8 @@ package org.flintparticles.twoD.actions
 	import org.flintparticles.twoD.particles.Particle2D;
 	import org.flintparticles.twoD.zones.Zone2D;
 
+	[DefaultProperty("zone")]
+
 	/**
 	 * The Collide action detects collisions between particles and modifies their 
 	 * velocities in response to the collision. All particles are approximated to 
