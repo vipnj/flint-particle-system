@@ -8,5 +8,4 @@
     <AS3Classpath generateProblems="true" type="source" useAsSharedCode="false">src</AS3Classpath>
     <AS3Classpath generateProblems="false" type="lib" useAsSharedCode="false">referenced_libs/Papervision3D_2.1.920.swc</AS3Classpath>
     <AS3Classpath generateProblems="false" type="lib" useAsSharedCode="false">referenced_libs/Away3d_3.5.swc</AS3Classpath>
-    <AS3Classpath generateProblems="true" type="source" useAsSharedCode="false">examples2D/Pachinko/PureAS3</AS3Classpath>
 </AS3Classpath>

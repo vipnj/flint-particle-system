@@ -215,8 +215,8 @@ package org.flintparticles.twoD.zones
 			particle.x = cx + ( 1 - time ) * frameVelX;
 			particle.y = cy + ( 1 - time ) * frameVelY;
 			var normalVel:Number = particle.velX * nx + particle.velY * ny;
-			particle.velX -= 2 * nx * normalVel;
-			particle.velY -= 2 * ny * normalVel;
+			particle.velX -= (1 + bounce) * nx * normalVel;
+			particle.velY -= (1 + bounce) * ny * normalVel;
 			return true;
 		}
 	}
