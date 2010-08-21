@@ -208,8 +208,8 @@ package org.flintparticles.twoD.zones
 			{
 				particle.x = particle.previousX;
 				particle.y = particle.previousY;
-				particle.velX = - particle.velX;
-				particle.velY = - particle.velY;
+				particle.velX = - bounce * particle.velX;
+				particle.velY = - bounce * particle.velY;
 				return true;
 			}
 			else
