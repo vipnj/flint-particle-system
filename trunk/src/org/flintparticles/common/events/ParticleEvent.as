@@ -60,6 +60,11 @@ package org.flintparticles.common.events
 		public static var PARTICLES_COLLISION:String = "particlesCollision";
 		
 		/**
+		 * The event dispatched by an emitter when a particle collides with a zone.
+		 */
+		public static var ZONE_COLLISION:String = "zoneCollision";
+		
+		/**
 		 * The event dispatched by an emitter when a particle collides with another particle.
 		 */
 		public static var BOUNDING_BOX_COLLISION:String = "boundingBoxCollision";

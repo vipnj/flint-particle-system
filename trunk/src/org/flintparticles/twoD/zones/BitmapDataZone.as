@@ -30,6 +30,7 @@
 
 package org.flintparticles.twoD.zones 
 {
+	import org.flintparticles.twoD.particles.Particle2D;
 	import org.flintparticles.common.utils.FastWeightedArray;
 	
 	import flash.display.BitmapData;
@@ -189,7 +190,6 @@ package org.flintparticles.twoD.zones
 			p.y = p.y * _scaleY + _offsetY;
 			return p; 
 		}
-
 		
 		/**
 		 * The getArea method returns the size of the zone.
@@ -201,6 +201,34 @@ package org.flintparticles.twoD.zones
 		public function getArea() : Number
 		{
 			return _validPoints.totalRatios * _scaleX * _scaleY;
+		}
+
+		/**
+		 * Manages collisions between a particle and the zone. The particle will collide with the edges of
+		 * the zone, from the inside or outside. In the interests of speed, these collisions do not take 
+		 * account of the collisionRadius of the particle and they do not calculate an accurate bounce
+		 * direction from the shape of the zone. Priority is placed on keeping particles inside 
+		 * or outside the zone.
+		 * 
+		 * @param particle The particle to be tested for collision with the zone.
+		 * @param bounce The coefficient of restitution for the collision.
+		 * 
+		 * @return Whether a collision occured.
+		 */
+		public function collideParticle(particle:Particle2D, bounce:Number = 1):Boolean
+		{
+			if( contains( particle.x, particle.y ) != contains( particle.previousX, particle.previousY ) )
+			{
+				particle.x = particle.previousX;
+				particle.y = particle.previousY;
+				particle.velX = - bounce * particle.velX;
+				particle.velY = - bounce * particle.velY;
+				return true;
+			}
+			else
+			{
+				return false;
+			}
 		}
 	}
 }

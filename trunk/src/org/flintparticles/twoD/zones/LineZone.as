@@ -30,17 +30,21 @@
 
 package org.flintparticles.twoD.zones 
 {
-	import flash.geom.Point;	
+	import org.flintparticles.twoD.particles.Particle2D;
+
+	import flash.geom.Point;
 
 	/**
 	 * The LineZone zone defines a zone that contains all the points on a line.
 	 */
 
-	public class LineZone implements Zone2D 
+	public class LineZone implements Zone2D
 	{
 		private var _start:Point;
 		private var _end:Point;
 		private var _length:Point;
+		private var _normal:Point;
+		private var _parallel:Point;
 		
 		/**
 		 * The constructor creates a LineZone zone.
@@ -66,7 +70,15 @@ package org.flintparticles.twoD.zones
 			{
 				_end = end;
 			}
+			setLengthAndNormal();
+		}
+		
+		private function setLengthAndNormal():void
+		{
 			_length = _end.subtract( _start );
+			_parallel = _length.clone();
+			_parallel.normalize( 1 );
+			_normal = new Point( _parallel.y, - _parallel.x );
 		}
 		
 		/**
@@ -80,7 +92,7 @@ package org.flintparticles.twoD.zones
 		public function set start( value : Point ) : void
 		{
 			_start = value;
-			_length = _end.subtract( _start );
+			setLengthAndNormal();
 		}
 
 		/**
@@ -94,7 +106,7 @@ package org.flintparticles.twoD.zones
 		public function set end( value : Point ) : void
 		{
 			_end = value;
-			_length = _end.subtract( _start );
+			setLengthAndNormal();
 		}
 
 		/**
@@ -154,13 +166,7 @@ package org.flintparticles.twoD.zones
 		}
 
 		/**
-		 * The contains method determines whether a point is inside the zone.
-		 * This method is used by the initializers and actions that
-		 * use the zone. Usually, it need not be called directly by the user.
-		 * 
-		 * @param x The x coordinate of the location to test for.
-		 * @param y The y coordinate of the location to test for.
-		 * @return true if point is inside the zone, false if it is outside.
+		 * @inheritDoc
 		 */
 		public function contains( x:Number, y:Number ):Boolean
 		{
@@ -174,11 +180,7 @@ package org.flintparticles.twoD.zones
 		}
 		
 		/**
-		 * The getLocation method returns a random point inside the zone.
-		 * This method is used by the initializers and actions that
-		 * use the zone. Usually, it need not be called directly by the user.
-		 * 
-		 * @return a random point inside the zone.
+		 * @inheritDoc
 		 */
 		public function getLocation():Point
 		{
@@ -190,16 +192,86 @@ package org.flintparticles.twoD.zones
 		}
 		
 		/**
-		 * The getArea method returns the size of the zone.
-		 * This method is used by the MultiZone class. Usually, 
-		 * it need not be called directly by the user.
-		 * 
-		 * @return a random point inside the zone.
+		 * @inheritDoc
 		 */
 		public function getArea():Number
 		{
 			// treat as one pixel tall rectangle
 			return _length.length;
+		}
+
+		/**
+		 * Manages collisions between a particle and the zone. The particle will collide with the line defined
+		 * for this zone. In the interests of speed, the collisions are not exactly accurate at the ends of the
+		 * line, but are accurate enough to ensure the particle doesn't pass through the line and to look
+		 * realistic in most circumstances. The collisionRadius of the particle is used when calculating the collision.
+		 * 
+		 * @param particle The particle to be tested for collision with the zone.
+		 * @param bounce The coefficient of restitution for the collision.
+		 * 
+		 * @return Whether a collision occured.
+		 */
+		public function collideParticle( particle:Particle2D, bounce:Number = 1 ):Boolean
+		{
+			// if it was moving away from the line, return false
+			var previousDistance:Number = ( particle.previousX - _start.x ) * _normal.x + ( particle.previousY - _start.y ) * _normal.y;
+			var velDistance:Number = particle.velX * _normal.x + particle.velY * _normal.y;
+			if( previousDistance * velDistance >= 0 )
+			{
+				return false;
+			}
+			
+			// if it is further away than the collision radius and the same side as previously, return false
+			var distance:Number = ( particle.x - _start.x ) * _normal.x + ( particle.y - _start.y ) * _normal.y;
+			if( distance * previousDistance > 0 && ( distance > particle.collisionRadius || distance < -particle.collisionRadius ) )
+			{
+				return false;
+			}
+			
+			// move line collisionradius distance in direction particle was, extend it by collision radius
+			var offsetX:Number;
+			var offsetY:Number;
+			if( previousDistance < 0 )
+			{
+				offsetX = _normal.x * particle.collisionRadius;
+				offsetY = _normal.y * particle.collisionRadius;
+			}
+			else
+			{
+				offsetX = - _normal.x * particle.collisionRadius;
+				offsetY = - _normal.y * particle.collisionRadius;
+			}
+			var thenX:Number = particle.previousX + offsetX;
+			var thenY:Number = particle.previousY + offsetY;
+			var nowX:Number = particle.x + offsetX;
+			var nowY:Number = particle.y + offsetY;
+			var startX:Number = _start.x - _parallel.x * particle.collisionRadius;
+			var startY:Number = _start.y - _parallel.y * particle.collisionRadius;
+			var endX:Number = _end.x + _parallel.x * particle.collisionRadius;
+			var endY:Number = _end.y + _parallel.y * particle.collisionRadius;
+			
+			var den:Number = 1 / ( ( nowY - thenY ) * ( endX - startX ) - ( nowX - thenX ) * ( endY - startY ) );
+			
+			var u : Number = den * ( ( nowX - thenX ) * ( startY - thenY ) - ( nowY - thenY ) * ( startX - thenX ) );
+			if( u < 0 || u > 1 )
+			{
+				return false;
+			}
+			
+			var v : Number = - den * ( ( endX - startX ) * ( thenY - startY ) - ( endY - startY ) * ( thenX - startX ) );
+			if( v < 0 || v > 1 )
+			{
+				return false;
+			}
+			
+			particle.x = particle.previousX + v * ( particle.x - particle.previousX );
+			particle.y = particle.previousY + v * ( particle.y - particle.previousY );
+			
+			var normalSpeed:Number = _normal.x * particle.velX + _normal.y * particle.velY;
+			var factor:Number = ( 1 + bounce ) * normalSpeed;
+			particle.velX -= factor * _normal.x;
+			particle.velY -= factor * _normal.y;
+			return true;
 		}
 	}
 }

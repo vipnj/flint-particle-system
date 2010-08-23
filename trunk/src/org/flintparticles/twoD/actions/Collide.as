@@ -42,7 +42,7 @@ package org.flintparticles.twoD.actions
 	/**
 	 * The Collide action detects collisions between particles and modifies their 
 	 * velocities in response to the collision. All particles are approximated to 
-	 * a circular shape for the collisions and they are assumed to be of equal 
+	 * a circular shape for the collisions and they are assumed to be of even 
 	 * density.
 	 * 
 	 * <p>If the particles reach a stationary, or near stationary, state under an 
