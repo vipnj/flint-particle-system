@@ -137,6 +137,15 @@ package org.flintparticles.twoD.zones
 			return 1;
 		}
 
+		/**
+		 * Manages collisions between a particle and the zone. Particles will colide with the point defined 
+		 * for this zone. The collisionRadius of the particle is used when calculating the collision.
+		 * 
+		 * @param particle The particle to be tested for collision with the zone.
+		 * @param bounce The coefficient of restitution for the collision.
+		 * 
+		 * @return Whether a collision occured.
+		 */
 		public function collideParticle(particle:Particle2D, bounce:Number = 1):Boolean
 		{
 			var relativePreviousX:Number = particle.previousX - _point.x;

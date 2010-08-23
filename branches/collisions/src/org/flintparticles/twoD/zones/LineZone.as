@@ -201,7 +201,15 @@ package org.flintparticles.twoD.zones
 		}
 
 		/**
-		 * @inheritDoc
+		 * Manages collisions between a particle and the zone. The particle will collide with the line defined
+		 * for this zone. In the interests of speed, the collisions are not exactly accurate at the ends of the
+		 * line, but are accurate enough to ensure the particle doesn't pass through the line and to look
+		 * realistic in most circumstances. The collisionRadius of the particle is used when calculating the collision.
+		 * 
+		 * @param particle The particle to be tested for collision with the zone.
+		 * @param bounce The coefficient of restitution for the collision.
+		 * 
+		 * @return Whether a collision occured.
 		 */
 		public function collideParticle( particle:Particle2D, bounce:Number = 1 ):Boolean
 		{

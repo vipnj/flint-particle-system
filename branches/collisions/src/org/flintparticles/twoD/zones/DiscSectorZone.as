@@ -303,6 +303,16 @@ package org.flintparticles.twoD.zones
 			return ( Math.PI * _outerSq - Math.PI * _innerSq );
 		}
 
+		/**
+		 * Manages collisions between a particle and the zone. The particle will collide with the edges of
+		 * the disc sector defined for this zone, from inside or outside the disc. In the interests of speed,
+		 * these collisions do not take account of the collisionRadius of the particle.
+		 * 
+		 * @param particle The particle to be tested for collision with the zone.
+		 * @param bounce The coefficient of restitution for the collision.
+		 * 
+		 * @return Whether a collision occured.
+		 */
 		public function collideParticle(particle:Particle2D, bounce:Number = 1):Boolean
 		{
 			// This is approximate, since accurate calculations would be quite complex and thus time consuming
