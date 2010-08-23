@@ -30,13 +30,15 @@
 
 package org.flintparticles.twoD.zones 
 {
-	import flash.geom.Point;	
+	import org.flintparticles.twoD.particles.Particle2D;
+
+	import flash.geom.Point;
 
 	/**
 	 * The RectangleZone zone defines a rectangular shaped zone.
 	 */
 
-	public class RectangleZone implements Zone2D 
+	public class RectangleZone implements Zone2D
 	{
 		private var _left : Number;
 		private var _top : Number;
@@ -167,6 +169,128 @@ package org.flintparticles.twoD.zones
 		public function getArea():Number
 		{
 			return _width * _height;
+		}
+
+		/**
+		 * Manages collisions between a particle and the zone. Particles will collide with the edges 
+		 * of the rectangle defined for this zone, from inside or outside the zone. The collisionRadius
+		 * of the particle is used when calculating the collision.
+		 * 
+		 * @param particle The particle to be tested for collision with the zone.
+		 * @param bounce The coefficient of restitution for the collision.
+		 * 
+		 * @return Whether a collision occured.
+		 */
+		public function collideParticle(particle:Particle2D, bounce:Number = 1):Boolean
+		{
+			var position:Number;
+			var previousPosition:Number;
+			var intersect:Number;
+			var collision:Boolean = false;
+			
+			if ( particle.velX > 0 )
+			{
+				position = particle.x + particle.collisionRadius;
+				previousPosition = particle.previousX + particle.collisionRadius;
+				if( previousPosition < _left && position >= _left )
+				{
+					intersect = particle.previousY + ( particle.y - particle.previousY ) * ( _left - previousPosition ) / ( position - previousPosition );
+					if( intersect >= _top - particle.collisionRadius && intersect <= _bottom + particle.collisionRadius )
+					{
+						particle.velX = -particle.velX * bounce;
+						particle.x += 2 * ( _left - position );
+						collision = true;
+					}
+				}
+				else if( previousPosition <= _right && position > _right )
+				{
+					intersect = particle.previousY + ( particle.y - particle.previousY ) * ( _right - previousPosition ) / ( position - previousPosition );
+					if( intersect >= _top - particle.collisionRadius && intersect <= _bottom + particle.collisionRadius )
+					{
+						particle.velX = -particle.velX * bounce;
+						particle.x += 2 * ( _right - position );
+						collision = true;
+					}
+				}
+			}
+			else if ( particle.velX < 0 )
+			{
+				position = particle.x - particle.collisionRadius;
+				previousPosition = particle.previousX - particle.collisionRadius;
+				if( previousPosition > _right && position <= _right )
+				{
+					intersect = particle.previousY + ( particle.y - particle.previousY ) * ( _right - previousPosition ) / ( position - previousPosition );
+					if( intersect >= _top - particle.collisionRadius && intersect <= _bottom + particle.collisionRadius )
+					{
+						particle.velX = -particle.velX * bounce;
+						particle.x += 2 * ( _right - position );
+						collision = true;
+					}
+				}
+				else if( previousPosition >= _left && position < _left )
+				{
+					intersect = particle.previousY + ( particle.y - particle.previousY ) * ( _left - previousPosition ) / ( position - previousPosition );
+					if( intersect >= _top - particle.collisionRadius && intersect <= _bottom + particle.collisionRadius )
+					{
+						particle.velX = -particle.velX * bounce;
+						particle.x += 2 * ( _left - position );
+						collision = true;
+					}
+				}
+			}
+
+			if ( particle.velY > 0 )
+			{
+				position = particle.y + particle.collisionRadius;
+				previousPosition = particle.previousY + particle.collisionRadius;
+				if( previousPosition < _top && position >= _top )
+				{
+					intersect = particle.previousX + ( particle.x - particle.previousX ) * ( _top - previousPosition ) / ( position - previousPosition );
+					if( intersect >= _left - particle.collisionRadius && intersect <= _right + particle.collisionRadius )
+					{
+						particle.velY = -particle.velY * bounce;
+						particle.y += 2 * ( _top - position );
+						collision = true;
+					}
+				}
+				else if( previousPosition <= _bottom && position > _bottom )
+				{
+					intersect = particle.previousX + ( particle.x - particle.previousX ) * ( _bottom - previousPosition ) / ( position - previousPosition );
+					if( intersect >= _left - particle.collisionRadius && intersect <= _right + particle.collisionRadius )
+					{
+						particle.velY = -particle.velY * bounce;
+						particle.y += 2 * ( _bottom - position );
+						collision = true;
+					}
+				}
+			}
+			else if ( particle.velY < 0 )
+			{
+				position = particle.y - particle.collisionRadius;
+				previousPosition = particle.previousY - particle.collisionRadius;
+				if( previousPosition > _bottom && position <= _bottom )
+				{
+					intersect = particle.previousX + ( particle.x - particle.previousX ) * ( _bottom - previousPosition ) / ( position - previousPosition );
+					if( intersect >= _left - particle.collisionRadius && intersect <= _right + particle.collisionRadius )
+					{
+						particle.velY = -particle.velY * bounce;
+						particle.y += 2 * ( _bottom - position );
+						collision = true;
+					}
+				}
+				else if( previousPosition >= _top && position < _top )
+				{
+					intersect = particle.previousX + ( particle.x - particle.previousX ) * ( _top - previousPosition ) / ( position - previousPosition );
+					if( intersect >= _left - particle.collisionRadius && intersect <= _right + particle.collisionRadius )
+					{
+						particle.velY = -particle.velY * bounce;
+						particle.y += 2 * ( _top - position );
+						collision = true;
+					}
+				}
+			}
+			
+			return collision;
 		}
 	}
 }

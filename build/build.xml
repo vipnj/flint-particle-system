@@ -215,6 +215,19 @@
 			<arg line='-debug=false'/>
 			<arg line='-optimize=true'/>
 
+			<arg line='-title "Pachinko"'/>
+			<arg line='-description "An example for the Flint particle system showing a 2D Pachinko game."'/>
+			<arg line='-creator "Richard Lord - flintparticles.org"'/>
+
+			<arg line='-output ../examples2D/Pachinko/PureAS3/Pachinko.swf'/>
+			<arg line='../examples2D/Pachinko/PureAS3/Main.as'/>
+		</exec>
+
+		<exec executable="${mxmlc}" failonerror="false">
+			<arg line='-source-path ../src'/>
+			<arg line='-debug=false'/>
+			<arg line='-optimize=true'/>
+
 			<arg line='-title "Rain"'/>
 			<arg line='-description "An example for the Flint particle system showing a Rain effect in 2D."'/>
 			<arg line='-creator "Richard Lord - flintparticles.org"'/>
@@ -738,7 +751,7 @@
 			
 			<arg line='-main-title "Flint Particles documentation v${version}"'/>
 			<arg line='-window-title "Flint Particles documentation"'/>
-			<arg line='-footer "© Richard Lord 2009"'/>
+			<arg line='-footer "© Richard Lord 2010"'/>
 			
 		</exec>
 	</target>

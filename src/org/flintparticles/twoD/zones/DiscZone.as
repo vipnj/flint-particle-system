@@ -30,14 +30,16 @@
 
 package org.flintparticles.twoD.zones 
 {
-	import flash.geom.Point;	
+	import org.flintparticles.twoD.particles.Particle2D;
+
+	import flash.geom.Point;
 
 	/**
 	 * The DiscZone zone defines a circular zone. The zone may
 	 * have a hole in the middle, like a doughnut.
 	 */
 
-	public class DiscZone implements Zone2D 
+	public class DiscZone implements Zone2D
 	{
 		private var _center:Point;
 		private var _innerRadius:Number;
@@ -187,6 +189,131 @@ package org.flintparticles.twoD.zones
 		public function getArea():Number
 		{
 			return Math.PI * ( _outerSq - _innerSq );
+		}
+		
+		/**
+		 * Manages collisions between a particle and the zone. The particle will collide with the edges of
+		 * the disc defined for this zone, from inside or outside the disc.  The collisionRadius of the 
+		 * particle is used when calculating the collision.
+		 * 
+		 * @param particle The particle to be tested for collision with the zone.
+		 * @param bounce The coefficient of restitution for the collision.
+		 * 
+		 * @return Whether a collision occured.
+		 */
+		public function collideParticle(particle:Particle2D, bounce:Number = 1):Boolean
+		{
+			var outerLimit:Number;
+			var innerLimit:Number;
+			var outerLimitSq:Number;
+			var innerLimitSq:Number;
+			var distanceSq:Number;
+			var distance:Number;
+			var pdx:Number;
+			var pdy:Number;
+			var pDistanceSq:Number;
+			var adjustSpeed:Number;
+			var positionRatio:Number;
+			var epsilon:Number = 0.001;
+			var dx:Number = particle.x - _center.x;
+			var dy:Number = particle.y - _center.y;
+			var dotProduct:Number = particle.velX * dx + particle.velY * dy;
+			if( dotProduct < 0 ) // moving towards center
+			{
+				outerLimit = _outerRadius + particle.collisionRadius;
+				if( Math.abs( dx ) > outerLimit ) return false;
+				if( Math.abs( dy ) > outerLimit ) return false;
+				distanceSq = dx * dx + dy * dy;
+				outerLimitSq =  outerLimit * outerLimit;
+				if( distanceSq > outerLimitSq ) return false;
+				// Particle is inside outer circle
+				
+				pdx = particle.previousX - _center.x;
+				pdy = particle.previousY - _center.y;
+				pDistanceSq = pdx * pdx + pdy * pdy;
+				if( pDistanceSq > outerLimitSq )
+				{
+					// particle was outside outer circle
+					adjustSpeed = ( 1 + bounce ) * dotProduct / distanceSq;
+					particle.velX -= adjustSpeed * dx;
+					particle.velY -= adjustSpeed * dy;
+					distance = Math.sqrt( distanceSq );
+					positionRatio = ( 2 * outerLimit - distance ) / distance + epsilon;
+					particle.x = _center.x + dx * positionRatio;
+					particle.y = _center.y + dy * positionRatio;
+					return true;
+				}
+				
+				if( _innerRadius != 0 && innerRadius != _outerRadius )
+				{
+					innerLimit = _innerRadius + particle.collisionRadius;
+					if( Math.abs( dx ) > innerLimit ) return false;
+					if( Math.abs( dy ) > innerLimit ) return false;
+					innerLimitSq = innerLimit * innerLimit;
+					if( distanceSq > innerLimitSq ) return false;
+					// Particle is inside inner circle
+	
+					if( pDistanceSq > innerLimitSq )
+					{
+						// particle was outside inner circle
+						adjustSpeed = ( 1 + bounce ) * dotProduct / distanceSq;
+						particle.velX -= adjustSpeed * dx;
+						particle.velY -= adjustSpeed * dy;
+						distance = Math.sqrt( distanceSq );
+						positionRatio = ( 2 * innerLimit - distance ) / distance + epsilon;
+						particle.x = _center.x + dx * positionRatio;
+						particle.y = _center.y + dy * positionRatio;
+						return true;
+					}
+				}
+				return false;
+			}
+			else // moving away from center
+			{
+				outerLimit = _outerRadius - particle.collisionRadius;
+				pdx = particle.previousX - _center.x;
+				pdy = particle.previousY - _center.y;
+				if( Math.abs( pdx ) > outerLimit ) return false;
+				if( Math.abs( pdy ) > outerLimit ) return false;
+				pDistanceSq = pdx * pdx + pdy * pdy;
+				outerLimitSq = outerLimit * outerLimit;
+				if( pDistanceSq > outerLimitSq ) return false;
+				// particle was inside outer circle
+				
+				distanceSq = dx * dx + dy * dy;
+
+				if( _innerRadius != 0 && innerRadius != _outerRadius )
+				{
+					innerLimit = _innerRadius - particle.collisionRadius;
+					innerLimitSq = innerLimit * innerLimit;
+					if( pDistanceSq < innerLimitSq && distanceSq >= innerLimitSq )
+					{
+						// particle was inside inner circle and is outside it
+						adjustSpeed = ( 1 + bounce ) * dotProduct / distanceSq;
+						particle.velX -= adjustSpeed * dx;
+						particle.velY -= adjustSpeed * dy;
+						distance = Math.sqrt( distanceSq );
+						positionRatio = ( 2 * innerLimit - distance ) / distance - epsilon;
+						particle.x = _center.x + dx * positionRatio;
+						particle.y = _center.y + dy * positionRatio;
+						return true;
+					}
+				}
+
+				if( distanceSq >= outerLimitSq )
+				{
+					// Particle is inside outer circle
+					adjustSpeed = ( 1 + bounce ) * dotProduct / distanceSq;
+					particle.velX -= adjustSpeed * dx;
+					particle.velY -= adjustSpeed * dy;
+					distance = Math.sqrt( distanceSq );
+					positionRatio = ( 2 * outerLimit - distance ) / distance - epsilon;
+					particle.x = _center.x + dx * positionRatio;
+					particle.y = _center.y + dy * positionRatio;
+					return true;
+				}
+				return false;
+			}
 		}
 	}
 }

@@ -30,7 +30,9 @@
 
 package org.flintparticles.twoD.zones 
 {
-	import flash.geom.Point;	
+	import org.flintparticles.twoD.particles.Particle2D;
+
+	import flash.geom.Point;
 
 	/**
 	 * The MutiZone zone defines a zone that combines other zones into one larger zone.
@@ -86,13 +88,7 @@ package org.flintparticles.twoD.zones
 		}
 		
 		/**
-		 * The contains method determines whether a point is inside the zone.
-		 * This method is used by the initializers and actions that
-		 * use the zone. Usually, it need not be called directly by the user.
-		 * 
-		 * @param x The x coordinate of the location to test for.
-		 * @param y The y coordinate of the location to test for.
-		 * @return true if point is inside the zone, false if it is outside.
+		 * @inheritDoc
 		 */
 		public function contains( x:Number, y:Number ):Boolean
 		{
@@ -108,11 +104,7 @@ package org.flintparticles.twoD.zones
 		}
 		
 		/**
-		 * The getLocation method returns a random point inside the zone.
-		 * This method is used by the initializers and actions that
-		 * use the zone. Usually, it need not be called directly by the user.
-		 * 
-		 * @return a random point inside the zone.
+		 * @inheritDoc
 		 */
 		public function getLocation():Point
 		{
@@ -137,15 +129,24 @@ package org.flintparticles.twoD.zones
 		}
 		
 		/**
-		 * The getArea method returns the size of the zone.
-		 * This method is used by the MultiZone class. Usually, 
-		 * it need not be called directly by the user.
-		 * 
-		 * @return a random point inside the zone.
+		 * @inheritDoc
 		 */
 		public function getArea():Number
 		{
 			return _totalArea;
+		}
+		
+		/**
+		 * @inheritDoc
+		 */
+		public function collideParticle( particle:Particle2D, bounce:Number = 1 ):Boolean
+		{
+			var collide:Boolean = false;
+			for each( var zone:Zone2D in _zones )
+			{
+				collide = zone.collideParticle( particle, bounce ) || collide;
+			}
+			return collide;
 		}
 	}
 }

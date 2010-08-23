@@ -27,30 +27,41 @@
  * THE SOFTWARE.
  */
 
-import org.flintparticles.common.counters.*;
-import org.flintparticles.common.displayObjects.Line;
-import org.flintparticles.common.initializers.*;
-import org.flintparticles.twoD.actions.*;
+import org.flintparticles.common.counters.Steady;
+import org.flintparticles.common.initializers.AlphaInit;
+import org.flintparticles.twoD.actions.Accelerate;
+import org.flintparticles.twoD.actions.CollisionZone;
+import org.flintparticles.twoD.actions.DeathZone;
+import org.flintparticles.twoD.actions.Move;
+import org.flintparticles.twoD.actions.RotateToDirection;
+import org.flintparticles.twoD.actions.SpeedLimit;
 import org.flintparticles.twoD.emitters.Emitter2D;
-import org.flintparticles.twoD.initializers.*;
-import org.flintparticles.twoD.renderers.*;
-import org.flintparticles.twoD.zones.*;	
+import org.flintparticles.twoD.initializers.Position;
+import org.flintparticles.twoD.initializers.Velocity;
+import org.flintparticles.twoD.renderers.PixelRenderer;
+import org.flintparticles.twoD.zones.DiscZone;
+import org.flintparticles.twoD.zones.LineZone;
+import org.flintparticles.twoD.zones.RectangleZone;
+
+import flash.display.Sprite;
+import flash.geom.Rectangle;
 
 var emitter:Emitter2D = new Emitter2D();
-emitter.counter = new Steady( 300 );
+emitter.counter = new Steady( 1000 );
 
-emitter.addInitializer( new ImageClass( Line, 8 ) );
-emitter.addInitializer( new Position( new LineZone( new Point( 5, 5 ), new Point( 505, 5 ) ) ) );
-emitter.addInitializer( new Velocity( new PointZone( new Point( -60, 300 ) ) ) );
-emitter.addInitializer( new ColorInit( 0x66FFFFFF, 0x66FFFFFF ) );
+emitter.addInitializer( new Position( new LineZone( new Point( -55, -5 ), new Point( 605, -5 ) ) ) );
+emitter.addInitializer( new Velocity( new DiscZone( new Point( 60, 400 ), 20 ) ) );
+emitter.addInitializer( new AlphaInit( 0.5 ) );
 
 emitter.addAction( new Move() );
-emitter.addAction( new DeathZone( new RectangleZone( -10, -10, 510, 610 ), true ) );
-emitter.addAction( new RotateToDirection() );
+emitter.addAction( new CollisionZone( new DiscZone( new Point( 245, 275 ), 150 ), 0.3 ) );
+emitter.addAction( new DeathZone( new RectangleZone( -60, -10, 610, 410 ), true ) );
+emitter.addAction( new Accelerate( 0, 500 ) );
+emitter.addAction( new SpeedLimit( 500 ) );
 
-var renderer:DisplayObjectRenderer = new DisplayObjectRenderer();
+var renderer:PixelRenderer = new PixelRenderer( new Rectangle( 0, 0, 600, 400 ) );
 renderer.addEmitter( emitter );
 addChild( renderer );
 
 emitter.start();
-emitter.runAhead( 5, 30 );
+emitter.runAhead( 4, 30 );

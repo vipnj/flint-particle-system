@@ -30,6 +30,7 @@
 
 package org.flintparticles.twoD.zones 
 {
+	import org.flintparticles.twoD.particles.Particle2D;
 	import flash.display.DisplayObject;
 	import flash.geom.Point;
 	import flash.geom.Rectangle;	
@@ -41,7 +42,7 @@ package org.flintparticles.twoD.zones
 	 * position of the zone.
 	 */
 
-	public class DisplayObjectZone  implements Zone2D 
+	public class DisplayObjectZone implements Zone2D
 	{
 		private var _displayObject : DisplayObject;
 		private var _renderer : DisplayObject;
@@ -146,7 +147,6 @@ package org.flintparticles.twoD.zones
 			return point;
 		}
 
-		
 		/**
 		 * The getArea method returns the size of the zone.
 		 * It's used by the MultiZone class to manage the balancing between the
@@ -157,6 +157,34 @@ package org.flintparticles.twoD.zones
 		public function getArea() : Number
 		{
 			return _area;
+		}
+
+		/**
+		 * Manages collisions between a particle and the zone. The particle will collide with the edges of
+		 * the zone, from the inside or outside. In the interests of speed, these collisions do not take 
+		 * account of the collisionRadius of the particle and they do not calculate an accurate bounce
+		 * direction from the shape of the zone. Priority is placed on keeping particles inside 
+		 * or outside the zone.
+		 * 
+		 * @param particle The particle to be tested for collision with the zone.
+		 * @param bounce The coefficient of restitution for the collision.
+		 * 
+		 * @return Whether a collision occured.
+		 */
+		public function collideParticle(particle:Particle2D, bounce:Number = 1):Boolean
+		{
+			if( contains( particle.x, particle.y ) != contains( particle.previousX, particle.previousY ) )
+			{
+				particle.x = particle.previousX;
+				particle.y = particle.previousY;
+				particle.velX = - bounce * particle.velX;
+				particle.velY = - bounce * particle.velY;
+				return true;
+			}
+			else
+			{
+				return false;
+			}
 		}
 	}
 }
