@@ -43,7 +43,7 @@ package org.flintparticles.threeD.actions
 	/**
 	 * The Collide action detects collisions between particles and modifies their velocities
 	 * in response to the collision. All paticles are approximated to a circular shape for
-	 * the collisions and they are assumed to be off equal density.
+	 * the collisions and they are assumed to be off even density.
 	 * 
 	 * <p>If the particles reach a stationary, or near stationary, state under an accelerating 
 	 * force (e.g. gravity) then they will fall through each other. This is due to the nature

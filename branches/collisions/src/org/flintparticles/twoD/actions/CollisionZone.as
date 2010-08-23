@@ -40,19 +40,12 @@ package org.flintparticles.twoD.actions
 	[DefaultProperty("zone")]
 
 	/**
-	 * The Collide action detects collisions between particles and modifies their 
-	 * velocities in response to the collision. All particles are approximated to 
-	 * a circular shape for the collisions and they are assumed to be of equal 
-	 * density.
+	 * The CollisionZone action detects collisions between particles and a zone, 
+	 * modifying the particles' velocities in response to the collision. All 
+	 * particles are approximated to a circular shape for the collisions.
 	 * 
-	 * <p>If the particles reach a stationary, or near stationary, state under an 
-	 * accelerating force (e.g. gravity) then they will fall through each other. 
-	 * This is due to the nature of the alogorithm used, which is designed for 
-	 * speed of execution and sufficient accuracy when the particles are in motion, 
-	 * not for absolute precision.</p>
-	 * 
-	 * <p>This action has a priority of 10, so that it executes 
-	 * before other actions.</p>
+	 * <p>This action has a priority of -30, so that it executes after most other 
+	 * actions.</p>
 	 */
 
 	public class CollisionZone extends ActionBase
@@ -61,12 +54,13 @@ package org.flintparticles.twoD.actions
 		private var _zone:Zone2D;
 		
 		/**
-		 * The constructor creates a Collide action for use by  an emitter.
-		 * To add a Collide to all particles created by an emitter, use the
+		 * The constructor creates a CollisionZone action for use by  an emitter.
+		 * To add a CollisionZone to all particles managed by an emitter, use the
 		 * emitter's addAction method.
 		 * 
 		 * @see org.flintparticles.common.emitters.Emitter#addAction()
 		 * 
+		 * @param zone The zone that the particles should collide with.
 		 * @param bounce The coefficient of restitution when the particles collide. 
 		 * A value of 1 gives a pure elastic collision, with no energy loss. A 
 		 * value between 0 and 1 causes the particles to loose enegy in the 
@@ -81,7 +75,7 @@ package org.flintparticles.twoD.actions
 		}
 
 		/**
-		 * The zone.
+		 * The zone that the particles should collide with.
 		 */
 		public function get zone():Zone2D
 		{
