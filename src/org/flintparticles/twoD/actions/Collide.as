@@ -51,8 +51,8 @@ package org.flintparticles.twoD.actions
 	 * speed of execution and sufficient accuracy when the particles are in motion, 
 	 * not for absolute precision.</p>
 	 * 
-	 * <p>This action has a priority of 10, so that it executes 
-	 * before other actions.</p>
+	 * <p>This action has a priority of -20, so that it executes 
+	 * after other actions.</p>
 	 */
 
 	public class Collide extends ActionBase implements FrameUpdatable
@@ -76,7 +76,7 @@ package org.flintparticles.twoD.actions
 		 */
 		public function Collide( bounce:Number = 1 )
 		{
-			priority = 10;
+			priority = -20;
 			this.bounce = bounce;
 			_maxDistance = 0;
 		}
