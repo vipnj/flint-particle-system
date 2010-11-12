@@ -30,7 +30,8 @@
 
 package org.flintparticles.twoD.actions 
 {
-	import org.flintparticles.common.events.ParticleEvent;		import org.flintparticles.common.actions.ActionBase;
+	import org.flintparticles.common.events.ParticleEvent;	
+	import org.flintparticles.common.actions.ActionBase;
 	import org.flintparticles.common.emitters.Emitter;
 	import org.flintparticles.common.particles.Particle;
 	import org.flintparticles.twoD.particles.Particle2D;	
