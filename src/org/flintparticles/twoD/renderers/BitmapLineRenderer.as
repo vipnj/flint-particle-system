@@ -3,7 +3,7 @@
  * .....................
  * 
  * Author: Richard Lord
- * Copyright (c) Richard Lord 2008-2010
+ * Copyright (c) Richard Lord 2008-2011
  * http://flintparticles.org
  * 
  * 
@@ -87,7 +87,7 @@ package org.flintparticles.twoD.renderers
 		
 		override protected function emitterUpdated( ev:EmitterEvent ):void
 		{
-			renderParticles( Emitter( ev.target ).particles );
+			renderParticles( Emitter( ev.target ).particlesArray );
 		}
 		override protected function updateParticles( ev:Event ):void
 		{

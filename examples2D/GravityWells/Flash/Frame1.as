@@ -3,7 +3,7 @@
  * .....................
  * 
  * Author: Richard Lord
- * Copyright (c) Richard Lord 2008-2010
+ * Copyright (c) Richard Lord 2008-2011
  * http://flintparticles.org/
  * 
  * Licence Agreement
@@ -37,7 +37,7 @@ import org.flintparticles.twoD.zones.*;
 
 var emitter:Emitter2D = new Emitter2D();
 
-emitter.counter = new Blast( 4000 );
+emitter.counter = new Blast( 10000 );
 
 emitter.addInitializer( new ColorInit( 0xFFFF00FF, 0xFF00FFFF ) );
 emitter.addInitializer( new Position( new DiscZone( new Point( 200, 200 ), 200 ) ) );

@@ -3,7 +3,7 @@
  * .....................
  * 
  * Author: Richard Lord
- * Copyright (c) Richard Lord 2008-2010
+ * Copyright (c) Richard Lord 2008-2011
  * http://flintparticles.org
  * 
  * 
@@ -30,8 +30,9 @@
 
 package org.flintparticles.threeD.particles 
 {
+	import org.flintparticles.common.debug.ParticleFactoryStats;
 	import org.flintparticles.common.particles.Particle;
-	import org.flintparticles.common.particles.ParticleFactory;	
+	import org.flintparticles.common.particles.ParticleFactory;
 
 	/**
 	 * The ParticleCreator is used by the Emitter class to manage the creation and reuse of particles.
@@ -41,14 +42,14 @@ package org.flintparticles.threeD.particles
 
 	public class ParticleCreator3D implements ParticleFactory
 	{
-		private var _particles:Array;
+		private var _particles:Vector.<Particle>;
 		
 		/**
 		 * The constructor creates a ParticleCreator object.
 		 */
 		public function ParticleCreator3D()
 		{
-			_particles = new Array();
+			_particles = new Vector.<Particle>();
 		}
 		
 		/**
@@ -60,6 +61,7 @@ package org.flintparticles.threeD.particles
 		 */
 		public function createParticle():Particle
 		{
+			ParticleFactoryStats.numParticles++;
 			if ( _particles.length )
 			{
 				return _particles.pop();
@@ -77,6 +79,7 @@ package org.flintparticles.threeD.particles
 		 */
 		public function disposeParticle( particle:Particle ):void
 		{
+			ParticleFactoryStats.numParticles--;
 			particle.initialize();
 			_particles.push( particle );
 		}
@@ -86,7 +89,7 @@ package org.flintparticles.threeD.particles
 		 */
 		public function clearAllParticles():void
 		{
-			_particles = new Array();
+			_particles = new Vector.<Particle>();
 		}
 	}
 }

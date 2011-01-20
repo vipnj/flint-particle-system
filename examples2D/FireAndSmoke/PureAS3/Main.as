@@ -4,7 +4,7 @@
  * .....................
  * 
  * Author: Richard Lord
- * Copyright (c) Richard Lord 2008-2010
+ * Copyright (c) Richard Lord 2008-2011
  * http://flintparticles.org/
  * 
  * Licence Agreement
@@ -36,7 +36,7 @@ package
 	import flash.display.Sprite;
 	import flash.geom.Rectangle;
 
-	[SWF(width='300', height='400', frameRate='61', backgroundColor='#000000')]
+	[SWF(width='300', height='400', frameRate='60', backgroundColor='#000000')]
 	
 	/**
 	 * This example creates fire and smoke using two emitters.

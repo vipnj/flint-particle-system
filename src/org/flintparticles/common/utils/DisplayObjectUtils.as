@@ -3,7 +3,7 @@
  * .....................
  * 
  * Author: Richard Lord
- * Copyright (c) Richard Lord 2008-2010
+ * Copyright (c) Richard Lord 2008-2011
  * http://flintparticles.org/
  * 
  * Licence Agreement
@@ -31,6 +31,9 @@ package org.flintparticles.common.utils
 {
 	import flash.display.DisplayObject;		
 
+	/**
+	 * Utility methods for use with display objects.
+	 */
 	public class DisplayObjectUtils 
 	{
 		/**

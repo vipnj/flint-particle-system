@@ -3,7 +3,7 @@
  * .....................
  * 
  * Author: Richard Lord
- * Copyright (c) Richard Lord 2008-2010
+ * Copyright (c) Richard Lord 2008-2011
  * http://flintparticles.org
  * 
  * 
@@ -33,11 +33,12 @@ package org.flintparticles.threeD.emitters
 	import org.flintparticles.common.emitters.Emitter;
 	import org.flintparticles.common.particles.Particle;
 	import org.flintparticles.common.particles.ParticleFactory;
-	import org.flintparticles.threeD.geom.Matrix3D;
-	import org.flintparticles.threeD.geom.Point3D;
 	import org.flintparticles.threeD.geom.Quaternion;
 	import org.flintparticles.threeD.particles.Particle3D;
-	import org.flintparticles.threeD.particles.ParticleCreator3D;	
+	import org.flintparticles.threeD.particles.ParticleCreator3D;
+
+	import flash.geom.Matrix3D;
+	import flash.geom.Vector3D;
 
 	/**
 	 * The Emitter3D class defines an emitter that exists in 3D space. It is the
@@ -72,7 +73,7 @@ package org.flintparticles.threeD.emitters
 		/**
 		 * @private
 		 */
-		protected var _position:Point3D;
+		protected var _position:Vector3D;
 		/**
 		 * @private
 		 */
@@ -83,14 +84,6 @@ package org.flintparticles.threeD.emitters
 		protected var _rotationTransform:Matrix3D;
 		private var _rotTransformRotation:Quaternion;
 		
-		/**
-		 * The array of particle indices sorted based on the particles' x 
-		 * positions. To tell the emitter to create this array you should set the 
-		 * spaceSort property to true. Usually, actions that need this set to true 
-		 * will do so in their addedToEmitter method.
-		 */
-		public var spaceSortedX:Array;
-
 		/**
 		 * Identifies whether the particles should be arranged
 		 * into a spacially sorted array - this speeds up proximity
@@ -105,9 +98,9 @@ package org.flintparticles.threeD.emitters
 		{
 			super();
 			_particleFactory = _creator;
-			_position = new Point3D( 0, 0, 0 );
+			_position = new Vector3D( 0, 0, 0, 1 );
 			_rotation = Quaternion.IDENTITY.clone();
-			_rotationTransform = Matrix3D.IDENTITY.clone();
+			_rotationTransform = new Matrix3D();
 			_rotTransformRotation = Quaternion.IDENTITY.clone();
 		}
 
@@ -115,13 +108,14 @@ package org.flintparticles.threeD.emitters
 		 * Indicates the position of the Emitter instance relative to 
 		 * the local coordinate system of the Renderer.
 		 */
-		public function get position():Point3D
+		public function get position():Vector3D
 		{
 			return _position;
 		}
-		public function set position( value:Point3D ):void
+		public function set position( value:Vector3D ):void
 		{
 			_position = value;
+			_position.w = 1;
 		}
 		/**
 		 * Indicates the rotation of the Emitter instance relative to 
@@ -162,8 +156,13 @@ package org.flintparticles.threeD.emitters
 		override protected function initParticle( particle:Particle ):void
 		{
 			var p:Particle3D = Particle3D( particle );
-			p.position = _position.clone();
-			p.rotation = _rotation.clone();
+			p.position.x = _position.x;
+			p.position.y = _position.y;
+			p.position.z = _position.z;
+			p.rotation.w = _rotation.w;
+			p.rotation.x = _rotation.x;
+			p.rotation.y = _rotation.y;
+			p.rotation.z = _rotation.z;
 		}
 		
 		/**
@@ -176,34 +175,18 @@ package org.flintparticles.threeD.emitters
 		{
 			if( spaceSort )
 			{
-				spaceSortedX = _particles.sort( sortOnX, Array.RETURNINDEXEDARRAY );
+				_particles.sort( sortOnX );
 				var len:int = _particles.length;
 				for( var i:int = 0; i < len; ++i )
 				{
-					Particle3D( _particles[ spaceSortedX[i] ] ).sortID = i;
+					Particle3D( _particles[ i ] ).sortID = i;
 				}
 			}
 		}
 		
-		/**
-		 * The custom sort function used when sorting the particles based on their
-		 * x coordinate.
-		 */
 		private function sortOnX( p1:Particle3D, p2:Particle3D ):int
 		{
-			/*
-			 * TODO: does this work?
-			 * return p1.position.x - p2.position.x
-			 */
-			if( p1.position.x < p2.position.x )
-			{
-				return -1;
-			}
-			if( p1.position.x > p2.position.x )
-			{
-				return 1;
-			}
-			return 0;
+			return p1.position.x - p2.position.x;
 		}
 	}
 }

@@ -3,7 +3,7 @@
  * .....................
  * 
  * Author: Richard Lord
- * Copyright (c) Richard Lord 2008-2010
+ * Copyright (c) Richard Lord 2008-2011
  * http://flintparticles.org
  * 
  * 
@@ -34,8 +34,9 @@ package org.flintparticles.threeD.actions
 	import org.flintparticles.common.emitters.Emitter;
 	import org.flintparticles.common.particles.Particle;
 	import org.flintparticles.threeD.emitters.Emitter3D;
-	import org.flintparticles.threeD.geom.Vector3D;
-	import org.flintparticles.threeD.particles.Particle3D;	
+	import org.flintparticles.threeD.particles.Particle3D;
+
+	import flash.geom.Vector3D;
 
 	/**
 	 * The MutualGravity Action applies forces to attract each particle towards 
@@ -141,8 +142,7 @@ package org.flintparticles.threeD.actions
 			}
 			var p:Particle3D = Particle3D( particle );
 			var e:Emitter3D = Emitter3D( emitter );
-			var particles:Array = e.particles;
-			var sortedX:Array = e.spaceSortedX;
+			var particles:Array = e.particlesArray;
 			var other:Particle3D;
 			var i:int;
 			var len:int = particles.length;
@@ -151,7 +151,7 @@ package org.flintparticles.threeD.actions
 			var distanceSq:Number;
 			for( i = p.sortID + 1; i < len; ++i )
 			{
-				other = particles[sortedX[i]];
+				other = particles[i];
 				if( other.mass == 0 )
 				{
 					continue;
@@ -170,8 +170,10 @@ package org.flintparticles.threeD.actions
 						distanceSq = _epsilonSq;
 					}
 					factor = ( _power * time ) / ( distanceSq * distance );
-					p.velocity.incrementBy( d.scaleBy( factor * other.mass ) );
-					other.velocity.decrementBy( d.scaleBy( p.mass / other.mass ) );
+					d.scaleBy( factor * other.mass );
+					p.velocity.incrementBy( d );
+					d.scaleBy( p.mass / other.mass );
+					other.velocity.decrementBy( d );
 				} 
 			}
 		}

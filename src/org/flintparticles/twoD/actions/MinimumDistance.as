@@ -3,7 +3,7 @@
  * .....................
  * 
  * Author: Richard Lord
- * Copyright (c) Richard Lord 2008-2010
+ * Copyright (c) Richard Lord 2008-2011
  * http://flintparticles.org
  * 
  * 
@@ -125,8 +125,7 @@ package org.flintparticles.twoD.actions
 		{
 			var p:Particle2D = Particle2D( particle );
 			var e:Emitter2D = Emitter2D( emitter );
-			var particles:Array = e.particles;
-			var sortedX:Array = e.spaceSortedX;
+			var particles:Array = e.particlesArray;
 			var other:Particle2D;
 			var i:int;
 			var len:int = particles.length;
@@ -139,7 +138,7 @@ package org.flintparticles.twoD.actions
 			var factor:Number;
 			for( i = p.sortID - 1; i >= 0; --i )
 			{
-				other = particles[sortedX[i]];
+				other = particles[i];
 				if( ( dx = p.x - other.x ) > _min ) break;
 				dy = p.y - other.y;
 				if( dy > _min || dy < -_min ) continue;
@@ -153,7 +152,7 @@ package org.flintparticles.twoD.actions
 			}
 			for( i = p.sortID + 1; i < len; ++i )
 			{
-				other = particles[sortedX[i]];
+				other = particles[i];
 				if( ( dx = p.x - other.x ) < -_min ) break;
 				dy = p.y - other.y;
 				if( dy > _min || dy < -_min ) continue;

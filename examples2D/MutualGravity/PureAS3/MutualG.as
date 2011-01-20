@@ -3,7 +3,7 @@
  * .....................
  * 
  * Author: Richard Lord
- * Copyright (c) Richard Lord 2008-2010
+ * Copyright (c) Richard Lord 2008-2011
  * http://flintparticles.org/
  * 
  * Licence Agreement
@@ -45,7 +45,7 @@ package
 	{
 		public function MutualG()
 		{
-			counter = new Blast( 30 );
+			counter = new Blast( 40 );
 			
 			addInitializer( new SharedImage( new Dot( 2 ) ) );
 			addInitializer( new ColorInit( 0xFFFF00FF, 0xFF00FFFF ) );

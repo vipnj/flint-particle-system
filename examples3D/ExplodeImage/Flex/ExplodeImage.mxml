@@ -1,41 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
-<mx:Application
-	xmlns:mx="http://www.adobe.com/2006/mxml"
+<s:Application
+	xmlns:fx="http://ns.adobe.com/mxml/2009" 
+	xmlns:s="library://ns.adobe.com/flex/spark"
 	xmlns:f="http://flintparticles.org/2009/flint3d"
 	xmlns:geom="flash.geom.*"
-	layout="absolute" width="500" height="350"
+	width="500" height="350"
 	backgroundColor="#000000" creationComplete="complete()">
 
-	<mx:Script>
-		<![CDATA[
-			import org.flintparticles.threeD.actions.Explosion;
-			import org.flintparticles.threeD.particles.Particle3DUtils;
-			
-			[Embed(source="assets/184098.jpg")]
-			public var Image1:Class;
-
-			private function complete():void
+<fx:Script>
+	<![CDATA[
+		import org.flintparticles.common.events.EmitterEvent;
+		import org.flintparticles.common.particles.Particle;
+		import org.flintparticles.threeD.actions.Explosion;
+		import org.flintparticles.threeD.particles.Particle3DUtils;
+		
+		private var explosion:Explosion;
+		private var bitmap:BitmapData;
+		
+		private function complete():void
+		{
+			bitmap  = new Image1( 384, 255 );
+			prepare();
+			addEventListener( MouseEvent.CLICK, explode, false, 0, true );
+			emitter.addEventListener( EmitterEvent.EMITTER_EMPTY, prepare );
+		}
+		
+		private function prepare( event:EmitterEvent = null ):void
+		{
+			if( explosion )
 			{
-				var bitmap:Bitmap  = new Image1();
-				var particles:Array = Particle3DUtils.createRectangleParticlesFromBitmapData( bitmap.bitmapData, 20, emitter.particleFactory, new Point3D( -192, 127, 0 ) );
-				emitter.addExistingParticles( particles, false );
-				addEventListener( MouseEvent.CLICK, explode, false, 0, true );
+				emitter.removeAction( explosion );
+				explosion = null;
 			}
-			
-			private function explode( ev:MouseEvent ):void
+			var particles:Vector.<Particle> = Particle3DUtils.createRectangleParticlesFromBitmapData( bitmap, 12, emitter.particleFactory, new Vector3D( -192, -127, 0 ) );
+			emitter.addParticles( particles, false );
+		}
+
+		private function explode( ev:MouseEvent ):void
+		{
+			if( !explosion )
 			{
 				var p:Point = renderer.globalToLocal( new Point( ev.stageX, ev.stageY ) );
-				emitter.addAction( new Explosion( 8, new Point3D( p.x - renderer.width / 2, -p.y + renderer.height / 2, 50 ), 500 ) );
-				removeEventListener( MouseEvent.CLICK, explode );
+				explosion = new Explosion( 8, new Vector3D( p.x - renderer.width / 2, p.y - renderer.height / 2, 50 ), 500 );
+				emitter.addAction( explosion );
 			}
-		]]>
-	</mx:Script>
+		}
+	]]>
+</fx:Script>
 
 <f:DisplayObjectRenderer x="0" y="0" id="renderer" width="500" height="350">
 	<f:camera>
 		<f:Camera id="camera" projectionDistance="400">
 			<f:position>
-				<f:Point3D x="0" y="0" z="-400"/>
+				<geom:Vector3D x="0" y="0" z="-400"/>
 			</f:position>
 		</f:Camera>
 	</f:camera>
@@ -46,7 +63,7 @@
 				<f:DeathZone zoneIsSafe="true">
 					<f:FrustrumZone camera="{camera}">
 						<f:viewRect>
-							<geom:Rectangle left="-290" top="-190" width="580" height="380"/>
+							<geom:Rectangle left="-290" top="-215" width="580" height="430"/>
 						</f:viewRect>
 					</f:FrustrumZone>
 				</f:DeathZone>
@@ -54,4 +71,4 @@
 		</f:Emitter>
 	</f:emitters>
 </f:DisplayObjectRenderer>
-</mx:Application>
+</s:Application>

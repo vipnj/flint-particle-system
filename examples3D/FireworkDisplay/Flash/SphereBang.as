@@ -3,7 +3,7 @@
  * .....................
  * 
  * Author: Richard Lord
- * Copyright (c) Richard Lord 2008-2010
+ * Copyright (c) Richard Lord 2008-2011
  * http://flintparticles.org/
  * 
  * Licence Agreement
@@ -32,31 +32,31 @@ package
 	import org.flintparticles.common.actions.*;
 	import org.flintparticles.common.counters.*;
 	import org.flintparticles.common.displayObjects.Dot;
-	import org.flintparticles.common.energyEasing.Quadratic;
+	import org.flintparticles.common.easing.Quadratic;
 	import org.flintparticles.common.initializers.*;
 	import org.flintparticles.threeD.actions.*;
 	import org.flintparticles.threeD.emitters.Emitter3D;
-	import org.flintparticles.threeD.geom.Point3D;
-	import org.flintparticles.threeD.geom.Vector3D;
 	import org.flintparticles.threeD.initializers.*;
 	import org.flintparticles.threeD.zones.*;	
 
+	import flash.geom.Vector3D;
+
 	public class SphereBang extends Emitter3D
 	{
-		public function SphereBang( position:Point3D )
+		public function SphereBang( position:Vector3D )
 		{
 			counter = new Blast( 200 );
 			
 			addInitializer( new SharedImage( new Dot( 1 ) ) );
 			addInitializer( new ColorInit( 0xFFFFFF00, 0xFFFF6600 ) );
 			addInitializer( new Position( new PointZone( position ) ) );
-			addInitializer( new Velocity( new SphereZone( Point3D.ZERO, 100 ) ) );
+			addInitializer( new Velocity( new SphereZone( new Vector3D(), 100 ) ) );
 			addInitializer( new Lifetime( 3 ) );
 			
 			addAction( new Age( Quadratic.easeIn ) );
 			addAction( new Move() );
 			addAction( new Fade() );
-			addAction( new Accelerate( new Vector3D( 0, -50, 0 ) ) );
+			addAction( new Accelerate( new Vector3D( 0, 50, 0 ) ) );
 			addAction( new LinearDrag( 0.5 ) );
 		}
 	}

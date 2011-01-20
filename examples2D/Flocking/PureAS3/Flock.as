@@ -3,7 +3,7 @@
  * .....................
  * 
  * Author: Richard Lord
- * Copyright (c) Richard Lord 2008-2010
+ * Copyright (c) Richard Lord 2008-2011
  * http://flintparticles.org/
  * 
  * Licence Agreement
@@ -48,12 +48,9 @@ package
 
 	public class Flock extends Emitter2D
 	{
-		[Embed(source='assets/bird.swf', symbol='Bird')]
-		public var Bird:Class;
-		
 		public function Flock()
 		{
-			counter = new Blast( 150 );
+			counter = new Blast( 250 );
 			
 			addInitializer( new ImageClass( Bird ) );
 			addInitializer( new Position( new RectangleZone( 10, 10, 680, 480 ) ) );

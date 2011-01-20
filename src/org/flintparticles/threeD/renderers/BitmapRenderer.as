@@ -3,7 +3,7 @@
  * .....................
  * 
  * Author: Richard Lord
- * Copyright (c) Richard Lord 2008-2010
+ * Copyright (c) Richard Lord 2008-2011
  * http://flintparticles.org
  * 
  * 
@@ -30,20 +30,19 @@
 
 package org.flintparticles.threeD.renderers
 {
+	import org.flintparticles.common.renderers.SpriteRendererBase;
+	import org.flintparticles.threeD.geom.Quaternion;
+	import org.flintparticles.threeD.particles.Particle3D;
+
 	import flash.display.Bitmap;
 	import flash.display.BitmapData;
 	import flash.display.DisplayObject;
 	import flash.filters.BitmapFilter;
 	import flash.geom.Matrix;
+	import flash.geom.Matrix3D;
 	import flash.geom.Point;
 	import flash.geom.Rectangle;
-	
-	import org.flintparticles.common.renderers.SpriteRendererBase;
-	import org.flintparticles.threeD.geom.Matrix3D;
-	import org.flintparticles.threeD.geom.Point3D;
-	import org.flintparticles.threeD.geom.Quaternion;
-	import org.flintparticles.threeD.geom.Vector3D;
-	import org.flintparticles.threeD.particles.Particle3D;	
+	import flash.geom.Vector3D;
 
 	/**
 	 * The BitmapRenderer is a native Flint 3D renderer that draws particles
@@ -125,6 +124,10 @@ package org.flintparticles.threeD.renderers
 		 * @private
 		 */
 		protected var _halfHeight:Number;
+		/**
+		 * @private
+		 */
+		protected var _rawCameraTransform:Vector.<Number>;
 
 		/**
 		 * The constructor creates a BitmapRenderer. After creation it should be
@@ -367,7 +370,7 @@ package org.flintparticles.threeD.renderers
 			{
 				return;
 			}
-			var transform:Matrix3D = _camera.transform;
+			_rawCameraTransform = _camera.transform.rawData;
 			var i:int;
 			var len:int;
 			var particle:Particle3D;
@@ -384,9 +387,18 @@ package org.flintparticles.threeD.renderers
 			len = particles.length;
 			for( i = 0; i < len; ++i )
 			{
-				particle = particles[i];
-				particle.projectedPosition = transform.transform( particle.position ) as Point3D;
-				particle.zDepth = particle.projectedPosition.z;
+				particle = Particle3D( particles[i] );
+				var p:Vector3D = particle.position;
+				var pp:Vector3D = particle.projectedPosition;
+				
+				//The following is very much more efficient than
+				//particle.projectedPosition = camera.transform.transformVector( particle.position );
+				pp.x = _rawCameraTransform[0] * p.x + _rawCameraTransform[4] * p.y + _rawCameraTransform[8] * p.z + _rawCameraTransform[12] * p.w;
+				pp.y = _rawCameraTransform[1] * p.x + _rawCameraTransform[5] * p.y + _rawCameraTransform[9] * p.z + _rawCameraTransform[13] * p.w;
+				pp.z = _rawCameraTransform[2] * p.x + _rawCameraTransform[6] * p.y + _rawCameraTransform[10] * p.z + _rawCameraTransform[14] * p.w;
+				pp.w = _rawCameraTransform[3] * p.x + _rawCameraTransform[7] * p.y + _rawCameraTransform[11] * p.z + _rawCameraTransform[15] * p.w;
+
+				particle.zDepth = pp.z;
 			}
 			if( _zSort )
 			{
@@ -394,7 +406,7 @@ package org.flintparticles.threeD.renderers
 			}
 			for( i = 0; i < len; ++i )
 			{
-				drawParticle( particles[i] );
+				drawParticle( Particle3D( particles[i] ) );
 			}
 			len = _postFilters.length;
 			for( i = 0; i < len; ++i )
@@ -427,7 +439,7 @@ package org.flintparticles.threeD.renderers
 		 */
 		protected function drawParticle( particle:Particle3D ):void
 		{
-			var pos:Point3D = particle.projectedPosition;
+			var pos:Vector3D = particle.projectedPosition;
 			if( pos.z < _camera.nearPlaneDistance || pos.z > _camera.farPlaneDistance )
 			{
 				return;
@@ -436,21 +448,28 @@ package org.flintparticles.threeD.renderers
 			pos.project();
 			
 			var rot:Number = 0;
-			var transform:Matrix3D = _camera.transform;			
-			var facing:Vector3D;
+			var f:Vector3D;
 			if( particle.rotation.equals( Quaternion.IDENTITY ) )
 			{
-				facing = particle.faceAxis.clone();
+				f = particle.faceAxis;
 			}
 			else
 			{
 				var m:Matrix3D = particle.rotation.toMatrixTransformation();
-				facing = m.transform( particle.faceAxis ) as Vector3D;
+				f = m.transformVector( particle.faceAxis );
 			}
-			transform.transformSelf( facing );
+			var facing:Vector3D = new Vector3D();
+			
+			// The following is very much more efficient than
+			// facing = camera.transform.transformVector( f );
+			facing.x = _rawCameraTransform[0] * f.x + _rawCameraTransform[4] * f.y + _rawCameraTransform[8] * f.z + _rawCameraTransform[12] * f.w;
+			facing.y = _rawCameraTransform[1] * f.x + _rawCameraTransform[5] * f.y + _rawCameraTransform[9] * f.z + _rawCameraTransform[13] * f.w;
+			facing.z = _rawCameraTransform[2] * f.x + _rawCameraTransform[6] * f.y + _rawCameraTransform[10] * f.z + _rawCameraTransform[14] * f.w;
+			facing.w = _rawCameraTransform[3] * f.x + _rawCameraTransform[7] * f.y + _rawCameraTransform[11] * f.z + _rawCameraTransform[15] * f.w;
+			
 			if( facing.x != 0 || facing.y != 0 )
 			{
-				rot = Math.atan2( -facing.y, facing.x );
+				rot = Math.atan2( facing.y, facing.x );
 			}
 
 			var matrix:Matrix;
@@ -458,11 +477,11 @@ package org.flintparticles.threeD.renderers
 			{
 				var cos:Number = scale * Math.cos( rot );
 				var sin:Number = scale * Math.sin( rot );
-				matrix = new Matrix( cos, sin, -sin, cos, pos.x + _halfWidth, -pos.y + _halfHeight );
+				matrix = new Matrix( cos, sin, -sin, cos, pos.x + _halfWidth, pos.y + _halfHeight );
 			}
 			else
 			{
-				matrix = new Matrix( scale, 0, 0, scale, pos.x + _halfWidth, -pos.y + _halfHeight );
+				matrix = new Matrix( scale, 0, 0, scale, pos.x + _halfWidth, pos.y + _halfHeight );
 			}
 
 			_bitmapData.draw( particle.image, matrix, particle.colorTransform, DisplayObject( particle.image ).blendMode, null, _smoothing );

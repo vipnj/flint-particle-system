@@ -3,7 +3,7 @@
  * .....................
  * 
  * Author: Richard Lord
- * Copyright (c) Richard Lord 2008-2010
+ * Copyright (c) Richard Lord 2008-2011
  * http://flintparticles.org/
  * 
  * Licence Agreement
@@ -33,9 +33,8 @@ package
 	import org.flintparticles.twoD.renderers.DisplayObjectRenderer;
 
 	import flash.display.Sprite;
-	import flash.text.TextField;
 
-	[SWF(width='500', height='500', frameRate='61', backgroundColor='#000000')]
+	[SWF(width='500', height='500', frameRate='60', backgroundColor='#000000')]
 	
 	public class Main extends Sprite
 	{
@@ -43,12 +42,6 @@ package
 		
 		public function Main()
 		{
-			var txt:TextField = new TextField();
-			txt.text = "Hold down the shift key to hide the air particles.";
-			txt.autoSize = "left";
-			txt.textColor = 0xFFFFFF;
-			addChild( txt );
-
 			emitter = new BrownianMotion( stage );
 
 			var renderer:DisplayObjectRenderer = new DisplayObjectRenderer();

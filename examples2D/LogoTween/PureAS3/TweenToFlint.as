@@ -3,7 +3,7 @@
  * .....................
  * 
  * Author: Richard Lord
- * Copyright (c) Richard Lord 2008-2010
+ * Copyright (c) Richard Lord 2008-2011
  * http://flintparticles.org/
  * 
  * Licence Agreement
@@ -30,27 +30,20 @@
 package
 {
 	import org.flintparticles.common.actions.Age;
-	import org.flintparticles.common.energyEasing.Quadratic;
+	import org.flintparticles.common.easing.Quadratic;
 	import org.flintparticles.common.initializers.Lifetime;
 	import org.flintparticles.twoD.actions.TweenToZone;
 	import org.flintparticles.twoD.emitters.Emitter2D;
 	import org.flintparticles.twoD.zones.BitmapDataZone;
 
-	import flash.display.Bitmap;
-
 	public class TweenToFlint extends Emitter2D
 	{
-		[Embed(source="assets/flint.png")]
-		public var FlintImage:Class;
-
 		public function TweenToFlint()
 		{
-			var flintBitmap:Bitmap = new FlintImage();
-			
 			addInitializer( new Lifetime( 6 ) );
 			
 			addAction( new Age( Quadratic.easeInOut ) );
-			addAction( new TweenToZone( new BitmapDataZone( flintBitmap.bitmapData, 40, 60 ) ) );
+			addAction( new TweenToZone( new BitmapDataZone( new FlintImage( 320, 80 ), 40, 60 ) ) );
 		}
 	}
 }

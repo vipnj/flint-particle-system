@@ -3,7 +3,7 @@
  * .....................
  * 
  * Author: Richard Lord
- * Copyright (c) Richard Lord 2008-2010
+ * Copyright (c) Richard Lord 2008-2011
  * http://flintparticles.org
  * 
  * 
@@ -34,8 +34,9 @@ package org.flintparticles.threeD.actions
 	import org.flintparticles.common.emitters.Emitter;
 	import org.flintparticles.common.particles.Particle;
 	import org.flintparticles.threeD.emitters.Emitter3D;
-	import org.flintparticles.threeD.geom.Vector3D;
-	import org.flintparticles.threeD.particles.Particle3D;	
+	import org.flintparticles.threeD.particles.Particle3D;
+
+	import flash.geom.Vector3D;
 
 	/**
 	 * The ApproachNeighbours action applies an acceleration to the particle to 
@@ -130,18 +131,21 @@ package org.flintparticles.threeD.actions
 		{
 			var p:Particle3D = Particle3D( particle );
 			var e:Emitter3D = Emitter3D( emitter );
-			var particles:Array = e.particles;
-			var sortedX:Array = e.spaceSortedX;
+			var particles:Array = e.particlesArray;
 			var other:Particle3D;
 			var i:int;
 			var len:int = particles.length;
 			var distanceInv:Number;
 			var distanceSq:Number;
 			var factor:Number;
-			move.reset( 0, 0, 0 );
+			
+			move.x = 0;
+			move.y = 0;
+			move.z = 0;
+			
 			for( i = p.sortID - 1; i >= 0; --i )
 			{
-				other = particles[sortedX[i]];
+				other = particles[i];
 				if( ( d.x = other.position.x - p.position.x ) < -_max ) break;
 				d.y = other.position.y - p.position.y;
 				if( d.y > _max || d.y < -_max ) continue;
@@ -151,12 +155,13 @@ package org.flintparticles.threeD.actions
 				if( distanceSq <= _maxSq && distanceSq > 0 )
 				{
 					distanceInv = 1 / Math.sqrt( distanceSq );
-					move.incrementBy( d.scaleBy( distanceInv ) );
+					d.scaleBy( distanceInv );
+					move.incrementBy( d );
 				} 
 			}
 			for( i = p.sortID + 1; i < len; ++i )
 			{
-				other = particles[sortedX[i]];
+				other = Particle3D( particles[i] );
 				if( ( d.x = other.position.x - p.position.x ) > _max ) break;
 				d.y = other.position.y - p.position.y;
 				if( d.y > _max || d.y < -_max ) continue;
@@ -166,13 +171,15 @@ package org.flintparticles.threeD.actions
 				if( distanceSq <= _maxSq && distanceSq > 0 )
 				{
 					distanceInv = 1 / Math.sqrt( distanceSq );
-					move.incrementBy( d.scaleBy( distanceInv ) );
+					d.scaleBy( distanceInv );
+					move.incrementBy( d );
 				} 
 			}
-			if( !move.equals( Vector3D.ZERO ) )
+			if ( move.x != 0 || move.y != 0 || move.z != 0 )
 			{
 				factor = time * _acc / move.length;
-				p.velocity.incrementBy( move.scaleBy( factor ) );
+				move.scaleBy( factor );
+				p.velocity.incrementBy( move );
 			}
 		}
 	}

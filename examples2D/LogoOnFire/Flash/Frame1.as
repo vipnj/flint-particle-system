@@ -3,7 +3,7 @@
  * .....................
  * 
  * Author: Richard Lord
- * Copyright (c) Richard Lord 2008-2010
+ * Copyright (c) Richard Lord 2008-2011
  * http://flintparticles.org/
  * 
  * Licence Agreement
@@ -37,10 +37,10 @@ import org.flintparticles.twoD.emitters.Emitter2D;
 import org.flintparticles.twoD.initializers.*;
 import org.flintparticles.twoD.renderers.*;
 import org.flintparticles.twoD.zones.*;	
-import org.flintparticles.common.energyEasing.TwoWay;
+import org.flintparticles.common.easing.TwoWay;
 
-var bitmapData:BitmapData = new Logo( 265, 80);
-var bitmap:Bitmap = new Bitmap();
+var bitmapData:BitmapData = new Logo( 265, 80 );
+var bitmap:Bitmap = new Bitmap( new Logo( 265, 80 ) );
 bitmap.bitmapData = bitmapData;
 addChild( bitmap );
 bitmap.x = 118;

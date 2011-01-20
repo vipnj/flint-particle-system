@@ -4,7 +4,7 @@
  * ..........................
  * 
  * Author: Richard Lord
- * Copyright (c) Richard Lord 2008-2010
+ * Copyright (c) Richard Lord 2008-2011
  * http://flintparticles.org
  * 
  * 
@@ -35,9 +35,10 @@ package org.flintparticles.threeD.actions
 	import org.flintparticles.common.emitters.Emitter;
 	import org.flintparticles.common.particles.Particle;
 	import org.flintparticles.threeD.geom.Quaternion;
-	import org.flintparticles.threeD.geom.Vector3D;
 	import org.flintparticles.threeD.geom.Vector3DUtils;
-	import org.flintparticles.threeD.particles.Particle3D;	
+	import org.flintparticles.threeD.particles.Particle3D;
+
+	import flash.geom.Vector3D;
 
 	/**
 	 * The RotateToDirection action updates the rotation of the particle 
@@ -69,24 +70,31 @@ package org.flintparticles.threeD.actions
 		 */
 		override public function update( emitter : Emitter, particle : Particle, time : Number ) : void
 		{
-			var p:Particle3D = Particle3D( particle );
-			if( p.velocity.equals( Vector3D.ZERO ) )
+			var p : Particle3D = Particle3D( particle );
+			var vel : Vector3D = p.velocity;
+			var len:Number = vel.length;
+			if ( len == 0 )
 			{
 				return;
 			}
-			p.velocity.unit( _target );
-			if( _target.equals( p.faceAxis ) )
+			_target.x = vel.x / len;
+			_target.y = vel.y / len;
+			_target.z = vel.z / len;
+			
+			var faceAxis:Vector3D = p.faceAxis;
+			if( _target.x == faceAxis.x && _target.y == faceAxis.y && _target.z == faceAxis.z )
 			{
 				p.rotation.assign( Quaternion.IDENTITY );
 				return;
 			}
-			if( _target.equals( p.faceAxis.negative( _temp ) ) )
+			
+			if( _target.x == -faceAxis.x && _target.y == -faceAxis.y && _target.z == -faceAxis.z )
 			{
-				var v:Vector3D = Vector3DUtils.getPerpendicular( p.faceAxis );
+				var v:Vector3D = Vector3DUtils.getPerpendicular( faceAxis );
 				p.rotation.reset( 0, v.x, v.y, v.z );
 				return;
 			}
-			_target.crossProduct( p.faceAxis, _axis );
+			_axis = _target.crossProduct( p.faceAxis );
 			var angle:Number = Math.acos( p.faceAxis.dotProduct( _target ) );
 			p.rotation.setFromAxisRotation( _axis, angle );
 		}

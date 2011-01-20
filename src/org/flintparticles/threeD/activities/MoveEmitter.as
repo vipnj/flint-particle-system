@@ -3,7 +3,7 @@
  * .....................
  * 
  * Author: Richard Lord
- * Copyright (c) Richard Lord 2008-2010
+ * Copyright (c) Richard Lord 2008-2011
  * http://flintparticles.org
  * 
  * 
@@ -33,7 +33,9 @@ package org.flintparticles.threeD.activities
 	import org.flintparticles.common.activities.ActivityBase;
 	import org.flintparticles.common.emitters.Emitter;
 	import org.flintparticles.threeD.emitters.Emitter3D;
-	import org.flintparticles.threeD.geom.Vector3D;	
+	import org.flintparticles.threeD.geom.Vector3DUtils;
+
+	import flash.geom.Vector3D;
 
 	/**
 	 * The MoveEmitter activity moves the emitter at a constant velocity.
@@ -41,7 +43,6 @@ package org.flintparticles.threeD.activities
 	public class MoveEmitter extends ActivityBase
 	{
 		private var _vel:Vector3D;
-		private var _temp:Vector3D;
 		
 		/**
 		 * The constructor creates a MoveEmitter activity for use by 
@@ -57,7 +58,7 @@ package org.flintparticles.threeD.activities
 		 */
 		public function MoveEmitter( velocity:Vector3D = null )
 		{
-			this.velocity = velocity ? velocity : Vector3D.ZERO;
+			this.velocity = velocity ? velocity : new Vector3D();
 		}
 		
 		/**
@@ -69,7 +70,7 @@ package org.flintparticles.threeD.activities
 		}
 		public function set velocity( value:Vector3D ):void
 		{
-			_vel = value.clone();
+			_vel = Vector3DUtils.cloneVector( value );
 		}
 		
 		/**
@@ -113,8 +114,10 @@ package org.flintparticles.threeD.activities
 		 */
 		override public function update( emitter : Emitter, time : Number ) : void
 		{
-			_vel.multiply( time, _temp );
-			Emitter3D( emitter ).position.incrementBy( _temp );
+			var p:Vector3D = Emitter3D( emitter ).position;
+			p.x += _vel.x * time;
+			p.y += _vel.y * time;
+			p.z += _vel.z * time;
 		}
 	}
 }

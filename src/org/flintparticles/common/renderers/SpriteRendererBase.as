@@ -3,7 +3,7 @@
  * .....................
  * 
  * Author: Richard Lord
- * Copyright (c) Richard Lord 2008-2010
+ * Copyright (c) Richard Lord 2008-2011
  * http://flintparticles.org/
  * 
  * Licence Agreement
@@ -58,14 +58,17 @@ package org.flintparticles.common.renderers
 		 * on a renderer is not garbage collected, an emitter that does not exist on a renderer may be 
 		 * garbage collected if no other references exist.
 		 */
-		protected var _emitters:Array;
+		protected var _emitters:Vector.<Emitter>;
+		
+		protected var _particles:Array;
 		
 		/**
 		 * The constructor creates a RendererBase class.
 		 */
 		public function SpriteRendererBase()
 		{
-			_emitters = new Array();
+			_emitters = new Vector.<Emitter>();
+			_particles = [];
 			mouseEnabled = false;
 			mouseChildren = false;
 			addEventListener( Event.ADDED_TO_STAGE, addedToStage, false, 0, true );
@@ -89,7 +92,7 @@ package org.flintparticles.common.renderers
 			emitter.addEventListener( ParticleEvent.PARTICLE_CREATED, particleAdded, false, 0, true );
 			emitter.addEventListener( ParticleEvent.PARTICLE_ADDED, particleAdded, false, 0, true );
 			emitter.addEventListener( ParticleEvent.PARTICLE_DEAD, particleRemoved, false, 0, true );
-			for each( var p:Particle in emitter.particles )
+			for each( var p:Particle in emitter.particlesArray )
 			{
 				addParticle( p );
 			}
@@ -117,7 +120,7 @@ package org.flintparticles.common.renderers
 					emitter.removeEventListener( ParticleEvent.PARTICLE_CREATED, particleAdded );
 					emitter.removeEventListener( ParticleEvent.PARTICLE_ADDED, particleAdded );
 					emitter.removeEventListener( ParticleEvent.PARTICLE_DEAD, particleRemoved );
-					for each( var p:Particle in emitter.particles )
+					for each( var p:Particle in emitter.particlesArray )
 					{
 						removeParticle( p );
 					}
@@ -171,15 +174,8 @@ package org.flintparticles.common.renderers
 		
 		protected function updateParticles( ev:Event ) : void
 		{
-			var particles:Array = new Array();
-			for( var i:int = 0; i < _emitters.length; ++i )
-			{
-				particles = particles.concat( Emitter( _emitters[i] ).particles );
-			}
-			renderParticles( particles );
+			renderParticles( _particles );
 		}
-		
-		
 		
 		/**
 		 * The addParticle method is called when a particle is added to one of
@@ -189,6 +185,7 @@ package org.flintparticles.common.renderers
 		 */
 		protected function addParticle( particle:Particle ):void
 		{
+			_particles.push( particle );
 		}
 		
 		/**
@@ -198,6 +195,11 @@ package org.flintparticles.common.renderers
 		 */
 		protected function removeParticle( particle:Particle ):void
 		{
+			var index:int = _particles.indexOf( particle );
+			if( index != -1 )
+			{
+				_particles.splice( index, 1 );
+			}
 		}
 		
 		/**
@@ -216,11 +218,11 @@ package org.flintparticles.common.renderers
 		/**
 		 * The array of all emitters being rendered by this renderer.
 		 */
-		public function get emitters():Array
+		public function get emitters():Vector.<Emitter>
 		{
 			return _emitters;
 		}
-		public function set emitters( value:Array ):void
+		public function set emitters( value:Vector.<Emitter> ):void
 		{
 			var e:Emitter;
 			for each( e in _emitters )

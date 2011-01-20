@@ -3,7 +3,7 @@
  * .....................
  * 
  * Author: Richard Lord
- * Copyright (c) Richard Lord 2008-2010
+ * Copyright (c) Richard Lord 2008-2011
  * http://flintparticles.org/
  * 
  * Licence Agreement
@@ -29,17 +29,43 @@
 
 package org.flintparticles.threeD.geom 
 {
-	import org.flintparticles.threeD.geom.Vector3D;		
+	import flash.geom.Vector3D;		
 
 	/**
-	 * @author user
+	 * Utility methods for working with the Vector3D class.
 	 */
 	public class Vector3DUtils 
 	{
+		public static function cloneVector( v:Vector3D ):Vector3D
+		{
+			return new Vector3D( v.x, v.y, v.z, 0 );
+		}
+		
+		public static function clonePoint( v:Vector3D ):Vector3D
+		{
+			return new Vector3D( v.x, v.y, v.z, 1 );
+		}
+
+		public static function cloneUnit( v:Vector3D ):Vector3D
+		{
+			var temp:Vector3D = new Vector3D( v.x, v.y, v.z, 0 );
+			temp.normalize();
+			return temp;
+		}
+
+		public static function distanceSquared( v:Vector3D, u:Vector3D ):Number
+		{
+			var dx:Number = v.x - u.x;
+			var dy:Number = v.y - u.y;
+			var dz:Number = v.z - u.z;
+			return Math.sqrt( dx * dx + dy * dy + dz * dz );
+		}
+		
 		public static function getPerpendiculars( normal:Vector3D ):Array
 		{
 			var p1:Vector3D = getPerpendicular( normal );
-			var p2:Vector3D = normal.crossProduct( p1 ).normalize();
+			var p2:Vector3D = normal.crossProduct( p1 );
+			p2.normalize();
 			return [ p1, p2 ];
 		}
 		
@@ -51,7 +77,9 @@ package org.flintparticles.threeD.geom
 			}
 			else
 			{
-				return new Vector3D( v.y, -v.x, 0 ).normalize();
+				var temp:Vector3D = new Vector3D( v.y, -v.x, 0 );
+				temp.normalize();
+				return temp;
 			}
 		}
 	}

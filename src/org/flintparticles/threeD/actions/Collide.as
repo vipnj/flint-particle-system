@@ -3,7 +3,7 @@
  * .....................
  * 
  * Author: Richard Lord
- * Copyright (c) Richard Lord 2008-2010
+ * Copyright (c) Richard Lord 2008-2011
  * http://flintparticles.org
  * 
  * 
@@ -37,8 +37,9 @@ package org.flintparticles.threeD.actions
 	import org.flintparticles.common.events.ParticleEvent;
 	import org.flintparticles.common.particles.Particle;
 	import org.flintparticles.threeD.emitters.Emitter3D;
-	import org.flintparticles.threeD.geom.Vector3D;
-	import org.flintparticles.threeD.particles.Particle3D;	
+	import org.flintparticles.threeD.particles.Particle3D;
+
+	import flash.geom.Vector3D;
 
 	/**
 	 * The Collide action detects collisions between particles and modifies their velocities
@@ -64,7 +65,6 @@ package org.flintparticles.threeD.actions
 		 * Temporary variables created as class members to avoid creating new objects all the time
 		 */
 		private var d:Vector3D;
-		private var _temp:Vector3D;
 
 		/**
 		 * The constructor creates a Collide action for use by  an emitter.
@@ -83,7 +83,6 @@ package org.flintparticles.threeD.actions
 			priority = -20;
 			_maxDistance = 0;
 			d = new Vector3D();
-			_temp = new Vector3D();
 			this.bounce = bounce;
 		}
 		
@@ -154,7 +153,7 @@ package org.flintparticles.threeD.actions
 		 */
 		public function frameUpdate( emitter:Emitter, time:Number ):void
 		{
-			var particles:Array = emitter.particles;
+			var particles:Array = emitter.particlesArray;
 			var max1:Number = 0;
 			var max2:Number = 0;
 			for each( var p:Particle in particles )
@@ -163,7 +162,7 @@ package org.flintparticles.threeD.actions
 				{
 					max2 = max1;
 					max1 = p.collisionRadius;
-		}
+				}
 				else if( p.collisionRadius > max2 )
 				{
 					max2 = p.collisionRadius;
@@ -179,8 +178,7 @@ package org.flintparticles.threeD.actions
 		{
 			var p:Particle3D = Particle3D( particle );
 			var e:Emitter3D = Emitter3D( emitter );
-			var particles:Array = e.particles;
-			var sortedX:Array = e.spaceSortedX;
+			var particles:Array = e.particlesArray;
 			var other:Particle3D;
 			var i:int;
 			var len:int = particles.length;
@@ -193,7 +191,7 @@ package org.flintparticles.threeD.actions
 			var f1:Number, f2:Number;
 			for( i = p.sortID + 1; i < len; ++i )
 			{
-				other = particles[sortedX[i]];
+				other = particles[i];
 				if( ( d.x = other.position.x - p.position.x ) > _maxDistance ) break;
 				collisionDist = other.collisionRadius + p.collisionRadius;
 				if( d.x > collisionDist ) continue;
@@ -215,11 +213,21 @@ package org.flintparticles.threeD.actions
 						factor = ( ( 1 + _bounce ) * relN ) / ( m1 + m2 );
 						f1 = factor * m2;
 						f2 = -factor * m1;
-						p.velocity.decrementBy( d.multiply( f1, _temp ) );
-						other.velocity.decrementBy( d.multiply( f2, _temp ) );
-						var ev:ParticleEvent = new ParticleEvent( ParticleEvent.PARTICLES_COLLISION, p );
-						ev.otherObject = other;
-						emitter.dispatchEvent( ev );
+						
+						p.velocity.x -= d.x * f1;
+						p.velocity.y -= d.y * f1;
+						p.velocity.z -= d.z * f1;
+						
+						other.velocity.x -= d.x * f2;
+						other.velocity.y -= d.y * f2;
+						other.velocity.z -= d.z * f2;
+						
+						if ( emitter.hasEventListener( ParticleEvent.PARTICLES_COLLISION ) )
+						{
+							var ev:ParticleEvent = new ParticleEvent( ParticleEvent.PARTICLES_COLLISION, p );
+							ev.otherObject = other;
+							emitter.dispatchEvent( ev );
+						}
 					}
 				} 
 			}

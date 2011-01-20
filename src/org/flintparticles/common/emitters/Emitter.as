@@ -3,7 +3,7 @@
  * .....................
  * 
  * Author: Richard Lord
- * Copyright (c) Richard Lord 2008-2010
+ * Copyright (c) Richard Lord 2008-2011
  * http://flintparticles.org
  * 
  * 
@@ -32,7 +32,7 @@ package org.flintparticles.common.emitters
 {
 	import org.flintparticles.common.actions.Action;
 	import org.flintparticles.common.activities.Activity;
-	import org.flintparticles.common.behaviours.BehaviourArrayUtils;
+	import org.flintparticles.common.behaviours.Behaviour;
 	import org.flintparticles.common.counters.Counter;
 	import org.flintparticles.common.counters.ZeroCounter;
 	import org.flintparticles.common.events.EmitterEvent;
@@ -42,8 +42,8 @@ package org.flintparticles.common.emitters
 	import org.flintparticles.common.particles.Particle;
 	import org.flintparticles.common.particles.ParticleFactory;
 	import org.flintparticles.common.utils.FrameUpdater;
-	
-	import flash.events.EventDispatcher;	
+
+	import flash.events.EventDispatcher;
 
 	/**
 	 * Dispatched when a particle dies and is about to be removed from the system.
@@ -119,8 +119,8 @@ package org.flintparticles.common.emitters
 	 * it creates; to apply gravity, drag, fade etc. These are added to the emitter 
 	 * using the addAction method.</p>
 	 * 
-	 * <p>An emitter uses Activities to customise its own behaviour in an ongoing
-	 * manner, to move it or rotate it for example.</p>
+	 * <p>An emitter uses Activities to alter its own behaviour, to move it or rotate
+	 * it for example.</p>
 	 * 
 	 * <p>An emitter uses a Counter to know when and how many particles to emit.</p>
 	 * 
@@ -143,15 +143,15 @@ package org.flintparticles.common.emitters
 		/**
 		 * @private
 		 */
-		protected var _initializers:Array;
+		protected var _initializers:Vector.<Initializer>;
 		/**
 		 * @private
 		 */
-		protected var _actions:Array;
+		protected var _actions:Vector.<Action>;
 		/**
 		 * @private
 		 */
-		protected var _activities:Array;
+		protected var _activities:Vector.<Activity>;
 		/**
 		 * @private
 		 */
@@ -196,10 +196,10 @@ package org.flintparticles.common.emitters
 		 */
 		public function Emitter()
 		{
-			_particles = new Array();
-			_actions = new Array();
-			_initializers = new Array();
-			_activities = new Array();
+			_particles = [];
+			_actions = new Vector.<Action>();
+			_initializers = new Vector.<Initializer>();
+			_activities = new Vector.<Activity>();
 			_counter = new ZeroCounter();
 		}
 
@@ -230,11 +230,11 @@ package org.flintparticles.common.emitters
 		/**
 		 * The array of all initializers being used by this emitter.
 		 */
-		public function get initializers():Array
+		public function get initializers():Vector.<Initializer>
 		{
 			return _initializers;
 		}
-		public function set initializers( value:Array ):void
+		public function set initializers( value:Vector.<Initializer> ):void
 		{
 			var initializer:Initializer;
 			for each( initializer in _initializers )
@@ -242,7 +242,7 @@ package org.flintparticles.common.emitters
 				initializer.removedFromEmitter( this );
 			}
 			_initializers = value.slice();
-			BehaviourArrayUtils.sortArray( _initializers );
+			_initializers.sort( prioritySort );
 			for each( initializer in value )
 			{
 				initializer.addedToEmitter( this );
@@ -260,7 +260,15 @@ package org.flintparticles.common.emitters
 		 */
 		public function addInitializer( initializer:Initializer ):void
 		{
-			BehaviourArrayUtils.add( _initializers, initializer );
+			var len:uint = _initializers.length;
+			for( var i:uint = 0; i < len; ++i )
+			{
+				if( _initializers[i].priority < initializer.priority )
+				{
+					break;
+				}
+			}
+			_initializers.splice( i, 0, initializer );
 			initializer.addedToEmitter( this );
 		}
 		
@@ -273,8 +281,10 @@ package org.flintparticles.common.emitters
 		 */
 		public function removeInitializer( initializer:Initializer ):void
 		{
-			if( BehaviourArrayUtils.remove( _initializers, initializer ) )
+			var index:int = _initializers.indexOf( initializer );
+			if( index != -1 )
 			{
+				_initializers.splice( index, 1 );
 				initializer.removedFromEmitter( this );
 			}
 		}
@@ -289,7 +299,7 @@ package org.flintparticles.common.emitters
 		 */
 		public function hasInitializer( initializer:Initializer ):Boolean
 		{
-			return BehaviourArrayUtils.contains( _initializers, initializer );
+			return _initializers.indexOf( initializer ) != -1;
 		}
 		
 		/**
@@ -302,17 +312,25 @@ package org.flintparticles.common.emitters
 		 */
 		public function hasInitializerOfType( initializerClass:Class ):Boolean
 		{
-			return BehaviourArrayUtils.containsType( _initializers, initializerClass );
+			var len:uint = _initializers.length;
+			for( var i:uint = 0; i < len; ++i )
+			{
+				if( _initializers[i] is initializerClass )
+				{
+					return true;
+				}
+			}
+			return false;
 		}
 
 		/**
 		 * The array of all actions being used by this emitter.
 		 */
-		public function get actions():Array
+		public function get actions():Vector.<Action>
 		{
 			return _actions;
 		}
-		public function set actions( value:Array ):void
+		public function set actions( value:Vector.<Action> ):void
 		{
 			var action:Action;
 			for each( action in _actions )
@@ -320,7 +338,7 @@ package org.flintparticles.common.emitters
 				action.removedFromEmitter( this );
 			}
 			_actions = value.slice();
-			BehaviourArrayUtils.sortArray( _actions );
+			_actions.sort( prioritySort );
 			for each( action in value )
 			{
 				action.addedToEmitter( this );
@@ -338,7 +356,15 @@ package org.flintparticles.common.emitters
 		 */
 		public function addAction( action:Action ):void
 		{
-			BehaviourArrayUtils.add( _actions, action );
+			var len:uint = _actions.length;
+			for( var i:uint = 0; i < len; ++i )
+			{
+				if( _actions[i].priority < action.priority )
+				{
+					break;
+				}
+			}
+			_actions.splice( i, 0, action );
 			action.addedToEmitter( this );
 		}
 		
@@ -351,8 +377,10 @@ package org.flintparticles.common.emitters
 		 */
 		public function removeAction( action:Action ):void
 		{
-			if( BehaviourArrayUtils.remove( _actions, action ) )
+			var index:int = _actions.indexOf( action );
+			if( index != -1 )
 			{
+				_actions.splice( index, 1 );
 				action.removedFromEmitter( this );
 			}
 		}
@@ -367,7 +395,7 @@ package org.flintparticles.common.emitters
 		 */
 		public function hasAction( action:Action ):Boolean
 		{
-			return BehaviourArrayUtils.contains( _actions, action );
+			return _actions.indexOf( action ) != -1;
 		}
 		
 		/**
@@ -380,17 +408,25 @@ package org.flintparticles.common.emitters
 		 */
 		public function hasActionOfType( actionClass:Class ):Boolean
 		{
-			return BehaviourArrayUtils.containsType( _actions, actionClass );
+			var len:uint = _actions.length;
+			for( var i:uint = 0; i < len; ++i )
+			{
+				if( _actions[i] is actionClass )
+				{
+					return true;
+				}
+			}
+			return false;
 		}
 
 		/**
 		 * The array of all actions being used by this emitter.
 		 */
-		public function get activities():Array
+		public function get activities():Vector.<Activity>
 		{
 			return _activities;
 		}
-		public function set activities( value:Array ):void
+		public function set activities( value:Vector.<Activity> ):void
 		{
 			var activity:Activity;
 			for each( activity in _activities )
@@ -398,7 +434,7 @@ package org.flintparticles.common.emitters
 				activity.removedFromEmitter( this );
 			}
 			_activities = value.slice();
-			BehaviourArrayUtils.sortArray( _activities );
+			_activities.sort( prioritySort );
 			for each( activity in _activities )
 			{
 				activity.addedToEmitter( this );
@@ -416,7 +452,15 @@ package org.flintparticles.common.emitters
 		 */
 		public function addActivity( activity:Activity ):void
 		{
-			BehaviourArrayUtils.add( _activities, activity );
+			var len:uint = _activities.length;
+			for( var i:uint = 0; i < len; ++i )
+			{
+				if( _activities[i].priority < activity.priority )
+				{
+					break;
+				}
+			}
+			_activities.splice( i, 0, activity );
 			activity.addedToEmitter( this );
 		}
 		
@@ -429,8 +473,10 @@ package org.flintparticles.common.emitters
 		 */
 		public function removeActivity( activity:Activity ):void
 		{
-			if( BehaviourArrayUtils.remove( _activities, activity ) )
+			var index:int = _activities.indexOf( activity );
+			if( index != -1 )
 			{
+				_activities.splice( index, 1 );
 				activity.removedFromEmitter( this );
 			}
 		}
@@ -445,7 +491,7 @@ package org.flintparticles.common.emitters
 		 */
 		public function hasActivity( activity:Activity ):Boolean
 		{
-			return BehaviourArrayUtils.contains( _activities, activity );
+			return _activities.indexOf( activity ) != -1;
 		}
 		
 		/**
@@ -458,7 +504,15 @@ package org.flintparticles.common.emitters
 		 */
 		public function hasActivityOfType( activityClass:Class ):Boolean
 		{
-			return BehaviourArrayUtils.containsType( _activities, activityClass );
+			var len:uint = _activities.length;
+			for( var i:uint = 0; i < len; ++i )
+			{
+				if( _activities[i] is activityClass )
+				{
+					return true;
+				}
+			}
+			return false;
 		}
 
 		/**
@@ -565,16 +619,28 @@ package org.flintparticles.common.emitters
 		}
 		
 		/**
-		 * The array of all particles created by this emitter.
+		 * The collection of all particles being managed by this emitter.
 		 */
-		public function get particles():Array
+		public function get particles():Vector.<Particle>
 		{
-			return _particles;
+			return new Vector.<Particle>( _particles );
 		}
-		public function set particles( value:Array ):void
+		public function set particles( value:Vector.<Particle> ):void
 		{
 			killAllParticles();
-			addExistingParticles( value, false );
+			addParticles( value, false );
+		}
+
+		/**
+		 * The actual array of particles used internally by this emitter. You may want to use this to manipulate
+		 * the particles array directly or to provide optimized access to the array inside a custom
+		 * behaviour. If you don't need the actual array, using the particles property is slightly safer.
+		 * 
+		 * @see #particles
+		 */
+		public function get particlesArray():Array
+		{
+			return _particles;
 		}
 
 		/*
@@ -590,7 +656,10 @@ package org.flintparticles.common.emitters
 				Initializer( _initializers[i] ).initialize( this, particle );
 			}
 			_particles.push( particle );
-			dispatchEvent( new ParticleEvent( ParticleEvent.PARTICLE_CREATED, particle ) );
+			if( hasEventListener( ParticleEvent.PARTICLE_CREATED ) )
+			{
+				dispatchEvent( new ParticleEvent( ParticleEvent.PARTICLE_CREATED, particle ) );
+			}
 			return particle;
 		}
 		
@@ -608,15 +677,47 @@ package org.flintparticles.common.emitters
 		}
 		
 		/**
-		 * Adds existing particles to the emitter. This enables users to create 
-		 * particles externally to the emitter and then pass the particles to the
-		 * emitter for management.
+		 * Add a particle to the emitter. This enables users to create a
+		 * particle externally to the emitter and then pass the particle to this
+		 * emitter for management. Or remove a particle from one emitter and add
+		 * it to another.
 		 * 
-		 * @param particles An array of particles
+		 * @param particle The particle to add to this emitter
 		 * @param applyInitializers Indicates whether to apply the emitter's
 		 * initializer behaviours to the particle (true) or not (false).
+		 * 
+		 * @see #removeParticle()
 		 */
-		public function addExistingParticles( particles:Array, applyInitializers:Boolean = false ):void
+		public function addParticle( particle:Particle, applyInitializers:Boolean = false ):void
+		{
+			if( applyInitializers )
+			{
+				var len:int = _initializers.length;
+				for ( var i:int = 0; i < len; ++i )
+				{
+					_initializers[i].initialize( this, particle );
+				}
+			}
+			_particles.push( particle );
+			if ( hasEventListener( ParticleEvent.PARTICLE_ADDED ) )
+			{
+				dispatchEvent( new ParticleEvent( ParticleEvent.PARTICLE_ADDED, particle ) );
+			}
+		}
+		
+		/**
+		 * Adds existing particles to the emitter. This enables users to create 
+		 * particles externally to the emitter and then pass the particles to the
+		 * emitter for management. Or remove particles from one emitter and add
+		 * them to another.
+		 * 
+		 * @param particles The particles to add to this emitter
+		 * @param applyInitializers Indicates whether to apply the emitter's
+		 * initializer behaviours to the particle (true) or not (false).
+		 * 
+		 * @see #removeParticles()
+		 */
+		public function addParticles( particles:Vector.<Particle>, applyInitializers:Boolean = false ):void
 		{
 			var len:int = particles.length;
 			var i:int;
@@ -627,24 +728,82 @@ package org.flintparticles.common.emitters
 				{
 					for ( i = 0; i < len; ++i )
 					{
-						Initializer( _initializers[j] ).initialize( this, particles[i] );
+						_initializers[j].initialize( this, particles[i] );
 					}
 				}
 			}
-			for( i = 0; i < len; ++i )
+			if ( hasEventListener( ParticleEvent.PARTICLE_ADDED ) )
 			{
-				_particles.push( particles[i] );
-				dispatchEvent( new ParticleEvent( ParticleEvent.PARTICLE_ADDED, particles[i] ) );
+				for( i = 0; i < len; ++i )
+				{
+					_particles.push( particles[i] );
+					dispatchEvent( new ParticleEvent( ParticleEvent.PARTICLE_ADDED, particles[i] ) );
+				}
+			}
+			else
+			{
+				for ( i = 0; i < len; ++i )
+				{
+					_particles.push( particles[i] );
+				}
+			}
+		}
+		
+		/**
+		 * Remove a particle from this emitter.
+		 * 
+		 * @param particle The particle to remove.
+		 * @return true if the particle was removed, false if it wasn't on this emitter in the first place.
+		 */
+		public function removeParticle( particle:Particle ):Boolean
+		{
+			var index:int = _particles.indexOf( particle );
+			if( index != -1 )
+			{
+				_particles.splice( index, 1 );
+				return true;
+			}
+			return false;
+		}
+		
+		/**
+		 * Remove a collection of particles from this emitter.
+		 * 
+		 * @param particles The particles to remove.
+		 */
+		public function removeParticles( particles:Vector.<Particle> ):void
+		{
+			for( var i:int = 0, len:int = particles.length; i < len; ++i )
+			{
+				var index:int = _particles.indexOf( particles[i] );
+				if( index != -1 )
+				{
+					_particles.splice( index, 1 );
+				}
 			}
 		}
 
+		/**
+		 * Kill all the particles on this emitter.
+		 */
 		public function killAllParticles():void
 		{
 			var len:int = _particles.length;
-			for ( var i:int = 0; i < len; ++i )
+			var i:int;
+			if ( hasEventListener( ParticleEvent.PARTICLE_DEAD ) )
 			{
-				dispatchEvent( new ParticleEvent( ParticleEvent.PARTICLE_DEAD, _particles[i] ) );
-				_particleFactory.disposeParticle( _particles[i] );
+				for ( i = 0; i < len; ++i )
+				{
+					dispatchEvent( new ParticleEvent( ParticleEvent.PARTICLE_DEAD, _particles[i] ) );
+					_particleFactory.disposeParticle( _particles[i] );
+				}
+			}
+			else
+			{
+				for ( i = 0; i < len; ++i )
+				{
+					_particleFactory.disposeParticle( _particles[i] );
+				}
 			}
 			_particles.length = 0;
 		}
@@ -745,29 +904,56 @@ package org.flintparticles.common.emitters
 					}
 				}
 				// remove dead particles
-				for ( i = len2; i--; )
+				if( hasEventListener( ParticleEvent.PARTICLE_DEAD ) )
 				{
-					particle = _particles[i];
-					if ( particle.isDead )
+					for ( i = len2; i--; )
 					{
-						_particles.splice( i, 1 );
-						dispatchEvent( new ParticleEvent( ParticleEvent.PARTICLE_DEAD, particle ) );
-						if( particle.isDead )
+						particle = _particles[i];
+						if ( particle.isDead )
 						{
-							_particleFactory.disposeParticle( particle );
+							_particles.splice( i, 1 );
+							dispatchEvent( new ParticleEvent( ParticleEvent.PARTICLE_DEAD, particle ) );
+							if( particle.isDead )
+							{
+								_particleFactory.disposeParticle( particle );
+							}
+						}
+					}
+				}
+				else 
+				{
+					for ( i = len2; i--; )
+					{
+						particle = _particles[i];
+						if ( particle.isDead )
+						{
+							_particles.splice( i, 1 );
+							if( particle.isDead )
+							{
+								_particleFactory.disposeParticle( particle );
+							}
 						}
 					}
 				}
 			}
 			else 
 			{
-				dispatchEvent( new EmitterEvent( EmitterEvent.EMITTER_EMPTY ) );
+				if( hasEventListener( EmitterEvent.EMITTER_EMPTY ) )
+				{
+					dispatchEvent( new EmitterEvent( EmitterEvent.EMITTER_EMPTY ) );
+				}
 			}
-			dispatchEvent( new EmitterEvent( EmitterEvent.EMITTER_UPDATED ) );
+			if( hasEventListener( EmitterEvent.EMITTER_UPDATED ) )
+			{
+				dispatchEvent( new EmitterEvent( EmitterEvent.EMITTER_UPDATED ) );
+			}
 			if( _dispatchCounterComplete )
 			{
 				_dispatchCounterComplete = false;
-				dispatchEvent( new EmitterEvent( EmitterEvent.COUNTER_COMPLETE ) );
+				if( hasEventListener( EmitterEvent.COUNTER_COMPLETE ) )
+				{
+					dispatchEvent( new EmitterEvent( EmitterEvent.COUNTER_COMPLETE ) );
+				}
 			}
 		}
 		
@@ -831,6 +1017,11 @@ package org.flintparticles.common.emitters
 				update( step );
 			}
 			_maximumFrameTime = maxTime;
+		}
+		
+		private function prioritySort( b1:Behaviour, b2:Behaviour ):Number
+		{
+			return b1.priority - b2.priority;
 		}
 	}
 }

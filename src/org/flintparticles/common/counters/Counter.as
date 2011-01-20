@@ -3,7 +3,7 @@
  * .....................
  * 
  * Author: Richard Lord
- * Copyright (c) Richard Lord 2008-2010
+ * Copyright (c) Richard Lord 2008-2011
  * http://flintparticles.org
  * 
  * 
@@ -85,5 +85,10 @@ package org.flintparticles.common.counters
 		 * Indicates if the counter has emitted all its particles
 		 */
 		function get complete():Boolean;
+		
+		/**
+		 * Indicates if the counter is currently emitting particles
+		 */
+		function get running():Boolean;
 	}
 }

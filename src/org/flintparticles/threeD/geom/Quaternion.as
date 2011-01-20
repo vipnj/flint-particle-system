@@ -3,7 +3,7 @@
  * .....................
  * 
  * Author: Richard Lord
- * Copyright (c) Richard Lord 2008-2010
+ * Copyright (c) Richard Lord 2008-2011
  * http://flintparticles.org/
  * 
  * Licence Agreement
@@ -29,8 +29,11 @@
 
 package org.flintparticles.threeD.geom
 {
+	import flash.geom.Matrix3D;
+	import flash.geom.Vector3D;
+	
 	/**
-	 * 
+	 * Represents a quaternion, an alternative representation of a rotation in three-d space.
 	 */
 	public class Quaternion 
 	{
@@ -437,7 +440,8 @@ package org.flintparticles.threeD.geom
 			}
 			if( axis.lengthSquared != 1 )
 			{
-				axis = axis.unit();
+				axis = axis.clone();
+				axis.normalize();
 			}
 			const sin:Number = Math.sin( angle );
 			w = Math.cos( angle );
@@ -479,12 +483,12 @@ package org.flintparticles.threeD.geom
 			var xz:Number = x * z;
 			var yz:Number = y * z;
 
-			return new Matrix3D( [
-				1 - 2 * ( yy + zz ), 2 * ( xy - wz ), 2 * ( xz + wy ), 0,
-				2 * ( xy + wz ), 1 - 2 * ( xx + zz ), 2 * ( yz - wx ), 0,
-				2 * ( xz - wy ), 2 * ( yz + wx ), 1 - 2 * ( xx + yy ), 0,
+			return new Matrix3D( Vector.<Number>( [
+				1 - 2 * ( yy + zz ), 2 * ( xy + wz ), 2 * ( xz - wy ), 0,
+				2 * ( xy - wz ), 1 - 2 * ( xx + zz ), 2 * ( yz + wx ), 0,
+				2 * ( xz + wy ), 2 * ( yz - wx ), 1 - 2 * ( xx + yy ), 0,
 				0, 0, 0, 1
-			] );
+			] ) );
 			
 		}
 		

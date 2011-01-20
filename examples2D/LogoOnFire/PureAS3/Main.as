@@ -3,7 +3,7 @@
  * .....................
  * 
  * Author: Richard Lord
- * Copyright (c) Richard Lord 2008-2010
+ * Copyright (c) Richard Lord 2008-2011
  * http://flintparticles.org/
  * 
  * Licence Agreement
@@ -36,18 +36,15 @@ package
 	import flash.display.Sprite;
 	import flash.geom.Rectangle;
 
-	[SWF(width='500', height='200', frameRate='61', backgroundColor='#000000')]
+	[SWF(width='500', height='200', frameRate='60', backgroundColor='#000000')]
 	
 	public class Main extends Sprite
 	{
-		[Embed(source="assets/flint.png")]
-		public var Logo:Class;
-
 		private var emitter:Emitter2D;
 		
 		public function Main()
 		{
-			var bitmap:Bitmap = new Logo();
+			var bitmap:Bitmap = new Bitmap( new Logo( 265, 80 ) );
 			addChild( bitmap );
 			bitmap.x = 118;
 			bitmap.y = 70;

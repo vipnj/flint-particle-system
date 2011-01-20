@@ -3,7 +3,7 @@
  * .....................
  * 
  * Author: Richard Lord
- * Copyright (c) Richard Lord 2008-2010
+ * Copyright (c) Richard Lord 2008-2011
  * http://flintparticles.org/
  * 
  * Licence Agreement
@@ -32,7 +32,7 @@ package
 	import org.flintparticles.common.actions.Age;
 	import org.flintparticles.common.actions.Fade;
 	import org.flintparticles.common.counters.Blast;
-	import org.flintparticles.common.energyEasing.Quadratic;
+	import org.flintparticles.common.easing.Quadratic;
 	import org.flintparticles.common.events.EmitterEvent;
 	import org.flintparticles.common.initializers.ColorInit;
 	import org.flintparticles.common.initializers.Lifetime;
@@ -45,23 +45,18 @@ package
 	import org.flintparticles.twoD.zones.BitmapDataZone;
 	import org.flintparticles.twoD.zones.DiscZone;
 
-	import flash.display.Bitmap;
 	import flash.geom.Point;
 
 	public class LogoFirework extends Emitter2D
 	{
-		[Embed(source="assets/flint.png")]
-		public var Logo:Class;
-
 		public function LogoFirework()
 		{
-			counter = new Blast( 1500 );
+			counter = new Blast( 4000 );
 			
 			addInitializer( new ColorInit( 0xFFFF3300, 0xFFFFFF00 ) );
 			addInitializer( new Lifetime( 6 ) );
 			addInitializer( new Position( new DiscZone( new Point( 0, 0 ), 10 ) ) );
-			var bitmap:Bitmap = new Logo();
-			addInitializer( new Velocity( new BitmapDataZone( bitmap.bitmapData, -132, -300 ) ) );
+			addInitializer( new Velocity( new BitmapDataZone( new Logo( 265, 80 ), -132, -300 ) ) );
 			
 			addAction( new Age( Quadratic.easeIn ) );
 			addAction( new Fade( 1.0, 0 ) );

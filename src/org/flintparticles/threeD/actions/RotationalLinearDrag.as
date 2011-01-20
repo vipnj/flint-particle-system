@@ -3,7 +3,7 @@
  * .....................
  * 
  * Author: Richard Lord
- * Copyright (c) Richard Lord 2008-2010
+ * Copyright (c) Richard Lord 2008-2011
  * http://flintparticles.org
  * 
  * 
@@ -33,8 +33,9 @@ package org.flintparticles.threeD.actions
 	import org.flintparticles.common.actions.ActionBase;
 	import org.flintparticles.common.emitters.Emitter;
 	import org.flintparticles.common.particles.Particle;
-	import org.flintparticles.threeD.geom.Vector3D;
-	import org.flintparticles.threeD.particles.Particle3D;	
+	import org.flintparticles.threeD.particles.Particle3D;
+
+	import flash.geom.Vector3D;
 
 	/**
 	 * The RotationalLinearDrag action applies drag to the particle to slow it down 
@@ -77,19 +78,21 @@ package org.flintparticles.threeD.actions
 		 */
 		override public function update( emitter:Emitter, particle:Particle, time:Number ):void
 		{
-			var p:Particle3D = Particle3D( particle );
-			if( p.angVelocity.equals( Vector3D.ZERO ) )
+			var v : Vector3D = Particle3D( particle ).angVelocity;
+			if ( v.x == 0 && v.y == 0 && v.z == 0 )
 			{
 				return;
 			}
-			var scale:Number = 1 - _drag * time / p.inertia;
+			var scale:Number = 1 - _drag * time / Particle3D( particle ).inertia;
 			if( scale < 0 )
 			{
-				p.angVelocity.reset( 0, 0, 0 );
+				v.x = 0;
+				v.y = 0;
+				v.z = 0;
 			}
 			else
 			{
-				p.angVelocity.scaleBy( scale );
+				v.scaleBy( scale );
 			}
 		}
 	}

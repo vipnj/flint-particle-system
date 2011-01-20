@@ -1,283 +1,55 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link rel="stylesheet" href="../../../../style.css" type="text/css" media="screen">
-<link rel="stylesheet" href="../../../../print.css" type="text/css" media="print">
-<meta content="InitializerBase,org.flintparticles.common.initializers.InitializerBase,_priority,priority,addedToEmitter,initialize,removedFromEmitter" name="keywords">
-<title>org.flintparticles.common.initializers.InitializerBase</title>
-</head>
-<body>
-<script type="text/javascript" language="javascript" src="../../../../asdoc.js"></script><script type="text/javascript" language="javascript" src="../../../../cookies.js"></script><script type="text/javascript" language="javascript">
-<!--
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"><!-- saved from url=(0014)about:internet --><html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><link rel="stylesheet" href="../../../../style.css" type="text/css" media="screen"><link rel="stylesheet" href="../../../../print.css" type="text/css" media="print"><link rel="stylesheet" href="../../../../override.css" type="text/css"><meta name="keywords" content="InitializerBase,org.flintparticles.common.initializers.InitializerBase,_priority,alpha,clickHandler,color,colors,downHandler,filter,image,imageClass,images,images,initValues,initializers,initializers,lifetime,mass,maxAlpha,maxColor,maxLifetime,maxScale,minAlpha,minColor,minLifetime,minScale,outHandler,overHandler,parameters,priority,radius,scale,scales,upHandler,weights,weights,weights,weights,weights,addColor,addImage,addImage,addInitializer,addInitializer,addScale,addedToEmitter,addedToEmitter,addedToEmitter,addedToEmitter,addedToEmitter,addedToEmitter,addedToEmitter,addedToEmitter,initialize,initialize,initialize,initialize,initialize,initialize,initialize,initialize,initialize,initialize,initialize,initialize,initialize,initialize,initialize,initialize,initialize,initialize,initialize,removeColor,removeImage,removeImage,removeInitializer,removeInitializer,removeScale,removedFromEmitter,removedFromEmitter,removedFromEmitter"><title>org.flintparticles.common.initializers.InitializerBase</title></head><body><script language="javascript" type="text/javascript" src="../../../../asdoc.js"></script><script language="javascript" type="text/javascript" src="../../../../help.js"></script><script language="javascript" type="text/javascript" src="../../../../cookies.js"></script><script language="javascript" type="text/javascript"><!--
 				asdocTitle = 'InitializerBase - Flint Particles documentation';
 				var baseRef = '../../../../';
 				window.onload = configPage;
 			--></script>
-<table style="display:none" id="titleTable" cellspacing="0" cellpadding="0" class="titleTable">
-<tr>
-<td align="left" class="titleTableTitle">Flint Particles documentation v2.2.1</td><td align="right" class="titleTableTopNav"><a onclick="loadClassListFrame('../../../../all-classes.html')" href="../../../../package-summary.html">All&nbsp;Packages</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../../../all-classes.html')" href="../../../../class-summary.html">All&nbsp;Classes</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../../../index-list.html')" href="../../../../all-index-A.html">Index</a>&nbsp;|&nbsp;<a href="../../../../index.html?org/flintparticles/common/initializers/InitializerBase.html&amp;org/flintparticles/common/initializers/class-list.html" id="framesLink1">Frames</a><a onclick="parent.location=document.location" href="" style="display:none" id="noFramesLink1">No&nbsp;Frames</a></td>
-</tr>
-<tr class="titleTableRow2">
-<td align="left" id="subTitle" class="titleTableSubTitle">Class&nbsp;InitializerBase</td><td align="right" id="subNav" class="titleTableSubNav"><a href="#propertySummary">Properties</a>&nbsp;| <a href="#methodSummary">Methods</a></td>
-</tr>
-<tr class="titleTableRow3">
-<td colspan="2">&nbsp;</td>
-</tr>
-</table>
-<script type="text/javascript" language="javascript">
-<!--
-if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Class InitializerBase"); titleBar_setSubNav(false,true,false,false,false,false,true,false,false,false,false,false,false,false);}
---></script>
-<div class="MainContent">
-<table cellspacing="0" cellpadding="0" class="classHeaderTable">
-<tr>
-<td class="classHeaderTableLabel">Package</td><td><a onclick="javascript:loadClassListFrame('class-list.html')" href="package-detail.html">org.flintparticles.common.initializers</a></td>
-</tr>
-<tr>
-<td class="classHeaderTableLabel">Class</td><td class="classSignature">public class InitializerBase</td>
-</tr>
-<tr>
-<td class="classHeaderTableLabel">Implements</td><td><a href="Initializer.html">Initializer</a></td>
-</tr>
-<tr>
-<td class="classHeaderTableLabel">Subclasses</td><td><a href="../../threeD/away3d/initializers/A3DDisplayObjectClass.html">A3DDisplayObjectClass</a>, <a href="../../threeD/away3d/initializers/A3DDisplayObjectClasses.html">A3DDisplayObjectClasses</a>, <a href="../../threeD/away3d/initializers/A3DObjectClass.html">A3DObjectClass</a>, <a href="../../threeD/away3d/initializers/A3DObjectClasses.html">A3DObjectClasses</a>, <a href="../initializers/AlphaInit.html">AlphaInit</a>, <a href="../initializers/ApplyFilter.html">ApplyFilter</a>, <a href="../../threeD/papervision3d/initializers/ApplyMaterial.html">ApplyMaterial</a>, <a href="../../threeD/away3d/initializers/ApplyMaterial.html">ApplyMaterial</a>, <a href="../initializers/ChooseInitializer.html">ChooseInitializer</a>, <a href="../initializers/CollisionRadiusInit.html">CollisionRadiusInit</a>, <a href="../initializers/ColorInit.html">ColorInit</a>, <a href="../initializers/ColorsInit.html">ColorsInit</a>, <a href="../initializers/DictionaryInitializer.html">DictionaryInitializer</a>, <a href="../../threeD/initializers/FaceAxis.html">FaceAxis</a>, <a href="../initializers/ImageClass.html">ImageClass</a>, <a href="../initializers/ImageClasses.html">ImageClasses</a>, <a href="../initializers/InitializerGroup.html">InitializerGroup</a>, <a href="../initializers/Lifetime.html">Lifetime</a>, <a href="../initializers/MassInit.html">MassInit</a>, <a href="../initializers/MouseEventHandlers.html">MouseEventHandlers</a>, <a href="../../twoD/initializers/Position.html">Position</a>, <a href="../../threeD/initializers/Position.html">Position</a>, <a href="../../twoD/initializers/PositionAbsolute.html">PositionAbsolute</a>, <a href="../../threeD/initializers/PositionAbsolute.html">PositionAbsolute</a>, <a href="../../threeD/papervision3d/initializers/PV3DDisplayObjectClass.html">PV3DDisplayObjectClass</a>, <a href="../../threeD/papervision3d/initializers/PV3DDisplayObjectClasses.html">PV3DDisplayObjectClasses</a>, <a href="../../threeD/papervision3d/initializers/PV3DObjectClass.html">PV3DObjectClass</a>, <a href="../../threeD/papervision3d/initializers/PV3DObjectClasses.html">PV3DObjectClasses</a>, <a href="../../threeD/initializers/RotateVelocity.html">RotateVelocity</a>, <a href="../../twoD/initializers/RotateVelocity.html">RotateVelocity</a>, <a href="../../threeD/initializers/Rotation.html">Rotation</a>, <a href="../../twoD/initializers/Rotation.html">Rotation</a>, <a href="../../threeD/initializers/RotationAbsolute.html">RotationAbsolute</a>, <a href="../../twoD/initializers/RotationAbsolute.html">RotationAbsolute</a>, <a href="../../threeD/initializers/ScaleAllInit.html">ScaleAllInit</a>, <a href="../../twoD/initializers/ScaleAllInit.html">ScaleAllInit</a>, <a href="../../twoD/initializers/ScaleAllsInit.html">ScaleAllsInit</a>, <a href="../../threeD/initializers/ScaleAllsInit.html">ScaleAllsInit</a>, <a href="../initializers/ScaleImageInit.html">ScaleImageInit</a>, <a href="../initializers/ScaleImagesInit.html">ScaleImagesInit</a>, <a href="../initializers/SharedImage.html">SharedImage</a>, <a href="../initializers/SharedImages.html">SharedImages</a>, <a href="../../threeD/initializers/Velocity.html">Velocity</a>, <a href="../../twoD/initializers/Velocity.html">Velocity</a></td>
-</tr>
-</table>
-<p></p>
-  The InitializerBase class is the abstract base class for all particle 
-  initializers in the Flint library. It implements the Initializer interface 
-  with a default priority of zero and empty methods for the rest of the 
-  interface.
-  
-  <p>Instances of the InitializerBase class should not be directly created 
-  because the InitializerBase class itself simply implements the Initializer
-  interface with default methods that do nothing.</p>
-  
-  <p>Developers creating custom initializers may either extend the 
-  InitializerBase class or implement the Initializer interface directly. 
-  Classes that extend the InitializerBase class need only to implement their 
-  own functionality for the methods they want to use, leaving other methods 
-  with their default empty implementations.</p>
-  
-  <p></p>
-<p>
-<span class="classHeaderTableLabel">See also</span>
-</p>
-<div class="seeAlso">
-<a href="../emitters/Emitter.html#addInitializer()" target="">org.flintparticles.common.emitters.Emitter.addInitializer()</a>
-</div>
-<br>
-<hr>
-</div>
-<a name="propertySummary"></a>
-<div class="summarySection">
-<div class="summaryTableTitle">Public Properties</div>
-<table id="summaryTableProperty" class="summaryTable " cellpadding="3" cellspacing="0">
-<tr>
-<th>&nbsp;</th><th colspan="2">Property</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
-</tr>
-<tr class="">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#priority">priority</a> : int<div class="summaryTableDescription">
-   Returns a default priority of 0 for this action.</div>
-</td><td class="summaryTableOwnerCol">InitializerBase</td>
-</tr>
-</table>
-</div>
-<a name="protectedPropertySummary"></a>
-<div class="summarySection">
-<div class="summaryTableTitle">Protected Properties</div>
-<table id="summaryTableProtectedProperty" class="summaryTable " cellpadding="3" cellspacing="0">
-<tr>
-<th>&nbsp;</th><th colspan="2">Property</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
-</tr>
-<tr class="">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#_priority">_priority</a> : int = 0<div class="summaryTableDescription"></div>
-</td><td class="summaryTableOwnerCol">InitializerBase</td>
-</tr>
-</table>
-</div>
-<a name="methodSummary"></a>
-<div class="summarySection">
-<div class="summaryTableTitle">Public Methods</div>
-<table id="summaryTableMethod" class="summaryTable " cellpadding="3" cellspacing="0">
-<tr>
-<th>&nbsp;</th><th colspan="2">Method</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
-</tr>
-<tr class="">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
-<div class="summarySignature">
-<a class="signatureLink" href="#InitializerBase()">InitializerBase</a>()</div>
-<div class="summaryTableDescription">
-   The constructor creates an Initializer object.</div>
-</td><td class="summaryTableOwnerCol">InitializerBase</td>
-</tr>
-<tr class="">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
-<div class="summarySignature">
-<a class="signatureLink" href="#addedToEmitter()">addedToEmitter</a>(emitter:<a href="../emitters/Emitter.html">Emitter</a>):void</div>
-<div class="summaryTableDescription">
-   This method does nothing.</div>
-</td><td class="summaryTableOwnerCol">InitializerBase</td>
-</tr>
-<tr class="">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
-<div class="summarySignature">
-<a class="signatureLink" href="#initialize()">initialize</a>(emitter:<a href="../emitters/Emitter.html">Emitter</a>, particle:<a href="../particles/Particle.html">Particle</a>):void</div>
-<div class="summaryTableDescription">
-   This method does nothing.</div>
-</td><td class="summaryTableOwnerCol">InitializerBase</td>
-</tr>
-<tr class="">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
-<div class="summarySignature">
-<a class="signatureLink" href="#removedFromEmitter()">removedFromEmitter</a>(emitter:<a href="../emitters/Emitter.html">Emitter</a>):void</div>
-<div class="summaryTableDescription">
-   This method does nothing.</div>
-</td><td class="summaryTableOwnerCol">InitializerBase</td>
-</tr>
-</table>
-</div>
-<script type="text/javascript" language="javascript">
-<!--
-showHideInherited();
---></script>
-<div class="MainContent">
-<a name="propertyDetail"></a>
-<div class="detailSectionHeader">Property detail</div>
-<a name="_priority"></a>
-<table cellspacing="0" cellpadding="0" class="detailHeader">
-<tr>
-<td class="detailHeaderName">_priority</td><td class="detailHeaderType">property</td>
-</tr>
-</table>
-<div class="detailBody">
-<code>protected var _priority:int = 0</code>
-</div>
-<a name="priority"></a>
-<table cellspacing="0" cellpadding="0" class="detailHeader">
-<tr>
-<td class="detailHeaderName">priority</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
-</tr>
-</table>
-<div class="detailBody">
-<code>priority:int</code>&nbsp;&nbsp;[read-write]<p>
-   Returns a default priority of 0 for this action. Derived classes 
-   overrid ethis method if they want a different default priority.
-   
-   </p><span class="label">Implementation</span>
-<br>
-<code>&nbsp;&nbsp;&nbsp;&nbsp;public function get priority():int</code>
-<br>
-<code>&nbsp;&nbsp;&nbsp;&nbsp;public function set priority(value:int):void</code>
-<br>
-<p>
-<span class="label">See also</span>
-</p>
-<div class="seeAlso">
-<a href="../initializers/Initializer.html#getDefaultPriority()" target="">org.flintparticles.common.initializers.Initializer.getDefaultPriority()</a>
-</div>
-</div>
-<a name="constructorDetail"></a>
-<div class="detailSectionHeader">Constructor detail</div>
-<a name="InitializerBase()"></a>
-<table cellspacing="0" cellpadding="0" class="detailHeader">
-<tr>
-<td class="detailHeaderName">InitializerBase</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">constructor</td>
-</tr>
-</table>
-<div class="detailBody">
-<code>public function InitializerBase()</code><p>
-   The constructor creates an Initializer object. But you shouldn't use 
-   it directly because the InitializerBase class is abstract.
-   </p></div>
-<a name="methodDetail"></a>
-<div class="detailSectionHeader">Method detail</div>
-<a name="addedToEmitter()"></a>
-<table cellspacing="0" cellpadding="0" class="detailHeader">
-<tr>
-<td class="detailHeaderName">addedToEmitter</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td>
-</tr>
-</table>
-<div class="detailBody">
-<code>public function addedToEmitter(emitter:<a href="../emitters/Emitter.html">Emitter</a>):void</code><p>
-   This method does nothing. Some derived classes override this method
-   to perform actions when the initializer is added to an emitter.
-   
-   </p><span class="label">Parameters</span>
-<table border="0" cellspacing="0" cellpadding="0">
-<tr>
-<td width="20px"></td><td><code><span class="label">emitter</span>:<a href="../emitters/Emitter.html">Emitter</a></code></td>
-</tr>
-</table>
-<p>
-<span class="label">See also</span>
-</p>
-<div class="seeAlso">
-<a href="../initializers/Initializer.html#addedToEmitter()" target="">org.flintparticles.common.initializers.Initializer.addedToEmitter()</a>
-</div>
-</div>
-<a name="initialize()"></a>
-<table cellspacing="0" cellpadding="0" class="detailHeader">
-<tr>
-<td class="detailHeaderName">initialize</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
-</tr>
-</table>
-<div class="detailBody">
-<code>public function initialize(emitter:<a href="../emitters/Emitter.html">Emitter</a>, particle:<a href="../particles/Particle.html">Particle</a>):void</code><p>
-   This method does nothing. All derived classes override this method
-   to initialize each particle created by the emitter.
-   
-   </p><span class="label">Parameters</span>
-<table border="0" cellspacing="0" cellpadding="0">
-<tr>
-<td width="20px"></td><td><code><span class="label">emitter</span>:<a href="../emitters/Emitter.html">Emitter</a></code></td>
-</tr>
-<tr>
-<td class="paramSpacer">&nbsp;</td>
-</tr>
-<tr>
-<td width="20px"></td><td><code><span class="label">particle</span>:<a href="../particles/Particle.html">Particle</a></code></td>
-</tr>
-</table>
-<p>
-<span class="label">See also</span>
-</p>
-<div class="seeAlso">
-<a href="../initializers/Initializer.html#initialize()" target="">org.flintparticles.common.initializers.Initializer.initialize()</a>
-</div>
-</div>
-<a name="removedFromEmitter()"></a>
-<table cellspacing="0" cellpadding="0" class="detailHeader">
-<tr>
-<td class="detailHeaderName">removedFromEmitter</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
-</tr>
-</table>
-<div class="detailBody">
-<code>public function removedFromEmitter(emitter:<a href="../emitters/Emitter.html">Emitter</a>):void</code><p>
-   This method does nothing. Some derived classes override this method
-   to perform actions when the initializer is removed from the emitter.
-   
-   </p><span class="label">Parameters</span>
-<table border="0" cellspacing="0" cellpadding="0">
-<tr>
-<td width="20px"></td><td><code><span class="label">emitter</span>:<a href="../emitters/Emitter.html">Emitter</a></code></td>
-</tr>
-</table>
-<p>
-<span class="label">See also</span>
-</p>
-<div class="seeAlso">
-<a href="../initializers/Initializer.html#removedFromEmitter()" target="">org.flintparticles.common.initializers.Initializer.removedFromEmitter()</a>
-</div>
-</div>
-<br>
-<br>
-<hr>
-<br>
-<p></p>
-<center class="copyright">&copy; Richard Lord 2010</center>
-</div>
-</body>
-</html>
-<!--© Richard Lord 2010-->
+<script type="text/javascript">
+			scrollToNameAnchor();
+		</script><table class="titleTable" cellpadding="0" cellspacing="0" id="titleTable" style="display:none"><tr><td class="titleTableTitle" align="left">Flint Particles documentation v3.0.0</td><td class="titleTableTopNav" align="right"><a href="../../../../package-summary.html" onclick="loadClassListFrame('../../../../all-classes.html')">All Packages</a>&nbsp;|&nbsp;<a href="../../../../class-summary.html" onclick="loadClassListFrame('../../../../all-classes.html')">All Classes</a>&nbsp;|&nbsp;<a href="../../../../all-index-A.html" onclick="loadClassListFrame('../../../../index-list.html')">Index</a>&nbsp;|&nbsp;<a id="framesLink1" href="../../../../index.html?org/flintparticles/common/initializers/InitializerBase.html&amp;org/flintparticles/common/initializers/class-list.html">Frames</a><a id="noFramesLink1" style="display:none" href="" onclick="parent.location=document.location"> No Frames </a></td></tr><tr class="titleTableRow2"><td class="titleTableSubTitle" id="subTitle" align="left">InitializerBase</td><td class="titleTableSubNav" id="subNav" align="right"><a href="#propertySummary">Properties</a>&nbsp;| <a href="#methodSummary">Methods</a></td></tr><tr class="titleTableRow3"><td colspan="3">&nbsp;</td></tr></table><script language="javascript" type="text/javascript" xml:space="preserve">
+				<!--
+				
+					if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("InitializerBase"); titleBar_setSubNav(false,true,false,false,false,false,false,false,true,false,false	,false,false,false,false,false);}	
+				-->
+			</script><div xmlns:fn="http://www.w3.org/2005/xpath-functions" class="MainContent"><table class="classHeaderTable" cellpadding="0" cellspacing="0"><tr><td class="classHeaderTableLabel">Package</td><td><a href="package-detail.html" onclick="javascript:loadClassListFrame('class-list.html')">org.flintparticles.common.initializers</a></td></tr><tr><td class="classHeaderTableLabel">Class</td><td class="classSignature">public  class  InitializerBase</td></tr><tr><td class="classHeaderTableLabel">Inheritance</td><td class="inheritanceList">InitializerBase  <img src="../../../../images/inherit-arrow.gif" title="Inheritance" alt="Inheritance" class="inheritArrow"> Object</td></tr><tr><td class="classHeaderTableLabel">Implements</td><td> <a href="../../../../org/flintparticles/common/initializers/Initializer.html">Initializer</a></td></tr><tr><td class="classHeaderTableLabel">Subclasses</td><td> <a href="../../../../org/flintparticles/threeD/away3d/initializers/A3DDisplayObjectClass.html">A3DDisplayObjectClass</a>,  <a href="../../../../org/flintparticles/threeD/away3d/initializers/A3DDisplayObjectClasses.html">A3DDisplayObjectClasses</a>,  <a href="../../../../org/flintparticles/threeD/away3d/initializers/A3DObjectClass.html">A3DObjectClass</a>,  <a href="../../../../org/flintparticles/threeD/away3d/initializers/A3DObjectClasses.html">A3DObjectClasses</a>,  <a href="../../../../org/flintparticles/common/initializers/AlphaInit.html">AlphaInit</a>,  <a href="../../../../org/flintparticles/common/initializers/ApplyFilter.html">ApplyFilter</a>,  <a href="../../../../org/flintparticles/threeD/away3d/initializers/ApplyMaterial.html">ApplyMaterial</a>,  <a href="../../../../org/flintparticles/threeD/papervision3d/initializers/ApplyMaterial.html">ApplyMaterial</a>,  <a href="../../../../org/flintparticles/common/initializers/ChooseInitializer.html">ChooseInitializer</a>,  <a href="../../../../org/flintparticles/common/initializers/CollisionRadiusInit.html">CollisionRadiusInit</a>,  <a href="../../../../org/flintparticles/common/initializers/ColorInit.html">ColorInit</a>,  <a href="../../../../org/flintparticles/common/initializers/ColorsInit.html">ColorsInit</a>,  <a href="../../../../org/flintparticles/common/initializers/DictionaryInitializer.html">DictionaryInitializer</a>,  <a href="../../../../org/flintparticles/threeD/initializers/FaceAxis.html">FaceAxis</a>,  <a href="../../../../org/flintparticles/common/initializers/ImageClass.html">ImageClass</a>,  <a href="../../../../org/flintparticles/common/initializers/ImageClasses.html">ImageClasses</a>,  <a href="../../../../org/flintparticles/common/initializers/InitializerGroup.html">InitializerGroup</a>,  <a href="../../../../org/flintparticles/common/initializers/Lifetime.html">Lifetime</a>,  <a href="../../../../org/flintparticles/common/initializers/MassInit.html">MassInit</a>,  <a href="../../../../org/flintparticles/common/initializers/MouseEventHandlers.html">MouseEventHandlers</a>,  <a href="../../../../org/flintparticles/threeD/initializers/Position.html">Position</a>,  <a href="../../../../org/flintparticles/twoD/initializers/Position.html">Position</a>,  <a href="../../../../org/flintparticles/threeD/initializers/PositionAbsolute.html">PositionAbsolute</a>,  <a href="../../../../org/flintparticles/twoD/initializers/PositionAbsolute.html">PositionAbsolute</a>,  <a href="../../../../org/flintparticles/threeD/papervision3d/initializers/PV3DDisplayObjectClass.html">PV3DDisplayObjectClass</a>,  <a href="../../../../org/flintparticles/threeD/papervision3d/initializers/PV3DDisplayObjectClasses.html">PV3DDisplayObjectClasses</a>,  <a href="../../../../org/flintparticles/threeD/papervision3d/initializers/PV3DObjectClass.html">PV3DObjectClass</a>,  <a href="../../../../org/flintparticles/threeD/papervision3d/initializers/PV3DObjectClasses.html">PV3DObjectClasses</a>,  <a href="../../../../org/flintparticles/threeD/initializers/RotateVelocity.html">RotateVelocity</a>,  <a href="../../../../org/flintparticles/twoD/initializers/RotateVelocity.html">RotateVelocity</a>,  <a href="../../../../org/flintparticles/threeD/initializers/Rotation.html">Rotation</a>,  <a href="../../../../org/flintparticles/twoD/initializers/Rotation.html">Rotation</a>,  <a href="../../../../org/flintparticles/threeD/initializers/RotationAbsolute.html">RotationAbsolute</a>,  <a href="../../../../org/flintparticles/twoD/initializers/RotationAbsolute.html">RotationAbsolute</a>,  <a href="../../../../org/flintparticles/threeD/initializers/ScaleAllInit.html">ScaleAllInit</a>,  <a href="../../../../org/flintparticles/twoD/initializers/ScaleAllInit.html">ScaleAllInit</a>,  <a href="../../../../org/flintparticles/threeD/initializers/ScaleAllsInit.html">ScaleAllsInit</a>,  <a href="../../../../org/flintparticles/twoD/initializers/ScaleAllsInit.html">ScaleAllsInit</a>,  <a href="../../../../org/flintparticles/common/initializers/ScaleImageInit.html">ScaleImageInit</a>,  <a href="../../../../org/flintparticles/common/initializers/ScaleImagesInit.html">ScaleImagesInit</a>,  <a href="../../../../org/flintparticles/common/initializers/SharedImage.html">SharedImage</a>,  <a href="../../../../org/flintparticles/common/initializers/SharedImages.html">SharedImages</a>,  <a href="../../../../org/flintparticles/threeD/initializers/Velocity.html">Velocity</a>,  <a href="../../../../org/flintparticles/twoD/initializers/Velocity.html">Velocity</a></td></tr></table><p></p><p></p><p></p>
+	 The InitializerBase class is the abstract base class for all particle 
+	 initializers in the Flint library. It implements the Initializer interface 
+	 with a default priority of zero and empty methods for the rest of the 
+	 interface.
+	 
+	 <p>Instances of the InitializerBase class should not be directly created 
+	 because the InitializerBase class itself simply implements the Initializer
+	 interface with default methods that do nothing.</p>
+	 
+	              <p>Developers creating custom initializers may either extend the 
+	 InitializerBase class or implement the Initializer interface directly. 
+	 Classes that extend the InitializerBase class need only to implement their 
+	 own functionality for the methods they want to use, leaving other methods 
+	 with their default empty implementations.</p>
+	 
+	           <p></p><p><span class="classHeaderTableLabel">See also</span></p><div class="seeAlso"><a href="../../../../org/flintparticles/common/emitters/Emitter.html#addInitializer()" target="">org.flintparticles.common.emitters.Emitter.addInitializer()</a></div><br/><hr></div><a name="propertySummary"></a><div class="summarySection"><div class="summaryTableTitle">Public Properties</div><table cellspacing="0" cellpadding="3" class="summaryTable " id="summaryTableProperty"><tr><th>&nbsp;</th><th colspan="2">Property</th><th class="summaryTableOwnerCol">Defined By</th></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a href="#priority" class="signatureLink">priority</a> : int<div class="summaryTableDescription">
+		 Returns a default priority of 0 for this action.</div></td><td class="summaryTableOwnerCol">InitializerBase</td></tr></table></div><a name="protectedPropertySummary"></a><div class="summarySection"><div class="summaryTableTitle">Protected Properties</div><table cellspacing="0" cellpadding="3" class="summaryTable " id="summaryTableProtectedProperty"><tr><th>&nbsp;</th><th colspan="2">Property</th><th class="summaryTableOwnerCol">Defined By</th></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a href="#_priority" class="signatureLink">_priority</a> : int = 0<div class="summaryTableDescription"></div></td><td class="summaryTableOwnerCol">InitializerBase</td></tr></table></div><a name="methodSummary"></a><div class="summarySection"><div class="summaryTableTitle">Public Methods </div><table cellspacing="0" cellpadding="3" class="summaryTable " id="summaryTableMethod"><tr><th>&nbsp;</th><th colspan="2">Method</th><th class="summaryTableOwnerCol">Defined By</th></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#InitializerBase()" class="signatureLink">InitializerBase</a>()</div><div class="summaryTableDescription">
+		 The constructor creates an Initializer object.</div></td><td class="summaryTableOwnerCol">InitializerBase</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#addedToEmitter()" class="signatureLink">addedToEmitter</a>(emitter:<a href="../../../../org/flintparticles/common/emitters/Emitter.html">Emitter</a>):void</div><div class="summaryTableDescription">
+		 This method does nothing.</div></td><td class="summaryTableOwnerCol">InitializerBase</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#initialize()" class="signatureLink">initialize</a>(emitter:<a href="../../../../org/flintparticles/common/emitters/Emitter.html">Emitter</a>, particle:<a href="../../../../org/flintparticles/common/particles/Particle.html">Particle</a>):void</div><div class="summaryTableDescription">
+		 This method does nothing.</div></td><td class="summaryTableOwnerCol">InitializerBase</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#removedFromEmitter()" class="signatureLink">removedFromEmitter</a>(emitter:<a href="../../../../org/flintparticles/common/emitters/Emitter.html">Emitter</a>):void</div><div class="summaryTableDescription">
+		 This method does nothing.</div></td><td class="summaryTableOwnerCol">InitializerBase</td></tr></table></div><script language="javascript" type="text/javascript"><!--
+										showHideInherited();
+										--></script><div class="MainContent"><div class="detailSectionHeader">Property Detail</div><a name="propertyDetail"></a><a name="_priority"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">_priority</td><td class="detailHeaderType">property</td></tr></table><div class="detailBody"><code>protected var _priority:int = 0</code><p></p></div><a name="propertyDetail"></a><a name="priority"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">priority</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code>priority:int</code><p></p><p></p><p>
+		 Returns a default priority of 0 for this action. Derived classes 
+		 overrid ethis method if they want a different default priority.
+		 
+		 </p><br/><span class="label"> Implementation </span><br/><code>&nbsp;&nbsp;&nbsp;&nbsp;public function get priority():int</code><br/><code>&nbsp;&nbsp;&nbsp;&nbsp;public function set priority(value:int):void</code><br/><p><span class="label">See also</span></p><div class="seeAlso"><a href="Initializer.html#getDefaultPriority()" target="">org.flintparticles.common.initializers.Initializer.getDefaultPriority()</a></div></div><a name="constructorDetail"></a><div class="detailSectionHeader">Constructor Detail</div><a name="InitializerBase()"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">InitializerBase</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">Constructor</td></tr></table><div class="detailBody"><code>public function InitializerBase()</code><p></p><p>
+		 The constructor creates an Initializer object. But you shouldn't use 
+		 it directly because the InitializerBase class is abstract.
+		 </p></div><a name="methodDetail"></a><div class="detailSectionHeader">Method Detail</div><a name="addedToEmitter()"></a><a name="addedToEmitter(org.flintparticles.common.emitters.Emitter)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">addedToEmitter</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td></tr></table><div class="detailBody"><code> public function addedToEmitter(emitter:<a href="../../../../org/flintparticles/common/emitters/Emitter.html">Emitter</a>):void</code><p></p><p></p><p>
+		 This method does nothing. Some derived classes override this method
+		 to perform actions when the initializer is added to an emitter.
+		 
+		 </p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">emitter</span>:<a href="../../../../org/flintparticles/common/emitters/Emitter.html">Emitter</a></code></td></tr></table></p><p><span class="label">See also</span></p><div class="seeAlso"><a href="Initializer.html#addedToEmitter()" target="">org.flintparticles.common.initializers.Initializer.addedToEmitter()</a></div></div><a name="initialize()"></a><a name="initialize(org.flintparticles.common.emitters.Emitter,org.flintparticles.common.particles.Particle)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">initialize</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> public function initialize(emitter:<a href="../../../../org/flintparticles/common/emitters/Emitter.html">Emitter</a>, particle:<a href="../../../../org/flintparticles/common/particles/Particle.html">Particle</a>):void</code><p></p><p></p><p>
+		 This method does nothing. All derived classes override this method
+		 to initialize each particle created by the emitter.
+		 
+		 </p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">emitter</span>:<a href="../../../../org/flintparticles/common/emitters/Emitter.html">Emitter</a></code></td></tr><tr><td class="paramSpacer">&nbsp;</td></tr><tr><td width="20px"></td><td><code><span class="label">particle</span>:<a href="../../../../org/flintparticles/common/particles/Particle.html">Particle</a></code></td></tr></table></p><p><span class="label">See also</span></p><div class="seeAlso"><a href="Initializer.html#initialize()" target="">org.flintparticles.common.initializers.Initializer.initialize()</a></div></div><a name="removedFromEmitter()"></a><a name="removedFromEmitter(org.flintparticles.common.emitters.Emitter)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">removedFromEmitter</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> public function removedFromEmitter(emitter:<a href="../../../../org/flintparticles/common/emitters/Emitter.html">Emitter</a>):void</code><p></p><p></p><p>
+		 This method does nothing. Some derived classes override this method
+		 to perform actions when the initializer is removed from the emitter.
+		 
+		 </p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">emitter</span>:<a href="../../../../org/flintparticles/common/emitters/Emitter.html">Emitter</a></code></td></tr></table></p><p><span class="label">See also</span></p><div class="seeAlso"><a href="Initializer.html#removedFromEmitter()" target="">org.flintparticles.common.initializers.Initializer.removedFromEmitter()</a></div></div><br/><br/><hr><br/><p></p><center class="copyright"><footer>© Richard Lord 2008-2011</footer><br/>Tue Jan 18 2011, 09:30 AM Z  </center></div></body></html><!--© Richard Lord 2008-2011<br/>Tue Jan 18 2011, 09:30 AM Z  -->

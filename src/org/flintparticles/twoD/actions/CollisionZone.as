@@ -3,7 +3,7 @@
  * .....................
  * 
  * Author: Richard Lord
- * Copyright (c) Richard Lord 2008-2010
+ * Copyright (c) Richard Lord 2008-2011
  * http://flintparticles.org
  * 
  * 
@@ -116,7 +116,7 @@ package org.flintparticles.twoD.actions
 		override public function update( emitter:Emitter, particle:Particle, time:Number ):void
 		{
 			var collide:Boolean = _zone.collideParticle( Particle2D( particle ), _bounce );
-			if( collide )
+			if( collide && emitter.hasEventListener( ParticleEvent.ZONE_COLLISION ) )
 			{
 				var ev:ParticleEvent = new ParticleEvent( ParticleEvent.ZONE_COLLISION, particle );
 				ev.otherObject = _zone;

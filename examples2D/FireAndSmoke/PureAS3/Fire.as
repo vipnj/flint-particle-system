@@ -3,7 +3,7 @@
  * .....................
  * 
  * Author: Richard Lord
- * Copyright (c) Richard Lord 2008-2010
+ * Copyright (c) Richard Lord 2008-2011
  * http://flintparticles.org/
  * 
  * Licence Agreement
@@ -49,9 +49,6 @@ package
 
 	public class Fire extends Emitter2D
 	{
-		[Embed(source='assets/fireblob.swf', symbol='FireBlob')]
-		public var FireBlob:Class;
-
 		public function Fire()
 		{
 			counter = new Steady( 60 );
