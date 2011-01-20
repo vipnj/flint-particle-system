@@ -4,7 +4,7 @@
  * .....................
  * 
  * Author: Richard Lord
- * Copyright (c) Richard Lord 2008-2010
+ * Copyright (c) Richard Lord 2008-2011
  * http://flintparticles.org/
  * 
  * Licence Agreement
@@ -30,42 +30,35 @@
 
 package
 {
+	import org.flintparticles.common.events.EmitterEvent;
+	import org.flintparticles.common.particles.Particle;
 	import org.flintparticles.threeD.actions.DeathZone;
 	import org.flintparticles.threeD.actions.Explosion;
 	import org.flintparticles.threeD.actions.Move;
 	import org.flintparticles.threeD.emitters.Emitter3D;
-	import org.flintparticles.threeD.geom.Point3D;
 	import org.flintparticles.threeD.particles.Particle3DUtils;
 	import org.flintparticles.threeD.renderers.DisplayObjectRenderer;
 	import org.flintparticles.threeD.zones.FrustrumZone;
 
-	import flash.display.Bitmap;
+	import flash.display.BitmapData;
 	import flash.display.Sprite;
 	import flash.events.MouseEvent;
 	import flash.geom.Point;
 	import flash.geom.Rectangle;
-	import flash.text.TextField;
+	import flash.geom.Vector3D;
 
-	[SWF(width='500', height='350', frameRate='61', backgroundColor='#000000')]
+	[SWF(width='500', height='350', frameRate='60', backgroundColor='#000000')]
 	
 	public class Main extends Sprite
 	{
-		// width:384 height:255
-		[Embed(source="assets/184098.jpg")]
-		public var Image1:Class;
-
 		private var emitter:Emitter3D;
-		private var bitmap:Bitmap;
+		private var bitmap:BitmapData;
 		private var renderer:DisplayObjectRenderer;
+		private var explosion:Explosion;
 		
 		public function Main()
 		{
-			var txt:TextField = new TextField();
-			txt.text = "Click on the image";
-			txt.textColor = 0xFFFFFF;
-			addChild( txt );
-
-			bitmap = new Image1();
+			bitmap = new Image1( 384, 255 );
 			
 			renderer = new DisplayObjectRenderer();
 			renderer.camera.dolly( -400 );
@@ -77,21 +70,33 @@ package
 			emitter = new Emitter3D();
 			emitter.addAction( new Move() );
 			emitter.addAction( new DeathZone( new FrustrumZone( renderer.camera, new Rectangle( -290, -215, 580, 430 ) ), true ) );
-			emitter.position = new Point3D( 0, 0, 0 );
-
-			var particles:Array = Particle3DUtils.createRectangleParticlesFromBitmapData( bitmap.bitmapData, 20, emitter.particleFactory, new Point3D( -192, 127, 0 ) );
-			emitter.addExistingParticles( particles, false );
-									
+			prepare();
+			
 			renderer.addEmitter( emitter );
 			emitter.start();
 			stage.addEventListener( MouseEvent.CLICK, explode, false, 0, true );
+			emitter.addEventListener( EmitterEvent.EMITTER_EMPTY, prepare );
+		}
+		
+		private function prepare( event:EmitterEvent = null ):void
+		{
+			if( explosion )
+			{
+				emitter.removeAction( explosion );
+				explosion = null;
+			}
+			var particles:Vector.<Particle> = Particle3DUtils.createRectangleParticlesFromBitmapData( bitmap, 12, emitter.particleFactory, new Vector3D( -192, -127, 0 ) );
+			emitter.addParticles( particles, false );
 		}
 		
 		private function explode( ev:MouseEvent ):void
 		{
-			var p:Point = renderer.globalToLocal( new Point( ev.stageX, ev.stageY ) );
-			emitter.addAction( new Explosion( 8, new Point3D( p.x, -p.y, 50 ), 500 ) );
-			stage.removeEventListener( MouseEvent.CLICK, explode );
+			if( !explosion )
+			{
+				var p:Point = renderer.globalToLocal( new Point( ev.stageX, ev.stageY ) );
+				explosion = new Explosion( 8, new Vector3D( p.x, p.y, 50 ), 500 );
+				emitter.addAction( explosion );
+			}
 		}
 	}
 }

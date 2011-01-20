@@ -3,7 +3,7 @@
  * .....................
  * 
  * Author: Richard Lord
- * Copyright (c) Richard Lord 2008-2010
+ * Copyright (c) Richard Lord 2008-2011
  * http://flintparticles.org
  * 
  * 
@@ -33,8 +33,10 @@ package org.flintparticles.threeD.actions
 	import org.flintparticles.common.actions.ActionBase;
 	import org.flintparticles.common.emitters.Emitter;
 	import org.flintparticles.common.particles.Particle;
-	import org.flintparticles.threeD.geom.Vector3D;
-	import org.flintparticles.threeD.particles.Particle3D;	
+	import org.flintparticles.threeD.geom.Vector3DUtils;
+	import org.flintparticles.threeD.particles.Particle3D;
+
+	import flash.geom.Vector3D;
 
 	/**
 	 * The TargetVelocity action adjusts the velocity of the particle towards the target velocity.
@@ -43,7 +45,6 @@ package org.flintparticles.threeD.actions
 	{
 		private var _vel:Vector3D;
 		private var _rate:Number;
-		private var _temp:Vector3D;
 		
 		/**
 		 * The constructor creates a TargetVelocity action for use by 
@@ -59,8 +60,7 @@ package org.flintparticles.threeD.actions
 		 */
 		public function TargetVelocity( targetVelocity:Vector3D = null, rate:Number = 0.1 )
 		{
-			_temp = new Vector3D();
-			this.targetVelocity = targetVelocity ? targetVelocity : Vector3D.ZERO;
+			this.targetVelocity = targetVelocity ? targetVelocity : new Vector3D();
 			this.rate = rate;
 		}
 		
@@ -73,7 +73,7 @@ package org.flintparticles.threeD.actions
 		}
 		public function set targetVelocity( value:Vector3D ):void
 		{
-			_vel = value.clone();
+			_vel = Vector3DUtils.cloneVector( value );
 		}
 		
 		/**
@@ -130,8 +130,11 @@ package org.flintparticles.threeD.actions
 		 */
 		override public function update( emitter:Emitter, particle:Particle, time:Number ):void
 		{
-			var p:Particle3D = Particle3D( particle );
-			p.velocity.incrementBy( _vel.subtract( p.velocity, _temp ).scaleBy( _rate * time ) );
+			var v:Vector3D = Particle3D( particle ).velocity;
+			var c:Number = _rate * time;
+			v.x += ( _vel.x - v.x ) * c;
+			v.y += ( _vel.y - v.y ) * c;
+			v.z += ( _vel.z - v.z ) * c;
 		}
 	}
 }

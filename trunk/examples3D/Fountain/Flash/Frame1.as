@@ -3,7 +3,7 @@
  * .....................
  * 
  * Author: Richard Lord
- * Copyright (c) Richard Lord 2008-2010
+ * Copyright (c) Richard Lord 2008-2011
  * http://flintparticles.org/
  * 
  * Licence Agreement
@@ -32,36 +32,28 @@ import org.flintparticles.common.counters.*;
 import org.flintparticles.common.initializers.*;
 import org.flintparticles.threeD.actions.*;
 import org.flintparticles.threeD.emitters.Emitter3D;
-import org.flintparticles.threeD.geom.Point3D;
-import org.flintparticles.threeD.geom.Vector3D;
 import org.flintparticles.threeD.initializers.*;
-import org.flintparticles.threeD.renderers.*;
+import org.flintparticles.threeD.renderers.PixelRenderer;
 import org.flintparticles.threeD.renderers.controllers.*;
 import org.flintparticles.threeD.zones.*;	
 
-var txt:TextField = new TextField();
-txt.text = "Use arrow keys to track in/out and orbit around the fountain.";
-txt.autoSize = "left";
-txt.textColor = 0xFFFFFF;
-addChild( txt );
-
 var emitter:Emitter3D = new Emitter3D();
-emitter.counter = new Steady( 500 );
+emitter.counter = new Steady( 2500 );
 
 emitter.addInitializer( new ColorInit( 0xFFCCCCFF, 0xFF6666FF ) );
-emitter.addInitializer( new Velocity( new DiscZone( new Point3D( 0, 250, 0 ), new Vector3D( 0, 1, 0 ), 60 ) ) );
+emitter.addInitializer( new Velocity( new DiscZone( new Vector3D( 0, -250, 0 ), new Vector3D( 0, 1, 0 ), 60 ) ) );
 emitter.addInitializer( new Lifetime( 3.2 ) );
 
 emitter.addAction( new Move() );
-emitter.addAction( new Accelerate( new Vector3D( 0, -150, 0 ) ) );
+emitter.addAction( new Accelerate( new Vector3D( 0, 150, 0 ) ) );
 emitter.addAction( new Age() );
 
 var renderer:PixelRenderer = new PixelRenderer( new Rectangle( -250, -250, 500, 500 ), false );
 renderer.camera.dolly( -300 );
 renderer.camera.lift( 100 );
-renderer.camera.target = new Point3D( 0, 100, 0 );
-renderer.addFilter( new BlurFilter( 2, 2, 1 ) );
-renderer.addFilter( new ColorMatrixFilter( [ 1,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0.99,0 ] ) );
+renderer.camera.target = new Vector3D( 0, -100, 0 );
+renderer.addFilter( new BlurFilter( 2, 2, 1 ), true );
+renderer.addFilter( new ColorMatrixFilter( [ 1,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0.99,0 ] ), true );
 renderer.addEmitter( emitter );
 renderer.x = 250;
 renderer.y = 250;

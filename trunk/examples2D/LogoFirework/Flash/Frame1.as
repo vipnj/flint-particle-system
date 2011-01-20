@@ -3,7 +3,7 @@
  * .....................
  * 
  * Author: Richard Lord
- * Copyright (c) Richard Lord 2008-2010
+ * Copyright (c) Richard Lord 2008-2011
  * http://flintparticles.org/
  * 
  * Licence Agreement
@@ -29,7 +29,7 @@
 
 import org.flintparticles.common.actions.*;
 import org.flintparticles.common.counters.*;
-import org.flintparticles.common.energyEasing.Quadratic;
+import org.flintparticles.common.easing.Quadratic;
 import org.flintparticles.common.events.EmitterEvent;
 import org.flintparticles.common.initializers.*;
 import org.flintparticles.twoD.actions.*;
@@ -39,13 +39,12 @@ import org.flintparticles.twoD.renderers.*;
 import org.flintparticles.twoD.zones.*;	
 
 var emitter:Emitter2D = new Emitter2D();
-emitter.counter = new Blast( 1500 );
+emitter.counter = new Blast( 4000 );
 
 emitter.addInitializer( new ColorInit( 0xFFFF3300, 0xFFFFFF00 ) );
 emitter.addInitializer( new Lifetime( 6 ) );
 emitter.addInitializer( new Position( new DiscZone( new Point( 0, 0 ), 10 ) ) );
-var bitmapData:BitmapData = new Logo( 265, 80);
-emitter.addInitializer( new Velocity( new BitmapDataZone( bitmapData, -132, -300 ) ) );			
+emitter.addInitializer( new Velocity( new BitmapDataZone( new Logo( 265, 80), -132, -300 ) ) );			
 
 emitter.addAction( new Age( Quadratic.easeIn ) );
 emitter.addAction( new Fade( 1.0, 0 ) );

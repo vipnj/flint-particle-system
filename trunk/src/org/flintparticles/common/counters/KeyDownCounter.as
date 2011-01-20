@@ -3,7 +3,7 @@
  * .....................
  * 
  * Author: Richard Lord
- * Copyright (c) Richard Lord 2008-2010
+ * Copyright (c) Richard Lord 2008-2011
  * http://flintparticles.org
  * 
  * 
@@ -174,6 +174,14 @@ package org.flintparticles.common.counters
 		public function get complete():Boolean
 		{
 			return _counter.complete;
+		}
+		
+		/**
+		 * Indicates if the counter is currently emitting particles
+		 */
+		public function get running():Boolean
+		{
+			return _counter.running;
 		}
 	}
 }

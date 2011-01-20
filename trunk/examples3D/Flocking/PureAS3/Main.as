@@ -3,7 +3,7 @@
  * .....................
  * 
  * Author: Richard Lord
- * Copyright (c) Richard Lord 2008-2010
+ * Copyright (c) Richard Lord 2008-2011
  * http://flintparticles.org/
  * 
  * Licence Agreement
@@ -26,40 +26,38 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-
 package
 {
 	import org.flintparticles.threeD.emitters.Emitter3D;
-	import org.flintparticles.threeD.geom.Point3D;
 	import org.flintparticles.threeD.renderers.DisplayObjectRenderer;
-	import org.flintparticles.threeD.renderers.controllers.OrbitCamera;
+	import org.flintparticles.threeD.renderers.controllers.FirstPersonCamera;
 
 	import flash.display.Sprite;
+	import flash.geom.Vector3D;
 
-	[SWF(width='700', height='500', frameRate='61', backgroundColor='#CCCCCC')]
-	
+	[SWF(width='700', height='500', frameRate='60', backgroundColor='#CCCCCC')]
 	public class Main extends Sprite
 	{
-		private var emitter:Emitter3D;
-		private var orbitter:OrbitCamera;
-		
+		private var emitter : Emitter3D;
+		private var controller : FirstPersonCamera;
+
 		public function Main()
 		{
 			emitter = new Flock();
-			
-			var renderer:DisplayObjectRenderer = new DisplayObjectRenderer( false );
+
+			var renderer : DisplayObjectRenderer = new DisplayObjectRenderer( false );
 			renderer.x = 350;
 			renderer.y = 250;
 			renderer.addEmitter( emitter );
 			addChild( renderer );
-			
-			renderer.camera.position = new Point3D( 0, 0, -400 );
-			renderer.camera.target = new Point3D( 0, 0, 0 );
-			renderer.camera.projectionDistance = 400;
-			orbitter = new OrbitCamera( stage, renderer.camera );
-			orbitter.start();
 
-			emitter.start( );
+			renderer.camera.position = new Vector3D( 0, 0, -400 );
+			renderer.camera.target = new Vector3D( 0, 0, 0 );
+			renderer.camera.projectionDistance = 400;
+			controller = new FirstPersonCamera( stage, renderer.camera );
+			controller.start();
+
+			emitter.start();
 		}
 	}
 }

@@ -3,7 +3,7 @@
  * .....................
  * 
  * Author: Richard Lord
- * Copyright (c) Richard Lord 2008-2010
+ * Copyright (c) Richard Lord 2008-2011
  * http://flintparticles.org/
  * 
  * Licence Agreement
@@ -33,7 +33,6 @@ package
 	import org.flintparticles.common.events.EmitterEvent;
 	import org.flintparticles.common.events.ParticleEvent;
 	import org.flintparticles.threeD.emitters.Emitter3D;
-	import org.flintparticles.threeD.geom.Point3D;
 	import org.flintparticles.threeD.particles.Particle3D;
 	import org.flintparticles.threeD.renderers.BitmapRenderer;
 	import org.flintparticles.threeD.renderers.controllers.FirstPersonCamera;
@@ -43,9 +42,9 @@ package
 	import flash.filters.BlurFilter;
 	import flash.filters.ColorMatrixFilter;
 	import flash.geom.Rectangle;
-	import flash.text.TextField;
+	import flash.geom.Vector3D;
 
-	[SWF(width='800', height='600', frameRate='61', backgroundColor='#000000')]
+	[SWF(width='800', height='600', frameRate='60', backgroundColor='#000000')]
 	
 	public class Main extends Sprite
 	{
@@ -54,13 +53,6 @@ package
 		
 		public function Main()
 		{
-			var txt:TextField = new TextField();
-			txt.text = "Use arrow keys to pan/tilt the camera. Use W,S,D,L to move the camera. Use page up/ page down to raise and lower the camera.";
-			txt.autoSize = "left";
-			txt.textColor = 0xFFFFFF;
-			addChild( txt );
-			txt.y = 580;
-
 			renderer = new BitmapRenderer( new Rectangle( -400, -300, 800, 600 ), false );
 			renderer.x = 400;
 			renderer.y = 300;
@@ -68,42 +60,42 @@ package
 			renderer.addFilter( new ColorMatrixFilter( [ 1,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0.95,0 ] ) );
 			addChild( renderer );
 
-			renderer.camera.position = new Point3D( 0, 150, -400 );
-			renderer.camera.target = new Point3D( 0, 150, 0 );
+			renderer.camera.position = new Vector3D( 0, -150, -400 );
+			renderer.camera.target = new Vector3D( 0, -150, 0 );
 			renderer.camera.projectionDistance = 400;
 			orbitter = new FirstPersonCamera( stage, renderer.camera );
 			orbitter.start();
 			
-			var emitter:Emitter3D = new Whizzer( new LineZone( new Point3D( -200, 0, 0 ), new Point3D( 200, 0, 0) ) );
+			var emitter:Emitter3D = new Whizzer( new LineZone( new Vector3D( -200, 0, 0 ), new Vector3D( 200, 0, 0) ) );
 			renderer.addEmitter( emitter );
 			emitter.addEventListener( ParticleEvent.PARTICLE_DEAD, whizzBang, false, 0, true );
 			emitter.start();
 			
-			emitter = new Candle( new Point3D( 150, 0, 150 ) );
+			emitter = new Candle( new Vector3D( 150, 0, 150 ) );
 			renderer.addEmitter( emitter );
 			emitter.start();
 			
-			emitter = new Candle( new Point3D( -150, 0, 150 ) );
+			emitter = new Candle( new Vector3D( -150, 0, 150 ) );
 			renderer.addEmitter( emitter );
 			emitter.start();
 			
-			emitter = new Candle( new Point3D( 150, 0, -150 ) );
+			emitter = new Candle( new Vector3D( 150, 0, -150 ) );
 			renderer.addEmitter( emitter );
 			emitter.start();
 			
-			emitter = new Candle( new Point3D( -150, 0, -150 ) );
+			emitter = new Candle( new Vector3D( -150, 0, -150 ) );
 			renderer.addEmitter( emitter );
 			emitter.start();
 			
-			emitter = new CatherineWheel( new Point3D( -200, 200, 50 ) );
+			emitter = new CatherineWheel( new Vector3D( -200, -200, 50 ) );
 			renderer.addEmitter( emitter );
 			emitter.start();
 			
-			emitter = new CatherineWheel( new Point3D( 0, 200, 50 ) );
+			emitter = new CatherineWheel( new Vector3D( 0, -200, 50 ) );
 			renderer.addEmitter( emitter );
 			emitter.start();
 			
-			emitter = new CatherineWheel( new Point3D( 200, 200, 50 ) );
+			emitter = new CatherineWheel( new Vector3D( 200, -200, 50 ) );
 			renderer.addEmitter( emitter );
 			emitter.start();
 		}

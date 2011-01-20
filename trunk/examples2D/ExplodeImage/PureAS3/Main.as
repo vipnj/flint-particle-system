@@ -4,7 +4,7 @@
  * .....................
  * 
  * Author: Richard Lord
- * Copyright (c) Richard Lord 2008-2010
+ * Copyright (c) Richard Lord 2008-2011
  * http://flintparticles.org/
  * 
  * Licence Agreement
@@ -30,6 +30,8 @@
 
 package
 {
+	import org.flintparticles.common.events.EmitterEvent;
+	import org.flintparticles.common.particles.Particle;
 	import org.flintparticles.twoD.actions.DeathZone;
 	import org.flintparticles.twoD.actions.Explosion;
 	import org.flintparticles.twoD.actions.Move;
@@ -38,38 +40,28 @@ package
 	import org.flintparticles.twoD.renderers.DisplayObjectRenderer;
 	import org.flintparticles.twoD.zones.RectangleZone;
 
-	import flash.display.Bitmap;
+	import flash.display.BitmapData;
 	import flash.display.Sprite;
 	import flash.events.MouseEvent;
 	import flash.geom.Point;
-	import flash.text.TextField;
 
-	[SWF(width='500', height='350', frameRate='61', backgroundColor='#000000')]
+	[SWF(width='500', height='350', frameRate='60', backgroundColor='#000000')]
 	
 	public class Main extends Sprite
 	{
-		// width:384 height:255
-		[Embed(source="assets/184098.jpg")]
-		public var Image1:Class;
-
 		private var emitter:Emitter2D;
-		private var bitmap:Bitmap;
+		private var bitmap:BitmapData;
 		private var renderer:DisplayObjectRenderer;
+		private var explosion:Explosion;
 		
 		public function Main()
 		{
-			var txt:TextField = new TextField();
-			txt.text = "Click on the image.";
-			txt.textColor = 0xFFFFFF;
-			addChild( txt );
-
-			bitmap = new Image1();
+			bitmap = new Image1( 384, 255 );
 			
 			emitter = new Emitter2D();
 			emitter.addAction( new DeathZone( new RectangleZone( -5, -5, 505, 355 ), true ) );
 			emitter.addAction( new Move() );
-			var particles:Array = Particle2DUtils.createRectangleParticlesFromBitmapData( bitmap.bitmapData, 10, emitter.particleFactory, 56, 47 );
-			emitter.addExistingParticles( particles, false );
+			prepare();
 			
 			renderer = new DisplayObjectRenderer();
 			addChild( renderer );
@@ -77,12 +69,28 @@ package
 			emitter.start();
 			
 			stage.addEventListener( MouseEvent.CLICK, explode, false, 0, true );
+			emitter.addEventListener( EmitterEvent.EMITTER_EMPTY, prepare );
+		}
+		
+		private function prepare( event:EmitterEvent = null ):void
+		{
+			if( explosion )
+			{
+				emitter.removeAction( explosion );
+				explosion = null;
+			}
+			var particles:Vector.<Particle> = Particle2DUtils.createRectangleParticlesFromBitmapData( bitmap, 8, emitter.particleFactory, 56, 47 );
+			emitter.addParticles( particles, false );
 		}
 		
 		private function explode( ev:MouseEvent ):void
 		{
-			var p:Point = renderer.globalToLocal( new Point( ev.stageX, ev.stageY ) );
-			emitter.addAction( new Explosion( 8, p.x, p.y, 500 ) );
+			if( !explosion )
+			{
+				var p:Point = renderer.globalToLocal( new Point( ev.stageX, ev.stageY ) );
+				explosion = new Explosion( 8, p.x, p.y, 500 );
+				emitter.addAction( explosion );
+			}
 		}
 	}
 }

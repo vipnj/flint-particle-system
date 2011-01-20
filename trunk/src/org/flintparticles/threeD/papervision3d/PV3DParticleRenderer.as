@@ -3,7 +3,7 @@
  * .....................
  * 
  * Author: Richard Lord
- * Copyright (c) Richard Lord 2008-2010
+ * Copyright (c) Richard Lord 2008-2011
  * http://flintparticles.org
  * 
  * 
@@ -34,7 +34,7 @@ package org.flintparticles.threeD.papervision3d
 	import org.flintparticles.common.renderers.RendererBase;
 	import org.flintparticles.threeD.particles.Particle3D;
 	import org.papervision3d.core.geom.Particles;
-	import org.papervision3d.core.geom.renderables.Particle;	
+	import org.papervision3d.core.geom.renderables.Particle;
 
 	/**
 	 * Renders the particles in a Papervision3D Particles object.

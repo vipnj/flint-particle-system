@@ -4,7 +4,7 @@
  * .....................
  * 
  * Author: Richard Lord
- * Copyright (c) Richard Lord 2008-2010
+ * Copyright (c) Richard Lord 2008-2011
  * http://flintparticles.org/
  * 
  * Licence Agreement
@@ -33,21 +33,13 @@ import org.flintparticles.common.displayObjects.Dot;
 import org.flintparticles.common.initializers.*;
 import org.flintparticles.threeD.actions.*;
 import org.flintparticles.threeD.emitters.Emitter3D;
-import org.flintparticles.threeD.geom.Point3D;
-import org.flintparticles.threeD.geom.Vector3D;
 import org.flintparticles.threeD.initializers.*;
 import org.flintparticles.threeD.renderers.*;
 import org.flintparticles.threeD.renderers.controllers.OrbitCamera;
 import org.flintparticles.threeD.zones.*;	
 
-var txt:TextField = new TextField();
-txt.text = "Hold down the shift key to hide the air particles.";
-txt.autoSize = "left";
-txt.textColor = 0xFFFFFF;
-addChild( txt );
-
 var emitter:Emitter3D = new Emitter3D();
-emitter.counter = new Blast( 250 );
+emitter.counter = new Blast( 400 );
 
 var air:InitializerGroup = new InitializerGroup();
 air.addInitializer( new ImageClass( Dot, 2 ) );
@@ -61,9 +53,9 @@ smoke.addInitializer( new ColorInit( 0xFFFFFFFF, 0xFFFFFFFF ) );
 smoke.addInitializer( new MassInit( 5 ) );
 smoke.addInitializer( new CollisionRadiusInit( 10 ) );
 
-emitter.addInitializer( new Position( new BoxZone( 280, 280, 280, new Point3D( 0, 0, 0 ), new Vector3D( 0, 1, 0 ), new Vector3D( 0, 0, 1 ) ) ) );
-emitter.addInitializer( new Velocity( new SphereZone( new Point3D( 0, 0, 0 ), 150, 100 ) ) );
-emitter.addInitializer( new ChooseInitializer( [ air, smoke ], [ 19, 1 ] ) );
+emitter.addInitializer( new Position( new BoxZone( 280, 280, 280, new Vector3D( 0, 0, 0 ), new Vector3D( 0, 1, 0 ), new Vector3D( 0, 0, 1 ) ) ) );
+emitter.addInitializer( new Velocity( new SphereZone( new Vector3D( 0, 0, 0 ), 150, 100 ) ) );
+emitter.addInitializer( new ChooseInitializer( [ air, smoke ], [ 30, 1 ] ) );
 
 emitter.addAction( new Move() );
 emitter.addAction( new Collide( 1 ) );
@@ -76,8 +68,8 @@ renderer.y = 200;
 renderer.addEmitter( emitter );
 addChild( renderer );
 
-renderer.camera.position = new Point3D( 0, 0, -400 );
-renderer.camera.target = new Point3D( 0, 0, 0 );
+renderer.camera.position = new Vector3D( 0, 0, -400 );
+renderer.camera.target = new Vector3D( 0, 0, 0 );
 renderer.camera.projectionDistance = 400;
 var orbitter:OrbitCamera = new OrbitCamera( stage, renderer.camera );
 orbitter.start();

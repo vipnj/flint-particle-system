@@ -3,7 +3,7 @@
  * .....................
  * 
  * Author: Richard Lord
- * Copyright (c) Richard Lord 2008-2010
+ * Copyright (c) Richard Lord 2008-2011
  * http://flintparticles.org/
  * 
  * Licence Agreement
@@ -55,14 +55,14 @@ package org.flintparticles.common.renderers
 		 * on a renderer is not garbage collected, an emitter that does not exist on a renderer may be 
 		 * garbage collected if no other references exist.
 		 */
-		protected var _emitters:Array;
+		protected var _emitters:Vector.<Emitter>;
 		
 		/**
 		 * The constructor creates a RendererBase class.
 		 */
 		public function RendererBase()
 		{
-			_emitters = new Array();
+			_emitters = new Vector.<Emitter>();
 		}
 		
 		/**
@@ -79,7 +79,7 @@ package org.flintparticles.common.renderers
 			emitter.addEventListener( ParticleEvent.PARTICLE_CREATED, particleAdded, false, 0, true );
 			emitter.addEventListener( ParticleEvent.PARTICLE_ADDED, particleAdded, false, 0, true );
 			emitter.addEventListener( ParticleEvent.PARTICLE_DEAD, particleRemoved, false, 0, true );
-			for each( var p:Particle in emitter.particles )
+			for each( var p:Particle in emitter.particlesArray )
 			{
 				addParticle( p );
 			}
@@ -103,7 +103,7 @@ package org.flintparticles.common.renderers
 					emitter.removeEventListener( ParticleEvent.PARTICLE_CREATED, particleAdded );
 					emitter.removeEventListener( ParticleEvent.PARTICLE_ADDED, particleAdded );
 					emitter.removeEventListener( ParticleEvent.PARTICLE_DEAD, particleRemoved );
-					for each( var p:Particle in emitter.particles )
+					for each( var p:Particle in emitter.particlesArray )
 					{
 						removeParticle( p );
 					}
@@ -124,7 +124,7 @@ package org.flintparticles.common.renderers
 
 		private function emitterUpdated( ev:EmitterEvent ):void
 		{
-			renderParticles( Emitter( ev.target ).particles );
+			renderParticles( Emitter( ev.target ).particlesArray );
 		}
 		
 		/**
@@ -162,11 +162,11 @@ package org.flintparticles.common.renderers
 		/**
 		 * The array of all emitters being rendered by this renderer.
 		 */
-		public function get emitters():Array
+		public function get emitters():Vector.<Emitter>
 		{
 			return _emitters;
 		}
-		public function set emitters( value:Array ):void
+		public function set emitters( value:Vector.<Emitter> ):void
 		{
 			var e:Emitter;
 			for each( e in _emitters )

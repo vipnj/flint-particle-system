@@ -3,7 +3,7 @@
  * .....................
  * 
  * Author: Richard Lord
- * Copyright (c) Richard Lord 2008-2010
+ * Copyright (c) Richard Lord 2008-2011
  * http://flintparticles.org
  * 
  * 
@@ -33,8 +33,9 @@ package org.flintparticles.threeD.actions
 	import org.flintparticles.common.actions.ActionBase;
 	import org.flintparticles.common.emitters.Emitter;
 	import org.flintparticles.common.particles.Particle;
-	import org.flintparticles.threeD.geom.Vector3D;
-	import org.flintparticles.threeD.particles.Particle3D;	
+	import org.flintparticles.threeD.particles.Particle3D;
+
+	import flash.geom.Vector3D;
 
 	/**
 	 * The Move action updates the position of the particle based on its velocity.
@@ -44,8 +45,6 @@ package org.flintparticles.threeD.actions
 	 */
 	public class Move extends ActionBase
 	{
-		private var _temp:Vector3D;
-		
 		/**
 		 * The constructor creates a Move action for use by 
 		 * an emitter. To add a Move to all particles created by an emitter, use the
@@ -56,7 +55,6 @@ package org.flintparticles.threeD.actions
 		public function Move()
 		{
 			priority = -10;
-			_temp = new Vector3D();
 		}
 
 		/**
@@ -64,8 +62,11 @@ package org.flintparticles.threeD.actions
 		 */
 		override public function update( emitter:Emitter, particle:Particle, time:Number ):void
 		{
-			var p:Particle3D = Particle3D( particle );
-			p.position.incrementBy( p.velocity.multiply( time, _temp ) );
+			var p:Vector3D = Particle3D( particle ).position;
+			var v:Vector3D = Particle3D( particle ).velocity;
+			p.x += v.x * time;
+			p.y += v.y * time;
+			p.z += v.z * time;
 		}
 	}
 }

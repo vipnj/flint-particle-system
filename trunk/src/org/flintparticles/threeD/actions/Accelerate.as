@@ -3,7 +3,7 @@
  * .....................
  * 
  * Author: Richard Lord
- * Copyright (c) Richard Lord 2008-2010
+ * Copyright (c) Richard Lord 2008-2011
  * http://flintparticles.org
  * 
  * 
@@ -33,8 +33,9 @@ package org.flintparticles.threeD.actions
 	import org.flintparticles.common.actions.ActionBase;
 	import org.flintparticles.common.emitters.Emitter;
 	import org.flintparticles.common.particles.Particle;
-	import org.flintparticles.threeD.geom.Vector3D;
-	import org.flintparticles.threeD.particles.Particle3D;	
+	import org.flintparticles.threeD.particles.Particle3D;
+
+	import flash.geom.Vector3D;
 
 	/**
 	 * The Accelerate Action adjusts the velocity of the particle by a 
@@ -44,7 +45,6 @@ package org.flintparticles.threeD.actions
 	public class Accelerate extends ActionBase
 	{
 		private var _acc:Vector3D;
-		private var _temp:Vector3D;
 		
 		/**
 		 * The constructor creates an Acceleration action for use by an emitter. 
@@ -58,8 +58,7 @@ package org.flintparticles.threeD.actions
 		 */
 		public function Accelerate( acceleration:Vector3D = null )
 		{
-			_temp = new Vector3D();
-			this.acceleration = acceleration ? acceleration : Vector3D.ZERO;
+			this.acceleration = acceleration ? acceleration : new Vector3D();
 		}
 		
 		/**
@@ -72,6 +71,7 @@ package org.flintparticles.threeD.actions
 		public function set acceleration( value:Vector3D ):void
 		{
 			_acc = value.clone();
+			_acc.w = 0;
 		}
 		
 		/**
@@ -127,7 +127,10 @@ package org.flintparticles.threeD.actions
 		 */
 		override public function update( emitter:Emitter, particle:Particle, time:Number ):void
 		{
-			Particle3D( particle ).velocity.incrementBy( _acc.multiply( time, _temp ) );
+			var v:Vector3D = Particle3D( particle ).velocity;
+			v.x += _acc.x * time;
+			v.y += _acc.y * time;
+			v.z += _acc.z * time;
 		}
 	}
 }

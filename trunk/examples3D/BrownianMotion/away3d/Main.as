@@ -3,7 +3,7 @@
  * .....................
  * 
  * Author: Richard Lord
- * Copyright (c) Richard Lord 2008-2010
+ * Copyright (c) Richard Lord 2008-2011
  * http://flintparticles.org/
  * 
  * Licence Agreement
@@ -37,7 +37,7 @@ package
 	import flash.display.Sprite;
 	import flash.events.Event;
 
-	[SWF(width='400', height='400', frameRate='61', backgroundColor='#000000')]
+	[SWF(width='400', height='400', frameRate='60', backgroundColor='#000000')]
 	
 	public class Main extends Sprite
 	{

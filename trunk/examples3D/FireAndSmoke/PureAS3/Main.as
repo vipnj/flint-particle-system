@@ -3,7 +3,7 @@
  * .....................
  * 
  * Author: Richard Lord
- * Copyright (c) Richard Lord 2008-2010
+ * Copyright (c) Richard Lord 2008-2011
  * http://flintparticles.org/
  * 
  * Licence Agreement
@@ -30,15 +30,14 @@
 package
 {
 	import org.flintparticles.threeD.emitters.Emitter3D;
-	import org.flintparticles.threeD.geom.Point3D;
 	import org.flintparticles.threeD.renderers.BitmapRenderer;
 	import org.flintparticles.threeD.renderers.controllers.OrbitCamera;
 
 	import flash.display.Sprite;
 	import flash.geom.Rectangle;
-	import flash.text.TextField;
+	import flash.geom.Vector3D;
 
-	[SWF(width='400', height='400', frameRate='61', backgroundColor='#000000')]
+	[SWF(width='400', height='400', frameRate='60', backgroundColor='#000000')]
 	
 	public class Main extends Sprite
 	{
@@ -48,12 +47,6 @@ package
 		
 		public function Main()
 		{
-			var txt:TextField = new TextField();
-			txt.text = "Use arrow keys to track in/out and orbit around the fire.";
-			txt.autoSize = "left";
-			txt.textColor = 0xFFFFFF;
-			addChild( txt );
-
 			smoke = new Smoke();			
 			smoke.start( );
 			
@@ -67,8 +60,8 @@ package
 			renderer.addEmitter( fire );
 			addChild( renderer );
 			
-			renderer.camera.position = new Point3D( 0, 150, -400 );
-			renderer.camera.target = new Point3D( 0, 150, 0 );
+			renderer.camera.position = new Vector3D( 0, -150, -400 );
+			renderer.camera.target = new Vector3D( 0, -150, 0 );
 			renderer.camera.projectionDistance = 400;
 			orbitter = new OrbitCamera( stage, renderer.camera );
 			orbitter.start();

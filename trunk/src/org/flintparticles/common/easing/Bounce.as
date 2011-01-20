@@ -38,7 +38,7 @@
  * Modifications:
  * 
  * Author: Richard Lord
- * Copyright (c) Richard Lord 2008-2010
+ * Copyright (c) Richard Lord 2008-2011
  * http://flintparticles.org
  * 
  * 
@@ -49,7 +49,9 @@
 
 package org.flintparticles.common.easing
 {
-
+	/**
+	 * Easing functions for use with ageing of particles. Based on Robert Penner's easing functions.
+	 */
 	public class Bounce
 	{
 		public static function easeOut( t : Number, b : Number, c : Number, d : Number ) : Number

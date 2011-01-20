@@ -3,7 +3,7 @@
  * .....................
  * 
  * Author: Richard Lord
- * Copyright (c) Richard Lord 2008-2010
+ * Copyright (c) Richard Lord 2008-2011
  * http://flintparticles.org
  * 
  * 
@@ -51,7 +51,7 @@ package org.flintparticles.common.initializers
 		 * @param radius The collision radius for particles
 		 * initialized by the instance.
 		 * 
-		 * @see org.flintparticles.common.emitters.Emitter#addInitializer().
+		 * @see org.flintparticles.common.emitters.Emitter#addInitializer()
 		 */
 		public function CollisionRadiusInit( radius:Number= 1 )
 		{

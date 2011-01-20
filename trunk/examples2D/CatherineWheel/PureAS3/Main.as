@@ -3,7 +3,7 @@
  * .....................
  * 
  * Author: Richard Lord
- * Copyright (c) Richard Lord 2008-2010
+ * Copyright (c) Richard Lord 2008-2011
  * http://flintparticles.org/
  * 
  * Licence Agreement
@@ -37,7 +37,7 @@ package
 	import flash.filters.ColorMatrixFilter;
 	import flash.geom.Rectangle;
 
-	[SWF(width='600', height='600', frameRate='61', backgroundColor='#000000')]
+	[SWF(width='500', height='500', frameRate='60', backgroundColor='#000000')]
 
 	public class Main extends Sprite
 	{
@@ -47,14 +47,14 @@ package
 		{
 			emitter = new CatherineWheel();
 
-			var renderer:BitmapRenderer = new BitmapRenderer( new Rectangle( 0, 0, 600, 600 ) );
+			var renderer:BitmapRenderer = new BitmapRenderer( new Rectangle( 0, 0, 500, 500 ) );
 			renderer.addFilter( new BlurFilter( 2, 2, 1 ) );
 			renderer.addFilter( new ColorMatrixFilter( [ 1,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0.97,0 ] ) );
 			renderer.addEmitter( emitter );
 			addChild( renderer );
 
-			emitter.x = 300;
-			emitter.y = 300;
+			emitter.x = 250;
+			emitter.y = 250;
 			emitter.start( );
 		}
 	}

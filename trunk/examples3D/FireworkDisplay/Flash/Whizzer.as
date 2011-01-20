@@ -3,7 +3,7 @@
  * .....................
  * 
  * Author: Richard Lord
- * Copyright (c) Richard Lord 2008-2010
+ * Copyright (c) Richard Lord 2008-2011
  * http://flintparticles.org/
  * 
  * Licence Agreement
@@ -35,10 +35,10 @@ package
 	import org.flintparticles.common.initializers.*;
 	import org.flintparticles.threeD.actions.*;
 	import org.flintparticles.threeD.emitters.Emitter3D;
-	import org.flintparticles.threeD.geom.Point3D;
-	import org.flintparticles.threeD.geom.Vector3D;
 	import org.flintparticles.threeD.initializers.*;
-	import org.flintparticles.threeD.zones.*;	
+	import org.flintparticles.threeD.zones.*;
+	
+	import flash.geom.Vector3D;
 
 	public class Whizzer extends Emitter3D
 	{
@@ -49,12 +49,12 @@ package
 			addInitializer( new SharedImage( new Dot( 4 ) ) );
 			addInitializer( new ColorInit( 0xFFFFFF00, 0xFFFF6600 ) );
 			addInitializer( new Position( zone ) );
-			addInitializer( new Velocity( new ConeZone( Point3D.ZERO, Vector3D.AXISY, 0.1, 350, 330 ) ) );
+			addInitializer( new Velocity( new ConeZone( new Vector3D(), new Vector3D( 0, -1, 0 ), 0.1, 350, 330 ) ) );
 			addInitializer( new Lifetime( 3.3 ) );
 			
 			addAction( new Age() );
 			addAction( new Move() );
-			addAction( new Accelerate( new Vector3D( 0, -50, 0 ) ) );
+			addAction( new Accelerate( new Vector3D( 0, 50, 0 ) ) );
 			addAction( new LinearDrag( 0.5 ) );
 			addAction( new RandomDrift( 10, 10, 10 ) );
 		}

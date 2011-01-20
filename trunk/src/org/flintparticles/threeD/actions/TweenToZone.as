@@ -3,7 +3,7 @@
  * .....................
  * 
  * Author: Richard Lord
- * Copyright (c) Richard Lord 2008-2010
+ * Copyright (c) Richard Lord 2008-2011
  * http://flintparticles.org
  * 
  * 
@@ -33,10 +33,10 @@ package org.flintparticles.threeD.actions
 	import org.flintparticles.common.actions.ActionBase;
 	import org.flintparticles.common.emitters.Emitter;
 	import org.flintparticles.common.particles.Particle;
-	import org.flintparticles.threeD.geom.Point3D;
-	import org.flintparticles.threeD.geom.Vector3D;
 	import org.flintparticles.threeD.particles.Particle3D;
 	import org.flintparticles.threeD.zones.Zone3D;
+
+	import flash.geom.Vector3D;
 
 	[DefaultProperty("zone")]
 
@@ -53,7 +53,6 @@ package org.flintparticles.threeD.actions
 	public class TweenToZone extends ActionBase
 	{
 		private var _zone:Zone3D;
-		private var _temp:Vector3D;
 		
 		/**
 		 * The constructor creates a TweenToZone action for use by an emitter. 
@@ -90,7 +89,7 @@ package org.flintparticles.threeD.actions
 			var data:TweenToZoneData;
 			if( ! p.dictionary[this] )
 			{
-				var pt:Point3D = _zone.getLocation();
+				var pt:Vector3D = _zone.getLocation();
 				data = new TweenToZoneData( p.position, pt );
 				p.dictionary[this] = data;
 			}
@@ -99,22 +98,26 @@ package org.flintparticles.threeD.actions
 				data = p.dictionary[this];
 			}
 			
-			data.end.add( data.diff.multiply( p.energy, _temp ), p.position );
+			var pos:Vector3D = p.position;
+			var diff:Vector3D = data.diff;
+			var end:Vector3D = data.end;
+			var energy:Number = p.energy;
+			pos.x = diff.x * energy + end.x;
+			pos.y = diff.y * energy + end.y;
+			pos.z = diff.z * energy + end.z;
 		}
 	}
 }
-
-import org.flintparticles.threeD.geom.Point3D;
-import org.flintparticles.threeD.geom.Vector3D;
+import flash.geom.Vector3D;
 
 class TweenToZoneData
 {
 	public var diff:Vector3D;
-	public var end:Point3D;
+	public var end:Vector3D;
 	
-	public function TweenToZoneData( start:Point3D, end:Point3D )
+	public function TweenToZoneData( start:Vector3D, end:Vector3D )
 	{
-		this.diff = end.vectorTo( start );
+		this.diff = start.subtract( end );
 		this.end = end.clone();
 	}
 }

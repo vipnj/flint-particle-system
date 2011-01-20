@@ -3,7 +3,7 @@
  * .....................
  * 
  * Author: Richard Lord
- * Copyright (c) Richard Lord 2008-2010
+ * Copyright (c) Richard Lord 2008-2011
  * http://flintparticles.org/
  * 
  * Licence Agreement
@@ -37,12 +37,6 @@ import org.flintparticles.twoD.emitters.Emitter2D;
 import org.flintparticles.twoD.initializers.*;
 import org.flintparticles.twoD.renderers.*;
 import org.flintparticles.twoD.zones.*;		
-
-var txt:TextField = new TextField();
-txt.text = "Move the mouse over this box.";
-txt.autoSize = "left";
-txt.textColor = 0xFFFFFF;
-addChild( txt );
 
 var emitter:Emitter2D = new Emitter2D();
 emitter.counter = new Steady( 150 );

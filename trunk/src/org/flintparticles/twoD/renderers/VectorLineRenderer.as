@@ -3,7 +3,7 @@
  * .....................
  * 
  * Author: Richard Lord
- * Copyright (c) Richard Lord 2008-2010
+ * Copyright (c) Richard Lord 2008-2011
  * http://flintparticles.org
  * 
  * 
@@ -30,13 +30,12 @@
 
 package org.flintparticles.twoD.renderers
 {
-	import org.flintparticles.common.emitters.Emitter;	
-	import org.flintparticles.common.events.EmitterEvent;	
-	
-	import flash.events.Event;	
-	
+	import org.flintparticles.common.emitters.Emitter;
+	import org.flintparticles.common.events.EmitterEvent;
 	import org.flintparticles.common.renderers.SpriteRendererBase;
-	import org.flintparticles.twoD.particles.Particle2D;	
+	import org.flintparticles.twoD.particles.Particle2D;
+
+	import flash.events.Event;
 
 	/**
 	 * The VectorLineRenderer draws particles as continuous lines mapping the 
@@ -76,7 +75,7 @@ package org.flintparticles.twoD.renderers
 			var len:int = particles.length;
 			for( var i:int = 0; i < len; ++i )
 			{
-				particle = particles[i];
+				particle = Particle2D( particles[i] );
 				graphics.lineStyle( particle.scale, particle.color & 0xFFFFFF, particle.color >>> 24 );
 				graphics.moveTo( particle.previousX, particle.previousY );
 				graphics.lineTo( particle.x, particle.y );
@@ -85,7 +84,7 @@ package org.flintparticles.twoD.renderers
 
 		override protected function emitterUpdated( ev:EmitterEvent ):void
 		{
-			renderParticles( Emitter( ev.target ).particles );
+			renderParticles( Emitter( ev.target ).particlesArray );
 		}
 		override protected function updateParticles( ev:Event ):void
 		{

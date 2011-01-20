@@ -3,7 +3,7 @@
  * .....................
  * 
  * Author: Richard Lord
- * Copyright (c) Richard Lord 2008-2010
+ * Copyright (c) Richard Lord 2008-2011
  * http://flintparticles.org/
  * 
  * Licence Agreement
@@ -31,7 +31,7 @@ package
 {
 	import org.flintparticles.common.actions.Age;
 	import org.flintparticles.common.counters.Blast;
-	import org.flintparticles.common.energyEasing.Quadratic;
+	import org.flintparticles.common.easing.Quadratic;
 	import org.flintparticles.common.initializers.ColorInit;
 	import org.flintparticles.common.initializers.Lifetime;
 	import org.flintparticles.twoD.actions.TweenToZone;
@@ -39,29 +39,18 @@ package
 	import org.flintparticles.twoD.initializers.Position;
 	import org.flintparticles.twoD.zones.BitmapDataZone;
 
-	import flash.display.Bitmap;
-
 	public class FirstEmitter extends Emitter2D
 	{
-		[Embed(source="assets/flint.png")]
-		public var FlintImage:Class;
-
-		[Embed(source="assets/particles.png")]
-		public var ParticlesImage:Class;
-
 		public function FirstEmitter()
 		{
-			var flintBitmap:Bitmap = new FlintImage();
-			var particlesBitmap:Bitmap = new ParticlesImage();
-			
-			counter = new Blast( 3000 );
+			counter = new Blast( 5000 );
 			
 			addInitializer( new ColorInit( 0xFFFFFF00, 0xCC6600 ) );
 			addInitializer( new Lifetime( 6 ) );
-			addInitializer( new Position( new BitmapDataZone( flintBitmap.bitmapData, 40, 60 ) ) );
+			addInitializer( new Position( new BitmapDataZone( new FlintImage( 320, 80 ), 40, 60 ) ) );
 			
 			addAction( new Age( Quadratic.easeInOut ) );
-			addAction( new TweenToZone( new BitmapDataZone( particlesBitmap.bitmapData, 40, 60 ) ) );
+			addAction( new TweenToZone( new BitmapDataZone( new ParticlesImage( 320, 80 ), 40, 60 ) ) );
 		}
 	}
 }
