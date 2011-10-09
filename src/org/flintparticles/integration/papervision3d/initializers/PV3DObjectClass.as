@@ -28,50 +28,40 @@
  * THE SOFTWARE.
  */
 
-package org.flintparticles.common.initializers
+package org.flintparticles.integration.papervision3d.initializers
 {
-	import org.flintparticles.common.utils.construct;
+	import org.flintparticles.common.emitters.Emitter;
+	import org.flintparticles.common.initializers.InitializerBase;
+	import org.flintparticles.common.particles.Particle;
+	import org.flintparticles.common.utils.construct;	
 
 	/**
-	 * The ImageClass Initializer sets the DisplayObject to use to draw
-	 * the particle. It is used with the DisplayObjectRenderer. When using the
-	 * BitmapRenderer it is more efficient to use the SharedImage Initializer.
-	 * 
-	 * <p>This class includes an object pool for reusing DisplayObjects when particles die.</p>
-	 * 
-	 * <p>To enable use of the object pool, it was necessary to alter the constructor so the 
-	 * parameters for the image class are passed as an array rather than as plain values.</p>
+	 * The PV3DObjectClass initializer sets the 3D Object to use to 
+	 * draw the particle in a 3D scene. It is used with the Papervision3D renderer when
+	 * particles should be represented by a 3D object.
 	 */
-	public class ImageClass extends ImageInitializerBase
+
+	public class PV3DObjectClass extends InitializerBase
 	{
 		private var _imageClass:Class;
 		private var _parameters:Array;
 		
 		/**
-		 * The constructor creates an ImageClass initializer for use by 
-		 * an emitter. To add an ImageClass to all particles created by an emitter, use the
-		 * emitter's addInitializer method.
+		 * The constructor creates an PV3DObjectClass initializer for use by 
+		 * an emitter. To add an ImageClass to all particles created by an emitter, 
+		 * use the emitter's addInitializer method.
 		 * 
 		 * @param imageClass The class to use when creating
-		 * the particles' DisplayObjects.
+		 * the particles' image object.
 		 * @param parameters The parameters to pass to the constructor
 		 * for the image class.
-		 * @param usePool Indicates whether particles should be reused when a particle dies.
-		 * @param fillPool Indicates how many particles to create immediately in the pool, to
-		 * avoid creating them when the particle effect is running.
 		 * 
 		 * @see org.flintparticles.common.emitters.Emitter#addInitializer()
 		 */
-		public function ImageClass( imageClass:Class = null, parameters : Array = null, usePool:Boolean = false, fillPool:uint = 0 )
+		public function PV3DObjectClass( imageClass:Class, ...parameters )
 		{
-			super( usePool );
 			_imageClass = imageClass;
-			_parameters = parameters ? parameters : [];
-			if( fillPool > 0 )
-			{
-				this.fillPool( fillPool );
-			}
-			
+			_parameters = parameters;
 		}
 		
 		/**
@@ -85,10 +75,6 @@ package org.flintparticles.common.initializers
 		public function set imageClass( value:Class ):void
 		{
 			_imageClass = value;
-			if( _usePool )
-			{
-				clearPool();
-			}
 		}
 		
 		/**
@@ -102,19 +88,18 @@ package org.flintparticles.common.initializers
 		public function set parameters( value:Array ):void
 		{
 			_parameters = value;
-			if( _usePool )
-			{
-				clearPool();
-			}
 		}
 		
 		/**
-		 * Used internally, this method creates an image object for displaying the particle 
-		 * by calling the image class constructor with the supplied parameters.
+		 * @inheritDoc
 		 */
-		override public function createImage() : Object
+		override public function initialize( emitter:Emitter, particle:Particle ):void
 		{
-			return construct( _imageClass, _parameters );
+			particle.image = construct( _imageClass, _parameters );
+			if( particle.image["hasOwnProperty"]( "size" ) )
+			{
+				particle.dictionary["pv3dBaseSize"] = particle.image["size"];
+			}
 		}
 	}
 }

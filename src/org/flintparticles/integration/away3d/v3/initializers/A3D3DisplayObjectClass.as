@@ -2,7 +2,7 @@
  * FLINT PARTICLE SYSTEM
  * .....................
  * 
- * Author: Richard Lord
+ * Author: Richard Lord & Michael Ivanov
  * Copyright (c) Richard Lord 2008-2011
  * http://flintparticles.org
  * 
@@ -28,28 +28,32 @@
  * THE SOFTWARE.
  */
 
-package org.flintparticles.common.initializers
+package org.flintparticles.integration.away3d.v3.initializers
 {
+	import away3d.sprites.MovieClipSprite;
+	
+	import org.flintparticles.common.initializers.ImageInitializerBase;
 	import org.flintparticles.common.utils.construct;
 
 	/**
-	 * The ImageClass Initializer sets the DisplayObject to use to draw
-	 * the particle. It is used with the DisplayObjectRenderer. When using the
-	 * BitmapRenderer it is more efficient to use the SharedImage Initializer.
+	 * The A3D3DisplayObjectClass initializer sets the DisplayObject to use to 
+	 * draw the particle in a 3D scene. It is used with the Away3D renderer when
+	 * particles should be represented by a display object.
 	 * 
-	 * <p>This class includes an object pool for reusing DisplayObjects when particles die.</p>
+	 * <p>The initializer creates an Away3D MovieClipSprite, with the display object
+	 * as the image source (the movieClip property), for rendering the display 
+	 * object in an Away3D scene.</p>
 	 * 
-	 * <p>To enable use of the object pool, it was necessary to alter the constructor so the 
-	 * parameters for the image class are passed as an array rather than as plain values.</p>
+	 * <p>This class includes an object pool for reusing objects when particles die.</p>
 	 */
-	public class ImageClass extends ImageInitializerBase
+	public class A3D3DisplayObjectClass extends ImageInitializerBase
 	{
 		private var _imageClass:Class;
 		private var _parameters:Array;
 		
 		/**
-		 * The constructor creates an ImageClass initializer for use by 
-		 * an emitter. To add an ImageClass to all particles created by an emitter, use the
+		 * The constructor creates an A3D3DisplayObjectClass initializer for use by 
+		 * an emitter. To add an A3D3DisplayObjectClass to all particles created by an emitter, use the
 		 * emitter's addInitializer method.
 		 * 
 		 * @param imageClass The class to use when creating
@@ -62,7 +66,7 @@ package org.flintparticles.common.initializers
 		 * 
 		 * @see org.flintparticles.common.emitters.Emitter#addInitializer()
 		 */
-		public function ImageClass( imageClass:Class = null, parameters : Array = null, usePool:Boolean = false, fillPool:uint = 0 )
+		public function A3D3DisplayObjectClass( imageClass:Class, parameters:Array = null, usePool:Boolean = false, fillPool:uint = 0 )
 		{
 			super( usePool );
 			_imageClass = imageClass;
@@ -71,7 +75,6 @@ package org.flintparticles.common.initializers
 			{
 				this.fillPool( fillPool );
 			}
-			
 		}
 		
 		/**
@@ -110,11 +113,12 @@ package org.flintparticles.common.initializers
 		
 		/**
 		 * Used internally, this method creates an image object for displaying the particle 
-		 * by calling the image class constructor with the supplied parameters.
+		 * by creating a MovieClipSprite and using the given DisplayObject as its movie clip source.
 		 */
-		override public function createImage() : Object
+		override public function createImage():Object
 		{
-			return construct( _imageClass, _parameters );
+			return new MovieClipSprite( construct( _imageClass, _parameters ) ,"none", 1, true );
+			
 		}
 	}
 }

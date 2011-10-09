@@ -28,21 +28,27 @@
  * THE SOFTWARE.
  */
 
-package org.flintparticles.common.initializers
+package org.flintparticles.integration.papervision3d.initializers
 {
+	import org.flintparticles.common.emitters.Emitter;
+	import org.flintparticles.common.initializers.InitializerBase;
+	import org.flintparticles.common.particles.Particle;
 	import org.flintparticles.common.utils.construct;
+	import org.papervision3d.materials.MovieMaterial;
+	import org.papervision3d.objects.primitives.Plane;
+	
+	import flash.display.DisplayObject;	
 
 	/**
-	 * The ImageClass Initializer sets the DisplayObject to use to draw
-	 * the particle. It is used with the DisplayObjectRenderer. When using the
-	 * BitmapRenderer it is more efficient to use the SharedImage Initializer.
+	 * The PV3DDisplayObjectClass initializer sets the DisplayObject to use to 
+	 * draw the particle in a 3D scene. It is used with the Papervision3D renderer when
+	 * particles should be represented by a display object.
 	 * 
-	 * <p>This class includes an object pool for reusing DisplayObjects when particles die.</p>
-	 * 
-	 * <p>To enable use of the object pool, it was necessary to alter the constructor so the 
-	 * parameters for the image class are passed as an array rather than as plain values.</p>
+	 * <p>The initializer creates an Papervision3D Plane object with the DisplayObject as its material
+	 * for rendering the display object in an Papervision3D scene.</p>
 	 */
-	public class ImageClass extends ImageInitializerBase
+
+	public class PV3DDisplayObjectClass extends InitializerBase
 	{
 		private var _imageClass:Class;
 		private var _parameters:Array;
@@ -56,22 +62,13 @@ package org.flintparticles.common.initializers
 		 * the particles' DisplayObjects.
 		 * @param parameters The parameters to pass to the constructor
 		 * for the image class.
-		 * @param usePool Indicates whether particles should be reused when a particle dies.
-		 * @param fillPool Indicates how many particles to create immediately in the pool, to
-		 * avoid creating them when the particle effect is running.
 		 * 
 		 * @see org.flintparticles.common.emitters.Emitter#addInitializer()
 		 */
-		public function ImageClass( imageClass:Class = null, parameters : Array = null, usePool:Boolean = false, fillPool:uint = 0 )
+		public function PV3DDisplayObjectClass( imageClass:Class, ...parameters )
 		{
-			super( usePool );
 			_imageClass = imageClass;
-			_parameters = parameters ? parameters : [];
-			if( fillPool > 0 )
-			{
-				this.fillPool( fillPool );
-			}
-			
+			_parameters = parameters;
 		}
 		
 		/**
@@ -85,10 +82,6 @@ package org.flintparticles.common.initializers
 		public function set imageClass( value:Class ):void
 		{
 			_imageClass = value;
-			if( _usePool )
-			{
-				clearPool();
-			}
 		}
 		
 		/**
@@ -102,19 +95,16 @@ package org.flintparticles.common.initializers
 		public function set parameters( value:Array ):void
 		{
 			_parameters = value;
-			if( _usePool )
-			{
-				clearPool();
-			}
 		}
 		
 		/**
-		 * Used internally, this method creates an image object for displaying the particle 
-		 * by calling the image class constructor with the supplied parameters.
+		 * @inheritDoc
 		 */
-		override public function createImage() : Object
+		override public function initialize( emitter:Emitter, particle:org.flintparticles.common.particles.Particle ):void
 		{
-			return construct( _imageClass, _parameters );
+			var clip:DisplayObject = construct( _imageClass, _parameters );
+			var material:MovieMaterial = new MovieMaterial( clip, true, true, false, clip.getBounds( clip ) );
+			particle.image = new Plane( material, clip.width, clip.height );
 		}
 	}
 }

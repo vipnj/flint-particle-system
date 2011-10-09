@@ -2,7 +2,7 @@
  * FLINT PARTICLE SYSTEM
  * .....................
  * 
- * Author: Richard Lord
+ * Author: Richard Lord & Michael Ivanov
  * Copyright (c) Richard Lord 2008-2011
  * http://flintparticles.org
  * 
@@ -28,72 +28,49 @@
  * THE SOFTWARE.
  */
 
-package org.flintparticles.common.initializers 
+package org.flintparticles.integration.away3d.v3.initializers
 {
-	import org.flintparticles.common.emitters.Emitter;
+	import away3d.sprites.MovieClipSprite;
+	
+	import org.flintparticles.common.initializers.ImageInitializerBase;
 	import org.flintparticles.common.utils.WeightedArray;
-	import org.flintparticles.common.utils.construct;
+	import org.flintparticles.common.utils.construct;	
 
 	/**
-	 * The ImageClasses Initializer sets the DisplayObject to use to draw
-	 * the particle. It selects one of multiple images that are passed to it.
-	 * It is used with the DisplayObjectRenderer. When using the
-	 * BitmapRenderer it is more efficient to use the SharedImage Initializer.
+	 * The A3D3DisplayObjectClasses Initializer sets the DisplayObject to use to draw
+	 * the particle in a 3D scene. It is used with the Away3D renderer when
+	 * particles should be represented by one of a number of display objects.
 	 * 
-	 * <p>This class includes an object pool for reusing DisplayObjects when particles die.</p>
+	 * <p>The initializer creates an Away3D MovieClipSprite, with the display object
+	 * as the image source (the movieClip property), for rendering a display 
+	 * object in an Away3D scene.</p>
+	 * 
+	 * <p>This class includes an object pool for reusing objects when particles die.</p>
 	 */
-	public class ImageClasses extends ImageInitializerBase
+
+	public class A3D3DisplayObjectClasses extends ImageInitializerBase
 	{
 		private var _images:WeightedArray;
-		private var _mxmlImages:Array;
-		private var _mxmlWeights:Array;
 		
 		/**
-		 * The constructor creates a ImageClasses initializer for use by 
-		 * an emitter. To add a ImageClasses to all particles created by 
+		 * The constructor creates a A3D3DisplayObjectClasses initializer for use by 
+		 * an emitter. To add a A3D3DisplayObjectClasses to all particles created by 
 		 * an emitter, use the emitter's addInitializer method.
 		 * 
 		 * @param images An array containing the classes to use for 
-		 * each particle created by the emitter. Each item in the array may be a class or an array 
-		 * containing a class and a number of parameters to pass to the constructor.
-		 * @param weights The weighting to apply to each displayObject. If no weighting
-		 * values are passed, the images are used with equal probability.
+		 * each particle created by the emitter.
+		 * @param weights The weighting to apply to each image class. If no weighting
+		 * values are passed, the image classes are used with equal probability.
 		 * @param usePool Indicates whether particles should be reused when a particle dies.
 		 * @param fillPool Indicates how many particles to create immediately in the pool, to
 		 * avoid creating them when the particle effect is running.
 		 * 
 		 * @see org.flintparticles.common.emitters.Emitter#addInitializer()
 		 */
-		public function ImageClasses( images:Array = null, weights:Array = null, usePool:Boolean = false, fillPool:uint = 0 )
+		public function A3D3DisplayObjectClasses( images:Array, weights:Array = null, usePool:Boolean = false, fillPool:uint = 0 )
 		{
 			super( usePool );
-			_images = new WeightedArray();
-			if( images == null )
-			{
-				return;
-			}
-			init( images, weights );
-			if( fillPool > 0 )
-			{
-				this.fillPool( fillPool );
-			}
-			
-		}
-		
-		override public function addedToEmitter( emitter:Emitter ):void
-		{
-			super.addedToEmitter( emitter );
-			if( _mxmlImages )
-			{
-				init( _mxmlImages, _mxmlWeights );
-				_mxmlImages = null;
-				_mxmlWeights = null;
-			}
-		}
-		
-		private function init( images:Array = null, weights:Array = null ):void
-		{
-			_images.clear();
+			_images = new WeightedArray;
 			var len:int = images.length;
 			var i:int;
 			if( weights != null && weights.length == len )
@@ -109,6 +86,10 @@ package org.flintparticles.common.initializers
 				{
 					addImage( images[i], 1 );
 				}
+			}
+			if( fillPool > 0 )
+			{
+				this.fillPool( fillPool );
 			}
 		}
 		
@@ -138,52 +119,15 @@ package org.flintparticles.common.initializers
 				clearPool();
 			}
 		}
-
-		public function set images( value:Array ):void
-		{
-			_mxmlImages = value;
-			checkStartValues();
-			if( _usePool )
-			{
-				clearPool();
-			}
-		}
 		
-		public function set weights( value:Array ):void
-		{
-			if( value.length == 1 && value[0] is String )
-			{
-				_mxmlWeights = String( value[0] ).split( "," );
-			}
-			else
-			{
-				_mxmlWeights = value;
-			}
-			checkStartValues();
-			if( _usePool )
-			{
-				clearPool();
-			}
-		}
-		
-		private function checkStartValues():void
-		{
-			if( _mxmlImages && _mxmlWeights )
-			{
-				init( _mxmlImages, _mxmlWeights );
-				_mxmlImages = null;
-				_mxmlWeights = null;
-			}
-		}
-
 		/**
 		 * Used internally, this method creates an image object for displaying the particle 
-		 * by calling the constructor of one of the supplied image classes.
+		 * by creating aninstance of one of the display objects and wrapping it in a MovieClipSprite.
 		 */
-		override public function createImage() : Object
+		override public function createImage():Object
 		{
 			var img:Pair = _images.getRandomValue();
-			return construct( img.image, img.parameters );
+			return new MovieClipSprite( construct( img.image, img.parameters ) ,"none", 1, true );
 		}
 	}
 }
