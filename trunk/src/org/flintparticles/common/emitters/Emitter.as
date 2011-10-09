@@ -180,12 +180,22 @@ package org.flintparticles.common.emitters
 		/**
 		 * @private
 		 */
+		protected var _updating:Boolean = false;
+		/**
+		 * @private
+		 */
 		protected var _maximumFrameTime:Number = 0.1;
 		/**
 		 * Indicates if the emitter should dispatch a counterComplete event at the
 		 * end of the next update cycle.
 		 */
 		protected var _dispatchCounterComplete:Boolean = false;
+		/**
+		 * Used to alternate the direction in which the particles in the particles
+		 * array are processed, to iron out errors from always processing them in
+		 * the same order.
+		 */
+		protected var _processLastFirst:Boolean = false;
 
 		/**
 		 * The constructor creates an emitter.
@@ -760,7 +770,19 @@ package org.flintparticles.common.emitters
 			var index:int = _particles.indexOf( particle );
 			if( index != -1 )
 			{
-				_particles.splice( index, 1 );
+				if( _updating )
+				{
+					addEventListener( EmitterEvent.EMITTER_UPDATED, function( e:EmitterEvent ) : void
+					{
+						removeEventListener( EmitterEvent.EMITTER_UPDATED, arguments.callee );
+						removeParticle( particle );
+					});
+				}
+				else
+				{
+					_particles.splice( index, 1 );
+					dispatchEvent( new ParticleEvent( ParticleEvent.PARTICLE_REMOVED, particle ) );
+				}
 				return true;
 			}
 			return false;
@@ -773,12 +795,24 @@ package org.flintparticles.common.emitters
 		 */
 		public function removeParticles( particles:Vector.<Particle> ):void
 		{
-			for( var i:int = 0, len:int = particles.length; i < len; ++i )
+			if( _updating )
 			{
-				var index:int = _particles.indexOf( particles[i] );
-				if( index != -1 )
+				addEventListener( EmitterEvent.EMITTER_UPDATED, function( e:EmitterEvent ) : void
 				{
-					_particles.splice( index, 1 );
+					removeEventListener( EmitterEvent.EMITTER_UPDATED, arguments.callee );
+					removeParticles( particles );
+				});
+			}
+			else
+			{
+				for( var i:int = 0, len:int = particles.length; i < len; ++i )
+				{
+					var index:int = _particles.indexOf( particles[i] );
+					if( index != -1 )
+					{
+						_particles.splice( index, 1 );
+						dispatchEvent( new ParticleEvent( ParticleEvent.PARTICLE_REMOVED, particles[i] ) );
+					}
 				}
 			}
 		}
@@ -875,6 +909,7 @@ package org.flintparticles.common.emitters
 			}
 			var i:int;
 			var particle:Particle;
+			_updating = true;
 			var len:int = _counter.updateEmitter( this, time );
 			for( i = 0; i < len; ++i )
 			{
@@ -893,16 +928,33 @@ package org.flintparticles.common.emitters
 				len = _actions.length;
 				var action:Action;
 				var len2:int = _particles.length;
-				
-				for( var j:int = 0; j < len; ++j )
+				var j:int;
+				if( _processLastFirst )
 				{
-					action = _actions[j];
-					for ( i = 0; i < len2; ++i )
+					for( j = 0; j < len; ++j )
 					{
-						particle = _particles[i];
-						action.update( this, particle, time );
+						action = _actions[j];
+						for ( i = len2; --i; )
+						{
+							particle = _particles[i];
+							action.update( this, particle, time );
+						}
 					}
 				}
+				else
+				{
+					for( j = 0; j < len; ++j )
+					{
+						action = _actions[j];
+						for ( i = 0; i < len2; ++i )
+						{
+							particle = _particles[i];
+							action.update( this, particle, time );
+						}
+					}
+				}
+				_processLastFirst = !_processLastFirst;
+				
 				// remove dead particles
 				if( hasEventListener( ParticleEvent.PARTICLE_DEAD ) )
 				{
@@ -928,10 +980,7 @@ package org.flintparticles.common.emitters
 						if ( particle.isDead )
 						{
 							_particles.splice( i, 1 );
-							if( particle.isDead )
-							{
-								_particleFactory.disposeParticle( particle );
-							}
+							_particleFactory.disposeParticle( particle );
 						}
 					}
 				}
@@ -943,6 +992,7 @@ package org.flintparticles.common.emitters
 					dispatchEvent( new EmitterEvent( EmitterEvent.EMITTER_EMPTY ) );
 				}
 			}
+			_updating = false;
 			if( hasEventListener( EmitterEvent.EMITTER_UPDATED ) )
 			{
 				dispatchEvent( new EmitterEvent( EmitterEvent.EMITTER_UPDATED ) );
